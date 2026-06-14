@@ -1,10 +1,17 @@
 # 엔진 완성 체크리스트
 
-최신 기준일: 2026-06-13  
+최신 기준일: 2026-06-14  
 대상: ST1 target deck validation gate  
 현재 판정: ST1 target deck 기준 통과
 
 이 체크리스트는 학습 단계 진입 전 검증 기준을 관리한다. 현재 통과 판정은 ST1 target deck 기준이며, 전체 DCGO 카드풀/룰 완성을 의미하지 않는다.
+
+## Current Snapshot
+
+- ST1 target deck gate: 통과.
+- 최신 source-aligned 구조 guard 기록: `All 212 tests passed.`
+- 과거 ST1 완료 시점 테스트 기록 `All 170 tests passed.`는 historical checkpoint 기록이며 최신 구조 guard 수와 다르다.
+- ST1~ST3 registry snapshot은 별도 상태표에서 관리한다. shared/variant source-alignment risk는 ST1 gate 통과와 별개로 남아 있다.
 
 ## 최신 Gate 결과
 
@@ -29,7 +36,8 @@
 - Unsupported card/effect: 0
 - PartiallyImplemented card/effect: 0
 - Failed gate: 0
-- 테스트 결과: `All 170 tests passed.`
+- historical ST1 checkpoint 테스트 결과: `All 170 tests passed.`
+- 최신 구조 guard 테스트 결과: `All 212 tests passed.`
 
 ## 통과 범위의 의미
 
@@ -45,4 +53,3 @@ ST1 target deck의 현재 card effect와 관련 gate는 통과한다. 그러나 
 ## 학습 단계 진입 제한
 
 ST1 gate 통과만으로 RL 학습 구성으로 바로 넘어가지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API는 전체 엔진 완성 기준과 사용자 승인이 있기 전까지 구현하지 않는다.
-

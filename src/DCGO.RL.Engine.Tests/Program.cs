@@ -140,11 +140,21 @@ var tests = new (string Name, Action Test)[]
     ("ST1 CardEffect catalog covers target decklist", St1CardEffectCatalogCoversTargetDecklist),
     ("ST1 CardEffect deck validation passes", St1CardEffectDeckValidationPasses),
     ("PortingStructure ST1 runnable records have files", PortingStructureSt1RunnableRecordsHaveFiles),
+    ("PortingStructure ST2 runnable records have files", PortingStructureSt2RunnableRecordsHaveFiles),
+    ("PortingStructure ST3 runnable records have files", PortingStructureSt3RunnableRecordsHaveFiles),
     ("PortingStructure ST1 source mapping documented", PortingStructureSt1SourceMappingDocumented),
+    ("PortingStructure ST2 source mapping documented", PortingStructureSt2SourceMappingDocumented),
+    ("PortingStructure ST3 source mapping documented", PortingStructureSt3SourceMappingDocumented),
     ("PortingStructure ST1 no-effect provenance documented", PortingStructureSt1NoEffectProvenanceDocumented),
+    ("PortingStructure ST2 no-effect provenance documented", PortingStructureSt2NoEffectProvenanceDocumented),
+    ("PortingStructure ST3 no-effect provenance documented", PortingStructureSt3NoEffectProvenanceDocumented),
     ("PortingStructure ST1 catalog is registry only", PortingStructureSt1CatalogIsRegistryOnly),
+    ("PortingStructure ST2/ST3 catalog is registry only", PortingStructureSt2St3CatalogIsRegistryOnly),
     ("PortingStructure ST1 status table matches registry", PortingStructureSt1StatusTableMatchesRegistry),
+    ("PortingStructure ST1-ST3 registry snapshot matches registry", PortingStructureSt1ToSt3StatusSnapshotMatchesRegistry),
     ("PortingStructure ST1 status table matches files", PortingStructureSt1StatusTableMatchesFiles),
+    ("PortingStructure ST1-ST3 registry snapshot matches files", PortingStructureSt1ToSt3StatusSnapshotMatchesFiles),
+    ("PortingStructure NoEffect asset conflicts are documented", PortingStructureNoEffectAssetConflictsAreDocumented),
     ("PortingStructure card files avoid direct zone mutation", PortingStructureCardFilesAvoidDirectZoneMutation),
     ("PortingStructure starter set files use original-like paths", PortingStructureStarterSetFilesUseOriginalLikePaths),
     ("ST2/ST3 CardEffect catalog skeleton covers target pool", St2St3CardEffectCatalogSkeletonCoversTargetPool),
@@ -2664,6 +2674,14 @@ static void PortingStructureSt1RunnableRecordsHaveFiles()
     }
 }
 
+static void PortingStructureSt2RunnableRecordsHaveFiles() =>
+    AssertRunnableRecordsHaveFiles(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST2-", StringComparison.Ordinal)));
+
+static void PortingStructureSt3RunnableRecordsHaveFiles() =>
+    AssertRunnableRecordsHaveFiles(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST3-", StringComparison.Ordinal)));
+
 static void PortingStructureSt1SourceMappingDocumented()
 {
     foreach (var record in St1CardScriptCatalog.CreateRegistry().PortingRecords)
@@ -2683,6 +2701,14 @@ static void PortingStructureSt1SourceMappingDocumented()
         }
     }
 }
+
+static void PortingStructureSt2SourceMappingDocumented() =>
+    AssertSourceMappingDocumented(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST2-", StringComparison.Ordinal)));
+
+static void PortingStructureSt3SourceMappingDocumented() =>
+    AssertSourceMappingDocumented(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST3-", StringComparison.Ordinal)));
 
 static void PortingStructureSt1NoEffectProvenanceDocumented()
 {
@@ -2704,16 +2730,37 @@ static void PortingStructureSt1NoEffectProvenanceDocumented()
     }
 }
 
+static void PortingStructureSt2NoEffectProvenanceDocumented() =>
+    AssertNoEffectProvenanceDocumented(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST2-", StringComparison.Ordinal)));
+
+static void PortingStructureSt3NoEffectProvenanceDocumented() =>
+    AssertNoEffectProvenanceDocumented(
+        St2St3CardScriptCatalog.CreateRegistry().PortingRecords.Where(record => record.CardId.StartsWith("ST3-", StringComparison.Ordinal)));
+
 static void PortingStructureSt1CatalogIsRegistryOnly()
 {
-    var catalogPath = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects", "St1CardScriptCatalog.cs");
+    AssertCatalogRegistryOnly("St1CardScriptCatalog.cs");
+}
+
+static void PortingStructureSt2St3CatalogIsRegistryOnly()
+{
+    AssertCatalogRegistryOnly("St2St3CardScriptCatalog.cs");
+}
+
+static void AssertCatalogRegistryOnly(string fileName)
+{
+    var catalogPath = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects", fileName);
     var content = File.ReadAllText(catalogPath);
     var bannedSnippets = new[]
     {
         "new EffectDescriptor",
         "SelectionRequest",
         "SelectionResult",
+        "SelectionContinuation",
         "Tier1PrimitiveService",
+        "ZoneMover",
+        "TemporaryModifier",
         ".Resolve(",
         "context.Primitives",
         "MoveCard",
@@ -2726,7 +2773,7 @@ static void PortingStructureSt1CatalogIsRegistryOnly()
     {
         if (content.Contains(snippet, StringComparison.Ordinal))
         {
-            throw new InvalidOperationException($"St1CardScriptCatalog contains non-registry logic snippet '{snippet}'.");
+            throw new InvalidOperationException($"{fileName} contains non-registry logic snippet '{snippet}'.");
         }
     }
 }
@@ -2744,6 +2791,27 @@ static void PortingStructureSt1StatusTableMatchesRegistry()
         if (!table.TryGetValue(record.CardId, out var status))
         {
             throw new InvalidOperationException($"CardEffect status table is missing {record.CardId}.");
+        }
+
+        AssertEqual(record.Status, status);
+    }
+}
+
+static void PortingStructureSt1ToSt3StatusSnapshotMatchesRegistry()
+{
+    var table = LoadCurrentRegistryStatusSnapshot();
+    var records = St1CardScriptCatalog.CreateRegistry().PortingRecords
+        .Concat(St2St3CardScriptCatalog.CreateRegistry().PortingRecords)
+        .ToArray();
+
+    AssertEqual(St1TargetCardIds().Length + St2TargetCardIds().Length + St3TargetCardIds().Length, table.Count);
+    AssertEqual(St1TargetCardIds().Length + St2TargetCardIds().Length + St3TargetCardIds().Length, records.Length);
+
+    foreach (var record in records)
+    {
+        if (!table.TryGetValue(record.CardId, out var status))
+        {
+            throw new InvalidOperationException($"Current registry snapshot is missing {record.CardId}.");
         }
 
         AssertEqual(record.Status, status);
@@ -2769,6 +2837,54 @@ static void PortingStructureSt1StatusTableMatchesFiles()
     }
 }
 
+static void PortingStructureSt1ToSt3StatusSnapshotMatchesFiles()
+{
+    var table = LoadCurrentRegistryStatusSnapshot();
+
+    foreach (var (cardId, status) in table)
+    {
+        if (status is not (CardEffectPortingStatus.Implemented or CardEffectPortingStatus.NoEffect))
+        {
+            continue;
+        }
+
+        var rlPath = RlCardEffectPath(cardId);
+        if (!File.Exists(rlPath))
+        {
+            throw new InvalidOperationException($"Current registry snapshot marks {cardId} as {status}, but RL.Engine file is missing: {rlPath}");
+        }
+    }
+}
+
+static void PortingStructureNoEffectAssetConflictsAreDocumented()
+{
+    var policyPath = Path.Combine(WorkspaceRoot(), "docs", "rl-engine", "porting-structure-policy.md");
+    var statusPath = Path.Combine(WorkspaceRoot(), "docs", "rl-engine", "cardeffect-porting-status.md");
+    var policy = File.ReadAllText(policyPath);
+    var status = File.ReadAllText(statusPath);
+
+    foreach (var cardId in new[] { "ST2-07", "ST3-07", "ST3-02" })
+    {
+        if (!policy.Contains(cardId, StringComparison.Ordinal) || !status.Contains(cardId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{cardId} NoEffect/source-mapping conflict must be documented in policy and status docs.");
+        }
+    }
+
+    foreach (var shared in new[] { "ST2-07", "ST3-07" })
+    {
+        if (!policy.Contains("ST1_06", StringComparison.Ordinal) || !status.Contains("ST1_06", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{shared} shared ST1_06 mapping risk must be documented.");
+        }
+    }
+
+    if (!policy.Contains("ST3_02", StringComparison.Ordinal) || !status.Contains("ST3_02", StringComparison.Ordinal))
+    {
+        throw new InvalidOperationException("ST3-02 variant ST3_02 asset conflict must be documented.");
+    }
+}
+
 static void PortingStructureCardFilesAvoidDirectZoneMutation()
 {
     var root = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects");
@@ -2776,11 +2892,17 @@ static void PortingStructureCardFilesAvoidDirectZoneMutation()
     var bannedSnippets = new[]
     {
         ".Hand.Add(",
+        ".Hand.Remove(",
         ".Deck.Add(",
+        ".Deck.Remove(",
         ".Security.Add(",
+        ".Security.Remove(",
         ".Trash.Add(",
+        ".Trash.Remove(",
         ".DigiEggDeck.Add(",
+        ".DigiEggDeck.Remove(",
         ".FieldPermanents.Add(",
+        ".FieldPermanents.Remove(",
         ".CardsIn(",
         "CurrentZone =",
     };
@@ -4643,14 +4765,123 @@ static string OriginalSt1CardEffectPath(string cardId) =>
         "Red",
         $"{St1EffectClassName(cardId)}.cs");
 
+static string StarterEffectClassName(string cardId) => cardId.Replace("-", "_", StringComparison.Ordinal);
+
+static string RlCardEffectPath(string cardId)
+{
+    var (set, color) = StarterSetPathParts(cardId);
+    return Path.Combine(
+        WorkspaceRoot(),
+        "src",
+        "DCGO.RL.Engine",
+        "CardEffects",
+        set,
+        color,
+        $"{StarterEffectClassName(cardId)}.cs");
+}
+
+static string OriginalCardEffectPath(string cardId)
+{
+    var (set, color) = StarterSetPathParts(cardId);
+    return Path.Combine(
+        WorkspaceRoot(),
+        "DCGO",
+        "Assets",
+        "Scripts",
+        "CardEffect",
+        set,
+        color,
+        $"{StarterEffectClassName(cardId)}.cs");
+}
+
+static string OriginalCardEffectMappingText(string cardId)
+{
+    var (set, color) = StarterSetPathParts(cardId);
+    return $"DCGO/Assets/Scripts/CardEffect/{set}/{color}/{StarterEffectClassName(cardId)}.cs";
+}
+
+static (string Set, string Color) StarterSetPathParts(string cardId) =>
+    cardId.Split('-', StringSplitOptions.TrimEntries) switch
+    {
+        ["ST1", _] => ("ST1", "Red"),
+        ["ST2", _] => ("ST2", "Blue"),
+        ["ST3", _] => ("ST3", "Yellow"),
+        _ => throw new InvalidOperationException($"Unsupported starter CardId for structure guard: {cardId}"),
+    };
+
+static void AssertRunnableRecordsHaveFiles(IEnumerable<CardEffectPortingRecord> records)
+{
+    foreach (var record in records
+        .Where(record => record.Status is CardEffectPortingStatus.Implemented or CardEffectPortingStatus.NoEffect))
+    {
+        var path = RlCardEffectPath(record.CardId);
+        if (!File.Exists(path))
+        {
+            throw new InvalidOperationException($"Missing RL.Engine card file for {record.CardId}: {path}");
+        }
+    }
+}
+
+static void AssertSourceMappingDocumented(IEnumerable<CardEffectPortingRecord> records)
+{
+    foreach (var record in records)
+    {
+        var originalPath = OriginalCardEffectPath(record.CardId);
+        if (!File.Exists(originalPath))
+        {
+            continue;
+        }
+
+        var rlPath = RlCardEffectPath(record.CardId);
+        var content = File.ReadAllText(rlPath);
+        var expected = OriginalCardEffectMappingText(record.CardId);
+        if (!content.Contains(expected, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{record.CardId} file does not document source mapping '{expected}'.");
+        }
+    }
+}
+
+static void AssertNoEffectProvenanceDocumented(IEnumerable<CardEffectPortingRecord> records)
+{
+    foreach (var record in records.Where(record => record.Status == CardEffectPortingStatus.NoEffect))
+    {
+        var originalPath = OriginalCardEffectPath(record.CardId);
+        if (File.Exists(originalPath))
+        {
+            throw new InvalidOperationException($"{record.CardId} is registered as NoEffect but set-local original CardEffect exists: {originalPath}");
+        }
+
+        var rlPath = RlCardEffectPath(record.CardId);
+        var content = File.ReadAllText(rlPath);
+        if (!content.Contains("No original CardEffect source file exists", StringComparison.Ordinal)
+            && !content.Contains("No set-local CardEffect source file exists", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{record.CardId} NoEffect file does not document the missing original CardEffect source.");
+        }
+    }
+}
+
 static Dictionary<string, CardEffectPortingStatus> LoadSt1PortingStatusTable()
 {
     var path = Path.Combine(WorkspaceRoot(), "docs", "rl-engine", "cardeffect-porting-status.md");
     var statuses = new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal);
+    var inSection = false;
 
     foreach (var line in File.ReadLines(path))
     {
-        if (!line.StartsWith("| ST1-", StringComparison.Ordinal))
+        if (line.StartsWith("## 최신 ST1 상태표", StringComparison.Ordinal))
+        {
+            inSection = true;
+            continue;
+        }
+
+        if (inSection && line.StartsWith("## ", StringComparison.Ordinal))
+        {
+            break;
+        }
+
+        if (!inSection || !line.StartsWith("| ST1-", StringComparison.Ordinal))
         {
             continue;
         }
@@ -4663,6 +4894,44 @@ static Dictionary<string, CardEffectPortingStatus> LoadSt1PortingStatusTable()
 
         var cardId = columns[1];
         var statusText = columns[3].Replace("`", string.Empty, StringComparison.Ordinal);
+        statuses[cardId] = Enum.Parse<CardEffectPortingStatus>(statusText);
+    }
+
+    return statuses;
+}
+
+static Dictionary<string, CardEffectPortingStatus> LoadCurrentRegistryStatusSnapshot()
+{
+    var path = Path.Combine(WorkspaceRoot(), "docs", "rl-engine", "cardeffect-porting-status.md");
+    var statuses = new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal);
+    var inSection = false;
+
+    foreach (var line in File.ReadLines(path))
+    {
+        if (line.StartsWith("## Current ST1-ST3 Registry Snapshot", StringComparison.Ordinal))
+        {
+            inSection = true;
+            continue;
+        }
+
+        if (inSection && line.StartsWith("## ", StringComparison.Ordinal))
+        {
+            break;
+        }
+
+        if (!inSection || !line.StartsWith("| ST", StringComparison.Ordinal))
+        {
+            continue;
+        }
+
+        var columns = line.Split('|', StringSplitOptions.TrimEntries);
+        if (columns.Length < 4)
+        {
+            continue;
+        }
+
+        var cardId = columns[1];
+        var statusText = columns[2].Replace("`", string.Empty, StringComparison.Ordinal);
         statuses[cardId] = Enum.Parse<CardEffectPortingStatus>(statusText);
     }
 

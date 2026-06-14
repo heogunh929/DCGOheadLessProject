@@ -1,8 +1,16 @@
 # Effect System Foundation
 
-최신 기준일: 2026-06-13
+최신 기준일: 2026-06-14
 
 이 문서는 Unity 원본 `ICardEffect`, `AutoProcessing`, `SkillInfo`, `MultipleSkills`, `CardController` 흐름을 RL.Engine의 headless effect system으로 이식한 현재 구조를 요약한다.
+
+## Current Snapshot
+
+- ST1 card effect body는 카드별 파일 구조로 정렬되어 있고 `St1CardScriptCatalog`는 registry 등록만 담당한다.
+- ST2/ST3도 source-aligned 로컬 작업트리에서 카드별 파일/marker 구조와 registry snapshot을 가진다.
+- 공통 service mapping 감사는 `docs/rl-engine/common-layer-source-mapping.md`에 분리했다.
+- full `MultipleSkills` priority, counter/pay-cost 세부 timing, Unity trace parity는 아직 전체 엔진 범위 TODO다.
+- RL 학습 구성은 아직 구현하지 않는다.
 
 ## 핵심 원칙
 

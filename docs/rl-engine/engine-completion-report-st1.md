@@ -1,9 +1,16 @@
 # ST1 Engine Completion Report
 
-최신 기준일: 2026-06-13  
+최신 기준일: 2026-06-14  
 대상 decklist: `path/to/ST1_zU4uCF5lBJt.txt`  
 대상 card pool: `ST1-01`부터 `ST1-16`  
 현재 판정: 통과
+
+## Current Snapshot
+
+- ST1 completion status는 계속 통과다.
+- 이 문서의 `All 170 tests passed.` 기록은 ST1-12 완료 당시 historical checkpoint 결과다.
+- 최신 source-aligned 구조 guard 기록은 `All 212 tests passed.`이며, ST1~ST3 registry/file/status guard까지 포함한다.
+- ST1 gate 통과는 전체 DCGO 엔진 완성 또는 RL 학습 단계 진입을 의미하지 않는다.
 
 ## 요약
 
@@ -39,7 +46,7 @@ ST1-12 security play-self tamer 구현으로 ST1 target deck 기준 마지막 pa
 | `replay-determinism` | 통과 | replay/state hash determinism 유지 |
 | `invariant-fuzz` | 통과 | invariant fuzz 유지 |
 
-## 실행 테스트
+## Historical 실행 테스트
 
 ```powershell
 $env:DOTNET_CLI_HOME='E:\headlessDCGO\.dotnet_home'
@@ -59,4 +66,3 @@ MSBuild가 cache/temp file access denied warning을 냈지만 test runner는 성
 - `BeforePayCost`/`AfterPayCost`/counter timing
 - block selection result application의 full end-to-end 흐름
 - Unity 원본 trace와 RL.Engine trace의 구조화 비교 확대
-

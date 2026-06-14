@@ -1,3 +1,4 @@
+// Source mapping: DCGO/Assets/Scripts/CardEffect/ST2/Blue/ST2_06.cs
 using DCGO.RL.Engine.Effects;
 
 namespace DCGO.RL.Engine.CardEffects;

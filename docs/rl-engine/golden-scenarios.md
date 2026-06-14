@@ -1,8 +1,14 @@
 # Golden Scenarios
 
-최신 기준일: 2026-06-13
+최신 기준일: 2026-06-14
 
 Golden scenario는 학습 데이터가 아니라 엔진 검증 데이터다. 현재 ST1 target deck validation은 통과하지만, 더 넓은 DCGO 룰 검증을 위해 scripted/golden scenario를 계속 확장해야 한다.
+
+## Current Snapshot
+
+- 현재 golden suite는 ST1/minimal battle 중심이다.
+- ST1~ST3 registry snapshot과 구조 guard는 존재하지만, ST1~ST3 전용 expanded golden scenario suite는 아직 future work다.
+- 아래 ST1~ST3 후보는 historical inventory 단계의 pass 09 후보이며, 현재 통과된 golden suite라고 해석하면 안 된다.
 
 ## 현재 Golden Suite
 
@@ -38,7 +44,7 @@ Golden scenario는 학습 데이터가 아니라 엔진 검증 데이터다. 현
 
 ST1-ST3 inventory 단계에서 새 golden scenario를 실행하지는 않는다. 다음 후보는 ST2/ST3 common layer 구현 후 검증 데이터로 추가한다.
 
-Planning note: 2026-06-14 현재 요청은 ST1-ST3 inventory/pass plan 문서화 전용이다. 아래 항목은 future Implementation Pass 09에서 추가할 golden scenario 후보이며, 이번 단계에서 새 golden scenario를 실행하거나 통과시키지 않는다.
+Historical planning note: 2026-06-14 ST1-ST3 inventory/pass plan 문서화 단계에서 아래 후보를 future Implementation Pass 09 대상으로 기록했다. 현재도 새 golden scenario를 실행하거나 통과시킨 기록은 없다.
 
 | Scenario 후보 | 주요 카드 | 검증 책임 |
 | --- | --- | --- |

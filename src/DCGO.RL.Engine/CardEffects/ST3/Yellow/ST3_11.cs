@@ -1,3 +1,4 @@
+// Source mapping: DCGO/Assets/Scripts/CardEffect/ST3/Yellow/ST3_11.cs
 namespace DCGO.RL.Engine.CardEffects;
 
 internal sealed class St3SeraphimonScript : St3OnAttackDpReductionScript

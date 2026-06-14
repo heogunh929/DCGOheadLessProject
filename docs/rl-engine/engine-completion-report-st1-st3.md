@@ -1,21 +1,27 @@
-# ST1-ST3 Engine Completion Planning Report
+# ST1-ST3 Engine Completion Report
 
 Updated: 2026-06-14
 
-This report defines the planned ST1-ST3 target card pool completion gate. It is not a completion claim for this task. The current task is documentation-only inventory and gap analysis; no ST2/ST3 implementation code is added here.
+## Current Snapshot
 
-Current worktree note: uncommitted ST2/ST3 implementation files already exist locally from previous work. This report does not validate or accept those changes. It records the requested planning baseline before future implementation passes are reviewed.
+This document now separates the current source-aligned local worktree snapshot from the earlier inventory/planning baseline.
 
-## Current Baseline
+Current source-aligned snapshot:
 
 | Area | Status |
 | --- | --- |
-| ST1 target deck | Completed baseline at commit `4b8260e3 chore: checkpoint ST1 target deck completion` |
-| ST2 target pool | Inventory complete; implementation pass plan required |
-| ST3 target pool | Inventory complete; implementation pass plan required |
-| ST1-ST3 validation | Designed only in this task; not run as a completion gate |
+| Git baseline | cached `origin/main`/local baseline `a20f045a chore: checkpoint porting structure guards`; queue 34~38 changes are uncommitted |
+| ST1 target deck | Completed and currently documented as passing |
+| ST2 target pool | Registered in the source-aligned local worktree with per-card files/markers |
+| ST3 target pool | Registered in the source-aligned local worktree with per-card files/markers |
+| ST1-ST3 registry snapshot | 48 cards documented in `cardeffect-porting-status.md`; latest recorded structure guard: `All 212 tests passed.` |
+| Source-alignment risks | `ST2-07`, `ST3-07` shared `ST1_06` mapping and `ST3-02` variant still require audit |
 | RL training stage | Not allowed; no ObservationEncoder/RewardCalculator/DatasetExporter/Trainer work |
 | Unity source files | Must remain read-only source of truth |
+
+## Historical Inventory Baseline
+
+The original version of this document was created during the ST1-ST3 inventory/pass-plan task. At that time it was explicitly not a completion claim and expected ST1-ST3 validation to fail until implementation passes were completed. That historical baseline is preserved below for traceability, but it is no longer the current source-aligned status.
 
 ## Inventory Counts
 
@@ -34,7 +40,23 @@ Current worktree note: uncommitted ST2/ST3 implementation files already exist lo
 
 `ST2-07` and `ST3-07` use the shared `ST1_06` CardEffect class. They are counted as effect-bearing cards, not NoEffect cards.
 
-## Planned Completion Gates
+## Current Gate Interpretation
+
+| Gate | Current interpretation |
+| --- | --- |
+| forbidden dependency guard | Must remain pass; no Unity/Photon dependency in RL.Engine |
+| target card pool documented | Current ST1-ST3 registry snapshot documents 48 cards |
+| ST1 baseline preserved | ST1 status remains `Implemented`/`NoEffect` with target deck pass |
+| ST1-ST3 deck validation | Current local status documents no remaining missing layer, but source-alignment risks remain for shared/variant assets |
+| unsupported mechanic zero | Current registry snapshot has no `Unsupported`; source-alignment risks must not be treated as resolved mechanics |
+| NoEffect explicitness | Marker files exist, but `ST2-07`, `ST3-07`, `ST3-02` need further source/asset verification |
+| replay determinism / invariant smoke | Latest recorded queue 36 test run: `All 212 tests passed.` |
+| golden scenarios | Existing ST1/minimal suite only; ST1-ST3 expanded golden scenarios remain future validation data |
+| RL training guard | Pass by policy; no RL training API implementation |
+
+## Historical Planned Completion Gates
+
+The following table is the earlier planning baseline. It is retained as historical context only.
 
 | Gate | Planned result before implementation passes | Evidence/required report |
 | --- | --- | --- |
@@ -89,11 +111,17 @@ The future ST1-ST3 completion runner should emit a structured report with:
 - proof that shared classes such as `ST2-07 -> ST1_06` are explicitly mapped,
 - replay determinism and invariant smoke results after each pass.
 
-## Test Status For This Task
+## Current Test Status
 
-No code test was run for this documentation-only task. The reason is that this task only updates planning documents and explicitly forbids implementation changes.
+Queue 38 is documentation-only and does not run tests. The latest recorded source-aligned test result is from queue 36:
 
-The most recent known test result from previous work remains:
+```powershell
+.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
+```
+
+Result: `All 212 tests passed`, with MSBuild cache/temp access warnings.
+
+Historical inventory task test note:
 
 ```powershell
 $env:DOTNET_CLI_HOME='E:\headlessDCGO\.dotnet_home'
@@ -103,7 +131,7 @@ $env:TMP='E:\headlessDCGO\.tmp'
 .\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
 ```
 
-Result from previous work: `All 194 tests passed`, with an MSBuild cache access warning. This previous result is not newly executed for the current documentation-only inventory task.
+Result from that previous work: `All 194 tests passed`, with an MSBuild cache access warning. This is a historical record, not the latest snapshot.
 
 ## Remaining Scope Limits
 

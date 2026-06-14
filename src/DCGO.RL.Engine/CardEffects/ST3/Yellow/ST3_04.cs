@@ -1,3 +1,4 @@
+// Source mapping: DCGO/Assets/Scripts/CardEffect/ST3/Yellow/ST3_04.cs
 namespace DCGO.RL.Engine.CardEffects;
 
 internal sealed class St3TokomonScript : St3DpZeroDeletionTriggerScript

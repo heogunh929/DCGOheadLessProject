@@ -1,8 +1,15 @@
 # Decision and Selection 구조
 
-최신 기준일: 2026-06-13
+최신 기준일: 2026-06-14
 
 RL.Engine은 Unity UI를 구현하지 않는다. 선택이 필요한 rule/effect는 `DecisionPoint`, `LegalAction`, `SelectionRequest`, `SelectionResult`로 표현하고, CLI/UnityAdapter/RL agent가 같은 구조를 공유한다.
+
+## Current Snapshot
+
+- ST1 selection wiring은 `SelectionRequest`/`SelectionResult` boundary를 유지한다.
+- ST2/ST3 source-aligned registry snapshot에서도 selection이 필요한 효과는 카드별 파일과 support helper를 통해 같은 boundary를 사용해야 한다.
+- UI 직접 구현은 여전히 금지다.
+- full `MultipleSkills` simultaneous trigger priority와 block/counter 세부 selection ordering은 아직 전체 엔진 TODO다.
 
 ## 핵심 원칙
 
@@ -80,4 +87,3 @@ ST1-12 security effect는 원본 `PlaySelfTamerSecurityEffect`처럼 `Executing`
 - full `MultipleSkills` simultaneous trigger priority와 선택 순서
 - block/counter 세부 timing의 end-to-end selection result application
 - `BeforePayCost` / `AfterPayCost` timing에서의 optional/selection boundary
-
