@@ -1,0 +1,31 @@
+headlessDCGO 템플릿 구성
+
+루트:
+- AGENTS.md
+- README.md
+- GOAL.md
+- .gitignore
+
+DCGO:
+- PUT_DCGO_SOURCE_HERE.md
+
+docs/codex-prompts:
+- README.md
+- snippets/common_header.md
+- prompts/*.md
+
+docs/rl-engine:
+- README.md
+- engine-completion-checklist.md
+- final-process-order.md
+- codex-usage-guide.md
+
+scripts:
+- validate_structure.ps1
+- show_prompt.ps1
+
+src:
+- DCGO.RL.Engine/
+- DCGO.RL.Engine.Tests/
+- DCGO.RL.Cli/
+- DCGO.RL.UnityAdapter/
