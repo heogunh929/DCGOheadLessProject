@@ -139,6 +139,14 @@ var tests = new (string Name, Action Test)[]
     ("CardEffectFoundation primitive service boundary", CardEffectFoundationPrimitiveServiceBoundary),
     ("ST1 CardEffect catalog covers target decklist", St1CardEffectCatalogCoversTargetDecklist),
     ("ST1 CardEffect deck validation passes", St1CardEffectDeckValidationPasses),
+    ("PortingStructure ST1 runnable records have files", PortingStructureSt1RunnableRecordsHaveFiles),
+    ("PortingStructure ST1 source mapping documented", PortingStructureSt1SourceMappingDocumented),
+    ("PortingStructure ST1 no-effect provenance documented", PortingStructureSt1NoEffectProvenanceDocumented),
+    ("PortingStructure ST1 catalog is registry only", PortingStructureSt1CatalogIsRegistryOnly),
+    ("PortingStructure ST1 status table matches registry", PortingStructureSt1StatusTableMatchesRegistry),
+    ("PortingStructure ST1 status table matches files", PortingStructureSt1StatusTableMatchesFiles),
+    ("PortingStructure card files avoid direct zone mutation", PortingStructureCardFilesAvoidDirectZoneMutation),
+    ("PortingStructure starter set files use original-like paths", PortingStructureStarterSetFilesUseOriginalLikePaths),
     ("ST2/ST3 CardEffect catalog skeleton covers target pool", St2St3CardEffectCatalogSkeletonCoversTargetPool),
     ("ST1-ST3 target pool validation passes", St1ToSt3TargetPoolValidationPasses),
     ("ST2-01 inherited no-source DP", St2OneInheritedNoSourceDp),
@@ -2640,6 +2648,163 @@ static void St1CardEffectDeckValidationPasses()
     }
 }
 
+static void PortingStructureSt1RunnableRecordsHaveFiles()
+{
+    var records = St1CardScriptCatalog.CreateRegistry().PortingRecords
+        .Where(record => record.Status is CardEffectPortingStatus.Implemented or CardEffectPortingStatus.NoEffect)
+        .ToArray();
+
+    foreach (var record in records)
+    {
+        var path = RlSt1CardEffectPath(record.CardId);
+        if (!File.Exists(path))
+        {
+            throw new InvalidOperationException($"Missing RL.Engine ST1 card file for {record.CardId}: {path}");
+        }
+    }
+}
+
+static void PortingStructureSt1SourceMappingDocumented()
+{
+    foreach (var record in St1CardScriptCatalog.CreateRegistry().PortingRecords)
+    {
+        var originalPath = OriginalSt1CardEffectPath(record.CardId);
+        if (!File.Exists(originalPath))
+        {
+            continue;
+        }
+
+        var rlPath = RlSt1CardEffectPath(record.CardId);
+        var content = File.ReadAllText(rlPath);
+        var expected = $"DCGO/Assets/Scripts/CardEffect/ST1/Red/{St1EffectClassName(record.CardId)}.cs";
+        if (!content.Contains(expected, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{record.CardId} file does not document source mapping '{expected}'.");
+        }
+    }
+}
+
+static void PortingStructureSt1NoEffectProvenanceDocumented()
+{
+    foreach (var record in St1CardScriptCatalog.CreateRegistry().PortingRecords
+        .Where(record => record.Status == CardEffectPortingStatus.NoEffect))
+    {
+        var originalPath = OriginalSt1CardEffectPath(record.CardId);
+        if (File.Exists(originalPath))
+        {
+            throw new InvalidOperationException($"{record.CardId} is registered as NoEffect but original CardEffect exists: {originalPath}");
+        }
+
+        var rlPath = RlSt1CardEffectPath(record.CardId);
+        var content = File.ReadAllText(rlPath);
+        if (!content.Contains("No original CardEffect source file exists", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{record.CardId} NoEffect file does not document the missing original CardEffect source.");
+        }
+    }
+}
+
+static void PortingStructureSt1CatalogIsRegistryOnly()
+{
+    var catalogPath = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects", "St1CardScriptCatalog.cs");
+    var content = File.ReadAllText(catalogPath);
+    var bannedSnippets = new[]
+    {
+        "new EffectDescriptor",
+        "SelectionRequest",
+        "SelectionResult",
+        "Tier1PrimitiveService",
+        ".Resolve(",
+        "context.Primitives",
+        "MoveCard",
+        "Trash(",
+        "Delete(",
+        "Destroy(",
+    };
+
+    foreach (var snippet in bannedSnippets)
+    {
+        if (content.Contains(snippet, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"St1CardScriptCatalog contains non-registry logic snippet '{snippet}'.");
+        }
+    }
+}
+
+static void PortingStructureSt1StatusTableMatchesRegistry()
+{
+    var table = LoadSt1PortingStatusTable();
+    var records = St1CardScriptCatalog.CreateRegistry().PortingRecords.ToArray();
+
+    AssertEqual(St1TargetCardIds().Length, table.Count);
+    AssertEqual(St1TargetCardIds().Length, records.Length);
+
+    foreach (var record in records)
+    {
+        if (!table.TryGetValue(record.CardId, out var status))
+        {
+            throw new InvalidOperationException($"CardEffect status table is missing {record.CardId}.");
+        }
+
+        AssertEqual(record.Status, status);
+    }
+}
+
+static void PortingStructureSt1StatusTableMatchesFiles()
+{
+    var table = LoadSt1PortingStatusTable();
+
+    foreach (var (cardId, status) in table)
+    {
+        if (status is not (CardEffectPortingStatus.Implemented or CardEffectPortingStatus.NoEffect))
+        {
+            continue;
+        }
+
+        var rlPath = RlSt1CardEffectPath(cardId);
+        if (!File.Exists(rlPath))
+        {
+            throw new InvalidOperationException($"Status table marks {cardId} as {status}, but RL.Engine file is missing: {rlPath}");
+        }
+    }
+}
+
+static void PortingStructureCardFilesAvoidDirectZoneMutation()
+{
+    var root = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects");
+    var files = Directory.GetFiles(root, "*.cs", SearchOption.AllDirectories);
+    var bannedSnippets = new[]
+    {
+        ".Hand.Add(",
+        ".Deck.Add(",
+        ".Security.Add(",
+        ".Trash.Add(",
+        ".DigiEggDeck.Add(",
+        ".FieldPermanents.Add(",
+        ".CardsIn(",
+        "CurrentZone =",
+    };
+
+    foreach (var file in files)
+    {
+        var content = File.ReadAllText(file);
+        foreach (var snippet in bannedSnippets)
+        {
+            if (content.Contains(snippet, StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException($"CardEffect file directly mutates zone state with '{snippet}': {Path.GetRelativePath(WorkspaceRoot(), file)}");
+            }
+        }
+    }
+}
+
+static void PortingStructureStarterSetFilesUseOriginalLikePaths()
+{
+    var root = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "CardEffects");
+    AssertCardEffectSetPath(root, "ST2");
+    AssertCardEffectSetPath(root, "ST3");
+}
+
 static void St2St3CardEffectCatalogSkeletonCoversTargetPool()
 {
     var records = St2St3CardScriptCatalog.CreateRegistry().PortingRecords.ToArray();
@@ -4435,6 +4600,91 @@ static void AssertThrows<TException>(Action action)
     }
 
     throw new InvalidOperationException($"Expected exception '{typeof(TException).Name}'.");
+}
+
+static string WorkspaceRoot()
+{
+    var directory = new DirectoryInfo(Environment.CurrentDirectory);
+    while (directory is not null)
+    {
+        if (File.Exists(Path.Combine(directory.FullName, "AGENTS.md"))
+            && Directory.Exists(Path.Combine(directory.FullName, "src"))
+            && Directory.Exists(Path.Combine(directory.FullName, "DCGO")))
+        {
+            return directory.FullName;
+        }
+
+        directory = directory.Parent;
+    }
+
+    throw new InvalidOperationException($"Could not locate workspace root from {Environment.CurrentDirectory}.");
+}
+
+static string St1EffectClassName(string cardId) => cardId.Replace("-", "_", StringComparison.Ordinal);
+
+static string RlSt1CardEffectPath(string cardId) =>
+    Path.Combine(
+        WorkspaceRoot(),
+        "src",
+        "DCGO.RL.Engine",
+        "CardEffects",
+        "ST1",
+        "Red",
+        $"{St1EffectClassName(cardId)}.cs");
+
+static string OriginalSt1CardEffectPath(string cardId) =>
+    Path.Combine(
+        WorkspaceRoot(),
+        "DCGO",
+        "Assets",
+        "Scripts",
+        "CardEffect",
+        "ST1",
+        "Red",
+        $"{St1EffectClassName(cardId)}.cs");
+
+static Dictionary<string, CardEffectPortingStatus> LoadSt1PortingStatusTable()
+{
+    var path = Path.Combine(WorkspaceRoot(), "docs", "rl-engine", "cardeffect-porting-status.md");
+    var statuses = new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal);
+
+    foreach (var line in File.ReadLines(path))
+    {
+        if (!line.StartsWith("| ST1-", StringComparison.Ordinal))
+        {
+            continue;
+        }
+
+        var columns = line.Split('|', StringSplitOptions.TrimEntries);
+        if (columns.Length < 5)
+        {
+            continue;
+        }
+
+        var cardId = columns[1];
+        var statusText = columns[3].Replace("`", string.Empty, StringComparison.Ordinal);
+        statuses[cardId] = Enum.Parse<CardEffectPortingStatus>(statusText);
+    }
+
+    return statuses;
+}
+
+static void AssertCardEffectSetPath(string root, string set)
+{
+    var files = Directory.GetFiles(root, $"{set}_*.cs", SearchOption.AllDirectories);
+    if (files.Length == 0)
+    {
+        throw new InvalidOperationException($"No {set} CardEffect files found under {root}.");
+    }
+
+    foreach (var file in files)
+    {
+        var relative = Path.GetRelativePath(root, file).Replace('\\', '/');
+        if (!relative.StartsWith($"{set}/", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{set} CardEffect file must live under CardEffects/{set}/...: {relative}");
+        }
+    }
 }
 
 static CardInstanceId AddCardToPlayerZone(GameState state, CardInstanceId cardId, PlayerId owner, Zone zone)

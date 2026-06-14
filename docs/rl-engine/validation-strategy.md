@@ -72,6 +72,26 @@ Suggested validation batches are now fixed in `docs/rl-engine/st1-st3-porting-pl
 
 No code test command was required for this document-only inventory task.
 
+## 구조 검증 테스트
+
+2026-06-14 추가 기준:
+
+- ST1 카드별 파일 존재, source mapping, NoEffect 근거를 테스트한다.
+- `St1CardScriptCatalog`가 registry-only인지 테스트한다.
+- `cardeffect-porting-status.md` ST1 status table이 registry와 파일 존재 상태에 맞는지 테스트한다.
+- CardEffect 파일에서 직접 zone list 수정 패턴을 금지한다.
+- ST2/ST3 파일이 `CardEffects/ST2/...`, `CardEffects/ST3/...` 아래에 있는지 테스트한다.
+
+이 테스트는 ST2/ST3 효과 구현을 시작하지 않고도 포팅 구조가 원본-like 형태에서 벗어나는 것을 막기 위한 guard다.
+
+실행 결과:
+
+```powershell
+.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 202 tests passed.` MSBuild `AssemblyReference.cache` 및 `MSBuildTemp` 접근 경고가 있었지만 test runner는 성공 종료했다.
+
 ## StateHash 기준
 
 StateHash에는 원천 state가 포함된다.

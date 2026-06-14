@@ -7,6 +7,14 @@
 
 이 문서는 `./DCGO` Unity 원본 battle 로직을 Source of Truth로 삼아 RL.Engine card script 포팅 상태를 추적한다. `Implemented`는 ST1 target deck 검증 기준으로 원본 의미를 보존한 구현이 존재한다는 뜻이며, 전체 DCGO 카드풀/룰 완성을 의미하지 않는다.
 
+## 코드 배치 원칙
+
+- ST1 카드별 effect body는 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_*.cs`에 대응되는 `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_*.cs` 파일에 둔다.
+- `St1CardScriptCatalog`는 `ICardScript` registry 등록과 명시적 NoEffect 등록만 담당한다.
+- ST1 공통 helper는 원본 `CardEffectCommons` 또는 공통 CardEffect helper에 대응되는 범위만 `src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs`에 둔다.
+- ST2/ST3 카드별 effect body도 원본 `DCGO/Assets/Scripts/CardEffect/ST2/Blue/ST2_*.cs`, `DCGO/Assets/Scripts/CardEffect/ST3/Yellow/ST3_*.cs`에 대응되는 `src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_*.cs`, `src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_*.cs` 파일에 둔다.
+- `St2St3CardScriptCatalog`도 registry 등록만 담당한다.
+
 ## 상태 값
 
 | Status | 의미 | 검증 deck 허용 |
@@ -80,3 +88,14 @@ ST2/ST3 확장은 원본 DCGO `DCGO/Assets/Scripts/CardEffect/ST2/**`, `DCGO/Ass
 ST2/ST3 skeleton은 `missing-layer:<id>` 토큰을 사용해 `TargetCardPoolValidator`의 missing layer report가 구체적인 공통 layer 이름을 반환하게 한다. 현재 ST1~ST3 target pool 기준 남은 missing layer는 없다. `security-add-this-card-to-hand`는 ST3-13/14 구현에서 generic `Executing -> Hand` primitive로 해결됐고, `digivolution-source-trash`는 ST2-03/06/09 구현에서 generic bottom-source trash primitive로 해결됐다. `opponent-no-source-condition`은 ST2-01/08/12 구현에서 opponent battle area no-source Digimon helper로 해결됐다. `negative-security-attack-duration`은 ST3-15 구현에서 permanent/player 대상 temporary `SecurityAttack` modifier와 `BattleKeywordService` 하한 계산으로 해결됐다. `st2st3-card-body-wiring`은 ST2-11 구현에서 once-per-turn OnAllyAttack unsuspend body를 `TriggerPipelineService`와 `Tier1PrimitiveService.Unsuspend`에 연결해 해결됐다. `bounce-to-hand`는 ST2-16 구현에서 generic `ReturnPermanentToHand` primitive로 top card hand 이동과 source trash를 분리해 해결됐다. `recovery-from-deck`와 `on-enter-field-when-digivolving-compat`는 ST3-09 구현에서 `Tier1PrimitiveService.RecoverFromDeck`와 `EffectTiming.WhenDigivolving` mapping으로 해결됐다. `continuous-security-digimon-dp`는 ST3-12 구현에서 continuous `SecurityDigimonDP` modifier와 `EffectiveStatService.SecurityDp`로 해결됐다. `cannot-attack-block-duration`은 ST2-14 구현에서 temporary `CannotAttack`/`CannotBlock` restriction modifier와 attack/block legal filtering으로 해결됐다. `evolution-source-card-play`는 ST2-15 구현에서 chained selection과 `Tier1PrimitiveService.PlayEvolutionSourceAsNewPermanent`로 해결됐다. `dp-zero-deletion-trigger`는 ST3-01/04 구현에서 `RuleProcessor` DP-zero deletion payload와 `EffectTiming.OnDestroyedAnyone` hook으로 해결됐다.
 
 Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 generic layer로 보존되어 `Implemented`로 승격했다. 이후 security add-to-hand 갱신에서 ST3-13과 ST3-14가, source-trash 갱신에서 ST2-03, ST2-06, ST2-09가, opponent no-source 갱신에서 ST2-01, ST2-08, ST2-12가, negative SecurityAttack duration 갱신에서 ST3-15가, ST2-11 body wiring 갱신에서 ST2-11이, bounce-to-hand 갱신에서 ST2-16이, recovery 갱신에서 ST3-09가, continuous SecurityDigimonDP 갱신에서 ST3-12가, attack/block restriction 갱신에서 ST2-14가, evolution-source-card-play 갱신에서 ST2-15가, DP-zero deletion trigger 갱신에서 ST3-01과 ST3-04가 generic layer 경계를 통해 `Implemented`로 승격했다. ST1~ST3 target validation은 통과하며, 다음 단계에서도 원본 의미가 보존되는 카드만 generic layer 경계를 통해 개별적으로 승격한다.
+
+## 구조 검증 guard
+
+2026-06-14 기준으로 ST1 구조 검증 테스트를 추가했다.
+
+- ST1 `Implemented`/`NoEffect` 카드는 모두 `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_XX.cs` 파일을 가진다.
+- 원본 CardEffect가 있는 카드는 파일 상단에 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_XX.cs` mapping을 기록한다.
+- 원본 CardEffect가 없는 `ST1-02`, `ST1-04`, `ST1-05`, `ST1-10`은 NoEffect marker 파일에 missing-source 근거를 기록한다.
+- `St1CardScriptCatalog`는 registry-only guard를 통과해야 한다.
+- 이 문서의 ST1 status table은 실제 registry status와 테스트로 비교된다.
+- 최신 실행 결과: `All 202 tests passed.`

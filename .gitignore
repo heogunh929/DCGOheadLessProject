@@ -1,1 +1,10 @@
 DCGO/
+.dotnet/
+.dotnet_home/
+.nuget/
+.tmp/
+**/bin/
+**/obj/
+*.csproj.AssemblyReference.cache
+*.tmp
+*.log

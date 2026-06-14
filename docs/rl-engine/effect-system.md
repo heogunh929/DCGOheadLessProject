@@ -32,6 +32,29 @@
 | `EffectiveStatService` | base stat + temporary modifier + continuous modifier 합산 |
 | `SecurityEffectExecutionService` | security check 중 `SecuritySkill` 실행과 Activate Main Option/direct body 처리 |
 
+## ST1 Per-Card Layout Alignment - 2026-06-14
+
+ST1 card script body는 더 이상 `St1CardScriptCatalog.cs`에 모아두지 않는다. 원본 Unity의 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_*.cs` 파일 단위와 대응되도록 RL.Engine도 `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_*.cs`에 카드별 body를 배치한다.
+
+| 원본 Unity 파일 | RL.Engine 파일 | 책임 |
+| --- | --- | --- |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_01.cs` | ST1-01 inherited continuous DP body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_03.cs` | ST1-03 inherited continuous DP body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs` | ST1-06 blocker/memory trigger body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_07.cs` | ST1-07 declared static capability |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_08.cs` | ST1-08 WhenDigivolving selection body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_09.cs` | ST1-09 OnBlockAnyone memory trigger body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_11.cs` | ST1-11 continuous SecurityAttack body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_12.cs` | ST1-12 tamer aura and security self-play body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_13.cs` | ST1-13 option/security duration body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_14.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_14.cs` | ST1-14 Security Digimon DP body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_15.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_15.cs` | ST1-15 option/security deletion body |
+| `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs` | `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_16.cs` | ST1-16 option/security deletion body |
+
+`St1CardScriptCatalog`는 registry 등록만 담당한다. 공통 helper는 원본 `CardEffectCommons`/공통 effect helper에 대응되는 범위만 `src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs`에 둔다.
+
+ST2/ST3도 같은 원칙을 따른다. `St2St3CardScriptCatalog`는 `ICardScript` 목록 생성만 담당하고, ST2 body는 `src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_*.cs`, ST3 body는 `src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_*.cs`에 둔다. 반복되는 source trash, no-source inherited continuous, DP-zero deletion trigger, on-attack DP reduction helper는 원본 공통 helper 역할에 대응되는 support file로 분리한다.
+
 ## 원본 DCGO Mapping
 
 | 원본 DCGO | 원본 책임 | RL.Engine 대응 |

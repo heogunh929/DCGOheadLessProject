@@ -6,6 +6,8 @@ This is the fixed implementation pass plan for expanding the committed ST1 targe
 
 Current worktree note: local uncommitted ST2/ST3 implementation files may already exist from earlier work. They are outside the scope of this documentation-only planning task and are not committed or accepted by this document.
 
+Structure alignment note: ST1, ST2, and ST3 card scripts now mirror the Unity source layout under `src/DCGO.RL.Engine/CardEffects/{Set}/{Color}/{CardId}.cs`. `St1CardScriptCatalog` and `St2St3CardScriptCatalog` are registry-only. Shared helper logic that maps to common `CardEffectCommons`-style behavior lives outside the catalogs in support files such as `St1ScriptSupport`, `St2ScriptSupport`, `St3ScriptSupport`, and `StarterScriptSupport`.
+
 ## Planning Rules
 
 - Use `DCGO/` Unity battle logic as source of truth.
