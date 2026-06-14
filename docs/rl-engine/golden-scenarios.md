@@ -4,7 +4,7 @@
 
 Golden scenario는 학습 데이터가 아니라 엔진 검증 데이터다. 현재 ST1 target deck validation은 통과하지만, 더 넓은 DCGO 룰 검증을 위해 scripted/golden scenario를 계속 확장해야 한다.
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
 - 현재 golden suite는 ST1/minimal battle 중심이다.
 - ST1~ST3 registry snapshot과 구조 guard는 존재하지만, ST1~ST3 전용 expanded golden scenario suite는 아직 future work다.

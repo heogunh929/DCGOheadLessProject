@@ -5,11 +5,11 @@
 대상 card pool: `ST1-01`부터 `ST1-16`  
 현재 판정: 통과
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
 - ST1 completion status는 계속 통과다.
 - 이 문서의 `All 170 tests passed.` 기록은 ST1-12 완료 당시 historical checkpoint 결과다.
-- 최신 source-aligned 구조 guard 기록은 `All 212 tests passed.`이며, ST1~ST3 registry/file/status guard까지 포함한다.
+- 최신 source-aligned 구조 guard 기록은 `All 214 tests passed.`이며, ST1~ST3 registry/file/status guard까지 포함한다.
 - ST1 gate 통과는 전체 DCGO 엔진 완성 또는 RL 학습 단계 진입을 의미하지 않는다.
 
 ## 요약
@@ -46,7 +46,7 @@ ST1-12 security play-self tamer 구현으로 ST1 target deck 기준 마지막 pa
 | `replay-determinism` | 통과 | replay/state hash determinism 유지 |
 | `invariant-fuzz` | 통과 | invariant fuzz 유지 |
 
-## Historical 실행 테스트
+## 이전 단계 실행 테스트
 
 ```powershell
 $env:DOTNET_CLI_HOME='E:\headlessDCGO\.dotnet_home'
@@ -66,3 +66,11 @@ MSBuild가 cache/temp file access denied warning을 냈지만 test runner는 성
 - `BeforePayCost`/`AfterPayCost`/counter timing
 - block selection result application의 full end-to-end 흐름
 - Unity 원본 trace와 RL.Engine trace의 구조화 비교 확대
+
+## Queue 45 Gate 범위 정합성 - 2026-06-15
+
+이 문서는 ST1 target deck completion report다. 현재 통과 근거는 `EngineCompletionChecklistRunner`를 ST1 request로 실행하는 테스트(`ValidationHarnessV2 completion gate reports ST1 complete`)이며, failed gate는 0이다.
+
+이 결과는 ST1~ST3 전체 completion 또는 전체 DCGO 엔진 completion을 의미하지 않는다. ST1~ST3 target pool은 별도 `TargetCardPoolValidator` 결과로 관리되며, whole-engine completion request는 아직 실행되지 않았다.
+
+학습 단계 진입 상태: 불가. ST1 gate 통과는 `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API 구현을 허용하는 조건이 아니다.

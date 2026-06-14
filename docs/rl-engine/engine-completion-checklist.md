@@ -6,10 +6,10 @@
 
 이 체크리스트는 학습 단계 진입 전 검증 기준을 관리한다. 현재 통과 판정은 ST1 target deck 기준이며, 전체 DCGO 카드풀/룰 완성을 의미하지 않는다.
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
 - ST1 target deck gate: 통과.
-- 최신 source-aligned 구조 guard 기록: `All 212 tests passed.`
+- 최신 source-aligned 구조 guard 기록: `All 214 tests passed.`
 - 과거 ST1 완료 시점 테스트 기록 `All 170 tests passed.`는 historical checkpoint 기록이며 최신 구조 guard 수와 다르다.
 - ST1~ST3 registry snapshot은 별도 상태표에서 관리한다. shared/variant source-alignment risk는 ST1 gate 통과와 별개로 남아 있다.
 
@@ -37,7 +37,7 @@
 - PartiallyImplemented card/effect: 0
 - Failed gate: 0
 - historical ST1 checkpoint 테스트 결과: `All 170 tests passed.`
-- 최신 구조 guard 테스트 결과: `All 212 tests passed.`
+- 최신 구조 guard 테스트 결과: `All 214 tests passed.`
 
 ## 통과 범위의 의미
 
@@ -53,3 +53,17 @@ ST1 target deck의 현재 card effect와 관련 gate는 통과한다. 그러나 
 ## 학습 단계 진입 제한
 
 ST1 gate 통과만으로 RL 학습 구성으로 바로 넘어가지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API는 전체 엔진 완성 기준과 사용자 승인이 있기 전까지 구현하지 않는다.
+
+## Queue 45 Gate 범위 정합성 - 2026-06-15
+
+현재 completion 관련 결과는 아래 세 범위를 분리해서 해석한다.
+
+| 범위 | runner/근거 | 현재 결과 | 해석 |
+| --- | --- | --- | --- |
+| ST1 target deck | `EngineCompletionChecklistRunner` / `ValidationHarnessV2 completion gate reports ST1 complete` | 통과, failed gate 0 | ST1 target deck에 한정된 completion gate |
+| ST1~ST3 target pool | `TargetCardPoolValidator` / `ST1-ST3 target pool validation passes` | 통과, 48장 registry/deck validation 기준 | 카드풀 registry/status/file validation 통과이며 전체 엔진 completion gate가 아님 |
+| 전체 엔진 completion | 별도 whole-engine `EngineCompletionChecklistRunner` request 없음 | 미실행 / 검증 필요 | RL 학습 단계 진입 근거로 사용할 수 없음 |
+
+`EngineCompletionReport.IsComplete`는 request scope에 한정한다. ST1 request의 `IsComplete=true`를 ST1~ST3 전체 completion 또는 전체 DCGO 엔진 completion으로 재사용하지 않는다.
+
+학습 단계 진입 상태: 불가. ST1 및 ST1~ST3 target validation이 통과하더라도 전체 엔진 completion request, Unity trace parity, 확장 golden scenario 근거가 없으면 RL 학습 구성으로 넘어가지 않는다.

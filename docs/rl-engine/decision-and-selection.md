@@ -4,7 +4,7 @@
 
 RL.Engine은 Unity UI를 구현하지 않는다. 선택이 필요한 rule/effect는 `DecisionPoint`, `LegalAction`, `SelectionRequest`, `SelectionResult`로 표현하고, CLI/UnityAdapter/RL agent가 같은 구조를 공유한다.
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
 - ST1 selection wiring은 `SelectionRequest`/`SelectionResult` boundary를 유지한다.
 - ST2/ST3 source-aligned registry snapshot에서도 selection이 필요한 효과는 카드별 파일과 support helper를 통해 같은 boundary를 사용해야 한다.

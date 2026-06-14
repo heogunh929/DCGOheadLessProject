@@ -1,17 +1,12 @@
 # 공통 제약
 
-모든 source-aligned 작업에 적용한다.
-
-- 이 작업은 신규 개발이 아니라 DCGO Unity battle 로직의 headless 이식이다.
-- 원본 `DCGO/`는 Source of Truth이며 명시 요청 없이 수정하지 않는다.
-- `src/DCGO.RL.Engine`에는 UnityEngine/Photon/MonoBehaviour/GameObject/Coroutine/UI 의존성을 추가하지 않는다.
-- CardEffect는 원본처럼 카드별 파일 구조를 유지한다.
-- Catalog는 registry 등록만 담당한다.
-- 공통 service는 원본 공통 처리에 대응될 때만 유지한다.
-- 카드별 effect body를 통합 catalog 또는 거대한 helper 파일에 숨기지 않는다.
-- 직접 zone list 수정 금지. ZoneMover/primitive를 사용한다.
-- unsupported는 silent no-op이 아니라 명시 실패/validation report로 남긴다.
-- 학습용 ObservationEncoder/RewardCalculator/DatasetExporter/Trainer/RL Environment API는 구현하지 않는다.
-- remote 추가/push/fetch/pull 금지.
+- 신규 엔진 개발이 아니라 기존 DCGO Unity battle 로직의 headless RL.Engine 이식이다.
+- 기존 `DCGO/Assets/Scripts` 원본 파일은 Source of Truth이며 수정하지 않는다.
+- RL.Engine에는 UnityEngine/Photon/MonoBehaviour/GameObject/Coroutine/UI 의존성을 넣지 않는다.
+- remote 없는 로컬 Git만 사용한다. `remote add`, `push`, `fetch`, `pull` 금지.
 - 사용자 승인 없는 commit 금지.
-- 모든 보고는 한국어로 한다.
+- 작업 시작 전후 `git status --short`, `git diff --stat`, `git diff --name-only`, `git remote -v` 보고.
+- 카드 효과 body는 카드별 파일에 둔다. Catalog는 registry 역할만 한다.
+- 원본 의미를 보존할 수 없으면 `Implemented`로 올리지 않는다.
+- silent no-op 금지. Unsupported/Partial은 명시 보고.
+- 학습용 Observation/Reward/Dataset/Trainer/RL Environment 구현 금지.

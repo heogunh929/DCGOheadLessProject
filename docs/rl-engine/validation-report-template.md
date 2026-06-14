@@ -72,3 +72,14 @@
 - Missing layer 우선순위:
 - 다음 prompt:
 - 사용자 결정 필요 사항:
+
+## Gate Scope 해석 규칙
+
+보고서 작성자는 아래 항목을 반드시 명시한다.
+
+- Gate scope: `ST1 target deck`, `ST1-ST3 target pool`, `whole engine` 중 하나.
+- Runner type: `EngineCompletionChecklistRunner`, `TargetCardPoolValidator`, `문서 감사`, 또는 기타 정확한 runner.
+- `IsComplete` 적용 범위: `IsComplete=true`는 실행한 request scope에만 유효하다.
+- 학습 단계 진입 가능 여부: 기본값은 `불가`이며, whole-engine completion과 사용자 승인이 모두 없으면 `가능`으로 쓰지 않는다.
+
+ST1 target deck 통과와 ST1-ST3 target pool validation 통과는 서로 다른 근거다. 둘 중 어느 것도 단독으로 전체 DCGO 엔진 완성 또는 RL 학습 단계 진입을 의미하지 않는다.

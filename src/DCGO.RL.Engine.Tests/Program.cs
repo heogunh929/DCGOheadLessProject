@@ -154,6 +154,8 @@ var tests = new (string Name, Action Test)[]
     ("PortingStructure ST1-ST3 registry snapshot matches registry", PortingStructureSt1ToSt3StatusSnapshotMatchesRegistry),
     ("PortingStructure ST1 status table matches files", PortingStructureSt1StatusTableMatchesFiles),
     ("PortingStructure ST1-ST3 registry snapshot matches files", PortingStructureSt1ToSt3StatusSnapshotMatchesFiles),
+    ("PortingStructure implemented scripts declare concrete classes in card files", PortingStructureImplementedScriptsDeclareConcreteClassesInCardFiles),
+    ("PortingStructure NoEffect files are marker only", PortingStructureNoEffectFilesAreMarkerOnly),
     ("PortingStructure NoEffect asset conflicts are documented", PortingStructureNoEffectAssetConflictsAreDocumented),
     ("PortingStructure card files avoid direct zone mutation", PortingStructureCardFilesAvoidDirectZoneMutation),
     ("PortingStructure starter set files use original-like paths", PortingStructureStarterSetFilesUseOriginalLikePaths),
@@ -2754,19 +2756,25 @@ static void AssertCatalogRegistryOnly(string fileName)
     var content = File.ReadAllText(catalogPath);
     var bannedSnippets = new[]
     {
-        "new EffectDescriptor",
+        "EffectDescriptor",
         "SelectionRequest",
         "SelectionResult",
         "SelectionContinuation",
+        "CreateSelectionRequest",
         "Tier1PrimitiveService",
         "ZoneMover",
         "TemporaryModifier",
+        "AddTemporary",
         ".Resolve(",
         "context.Primitives",
+        ".Primitives.",
         "MoveCard",
         "Trash(",
         "Delete(",
         "Destroy(",
+        "ModifyMemory(",
+        "PlayWithoutPayingCost(",
+        "ReturnPermanentToHand(",
     };
 
     foreach (var snippet in bannedSnippets)
@@ -2852,6 +2860,67 @@ static void PortingStructureSt1ToSt3StatusSnapshotMatchesFiles()
         if (!File.Exists(rlPath))
         {
             throw new InvalidOperationException($"Current registry snapshot marks {cardId} as {status}, but RL.Engine file is missing: {rlPath}");
+        }
+    }
+}
+
+static void PortingStructureImplementedScriptsDeclareConcreteClassesInCardFiles()
+{
+    var scripts = St1CardScriptCatalog.CreateScripts()
+        .Concat(St2St3CardScriptCatalog.CreateScripts())
+        .Where(script => script.Porting.Status == CardEffectPortingStatus.Implemented)
+        .ToArray();
+
+    foreach (var script in scripts)
+    {
+        var path = RlCardEffectPath(script.Porting.CardId);
+        var content = File.ReadAllText(path);
+        var expectedDeclaration = $"class {script.GetType().Name}";
+        if (!content.Contains(expectedDeclaration, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"{script.Porting.CardId} implemented script '{script.GetType().Name}' must be declared in its card file: {Path.GetRelativePath(WorkspaceRoot(), path)}");
+        }
+    }
+}
+
+static void PortingStructureNoEffectFilesAreMarkerOnly()
+{
+    var records = St1CardScriptCatalog.CreateRegistry().PortingRecords
+        .Concat(St2St3CardScriptCatalog.CreateRegistry().PortingRecords)
+        .Where(record => record.Status == CardEffectPortingStatus.NoEffect)
+        .ToArray();
+
+    var bannedSnippets = new[]
+    {
+        "class ",
+        "EffectDescriptor",
+        "SelectionRequest",
+        "SelectionContinuation",
+        "Resolve(",
+        "context.Primitives",
+        "Tier1PrimitiveService",
+        "ZoneMover",
+        "TemporaryModifier",
+        "CurrentZone =",
+    };
+
+    foreach (var record in records)
+    {
+        var path = RlCardEffectPath(record.CardId);
+        var content = File.ReadAllText(path);
+        if (!content.Contains("Source mapping:", StringComparison.Ordinal)
+            || !content.Contains("NoEffect", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{record.CardId} NoEffect marker must document source mapping and explicit NoEffect status.");
+        }
+
+        foreach (var snippet in bannedSnippets)
+        {
+            if (content.Contains(snippet, StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException($"{record.CardId} NoEffect marker contains implementation snippet '{snippet}': {Path.GetRelativePath(WorkspaceRoot(), path)}");
+            }
         }
     }
 }

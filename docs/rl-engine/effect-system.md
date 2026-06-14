@@ -4,7 +4,7 @@
 
 이 문서는 Unity 원본 `ICardEffect`, `AutoProcessing`, `SkillInfo`, `MultipleSkills`, `CardController` 흐름을 RL.Engine의 headless effect system으로 이식한 현재 구조를 요약한다.
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
 - ST1 card effect body는 카드별 파일 구조로 정렬되어 있고 `St1CardScriptCatalog`는 registry 등록만 담당한다.
 - ST2/ST3도 source-aligned 로컬 작업트리에서 카드별 파일/marker 구조와 registry snapshot을 가진다.

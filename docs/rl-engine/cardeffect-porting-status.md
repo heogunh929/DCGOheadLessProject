@@ -1,10 +1,10 @@
 # CardEffect 포팅 상태표
 
-## Current Snapshot - 2026-06-14
+## 최신 상태 요약 - 2026-06-15
 
-- 기준: source-aligned 로컬 작업트리. cached `origin/main`/로컬 기준점은 `a20f045a chore: checkpoint porting structure guards`이며, queue 34~38 변경은 아직 commit 전이다.
+- 기준: github-current 로컬 작업트리. 로컬 HEAD는 `3b993b34 202606142346`이며, queue 40~43 문서/구조 guard 변경은 아직 commit 전이다.
 - ST1 target deck validation: 통과.
-- ST1~ST3 registry snapshot: 48장 모두 `Implemented` 또는 `NoEffect`로 등록되어 있으며, 최신 구조 guard 기록은 `All 212 tests passed.`다.
+- ST1~ST3 registry snapshot: 48장 모두 `Implemented` 또는 `NoEffect`로 등록되어 있으며, 최신 구조 guard 기록은 `All 214 tests passed.`다.
 - 남은 source-alignment risk: `ST2-07`, `ST3-07`은 asset에서 shared `ST1_06`을 참조하지만 registry는 `NoEffect`다. `ST3-02`는 `ST3_02_P2.asset` variant 확인이 필요하다.
 - 학습 단계: 아직 진입하지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API는 구현 금지 상태다.
 
@@ -71,7 +71,7 @@ ST1 대상 card pool: `ST1-01`부터 `ST1-16`
 - `PartiallyImplemented`: 0
 - ST1 deck validation: 통과
 - EngineCompletionChecklistRunner: ST1 target deck 기준 통과
-- 전체 테스트: `All 212 tests passed.`
+- 전체 테스트: `All 214 tests passed.`
 
 ## 아직 전체 엔진 차원에서 남은 항목
 
@@ -101,7 +101,7 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 
 - 2026-06-13 ST1 완료 직후에는 ST2/ST3가 inventory/pass plan 단계였고, ST1~ST3 validation은 expected fail로 문서화되어 있었다.
 - 이후 로컬 source-aligned 작업트리에서 ST2/ST3 registry snapshot과 구조 guard가 추가되었다.
-- 과거 `All 170 tests passed.`, `All 194 tests passed.`, `All 202 tests passed.` 기록은 해당 시점의 test count이며, 현재 이 문서의 최신 구조 guard 기준 기록은 `All 212 tests passed.`다.
+- 과거 `All 170 tests passed.`, `All 194 tests passed.`, `All 202 tests passed.`, `All 212 tests passed.` 기록은 해당 시점의 test count이며, 현재 이 문서의 최신 구조 guard 기준 기록은 `All 214 tests passed.`다.
 
 ## Current ST1-ST3 Registry Snapshot - 2026-06-14
 
@@ -168,7 +168,9 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 - 원본 CardEffect가 있는 카드는 파일 상단에 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_XX.cs` mapping을 기록한다.
 - 원본 CardEffect가 없는 NoEffect 카드는 NoEffect marker 파일에 missing-source 근거를 기록한다.
 - `St1CardScriptCatalog`와 `St2St3CardScriptCatalog`는 registry-only guard를 통과해야 한다.
+- `Implemented` script의 concrete class는 대응 카드별 파일에 선언되어야 하며, support 파일이나 Catalog에 숨어 있으면 안 된다.
+- `NoEffect` 카드별 파일은 source mapping과 NoEffect 근거만 가진 marker-only 파일이어야 한다.
 - 이 문서의 ST1 status table 및 ST1~ST3 registry snapshot은 실제 registry status와 테스트로 비교된다.
 - `ST2-07`, `ST3-07`, `ST3-02`처럼 asset/source mapping 충돌 가능성이 있는 NoEffect registry는 policy/status 문서에 source-alignment risk로 남겨야 한다.
 - 실패/수정 내역: 첫 실행에서 기존 ST1 status table parser가 새 ST1~ST3 snapshot의 `ST1-*` 행을 함께 읽어 2개 구조 테스트가 실패했다. parser를 `## 최신 ST1 상태표` 섹션으로 한정한 뒤 재실행했다.
-- 최신 실행 결과: `.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 212 tests passed.` MSBuild cache/temp access denied warning은 있었지만 test runner는 성공 종료했다.
+- 최신 실행 결과: `.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 214 tests passed.` MSBuild cache/temp access denied warning은 있었지만 test runner는 성공 종료했다.

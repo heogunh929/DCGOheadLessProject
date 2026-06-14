@@ -2,24 +2,24 @@
 
 Updated: 2026-06-14
 
-## Current Snapshot
+## 최신 상태 요약 - 2026-06-15
 
-This document now separates the current source-aligned local worktree snapshot from the earlier inventory/planning baseline.
+This document separates the current github-current local worktree snapshot from the earlier inventory/planning baseline.
 
 Current source-aligned snapshot:
 
 | Area | Status |
 | --- | --- |
-| Git baseline | cached `origin/main`/local baseline `a20f045a chore: checkpoint porting structure guards`; queue 34~38 changes are uncommitted |
+| Git baseline | local HEAD `3b993b34 202606142346`; cached `origin/main` is `a20f045a`, so local `main` is ahead 1 |
 | ST1 target deck | Completed and currently documented as passing |
 | ST2 target pool | Registered in the source-aligned local worktree with per-card files/markers |
 | ST3 target pool | Registered in the source-aligned local worktree with per-card files/markers |
-| ST1-ST3 registry snapshot | 48 cards documented in `cardeffect-porting-status.md`; latest recorded structure guard: `All 212 tests passed.` |
+| ST1-ST3 registry snapshot | 48 cards documented in `cardeffect-porting-status.md`; latest recorded structure guard: `All 214 tests passed.` |
 | Source-alignment risks | `ST2-07`, `ST3-07` shared `ST1_06` mapping and `ST3-02` variant still require audit |
 | RL training stage | Not allowed; no ObservationEncoder/RewardCalculator/DatasetExporter/Trainer work |
 | Unity source files | Must remain read-only source of truth |
 
-## Historical Inventory Baseline
+## 이전 단계 기록 - Inventory Baseline
 
 The original version of this document was created during the ST1-ST3 inventory/pass-plan task. At that time it was explicitly not a completion claim and expected ST1-ST3 validation to fail until implementation passes were completed. That historical baseline is preserved below for traceability, but it is no longer the current source-aligned status.
 
@@ -50,11 +50,11 @@ The original version of this document was created during the ST1-ST3 inventory/p
 | ST1-ST3 deck validation | Current local status documents no remaining missing layer, but source-alignment risks remain for shared/variant assets |
 | unsupported mechanic zero | Current registry snapshot has no `Unsupported`; source-alignment risks must not be treated as resolved mechanics |
 | NoEffect explicitness | Marker files exist, but `ST2-07`, `ST3-07`, `ST3-02` need further source/asset verification |
-| replay determinism / invariant smoke | Latest recorded queue 36 test run: `All 212 tests passed.` |
+| replay determinism / invariant smoke | Latest recorded source-aligned structure guard: `All 214 tests passed.` |
 | golden scenarios | Existing ST1/minimal suite only; ST1-ST3 expanded golden scenarios remain future validation data |
 | RL training guard | Pass by policy; no RL training API implementation |
 
-## Historical Planned Completion Gates
+## 이전 단계 기록 - Planned Completion Gates
 
 The following table is the earlier planning baseline. It is retained as historical context only.
 
@@ -119,7 +119,7 @@ Queue 38 is documentation-only and does not run tests. The latest recorded sourc
 .\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
 ```
 
-Result: `All 212 tests passed`, with MSBuild cache/temp access warnings.
+Result: `All 214 tests passed`, with MSBuild cache/temp access warnings.
 
 Historical inventory task test note:
 
@@ -142,3 +142,24 @@ Result from that previous work: `All 194 tests passed`, with an MSBuild cache ac
 - RL training components.
 
 These limits must remain explicit. Unsupported or not-yet-planned ST2/ST3 behavior must not be accepted as silent no-op.
+
+## Queue 45 Gate Scope Reconciliation - 2026-06-15
+
+This report is the ST1-ST3 target card pool validation report, not a whole-engine completion certificate.
+
+| Scope | Runner/evidence | Current result | Meaning |
+| --- | --- | --- | --- |
+| ST1 target deck | `EngineCompletionChecklistRunner` via `ValidationHarnessV2 completion gate reports ST1 complete` | Passed, failed gates 0 | ST1-only completion request |
+| ST1-ST3 target pool | `TargetCardPoolValidator` via `ST1-ST3 target pool validation passes` | Passed for 48 target cards | Registry/status/file/deck validation scope only |
+| Whole engine completion | No whole-engine `EngineCompletionChecklistRunner` request exists | Not run / needs validation | Cannot be used for RL training entry |
+
+`EngineCompletionReport.IsComplete` is request-scoped. A passing ST1 report or ST1-ST3 target pool report must not be interpreted as full DCGO engine completion.
+
+Remaining ST1-ST3 validation risks:
+
+- `ST2-07` and `ST3-07` shared `ST1_06` mapping still require source-alignment review.
+- `ST3-02` variant/no-effect classification still requires asset/source verification.
+- ST1-ST3 expanded golden scenarios are not yet complete.
+- Unity source trace parity harness is still missing.
+
+RL training entry: not allowed. The current reports are validation artifacts only.
