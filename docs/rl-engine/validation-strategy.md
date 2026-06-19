@@ -4,15 +4,15 @@
 
 검증의 목적은 Unity 원본 battle 로직과 RL.Engine의 rule-visible state 차이를 찾는 것이다. self-play/trace는 엔진 완성 전 학습 데이터가 아니라 검증 데이터로만 사용한다.
 
-## 최신 상태 요약 - 2026-06-18
+## 최신 상태 요약 - 2026-06-19
 
 - ST1 target deck validation: 통과
 - Unsupported card/effect: 0
 - PartiallyImplemented card/effect: 0
 - EngineCompletionChecklistRunner failed gate: 0
 - ST1~ST3 registry snapshot: `cardeffect-porting-status.md` 기준 48장 문서화
-- 최신 기록된 구조 guard 테스트: `All 216 tests passed.`
-- source-alignment 상태: `ST2-07`, `ST3-07` shared `ST1_06` mapping은 card-id 기반 `Implemented` script로 정리됨. 남은 risk는 `ST3-02` variant 확인
+- 최신 기록된 구조 guard 테스트: `All 225 tests passed.`
+- source-alignment 상태: `ST2-07`, `ST3-07` shared `ST1_06` mapping은 card-id 기반 `Implemented` script와 `SourceEffectClassName` metadata로 정리됨. `ST3-02`는 base/P1 NoEffect 후보와 P2 source body 미확인 variant를 분리해 `needs-review`로 유지한다.
 - queue 46 기준 golden scenario gap plan 작성 완료. ST1/minimal battle 7개 scenario 외 ST1~ST3 expanded golden suite는 아직 구현되지 않았다.
 - RL 학습 구성: 아직 구현 금지
 
@@ -56,7 +56,7 @@ $env:TMP='E:\headlessDCGO\.tmp'
 
 2026-06-14 ST1-ST3 inventory 단계에서는 validation 구조만 설계했다. 아래 내용은 당시 planning-only baseline이다.
 
-Current note: 이후 source-aligned 로컬 작업트리에는 ST1~ST3 registry snapshot과 구조 guard가 추가되어 최신 `All 216 tests passed.` 기록이 남았다. 따라서 아래 expected-fail 문장은 현재 snapshot이 아니라 historical planning note다.
+Current note: 이후 source-aligned 로컬 작업트리에는 ST1~ST3 registry snapshot과 구조 guard가 추가되어 최신 `All 225 tests passed.` 기록이 남았다. 따라서 아래 expected-fail 문장은 현재 snapshot이 아니라 historical planning note다.
 
 Planned ST1-ST3 validation output:
 
@@ -85,7 +85,8 @@ No code test command was required for this document-only inventory task.
 - `St1CardScriptCatalog`와 `St2St3CardScriptCatalog`가 registry-only인지 테스트한다.
 - `cardeffect-porting-status.md` ST1 status table이 registry와 파일 존재 상태에 맞는지 테스트한다.
 - `cardeffect-porting-status.md` ST1~ST3 registry snapshot이 실제 registry와 파일 존재 상태에 맞는지 테스트한다.
-- `ST2-07`, `ST3-07`처럼 shared effect class를 참조하는 카드는 NoEffect가 아니라 shared mapping으로 등록됐는지 테스트한다. `ST3-02`처럼 variant별 effect class가 갈리는 카드는 policy/status 문서에 source-alignment risk가 남아 있는지 테스트한다.
+- `ST2-07`, `ST3-07`처럼 shared effect class를 참조하는 카드는 NoEffect가 아니라 shared mapping으로 등록됐는지 테스트한다. registry lookup alias와 원본 `SourceEffectClassName` metadata가 분리되어 보존되는지도 테스트한다.
+- `ST3-02`처럼 variant별 effect class가 갈리는 카드는 `CardId`만으로 flatten하지 않고 `CardIndex`와 `VariantKey`를 포함한 `AssetCardDefinitionId`로 보고한다.
 - CardEffect 파일에서 직접 zone list 수정 패턴을 금지한다.
 - ST2/ST3 파일이 `CardEffects/ST2/...`, `CardEffects/ST3/...` 아래에 있는지 테스트한다.
 
@@ -101,7 +102,17 @@ No code test command was required for this document-only inventory task.
 
 queue 43에서 concrete class/card-file 선언 guard와 NoEffect marker-only guard를 추가로 고정했다.
 
-결과: `All 216 tests passed.` MSBuild `AssemblyReference.cache` 및 `MSBuildTemp` 접근 경고가 있었지만 test runner는 성공 종료했다.
+queue 49에서는 `AssetRegistryMappingValidator`를 추가했다. 이 validator는 원본 `CardBaseEntity` asset의 `CardEffectClassName`, RL registry `CardEffectPortingRecord`, status snapshot, 카드별 RL.Engine 파일, 원본 source body 존재 여부를 대조한다. source root가 없으면 조용히 skip하지 않고 `SourceUnavailable` report를 반환한다.
+
+현재 repo의 `src/DCGO.RL.Cli`는 아직 CLI project가 아니라 `.gitkeep`만 있는 placeholder다. 따라서 queue 49에서는 audit surface를 `AssetRegistryMappingValidator.ValidateLocalSource` service와 `AssetRegistryMapping actual local DCGO audit` 테스트로 고정했다. `scripts/run_asset_registry_mapping_audit.ps1`는 test runner filter로 `AssetRegistryMapping` 감사 테스트 묶음만 실행한다. report record는 JSON 직렬화 가능하고, 한국어 요약은 `AssetRegistryMappingReport.ToKoreanSummaryLines()`로 제공한다. 현재 로컬 source audit은 `ST3-02` P2 needs-review 때문에 `IsValid == false`가 정상이다.
+
+로컬 감사 결과:
+
+- `ST2-07`, `ST3-07`: asset `CardEffectClassName`은 `ST1_06`, registry lookup alias는 빈 문자열, `SourceEffectClassName`은 `ST1_06`으로 분리 보존한다.
+- `ST3-02`: `ST3_02.asset` CardIndex 76과 `ST3_02_P1.asset` CardIndex 77은 빈 `CardEffectClassName`의 NoEffect 후보로 남긴다. `ST3_02_P2.asset` CardIndex 4977은 `CardEffectClassName: ST3_02`이지만 source body가 없어 `FalseNoEffect` 및 `MissingSourceEffectBody` needs-review로 보고한다.
+- machine-readable report는 `AssetRegistryMappingReport`/`AssetRegistryMappingIssue`/`AssetRegistryMappingCardReport` record로 제공하며 JSON 직렬화 가능하다.
+
+결과: `All 225 tests passed.` MSBuild `AssemblyReference.cache` 및 `MSBuildTemp` 접근 경고가 있었지만 test runner는 성공 종료했다.
 
 ## StateHash 기준
 

@@ -4,8 +4,8 @@
 
 - 기준: github-current 로컬 작업트리. 로컬 HEAD는 `3b993b34 202606142346`이며, queue 40~43 문서/구조 guard 변경은 아직 commit 전이다.
 - ST1 target deck validation: 통과.
-- ST1~ST3 registry snapshot: 48장 모두 `Implemented` 또는 `NoEffect`로 등록되어 있으며, 최신 구조 guard 기록은 `All 216 tests passed.`다.
-- source-alignment 정리: `ST2-07`, `ST3-07`은 asset의 shared `ST1_06` 참조를 card-id 기반 `Implemented` script로 연결했다. 남은 risk는 `ST3-02`의 `ST3_02_P2.asset` variant 확인이다.
+- ST1~ST3 registry snapshot: 48장 모두 `Implemented` 또는 `NoEffect`로 등록되어 있으며, 최신 구조 guard 기록은 `All 225 tests passed.`다.
+- source-alignment 정리: `ST2-07`, `ST3-07`은 asset의 shared `ST1_06` 참조를 card-id 기반 `Implemented` script로 연결하고 `SourceEffectClassName: ST1_06` metadata를 보존한다. 남은 risk는 `ST3-02`의 `ST3_02_P2.asset` variant source body 미확인이다.
 - 학습 단계: 아직 진입하지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API는 구현 금지 상태다.
 
 ## Scope
@@ -71,7 +71,7 @@ ST1 대상 card pool: `ST1-01`부터 `ST1-16`
 - `PartiallyImplemented`: 0
 - ST1 deck validation: 통과
 - EngineCompletionChecklistRunner: ST1 target deck 기준 통과
-- 전체 테스트: `All 216 tests passed.`
+- 전체 테스트: `All 225 tests passed.`
 
 ## 아직 전체 엔진 차원에서 남은 항목
 
@@ -86,7 +86,7 @@ ST1 대상 card pool: `ST1-01`부터 `ST1-16`
 최신 기준일: 2026-06-14  
 대상 확장: `ST1` 완료 기준점 이후 `ST1~ST3` target card pool source-aligned registry snapshot
 
-ST2/ST3 확장은 원본 DCGO `DCGO/Assets/Scripts/CardEffect/ST2/**`, `DCGO/Assets/Scripts/CardEffect/ST3/**` inventory를 기준으로 `St2St3CardScriptCatalog`에 명시 등록했다. 현재 source-aligned 로컬 작업트리 기준 ST2/ST3 registry에는 `Unsupported`가 남아 있지 않다. `ST2-07`, `ST3-07`은 set-local CardEffect 파일이 없지만 asset의 `CardEffectClassName: ST1_06`을 공유 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs`에 연결한 card-id 기반 `Implemented` script다. `ST3-02`만 `ST3_02_P2.asset` variant의 `CardEffectClassName: ST3_02` 의미 확인이 필요한 source-alignment risk로 남아 있다.
+ST2/ST3 확장은 원본 DCGO `DCGO/Assets/Scripts/CardEffect/ST2/**`, `DCGO/Assets/Scripts/CardEffect/ST3/**` inventory를 기준으로 `St2St3CardScriptCatalog`에 명시 등록했다. 현재 source-aligned 로컬 작업트리 기준 ST2/ST3 registry에는 `Unsupported`가 남아 있지 않다. `ST2-07`, `ST3-07`은 set-local CardEffect 파일이 없지만 asset의 `CardEffectClassName: ST1_06`을 공유 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs`에 연결한 card-id 기반 `Implemented` script다. registry lookup alias는 빈 문자열로 두되 원본 `SourceEffectClassName` metadata는 `ST1_06`으로 보존한다. `ST3-02`는 base/P1 asset은 NoEffect 후보지만 P2 asset의 `CardEffectClassName: ST3_02` source body가 확인되지 않아 source-alignment risk로 남아 있다.
 
 | Set | `NoEffect` | `Unsupported` | `Implemented` |
 | --- | --- | --- | --- |
@@ -101,11 +101,11 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 
 - 2026-06-13 ST1 완료 직후에는 ST2/ST3가 inventory/pass plan 단계였고, ST1~ST3 validation은 expected fail로 문서화되어 있었다.
 - 이후 로컬 source-aligned 작업트리에서 ST2/ST3 registry snapshot과 구조 guard가 추가되었다.
-- 과거 `All 170 tests passed.`, `All 194 tests passed.`, `All 202 tests passed.`, `All 212 tests passed.`, `All 214 tests passed.` 기록은 해당 시점의 test count이며, 현재 이 문서의 최신 구조 guard 기준 기록은 `All 216 tests passed.`다.
+- 과거 `All 170 tests passed.`, `All 194 tests passed.`, `All 202 tests passed.`, `All 212 tests passed.`, `All 214 tests passed.`, `All 216 tests passed.` 기록은 해당 시점의 test count이며, 현재 이 문서의 최신 구조 guard 기준 기록은 `All 225 tests passed.`다.
 
 ## Current ST1-ST3 Registry Snapshot - 2026-06-14
 
-이 표는 `St1CardScriptCatalog`와 `St2St3CardScriptCatalog`의 현재 registry 상태를 테스트가 직접 대조하기 위한 최신 snapshot이다. `ST2-07`, `ST3-07`은 asset에서 shared `ST1_06`을 참조하므로 `NoEffect`가 아니라 card-id 기반 `Implemented` script로 등록한다. `ST3-02`는 `ST3_02_P2.asset` variant의 `CardEffectClassName: ST3_02` 의미 확인이 필요하다.
+이 표는 `St1CardScriptCatalog`와 `St2St3CardScriptCatalog`의 현재 registry 상태를 테스트가 직접 대조하기 위한 최신 snapshot이다. `ST2-07`, `ST3-07`은 asset에서 shared `ST1_06`을 참조하므로 `NoEffect`가 아니라 card-id 기반 `Implemented` script로 등록한다. `ST3-02`는 base/P1 asset은 NoEffect 후보지만 `ST3_02_P2.asset` variant의 `CardEffectClassName: ST3_02` source body 확인이 필요하다.
 
 | CardId | Registry status | RL.Engine file | Source mapping status |
 | --- | --- | --- | --- |
@@ -142,7 +142,7 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 | ST2-15 | `Implemented` | `CardEffects/ST2/Blue/ST2_15.cs` | set-local source mapping |
 | ST2-16 | `Implemented` | `CardEffects/ST2/Blue/ST2_16.cs` | set-local source mapping |
 | ST3-01 | `Implemented` | `CardEffects/ST3/Yellow/ST3_01.cs` | set-local source mapping |
-| ST3-02 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_02.cs` | no set-local source; `ST3_02_P2.asset` variant risk |
+| ST3-02 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_02.cs` | base/P1 NoEffect candidate; P2 `ST3_02` source body unconfirmed |
 | ST3-03 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_03.cs` | missing-source marker |
 | ST3-04 | `Implemented` | `CardEffects/ST3/Yellow/ST3_04.cs` | set-local source mapping |
 | ST3-05 | `Implemented` | `CardEffects/ST3/Yellow/ST3_05.cs` | set-local source mapping |
@@ -171,6 +171,6 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 - `Implemented` script의 concrete class는 대응 카드별 파일에 선언되어야 하며, support 파일이나 Catalog에 숨어 있으면 안 된다.
 - `NoEffect` 카드별 파일은 source mapping과 NoEffect 근거만 가진 marker-only 파일이어야 한다.
 - 이 문서의 ST1 status table 및 ST1~ST3 registry snapshot은 실제 registry status와 테스트로 비교된다.
-- `ST2-07`, `ST3-07`처럼 asset이 shared `CardEffectClassName`을 참조하는 카드는 NoEffect로 두지 않고 shared-effect mapping을 명시해야 한다. `ST3-02`처럼 variant별 `CardEffectClassName`이 갈리는 카드는 policy/status 문서에 source-alignment risk로 남겨야 한다.
+- `ST2-07`, `ST3-07`처럼 asset이 shared `CardEffectClassName`을 참조하는 카드는 NoEffect로 두지 않고 shared-effect mapping을 명시해야 한다. registry lookup alias와 원본 `SourceEffectClassName` metadata가 다를 수 있으므로 둘을 분리해 보존한다. `ST3-02`처럼 variant별 `CardEffectClassName`이 갈리는 카드는 `CardId`만으로 flatten하지 않고 `CardIndex`/`VariantKey` 기준으로 source-alignment risk를 남겨야 한다.
 - 실패/수정 내역: 첫 실행에서 기존 ST1 status table parser가 새 ST1~ST3 snapshot의 `ST1-*` 행을 함께 읽어 2개 구조 테스트가 실패했다. parser를 `## 최신 ST1 상태표` 섹션으로 한정한 뒤 재실행했다.
-- 최신 실행 결과: `.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 216 tests passed.` MSBuild cache/temp access denied warning은 있었지만 test runner는 성공 종료했다.
+- 최신 실행 결과: `.\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 225 tests passed.` MSBuild cache/temp access denied warning은 있었지만 test runner는 성공 종료했다.

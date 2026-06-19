@@ -119,7 +119,7 @@ queue 38과 queue 41에서 주요 문서에 `최신 상태 요약`과 이전 단
 1. `README.md`와 `prompts/INDEX.md`가 github-current queue 40~47을 반영하지 않는다.
 2. `docs/progress/CHATGPT_HANDOFF.md` 본문은 ST1-12 완료 당시 historical handoff이며, 상단 snapshot을 함께 읽어야 한다.
 3. `docs/rl-engine/github-current-state-audit.md` 본문도 queue 34 historical audit이므로 상단 snapshot을 기준으로 해석해야 한다.
-4. `ST2-07`, `ST3-07`, `ST3-02` source-alignment risk는 아직 다음 감사 대상이다.
+4. `ST2-07`, `ST3-07` source-alignment risk는 queue 49 validator로 회귀 방지 대상이 됐다. `ST3-02`는 base/P1 NoEffect 후보와 P2 source body 미확인 variant로 분리되어 아직 needs-review다.
 
 ## 현재 기준점 판단
 
@@ -151,4 +151,4 @@ queue 46 완료 후 다음 항목은 `docs/codex-prompts/state/QUEUE_GITHUB_CURR
 .\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
 ```
 
-결과: `All 214 tests passed.` MSBuild temp/cache access denied warning은 있었지만 test runner는 성공 종료했다.
+최신 결과: `All 225 tests passed.` MSBuild temp/cache access denied warning은 있었지만 test runner는 성공 종료했다.

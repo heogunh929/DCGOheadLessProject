@@ -9,6 +9,7 @@ using DCGO.RL.Engine.Mechanics;
 using DCGO.RL.Engine.Primitives;
 using DCGO.RL.Engine.Setup;
 using DCGO.RL.Engine.Validation;
+using System.Text.Json;
 
 var tests = new (string Name, Action Test)[]
 {
@@ -160,6 +161,15 @@ var tests = new (string Name, Action Test)[]
     ("PortingStructure NoEffect asset conflicts are documented", PortingStructureNoEffectAssetConflictsAreDocumented),
     ("PortingStructure card files avoid direct zone mutation", PortingStructureCardFilesAvoidDirectZoneMutation),
     ("PortingStructure starter set files use original-like paths", PortingStructureStarterSetFilesUseOriginalLikePaths),
+    ("AssetRegistryMapping exact mapping", AssetRegistryMappingExactMapping),
+    ("AssetRegistryMapping shared effect preserves source metadata", AssetRegistryMappingSharedEffectPreservesSourceMetadata),
+    ("AssetRegistryMapping variant split reports ST3-02", AssetRegistryMappingVariantSplitReportsSt3Two),
+    ("AssetRegistryMapping false NoEffect detection", AssetRegistryMappingFalseNoEffectDetection),
+    ("AssetRegistryMapping missing per-card file", AssetRegistryMappingMissingPerCardFile),
+    ("AssetRegistryMapping stale status snapshot", AssetRegistryMappingStaleStatusSnapshot),
+    ("AssetRegistryMapping unregistered effect", AssetRegistryMappingUnregisteredEffect),
+    ("AssetRegistryMapping source unavailable report", AssetRegistryMappingSourceUnavailableReport),
+    ("AssetRegistryMapping actual local DCGO audit", AssetRegistryMappingActualLocalDcgoAudit),
     ("ST2/ST3 CardEffect catalog skeleton covers target pool", St2St3CardEffectCatalogSkeletonCoversTargetPool),
     ("ST1-ST3 target pool validation passes", St1ToSt3TargetPoolValidationPasses),
     ("ST2/ST3 shared ST1_06 mapping uses card-id scripts", St2St3SharedSt106MappingUsesCardIdScripts),
@@ -230,9 +240,21 @@ var tests = new (string Name, Action Test)[]
     ("ComplexMechanics replay determinism", ComplexMechanicsReplayDeterminism),
 };
 
+var selectedTests = args.Length == 0
+    ? tests
+    : tests
+        .Where(test => args.Any(filter => test.Name.Contains(filter, StringComparison.OrdinalIgnoreCase)))
+        .ToArray();
+
+if (selectedTests.Length == 0)
+{
+    Console.WriteLine($"No tests matched filter: {string.Join(", ", args)}");
+    return 1;
+}
+
 var failures = new List<string>();
 
-foreach (var (name, test) in tests)
+foreach (var (name, test) in selectedTests)
 {
     try
     {
@@ -259,7 +281,7 @@ if (failures.Count > 0)
 }
 
 Console.WriteLine();
-Console.WriteLine($"All {tests.Length} tests passed.");
+Console.WriteLine($"All {selectedTests.Length} tests passed.");
 return 0;
 
 static void GameStateCreation()
@@ -3016,6 +3038,242 @@ static void PortingStructureStarterSetFilesUseOriginalLikePaths()
     AssertCardEffectSetPath(root, "ST3");
 }
 
+static void AssetRegistryMappingExactMapping()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-exact",
+        new[] { Asset("FX-01", 1, "base", "FX_01") },
+        CardEffectTestFixture.Registry(new PrimitiveDrawCardScript("FX-01", "FX_01")),
+        StatusSnapshot: new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal)
+        {
+            ["FX-01"] = CardEffectPortingStatus.Implemented,
+        },
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX-01"] = "// Source mapping: DCGO/Assets/Scripts/CardEffect/FX/FX_01.cs",
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX_01"] = "DCGO/Assets/Scripts/CardEffect/FX/FX_01.cs",
+        }));
+
+    AssertTrue(report.IsValid);
+    AssertFalse(report.Issues.Any(issue => issue.Severity != AssetRegistryMappingSeverity.Info));
+    AssertTrue(JsonSerializer.Serialize(report).Contains("\"TargetName\"", StringComparison.Ordinal));
+    AssertTrue(report.ToKoreanSummaryLines().Any(line => line.Contains("대상", StringComparison.Ordinal)));
+}
+
+static void AssetRegistryMappingSharedEffectPreservesSourceMetadata()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-shared",
+        new[] { Asset("ST2-07", 53, "base", "ST1_06") },
+        St2St3CardScriptCatalog.CreateCombinedWithSt1Registry(),
+        StatusSnapshot: new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal)
+        {
+            ["ST2-07"] = CardEffectPortingStatus.Implemented,
+        },
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["ST2-07"] = File.ReadAllText(RlCardEffectPath("ST2-07")),
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["ST1_06"] = "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs",
+        }));
+
+    AssertTrue(report.IsValid);
+    var card = report.Cards.Single();
+    AssertEqual("ST2-07", card.DefinitionId.CardId);
+    AssertEqual(string.Empty, card.RegistryEffectClassName);
+    AssertEqual("ST1_06", card.SourceEffectClassName);
+    AssertIssue(report, "RegistryAliasSeparatedFromSourceEffectClass", "ST2-07");
+    AssertFalse(report.Issues.Any(issue => issue.Code == "FalseNoEffect"));
+}
+
+static void AssetRegistryMappingVariantSplitReportsSt3Two()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-variant",
+        new[]
+        {
+            Asset("ST3-02", 76, "base", string.Empty),
+            Asset("ST3-02", 77, "P1", string.Empty),
+            Asset("ST3-02", 4977, "P2", "ST3_02"),
+        },
+        St2St3CardScriptCatalog.CreateCombinedWithSt1Registry(),
+        StatusSnapshot: new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal)
+        {
+            ["ST3-02"] = CardEffectPortingStatus.NoEffect,
+        },
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["ST3-02"] = File.ReadAllText(RlCardEffectPath("ST3-02")),
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)));
+
+    AssertFalse(report.IsValid);
+    AssertEqual(3, report.Cards.Count);
+    AssertIssue(report, "VariantEffectClassSplit", "ST3-02");
+    AssertIssue(report, "FalseNoEffect", "ST3-02", 4977);
+    AssertIssue(report, "MissingSourceEffectBody", "ST3-02", 4977);
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 76
+        && card.DefinitionId.VariantKey == "base"
+        && string.IsNullOrWhiteSpace(card.AssetEffectClassName)
+        && card.PortingStatus == CardEffectPortingStatus.NoEffect));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 77
+        && card.DefinitionId.VariantKey == "P1"
+        && string.IsNullOrWhiteSpace(card.AssetEffectClassName)
+        && card.PortingStatus == CardEffectPortingStatus.NoEffect));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 4977
+        && card.DefinitionId.VariantKey == "P2"
+        && card.AssetEffectClassName == "ST3_02"
+        && !card.HasSourceEffectBody));
+}
+
+static void AssetRegistryMappingFalseNoEffectDetection()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-false-noeffect",
+        new[] { Asset("FX-NO", 2, "base", "FX_No") },
+        CardEffectTestFixture.Registry(new NoEffectCardScript("FX-NO")),
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX-NO"] = "// Source mapping: FX_No\n// NoEffect marker",
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX_No"] = "DCGO/Assets/Scripts/CardEffect/FX/FX_No.cs",
+        }));
+
+    AssertFalse(report.IsValid);
+    AssertIssue(report, "FalseNoEffect", "FX-NO");
+}
+
+static void AssetRegistryMappingMissingPerCardFile()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-missing-file",
+        new[] { Asset("FX-01", 3, "base", "FX_01") },
+        CardEffectTestFixture.Registry(new PrimitiveDrawCardScript("FX-01", "FX_01")),
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX_01"] = "DCGO/Assets/Scripts/CardEffect/FX/FX_01.cs",
+        }));
+
+    AssertFalse(report.IsValid);
+    AssertIssue(report, "MissingPerCardFile", "FX-01");
+}
+
+static void AssetRegistryMappingStaleStatusSnapshot()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-stale-status",
+        new[] { Asset("FX-01", 4, "base", "FX_01") },
+        CardEffectTestFixture.Registry(new PrimitiveDrawCardScript("FX-01", "FX_01")),
+        StatusSnapshot: new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal)
+        {
+            ["FX-01"] = CardEffectPortingStatus.NoEffect,
+        },
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX-01"] = "// Source mapping: DCGO/Assets/Scripts/CardEffect/FX/FX_01.cs",
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX_01"] = "DCGO/Assets/Scripts/CardEffect/FX/FX_01.cs",
+        }));
+
+    AssertFalse(report.IsValid);
+    AssertIssue(report, "StaleStatusSnapshot", "FX-01");
+}
+
+static void AssetRegistryMappingUnregisteredEffect()
+{
+    var report = new AssetRegistryMappingValidator().Validate(new AssetRegistryMappingRequest(
+        "fixture-unregistered",
+        new[] { Asset("FX-MISS", 5, "base", "FX_Missing") },
+        new CardScriptRegistry(),
+        CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX-MISS"] = "// Source mapping: DCGO/Assets/Scripts/CardEffect/FX/FX_Missing.cs",
+        },
+        SourceEffectRelativePathsByClass: new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["FX_Missing"] = "DCGO/Assets/Scripts/CardEffect/FX/FX_Missing.cs",
+        }));
+
+    AssertFalse(report.IsValid);
+    AssertIssue(report, "MissingRegistryScript", "FX-MISS");
+}
+
+static void AssetRegistryMappingSourceUnavailableReport()
+{
+    var report = new AssetRegistryMappingValidator().ValidateLocalSource(new AssetRegistryLocalAuditRequest(
+        "missing-source",
+        WorkspaceRoot(),
+        Path.Combine(WorkspaceRoot(), ".missing-dcgo-source"),
+        St2St3CardScriptCatalog.CreateCombinedWithSt1Registry()));
+
+    AssertFalse(report.IsValid);
+    AssertEqual(AssetRegistrySourceStatus.SourceUnavailable, report.SourceStatus);
+    AssertTrue(report.Issues.Any(issue => issue.Code == "SourceUnavailable"));
+}
+
+static void AssetRegistryMappingActualLocalDcgoAudit()
+{
+    var report = new AssetRegistryMappingValidator().ValidateLocalSource(new AssetRegistryLocalAuditRequest(
+        "ST1-ST3 local DCGO asset audit",
+        WorkspaceRoot(),
+        Path.Combine(WorkspaceRoot(), "DCGO"),
+        St2St3CardScriptCatalog.CreateCombinedWithSt1Registry(),
+        LoadCurrentRegistryStatusSnapshot()));
+
+    AssertFalse(report.IsValid);
+    AssertEqual(AssetRegistrySourceStatus.Available, report.SourceStatus);
+    AssertTrue(report.Cards.Count >= 48);
+    AssertIssue(report, "VariantEffectClassSplit", "ST3-02");
+    AssertIssue(report, "FalseNoEffect", "ST3-02", 4977);
+    AssertIssue(report, "MissingSourceEffectBody", "ST3-02", 4977);
+    AssertFalse(report.Issues.Any(issue => issue.Severity == AssetRegistryMappingSeverity.Error));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 76
+        && card.DefinitionId.VariantKey == "base"
+        && string.IsNullOrWhiteSpace(card.AssetEffectClassName)
+        && card.PortingStatus == CardEffectPortingStatus.NoEffect));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 77
+        && card.DefinitionId.VariantKey == "P1"
+        && string.IsNullOrWhiteSpace(card.AssetEffectClassName)
+        && card.PortingStatus == CardEffectPortingStatus.NoEffect));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-02"
+        && card.DefinitionId.CardIndex == 4977
+        && card.DefinitionId.VariantKey == "P2"
+        && card.AssetEffectClassName == "ST3_02"
+        && !card.HasSourceEffectBody));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST2-07"
+        && card.AssetEffectClassName == "ST1_06"
+        && card.RegistryEffectClassName == string.Empty
+        && card.SourceEffectClassName == "ST1_06"));
+    AssertTrue(report.Cards.Any(card =>
+        card.DefinitionId.CardId == "ST3-07"
+        && card.AssetEffectClassName == "ST1_06"
+        && card.RegistryEffectClassName == string.Empty
+        && card.SourceEffectClassName == "ST1_06"));
+    AssertTrue(JsonSerializer.Serialize(report).Contains("ST3_02", StringComparison.Ordinal));
+    AssertTrue(report.ToKoreanSummaryLines().Any(line => line.Contains("blocking", StringComparison.Ordinal)));
+}
+
 static void St2St3CardEffectCatalogSkeletonCoversTargetPool()
 {
     var records = St2St3CardScriptCatalog.CreateRegistry().PortingRecords.ToArray();
@@ -3108,6 +3366,8 @@ static void St2St3SharedSt106MappingUsesCardIdScripts()
         AssertTrue(registry.TryGetScript(definition, out var script));
         AssertEqual(cardId, script.Porting.CardId);
         AssertEqual(string.Empty, script.Porting.EffectClassName);
+        AssertEqual("ST1_06", script.Porting.SourceEffectClassName);
+        AssertEqual("ST1_06", script.Porting.EffectiveSourceEffectClassName);
         AssertEqual(CardEffectPortingStatus.Implemented, script.Porting.Status);
         AssertTrue(script.Porting.Notes.Contains("ST1_06", StringComparison.Ordinal));
 
@@ -4816,6 +5076,33 @@ static void AssertViolation(EngineInvariantReport report, string code)
     if (!report.Violations.Any(violation => violation.Code == code))
     {
         throw new InvalidOperationException($"Expected invariant violation '{code}'.");
+    }
+}
+
+static AssetCardMetadata Asset(string cardId, int cardIndex, string variantKey, string effectClassName)
+{
+    var assetNamePrefix = cardId.Replace("-", "_", StringComparison.Ordinal);
+    var assetName = string.Equals(variantKey, "base", StringComparison.Ordinal)
+        ? assetNamePrefix
+        : $"{assetNamePrefix}_{variantKey}";
+
+    return new AssetCardMetadata(
+        new AssetCardDefinitionId(cardId, cardIndex, variantKey),
+        assetName,
+        $"Assets/CardBaseEntity/Fixture/{assetName}.asset",
+        effectClassName);
+}
+
+static void AssertIssue(AssetRegistryMappingReport report, string code, string cardId, int? cardIndex = null)
+{
+    if (!report.Issues.Any(issue =>
+        issue.Code == code
+        && issue.Assets.Any(asset =>
+            asset.CardId == cardId
+            && (cardIndex is null || asset.CardIndex == cardIndex.Value))))
+    {
+        var indexText = cardIndex is null ? string.Empty : $"#{cardIndex.Value}";
+        throw new InvalidOperationException($"Expected asset registry issue '{code}' for {cardId}{indexText}.");
     }
 }
 

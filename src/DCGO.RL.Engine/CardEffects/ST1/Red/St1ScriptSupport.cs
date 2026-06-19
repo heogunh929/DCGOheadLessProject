@@ -222,13 +222,14 @@ internal abstract class DeclaredCapabilityCardScript : ICardScript
 
 internal abstract class SharedSt1_06BlockerMemoryLossScript : ICardScript
 {
-    protected SharedSt1_06BlockerMemoryLossScript(string cardId, string effectClassName, string notes)
+    protected SharedSt1_06BlockerMemoryLossScript(string cardId, string effectClassName, string sourceEffectClassName, string notes)
     {
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
             CardEffectPortingStatus.Implemented,
-            notes);
+            notes,
+            sourceEffectClassName);
     }
 
     public CardEffectPortingRecord Porting { get; }

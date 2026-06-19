@@ -9,6 +9,7 @@ internal sealed class St2GrizzlymonScript : SharedSt1_06BlockerMemoryLossScript
         : base(
             "ST2-07",
             string.Empty,
+            "ST1_06",
             "Shared ST1_06 mapping from ST2_07*.asset: Blocker is represented by CardDefinition.BattleKeywords and OnAllyAttack loses 2 memory. Registry lookup is intentionally CardId-based to avoid duplicate ST1_06 effect-class aliases.")
     {
     }

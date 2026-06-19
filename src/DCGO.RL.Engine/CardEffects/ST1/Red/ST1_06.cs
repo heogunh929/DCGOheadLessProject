@@ -8,6 +8,7 @@ internal sealed class St1CoredramonScript : SharedSt1_06BlockerMemoryLossScript
         : base(
             "ST1-06",
             "ST1_06",
+            "ST1_06",
             "Blocker is represented by CardDefinition.BattleKeywords. OnAllyAttack loses 2 memory through Tier1PrimitiveService.ModifyMemory.")
     {
     }

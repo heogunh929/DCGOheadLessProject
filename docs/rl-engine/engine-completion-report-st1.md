@@ -9,7 +9,7 @@
 
 - ST1 completion status는 계속 통과다.
 - 이 문서의 `All 170 tests passed.` 기록은 ST1-12 완료 당시 historical checkpoint 결과다.
-- 최신 source-aligned 구조 guard 기록은 `All 214 tests passed.`이며, ST1~ST3 registry/file/status guard까지 포함한다.
+- 최신 source-aligned 구조 guard 기록은 `All 225 tests passed.`이며, ST1~ST3 registry/file/status/asset-registry guard까지 포함한다.
 - ST1 gate 통과는 전체 DCGO 엔진 완성 또는 RL 학습 단계 진입을 의미하지 않는다.
 
 ## 요약

@@ -152,7 +152,7 @@ queue 36에서는 새 카드 효과 구현 없이 구조 guard만 강화했다.
 
 1. 현재 방향은 원본 CardEffect별 파일 구조로 정렬되는 중이며, Catalog는 registry-only에 가까워졌다.
 2. 다만 ST2/ST3 확장 전에 구조 검증 테스트가 없다.
-3. 원본 asset 기준 shared effect가 있는 카드는 `NoEffect`로 등록하지 않도록 guard와 validator가 필요하다. `ST2-07`, `ST3-07`은 card-id 기반 shared mapping으로 정리됐다.
+3. 원본 asset 기준 shared effect가 있는 카드는 `NoEffect`로 등록하지 않도록 asset registry validator로 guard한다. `ST2-07`, `ST3-07`은 card-id 기반 shared mapping으로 정리됐고 `SourceEffectClassName: ST1_06` metadata를 보존한다.
 4. 공통 helper가 커지면서 카드별 body와 원본 공통 처리의 경계가 흐려질 수 있다.
 5. `docs/rl-engine`에는 ST1 통과 상태, ST1-ST3 inventory 상태, local uncommitted 구현 상태가 섞여 있는 문서가 있다.
 
@@ -215,7 +215,7 @@ ST1~ST3의 원본 CardEffect 파일이 있는 카드 대부분은 현재 RL.Engi
 
 | 위험 | 내용 | 우선순위 |
 | --- | --- | --- |
-| shared effect NoEffect 오분류 | ST2-07/ST3-07 asset `ST1_06` 참조는 card-id 기반 `Implemented` script로 정리됨. 회귀 방지를 위해 asset registry validator가 필요 | 중간 |
+| shared effect NoEffect 오분류 | ST2-07/ST3-07 asset `ST1_06` 참조는 card-id 기반 `Implemented` script와 asset registry validator로 정리됨 | 낮음 |
 | Catalog 검증 부재 | Catalog가 현재 registry-only라도 이를 보장하는 테스트 없음 | 높음 |
 | 대형 support helper | `StarterScriptSupport`와 set별 support가 카드 body의 의미를 숨길 수 있음 | 중간 |
 | TriggerPipeline 압축 | 원본 `AutoProcessing`, `MultipleSkills`, background effect, once-per-turn, optional boundary가 한 layer에 모임 | 중간 |

@@ -14,8 +14,12 @@ public sealed record CardEffectPortingRecord(
     string CardId,
     string EffectClassName,
     CardEffectPortingStatus Status,
-    string Notes = "")
+    string Notes = "",
+    string SourceEffectClassName = "")
 {
+    public string EffectiveSourceEffectClassName =>
+        string.IsNullOrWhiteSpace(SourceEffectClassName) ? EffectClassName : SourceEffectClassName;
+
     public bool IsRunnableInValidatedDeck =>
         Status is CardEffectPortingStatus.NoEffect
             or CardEffectPortingStatus.Implemented

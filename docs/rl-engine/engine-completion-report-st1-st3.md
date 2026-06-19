@@ -14,8 +14,8 @@ Current source-aligned snapshot:
 | ST1 target deck | Completed and currently documented as passing |
 | ST2 target pool | Registered in the source-aligned local worktree with per-card files/markers |
 | ST3 target pool | Registered in the source-aligned local worktree with per-card files/markers |
-| ST1-ST3 registry snapshot | 48 cards documented in `cardeffect-porting-status.md`; latest recorded structure guard: `All 214 tests passed.` |
-| Source-alignment risks | `ST2-07`, `ST3-07` shared `ST1_06` mapping and `ST3-02` variant still require audit |
+| ST1-ST3 registry snapshot | 48 cards documented in `cardeffect-porting-status.md`; latest recorded structure guard: `All 225 tests passed.` |
+| Source-alignment risks | `ST2-07`, `ST3-07` shared `ST1_06` mapping is guarded by queue 49 validator; `ST3-02` P2 source body remains needs-review |
 | RL training stage | Not allowed; no ObservationEncoder/RewardCalculator/DatasetExporter/Trainer work |
 | Unity source files | Must remain read-only source of truth |
 
@@ -47,10 +47,10 @@ The original version of this document was created during the ST1-ST3 inventory/p
 | forbidden dependency guard | Must remain pass; no Unity/Photon dependency in RL.Engine |
 | target card pool documented | Current ST1-ST3 registry snapshot documents 48 cards |
 | ST1 baseline preserved | ST1 status remains `Implemented`/`NoEffect` with target deck pass |
-| ST1-ST3 deck validation | Current local status documents no remaining missing layer, but source-alignment risks remain for shared/variant assets |
-| unsupported mechanic zero | Current registry snapshot has no `Unsupported`; source-alignment risks must not be treated as resolved mechanics |
-| NoEffect explicitness | Marker files exist, but `ST2-07`, `ST3-07`, `ST3-02` need further source/asset verification |
-| replay determinism / invariant smoke | Latest recorded source-aligned structure guard: `All 214 tests passed.` |
+| ST1-ST3 deck validation | Current local status documents no remaining missing layer; queue 49 validator keeps shared/variant asset mapping audited |
+| unsupported mechanic zero | Current registry snapshot has no `Unsupported`; `ST3-02` P2 source body uncertainty must not be treated as a resolved mechanic |
+| NoEffect explicitness | Marker files exist; `ST3-02` base/P1 are NoEffect candidates while P2 remains source-body-unconfirmed |
+| replay determinism / invariant smoke | Latest recorded source-aligned structure guard: `All 225 tests passed.` |
 | golden scenarios | Existing ST1/minimal suite only; ST1-ST3 expanded golden scenarios remain future validation data |
 | RL training guard | Pass by policy; no RL training API implementation |
 
@@ -113,13 +113,13 @@ The future ST1-ST3 completion runner should emit a structured report with:
 
 ## Current Test Status
 
-Queue 38 is documentation-only and does not run tests. The latest recorded source-aligned test result is from queue 36:
+Queue 38 was documentation-only and did not run tests. The latest recorded source-aligned test result is from queue 49:
 
 ```powershell
 .\\.dotnet\\dotnet.exe run --no-restore --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj
 ```
 
-Result: `All 214 tests passed`, with MSBuild cache/temp access warnings.
+Result: `All 225 tests passed`, with MSBuild cache/temp access warnings.
 
 Historical inventory task test note:
 
@@ -157,8 +157,8 @@ This report is the ST1-ST3 target card pool validation report, not a whole-engin
 
 Remaining ST1-ST3 validation risks:
 
-- `ST2-07` and `ST3-07` shared `ST1_06` mapping still require source-alignment review.
-- `ST3-02` variant/no-effect classification still requires asset/source verification.
+- `ST2-07` and `ST3-07` shared `ST1_06` mapping is now guarded by asset registry validation and preserved `SourceEffectClassName` metadata.
+- `ST3-02` P2 source body remains unconfirmed; base/P1 stay NoEffect candidates and P2 stays needs-review.
 - ST1-ST3 expanded golden scenarios are not yet complete.
 - Unity source trace parity harness is still missing.
 

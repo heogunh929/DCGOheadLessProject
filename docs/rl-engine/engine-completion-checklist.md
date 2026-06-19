@@ -6,12 +6,12 @@
 
 이 체크리스트는 학습 단계 진입 전 검증 기준을 관리한다. 현재 통과 판정은 ST1 target deck 기준이며, 전체 DCGO 카드풀/룰 완성을 의미하지 않는다.
 
-## 최신 상태 요약 - 2026-06-15
+## 최신 상태 요약 - 2026-06-19
 
 - ST1 target deck gate: 통과.
-- 최신 source-aligned 구조 guard 기록: `All 214 tests passed.`
+- 최신 source-aligned 구조 guard 기록: `All 225 tests passed.`
 - 과거 ST1 완료 시점 테스트 기록 `All 170 tests passed.`는 historical checkpoint 기록이며 최신 구조 guard 수와 다르다.
-- ST1~ST3 registry snapshot은 별도 상태표에서 관리한다. shared/variant source-alignment risk는 ST1 gate 통과와 별개로 남아 있다.
+- ST1~ST3 registry snapshot은 별도 상태표에서 관리한다. shared `ST1_06` mapping은 asset registry validator로 고정됐고, `ST3-02` P2 source body 미확인은 ST1 gate 통과와 별개의 needs-review로 남아 있다.
 
 ## 최신 Gate 결과
 
@@ -37,7 +37,7 @@
 - PartiallyImplemented card/effect: 0
 - Failed gate: 0
 - historical ST1 checkpoint 테스트 결과: `All 170 tests passed.`
-- 최신 구조 guard 테스트 결과: `All 214 tests passed.`
+- 최신 구조 guard 테스트 결과: `All 225 tests passed.`
 
 ## 통과 범위의 의미
 
