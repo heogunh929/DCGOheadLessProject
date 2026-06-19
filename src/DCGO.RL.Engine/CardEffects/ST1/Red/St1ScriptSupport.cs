@@ -220,6 +220,47 @@ internal abstract class DeclaredCapabilityCardScript : ICardScript
         throw new DomainException($"Card script '{Porting.CardId}' is implemented as a declared capability and has no queued resolve body.");
 }
 
+internal abstract class SharedSt1_06BlockerMemoryLossScript : ICardScript
+{
+    protected SharedSt1_06BlockerMemoryLossScript(string cardId, string effectClassName, string notes)
+    {
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            notes);
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:on-ally-attack:memory-minus-2",
+                EffectTiming.OnAllyAttack,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                CanTrigger: effectContext => St1ScriptSupport.IsSourcePermanentInBattleArea(
+                    effectContext.State,
+                    context.SourceCard,
+                    context.SourcePermanent)),
+        };
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        context.WithState((state, primitives) =>
+        {
+            var owner = St1ScriptSupport.RequireSourceCardOwner(state, context.Resolution.SourceCard);
+            if (!St1ScriptSupport.IsSourcePermanentInBattleArea(state, context.Resolution.SourceCard, context.Resolution.SourcePermanent))
+            {
+                throw new DomainException($"{Porting.CardId} memory loss requires the source permanent in the battle area.");
+            }
+
+            primitives.ModifyMemory(state, owner, -2);
+        });
+}
+
 internal static class St1ScriptSupport
 {
     public static PlayerId Opponent(GameState state, PlayerId player)

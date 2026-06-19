@@ -5,7 +5,7 @@
 - source-aligned 로컬 작업트리는 ST1~ST3 카드별 파일/marker 구조와 registry snapshot을 가진다.
 - latest recorded structure guard는 `All 212 tests passed.`다.
 - 아직 commit 전인 queue 34~38 변경이 있으므로, 이 문서의 current snapshot은 로컬 작업트리 기준이다.
-- `ST2-07`, `ST3-07`, `ST3-02`의 shared/variant source-alignment risk는 여전히 정책상 차단/감사 대상이다.
+- `ST2-07`, `ST3-07`의 shared `ST1_06` mapping은 card-id 기반 `Implemented` script로 정리했다. `ST3-02` variant source-alignment risk는 여전히 정책상 차단/감사 대상이다.
 - 아래 queue 35/36 정책은 historical context이자 현재 guard의 근거다.
 
 ## Queue 35 감사 후 추가 정책
@@ -26,7 +26,7 @@
 - 원본 set-local CardEffect 파일이 있는 ST2/ST3 카드는 RL.Engine 카드 파일 상단에 `DCGO/Assets/Scripts/CardEffect/<Set>/<Color>/<Card>.cs` source mapping을 둔다.
 - 원본 set-local CardEffect 파일이 없는 ST2/ST3 `NoEffect` 카드는 동작 없는 marker 파일에 `No set-local CardEffect source file exists` 근거를 둔다.
 - 이 marker 파일은 효과 구현이 아니며, `NoEffectCardScript` 등록의 근거를 파일 구조에 남기기 위한 것이다.
-- `ST2-07`, `ST3-07`은 현재 registry가 `NoEffect`지만 원본 asset이 shared `ST1_06`을 참조한다. 따라서 marker와 상태 문서에 source-alignment risk를 반드시 남긴다.
+- `ST2-07`, `ST3-07`처럼 set-local CardEffect 파일은 없지만 원본 asset이 shared `ST1_06`을 참조하는 카드는 `NoEffect`로 등록하지 않는다. 카드별 RL.Engine 파일에는 shared source mapping을 적고, registry는 card-id 기반 `Implemented` script로 연결한다.
 - `ST3-02`는 `ST3_02_P2.asset` variant가 `CardEffectClassName: ST3_02`를 참조하므로, marker와 상태 문서에 variant risk를 반드시 남긴다.
 - `St2St3CardScriptCatalog`는 `St1CardScriptCatalog`와 동일하게 registry-only여야 한다.
 - `docs/rl-engine/cardeffect-porting-status.md`의 ST1~ST3 registry snapshot은 실제 registry와 테스트로 대조한다.

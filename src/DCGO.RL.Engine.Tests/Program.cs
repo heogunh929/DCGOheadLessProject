@@ -20,6 +20,7 @@ var tests = new (string Name, Action Test)[]
     ("CardDefinition 생성", CardDefinitionCreation),
     ("CardInstanceFactory instance id 분리", CardInstanceFactoryCreatesDistinctInstances),
     ("CardDatabase CardId 조회", CardDatabaseLookupByCardId),
+    ("CardDatabase duplicate CardId fails", CardDatabaseDuplicateCardIdFails),
     ("CardDefinition immutable 컬렉션", CardDefinitionDefensivelyCopiesCollections),
     ("ZoneMover Deck -> Hand", ZoneMoverDeckToHand),
     ("ZoneMover Deck -> Security", ZoneMoverDeckToSecurity),
@@ -161,6 +162,7 @@ var tests = new (string Name, Action Test)[]
     ("PortingStructure starter set files use original-like paths", PortingStructureStarterSetFilesUseOriginalLikePaths),
     ("ST2/ST3 CardEffect catalog skeleton covers target pool", St2St3CardEffectCatalogSkeletonCoversTargetPool),
     ("ST1-ST3 target pool validation passes", St1ToSt3TargetPoolValidationPasses),
+    ("ST2/ST3 shared ST1_06 mapping uses card-id scripts", St2St3SharedSt106MappingUsesCardIdScripts),
     ("ST2-01 inherited no-source DP", St2OneInheritedNoSourceDp),
     ("ST2-08 inherited no-source SecurityAttack", St2EightInheritedNoSourceSecurityAttack),
     ("ST2-12 start turn memory and security play", St2MattIshidaStartTurnMemoryAndSecurityPlay),
@@ -429,6 +431,24 @@ static void CardDatabaseLookupByCardId()
     AssertEqual("BT1-003", instance.DefinitionId);
     AssertEqual(PlayerId.Player1, instance.Owner);
     AssertThrows<DomainException>(() => database.GetByCardId("BT1-999"));
+}
+
+static void CardDatabaseDuplicateCardIdFails()
+{
+    var baseSalamon = new CardDefinition
+    {
+        CardId = "ST3-02",
+        CardIndex = 76,
+        CardNameEnglish = "Salamon",
+        CardEffectClassName = string.Empty,
+    };
+    var promoSalamon = baseSalamon with
+    {
+        CardIndex = 4977,
+        CardEffectClassName = "ST3_02",
+    };
+
+    AssertThrows<DomainException>(() => new InMemoryCardDatabase(new[] { baseSalamon, promoSalamon }));
 }
 
 static void CardDefinitionDefensivelyCopiesCollections()
@@ -3075,6 +3095,37 @@ static void St1ToSt3TargetPoolValidationPasses()
     AssertFalse(report.MissingLayers.Contains("evolution-source-card-play"));
 }
 
+static void St2St3SharedSt106MappingUsesCardIdScripts()
+{
+    var database = CreateSt1ToSt3CardDatabase();
+    var registry = St2St3CardScriptCatalog.CreateCombinedWithSt1Registry();
+
+    foreach (var cardId in new[] { "ST2-07", "ST3-07" })
+    {
+        var definition = database.GetByCardId(cardId);
+        AssertEqual("ST1_06", definition.CardEffectClassName);
+        AssertTrue(definition.BattleKeywords.Contains(BattleKeyword.Blocker));
+        AssertTrue(registry.TryGetScript(definition, out var script));
+        AssertEqual(cardId, script.Porting.CardId);
+        AssertEqual(string.Empty, script.Porting.EffectClassName);
+        AssertEqual(CardEffectPortingStatus.Implemented, script.Porting.Status);
+        AssertTrue(script.Porting.Notes.Contains("ST1_06", StringComparison.Ordinal));
+
+        var state = CreateSt2St3ScenarioState();
+        var source = AddBattlePermanent(state, 6101, 611, cardId, PlayerId.Player0, 0, enterTurn: 1);
+        var result = new TriggerPipelineService(registry).Run(
+            state,
+            EffectTiming.OnAllyAttack,
+            PlayerId.Player0,
+            source.TopCardId,
+            source.Id);
+
+        AssertEqual(-2, state.Memory);
+        AssertEqual(1, result.ExecutedEffects.Count);
+        AssertEqual($"{cardId}:on-ally-attack:memory-minus-2", result.ExecutedEffects.Single().StableId);
+    }
+}
+
 static void St2OneInheritedNoSourceDp()
 {
     var state = CreateSt2St3ScenarioState();
@@ -5140,12 +5191,10 @@ static string[] St2St3NoEffectCardIds() =>
         "ST2-02",
         "ST2-04",
         "ST2-05",
-        "ST2-07",
         "ST2-10",
         "ST3-02",
         "ST3-03",
         "ST3-06",
-        "ST3-07",
         "ST3-10",
     };
 
@@ -5155,6 +5204,7 @@ static string[] St2St3ImplementedCardIds() =>
         "ST2-01",
         "ST2-03",
         "ST2-06",
+        "ST2-07",
         "ST2-08",
         "ST2-09",
         "ST2-11",
@@ -5166,6 +5216,7 @@ static string[] St2St3ImplementedCardIds() =>
         "ST3-01",
         "ST3-04",
         "ST3-05",
+        "ST3-07",
         "ST3-08",
         "ST3-09",
         "ST3-11",
@@ -5273,7 +5324,7 @@ static IReadOnlyList<CardDefinition> CreateSt2St3CardDefinitions() =>
         StarterDefinition("ST2-04", CardColor.Blue, CardKind.Digimon, level: 3, playCost: 3, dp: 4000),
         StarterDefinition("ST2-05", CardColor.Blue, CardKind.Digimon, level: 4, playCost: 4, dp: 5000),
         StarterDefinition("ST2-06", CardColor.Blue, CardKind.Digimon, level: 4, playCost: 5, dp: 6000, effectClassName: "ST2_06"),
-        StarterDefinition("ST2-07", CardColor.Blue, CardKind.Digimon, level: 4, playCost: 4, dp: 4000),
+        StarterDefinition("ST2-07", CardColor.Blue, CardKind.Digimon, level: 4, playCost: 5, dp: 6000, effectClassName: "ST1_06", battleKeywords: new[] { BattleKeyword.Blocker }),
         StarterDefinition("ST2-08", CardColor.Blue, CardKind.Digimon, level: 5, playCost: 6, dp: 7000, effectClassName: "ST2_08"),
         StarterDefinition("ST2-09", CardColor.Blue, CardKind.Digimon, level: 5, playCost: 7, dp: 7000, effectClassName: "ST2_09"),
         StarterDefinition("ST2-10", CardColor.Blue, CardKind.Digimon, level: 6, playCost: 10, dp: 12000),
@@ -5289,7 +5340,7 @@ static IReadOnlyList<CardDefinition> CreateSt2St3CardDefinitions() =>
         StarterDefinition("ST3-04", CardColor.Yellow, CardKind.Digimon, level: 3, playCost: 3, dp: 2000, effectClassName: "ST3_04"),
         StarterDefinition("ST3-05", CardColor.Yellow, CardKind.Digimon, level: 4, playCost: 4, dp: 4000, effectClassName: "ST3_05"),
         StarterDefinition("ST3-06", CardColor.Yellow, CardKind.Digimon, level: 4, playCost: 5, dp: 6000),
-        StarterDefinition("ST3-07", CardColor.Yellow, CardKind.Digimon, level: 5, playCost: 6, dp: 6000),
+        StarterDefinition("ST3-07", CardColor.Yellow, CardKind.Digimon, level: 5, playCost: 5, dp: 6000, effectClassName: "ST1_06", battleKeywords: new[] { BattleKeyword.Blocker }),
         StarterDefinition("ST3-08", CardColor.Yellow, CardKind.Digimon, level: 5, playCost: 6, dp: 7000, effectClassName: "ST3_08"),
         StarterDefinition("ST3-09", CardColor.Yellow, CardKind.Digimon, level: 5, playCost: 7, dp: 7000, effectClassName: "ST3_09"),
         StarterDefinition("ST3-10", CardColor.Yellow, CardKind.Digimon, level: 6, playCost: 10, dp: 12000),
@@ -5332,7 +5383,8 @@ static CardDefinition StarterDefinition(
     int level,
     int playCost,
     int dp,
-    string effectClassName = "") =>
+    string effectClassName = "",
+    IReadOnlyList<BattleKeyword>? battleKeywords = null) =>
     new()
     {
         CardId = cardId,
@@ -5343,6 +5395,7 @@ static CardDefinition StarterDefinition(
         PlayCost = playCost,
         Dp = dp,
         CardEffectClassName = effectClassName,
+        BattleKeywords = battleKeywords ?? Array.Empty<BattleKeyword>(),
     };
 
 static GameState CreateSt1ScenarioState()

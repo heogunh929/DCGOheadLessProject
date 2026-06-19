@@ -1,5 +1,238 @@
 # ChatGPT 검수용 Handoff
 
+## 최신 상태 요약 - 2026-06-19 queue 48/90
+
+이 snapshot은 engine-parity queue 48 `asset_effect_mapping_reconcile` 수행 직후, support queue 90 `handoff_update_engine_parity`를 실행하면서 작성한 상태다. 기존 handoff 내용은 아래 Historical Handoff로 보존한다.
+
+## 현재 Queue와 목표
+
+- 현재 실행 prompt: engine-parity support `90_handoff_update_engine_parity.md`
+- 최신 처리 queue: `48`, `prompts/48_asset_effect_mapping_reconcile.md`
+- queue 48 상태: `needs-review`
+- queue 48 완료 범위: `ST2-07`/`ST3-07` shared `ST1_06` mapping을 card-id 기반 `Implemented` script로 정리
+- queue 48 needs-review 이유: `ST3_02_P2.asset`가 `CardEffectClassName: ST3_02`를 가지지만 `DCGO/Assets/Scripts/**`에서 대응 source body가 확인되지 않음
+- 다음 queue: `49`, `prompts/49_asset_registry_mapping_validator.md`
+- 다음 목표: 원본 asset, registry, status 문서, 카드 파일의 mapping drift를 자동 검증
+- 전체 목표: DCGO Unity battle source를 기준으로 headless `RL.Engine` parity를 높인다.
+- 금지 상태: RL training Observation/Reward/Dataset/Trainer/Environment API 구현 금지
+
+## Git / Branch / Remote
+
+- branch: `main`
+- HEAD: `8e4739f9 20260619 local latest`
+- branch 상태: `main 8e4739f9 [origin/main] 20260619 local latest`
+- remote: `origin https://github.com/heogunh929/DCGOheadLessProject.git`
+- 이번 작업에서 fetch/pull/push 실행 없음
+- 사용자 승인 없는 commit 없음
+
+## 작업트리 상태
+
+현재 `git status --short` 기준:
+
+```text
+ M docs/codex-prompts/README_ENGINE_PARITY_QUEUE.md
+ M docs/codex-prompts/state/PROGRESS_ENGINE_PARITY.md
+ M docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md
+ M docs/progress/CHATGPT_HANDOFF.md
+ M docs/rl-engine/cardeffect-file-layout-audit.md
+ M docs/rl-engine/cardeffect-porting-status.md
+ M docs/rl-engine/porting-structure-audit.md
+ M docs/rl-engine/porting-structure-policy.md
+ M docs/rl-engine/validation-strategy.md
+ M src/DCGO.RL.Engine.Tests/Program.cs
+ M src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs
+ M src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs
+ M src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_07.cs
+ M src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_07.cs
+ M src/DCGO.RL.Engine/CardEffects/St2St3CardScriptCatalog.cs
+?? docs/rl-engine/card-definition-variant-mapping.md
+```
+
+`git diff --stat` 기준 tracked 변경:
+
+```text
+docs/codex-prompts/README_ENGINE_PARITY_QUEUE.md   |  2 +-
+docs/codex-prompts/state/PROGRESS_ENGINE_PARITY.md |  5 +-
+docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md    |  2 +-
+docs/rl-engine/cardeffect-file-layout-audit.md     | 10 ++--
+docs/rl-engine/cardeffect-porting-status.md        | 26 ++++-----
+docs/rl-engine/porting-structure-audit.md          | 22 ++++----
+docs/rl-engine/porting-structure-policy.md         |  4 +-
+docs/rl-engine/validation-strategy.md              | 10 ++--
+src/DCGO.RL.Engine.Tests/Program.cs                | 63 ++++++++++++++++++++--
+src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs   | 43 +++------------
+src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs | 41 ++++++++++++++
+src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_07.cs  | 17 +++++-
+src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_07.cs | 17 +++++-
+src/DCGO.RL.Engine/CardEffects/St2St3CardScriptCatalog.cs |  4 +-
+```
+
+위 stat에는 untracked `docs/rl-engine/card-definition-variant-mapping.md`와 이 handoff 갱신분은 반영되지 않았을 수 있다.
+
+## DCGO Unity 원본 변경 여부
+
+- `git status --short -- DCGO`: 출력 없음
+- `git status --short -- DCGO\Assets\Scripts`: 출력 없음
+- `git diff --name-only -- DCGO\Assets\Scripts`: 출력 없음
+- 판정: `DCGO/Assets/Scripts` 원본 변경 없음
+
+## 변경 파일과 의미
+
+- `src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs`: shared `ST1_06` blocker/memory-loss helper 추가
+- `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs`: 기존 `ST1-06` script를 shared helper 기반으로 정리
+- `src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_07.cs`: `St2GrizzlymonScript` 추가, shared `ST1_06` mapping 실행
+- `src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_07.cs`: `St3UnimonScript` 추가, shared `ST1_06` mapping 실행
+- `src/DCGO.RL.Engine/CardEffects/St2St3CardScriptCatalog.cs`: `ST2-07`/`ST3-07`을 `NoEffectCardScript`에서 implemented script 등록으로 교체
+- `src/DCGO.RL.Engine.Tests/Program.cs`: shared mapping 실행 테스트와 duplicate `CardId` variant guard 테스트 추가
+- `docs/rl-engine/card-definition-variant-mapping.md`: `ST3-02`/`ST3_02_P2` variant identity risk 문서 추가
+- `docs/rl-engine/cardeffect-porting-status.md`: ST1-ST3 registry snapshot을 `All 216 tests passed`와 queue 48 상태로 갱신
+- `docs/rl-engine/cardeffect-file-layout-audit.md`, `porting-structure-audit.md`, `porting-structure-policy.md`, `validation-strategy.md`: shared mapping 해소와 남은 `ST3-02` risk 반영
+- `docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md`: queue 48을 `needs-review`로 기록
+- `docs/codex-prompts/state/PROGRESS_ENGINE_PARITY.md`: queue 48 결과와 테스트 결과 추가
+- `docs/codex-prompts/README_ENGINE_PARITY_QUEUE.md`: 최신 기록 테스트를 `All 216 tests passed`로 갱신
+
+## Source Mapping 상태
+
+- `ST2-07`: `DCGO/Assets/CardBaseEntity/ST2/Blue/Digimon/ST2_07*.asset`의 `CardEffectClassName: ST1_06` 확인. RL.Engine에서는 `St2GrizzlymonScript`가 shared `ST1_06` helper를 card-id 기반으로 실행한다.
+- `ST3-07`: `DCGO/Assets/CardBaseEntity/ST3/Yellow/Digimon/ST3_07*.asset`의 `CardEffectClassName: ST1_06` 확인. RL.Engine에서는 `St3UnimonScript`가 shared `ST1_06` helper를 card-id 기반으로 실행한다.
+- `ST1_06`: 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs` 기준 Blocker와 `OnAllyAttack` memory -2를 표현한다.
+- `ST3-02`: base/P1 asset은 effect class 없음, `ST3_02_P2.asset`만 `CardEffectClassName: ST3_02`. 대응 source body가 없어 `NoEffectCardScript("ST3-02")` 유지 및 needs-review.
+
+## 구현된 공통 Layer
+
+- `SharedSt1_06BlockerMemoryLossScript`: Blocker는 `CardDefinition.BattleKeywords`에 맡기고, `OnAllyAttack` memory -2를 `Tier1PrimitiveService.ModifyMemory`로 실행
+- `CardScriptRegistry`: 이번 변경에서는 effect-class duplicate alias를 늘리지 않고 기존 card-id 우선 lookup 정책을 사용
+- `TriggerPipelineService`: `ST2-07`/`ST3-07` top field source의 `OnAllyAttack` descriptor 수집/실행 검증
+- `InMemoryCardDatabase`: duplicate `CardId`를 실패시켜 `ST3-02` variant를 조용히 flatten하지 않도록 회귀 테스트 추가
+
+## 구현/변경된 카드
+
+- `ST1-06`: 동작은 유지, shared helper 기반으로 리팩터링
+- `ST2-07`: `NoEffect`에서 `Implemented`로 전환. shared `ST1_06` mapping, Blocker keyword, `OnAllyAttack` memory -2
+- `ST3-07`: `NoEffect`에서 `Implemented`로 전환. shared `ST1_06` mapping, Blocker keyword, `OnAllyAttack` memory -2
+- `ST3-02`: 구현 승격 없음. `ST3_02_P2.asset` variant는 source body 확인 전까지 `needs-review`
+
+## 테스트 결과
+
+실행 명령:
+
+```powershell
+$env:DOTNET_CLI_HOME='E:\headlessDCGO\.dotnet_home'
+$env:NUGET_PACKAGES='E:\headlessDCGO\.nuget\packages'
+$env:TEMP='E:\headlessDCGO\.tmp'
+$env:TMP='E:\headlessDCGO\.tmp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과:
+
+- `All 216 tests passed.`
+- MSBuild temp/cache access denied warning은 있었지만 test runner는 성공 종료
+- 테스트 산출물 `bin/obj` 추적 변경은 `git.exe restore`로 복원
+- `git diff --check`: whitespace error 없음. LF to CRLF 경고만 출력
+
+## Gate 구분
+
+| Scope | 현재 해석 |
+| --- | --- |
+| ST1 target deck | 통과 상태로 문서화 |
+| ST1-ST3 target pool | registry/status/file/deck validation 통과, 최신 테스트 `All 216 tests passed` |
+| queue 48 source mapping | 부분 완료. `ST2-07`/`ST3-07` 해결, `ST3-02` needs-review |
+| whole-engine completion | 미실행 / 미완료 |
+| RL training entry | 불가 |
+
+ST1 또는 ST1-ST3 target pool 통과를 전체 엔진 완성으로 해석하면 안 된다.
+
+## Golden / Parity 상태
+
+- 현재 golden suite는 ST1/minimal battle 중심 7개 scenario 수준
+- ST1-ST3 expanded golden scenario suite는 아직 구현되지 않음
+- queue 56이 golden scenario batch1 범위
+- Unity/RL rule-visible trace contract/exporter는 queue 57 범위
+- Unity trace fixture comparer는 queue 58 범위
+- ST1-ST3 whole-engine completion gate v1은 queue 59 범위
+
+## 남은 위험
+
+- `ST3_02_P2.asset`의 `ST3_02` source body 부재 및 variant identity 모델 미정
+- asset registry/status/file drift를 자동 검증하는 queue 49 미실행
+- option `Hand -> Executing -> OptionSkill -> Trash` lifecycle parity 미확정
+- runtime composition에서 `TriggerPipelineService` 누락 시 silent trigger skip 가능성
+- `RuleProcessor`/core service의 `ZoneMover` 주입 일관성
+- security trigger timing 순서 미정렬
+- `MultipleSkills`/`AfterEffectsActivate` 동시 trigger priority 미구현
+- counter/block/attack target change timing 미완료
+- expanded golden scenario와 Unity/RL trace parity 미구현
+- whole-engine completion gate 미실행
+
+## 다음 Queue 항목
+
+```text
+49 | todo | prompts/49_asset_registry_mapping_validator.md | 원본 asset ↔ registry/status/file 자동 대조 validator
+```
+
+queue 49에서 특히 확인할 것:
+
+- non-empty `CardEffectClassName`이 있는 asset이 `NoEffect`로 등록되지 않는지
+- shared effect mapping이 card-id 기반으로 명시됐는지
+- 같은 `CardId`의 variant가 다른 `CardEffectClassName`을 가질 때 flatten하지 않는지
+- `cardeffect-porting-status.md` snapshot이 registry와 drift되지 않는지
+
+## ChatGPT에게 검토받을 질문
+
+1. `ST2-07`/`ST3-07`처럼 asset이 shared `ST1_06`을 참조할 때, duplicate effect-class alias 없이 card-id 기반 script로 연결한 방식이 장기적으로 적절한가?
+2. `ST3_02_P2.asset`의 `ST3_02` source body가 없을 때, 현재처럼 `ST3-02` 전체를 `NoEffect` 유지하되 variant identity를 needs-review로 남기는 것이 맞는가?
+3. `CardId`, `CardIndex`, `VariantKey`를 분리하는 lookup 모델은 queue 49 validator에서 문서 검증만 할지, 엔진 API까지 확장할지?
+4. `Implemented`와 `Verified` 상태를 언제 분리 승격해야 하는가? Unity trace parity 전에는 `Verified`를 쓰지 않는 것이 맞는가?
+5. queue 50 option lifecycle 전에 asset registry validator를 먼저 고정하는 순서가 적절한가?
+
+## 복사용 요약 40줄
+
+```text
+01. 작업공간: E:\headlessDCGO
+02. branch: main
+03. HEAD: 8e4739f9 20260619 local latest
+04. remote: origin https://github.com/heogunh929/DCGOheadLessProject.git
+05. fetch/pull/push: 실행하지 않음
+06. commit: 생성하지 않음
+07. 현재 실행 prompt: 90_handoff_update_engine_parity.md
+08. 최신 처리 queue: 48 asset_effect_mapping_reconcile
+09. queue 48 상태: needs-review
+10. 다음 queue: 49 asset_registry_mapping_validator
+11. DCGO/Assets/Scripts 변경 없음
+12. RL training API 구현 없음
+13. ST2-07은 NoEffect에서 Implemented로 전환
+14. ST3-07은 NoEffect에서 Implemented로 전환
+15. ST2-07 asset은 CardEffectClassName ST1_06을 참조
+16. ST3-07 asset은 CardEffectClassName ST1_06을 참조
+17. shared ST1_06 helper는 OnAllyAttack memory -2를 실행
+18. Blocker는 CardDefinition.BattleKeywords로 표현
+19. registry는 duplicate ST1_06 alias를 추가하지 않음
+20. ST2-07/ST3-07은 card-id lookup으로 shared helper에 연결
+21. ST1-06 기존 동작은 shared helper 기반으로 정리
+22. ST3-02 base/P1 asset은 effect class 없음
+23. ST3_02_P2.asset은 CardEffectClassName ST3_02 보유
+24. DCGO/Assets/Scripts/**에서 ST3_02 source body 확인 안 됨
+25. ST3-02는 NoEffect 유지
+26. ST3-02 variant identity는 needs-review
+27. 새 문서: docs/rl-engine/card-definition-variant-mapping.md
+28. 추가 테스트: CardDatabase duplicate CardId fails
+29. 추가 테스트: ST2/ST3 shared ST1_06 mapping uses card-id scripts
+30. fixture에서 ST2-07/ST3-07에 ST1_06과 Blocker 반영
+31. ST2-07 fixture play cost/DP를 asset 기준 5/6000으로 조정
+32. ST3-07 fixture play cost를 asset 기준 5로 조정
+33. 최신 테스트 결과: All 216 tests passed
+34. MSBuild temp/cache access denied warning은 있었지만 runner 성공
+35. git diff --check whitespace error 없음
+36. bin/obj 추적 산출물은 restore로 복원
+37. cardeffect-porting-status snapshot 갱신됨
+38. QUEUE_ENGINE_PARITY.md에서 48은 needs-review
+39. queue 49는 asset/registry/status/file drift validator
+40. whole-engine completion gate는 아직 미실행
+```
+
+## Historical Handoff
+
 ## 최신 상태 요약 - 2026-06-19
 
 이 snapshot은 engine-parity 47번 전환 완료 직후, 90번 handoff 갱신 시점의 상태다. 아래 historical 섹션은 이전 ST1/ST1~ST3 정렬 기록으로 유지한다.

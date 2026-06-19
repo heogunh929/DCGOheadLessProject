@@ -5,7 +5,7 @@
 | Order | Status | Prompt file | 목적 |
 | ---: | --- | --- | --- |
 | 47 | done | prompts/47_next_porting_work_plan.md | 현재 기준점 검증, 기존 queue 전환, README/INDEX 정렬 |
-| 48 | todo | prompts/48_asset_effect_mapping_reconcile.md | ST2-07/ST3-07 shared effect와 ST3-02 variant 원본 mapping 정리 |
+| 48 | needs-review | prompts/48_asset_effect_mapping_reconcile.md | ST2-07/ST3-07 shared effect와 ST3-02 variant 원본 mapping 정리 |
 | 49 | todo | prompts/49_asset_registry_mapping_validator.md | 원본 asset ↔ registry/status/file 자동 대조 validator |
 | 50 | todo | prompts/50_option_execution_lifecycle_parity.md | Option Hand→Executing→OptionSkill→Trash 원본 lifecycle 정렬 |
 | 51 | todo | prompts/51_runtime_composition_guard.md | TriggerPipeline 없는 runtime 구성과 silent trigger skip 금지 |
