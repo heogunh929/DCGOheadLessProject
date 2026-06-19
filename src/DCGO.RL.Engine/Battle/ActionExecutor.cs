@@ -56,7 +56,7 @@ public sealed class ActionExecutor
                 break;
 
             case PlayCardAction play:
-                _playCardService.Play(state, play);
+                _playCardService.Play(state, play, trace);
                 break;
 
             case DigivolveAction digivolve:

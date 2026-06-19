@@ -30,6 +30,15 @@ internal static class CardEffectTestFixture
             BattleKeywords = battleKeywords ?? Array.Empty<BattleKeyword>(),
         };
 
+    public static CardDefinition OptionEffectDefinition(string cardId, string effectClassName, int playCost = 1) =>
+        EffectDefinition(cardId, effectClassName) with
+        {
+            CardKinds = new[] { CardKind.Option },
+            Level = 0,
+            PlayCost = playCost,
+            Dp = 0,
+        };
+
     public static ICardDatabase Database(params CardDefinition[] definitions) =>
         new InMemoryCardDatabase(definitions);
 
@@ -248,5 +257,95 @@ internal sealed class TimingMemoryCardScript : ICardScript
                 ?? state.Cards[context.Resolution.SourceCard!.Value].Owner;
             primitives.ModifyMemory(state, player, _amount);
         });
+    }
+}
+
+internal sealed class OptionSourceZoneProbeScript : ICardScript
+{
+    public OptionSourceZoneProbeScript(string cardId, string effectClassName)
+    {
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that requires hand-played OptionSkill source context to be Executing.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+    public Zone? ObservedPayloadSourceZone { get; private set; }
+    public Zone? ObservedCardZone { get; private set; }
+    public int ResolveCount { get; private set; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:option:probe-executing-source",
+                EffectTiming.OptionSkill,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        var sourceCard = context.Resolution.SourceCard
+            ?? throw new DomainException($"{Porting.CardId} probe requires a source card.");
+        context.WithState((state, _) =>
+        {
+            ObservedPayloadSourceZone = context.Resolution.Context.GetValueOrDefault("SourceZone") as Zone?;
+            ObservedCardZone = state.Cards[sourceCard].CurrentZone;
+            ResolveCount++;
+
+            if (ObservedPayloadSourceZone != Zone.Executing)
+            {
+                throw new DomainException(
+                    $"{Porting.CardId} expected SourceZone payload Executing, actual '{ObservedPayloadSourceZone}'.");
+            }
+
+            if (ObservedCardZone != Zone.Executing)
+            {
+                throw new DomainException(
+                    $"{Porting.CardId} expected source card in Executing during OptionSkill, actual '{ObservedCardZone}'.");
+            }
+        });
+    }
+}
+
+internal sealed class MoveSourceOptionScript : ICardScript
+{
+    private readonly Zone _destinationZone;
+
+    public MoveSourceOptionScript(string cardId, string effectClassName, Zone destinationZone)
+    {
+        _destinationZone = destinationZone;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that moves its own option source away from Executing during resolution.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:option:move-source",
+                EffectTiming.OptionSkill,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        var sourceCard = context.Resolution.SourceCard
+            ?? throw new DomainException($"{Porting.CardId} source move requires a source card.");
+        context.WithState((state, primitives) =>
+            primitives.MoveCard(
+                state,
+                new MoveCardCommand(sourceCard, Zone.Executing, _destinationZone, MoveReason.Effect, FaceUp: true)));
     }
 }

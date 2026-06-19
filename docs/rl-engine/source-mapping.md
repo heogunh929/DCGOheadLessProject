@@ -52,3 +52,17 @@
 - 원본은 `UnityEngine.Random`과 Photon room state에 의존한다. RL.Engine은 deterministic RNG만 사용해야 한다.
 - 원본 selection은 queue에 결과만 들어오며 요청 객체가 명시적이지 않다. RL.Engine은 요청과 응답을 모두 trace에 남겨야 한다.
 - 원본의 일부 TODO와 silent return은 headless에서 예외 또는 validation failure로 바꿔야 한다.
+
+## Queue 50 - `UseOptionClass` source mapping
+
+원본 `DCGO/Assets/Scripts/Script/CardController.cs`의 `UseOptionClass.UseOption()`은 option play를 다음 책임으로 처리한다.
+
+| Unity source 책임 | RL.Engine 대응 |
+| --- | --- |
+| `CardObjectController.RemoveFromAllArea(card)` 후 `AddExecutingCard(card)` | `PlayCardService.PlayOptionFromHand`의 `ZoneMover` `Hand -> Executing` |
+| `OptionSkill` activation hash에 card/root/cost 전달 | `TriggerPipelineService.Run(EffectTiming.OptionSkill, sourceCard: option)`와 payload `Card`, `PayCost`, `SourceZone=Executing` |
+| selection/optional 처리 중 card가 execution zone에 남음 | `OptionPlayResult.PendingSelectionRequest`와 `PendingResolution`; cleanup 보류 |
+| option body 또는 security effect가 card를 다른 zone으로 이동할 수 있음 | `TrashIfStillExecuting` guard로 `Executing`이 아닐 때 후속 trash 생략 |
+| effect/resolution 후 아직 `ExecutingCards`에 있으면 trash | `ZoneMover` `Executing -> Trash` |
+
+Security option activation은 `SecurityCheckService`가 checked card를 `Security -> Executing`으로 이동한 뒤 `SecurityEffectExecutionService.ActivateMainOption`이 같은 `OptionSkill` descriptor/body를 사용한다. hand play와 security activation은 비용 지급과 시작 zone이 다르지만, effect source card가 `Executing`이라는 점과 cleanup guard는 source-aligned하게 유지한다.

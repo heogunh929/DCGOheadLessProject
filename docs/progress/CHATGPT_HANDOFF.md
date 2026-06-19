@@ -1,5 +1,319 @@
 # ChatGPT 검수용 Handoff
 
+## 최신 상태 요약 - 2026-06-19 queue 50
+
+이 snapshot은 engine-parity queue 50 `option_execution_lifecycle_parity` 진행 결과다. 기존 queue 49/90 handoff 내용은 아래 Historical Handoff로 보존한다.
+
+## 현재 Queue와 목표
+
+- 현재 실행 prompt: `docs/codex-prompts/prompts/50_option_execution_lifecycle_parity.md`
+- 최신 완료 queue: `50`
+- queue 50 상태: `done`
+- queue 50 목표: hand option play를 원본 `UseOptionClass` 흐름인 `Hand -> Executing -> OptionSkill -> Trash`로 정렬
+- 다음 queue: `51`, `prompts/51_runtime_composition_guard.md`
+- 전체 목표: DCGO Unity battle source를 Source of Truth로 삼아 headless `RL.Engine` parity를 높인다.
+- 금지 상태: RL training Observation/Reward/Dataset/Trainer/Environment API 구현 금지
+
+## queue 50 변경 요약
+
+- `PlayCardService`:
+  - option hand play 시 turn player/hand 검증 후 cost 지급
+  - `ZoneMover`로 `Hand -> Executing`
+  - `OptionSkill` context payload에 `SourceZone=Zone.Executing`, `PayCost=true`, `ActivatedFromSecurity=false` 전달
+  - pending selection이면 `OptionPlayResult`로 request/resolution을 반환하고 card를 `Executing`에 유지
+  - selection completion 후 chained pending이 없고 card가 아직 `Executing`이면 `Executing -> Trash`
+  - option body가 source card를 다른 zone으로 이동한 경우 후속 trash 생략
+- `ActionExecutor`: `PlayCardService.Play`에 trace를 전달해 option play move/action trace가 연결되도록 조정
+- tests:
+  - fixture option probe/move-source script 추가
+  - option lifecycle tests 9개 추가
+  - ST1-13/14/15/16 hand option regression 추가
+  - ST2-13, ST2-15 chained selection, ST3-13 hand option regression 추가
+- docs:
+  - `effect-system.md`: option lifecycle source-aligned 규칙 추가
+  - `source-mapping.md`: Unity `UseOptionClass`와 RL `PlayCardService` 대응표 추가
+  - `validation-strategy.md`: queue 50 검증 결과와 ST3-02 blocking finding 유지 조건 추가
+  - `QUEUE_ENGINE_PARITY.md`: queue 50 `done`
+  - `PROGRESS_ENGINE_PARITY.md`: queue 50 완료 기록
+
+## queue 50 테스트
+
+실행:
+
+```text
+DOTNET_CLI_HOME=E:\headlessDCGO\.dotnet_home
+TEMP/TMP=E:\headlessDCGO\.tmp
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj -- "Option lifecycle"
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과:
+
+```text
+Option lifecycle filter: All 9 tests passed.
+Full test suite: All 234 tests passed.
+```
+
+주의:
+
+- restore는 로컬 사용자 temp/NuGet lock 권한 문제로 실패했으므로 `--no-restore`로 실행했다.
+- MSBuild 임시 파일 삭제/AssemblyReference cache write 경고가 있었지만 test runner는 통과했다.
+- 전체 테스트는 `--no-restore`로 실행했고 234개 통과했다.
+
+## ST3-02 / whole-engine gate 주의
+
+- `ST3-02` variant는 계속 `needs-review` 및 blocking finding 상태다.
+- `ST3_02_P2.asset`는 `CardEffectClassName: ST3_02`를 가지지만 source body가 확인되지 않았다.
+- source body 없이 `ST3-02` 효과를 추측 구현하지 않는다.
+- whole-engine completion gate에서 이 finding을 숨기지 않는다.
+- whole-engine completion gate는 아직 미실행이며 RL 학습 단계 진입 근거가 아니다.
+
+## DCGO Unity 원본 변경 여부
+
+- queue 50에서 `DCGO/Assets/Scripts`는 읽기 전용 Source of Truth로만 사용했다.
+- `DCGO/Assets/Scripts` 변경 없음.
+
+## Historical Handoff
+
+## 최신 상태 요약 - 2026-06-19 queue 49/90
+
+이 snapshot은 engine-parity queue 49 `asset_registry_mapping_validator` 완료 후, support queue 90 `handoff_update_engine_parity`를 실행하면서 작성한 상태다. 기존 handoff 내용은 아래 Historical Handoff로 보존한다.
+
+## 현재 Queue와 목표
+
+- 현재 실행 prompt: engine-parity support `90_handoff_update_engine_parity.md`
+- 최신 완료 queue: `49`, `prompts/49_asset_registry_mapping_validator.md`
+- queue 49 상태: `done`
+- queue 49 목표: 원본 `CardBaseEntity` asset의 `CardEffectClassName`과 RL registry/status/file/source body mapping drift를 자동 검증
+- queue 49 완료 범위: validator service, machine-readable report records, 한국어 summary lines, audit test script, fixture/local-source audit tests, 문서 갱신
+- 다음 queue: `50`, `prompts/50_option_execution_lifecycle_parity.md`
+- 다음 목표: Option 카드의 `Hand -> Executing -> OptionSkill -> Trash` 원본 lifecycle 정렬
+- 전체 목표: DCGO Unity battle source를 Source of Truth로 삼아 headless `RL.Engine` parity를 높인다.
+- 금지 상태: RL training Observation/Reward/Dataset/Trainer/Environment API 구현 금지
+
+## Git / Branch / Remote
+
+- branch: `main`
+- HEAD: `15665a95 202606191400 local`
+- branch 상태: `main 15665a95 [origin/main] 202606191400 local`
+- remote: `origin https://github.com/heogunh929/DCGOheadLessProject.git`
+- `git status -sb`: `## main...origin/main`
+- 이번 90 작업에서 fetch/pull/push 실행 없음
+- 이번 90 작업에서 commit 생성 없음
+- remote 상태는 fetch 없이 로컬 tracking 정보 기준이다.
+
+## 작업 시작 전 Git 상태와 Diff
+
+작업 시작 전 `git status --short` 기준:
+
+```text
+<clean>
+```
+
+작업 시작 전 `git diff --name-only -- docs src scripts` 기준:
+
+```text
+<empty>
+```
+
+작업 시작 전 `git diff --name-only -- DCGO DCGO\Assets\Scripts` 기준:
+
+```text
+<empty>
+```
+
+이번 90번 handoff 작업 자체의 의도된 변경 파일은 `docs/progress/CHATGPT_HANDOFF.md` 하나다.
+
+## DCGO Unity 원본 변경 여부
+
+- `git diff --name-only -- DCGO`: 출력 없음
+- `git diff --name-only -- DCGO\Assets\Scripts`: 출력 없음
+- 판정: `DCGO/Assets/Scripts` 원본 변경 없음
+- queue 49에서도 기존 DCGO Unity source는 수정하지 않았다.
+
+## queue 49 변경 파일과 의미
+
+latest commit `15665a95` 기준 변경 파일:
+
+- `src/DCGO.RL.Engine/Validation/AssetRegistryMappingValidator.cs`: asset/registry/status/file/source body mapping validator와 report model 추가
+- `src/DCGO.RL.Engine/CardEffects/CardEffectPortingStatus.cs`: `SourceEffectClassName` 및 `EffectiveSourceEffectClassName` metadata 추가
+- `src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs`: shared `ST1_06` helper가 source class metadata를 보존하도록 변경
+- `src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs`: source effect class `ST1_06` metadata 명시
+- `src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_07.cs`: registry alias와 source effect class `ST1_06` 분리 보존
+- `src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_07.cs`: registry alias와 source effect class `ST1_06` 분리 보존
+- `src/DCGO.RL.Engine.Tests/Program.cs`: `AssetRegistryMapping` fixture/local-source audit tests 9개 및 test name filter 추가
+- `scripts/run_asset_registry_mapping_audit.ps1`: `AssetRegistryMapping` audit test subset 실행 스크립트
+- `docs/rl-engine/card-definition-variant-mapping.md`: `ST3-02` variant-aware identity와 queue 49 판정 문서화
+- `docs/rl-engine/validation-strategy.md`: validator/service, report, audit script, test result 문서화
+- `docs/rl-engine/cardeffect-porting-status.md`: `All 225 tests passed`, source metadata, `ST3-02` needs-review 반영
+- `docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md`: queue 49 `done`
+- `docs/codex-prompts/state/PROGRESS_ENGINE_PARITY.md`: queue 49 완료 기록
+- 기타 상태/완료/golden/porting 문서: 최신 테스트 수와 source-alignment 상태 갱신
+
+## Source Mapping 상태
+
+- `ST2-07`: `ST2_07*.asset`의 `CardEffectClassName: ST1_06`을 공유 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs`에 연결한다.
+- `ST3-07`: `ST3_07*.asset`의 `CardEffectClassName: ST1_06`을 공유 원본 `DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs`에 연결한다.
+- `ST2-07`/`ST3-07` registry lookup alias는 빈 문자열이며, 원본 source metadata는 `SourceEffectClassName: ST1_06`으로 보존한다.
+- `ST3-02` base asset `CardIndex 76`, `VariantKey base`: `CardEffectClassName` 없음, NoEffect 후보.
+- `ST3-02` P1 asset `CardIndex 77`, `VariantKey P1`: `CardEffectClassName` 없음, NoEffect 후보.
+- `ST3-02` P2 asset `CardIndex 4977`, `VariantKey P2`: `CardEffectClassName: ST3_02`, source body 미확인.
+- `ST3-02`는 효과를 추측 구현하지 않고 `FalseNoEffect`/`MissingSourceEffectBody` needs-review로 보고한다.
+
+## 구현된 공통 Layer
+
+- `AssetRegistryMappingValidator`: asset metadata, registry record, status snapshot, per-card file, source mapping comment, source body existence를 대조한다.
+- `AssetCardDefinitionId(CardId, CardIndex, VariantKey)`: audit/report identity가 `CardId`만으로 variant를 flatten하지 않도록 한다.
+- `AssetRegistryMappingReport`: machine-readable report record이며 JSON 직렬화 가능하다.
+- `AssetRegistryMappingIssue`: `Info`, `Warning`, `NeedsReview`, `Error` severity와 issue target asset identity를 제공한다.
+- `AssetRegistryMappingReport.ToKoreanSummaryLines()`: 한국어 요약 report surface.
+- `CardEffectPortingRecord.SourceEffectClassName`: registry lookup alias와 원본 source effect class name 분리.
+- `scripts/run_asset_registry_mapping_audit.ps1`: test runner filter로 `AssetRegistryMapping` audit test batch만 실행.
+- `Program.cs` test runner filter: 인자 없으면 전체 테스트, 인자 있으면 name substring matching.
+
+## 구현/변경된 카드
+
+- `ST1-06`: 기존 shared helper 기반 구현 유지, source metadata `ST1_06` 명시.
+- `ST2-07`: queue 48에서 `Implemented`로 전환된 shared `ST1_06` mapping을 queue 49 validator로 고정.
+- `ST3-07`: queue 48에서 `Implemented`로 전환된 shared `ST1_06` mapping을 queue 49 validator로 고정.
+- `ST3-02`: 구현 승격 없음. base/P1은 NoEffect 후보, P2는 source body 미확인 needs-review.
+- 신규 카드 효과 구현은 없음.
+
+## 테스트 결과
+
+Asset registry audit subset:
+
+```powershell
+.\scripts\run_asset_registry_mapping_audit.ps1
+```
+
+결과:
+
+- `All 9 tests passed.`
+- MSBuild temp/cache access denied warning은 있었지만 test runner는 성공 종료
+
+전체 테스트:
+
+```powershell
+$env:DOTNET_CLI_HOME='E:\headlessDCGO\.dotnet_home'
+$env:NUGET_PACKAGES='E:\headlessDCGO\.nuget\packages'
+$env:TEMP='E:\headlessDCGO\.tmp'
+$env:TMP='E:\headlessDCGO\.tmp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과:
+
+- `All 225 tests passed.`
+- MSBuild `AssemblyReference.cache` 및 `MSBuildTemp` access denied warning은 있었지만 test runner는 성공 종료
+- 테스트 산출물 `bin/obj` 추적 변경은 restore로 정리된 상태로 commit됨
+- queue 90 문서 갱신은 문서-only 작업이라 별도 전체 테스트 재실행 없음
+
+## Gate 구분
+
+| Scope | 현재 해석 |
+| --- | --- |
+| ST1 target deck | 통과 상태 유지 |
+| ST1-ST3 target pool | 48장 registry/status/file/deck validation 통과 |
+| queue 49 asset registry audit | 구현 완료. shared mapping과 variant split을 자동 감사 |
+| ST3-02 source body | P2 variant source body 미확인으로 needs-review 유지 |
+| whole-engine completion | 미실행 / 미완료 |
+| RL training entry | 불가 |
+
+ST1 또는 ST1-ST3 target pool 통과를 전체 DCGO 엔진 완성으로 해석하면 안 된다.
+
+## Golden / Parity 상태
+
+- 현재 golden suite는 ST1/minimal battle 중심이다.
+- ST1-ST3 expanded golden scenario suite는 아직 구현되지 않았다.
+- queue 56이 golden scenario batch1 범위다.
+- Unity/RL rule-visible trace contract/exporter는 queue 57 범위다.
+- Unity trace fixture comparer는 queue 58 범위다.
+- ST1-ST3 whole-engine completion gate v1은 queue 59 범위다.
+
+## 남은 위험
+
+- `ST3_02_P2.asset`의 `ST3_02` source body 부재와 실제 variant identity 모델 미정.
+- 현재 gameplay registry lookup은 여전히 `CardId` 기반이다. 실제 variant 선택이 필요해지면 `CardIndex` 또는 `(CardId, VariantKey)` 기반 `CardDefinitionId` 도입 검토가 필요하다.
+- Option `Hand -> Executing -> OptionSkill -> Trash` lifecycle parity 미확정.
+- runtime composition에서 `TriggerPipelineService` 누락 시 silent trigger skip 가능성.
+- `RuleProcessor`/core service의 `ZoneMover` 주입 일관성.
+- security trigger timing 순서 미정렬.
+- `MultipleSkills`/`AfterEffectsActivate` 동시 trigger priority 미구현.
+- counter/block/attack target change timing 미완료.
+- expanded golden scenario와 Unity/RL trace parity 미구현.
+- whole-engine completion gate 미실행.
+
+## 다음 Queue 항목
+
+```text
+50 | todo | prompts/50_option_execution_lifecycle_parity.md | Option Hand→Executing→OptionSkill→Trash 원본 lifecycle 정렬
+```
+
+queue 50에서 특히 확인할 것:
+
+- 원본 Unity option card 사용 시 zone 흐름이 `Hand -> Executing -> OptionSkill -> Trash`인지
+- security option resolution과 hand-play option resolution이 같은 primitive를 공유할 수 있는지
+- effect 실패/선택 대기/invalid selection 상황에서 Executing card가 잘못 trash/hand로 이동하지 않는지
+- 기존 `ST3-13`, `ST3-14` security add-to-hand 처리와 충돌하지 않는지
+
+## ChatGPT에게 검토받을 질문
+
+1. `SourceEffectClassName`과 registry lookup alias를 분리한 현재 모델이 `ST2-07`/`ST3-07` shared `ST1_06` case에 충분한가?
+2. `AssetCardDefinitionId(CardId, CardIndex, VariantKey)`를 audit/report에만 두고 gameplay `CardDefinition`은 아직 `CardId` 기반으로 유지하는 판단이 적절한가?
+3. `ST3-02` P2가 source body 미확인인 상태에서 `NoEffectCardScript("ST3-02")`를 유지하되 needs-review issue로 차단하는 방식이 충분히 보수적인가?
+4. queue 50 option lifecycle에서 현재 security option add-to-hand primitive와 hand-play option trash primitive를 하나의 lifecycle service로 묶어야 하는가?
+5. `AssetRegistryMappingReport.IsValid == false`를 `ST3-02` P2 needs-review 때문에 유지하는 것이 whole-engine gate에서 어떤 severity로 반영되어야 하는가?
+
+## 복사용 요약 42줄
+
+```text
+01. 작업공간: E:\headlessDCGO
+02. branch: main
+03. HEAD: 15665a95 202606191400 local
+04. remote: origin https://github.com/heogunh929/DCGOheadLessProject.git
+05. git status -sb: ## main...origin/main
+06. fetch/pull/push: 실행하지 않음
+07. 이번 90 작업 commit: 생성하지 않음
+08. 작업 시작 전 git status --short: clean
+09. DCGO/Assets/Scripts diff: 없음
+10. 현재 실행 prompt: 90_handoff_update_engine_parity.md
+11. 최신 완료 queue: 49 asset_registry_mapping_validator
+12. queue 49 상태: done
+13. 다음 queue: 50 option_execution_lifecycle_parity
+14. RL training API 구현 없음
+15. queue 49는 AssetRegistryMappingValidator를 추가함
+16. validator는 asset/registry/status/file/source body mapping을 대조함
+17. SourceUnavailable은 silent skip이 아니라 명시 report임
+18. AssetCardDefinitionId는 CardId, CardIndex, VariantKey를 포함함
+19. CardId만으로 variant를 flatten하지 않음
+20. AssetRegistryMappingReport는 JSON 직렬화 가능한 machine-readable report임
+21. ToKoreanSummaryLines로 한국어 summary 제공
+22. CardEffectPortingRecord에 SourceEffectClassName 추가
+23. registry lookup alias와 원본 source class를 분리함
+24. ST2-07 asset source class는 ST1_06
+25. ST3-07 asset source class는 ST1_06
+26. ST2-07/ST3-07 registry alias는 빈 문자열 유지
+27. ST2-07/ST3-07 SourceEffectClassName은 ST1_06 보존
+28. ST3-02 base CardIndex 76은 NoEffect 후보
+29. ST3-02 P1 CardIndex 77은 NoEffect 후보
+30. ST3-02 P2 CardIndex 4977은 CardEffectClassName ST3_02
+31. ST3_02 source body는 DCGO/Assets/Scripts에서 확인되지 않음
+32. ST3-02 효과는 추측 구현하지 않음
+33. ST3-02 P2는 FalseNoEffect/MissingSourceEffectBody needs-review
+34. audit script: scripts/run_asset_registry_mapping_audit.ps1
+35. audit subset 결과: All 9 tests passed
+36. 전체 테스트 결과: All 225 tests passed
+37. MSBuild temp/cache access denied warning은 있었지만 runner 성공
+38. ST1 target deck gate는 통과 상태 유지
+39. ST1-ST3 target pool validation은 통과 상태 유지
+40. whole-engine completion gate는 아직 미실행
+41. golden/parity trace suite는 queue 56~58 범위
+42. 다음 핵심 위험은 option lifecycle parity와 ST3-02 P2 source 미확인
+```
+
+## Historical Handoff
+
 ## 최신 상태 요약 - 2026-06-19 queue 48/90
 
 이 snapshot은 engine-parity queue 48 `asset_effect_mapping_reconcile` 수행 직후, support queue 90 `handoff_update_engine_parity`를 실행하면서 작성한 상태다. 기존 handoff 내용은 아래 Historical Handoff로 보존한다.

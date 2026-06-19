@@ -160,3 +160,31 @@ queue 46 기준 1차 golden scenario 우선순위는 다음 5개다.
 failed gate는 테스트 실패가 아니라 completion report의 gate 결과로 표현한다. Unsupported/Partial 항목이 남는 경우 test runner 자체를 실패시키기보다 report에 failed gate와 missing layer를 명시한다.
 
 RL 학습 단계 진입: 불가. 현재 검증은 source-aligned porting 상태를 확인하기 위한 검증 데이터이며 학습 데이터 생성 단계가 아니다.
+
+## Queue 50 Option Lifecycle 검증 - 2026-06-19
+
+Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Executing -> OptionSkill -> Trash`를 검증한다.
+
+검증 항목:
+
+- 정상 hand play option이 cost 지급 후 `Hand -> Executing -> Trash`로 이동한다.
+- `OptionSkill` context payload의 `SourceZone`과 source card current zone은 effect 실행 중 `Executing`이다.
+- selection pending 중에는 option card가 `Executing`에 남는다.
+- selection completion 후 다음 chained selection이 없으면 아직 `Executing`인 option만 trash로 이동한다.
+- option body가 source card를 `Hand` 등 다른 zone으로 이동한 경우 후속 trash를 생략한다.
+- invalid hand play는 memory/zone/state hash를 오염시키지 않는다.
+- action trace replay에서 동일 final state hash를 만든다.
+- ST1-13, ST1-14, ST1-15, ST1-16 hand option regression을 유지한다.
+- ST2-13, ST2-15 chained selection, ST3-13 hand option regression을 유지한다.
+
+실행 결과:
+
+- `dotnet run --no-restore --project src/DCGO.RL.Engine.Tests/DCGO.RL.Engine.Tests.csproj -- "Option lifecycle"`: 9개 테스트 통과.
+- `dotnet run --no-restore --project src/DCGO.RL.Engine.Tests/DCGO.RL.Engine.Tests.csproj`: 전체 234개 테스트 통과.
+- restore는 로컬 사용자 temp/NuGet lock 권한 문제로 실행하지 않았고, repo-local SDK에 `DOTNET_CLI_HOME`, `TEMP`, `TMP`를 workspace 내부로 지정한 뒤 `--no-restore`로 실행했다.
+
+주의:
+
+- 이 검증은 option lifecycle에 한정된다.
+- `ST3-02` variant finding은 계속 blocking/needs-review이다. `ST3_02_P2.asset`의 source body가 확인되지 않았으므로 효과를 추측 구현하지 않으며, whole-engine completion gate에서 숨기지 않는다.
+- whole-engine completion gate는 여전히 미실행이며 RL 학습 단계 진입 근거가 아니다.

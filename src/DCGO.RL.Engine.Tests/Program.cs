@@ -129,6 +129,15 @@ var tests = new (string Name, Action Test)[]
     ("TriggerPipeline OnEndAttack deterministic", TriggerPipelineOnEndAttackDeterministic),
     ("TriggerPipeline OptionSkill remains compatible with ST1-15", TriggerPipelineOptionSkillCompatibleWithSt1Option),
     ("TriggerPipeline SecuritySkill remains compatible with service", TriggerPipelineSecuritySkillCompatibleWithSecurityService),
+    ("Option lifecycle hand play moves through Executing to Trash", OptionLifecycleHandPlayMovesThroughExecutingToTrash),
+    ("Option lifecycle source context is Executing", OptionLifecycleSourceContextIsExecuting),
+    ("Option lifecycle pending selection keeps Executing", OptionLifecyclePendingSelectionKeepsExecuting),
+    ("Option lifecycle selection completion trashes option", OptionLifecycleSelectionCompletionTrashesOption),
+    ("Option lifecycle moved source skips follow-up Trash", OptionLifecycleMovedSourceSkipsFollowupTrash),
+    ("Option lifecycle invalid action leaves zones clean", OptionLifecycleInvalidActionLeavesZonesClean),
+    ("Option lifecycle action trace replay deterministic", OptionLifecycleActionTraceReplayDeterministic),
+    ("Option lifecycle ST1 hand option regression", OptionLifecycleSt1HandOptionRegression),
+    ("Option lifecycle ST2/ST3 hand option regression", OptionLifecycleSt2St3HandOptionRegression),
     ("TriggerPipeline ST1-09 OnBlockAnyone hook", TriggerPipelineSt1OnBlockAnyoneHook),
     ("TriggerPipeline ST1 completion report has no partials", TriggerPipelineSt1CompletionReportHasNoPartials),
     ("Tier1 Optional effect creates selection request", Tier1OptionalEffectCreatesSelectionRequest),
@@ -2488,6 +2497,302 @@ static void TriggerPipelineSecuritySkillCompatibleWithSecurityService()
     AssertEqual(1, result.SecurityEffectResults.Count);
     AssertEqual(1, result.SecurityEffectResults[0].ActivatedMainOptionResolutions.Count);
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(target.TopCardId));
+}
+
+static void OptionLifecycleHandPlayMovesThroughExecutingToTrash()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-OPTION"] = CardEffectTestFixture.OptionEffectDefinition("FX-OPTION", "FX_Option", playCost: 2);
+    var option = AddCardToZone(state, 6201, "FX-OPTION", PlayerId.Player0, Zone.Hand);
+    var script = new OptionSourceZoneProbeScript("FX-OPTION", "FX_Option");
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(script));
+    var service = new PlayCardService(triggerPipelineService: pipeline);
+
+    var result = service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertTrue(result.MovedToTrash);
+    AssertEqual(1, script.ResolveCount);
+    AssertEqual(Zone.Executing, script.ObservedPayloadSourceZone!.Value);
+    AssertEqual(Zone.Executing, script.ObservedCardZone!.Value);
+    AssertEqual(3, state.Memory);
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Hand.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void OptionLifecycleSourceContextIsExecuting()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-CONTEXT"] = CardEffectTestFixture.OptionEffectDefinition("FX-CONTEXT", "FX_Context");
+    var option = AddCardToZone(state, 6211, "FX-CONTEXT", PlayerId.Player0, Zone.Hand);
+    var script = new OptionSourceZoneProbeScript("FX-CONTEXT", "FX_Context");
+    var service = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(CardEffectTestFixture.Registry(script)));
+
+    service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertEqual(Zone.Executing, script.ObservedPayloadSourceZone!.Value);
+    AssertEqual(Zone.Executing, script.ObservedCardZone!.Value);
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+}
+
+static void OptionLifecyclePendingSelectionKeepsExecuting()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
+    var option = AddCardToZone(state, 6221, "FX-SELECT", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6222, 822, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT",
+            "FX_Select",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1)));
+    var service = new PlayCardService(triggerPipelineService: pipeline);
+
+    var result = service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertTrue(result.HasPendingSelection);
+    AssertEqual("test-selection:FX-SELECT", result.PendingSelectionRequest!.Id);
+    AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertEqual(4, state.Memory);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void OptionLifecycleSelectionCompletionTrashesOption()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
+    var option = AddCardToZone(state, 6231, "FX-SELECT", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6232, 832, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT",
+            "FX_Select",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1)));
+    var service = new PlayCardService(triggerPipelineService: pipeline);
+    var pending = service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
+    var selected = pending.PendingSelectionRequest!.Candidates.Single(candidate => candidate.Permanent == target.Id);
+
+    var completed = service.ApplyOptionSelection(
+        state,
+        pending.PendingResolution!,
+        SelectionResult.ForTargets(pending.PendingSelectionRequest.Id, new[] { selected }));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertEqual(1, completed.SelectionApplications.Count);
+    AssertTrue(completed.MovedToTrash);
+    AssertFalse(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void OptionLifecycleMovedSourceSkipsFollowupTrash()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-MOVE"] = CardEffectTestFixture.OptionEffectDefinition("FX-MOVE", "FX_Move");
+    var option = AddCardToZone(state, 6241, "FX-MOVE", PlayerId.Player0, Zone.Hand);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new MoveSourceOptionScript("FX-MOVE", "FX_Move", Zone.Hand)));
+    var service = new PlayCardService(triggerPipelineService: pipeline);
+
+    var result = service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertFalse(result.MovedToTrash);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Hand, state.Cards[option].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void OptionLifecycleInvalidActionLeavesZonesClean()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-OPTION"] = CardEffectTestFixture.OptionEffectDefinition("FX-OPTION", "FX_Option");
+    var option = AddCardToZone(state, 6251, "FX-OPTION", PlayerId.Player0, Zone.Deck);
+    var beforeHash = state.ComputeStateHash();
+    var beforeMemory = state.Memory;
+    var service = new PlayCardService(triggerPipelineService: new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new OptionSourceZoneProbeScript("FX-OPTION", "FX_Option"))));
+
+    AssertThrows<DomainException>(() =>
+        service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1)));
+
+    AssertEqual(beforeMemory, state.Memory);
+    AssertEqual(beforeHash, state.ComputeStateHash());
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Deck.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Deck, state.Cards[option].CurrentZone);
+}
+
+static void OptionLifecycleActionTraceReplayDeterministic()
+{
+    static (string Hash, GameTrace Trace) Run()
+    {
+        var state = CreateMinimalBattleState();
+        state.CardDefinitions["FX-OPTION"] = CardEffectTestFixture.OptionEffectDefinition("FX-OPTION", "FX_Option");
+        var option = AddCardToZone(state, 6261, "FX-OPTION", PlayerId.Player0, Zone.Hand);
+        var initial = state.Clone();
+        var service = new PlayCardService(
+            triggerPipelineService: new TriggerPipelineService(CardEffectTestFixture.Registry(
+                new TimingMemoryCardScript("FX-OPTION", "FX_Option", EffectTiming.OptionSkill, amount: 1))));
+        var executor = new ActionExecutor(playCardService: service);
+        var trace = new GameTrace();
+
+        executor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1), trace);
+
+        new EngineInvariantChecker().ThrowIfInvalid(state);
+        var replay = new ReplayRunner(actionExecutor: executor).Replay(initial, trace);
+        AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+        return (state.ComputeStateHash(), trace);
+    }
+
+    var first = Run();
+    var second = Run();
+
+    AssertEqual(first.Hash, second.Hash);
+    AssertTrue(first.Trace.Events.Count > 0);
+}
+
+static void OptionLifecycleSt1HandOptionRegression()
+{
+    var registry = St1CardScriptCatalog.CreateRegistry();
+
+    var shadowWingState = CreateSt1ScenarioState();
+    shadowWingState.Memory = 10;
+    var shadowWing = AddCardToZone(shadowWingState, 6271, "ST1-13", PlayerId.Player0, Zone.Hand);
+    var shadowTarget = AddBattlePermanent(shadowWingState, 6272, 872, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
+    var shadowProvider = new TestDecisionProvider();
+    shadowProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "ST1-13:option:dp",
+        new[] { PermanentSelectionTarget(shadowTarget) }));
+    var shadowResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry, shadowProvider))
+        .PlayOptionFromHand(shadowWingState, new PlayCardAction(PlayerId.Player0, shadowWing, -1));
+    AssertTrue(shadowResult.MovedToTrash);
+    AssertEqual(7000, EffectiveStatService.NoContinuous.Dp(shadowWingState, shadowTarget));
+    AssertTrue(shadowWingState.GetPlayer(PlayerId.Player0).Trash.Contains(shadowWing));
+
+    var starlightState = CreateSt1ScenarioState();
+    starlightState.Memory = 10;
+    var starlight = AddCardToZone(starlightState, 6273, "ST1-14", PlayerId.Player0, Zone.Hand);
+    var starlightResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry))
+        .PlayOptionFromHand(starlightState, new PlayCardAction(PlayerId.Player0, starlight, -1));
+    AssertTrue(starlightResult.MovedToTrash);
+    AssertTrue(starlightState.TemporaryModifiers.Any(modifier =>
+        modifier.ModifierKind == TemporaryModifierKind.SecurityDigimonDP
+        && modifier.Amount == 7000
+        && modifier.DurationScope == DurationScope.UntilOpponentTurnEnd));
+    AssertTrue(starlightState.GetPlayer(PlayerId.Player0).Trash.Contains(starlight));
+
+    var gigaState = CreateSt1ScenarioState();
+    gigaState.Memory = 10;
+    var giga = AddCardToZone(gigaState, 6274, "ST1-15", PlayerId.Player0, Zone.Hand);
+    var smallTarget = AddBattlePermanent(gigaState, 6275, 875, "ST1-04", PlayerId.Player1, 0, enterTurn: 1);
+    var gigaProvider = new TestDecisionProvider();
+    gigaProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "ST1-15:option:delete",
+        new[] { PermanentSelectionTarget(smallTarget) }));
+    var gigaResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry, gigaProvider))
+        .PlayOptionFromHand(gigaState, new PlayCardAction(PlayerId.Player0, giga, -1));
+    AssertTrue(gigaResult.MovedToTrash);
+    AssertTrue(gigaState.GetPlayer(PlayerId.Player1).Trash.Contains(smallTarget.TopCardId));
+    AssertTrue(gigaState.GetPlayer(PlayerId.Player0).Trash.Contains(giga));
+
+    var gaiaState = CreateSt1ScenarioState();
+    gaiaState.Memory = 10;
+    var gaia = AddCardToZone(gaiaState, 6276, "ST1-16", PlayerId.Player0, Zone.Hand);
+    var largeTarget = AddBattlePermanent(gaiaState, 6277, 877, "ST1-06", PlayerId.Player1, 0, enterTurn: 1);
+    var gaiaProvider = new TestDecisionProvider();
+    gaiaProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "ST1-16:option:delete",
+        new[] { PermanentSelectionTarget(largeTarget) }));
+    var gaiaResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry, gaiaProvider))
+        .PlayOptionFromHand(gaiaState, new PlayCardAction(PlayerId.Player0, gaia, -1));
+    AssertTrue(gaiaResult.MovedToTrash);
+    AssertTrue(gaiaState.GetPlayer(PlayerId.Player1).Trash.Contains(largeTarget.TopCardId));
+    AssertTrue(gaiaState.GetPlayer(PlayerId.Player0).Trash.Contains(gaia));
+}
+
+static void OptionLifecycleSt2St3HandOptionRegression()
+{
+    var registry = St2St3CardScriptCatalog.CreateCombinedWithSt1Registry();
+
+    var hammerSparkState = CreateSt2St3ScenarioState();
+    hammerSparkState.Memory = 5;
+    var hammerSpark = AddCardToZone(hammerSparkState, 6281, "ST2-13", PlayerId.Player0, Zone.Hand);
+    var hammerResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry))
+        .PlayOptionFromHand(hammerSparkState, new PlayCardAction(PlayerId.Player0, hammerSpark, -1));
+    AssertTrue(hammerResult.MovedToTrash);
+    AssertEqual(5, hammerSparkState.Memory);
+    AssertTrue(hammerSparkState.GetPlayer(PlayerId.Player0).Trash.Contains(hammerSpark));
+
+    var sourcePlayState = CreateSt2St3ScenarioState();
+    sourcePlayState.Memory = 10;
+    var sourcePlayOption = AddCardToZone(sourcePlayState, 6282, "ST2-15", PlayerId.Player0, Zone.Hand);
+    var host = AddBattlePermanent(sourcePlayState, 6283, 883, "ST2-06", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddEvolutionSource(sourcePlayState, 6284, "ST2-03", PlayerId.Player0, host.Id);
+    var sourcePlayService = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry));
+
+    var firstPending = sourcePlayService.PlayOptionFromHand(
+        sourcePlayState,
+        new PlayCardAction(PlayerId.Player0, sourcePlayOption, -1));
+    AssertTrue(firstPending.HasPendingSelection);
+    AssertEqual(Zone.Executing, sourcePlayState.Cards[sourcePlayOption].CurrentZone);
+
+    var secondPending = sourcePlayService.ApplyOptionSelection(
+        sourcePlayState,
+        firstPending.PendingResolution!,
+        SelectionResult.ForTargets(
+            "ST2-15:option:source-host",
+            new[] { PermanentSelectionTarget(host) }));
+    AssertTrue(secondPending.HasPendingSelection);
+    AssertEqual(Zone.Executing, sourcePlayState.Cards[sourcePlayOption].CurrentZone);
+
+    var completed = sourcePlayService.ApplyOptionSelection(
+        sourcePlayState,
+        secondPending.PendingResolution!,
+        SelectionResult.ForTargets(
+            $"ST2-15:option:source-card:{host.Id.Value}",
+            new[] { CardSelectionTarget(source, PlayerId.Player0, Zone.EvolutionSources, host.Id) }));
+    AssertFalse(completed.HasPendingSelection);
+    AssertTrue(completed.MovedToTrash);
+    AssertTrue(sourcePlayState.GetPlayer(PlayerId.Player0).Trash.Contains(sourcePlayOption));
+    AssertFalse(host.SourceCardIds.Contains(source));
+    AssertTrue(sourcePlayState.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == source));
+
+    var holyFlameState = CreateSt2St3ScenarioState();
+    holyFlameState.Memory = 5;
+    var holyFlame = AddCardToZone(holyFlameState, 6285, "ST3-13", PlayerId.Player0, Zone.Hand);
+    var holyTarget = AddBattlePermanent(holyFlameState, 6286, 886, "ST3-06", PlayerId.Player0, 0, enterTurn: 1);
+    var holyProvider = new TestDecisionProvider();
+    holyProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "ST3-13:option:dp",
+        new[] { PermanentSelectionTarget(holyTarget) }));
+    var holyResult = new PlayCardService(
+        triggerPipelineService: new TriggerPipelineService(registry, holyProvider))
+        .PlayOptionFromHand(holyFlameState, new PlayCardAction(PlayerId.Player0, holyFlame, -1));
+    AssertTrue(holyResult.MovedToTrash);
+    AssertEqual(9000, EffectiveStatService.NoContinuous.Dp(holyFlameState, holyTarget));
+    AssertTrue(holyFlameState.GetPlayer(PlayerId.Player0).Trash.Contains(holyFlame));
 }
 
 static void TriggerPipelineSt1OnBlockAnyoneHook()

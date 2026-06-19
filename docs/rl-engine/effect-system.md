@@ -441,3 +441,31 @@ The fixed implementation pass sections are defined in `docs/rl-engine/st1-st3-po
 - `OnAttackTargetChanged`, `OnEndBlockDesignation`
 - block selection result application의 full end-to-end integration
 - 더 넓은 카드풀의 replacement/cut-in effect
+
+## Queue 50 - option 실행 lifecycle
+
+원본 `CardController.UseOptionClass.UseOption()`은 hand option을 사용할 때 card를 먼저 모든 zone에서 제거한 뒤 `ExecutingCards`에 넣고, `OptionSkill` 및 option resolution을 처리한 뒤 아직 `ExecutingCards`에 남아 있을 때만 trash로 보낸다. RL.Engine의 `PlayCardService`도 queue 50부터 같은 lifecycle을 사용한다.
+
+Hand play option 흐름:
+
+1. turn player와 hand 소유 여부를 검증한다.
+2. play cost를 지급한다.
+3. `ZoneMover`로 `Zone.Hand -> Zone.Executing` 이동한다.
+4. `EffectTiming.OptionSkill`을 실행하며 context payload의 `SourceZone`은 `Zone.Executing`이다.
+5. pending `SelectionRequest`가 있으면 card를 `Executing`에 둔 채 `OptionPlayResult`로 request/resolution을 반환한다.
+6. selection 결과 적용 후 다음 chained selection이 없고 card가 아직 `Executing`이면 `Zone.Executing -> Zone.Trash`로 이동한다.
+7. option body가 source card를 다른 zone으로 이동했다면 후속 trash를 생략한다.
+
+Security option은 기존처럼 `SecurityCheckService`가 `Zone.Security -> Zone.Executing`으로 이동시킨 뒤 `SecurityEffectExecutionService.ActivateMainOption`이 같은 `OptionSkill` body를 실행한다. 비용 지급 여부와 시작 zone은 hand play와 다르지만, 효과 body가 보는 source card는 `Executing`이다. security check cleanup도 card가 여전히 `Executing`일 때만 trash로 이동한다.
+
+검증:
+
+- `Option lifecycle hand play moves through Executing to Trash`
+- `Option lifecycle source context is Executing`
+- `Option lifecycle pending selection keeps Executing`
+- `Option lifecycle selection completion trashes option`
+- `Option lifecycle moved source skips follow-up Trash`
+- `Option lifecycle invalid action leaves zones clean`
+- `Option lifecycle action trace replay deterministic`
+- `Option lifecycle ST1 hand option regression`
+- `Option lifecycle ST2/ST3 hand option regression`
