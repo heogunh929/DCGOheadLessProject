@@ -1,54 +1,45 @@
-# 47 - 다음 포팅 작업 계획 생성
+AGENTS.md, docs/progress/LOCAL_GIT_GUIDE.md, docs/codex-prompts/templates/engine_parity_common_constraints.md, 현재 /goal을 따르라.
 
-AGENTS.md, docs/progress/LOCAL_GIT_GUIDE.md, 현재 /goal을 따르라.
+기존 DCGO Unity 원본 파일은 수정하지 마라.
+remote fetch/pull/push는 사용자 승인 없이 실행하지 마라.
+사용자 승인 없는 commit은 만들지 마라.
+RL 학습 구성은 구현하지 마라.
 
-이번 작업은 다음 개발 계획 생성이다. 코드 구현은 하지 마라. 기존 DCGO Unity 원본 파일은 수정하지 마라. remote를 추가하거나 push/fetch/pull 하지 마라. 사용자 승인 없는 commit은 만들지 마라.
+작업 시작 전 Git 상태와 `DCGO/Assets/Scripts` 변경 여부를 한국어로 보고하라.
 
-## 작업 시작 전 보고
+# 47 - Engine Parity Queue 전환 및 기준점 확정
 
-- git status --short
-- git diff --stat
-- git diff --name-only
-- git remote -v
-- git log --oneline -5
-- git status --short -- DCGO\Assets\Scripts
+이번 작업은 새 기능 구현이 아니라 현재 기준점 검증과 queue 전환 작업이다.
 
 ## 목표
 
-34~46 감사 결과를 바탕으로 다음에 실제로 진행할 포팅 작업 queue를 생성한다.
+GitHub `main`의 현재 기준점과 로컬 상태를 확인하고, 기존 github-current queue에서 이 engine-parity queue로 안전하게 전환한다.
 
-## 수행할 것
+## 확인할 것
 
-1. 구조 감사 결과를 종합한다.
-2. 문서 정합성 문제가 해결되었는지 확인한다.
-3. 카드별 파일 구조 guard가 있는지 확인한다.
-4. ST1~ST3 validation 상태를 확인한다.
-5. 다음 작업을 아래 중 하나로 결정한다.
-   - ST2/ST3 추가 포팅 계속
-   - 구조 refactor 보강
-   - 공통 layer 보강
-   - golden scenario 구현
-   - Unity trace 비교 준비
-6. 결정한 방향에 맞는 prompt queue 문서를 작성한다.
+1. 현재 HEAD와 최신 commit message를 보고한다.
+2. 이 패키지 생성 기준 GitHub main은 `a101acd2 20260618 local latest`다.
+3. 로컬 HEAD가 다르면:
+   - 해당 commit의 후손인지 확인한다.
+   - 후손이고 clean worktree라면 더 최신 로컬 기준점을 사용한다.
+   - 다른 history거나 dirty 상태 원인이 불명확하면 `needs-review`로 멈춘다.
+4. `docs/codex-prompts/state/QUEUE_GITHUB_CURRENT.md`의 40~46이 done인지 확인한다.
+5. 기존 47번은 이 prompt로 대체됐음을 문서화한다.
+6. `README.md`와 `docs/codex-prompts/prompts/INDEX.md`가 현재 queue를 반영하지 않으면 다음을 갱신한다.
+   - engine-parity queue 사용법
+   - 47~60/90/91 prompt 목록
+   - 과거 queue는 historical로 유지
+7. `QUEUE_GITHUB_CURRENT.md`의 47 항목은 `done` 또는 `superseded-done`으로 표시할 수 있다.
+8. 코드는 수정하지 않는다.
 
-## 생성/갱신할 수 있는 파일
+## 테스트
 
-- docs/codex-prompts/state/QUEUE_NEXT_PORTING.md
-- docs/codex-prompts/ACTIVE/RUN_NEXT_PORTING.md
-- docs/codex-prompts/GOAL_NEXT_PORTING.md
-- docs/codex-prompts/prompts/48_*.md 이후 파일
+문서/queue만 변경했다면 전체 테스트는 필수가 아니다.
+테스트를 실행하지 않은 이유를 보고한다.
 
-## 금지
+## 완료 조건
 
-- 실제 포팅 구현 금지
-- 기존 DCGO Unity 원본 수정 금지
-- 학습용 RL 구성 구현 금지
-- remote 추가/push/fetch/pull 금지
-- 사용자 승인 없는 commit 금지
-
-## 완료 보고
-
-- 다음 목표
-- 생성한 prompt queue 파일
-- 사용자가 실행할 /goal 문구
-- 다음에 입력할 명령
+- 현재 기준 commit이 명확하다.
+- `QUEUE_ENGINE_PARITY.md`의 다음 todo가 48번이다.
+- README/INDEX에서 새 queue 실행법을 찾을 수 있다.
+- `DCGO/Assets/Scripts` 변경 없음.

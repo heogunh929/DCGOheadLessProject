@@ -1,5 +1,32 @@
 # headlessDCGO GitHub 상태 정렬 / 구조 이식 프롬프트 확장
 
+## 현재 Queue - Engine Parity 47+
+
+현재 후속 작업은 `a101acd2 20260618 local latest` 기준의 engine-parity queue를 사용한다. 목적은 ST1~ST3 registry/status/file validation을 전체 엔진 완성으로 오해하지 않고, 원본 DCGO Unity battle 로직과 headless `RL.Engine`의 의미 차이를 줄이는 것이다.
+
+처음 한 번:
+
+```text
+/mention docs/codex-prompts/GOAL_ENGINE_PARITY_47_PLUS.md
+/mention docs/codex-prompts/ACTIVE/RUN_NEXT_ENGINE_PARITY.md
+/mention docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md
+/mention docs/codex-prompts/templates/engine_parity_common_constraints.md
+```
+
+이후에는 다음 한 줄만 반복한다.
+
+```text
+다음 engine-parity queue 작업을 진행해.
+```
+
+관련 문서:
+
+- `docs/codex-prompts/README_ENGINE_PARITY_QUEUE.md`
+- `docs/codex-prompts/state/QUEUE_ENGINE_PARITY.md`
+- `docs/codex-prompts/prompts/INDEX_ENGINE_PARITY.md`
+
+기존 source-aligned/github-current queue는 historical 전환 경로로 유지한다.
+
 이 패키지는 기존 `docs/codex-prompts/prompts/00_...20_...` 구조에 이어서 사용하는 확장 프롬프트입니다.
 
 목적은 ST2/ST3를 무작정 더 구현하는 것이 아니라, 현재 GitHub main 상태를 기준으로 다음을 점검/정렬하는 것입니다.

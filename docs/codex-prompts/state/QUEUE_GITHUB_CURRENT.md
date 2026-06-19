@@ -2,7 +2,7 @@
 
 이 queue는 GitHub main과 로컬 상태를 재정렬하고, 앞으로의 이식을 원본 구조와 최대한 비슷하게 유지하기 위한 queue다.
 
-상태 값: `todo`, `in-progress`, `done`, `blocked`, `needs-review`.
+상태 값: `todo`, `in-progress`, `done`, `superseded-done`, `blocked`, `needs-review`.
 
 | Order | Status | Prompt file | 목적 |
 | ---: | --- | --- | --- |
@@ -13,6 +13,6 @@
 | 44 | done | prompts/44_common_layer_source_mapping_audit.md | 공통 layer가 원본 공통 처리와 대응되는지 감사 |
 | 45 | done | prompts/45_st1_st3_completion_gate_reconcile.md | ST1~ST3 validation/report/gate 정합성 검사 |
 | 46 | done | prompts/46_golden_scenario_gap_plan.md | 원본 trace/golden scenario 보강 계획 |
-| 47 | todo | prompts/47_next_porting_work_plan.md | 이후 ST1~ST3 또는 다음 카드풀 진행 계획 생성 |
+| 47 | superseded-done | prompts/47_next_porting_work_plan.md | engine-parity 47번 전환 prompt로 대체됨 |
 | 90 | support | prompts/90_handoff_update_github_current.md | ChatGPT handoff 갱신 |
 | 91 | support | prompts/91_checkpoint_github_current.md | 검수 후 로컬 checkpoint commit |
