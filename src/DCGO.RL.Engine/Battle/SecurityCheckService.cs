@@ -26,12 +26,14 @@ public sealed record SecurityCheckResult(
 public sealed record SecurityCheckContinuation(
     PermanentId Attacker,
     PlayerId Defender,
-    int RemainingChecks,
+    int ChecksCompleted,
     CardInstanceId CurrentSecurityCard,
     IReadOnlyList<CardInstanceId> CheckedCards,
     IReadOnlyList<BattleResolutionResult> BattleResults,
     IReadOnlyList<SecurityEffectExecutionResult> SecurityEffectResults,
     IReadOnlyList<TriggerPipelineResult> SecurityTimingResults,
+    PreparedTriggerGroup? PreparedOnSecurityCheck = null,
+    PreparedTriggerGroup? PreparedOnLoseSecurity = null,
     SecurityEffectExecutionContinuation? EffectContinuation = null,
     TriggerPipelineContinuation? TriggerContinuation = null)
 {
@@ -64,6 +66,13 @@ public sealed record SecurityCheckExecutionResult(
 
 public sealed class SecurityCheckService
 {
+    private static readonly TriggerPipelineOptions SecurityTimingOptions = new(
+        TriggerSourceZone.FieldTop
+        | TriggerSourceZone.Inherited
+        | TriggerSourceZone.Hand
+        | TriggerSourceZone.Trash
+        | TriggerSourceZone.FaceUpSecurity);
+
     private readonly IZoneMover _zoneMover;
     private readonly BattleResolver _battleResolver;
     private readonly BattleKeywordService _keywordService;
@@ -118,20 +127,12 @@ public sealed class SecurityCheckService
         PlayerId defenderId,
         GameTrace? trace = null)
     {
-        var defender = state.GetPlayer(defenderId);
-        if (defender.Security.Count == 0)
-        {
-            _durationCleanupService.CleanupSecurityCheckEnd(state);
-            return new SecurityCheckExecutionResult(new SecurityCheckResult(defenderId, null, null));
-        }
-
-        var attacker = BattleRules.Permanent(state, attackerId);
-        var checkCount = _keywordService.SecurityAttackCount(state, attacker);
+        _ = state.GetPlayer(defenderId);
         return ContinueChecksWithResult(
             state,
             attackerId,
             defenderId,
-            checkCount,
+            checksCompleted: 0,
             new List<CardInstanceId>(),
             new List<BattleResolutionResult>(),
             new List<SecurityEffectExecutionResult>(),
@@ -156,61 +157,15 @@ public sealed class SecurityCheckService
 
         if (continuation.TriggerContinuation is not null)
         {
-            if (_triggerPipelineService is null)
-            {
-                throw new DomainException("Security timing continuation requires TriggerPipelineService.");
-            }
-
-            var triggerResult = _triggerPipelineService.Resume(
+            return ResumeSecurityTimingWithResult(
                 state,
-                continuation.TriggerContinuation,
+                continuation,
                 selectionResult,
+                checkedCards,
+                battleResults,
+                securityEffectResults,
+                securityTimingResults,
                 trace);
-            if (triggerResult.HasPendingSelection)
-            {
-                return PendingTrigger(
-                    continuation.Attacker,
-                    continuation.Defender,
-                    continuation.RemainingChecks,
-                    continuation.CurrentSecurityCard,
-                    checkedCards,
-                    battleResults,
-                    securityEffectResults,
-                    securityTimingResults,
-                    triggerResult);
-            }
-
-            securityTimingResults.Add(triggerResult);
-            return continuation.TriggerContinuation.Context.Timing switch
-            {
-                EffectTiming.OnSecurityCheck => ContinueSecurityTimingAndBattleWithResult(
-                    state,
-                    continuation.Attacker,
-                    continuation.Defender,
-                    continuation.RemainingChecks,
-                    continuation.CurrentSecurityCard,
-                    checkedCards,
-                    battleResults,
-                    securityEffectResults,
-                    securityTimingResults,
-                    EffectTiming.OnLoseSecurity,
-                    trace),
-
-                EffectTiming.OnLoseSecurity => ContinueAfterSecurityTimingWithResult(
-                    state,
-                    continuation.Attacker,
-                    continuation.Defender,
-                    continuation.RemainingChecks,
-                    continuation.CurrentSecurityCard,
-                    checkedCards,
-                    battleResults,
-                    securityEffectResults,
-                    securityTimingResults,
-                    trace),
-
-                var timing => throw new DomainException(
-                    $"Security timing continuation cannot resume timing '{timing}'."),
-            };
         }
 
         if (continuation.EffectContinuation is null)
@@ -228,33 +183,35 @@ public sealed class SecurityCheckService
             continuation.EffectContinuation,
             selectionResult,
             trace);
-
         if (securityEffect.HasPendingSelection)
         {
-            return Pending(
+            return PendingEffect(
                 continuation.Attacker,
                 continuation.Defender,
-                continuation.RemainingChecks,
+                continuation.ChecksCompleted,
                 continuation.CurrentSecurityCard,
                 checkedCards,
                 battleResults,
                 securityEffectResults,
                 securityTimingResults,
+                continuation.PreparedOnSecurityCheck,
+                continuation.PreparedOnLoseSecurity,
                 securityEffect);
         }
 
         securityEffectResults.Add(securityEffect);
-        return ContinueSecurityTimingAndBattleWithResult(
+        return ContinueAfterSecuritySkillWithResult(
             state,
             continuation.Attacker,
             continuation.Defender,
-            continuation.RemainingChecks,
+            continuation.ChecksCompleted,
             continuation.CurrentSecurityCard,
             checkedCards,
             battleResults,
             securityEffectResults,
             securityTimingResults,
-            EffectTiming.OnSecurityCheck,
+            RequirePrepared(continuation.PreparedOnSecurityCheck, EffectTiming.OnSecurityCheck),
+            RequirePrepared(continuation.PreparedOnLoseSecurity, EffectTiming.OnLoseSecurity),
             trace);
     }
 
@@ -262,7 +219,40 @@ public sealed class SecurityCheckService
         GameState state,
         PermanentId attackerId,
         PlayerId defenderId,
-        int remainingChecks,
+        int checksCompleted,
+        List<CardInstanceId> checkedCards,
+        List<BattleResolutionResult> battleResults,
+        List<SecurityEffectExecutionResult> securityEffectResults,
+        List<TriggerPipelineResult> securityTimingResults,
+        GameTrace? trace)
+    {
+        if (!CanStartNextCheck(state, attackerId, defenderId, checksCompleted))
+        {
+            return new SecurityCheckExecutionResult(BuildResult(
+                defenderId,
+                checkedCards,
+                battleResults,
+                securityEffectResults,
+                securityTimingResults));
+        }
+
+        return StartNextSecurityCheckWithResult(
+            state,
+            attackerId,
+            defenderId,
+            checksCompleted,
+            checkedCards,
+            battleResults,
+            securityEffectResults,
+            securityTimingResults,
+            trace);
+    }
+
+    private SecurityCheckExecutionResult StartNextSecurityCheckWithResult(
+        GameState state,
+        PermanentId attackerId,
+        PlayerId defenderId,
+        int checksCompleted,
         List<CardInstanceId> checkedCards,
         List<BattleResolutionResult> battleResults,
         List<SecurityEffectExecutionResult> securityEffectResults,
@@ -270,159 +260,242 @@ public sealed class SecurityCheckService
         GameTrace? trace)
     {
         var defender = state.GetPlayer(defenderId);
-        for (var i = 0; i < remainingChecks && defender.Security.Count > 0; i++)
+        var securityCard = defender.Security[0];
+        var wasFaceDown = !state.Cards[securityCard].IsFaceUp;
+        var preparedOnSecurityCheck = PrepareSecurityTiming(
+            state,
+            EffectTiming.OnSecurityCheck,
+            attackerId,
+            defenderId,
+            securityCard);
+
+        MoveSecurityToExecuting(state, defenderId, securityCard, trace);
+
+        var preparedOnLoseSecurity = PrepareSecurityTiming(
+            state,
+            EffectTiming.OnLoseSecurity,
+            attackerId,
+            defenderId,
+            securityCard);
+
+        checkedCards.Add(securityCard);
+        var nextChecksCompleted = checksCompleted + 1;
+
+        if (_securityEffectExecutionService is not null)
         {
-            if (!AttackerCanContinue(state, attackerId))
-            {
-                break;
-            }
-
-            var securityCard = defender.Security[0];
-            var wasFaceDown = !state.Cards[securityCard].IsFaceUp;
-            checkedCards.Add(securityCard);
-
-            MoveSecurityToExecuting(state, defenderId, securityCard, trace);
-
-            if (_securityEffectExecutionService is not null)
-            {
-                var securityEffect = _securityEffectExecutionService.ExecuteSecurityEffectsWithResult(
-                    state,
-                    securityCard,
-                    defenderId,
-                    wasFaceDown,
-                    trace);
-                if (securityEffect.HasPendingSelection)
-                {
-                    return Pending(
-                        attackerId,
-                        defenderId,
-                        remainingChecks - i - 1,
-                        securityCard,
-                        checkedCards,
-                        battleResults,
-                        securityEffectResults,
-                        securityTimingResults,
-                        securityEffect);
-                }
-
-                securityEffectResults.Add(securityEffect);
-            }
-
-            var timingResult = ContinueSecurityTimingAndBattleWithResult(
+            var securityEffect = _securityEffectExecutionService.ExecuteSecurityEffectsWithResult(
                 state,
-                attackerId,
-                defenderId,
-                remainingChecks - i - 1,
                 securityCard,
-                checkedCards,
-                battleResults,
-                securityEffectResults,
-                securityTimingResults,
-                EffectTiming.OnSecurityCheck,
-                trace);
-            if (timingResult.HasPendingSelection)
+                defenderId,
+                wasFaceDown,
+                trace,
+                SecurityEffectValues(attackerId, defenderId, securityCard));
+            if (securityEffect.HasPendingSelection)
             {
-                return timingResult;
+                return PendingEffect(
+                    attackerId,
+                    defenderId,
+                    nextChecksCompleted,
+                    securityCard,
+                    checkedCards,
+                    battleResults,
+                    securityEffectResults,
+                    securityTimingResults,
+                    preparedOnSecurityCheck,
+                    preparedOnLoseSecurity,
+                    securityEffect);
             }
+
+            securityEffectResults.Add(securityEffect);
         }
 
-        _durationCleanupService.CleanupSecurityCheckEnd(state);
-        return new SecurityCheckExecutionResult(BuildResult(defenderId, checkedCards, battleResults, securityEffectResults, securityTimingResults));
+        return ContinueAfterSecuritySkillWithResult(
+            state,
+            attackerId,
+            defenderId,
+            nextChecksCompleted,
+            securityCard,
+            checkedCards,
+            battleResults,
+            securityEffectResults,
+            securityTimingResults,
+            preparedOnSecurityCheck,
+            preparedOnLoseSecurity,
+            trace);
     }
 
-    private SecurityCheckExecutionResult ContinueSecurityTimingAndBattleWithResult(
+    private SecurityCheckExecutionResult ContinueAfterSecuritySkillWithResult(
         GameState state,
         PermanentId attackerId,
         PlayerId defenderId,
-        int remainingChecks,
+        int checksCompleted,
         CardInstanceId securityCard,
         List<CardInstanceId> checkedCards,
         List<BattleResolutionResult> battleResults,
         List<SecurityEffectExecutionResult> securityEffectResults,
         List<TriggerPipelineResult> securityTimingResults,
-        EffectTiming nextTiming,
+        PreparedTriggerGroup? preparedOnSecurityCheck,
+        PreparedTriggerGroup? preparedOnLoseSecurity,
         GameTrace? trace)
     {
-        if (nextTiming == EffectTiming.OnSecurityCheck)
+        if (preparedOnSecurityCheck is not null)
         {
-            var onSecurityCheck = RunSecurityTimingWithResult(
-                state,
-                EffectTiming.OnSecurityCheck,
-                attackerId,
-                defenderId,
-                securityCard,
-                trace);
-            if (onSecurityCheck?.HasPendingSelection == true)
+            var onSecurityCheck = RunPreparedSecurityTimingWithResult(state, preparedOnSecurityCheck, trace);
+            if (onSecurityCheck.HasPendingSelection)
             {
                 return PendingTrigger(
                     attackerId,
                     defenderId,
-                    remainingChecks,
+                    checksCompleted,
                     securityCard,
                     checkedCards,
                     battleResults,
                     securityEffectResults,
                     securityTimingResults,
+                    preparedOnSecurityCheck,
+                    preparedOnLoseSecurity,
                     onSecurityCheck);
             }
 
-            if (onSecurityCheck is not null)
-            {
-                securityTimingResults.Add(onSecurityCheck);
-            }
-
-            nextTiming = EffectTiming.OnLoseSecurity;
+            securityTimingResults.Add(onSecurityCheck);
         }
 
-        if (nextTiming == EffectTiming.OnLoseSecurity)
+        return ContinueAfterOnSecurityCheckWithResult(
+            state,
+            attackerId,
+            defenderId,
+            checksCompleted,
+            securityCard,
+            checkedCards,
+            battleResults,
+            securityEffectResults,
+                    securityTimingResults,
+                    preparedOnLoseSecurity,
+                    trace);
+    }
+
+    private SecurityCheckExecutionResult ContinueAfterOnSecurityCheckWithResult(
+        GameState state,
+        PermanentId attackerId,
+        PlayerId defenderId,
+        int checksCompleted,
+        CardInstanceId securityCard,
+        List<CardInstanceId> checkedCards,
+        List<BattleResolutionResult> battleResults,
+        List<SecurityEffectExecutionResult> securityEffectResults,
+        List<TriggerPipelineResult> securityTimingResults,
+        PreparedTriggerGroup? preparedOnLoseSecurity,
+        GameTrace? trace)
+    {
+        if (preparedOnLoseSecurity is not null)
         {
-            var onLoseSecurity = RunSecurityTimingWithResult(
-                state,
-                EffectTiming.OnLoseSecurity,
-                attackerId,
-                defenderId,
-                securityCard,
-                trace);
-            if (onLoseSecurity?.HasPendingSelection == true)
+            var onLoseSecurity = RunPreparedSecurityTimingWithResult(state, preparedOnLoseSecurity, trace);
+            if (onLoseSecurity.HasPendingSelection)
             {
                 return PendingTrigger(
                     attackerId,
                     defenderId,
-                    remainingChecks,
+                    checksCompleted,
                     securityCard,
                     checkedCards,
                     battleResults,
                     securityEffectResults,
                     securityTimingResults,
+                    preparedOnSecurityCheck: null,
+                    preparedOnLoseSecurity,
                     onLoseSecurity);
             }
 
-            if (onLoseSecurity is not null)
-            {
-                securityTimingResults.Add(onLoseSecurity);
-            }
+            securityTimingResults.Add(onLoseSecurity);
+        }
 
-            return ContinueAfterSecurityTimingWithResult(
-                state,
-                attackerId,
-                defenderId,
-                remainingChecks,
-                securityCard,
+        return FinishCurrentSecurityCardWithResult(
+            state,
+            attackerId,
+            defenderId,
+            checksCompleted,
+            securityCard,
+            checkedCards,
+            battleResults,
+            securityEffectResults,
+            securityTimingResults,
+            trace);
+    }
+
+    private SecurityCheckExecutionResult ResumeSecurityTimingWithResult(
+        GameState state,
+        SecurityCheckContinuation continuation,
+        SelectionResult selectionResult,
+        List<CardInstanceId> checkedCards,
+        List<BattleResolutionResult> battleResults,
+        List<SecurityEffectExecutionResult> securityEffectResults,
+        List<TriggerPipelineResult> securityTimingResults,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            throw new DomainException("Security timing continuation requires TriggerPipelineService.");
+        }
+
+        var triggerResult = _triggerPipelineService.Resume(
+            state,
+            continuation.TriggerContinuation!,
+            selectionResult,
+            trace);
+        if (triggerResult.HasPendingSelection)
+        {
+            return PendingTrigger(
+                continuation.Attacker,
+                continuation.Defender,
+                continuation.ChecksCompleted,
+                continuation.CurrentSecurityCard,
                 checkedCards,
                 battleResults,
                 securityEffectResults,
                 securityTimingResults,
-                trace);
+                continuation.PreparedOnSecurityCheck,
+                continuation.PreparedOnLoseSecurity,
+                triggerResult);
         }
 
-        throw new DomainException($"Unsupported security timing continuation '{nextTiming}'.");
+        securityTimingResults.Add(triggerResult);
+        return continuation.TriggerContinuation!.Context.Timing switch
+        {
+            EffectTiming.OnSecurityCheck => ContinueAfterOnSecurityCheckWithResult(
+                state,
+                continuation.Attacker,
+                continuation.Defender,
+                continuation.ChecksCompleted,
+                continuation.CurrentSecurityCard,
+                checkedCards,
+                battleResults,
+                securityEffectResults,
+                securityTimingResults,
+                RequirePrepared(continuation.PreparedOnLoseSecurity, EffectTiming.OnLoseSecurity),
+                trace),
+
+            EffectTiming.OnLoseSecurity => FinishCurrentSecurityCardWithResult(
+                state,
+                continuation.Attacker,
+                continuation.Defender,
+                continuation.ChecksCompleted,
+                continuation.CurrentSecurityCard,
+                checkedCards,
+                battleResults,
+                securityEffectResults,
+                securityTimingResults,
+                trace),
+
+            var timing => throw new DomainException(
+                $"Security timing continuation cannot resume timing '{timing}'."),
+        };
     }
 
-    private SecurityCheckExecutionResult ContinueAfterSecurityTimingWithResult(
+    private SecurityCheckExecutionResult FinishCurrentSecurityCardWithResult(
         GameState state,
         PermanentId attackerId,
         PlayerId defenderId,
-        int remainingChecks,
+        int checksCompleted,
         CardInstanceId securityCard,
         List<CardInstanceId> checkedCards,
         List<BattleResolutionResult> battleResults,
@@ -436,11 +509,12 @@ public sealed class SecurityCheckService
             battleResults.Add(battle);
         }
 
+        _durationCleanupService.CleanupSecurityCheckEnd(state);
         return ContinueChecksWithResult(
             state,
             attackerId,
             defenderId,
-            remainingChecks,
+            checksCompleted,
             checkedCards,
             battleResults,
             securityEffectResults,
@@ -448,41 +522,69 @@ public sealed class SecurityCheckService
             trace);
     }
 
-    private TriggerPipelineResult? RunSecurityTimingWithResult(
+    private PreparedTriggerGroup? PrepareSecurityTiming(
         GameState state,
         EffectTiming timing,
         PermanentId attackerId,
         PlayerId defenderId,
-        CardInstanceId securityCard,
-        GameTrace? trace)
+        CardInstanceId securityCard)
     {
         if (_triggerPipelineService is null)
         {
             return null;
         }
 
-        return _triggerPipelineService.Run(
+        return _triggerPipelineService.Prepare(
             state,
             timing,
             defenderId,
-            values: new Dictionary<string, object?>
-            {
-                ["AttackingPermanent"] = attackerId,
-                ["Attacker"] = attackerId,
-                ["Card"] = securityCard,
-                ["SecurityCard"] = securityCard,
-                ["Player"] = defenderId,
-                ["Defender"] = defenderId,
-                ["CardEffect"] = null,
-            },
-            options: new TriggerPipelineOptions(
-                TriggerSourceZone.FieldTop
-                | TriggerSourceZone.Inherited
-                | TriggerSourceZone.Hand
-                | TriggerSourceZone.Trash
-                | TriggerSourceZone.FaceUpSecurity),
-            trace: trace);
+            values: SecurityTimingValues(state, attackerId, defenderId, securityCard),
+            options: SecurityTimingOptions);
     }
+
+    private TriggerPipelineResult RunPreparedSecurityTimingWithResult(
+        GameState state,
+        PreparedTriggerGroup prepared,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            throw new DomainException("Prepared security timing requires TriggerPipelineService.");
+        }
+
+        return _triggerPipelineService.RunPrepared(state, prepared, trace);
+    }
+
+    private static IReadOnlyDictionary<string, object?> SecurityTimingValues(
+        GameState state,
+        PermanentId attackerId,
+        PlayerId defenderId,
+        CardInstanceId securityCard) =>
+        new Dictionary<string, object?>
+        {
+            ["AttackingPermanent"] = attackerId,
+            ["Attacker"] = attackerId,
+            ["Card"] = securityCard,
+            ["SecurityCard"] = securityCard,
+            ["Player"] = defenderId,
+            ["Defender"] = defenderId,
+            ["CardEffect"] = null,
+            ["SourceZone"] = state.Cards[securityCard].CurrentZone,
+        };
+
+    private static IReadOnlyDictionary<string, object?> SecurityEffectValues(
+        PermanentId attackerId,
+        PlayerId defenderId,
+        CardInstanceId securityCard) =>
+        new Dictionary<string, object?>
+        {
+            ["AttackingPermanent"] = attackerId,
+            ["Attacker"] = attackerId,
+            ["Card"] = securityCard,
+            ["SecurityCard"] = securityCard,
+            ["Player"] = defenderId,
+            ["Defender"] = defenderId,
+        };
 
     private BattleResolutionResult? ResolveSecurityBattleAndTrashIfNeeded(
         GameState state,
@@ -534,17 +636,38 @@ public sealed class SecurityCheckService
         trace?.AddMove($"security-check-trash:{defenderId.Value}:{securityCard.Value}", before!, state, command, result);
     }
 
-    private bool AttackerCanContinue(GameState state, PermanentId attackerId)
+    private bool CanStartNextCheck(
+        GameState state,
+        PermanentId attackerId,
+        PlayerId defenderId,
+        int checksCompleted)
     {
-        var attacker = state.Players
+        if (state.GetPlayer(defenderId).Security.Count == 0)
+        {
+            return false;
+        }
+
+        var attacker = FindAttacker(state, attackerId);
+        return AttackerCanContinue(state, attacker)
+            && _keywordService.SecurityAttackCount(state, attacker!) > checksCompleted;
+    }
+
+    private bool AttackerCanContinue(GameState state, PermanentId attackerId) =>
+        AttackerCanContinue(state, FindAttacker(state, attackerId));
+
+    private bool AttackerCanContinue(GameState state, PermanentState? attacker) =>
+        attacker is not null
+        && !attacker.IsBreedingArea
+        && BattleRules.IsDigimon(state, attacker.TopCardId)
+        && _effectiveStats.Dp(state, attacker) > 0;
+
+    private static PermanentState? FindAttacker(GameState state, PermanentId attackerId) =>
+        state.Players
             .SelectMany(player => player.FieldPermanents)
             .FirstOrDefault(permanent => permanent.Id == attackerId);
 
-        return attacker is not null
-            && !attacker.IsBreedingArea
-            && BattleRules.IsDigimon(state, attacker.TopCardId)
-            && _effectiveStats.Dp(state, attacker) > 0;
-    }
+    private static PreparedTriggerGroup RequirePrepared(PreparedTriggerGroup? prepared, EffectTiming timing) =>
+        prepared ?? throw new DomainException($"Security check continuation is missing prepared '{timing}' trigger group.");
 
     private static SecurityCheckResult BuildResult(
         PlayerId defenderId,
@@ -563,15 +686,17 @@ public sealed class SecurityCheckService
             SecurityTimingResults = securityTimingResults.ToArray(),
         };
 
-    private static SecurityCheckExecutionResult Pending(
+    private static SecurityCheckExecutionResult PendingEffect(
         PermanentId attacker,
         PlayerId defender,
-        int remainingChecks,
+        int checksCompleted,
         CardInstanceId currentSecurityCard,
         IReadOnlyList<CardInstanceId> checkedCards,
         IReadOnlyList<BattleResolutionResult> battleResults,
         IReadOnlyList<SecurityEffectExecutionResult> securityEffectResults,
         IReadOnlyList<TriggerPipelineResult> securityTimingResults,
+        PreparedTriggerGroup? preparedOnSecurityCheck,
+        PreparedTriggerGroup? preparedOnLoseSecurity,
         SecurityEffectExecutionResult securityEffect)
     {
         if (securityEffect.Continuation is null)
@@ -583,12 +708,14 @@ public sealed class SecurityCheckService
             Continuation: new SecurityCheckContinuation(
                 attacker,
                 defender,
-                remainingChecks,
+                checksCompleted,
                 currentSecurityCard,
                 checkedCards.ToArray(),
                 battleResults.ToArray(),
                 securityEffectResults.ToArray(),
                 securityTimingResults.ToArray(),
+                preparedOnSecurityCheck,
+                preparedOnLoseSecurity,
                 securityEffect.Continuation,
                 TriggerContinuation: null));
     }
@@ -596,12 +723,14 @@ public sealed class SecurityCheckService
     private static SecurityCheckExecutionResult PendingTrigger(
         PermanentId attacker,
         PlayerId defender,
-        int remainingChecks,
+        int checksCompleted,
         CardInstanceId currentSecurityCard,
         IReadOnlyList<CardInstanceId> checkedCards,
         IReadOnlyList<BattleResolutionResult> battleResults,
         IReadOnlyList<SecurityEffectExecutionResult> securityEffectResults,
         IReadOnlyList<TriggerPipelineResult> securityTimingResults,
+        PreparedTriggerGroup? preparedOnSecurityCheck,
+        PreparedTriggerGroup? preparedOnLoseSecurity,
         TriggerPipelineResult triggerResult)
     {
         if (triggerResult.PendingContinuation is null)
@@ -613,12 +742,14 @@ public sealed class SecurityCheckService
             Continuation: new SecurityCheckContinuation(
                 attacker,
                 defender,
-                remainingChecks,
+                checksCompleted,
                 currentSecurityCard,
                 checkedCards.ToArray(),
                 battleResults.ToArray(),
                 securityEffectResults.ToArray(),
                 securityTimingResults.ToArray(),
+                preparedOnSecurityCheck,
+                preparedOnLoseSecurity,
                 EffectContinuation: null,
                 triggerResult.PendingContinuation));
     }

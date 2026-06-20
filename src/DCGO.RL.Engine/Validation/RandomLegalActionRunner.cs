@@ -101,11 +101,10 @@ public sealed class RandomLegalActionRunner
     public ScenarioResult Run(RandomLegalActionRunRequest request)
     {
         var session = StartSession(request, requireProviderless: false);
-        if (session.Result.Status == ScenarioRunStatus.PausedForDecision
-            && _services?.HasRuntimeDecisionProvider != true)
+        if (session.Result.Status == ScenarioRunStatus.PausedForDecision)
         {
             throw new DomainException(
-                "RandomLegalActionRunner.Run cannot return a providerless paused decision because the resumable session would be lost; use StartSession(...) and Resume(..., DecisionResult) for external decisions.");
+                "RandomLegalActionRunner.Run cannot return a paused decision because the resumable session would be lost; use StartSession(...) and Resume(..., DecisionResult) for external decisions.");
         }
 
         return session.Result;

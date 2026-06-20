@@ -52,6 +52,12 @@ public sealed record TriggerPipelineContinuation(
     public string StableContinuationId => PendingResolution.StableId;
 }
 
+public sealed record PreparedTriggerGroup(
+    EffectContext Context,
+    IReadOnlyList<EffectResolution> QueuedEffects,
+    IReadOnlyList<EffectResolution> BackgroundEffects,
+    TriggerPipelineOptions Options);
+
 public sealed class TriggerPipelineService
 {
     private readonly ICardScriptRegistry _cardScriptRegistry;
@@ -97,8 +103,53 @@ public sealed class TriggerPipelineService
         var context = new EffectContext(state, timing, player, sourceCard, sourcePermanent, values);
         var descriptors = CollectSourceDescriptors(state, context, options ?? new TriggerPipelineOptions());
         var collected = _triggerCollector.Collect(context, descriptors);
+        return RunPrepared(
+            state,
+            new PreparedTriggerGroup(
+                context,
+                collected.QueuedEffects,
+                collected.BackgroundEffects,
+                options ?? new TriggerPipelineOptions()),
+            trace);
+    }
+
+    public PreparedTriggerGroup Prepare(
+        GameState state,
+        EffectTiming timing,
+        PlayerId? player = null,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        IReadOnlyDictionary<string, object?>? values = null,
+        TriggerPipelineOptions? options = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var resolvedOptions = options ?? new TriggerPipelineOptions();
+        var context = new EffectContext(state, timing, player, sourceCard, sourcePermanent, values);
+        var descriptors = CollectSourceDescriptors(state, context, resolvedOptions);
+        var collected = _triggerCollector.Collect(context, descriptors);
+        return new PreparedTriggerGroup(
+            context,
+            collected.QueuedEffects,
+            collected.BackgroundEffects,
+            resolvedOptions);
+    }
+
+    public TriggerPipelineResult RunPrepared(
+        GameState state,
+        PreparedTriggerGroup prepared,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(prepared);
+
+        if (!ReferenceEquals(state, prepared.Context.State))
+        {
+            throw new DomainException("Prepared trigger group must run against the same GameState instance used to prepare it.");
+        }
+
         var queue = new EffectQueue();
-        queue.EnqueueRange(collected.QueuedEffects);
+        queue.EnqueueRange(prepared.QueuedEffects);
 
         var executedEffects = new List<EffectResolution>();
         var skippedOptionalEffects = new List<EffectResolution>();
@@ -107,17 +158,17 @@ public sealed class TriggerPipelineService
         var pending = DrainQueue(
             queue,
             state,
-            collected.BackgroundEffects,
-            options ?? new TriggerPipelineOptions(),
+            prepared.BackgroundEffects,
+            prepared.Options,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
 
         return new TriggerPipelineResult(
-            context,
-            collected.QueuedEffects,
-            collected.BackgroundEffects,
+            prepared.Context,
+            prepared.QueuedEffects,
+            prepared.BackgroundEffects,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications,

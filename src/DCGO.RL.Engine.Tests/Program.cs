@@ -136,6 +136,16 @@ var tests = new (string Name, Action Test)[]
     ("Security timing resolves source order", SecurityTimingResolvesSourceOrder),
     ("Security timing selection pauses and resumes", SecurityTimingSelectionPausesAndResumes),
     ("EngineSession security timing selection pause/resume", EngineSessionSecurityTimingSelectionPauseResume),
+    ("Security multi-check SecurityAttack 2 checks exactly two cards", SecurityMultiCheckSecurityAttackTwoChecksExactlyTwoCards),
+    ("Security multi-check SecurityAttack 3 checks exactly three cards", SecurityMultiCheckSecurityAttackThreeChecksExactlyThreeCards),
+    ("Security multi-check decrease stops remaining checks", SecurityMultiCheckDecreaseStopsRemainingChecks),
+    ("Security multi-check increase allows additional checks", SecurityMultiCheckIncreaseAllowsAdditionalChecks),
+    ("SecurityCheckEnd cleanup runs before next security card", SecurityCheckEndCleanupBeforeNextCard),
+    ("OnSecurityCheck candidates snapshot before SecuritySkill", OnSecurityCheckCandidatesSnapshotBeforeSecuritySkill),
+    ("SecuritySkill-created source excluded from current timing", SecuritySkillCreatedSourceExcludedFromCurrentTiming),
+    ("Security multi-check selection pauses on first and second card", SecurityMultiCheckSelectionPauseResumeFirstAndSecondCards),
+    ("Security timing replay deterministic", SecurityTimingReplayDeterministic),
+    ("Provider optional target one-shot Run rejects pause", ProviderOptionalTargetOneShotRunRejectsPause),
     ("Option lifecycle hand play moves through Executing to Trash", OptionLifecycleHandPlayMovesThroughExecutingToTrash),
     ("Option lifecycle source context is Executing", OptionLifecycleSourceContextIsExecuting),
     ("Option lifecycle pending selection keeps Executing", OptionLifecyclePendingSelectionKeepsExecuting),
@@ -2744,6 +2754,283 @@ static void EngineSessionSecurityTimingSelectionPauseResume()
     AssertTrue(completed.RulesProcessed);
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+}
+
+static void SecurityMultiCheckSecurityAttackTwoChecksExactlyTwoCards()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 1);
+    var attacker = AddBattlePermanent(state, 9201, 1201, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var security = AddSecurityCards(state, 9210, 5, "BT1-OPTION");
+    var service = CreateSecurityTimingCheckService(SecurityMultiCheckRegistry());
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(security.Take(2).ToArray(), result.CheckedCards);
+    AssertEqual(3, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertEqual(2, state.GetPlayer(PlayerId.Player1).Trash.Count(card => security.Contains(card)));
+}
+
+static void SecurityMultiCheckSecurityAttackThreeChecksExactlyThreeCards()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 2);
+    var attacker = AddBattlePermanent(state, 9221, 1221, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var security = AddSecurityCards(state, 9230, 10, "BT1-OPTION");
+    var service = CreateSecurityTimingCheckService(SecurityMultiCheckRegistry());
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(security.Take(3).ToArray(), result.CheckedCards);
+    AssertEqual(7, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertEqual(3, state.GetPlayer(PlayerId.Player1).Trash.Count(card => security.Contains(card)));
+}
+
+static void SecurityMultiCheckDecreaseStopsRemainingChecks()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 2);
+    var attacker = AddBattlePermanent(state, 9241, 1241, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var first = AddCardToZone(state, 9242, "FX-SEC-MINUS", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    AddSecurityCards(state, 9243, 9, "BT1-OPTION");
+    state.CardDefinitions["FX-SEC-MINUS"] = CardEffectTestFixture.EffectDefinition("FX-SEC-MINUS", "FX_SecMinus") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new SecurityAttackModifierCardScript(
+            "FX-SEC-MINUS",
+            "FX_SecMinus",
+            EffectTiming.SecuritySkill,
+            amount: -2,
+            DurationScope.UntilBattleEnd));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { first }, result.CheckedCards);
+    AssertEqual(9, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertEqual(1, BattleKeywordService.Default.SecurityAttackCount(state, attacker));
+}
+
+static void SecurityMultiCheckIncreaseAllowsAdditionalChecks()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    var attacker = AddBattlePermanent(state, 9251, 1251, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var first = AddCardToZone(state, 9252, "FX-SEC-PLUS", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var tail = AddSecurityCards(state, 9253, 9, "BT1-OPTION");
+    state.CardDefinitions["FX-SEC-PLUS"] = CardEffectTestFixture.EffectDefinition("FX-SEC-PLUS", "FX_SecPlus") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new SecurityAttackModifierCardScript(
+            "FX-SEC-PLUS",
+            "FX_SecPlus",
+            EffectTiming.SecuritySkill,
+            amount: 2,
+            DurationScope.UntilBattleEnd));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { first }.Concat(tail.Take(2)).ToArray(), result.CheckedCards);
+    AssertEqual(7, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertEqual(3, BattleKeywordService.Default.SecurityAttackCount(state, attacker));
+}
+
+static void SecurityCheckEndCleanupBeforeNextCard()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 1);
+    var attacker = AddBattlePermanent(state, 9261, 1261, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var first = AddCardToZone(state, 9262, "FX-SEC-UNTIL-END", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var tail = AddSecurityCards(state, 9263, 2, "BT1-OPTION");
+    state.CardDefinitions["FX-SEC-UNTIL-END"] = CardEffectTestFixture.EffectDefinition("FX-SEC-UNTIL-END", "FX_SecUntilEnd") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new SecurityAttackModifierCardScript(
+            "FX-SEC-UNTIL-END",
+            "FX_SecUntilEnd",
+            EffectTiming.SecuritySkill,
+            amount: 1,
+            DurationScope.UntilSecurityCheckEnd));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { first, tail[0] }, result.CheckedCards);
+    AssertEqual(1, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertFalse(state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilSecurityCheckEnd));
+    AssertEqual(2, BattleKeywordService.Default.SecurityAttackCount(state, attacker));
+}
+
+static void OnSecurityCheckCandidatesSnapshotBeforeSecuritySkill()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    var attacker = AddBattlePermanent(state, 9271, 1271, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddBattlePermanent(state, 9272, 1272, "FX-CHECK", PlayerId.Player0, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 9273, "FX-MOVE-SOURCE", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    state.CardDefinitions["FX-CHECK"] = CardEffectTestFixture.EffectDefinition("FX-CHECK", "FX_Check");
+    state.CardDefinitions["FX-MOVE-SOURCE"] = CardEffectTestFixture.EffectDefinition("FX-MOVE-SOURCE", "FX_MoveSource") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new TimingMemoryCardScript("FX-CHECK", "FX_Check", EffectTiming.OnSecurityCheck, amount: 1),
+        new SecuritySkillMovePermanentToLostScript("FX-MOVE-SOURCE", "FX_MoveSource", "FX-CHECK"));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { security }, result.CheckedCards);
+    AssertEqual(6, state.Memory);
+    AssertEqual(Zone.Lost, state.Cards[source.TopCardId].CurrentZone);
+    AssertEqual(1, result.SecurityTimingResults.Single(timing => timing.Context.Timing == EffectTiming.OnSecurityCheck).QueuedEffects.Count);
+}
+
+static void SecuritySkillCreatedSourceExcludedFromCurrentTiming()
+{
+    var order = new List<string>();
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    var attacker = AddBattlePermanent(state, 9281, 1281, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var security = AddCardToZone(state, 9282, "FX-PLAY-LATE", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var late = AddCardToZone(state, 9283, "FX-LATE", PlayerId.Player1, Zone.OutsideGame);
+    state.CardDefinitions["FX-PLAY-LATE"] = CardEffectTestFixture.EffectDefinition("FX-PLAY-LATE", "FX_PlayLate") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    state.CardDefinitions["FX-LATE"] = CardEffectTestFixture.EffectDefinition("FX-LATE", "FX_Late") with
+    {
+        PlayCost = 0,
+        Dp = 3000,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new SecuritySkillPlayHandCardScript(
+            "FX-PLAY-LATE",
+            "FX_PlayLate",
+            "FX-LATE",
+            targetFrameIndex: 0,
+            sourceZone: Zone.OutsideGame),
+        new RecordingTimingCardScript("FX-LATE", "FX_Late", EffectTiming.OnSecurityCheck, "late", order));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { security }, result.CheckedCards);
+    AssertEqual(5, state.Memory);
+    AssertEmpty(order.ToArray());
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.TopCardId == late));
+}
+
+static void SecurityMultiCheckSelectionPauseResumeFirstAndSecondCards()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 1);
+    var attacker = AddBattlePermanent(state, 9291, 1291, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var firstSecurity = AddCardToZone(state, 9292, "FX-SEL-A", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var secondSecurity = AddCardToZone(state, 9293, "FX-SEL-B", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var firstTarget = AddBattlePermanent(state, 9294, 1294, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var secondTarget = AddBattlePermanent(state, 9295, 1295, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    state.CardDefinitions["FX-SEL-A"] = CardEffectTestFixture.EffectDefinition("FX-SEL-A", "FX_SelA") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    state.CardDefinitions["FX-SEL-B"] = CardEffectTestFixture.EffectDefinition("FX-SEL-B", "FX_SelB") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new SelectionPrimitiveCardScript(
+            "FX-SEL-A",
+            "FX_SelA",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.SecuritySkill),
+        new SelectionPrimitiveCardScript(
+            "FX-SEL-B",
+            "FX_SelB",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.SecuritySkill));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var firstPending = service.CheckSecurityWithResult(state, attacker.Id, PlayerId.Player1);
+    AssertTrue(firstPending.HasPendingSelection);
+    AssertEqual("test-selection:FX-SEL-A", firstPending.PendingSelectionRequest!.Id);
+
+    var secondPending = service.CompleteSecurityContinuationWithResult(
+        state,
+        firstPending.Continuation!,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SEL-A",
+            new[] { PermanentSelectionTarget(firstTarget) }));
+    AssertTrue(secondPending.HasPendingSelection);
+    AssertEqual("test-selection:FX-SEL-B", secondPending.PendingSelectionRequest!.Id);
+
+    var completed = service.CompleteSecurityContinuationWithResult(
+        state,
+        secondPending.Continuation!,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SEL-B",
+            new[] { PermanentSelectionTarget(secondTarget) }));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertSequence(new[] { firstSecurity, secondSecurity }, completed.Result!.CheckedCards);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(firstTarget.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(secondTarget.TopCardId));
+}
+
+static void SecurityTimingReplayDeterministic()
+{
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    var attacker = AddBattlePermanent(state, 9301, 1301, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9302, 1302, "FX-CHECK", PlayerId.Player0, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 9303, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    state.CardDefinitions["FX-CHECK"] = CardEffectTestFixture.EffectDefinition("FX-CHECK", "FX_Check");
+    var initial = state.Clone();
+    var services = BattleEngineServices.Create(SecurityMultiCheckRegistry(
+        new TimingMemoryCardScript("FX-CHECK", "FX_Check", EffectTiming.OnSecurityCheck, amount: 1)));
+    var session = services.CreateSession(state);
+
+    var completed = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+    AssertEqual(6, state.Memory);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void ProviderOptionalTargetOneShotRunRejectsPause()
+{
+    var provider = new TestDecisionProvider();
+    provider.EnqueueSelectionResult(SelectionResult.ForBoolean(
+        "optional:FX-OPT:optional-target:OptionSkill",
+        true));
+    var services = CreateOptionalSelectionServices(decisionProvider: provider);
+    var state = CreateOptionalSelectionScenarioState("FX-OPT", out var option, out _);
+    var runner = new ScriptedScenarioRunner(services);
+
+    AssertThrows<DomainException>(
+        () => runner.Run(new ScriptedScenario(
+            "provider-optional-target-run",
+            state,
+            new[] { new PlayCardAction(PlayerId.Player0, option, -1) })),
+        "StartSession");
 }
 
 static void OptionLifecycleHandPlayMovesThroughExecutingToTrash()
@@ -8297,6 +8584,47 @@ static SecurityCheckService CreateSecurityTimingCheckService(
         triggerPipelineService: new TriggerPipelineService(
             registry,
             provider));
+
+static GameState CreateSecurityMultiCheckState(int securityAttackModifier)
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ATTACKER"] = CardEffectTestFixture.NoEffectDefinition("FX-ATTACKER") with
+    {
+        Dp = 5000,
+        SecurityAttackModifier = securityAttackModifier,
+    };
+    return state;
+}
+
+static CardInstanceId[] AddSecurityCards(
+    GameState state,
+    int firstCardInstanceId,
+    int count,
+    string definitionId)
+{
+    var cards = new List<CardInstanceId>();
+    for (var index = 0; index < count; index++)
+    {
+        cards.Add(AddCardToZone(
+            state,
+            firstCardInstanceId + index,
+            definitionId,
+            PlayerId.Player1,
+            Zone.Security,
+            isFaceUp: false));
+    }
+
+    return cards.ToArray();
+}
+
+static CardScriptRegistry SecurityMultiCheckRegistry(params ICardScript[] scripts) =>
+    CardEffectTestFixture.Registry(
+        new ICardScript[]
+        {
+            new NoEffectCardScript("FX-ATTACKER", notes: "Test-only security multi-check attacker."),
+            new NoEffectCardScript("BT1-OPTION", notes: "Test-only security stack filler."),
+            new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only security selection target."),
+        }.Concat(scripts).ToArray());
 
 static SecurityCheckService CreateSt1SecurityCheckService(IDecisionProvider provider)
 {

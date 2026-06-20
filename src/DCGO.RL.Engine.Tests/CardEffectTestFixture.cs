@@ -418,6 +418,188 @@ internal sealed class RecordingTimingCardScript : ICardScript
     public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
 }
 
+internal sealed class SecurityAttackModifierCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly int _amount;
+    private readonly DurationScope _durationScope;
+    private readonly bool _targetAttacker;
+
+    public SecurityAttackModifierCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        int amount,
+        DurationScope durationScope,
+        bool targetAttacker = true)
+    {
+        _timing = timing;
+        _amount = amount;
+        _durationScope = durationScope;
+        _targetAttacker = targetAttacker;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that changes SecurityAttack through a card-local effect body.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:security-attack:{_amount}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, primitives) =>
+        {
+            var controller = context.Resolution.Controller
+                ?? context.Resolution.Context.Player
+                ?? PlayerId.Player0;
+            var target = _targetAttacker
+                ? context.Resolution.Context.GetValueOrDefault("Attacker") as PermanentId?
+                : context.Resolution.SourcePermanent;
+            if (target is null)
+            {
+                throw new DomainException($"{Porting.CardId} requires a SecurityAttack target permanent.");
+            }
+
+            primitives.AddTemporarySecurityAttackModifier(
+                state,
+                target.Value,
+                _amount,
+                _durationScope,
+                controller,
+                context.Resolution.SourceCard,
+                context.Resolution.SourcePermanent,
+                stableId: $"{Porting.CardId}:{_timing}:security-attack:{_amount}:{state.TemporaryModifiers.Count + 1}");
+        });
+    }
+}
+
+internal sealed class SecuritySkillPlayHandCardScript : ICardScript
+{
+    private readonly string _definitionIdToPlay;
+    private readonly int _targetFrameIndex;
+    private readonly Zone _sourceZone;
+
+    public SecuritySkillPlayHandCardScript(
+        string cardId,
+        string effectClassName,
+        string definitionIdToPlay,
+        int targetFrameIndex,
+        Zone sourceZone = Zone.Hand)
+    {
+        _definitionIdToPlay = definitionIdToPlay;
+        _targetFrameIndex = targetFrameIndex;
+        _sourceZone = sourceZone;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture SecuritySkill that plays a card after security trigger candidates were prepared.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:security:play-hand:{_definitionIdToPlay}",
+                EffectTiming.SecuritySkill,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, primitives) =>
+        {
+            var player = context.Resolution.Controller
+                ?? context.Resolution.Context.Player
+                ?? PlayerId.Player0;
+            var card = state.GetPlayer(player).CardsIn(_sourceZone)
+                .FirstOrDefault(candidate => state.Cards[candidate].DefinitionId == _definitionIdToPlay);
+            if (card.Value == 0)
+            {
+                throw new DomainException($"{Porting.CardId} could not find '{_definitionIdToPlay}' in '{_sourceZone}'.");
+            }
+
+            primitives.PlayWithoutPayingCost(
+                state,
+                player,
+                card,
+                _sourceZone,
+                _targetFrameIndex);
+        });
+    }
+}
+
+internal sealed class SecuritySkillMovePermanentToLostScript : ICardScript
+{
+    private readonly string _definitionIdToMove;
+
+    public SecuritySkillMovePermanentToLostScript(
+        string cardId,
+        string effectClassName,
+        string definitionIdToMove)
+    {
+        _definitionIdToMove = definitionIdToMove;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture SecuritySkill that removes a prepared trigger source before that trigger resolves.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:security:move-source-lost:{_definitionIdToMove}",
+                EffectTiming.SecuritySkill,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, primitives) =>
+        {
+            var permanent = state.Players
+                .SelectMany(player => player.FieldPermanents)
+                .FirstOrDefault(candidate => state.Cards[candidate.TopCardId].DefinitionId == _definitionIdToMove);
+            if (permanent is null)
+            {
+                throw new DomainException($"{Porting.CardId} could not find source permanent '{_definitionIdToMove}'.");
+            }
+
+            primitives.MoveCard(
+                state,
+                new MoveCardCommand(
+                    permanent.TopCardId,
+                    permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea,
+                    Zone.Lost,
+                    MoveReason.Effect,
+                    SourcePermanent: permanent.Id,
+                    FaceUp: true));
+        });
+    }
+}
+
 internal sealed class OnceThenSelectionCardScript : ICardScript
 {
     private readonly EffectTiming _timing;

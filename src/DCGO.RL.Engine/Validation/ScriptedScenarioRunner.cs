@@ -144,11 +144,10 @@ public sealed class ScriptedScenarioRunner
     public ScenarioResult Run(ScriptedScenario scenario)
     {
         var session = StartSession(scenario, requireProviderless: false);
-        if (session.Result.Status == ScenarioRunStatus.PausedForDecision
-            && _services?.HasRuntimeDecisionProvider != true)
+        if (session.Result.Status == ScenarioRunStatus.PausedForDecision)
         {
             throw new DomainException(
-                "ScriptedScenarioRunner.Run cannot return a providerless paused decision because the resumable session would be lost; use StartSession(...) and Resume(..., DecisionResult) for external decisions.");
+                "ScriptedScenarioRunner.Run cannot return a paused decision because the resumable session would be lost; use StartSession(...) and Resume(..., DecisionResult) for external decisions.");
         }
 
         return session.Result;

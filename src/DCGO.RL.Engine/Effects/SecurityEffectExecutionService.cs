@@ -66,9 +66,10 @@ public sealed class SecurityEffectExecutionService
         CardInstanceId securityCard,
         PlayerId defender,
         bool wasFaceDown,
-        GameTrace? trace = null)
+        GameTrace? trace = null,
+        IReadOnlyDictionary<string, object?>? values = null)
     {
-        var result = ExecuteSecurityEffectsWithResult(state, securityCard, defender, wasFaceDown, trace);
+        var result = ExecuteSecurityEffectsWithResult(state, securityCard, defender, wasFaceDown, trace, values);
         if (result.HasPendingSelection)
         {
             throw new DomainException(
@@ -83,7 +84,8 @@ public sealed class SecurityEffectExecutionService
         CardInstanceId securityCard,
         PlayerId defender,
         bool wasFaceDown,
-        GameTrace? trace = null)
+        GameTrace? trace = null,
+        IReadOnlyDictionary<string, object?>? values = null)
     {
         var script = GetSecurityScript(state, securityCard, defender);
         var descriptors = script.CreateEffectDescriptors(new CardScriptContext(
@@ -92,17 +94,21 @@ public sealed class SecurityEffectExecutionService
             SourcePermanent: null,
             Controller: defender));
 
+        var securityValues = values is null
+            ? new Dictionary<string, object?>(StringComparer.Ordinal)
+            : new Dictionary<string, object?>(values, StringComparer.Ordinal);
+        securityValues["Card"] = securityCard;
+        securityValues["SecurityCard"] = securityCard;
+        securityValues["Defender"] = defender;
+        securityValues["IsFaceDown"] = wasFaceDown;
+        securityValues["SourceZone"] = state.Cards[securityCard].CurrentZone;
+
         var securityContext = new EffectContext(
             state,
             EffectTiming.SecuritySkill,
             defender,
             securityCard,
-            Values: new Dictionary<string, object?>
-            {
-                ["Card"] = securityCard,
-                ["IsFaceDown"] = wasFaceDown,
-                ["SourceZone"] = state.Cards[securityCard].CurrentZone,
-            });
+            Values: securityValues);
         var collected = new TriggerCollector().Collect(securityContext, descriptors);
 
         return ContinueSecurityResolutions(

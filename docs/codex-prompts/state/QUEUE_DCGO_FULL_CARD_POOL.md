@@ -11,6 +11,7 @@
 | 52C | done | prompts/52C_resumable_runner_continuation.md | Scripted/Random runner 재개 가능한 continuation/session API |
 | 52D | done | prompts/52D_runner_result_snapshot_one_shot_boundary.md | runner result snapshot과 one-shot Run boundary hardening |
 | 53 | done | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
+| 53A | done | prompts/53A_source_aligned_security_multi_check_correction.md | source-aligned security multi-check state machine 보정 |
 | 54 | todo | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
 | 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |
@@ -28,5 +29,5 @@
 | 68 | todo | prompts/68_full_card_pool_source_alignment_audit.md | 전체 source/asset/registry/status 정합성 |
 | 69 | todo | prompts/69_full_card_pool_golden_parity_coverage.md | 전체 mechanic family golden/parity coverage |
 | 70 | todo | prompts/70_full_dcgo_snapshot_completion_gate.md | Full DCGO Snapshot Completion Gate |
-| 71 | todo | prompts/71_generate_rl_or_remediation_queue.md | gate 결과에 따라 RL 또는 remediation queue 생성 |
+| 71 | todo | prompts/71_generate_rl_or_remediation_queue.md | gate 결과에 따른 RL 또는 remediation queue 생성 |
 | 90 | support | prompts/90_handoff_update_dcgo_full_card_pool.md | ChatGPT handoff 갱신 |
