@@ -379,6 +379,45 @@ internal sealed class TimingMemoryCardScript : ICardScript
     }
 }
 
+internal sealed class RecordingTimingCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _label;
+    private readonly IList<string> _order;
+
+    public RecordingTimingCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string label,
+        IList<string> order)
+    {
+        _timing = timing;
+        _label = label;
+        _order = order;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records security timing resolution order.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:record:{_label}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
+}
+
 internal sealed class OnceThenSelectionCardScript : ICardScript
 {
     private readonly EffectTiming _timing;

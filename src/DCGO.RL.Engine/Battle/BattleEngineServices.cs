@@ -179,6 +179,12 @@ public sealed class BattleEngineServices
             services.SecurityCheckService.RuntimeZoneMover);
         AddMismatch(
             issues,
+            nameof(SecurityCheckService),
+            nameof(TriggerPipelineService),
+            services.TriggerPipelineService,
+            services.SecurityCheckService.RuntimeTriggerPipelineService);
+        AddMismatch(
+            issues,
             nameof(TriggerPipelineService),
             nameof(Tier1PrimitiveService),
             services.PrimitiveService,
@@ -346,6 +352,7 @@ public sealed class BattleEngineServices
             keywordService,
             durationCleanupService,
             securityEffectExecutionService,
+            triggerPipelineService,
             effectiveStats);
         var playCardService = new PlayCardService(
             triggerPipelineService,

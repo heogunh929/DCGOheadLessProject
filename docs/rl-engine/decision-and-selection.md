@@ -65,6 +65,15 @@ Queue 52C에서 runner continuation 정책을 구현했다. `ScriptedScenarioRun
 - runner resume은 session owner id를 검증하고, EngineSession resume은 player, `DecisionToken`, request id를 검증한다. 다른 runner에 session을 넘기거나 stale token을 제출하면 명시적으로 실패한다.
 - external decision session은 providerless `BattleEngineServices` graph만 허용한다. shared stateful `IDecisionProvider`는 one-shot `Run` 비교/legacy 경로에서만 사용하며 runner session continuation에는 들어가지 않는다.
 
+Queue 52D에서 result snapshot과 one-shot boundary를 강화했다.
+
+- `ScenarioResult.FinalState`는 runner session 내부 `GameState`가 아니라 `GameState.Clone()` snapshot이다.
+- `ScenarioResult.Trace`는 `new GameTrace(trace.Events.ToArray())` 형태의 event snapshot이다.
+- `ScenarioResult.InvariantReports`는 `ToArray()`로 고정된 list snapshot이다.
+- pause 결과와 완료 결과 모두 같은 snapshot 정책을 사용한다. 이전 `ScenarioResult`를 보관한 상태로 session을 resume해도 이전 result의 state hash, trace event count, invariant report count는 변하지 않는다.
+- `RunnerSessionHandle`은 로그/진단용 identity일 뿐 resumable continuation 객체가 아니다. 실제 resume는 원래 runner가 소유한 `ScriptedScenarioRunnerSession` 또는 `RandomLegalActionRunnerSession` 객체로만 가능하다.
+- providerless `Run(...)`이 pending decision에 도달하면 lost continuation 결과를 반환하지 않고 `StartSession(...)`/`Resume(..., DecisionResult)`를 사용하라는 `DomainException`으로 실패한다. provider가 모든 선택을 처리하는 one-shot `Run(...)`은 유지된다.
+
 ## 원본 Unity Mapping
 
 | 원본 Unity 구조 | 원본 책임 | RL.Engine 대응 |

@@ -92,3 +92,11 @@ Queue 52C 기준 `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 재개
 - scripted session은 scenario와 현재 step index를 소유해 pause된 step을 완료한 뒤 다음 step부터 이어 간다.
 - random session은 RNG, actions executed, max action count, phase normalization/action/main-phase pause 위치를 소유해 pause/resume 전후 random action sequence를 보존한다.
 - shared stateful `IDecisionProvider`가 여러 `EngineSession`에 섞이지 않도록 external decision session에서는 provider graph를 거부한다. provider graph는 one-shot `Run` 비교/legacy 경로에서만 사용한다.
+
+Queue 52D 기준 `ScenarioResult`는 live session state를 노출하지 않는다.
+
+- `FinalState`, `Trace`, `InvariantReports`는 result 생성 시점의 snapshot이다.
+- 외부 코드가 이전 result의 `FinalState`나 `Trace`를 변경해도 runner-owned session에는 영향이 없다.
+- `RunnerSessionHandle`은 diagnostic identity이며 resume 권한이나 continuation payload가 아니다. handle만 보관해서는 resume할 수 없고, 원래 runner-owned session 객체가 필요하다.
+- providerless one-shot `Run(...)`은 pending decision을 만나면 `StartSession(...)`을 사용하라는 `DomainException`으로 실패한다. 이 경로는 lost continuation을 `ScenarioResult`로 반환하지 않는다.
+- provider가 모든 선택을 공급하는 one-shot `Run(...)`은 기존 validation harness와 replay 비교를 위해 유지한다.

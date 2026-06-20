@@ -9,7 +9,8 @@
 | 52A | done | prompts/52A_engine_decision_resume_boundary.md | 모든 timing의 공통 pending decision pause/resume |
 | 52B | done | prompts/52B_runtime_state_decision_token_hardening.md | runtime rule state와 DecisionToken replay hardening |
 | 52C | done | prompts/52C_resumable_runner_continuation.md | Scripted/Random runner 재개 가능한 continuation/session API |
-| 53 | todo | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
+| 52D | done | prompts/52D_runner_result_snapshot_one_shot_boundary.md | runner result snapshot과 one-shot Run boundary hardening |
+| 53 | done | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
 | 54 | todo | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
 | 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |

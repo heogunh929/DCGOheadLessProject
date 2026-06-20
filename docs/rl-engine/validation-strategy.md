@@ -234,6 +234,30 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 남은 범위:
 
 - full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
+
+## Queue 52D runner result snapshot and one-shot boundary 검증 - 2026-06-21
+
+검증 항목:
+
+- paused scripted `ScenarioResult` snapshot은 resume 후에도 state hash, trace event count, invariant report count가 변하지 않는다.
+- paused random `ScenarioResult` snapshot은 resume 후에도 state hash, trace event count, invariant report count가 변하지 않는다.
+- result `FinalState`를 외부에서 변경해도 내부 runner session에는 영향이 없다.
+- result `Trace`를 외부에서 변경해도 내부 runner session에는 영향이 없다.
+- providerless one-shot `Run(...)`이 pending decision에서 pause되면 `StartSession` 안내와 함께 실패한다.
+- provider-driven one-shot `Run(...)`은 scripted/random runner 모두 계속 동작한다.
+- chained decision, random RNG sequence, action count, replay determinism 회귀가 계속 통과한다.
+
+실행 결과:
+
+```powershell
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 302 tests passed.`
+
+남은 범위:
+
+- full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
 - 52A는 보완 요구사항 통과로 `done` 처리한다.
 
 ## Queue 52B runtime state/token hardening 검증 - 2026-06-20

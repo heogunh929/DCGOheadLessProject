@@ -57,6 +57,12 @@ public sealed record ScenarioResult(
     string? PendingStableContinuationId = null,
     RunnerSessionHandle? PendingRunnerSession = null)
 {
+    public GameState FinalState { get; init; } = FinalState.Clone();
+
+    public GameTrace Trace { get; init; } = new(Trace.Events.ToArray());
+
+    public IReadOnlyList<EngineInvariantReport> InvariantReports { get; init; } = InvariantReports.ToArray();
+
     public EngineInvariantReport InvariantReport => InvariantReports.Count == 0
         ? new EngineInvariantReport(Array.Empty<EngineInvariantViolation>())
         : InvariantReports[^1];
@@ -138,6 +144,13 @@ public sealed class ScriptedScenarioRunner
     public ScenarioResult Run(ScriptedScenario scenario)
     {
         var session = StartSession(scenario, requireProviderless: false);
+        if (session.Result.Status == ScenarioRunStatus.PausedForDecision
+            && _services?.HasRuntimeDecisionProvider != true)
+        {
+            throw new DomainException(
+                "ScriptedScenarioRunner.Run cannot return a providerless paused decision because the resumable session would be lost; use StartSession(...) and Resume(..., DecisionResult) for external decisions.");
+        }
+
         return session.Result;
     }
 
