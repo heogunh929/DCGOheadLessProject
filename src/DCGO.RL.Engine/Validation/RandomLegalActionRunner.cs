@@ -154,8 +154,21 @@ public sealed class RandomLegalActionRunner
             {
                 case Phase.None:
                 case Phase.End:
-                    _turnRunner.RunToMainPhase(state);
-                    trace.AddStateSnapshot("random:run-to-main", state);
+                    var runToMainResult = session?.RunToMainPhase();
+                    if (runToMainResult is not null)
+                    {
+                        if (runToMainResult.IsPaused)
+                        {
+                            AddInvariantReport(state, invariantReports);
+                            return runToMainResult;
+                        }
+                    }
+                    else
+                    {
+                        _turnRunner.RunToMainPhase(state);
+                        trace.AddStateSnapshot("random:run-to-main", state);
+                    }
+
                     AddInvariantReport(state, invariantReports);
                     continue;
 
@@ -245,6 +258,7 @@ public sealed class RandomLegalActionRunner
             invariantReports,
             state.ComputeStateHash(),
             PendingDecisionPoint: stepResult.PendingDecisionPoint,
+            PendingDecisionToken: stepResult.PendingDecisionToken,
             PendingStableContinuationId: stepResult.PendingStableContinuationId);
     }
 }

@@ -43,11 +43,11 @@
 
 ## Queue 52A pause/resume foundation
 
-`EngineSession`은 `ActionExecutor`가 반환한 pending `TriggerPipelineContinuation`을 보관하고, `Resume(DecisionResult)`에서 `TriggerPipelineService.Resume(...)`을 통해 selection 결과와 남은 queue/background tail을 이어서 처리한다. 적용 결과 다음 `EffectResolution`이 있으면 같은 boundary에서 다시 pause한다. chain이 끝나면 option lifecycle 후속 trash와 rules timing/cleanup을 실행한다.
+`EngineSession`은 `ActionExecutor`가 반환한 pending `TriggerPipelineContinuation`을 보관하고, `Resume(DecisionResult)`에서 `TriggerPipelineService.Resume(...)`을 통해 selection 결과와 남은 queue/background tail을 이어서 처리한다. continuation은 optional 승인 단계와 explicit target selection 단계를 구분한다. optional 승인 후 target request가 있으면 body를 실행하지 않고 다시 pause하며, optional 거절은 body를 skip하고 tail을 drain한다. 적용 결과 다음 `EffectResolution`이 있으면 같은 boundary에서 다시 pause한다. chain이 끝나면 option lifecycle 후속 trash와 rules timing/cleanup을 실행한다.
 
 trace에는 action event와 selection event가 모두 남는다. selection event는 request id와 stable continuation id를 label에 포함하고, before/after state hash를 기록한다. delegate나 memory address는 trace identity로 쓰지 않는다.
 
-현재 이 foundation은 hand option `OptionSkill`, chained option selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `OnAllyAttack`, `OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `OnStartMainPhase`, `PassAction`의 `OnEndTurn`/`OnStartTurn`에 연결됐다. `SecurityEffectExecutionService`와 `SecurityCheckService`는 pending selection을 continuation으로 반환하고, resume 후 security card의 battle/trash와 남은 security checks를 이어간다. queue 53에서는 `OnSecurityCheck`, `OnLoseSecurity`, `AfterEffectsActivate`를 포함한 원본 security timing 순서를 별도로 정렬한다.
+현재 이 foundation은 hand option `OptionSkill`, chained option selection, optional yes/no + explicit target selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `OnAllyAttack`, `OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `OnStartTurn`, `OnStartMainPhase`, `PassAction`의 `OnEndTurn`/`OnStartTurn`에 연결됐다. `SecurityEffectExecutionService`와 `SecurityCheckService`는 같은 optional/selection stage 의미로 pending selection을 continuation으로 반환하고, resume 후 security card의 battle/trash와 남은 security checks를 이어간다. queue 53에서는 `OnSecurityCheck`, `OnLoseSecurity`, `AfterEffectsActivate`를 포함한 원본 security timing 순서를 별도로 정렬한다.
 
 ## ST1 Per-Card Layout Alignment - 2026-06-14
 

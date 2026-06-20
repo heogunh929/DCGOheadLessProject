@@ -79,9 +79,12 @@ public sealed class SecurityCheckService
 
     public SecurityCheckResult CheckSecurity(GameState state, PermanentId attackerId, PlayerId defenderId, GameTrace? trace = null)
     {
+        var snapshot = state.Clone();
+        var traceCount = trace?.Events.Count ?? 0;
         var result = CheckSecurityWithResult(state, attackerId, defenderId, trace);
         if (result.HasPendingSelection)
         {
+            RestoreAfterPendingSynchronousCall(state, snapshot, trace, traceCount);
             throw new DomainException(
                 $"Security check requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
         }
@@ -337,5 +340,15 @@ public sealed class SecurityCheckService
                 battleResults.ToArray(),
                 securityEffectResults.ToArray(),
                 securityEffect.Continuation));
+    }
+
+    private static void RestoreAfterPendingSynchronousCall(
+        GameState state,
+        GameState snapshot,
+        GameTrace? trace,
+        int traceCount)
+    {
+        state.RestoreFrom(snapshot);
+        trace?.Truncate(traceCount);
     }
 }

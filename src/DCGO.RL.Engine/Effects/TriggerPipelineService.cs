@@ -43,6 +43,7 @@ public sealed record TriggerPipelineContinuation(
     EffectContext Context,
     EffectResolution PendingResolution,
     SelectionRequest PendingSelectionRequest,
+    EffectDecisionStage PendingStage,
     IReadOnlyList<EffectResolution> RemainingQueuedEffects,
     IReadOnlyList<EffectResolution> RemainingBackgroundEffects,
     TriggerPipelineOptions Options,
@@ -237,7 +238,7 @@ public sealed class TriggerPipelineService
         {
             if (_decisionProvider is null)
             {
-                return CreatePendingSelection(resolution, resolution.OptionalSelectionRequest);
+                return CreatePendingSelection(resolution, resolution.OptionalSelectionRequest, EffectDecisionStage.Optional);
             }
 
             var optionalResult = _decisionProvider.ChooseSelection(resolution.OptionalSelectionRequest);
@@ -247,18 +248,29 @@ public sealed class TriggerPipelineService
                 skippedOptionalEffects.Add(resolution);
                 return null;
             }
+
+            if (resolution.SelectionRequest is not null)
+            {
+                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection);
+            }
         }
 
         if (resolution.SelectionRequest is not null)
         {
             if (_decisionProvider is null)
             {
-                return CreatePendingSelection(resolution, resolution.SelectionRequest);
+                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection);
             }
 
             var result = _decisionProvider.ChooseSelection(resolution.SelectionRequest);
             RegisterOncePerTurnIfNeeded(state, resolution);
-            var application = _selectionApplicator.Apply(state, resolution, result, _primitives, trace);
+            var application = _selectionApplicator.Apply(
+                state,
+                resolution,
+                resolution.SelectionRequest,
+                result,
+                _primitives,
+                trace);
             selectionApplications.Add(application);
             executedEffects.Add(resolution);
             if (application.NextResolution is not null)
@@ -467,14 +479,29 @@ public sealed class TriggerPipelineService
                 $"SelectionResult request id '{selectionResult.RequestId}' does not match pending request '{request.Id}'.");
         }
 
-        if (resolution.OptionalSelectionRequest is not null
-            && ReferenceEquals(request, resolution.OptionalSelectionRequest))
+        if (continuation.PendingStage == EffectDecisionStage.Optional)
         {
+            if (!ReferenceEquals(request, resolution.OptionalSelectionRequest))
+            {
+                throw new DomainException(
+                    $"Pending optional stage for '{resolution.StableId}' is not bound to its optional request.");
+            }
+
             SelectionValidator.Validate(request, selectionResult);
             if (selectionResult.SelectedBoolean == false)
             {
                 skippedOptionalEffects.Add(resolution);
                 return null;
+            }
+
+            if (resolution.SelectionRequest is not null)
+            {
+                return AttachNestedTail(
+                    CreatePendingSelection(
+                    resolution,
+                    resolution.SelectionRequest,
+                        EffectDecisionStage.Selection),
+                    continuation);
             }
 
             RegisterOncePerTurnIfNeeded(state, resolution);
@@ -486,7 +513,13 @@ public sealed class TriggerPipelineService
         }
 
         RegisterOncePerTurnIfNeeded(state, resolution);
-        var application = _selectionApplicator.Apply(state, resolution, selectionResult, _primitives, trace);
+        if (continuation.PendingStage != EffectDecisionStage.Selection)
+        {
+            throw new DomainException(
+                $"Unsupported pending decision stage '{continuation.PendingStage}' for '{resolution.StableId}'.");
+        }
+
+        var application = _selectionApplicator.Apply(state, resolution, request, selectionResult, _primitives, trace);
         selectionApplications.Add(application);
         executedEffects.Add(resolution);
         if (application.NextResolution is null)
@@ -588,11 +621,15 @@ public sealed class TriggerPipelineService
             pending?.Continuation.PendingSelectionRequest,
             pending?.Continuation);
 
-    private static PendingSelection CreatePendingSelection(EffectResolution resolution, SelectionRequest request) =>
+    private static PendingSelection CreatePendingSelection(
+        EffectResolution resolution,
+        SelectionRequest request,
+        EffectDecisionStage stage) =>
         new(new TriggerPipelineContinuation(
             resolution.Context,
             resolution,
             request,
+            stage,
             Array.Empty<EffectResolution>(),
             Array.Empty<EffectResolution>(),
             new TriggerPipelineOptions(),

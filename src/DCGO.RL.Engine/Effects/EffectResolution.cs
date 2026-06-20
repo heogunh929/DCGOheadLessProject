@@ -3,6 +3,12 @@ using DCGO.RL.Engine.Domain;
 
 namespace DCGO.RL.Engine.Effects;
 
+public enum EffectDecisionStage
+{
+    Optional,
+    Selection,
+}
+
 public sealed record EffectResolution(
     string StableId,
     EffectTiming Timing,
@@ -19,5 +25,5 @@ public sealed record EffectResolution(
     bool IsOncePerTurn = false,
     string? OncePerTurnKey = null)
 {
-    public SelectionRequest? PendingSelectionRequest => SelectionRequest ?? OptionalSelectionRequest;
+    public SelectionRequest? PendingSelectionRequest => OptionalSelectionRequest ?? SelectionRequest;
 }

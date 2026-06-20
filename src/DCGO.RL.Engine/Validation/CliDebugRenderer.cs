@@ -23,6 +23,7 @@ public sealed class CliDebugRenderer
         {
             builder.Append("PendingPlayer: ").Append(result.PendingDecisionPoint.Player).AppendLine();
             builder.Append("PendingReason: ").Append(result.PendingDecisionPoint.Reason).AppendLine();
+            builder.Append("PendingToken: ").Append(result.PendingDecisionToken?.ToString() ?? string.Empty).AppendLine();
             builder.Append("PendingContinuation: ").Append(result.PendingStableContinuationId).AppendLine();
             builder.Append("PendingSelection: ")
                 .Append(result.PendingDecisionPoint.SelectionRequest?.Id ?? string.Empty)

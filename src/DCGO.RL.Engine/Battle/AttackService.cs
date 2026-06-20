@@ -99,9 +99,12 @@ public sealed class AttackService
 
     public AttackResult Attack(GameState state, AttackAction action, GameTrace? trace = null)
     {
+        var snapshot = state.Clone();
+        var traceCount = trace?.Events.Count ?? 0;
         var result = AttackWithResult(state, action, trace);
         if (result.HasPendingSelection)
         {
+            RestoreAfterPendingSynchronousCall(state, snapshot, trace, traceCount);
             throw new DomainException(
                 $"Attack timing requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
         }
@@ -495,5 +498,15 @@ public sealed class AttackService
             sourcePermanent: sourcePermanent,
             values: values,
             trace: trace);
+    }
+
+    private static void RestoreAfterPendingSynchronousCall(
+        GameState state,
+        GameState snapshot,
+        GameTrace? trace,
+        int traceCount)
+    {
+        state.RestoreFrom(snapshot);
+        trace?.Truncate(traceCount);
     }
 }

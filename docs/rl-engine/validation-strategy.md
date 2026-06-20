@@ -197,7 +197,11 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 
 - hand option action이 selection 필요 시 `EngineStepResult.PausedForDecision`을 반환한다.
 - pending 중 새 action 실행은 실패한다.
-- `DecisionResult.Player`와 `SelectionResult.RequestId`가 pending request와 다르면 실패한다.
+- `DecisionResult.Player`, `SelectionResult.RequestId`, `DecisionToken`이 pending request와 다르면 실패한다.
+- optional yes는 explicit target selection을 두 번째 decision으로 반환한 뒤 resolve한다.
+- optional no는 effect body를 skip하고 기존 queue tail을 drain한다.
+- security optional yes도 explicit target selection을 두 번째 decision으로 반환한 뒤 resolve한다.
+- provider가 optional yes를 자동 공급해도 `TriggerPipelineService`와 `SecurityEffectExecutionService`는 explicit target selection을 별도 pending으로 반환한다.
 - `OnPlay` pending selection은 play 완료 후 battle area permanent를 유지하고 selection resume 후 rules timing을 실행한다.
 - `WhenDigivolving` pending selection은 digivolve 완료 후 source stack을 유지하고 selection resume 후 rules timing을 실행한다.
 - `OnStartMainPhase` pending selection은 phase를 `Main`으로 전환한 상태에서 pause하고, selection resume 후 rules timing을 실행한다.
@@ -206,7 +210,9 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 - `AttackAction`의 `OnAllyAttack` pending selection은 attacker suspend 후 battle/security 처리 전에 pause하고, selection resume 후 attack tail과 rules timing을 이어간다.
 - `AttackAction`의 `OnEndAttack` pending selection은 battle/security 처리 후 battle-end cleanup 전에 pause하고, selection resume 후 cleanup과 rules timing을 이어간다.
 - action 후 `RulesTiming` pending selection은 action state change를 유지한 채 pause하고, selection resume 후 rule stabilization을 이어간다.
+- selection resume 후 `RulesTiming`이 다시 selection을 반환하면 새 pending interaction으로 pause한다.
 - attack security check 중 `SecuritySkill`/Activate Main pending selection은 security card를 `Executing`으로 이동한 상태에서 pause하고, selection resume 후 security card final zone, attack tail, rules timing을 이어간다.
+- `EngineSession.RunToMainPhase()`는 `None`/`End`에서 `OnStartTurn` selection을 pause/resume한 뒤 `Main`까지 진행한다.
 - ST2-15 같은 chained option selection은 첫 selection 후 다시 pause하고, 두 번째 selection 후 완료된다.
 - selection chain 완료 후에만 rules timing/cleanup이 실행된다.
 - action event와 selection event를 포함한 trace를 `ReplayRunner(services: ...)`로 재생해 동일 final state hash를 만든다.
@@ -215,6 +221,7 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 - security selection trace도 `ReplayRunner(services: ...)`로 재생해 동일 final state hash를 만든다.
 - `EngineSession.RunMainPhase()` phase-only trace도 `TraceEventKind.Phase` event로 재생해 동일 final state hash를 만든다.
 - `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 반환한다.
+- `Play`, `Digivolve`, `Attack`, `CheckSecurity` 직접 동기 API는 pending 발생 시 상태와 trace를 호출 전으로 되돌리고 실패한다.
 
 실행 결과:
 
@@ -222,9 +229,9 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 .\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
 ```
 
-결과: `All 266 tests passed.`
+결과: `All 278 tests passed.`
 
 남은 범위:
 
 - full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
-- 이 상태는 52A needs-review로 남긴다.
+- 52A는 보완 요구사항 통과로 `done` 처리한다.

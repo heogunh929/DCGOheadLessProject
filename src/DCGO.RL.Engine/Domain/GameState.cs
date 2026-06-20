@@ -85,6 +85,43 @@ public sealed class GameState
         return clone;
     }
 
+    internal void RestoreFrom(GameState snapshot)
+    {
+        ArgumentNullException.ThrowIfNull(snapshot);
+        if (!ReferenceEquals(Config, snapshot.Config))
+        {
+            throw new DomainException("Cannot restore GameState from a snapshot with a different config instance.");
+        }
+
+        Memory = snapshot.Memory;
+        Phase = snapshot.Phase;
+        TurnCount = snapshot.TurnCount;
+        TurnPlayerId = snapshot.TurnPlayerId;
+        FirstPlayerId = snapshot.FirstPlayerId;
+        Result = snapshot.Result;
+
+        ActiveCardIds.Clear();
+        ActiveCardIds.AddRange(snapshot.ActiveCardIds);
+
+        TemporaryModifiers.Clear();
+        TemporaryModifiers.AddRange(snapshot.TemporaryModifiers);
+
+        Players.Clear();
+        Players.AddRange(snapshot.Players.Select(player => player.Clone()));
+
+        CardDefinitions.Clear();
+        foreach (var definition in snapshot.CardDefinitions)
+        {
+            CardDefinitions.Add(definition.Key, definition.Value);
+        }
+
+        Cards.Clear();
+        foreach (var card in snapshot.Cards)
+        {
+            Cards.Add(card.Key, card.Value.Clone());
+        }
+    }
+
     public string ComputeStateHash()
     {
         var builder = new StringBuilder();

@@ -13,13 +13,20 @@ public enum EngineStepStatus
     GameOver,
 }
 
-public sealed record DecisionResult(PlayerId Player, SelectionResult SelectionResult);
+public sealed record DecisionResult(PlayerId Player, DecisionToken Token, SelectionResult SelectionResult)
+{
+    public DecisionResult(PlayerId player, SelectionResult selectionResult)
+        : this(player, default, selectionResult)
+    {
+    }
+}
 
 public sealed record EngineStepResult(
     EngineStepStatus Status,
     GameAction? CompletedAction,
     EffectTiming? CompletedTiming,
     DecisionPoint? PendingDecisionPoint,
+    DecisionToken? PendingDecisionToken,
     string? PendingStableContinuationId,
     bool RulesProcessed,
     bool IsTerminal,
@@ -32,6 +39,7 @@ public sealed class EngineSession
 {
     private readonly BattleEngineServices _services;
     private PendingEngineInteraction? _pending;
+    private long _nextDecisionToken = 1;
 
     public EngineSession(BattleEngineServices services, GameState state, GameTrace? trace = null)
     {
@@ -48,6 +56,39 @@ public sealed class EngineSession
 
     public bool HasPendingDecision => _pending is not null;
 
+    public EngineStepResult RunToMainPhase()
+    {
+        if (_pending is not null)
+        {
+            throw new DomainException(
+                $"Cannot advance to main phase while SelectionRequest '{_pending.Request.Id}' is pending.");
+        }
+
+        var traceStart = Trace.Events.Count;
+        var beforePhase = State.Clone();
+
+        if (State.Phase is Phase.None or Phase.End)
+        {
+            var activeResult = _services.PhaseRunner.RunActivePhaseWithResult(State, Trace);
+            if (activeResult.HasPendingSelection)
+            {
+                Trace.AddPhase("phase:RunToMainPhase", beforePhase, State, "RunToMainPhase");
+                _pending = PendingEngineInteraction.FromPhaseResult(
+                    State,
+                    activeResult,
+                    NextDecisionToken(),
+                    continueToMainPhaseAfterResume: true);
+                Trace.AddDecision(
+                    $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                    State,
+                    _pending.DecisionPoint);
+                return PausedResult(action: null, activeResult.PendingResolution?.Timing, traceStart);
+            }
+        }
+
+        return CompleteRunToMainPhase(traceStart, beforePhase);
+    }
+
     public EngineStepResult RunMainPhase()
     {
         if (_pending is not null)
@@ -62,7 +103,7 @@ public sealed class EngineSession
         if (result.HasPendingSelection)
         {
             Trace.AddPhase("phase:RunMainPhase", beforePhase, State, "RunMainPhase");
-            _pending = PendingEngineInteraction.FromPhaseResult(State, result);
+            _pending = PendingEngineInteraction.FromPhaseResult(State, result, NextDecisionToken());
             Trace.AddDecision(
                 $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                 State,
@@ -70,8 +111,18 @@ public sealed class EngineSession
             return PausedResult(action: null, result.PendingResolution?.Timing, traceStart);
         }
 
-        _services.RuleProcessor.ProcessAfterAction(State);
         Trace.AddPhase("phase:RunMainPhase", beforePhase, State, "RunMainPhase");
+        var rulesResult = _services.RuleProcessor.ProcessAfterActionWithResult(State, Trace);
+        if (rulesResult.HasPendingSelection)
+        {
+            _pending = PendingEngineInteraction.FromRuleResult(State, rulesResult, NextDecisionToken());
+            Trace.AddDecision(
+                $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                State,
+                _pending.DecisionPoint);
+            return PausedResult(action: null, rulesResult.PendingResolution?.Timing, traceStart);
+        }
+
         return CompletedResult(action: null, result.Timing, rulesProcessed: true, traceStart);
     }
 
@@ -88,7 +139,7 @@ public sealed class EngineSession
         var result = _services.ActionExecutor.Execute(State, action, Trace);
         if (result.HasPendingSelection)
         {
-            _pending = PendingEngineInteraction.FromActionResult(State, result);
+            _pending = PendingEngineInteraction.FromActionResult(State, result, NextDecisionToken());
             Trace.AddDecision(
                 $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                 State,
@@ -114,6 +165,12 @@ public sealed class EngineSession
                 $"SelectionRequest '{pending.Request.Id}' is for player '{pending.Request.Player}', not '{result.Player}'.");
         }
 
+        if (result.Token != pending.DecisionToken)
+        {
+            throw new DomainException(
+                $"DecisionToken '{result.Token}' does not match pending token '{pending.DecisionToken}' for request '{pending.Request.Id}'.");
+        }
+
         if (!string.Equals(result.SelectionResult.RequestId, pending.Request.Id, StringComparison.Ordinal))
         {
             throw new DomainException(
@@ -136,7 +193,7 @@ public sealed class EngineSession
                 Trace);
             if (attackSelectionResult.HasPendingSelection)
             {
-                _pending = pending.NextAttack(State, attackSelectionResult);
+                _pending = pending.NextAttack(State, attackSelectionResult, NextDecisionToken());
                 Trace.AddSelection(
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
@@ -150,7 +207,22 @@ public sealed class EngineSession
             }
 
             _pending = null;
-            _services.RuleProcessor.ProcessAfterAction(State);
+            var securityRulesResult = _services.RuleProcessor.ProcessAfterActionWithResult(State, Trace);
+            if (securityRulesResult.HasPendingSelection)
+            {
+                _pending = pending.NextRule(State, securityRulesResult, NextDecisionToken());
+                Trace.AddSelection(
+                    $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
+                    beforeSelection,
+                    State,
+                    result.SelectionResult);
+                Trace.AddDecision(
+                    $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                    State,
+                    _pending.DecisionPoint);
+                return PausedResult(pending.Action, securityRulesResult.PendingResolution?.Timing, traceStart);
+            }
+
             Trace.AddSelection(
                 $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                 beforeSelection,
@@ -167,7 +239,7 @@ public sealed class EngineSession
 
         if (pipelineResult.HasPendingSelection)
         {
-            _pending = pending.Next(State, pipelineResult);
+            _pending = pending.Next(State, pipelineResult, NextDecisionToken());
             Trace.AddSelection(
                 $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                 beforeSelection,
@@ -193,7 +265,7 @@ public sealed class EngineSession
                 Trace);
             if (attackTailResult.HasPendingSelection)
             {
-                _pending = pending.NextAttack(State, attackTailResult);
+                _pending = pending.NextAttack(State, attackTailResult, NextDecisionToken());
                 Trace.AddSelection(
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
@@ -214,7 +286,7 @@ public sealed class EngineSession
             var phaseTailResult = CompletePhaseContinuation(pending.PhaseContinuation);
             if (phaseTailResult.HasPendingSelection)
             {
-                _pending = pending.NextPhase(State, phaseTailResult);
+                _pending = pending.NextPhase(State, phaseTailResult, NextDecisionToken());
                 Trace.AddSelection(
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
@@ -236,7 +308,7 @@ public sealed class EngineSession
                 Trace);
             if (ruleTailResult.HasPendingSelection)
             {
-                _pending = pending.NextRule(State, ruleTailResult);
+                _pending = pending.NextRule(State, ruleTailResult, NextDecisionToken());
                 Trace.AddSelection(
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
@@ -252,10 +324,29 @@ public sealed class EngineSession
             rulesAlreadyProcessed = true;
         }
 
+        if (pending.ContinueToMainPhaseAfterResume)
+        {
+            return ContinueRunToMainPhaseAfterSelection(pending, beforeSelection, result.SelectionResult, traceStart);
+        }
+
         _pending = null;
         if (!rulesAlreadyProcessed)
         {
-            _services.RuleProcessor.ProcessAfterAction(State);
+            var rulesResult = _services.RuleProcessor.ProcessAfterActionWithResult(State, Trace);
+            if (rulesResult.HasPendingSelection)
+            {
+                _pending = pending.NextRule(State, rulesResult, NextDecisionToken());
+                Trace.AddSelection(
+                    $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
+                    beforeSelection,
+                    State,
+                    result.SelectionResult);
+                Trace.AddDecision(
+                    $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                    State,
+                    _pending.DecisionPoint);
+                return PausedResult(pending.Action, rulesResult.PendingResolution?.Timing, traceStart);
+            }
         }
 
         Trace.AddSelection(
@@ -273,7 +364,118 @@ public sealed class EngineSession
             throw new DomainException("Cannot resume because no engine decision is pending.");
         }
 
-        return Resume(new DecisionResult(_pending.Request.Player, selectionResult));
+        return Resume(new DecisionResult(_pending.Request.Player, _pending.DecisionToken, selectionResult));
+    }
+
+    private DecisionToken NextDecisionToken() => new(_nextDecisionToken++);
+
+    private EngineStepResult CompleteRunToMainPhase(int traceStart, GameState beforePhase)
+    {
+        if (State.Phase == Phase.Active)
+        {
+            _services.PhaseRunner.RunDrawPhase(State);
+        }
+
+        if (State.IsGameOver)
+        {
+            Trace.AddPhase("phase:RunToMainPhase", beforePhase, State, "RunToMainPhase");
+            return CompletedResult(action: null, completedTiming: null, rulesProcessed: false, traceStart);
+        }
+
+        if (State.Phase == Phase.Draw)
+        {
+            _services.PhaseRunner.RunBreedingPhase(State);
+        }
+
+        if (State.Phase == Phase.Breeding)
+        {
+            var mainResult = _services.PhaseRunner.RunMainPhaseWithResult(State, Trace);
+            if (mainResult.HasPendingSelection)
+            {
+                Trace.AddPhase("phase:RunToMainPhase", beforePhase, State, "RunToMainPhase");
+                _pending = PendingEngineInteraction.FromPhaseResult(State, mainResult, NextDecisionToken());
+                Trace.AddDecision(
+                    $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                    State,
+                    _pending.DecisionPoint);
+                return PausedResult(action: null, mainResult.PendingResolution?.Timing, traceStart);
+            }
+        }
+
+        Trace.AddPhase("phase:RunToMainPhase", beforePhase, State, "RunToMainPhase");
+        var rulesResult = _services.RuleProcessor.ProcessAfterActionWithResult(State, Trace);
+        if (rulesResult.HasPendingSelection)
+        {
+            _pending = PendingEngineInteraction.FromRuleResult(State, rulesResult, NextDecisionToken());
+            Trace.AddDecision(
+                $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                State,
+                _pending.DecisionPoint);
+            return PausedResult(action: null, rulesResult.PendingResolution?.Timing, traceStart);
+        }
+
+        return CompletedResult(action: null, EffectTiming.OnStartMainPhase, rulesProcessed: true, traceStart);
+    }
+
+    private EngineStepResult ContinueRunToMainPhaseAfterSelection(
+        PendingEngineInteraction completedPending,
+        GameState beforeSelection,
+        SelectionResult selectionResult,
+        int traceStart)
+    {
+        _pending = null;
+
+        if (State.Phase == Phase.Active)
+        {
+            _services.PhaseRunner.RunDrawPhase(State);
+        }
+
+        if (!State.IsGameOver && State.Phase == Phase.Draw)
+        {
+            _services.PhaseRunner.RunBreedingPhase(State);
+        }
+
+        if (!State.IsGameOver && State.Phase == Phase.Breeding)
+        {
+            var mainResult = _services.PhaseRunner.RunMainPhaseWithResult(State, Trace);
+            if (mainResult.HasPendingSelection)
+            {
+                _pending = PendingEngineInteraction.FromPhaseResult(State, mainResult, NextDecisionToken());
+                Trace.AddSelection(
+                    $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
+                    beforeSelection,
+                    State,
+                    selectionResult);
+                Trace.AddDecision(
+                    $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                    State,
+                    _pending.DecisionPoint);
+                return PausedResult(action: null, mainResult.PendingResolution?.Timing, traceStart);
+            }
+        }
+
+        var rulesResult = _services.RuleProcessor.ProcessAfterActionWithResult(State, Trace);
+        if (rulesResult.HasPendingSelection)
+        {
+            _pending = PendingEngineInteraction.FromRuleResult(State, rulesResult, NextDecisionToken());
+            Trace.AddSelection(
+                $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
+                beforeSelection,
+                State,
+                selectionResult);
+            Trace.AddDecision(
+                $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
+                State,
+                _pending.DecisionPoint);
+            return PausedResult(action: null, rulesResult.PendingResolution?.Timing, traceStart);
+        }
+
+        Trace.AddSelection(
+            $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
+            beforeSelection,
+            State,
+            selectionResult);
+        return CompletedResult(action: null, EffectTiming.OnStartMainPhase, rulesProcessed: true, traceStart);
     }
 
     private EngineStepResult PausedResult(GameAction? action, EffectTiming? timing, int traceStart) =>
@@ -282,6 +484,7 @@ public sealed class EngineSession
             action,
             timing,
             _pending?.DecisionPoint,
+            _pending?.DecisionToken,
             _pending?.StableContinuationId,
             RulesProcessed: false,
             State.IsGameOver,
@@ -293,6 +496,7 @@ public sealed class EngineSession
             action,
             completedTiming,
             PendingDecisionPoint: null,
+            PendingDecisionToken: null,
             PendingStableContinuationId: null,
             rulesProcessed,
             State.IsGameOver,
@@ -316,8 +520,10 @@ public sealed class EngineSession
         PhaseExecutionContinuation? PhaseContinuation,
         AttackExecutionContinuation? AttackContinuation,
         RuleProcessorContinuation? RuleContinuation,
+        bool ContinueToMainPhaseAfterResume,
         EffectResolution Resolution,
         SelectionRequest Request,
+        DecisionToken DecisionToken,
         DecisionPoint DecisionPoint)
     {
         public string StableContinuationId =>
@@ -325,7 +531,10 @@ public sealed class EngineSession
             ?? AttackContinuation?.SecurityCheckContinuation?.StableContinuationId
             ?? Resolution.StableId;
 
-        public static PendingEngineInteraction FromActionResult(GameState state, ActionExecutionResult result)
+        public static PendingEngineInteraction FromActionResult(
+            GameState state,
+            ActionExecutionResult result,
+            DecisionToken token)
         {
             if (result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -345,17 +554,55 @@ public sealed class EngineSession
                 result.PhaseExecution?.Continuation,
                 result.AttackExecution?.Continuation,
                 result.RuleProcessing?.Continuation,
+                ContinueToMainPhaseAfterResume: false,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 result.PendingDecisionPoint
-                    ?? DecisionPoint.ForSelection(
+                    is null
+                    ? DecisionPoint.ForSelection(
                         result.PendingSelectionRequest.Player,
                         state.Phase,
                         "engine-action-pending-selection",
-                        result.PendingSelectionRequest));
+                        result.PendingSelectionRequest,
+                        token)
+                    : result.PendingDecisionPoint with { Token = token });
         }
 
-        public static PendingEngineInteraction FromPhaseResult(GameState state, PhaseExecutionResult result)
+        public static PendingEngineInteraction FromRuleResult(
+            GameState state,
+            RuleProcessorExecutionResult result,
+            DecisionToken token)
+        {
+            if (result.PendingContinuation is null || result.PendingResolution is null || result.PendingSelectionRequest is null)
+            {
+                throw new DomainException("Pending rule result requires an effect continuation, resolution, and selection request.");
+            }
+
+            return new PendingEngineInteraction(
+                null,
+                result.PendingContinuation,
+                null,
+                result.PhaseExecution?.Continuation,
+                null,
+                result.Continuation,
+                ContinueToMainPhaseAfterResume: false,
+                result.PendingResolution,
+                result.PendingSelectionRequest,
+                token,
+                DecisionPoint.ForSelection(
+                    result.PendingSelectionRequest.Player,
+                    state.Phase,
+                    "engine-rule-pending-selection",
+                    result.PendingSelectionRequest,
+                    token));
+        }
+
+        public static PendingEngineInteraction FromPhaseResult(
+            GameState state,
+            PhaseExecutionResult result,
+            DecisionToken token,
+            bool continueToMainPhaseAfterResume = false)
         {
             if (result.PendingContinuation is null || result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -369,18 +616,22 @@ public sealed class EngineSession
                 result.Continuation,
                 null,
                 null,
+                continueToMainPhaseAfterResume,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 DecisionPoint.ForSelection(
                     result.PendingSelectionRequest.Player,
                     state.Phase,
                     "engine-phase-pending-selection",
-                    result.PendingSelectionRequest));
+                    result.PendingSelectionRequest,
+                    token));
         }
 
         public PendingEngineInteraction Next(
             GameState state,
-            TriggerPipelineResult result)
+            TriggerPipelineResult result,
+            DecisionToken token)
         {
             if (result.PendingContinuation is null || result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -394,18 +645,22 @@ public sealed class EngineSession
                 PhaseContinuation,
                 AttackContinuation,
                 RuleContinuation,
+                ContinueToMainPhaseAfterResume,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 DecisionPoint.ForSelection(
                     result.PendingSelectionRequest.Player,
                     state.Phase,
                     "engine-resume-pending-selection",
-                    result.PendingSelectionRequest));
+                    result.PendingSelectionRequest,
+                    token));
         }
 
         public PendingEngineInteraction NextAttack(
             GameState state,
-            AttackExecutionResult result)
+            AttackExecutionResult result,
+            DecisionToken token)
         {
             if (result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -425,18 +680,22 @@ public sealed class EngineSession
                 null,
                 result.Continuation,
                 null,
+                ContinueToMainPhaseAfterResume,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 DecisionPoint.ForSelection(
                     result.PendingSelectionRequest.Player,
                     state.Phase,
                     "engine-attack-pending-selection",
-                    result.PendingSelectionRequest));
+                    result.PendingSelectionRequest,
+                    token));
         }
 
         public PendingEngineInteraction NextPhase(
             GameState state,
-            PhaseExecutionResult result)
+            PhaseExecutionResult result,
+            DecisionToken token)
         {
             if (result.PendingContinuation is null || result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -450,18 +709,22 @@ public sealed class EngineSession
                 result.Continuation,
                 null,
                 null,
+                ContinueToMainPhaseAfterResume,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 DecisionPoint.ForSelection(
                     result.PendingSelectionRequest.Player,
                     state.Phase,
                     "engine-phase-pending-selection",
-                        result.PendingSelectionRequest));
+                    result.PendingSelectionRequest,
+                    token));
         }
 
         public PendingEngineInteraction NextRule(
             GameState state,
-            RuleProcessorExecutionResult result)
+            RuleProcessorExecutionResult result,
+            DecisionToken token)
         {
             if (result.PendingContinuation is null || result.PendingResolution is null || result.PendingSelectionRequest is null)
             {
@@ -475,13 +738,16 @@ public sealed class EngineSession
                 result.PhaseExecution?.Continuation,
                 null,
                 result.Continuation,
+                ContinueToMainPhaseAfterResume: false,
                 result.PendingResolution,
                 result.PendingSelectionRequest,
+                token,
                 DecisionPoint.ForSelection(
                     result.PendingSelectionRequest.Player,
                     state.Phase,
                     "engine-rule-pending-selection",
-                    result.PendingSelectionRequest));
+                    result.PendingSelectionRequest,
+                    token));
         }
     }
 }

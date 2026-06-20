@@ -38,12 +38,14 @@ Queue 52A에서 `EngineSession.Step(GameAction)` / `EngineSession.Resume(Decisio
 
 - pending interaction은 session당 최대 하나만 허용한다.
 - pending 중 새 `GameAction` 실행은 실패한다.
-- `DecisionResult.Player`와 `SelectionResult.RequestId`가 pending `SelectionRequest`와 일치하는지 검증한다.
+- `DecisionResult.Player`, `SelectionResult.RequestId`, session-local monotonic `DecisionToken`이 pending `SelectionRequest`와 일치하는지 검증한다.
+- optional effect가 승인된 뒤 explicit `SelectionRequest`가 있으면 effect body를 실행하지 않고 두 번째 decision으로 pause한다. optional 거절은 해당 effect body를 skip하고 queue tail을 drain한다.
 - selection 적용 후 다음 chained selection이 있으면 다시 `PausedForDecision`을 반환한다.
-- selection chain이 완료된 뒤에만 `RuleProcessor.ProcessAfterAction`을 실행한다.
+- selection chain이 완료된 뒤에만 result-aware `RuleProcessor.ProcessAfterActionWithResult`를 실행한다. rules timing이 다시 selection을 반환하면 새 pending interaction으로 pause한다.
+- `RunToMainPhase()`는 `None`/`End`에서 `Active` -> `Draw` -> `Breeding` -> `Main`으로 진행하면서 `OnStartTurn`/`OnStartMainPhase` selection을 pause/resume할 수 있다.
 - trace에는 action, selection result, phase-only step event가 기록되며, pending continuation identity는 `EffectResolution.StableId`를 사용한다.
 
-현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`의 `OnStartMainPhase`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail 또는 security-check loop를 이어서 drain한다.
+현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, optional yes/no + explicit target selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`/`RunToMainPhase()`의 `OnStartMainPhase`/`OnStartTurn`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail 또는 security-check loop를 이어서 drain한다.
 
 SecuritySkill selection은 공통 boundary로 재개되지만, `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate` 등 원본 security timing 전체 순서는 queue 53의 source-aligned 정렬 범위로 남긴다. `EngineSession.RunMainPhase()`는 `TraceEventKind.Phase`/`RunMainPhase` event로 replay할 수 있고, `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 노출한다.
 

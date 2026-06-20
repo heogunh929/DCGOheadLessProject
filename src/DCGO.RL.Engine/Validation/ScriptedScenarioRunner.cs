@@ -51,6 +51,7 @@ public sealed record ScenarioResult(
     string FinalStateHash,
     MaxTurnAbortResult? MaxTurnAbort = null,
     DecisionPoint? PendingDecisionPoint = null,
+    DecisionToken? PendingDecisionToken = null,
     string? PendingStableContinuationId = null)
 {
     public EngineInvariantReport InvariantReport => InvariantReports.Count == 0
@@ -116,6 +117,7 @@ public sealed class ScriptedScenarioRunner
                     invariantReports,
                     state.ComputeStateHash(),
                     PendingDecisionPoint: stepResult.PendingDecisionPoint,
+                    PendingDecisionToken: stepResult.PendingDecisionToken,
                     PendingStableContinuationId: stepResult.PendingStableContinuationId);
             }
         }
@@ -157,9 +159,9 @@ public sealed class ScriptedScenarioRunner
                 return null;
 
             case RunToMainPhaseScenarioStep:
-                if (session is not null && state.Phase == Phase.Breeding)
+                if (session is not null)
                 {
-                    return session.RunMainPhase();
+                    return session.RunToMainPhase();
                 }
 
                 _turnRunner.RunToMainPhase(state);

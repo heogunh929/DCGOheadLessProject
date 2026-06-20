@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | 51 | done | prompts/51_runtime_composition_guard.md | production runtime composition 및 silent trigger skip 방지 |
 | 52 | done | prompts/52_ruleprocessor_zone_mover_injection.md | core dependency/ZoneMover 주입 정렬 |
-| 52A | needs-review | prompts/52A_engine_decision_resume_boundary.md | 모든 timing의 공통 pending decision pause/resume |
+| 52A | done | prompts/52A_engine_decision_resume_boundary.md | 모든 timing의 공통 pending decision pause/resume |
 | 53 | todo | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
 | 54 | todo | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
 | 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |

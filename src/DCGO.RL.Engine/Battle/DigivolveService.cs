@@ -40,9 +40,12 @@ public sealed class DigivolveService
 
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null)
     {
+        var snapshot = state.Clone();
+        var traceCount = trace?.Events.Count ?? 0;
         var result = DigivolveWithResult(state, action, trace);
         if (result.HasPendingSelection)
         {
+            RestoreAfterPendingSynchronousCall(state, snapshot, trace, traceCount);
             throw new DomainException(
                 $"WhenDigivolving requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
         }
@@ -105,5 +108,15 @@ public sealed class DigivolveService
                 ["Permanent"] = sourcePermanent,
             },
             trace: trace);
+    }
+
+    private static void RestoreAfterPendingSynchronousCall(
+        GameState state,
+        GameState snapshot,
+        GameTrace? trace,
+        int traceCount)
+    {
+        state.RestoreFrom(snapshot);
+        trace?.Truncate(traceCount);
     }
 }

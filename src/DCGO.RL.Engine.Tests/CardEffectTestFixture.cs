@@ -201,6 +201,122 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
     }
 }
 
+internal sealed class OptionalSelectionPrimitiveCardScript : ICardScript
+{
+    private readonly PlayerId _targetController;
+    private readonly EffectTiming _timing;
+    private readonly int _tailMemory;
+    private readonly bool _includeSecurityActivation;
+
+    public OptionalSelectionPrimitiveCardScript(
+        string cardId,
+        string effectClassName,
+        PlayerId targetController,
+        EffectTiming timing = EffectTiming.OptionSkill,
+        int tailMemory = 0,
+        bool includeSecurityActivation = false)
+    {
+        _targetController = targetController;
+        _timing = timing;
+        _tailMemory = tailMemory;
+        _includeSecurityActivation = includeSecurityActivation;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script for optional yes/no followed by explicit target selection.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context)
+    {
+        var descriptors = new List<EffectDescriptor>();
+        if (_includeSecurityActivation)
+        {
+            descriptors.Add(new EffectDescriptor(
+                $"{Porting.CardId}:security:activate-main",
+                EffectTiming.SecuritySkill,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                SecurityExecutionMode: SecurityEffectExecutionMode.ActivateMainOption));
+        }
+
+        descriptors.Add(new EffectDescriptor(
+            $"{Porting.CardId}:optional-target",
+            _timing,
+            SourceCard: context.SourceCard,
+            SourcePermanent: context.SourcePermanent,
+            Controller: context.Controller,
+            IsOptional: true,
+            CreateSelectionRequest: effectContext => CreateTargetRequest(
+                effectContext.State,
+                context.Controller ?? effectContext.Player ?? PlayerId.Player0),
+            SelectionContinuation: ApplySelection));
+
+        if (_tailMemory != 0)
+        {
+            descriptors.Add(new EffectDescriptor(
+                $"{Porting.CardId}:tail-memory:{_tailMemory}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller));
+        }
+
+        return descriptors;
+    }
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        if (context.Resolution.StableId.Contains(":tail-memory:", StringComparison.Ordinal))
+        {
+            var player = context.Resolution.Controller
+                ?? context.Resolution.Context.Player
+                ?? PlayerId.Player0;
+            context.WithState((state, primitives) => primitives.ModifyMemory(state, player, _tailMemory));
+            return;
+        }
+
+        throw new DomainException(
+            $"Card script '{Porting.CardId}' optional target body must be resolved through SelectionResultApplicator.");
+    }
+
+    private SelectionRequest CreateTargetRequest(GameState state, PlayerId player)
+    {
+        var candidates = state.GetPlayer(_targetController)
+            .BattleAreaPermanents
+            .Select(permanent => new SelectableTarget(
+                SelectionTargetKind.Permanent,
+                $"permanent:{permanent.Id.Value}",
+                permanent.ControllerPlayerId,
+                Permanent: permanent.Id,
+                Zone: Zone.BattleArea))
+            .ToArray();
+
+        return new SelectionRequest(
+            $"test-target:{Porting.CardId}",
+            player,
+            SelectionKind.SelectPermanent,
+            SelectionTargetKind.Permanent,
+            minCount: 1,
+            maxCount: 1,
+            canSkip: false,
+            canEndNotMax: false,
+            candidates,
+            "Select optional target.");
+    }
+
+    private static void ApplySelection(SelectionResultApplicationContext context)
+    {
+        foreach (var permanent in context.SelectedPermanentIds)
+        {
+            context.Primitives.DestroyPermanent(context.State, permanent, context.Trace);
+        }
+    }
+}
+
 internal sealed class TimingMemoryCardScript : ICardScript
 {
     private readonly EffectTiming _timing;

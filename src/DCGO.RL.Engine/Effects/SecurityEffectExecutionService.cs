@@ -12,6 +12,7 @@ public sealed record SecurityEffectExecutionContinuation(
     bool WasFaceDown,
     EffectResolution PendingResolution,
     SelectionRequest PendingSelectionRequest,
+    EffectDecisionStage PendingStage,
     IReadOnlyList<EffectResolution> SecurityResolutions,
     IReadOnlyList<EffectResolution> ActivatedMainOptionResolutions,
     IReadOnlyList<SelectionResultApplicationResult> SelectionApplications,
@@ -131,15 +132,7 @@ public sealed class SecurityEffectExecutionService
         var activatedMainOptions = continuation.ActivatedMainOptionResolutions.ToList();
         var selectionApplications = continuation.SelectionApplications.ToList();
 
-        var application = _selectionApplicator.Apply(
-            state,
-            continuation.PendingResolution,
-            selectionResult,
-            _primitives,
-            trace);
-        selectionApplications.Add(application);
-
-        return ContinueAfterSelectionApplication(
+        return ContinuePendingResolutionAfterSelection(
             state,
             script,
             continuation.SecurityCard,
@@ -148,7 +141,10 @@ public sealed class SecurityEffectExecutionService
             continuation.SecurityResolutions,
             activatedMainOptions,
             selectionApplications,
-            application,
+            continuation.PendingResolution,
+            continuation.PendingSelectionRequest,
+            continuation.PendingStage,
+            selectionResult,
             continuation.RemainingSecurityResolutions,
             continuation.RemainingOptionResolutions,
             continuation.IsResolvingActivatedMainOption,
@@ -249,34 +245,16 @@ public sealed class SecurityEffectExecutionService
     {
         if (resolution.PendingSelectionRequest is not null)
         {
-            if (_decisionProvider is null)
-            {
-                return Pending(
-                    securityCard,
-                    defender,
-                    wasFaceDown,
-                    allSecurityResolutions,
-                    activatedMainOptions,
-                    selectionApplications,
-                    resolution,
-                    remainingSecurityResolutions,
-                    Array.Empty<EffectResolution>(),
-                    isResolvingActivatedMainOption: false);
-            }
-
-            var selection = _decisionProvider.ChooseSelection(resolution.PendingSelectionRequest);
-            var application = _selectionApplicator.Apply(state, resolution, selection, _primitives, trace);
-            selectionApplications.Add(application);
-            return ContinueAfterSelectionApplication(
+            return ContinuePendingResolution(
                 state,
                 script,
                 securityCard,
                 defender,
                 wasFaceDown,
                 allSecurityResolutions,
+                resolution,
                 activatedMainOptions,
                 selectionApplications,
-                application,
                 remainingSecurityResolutions,
                 Array.Empty<EffectResolution>(),
                 isResolvingActivatedMainOption: false,
@@ -331,34 +309,16 @@ public sealed class SecurityEffectExecutionService
 
         if (resolution.PendingSelectionRequest is not null)
         {
-            if (_decisionProvider is null)
-            {
-                return Pending(
-                    securityCard,
-                    defender,
-                    wasFaceDown,
-                    allSecurityResolutions,
-                    activatedMainOptions,
-                    selectionApplications,
-                    resolution,
-                    remainingSecurityResolutions,
-                    nextOptionResolutions,
-                    isResolvingActivatedMainOption: true);
-            }
-
-            var selection = _decisionProvider.ChooseSelection(resolution.PendingSelectionRequest);
-            var application = _selectionApplicator.Apply(state, resolution, selection, _primitives, trace);
-            selectionApplications.Add(application);
-            return ContinueAfterSelectionApplication(
+            return ContinuePendingResolution(
                 state,
                 script,
                 securityCard,
                 defender,
                 wasFaceDown,
                 allSecurityResolutions,
+                resolution,
                 activatedMainOptions,
                 selectionApplications,
-                application,
                 remainingSecurityResolutions,
                 nextOptionResolutions,
                 isResolvingActivatedMainOption: true,
@@ -453,6 +413,203 @@ public sealed class SecurityEffectExecutionService
                 trace);
     }
 
+    private SecurityEffectExecutionResult ContinuePendingResolution(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        EffectResolution resolution,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        bool isResolvingActivatedMainOption,
+        GameTrace? trace)
+    {
+        var stage = resolution.OptionalSelectionRequest is not null
+            ? EffectDecisionStage.Optional
+            : EffectDecisionStage.Selection;
+        var request = stage == EffectDecisionStage.Optional
+            ? resolution.OptionalSelectionRequest!
+            : resolution.SelectionRequest!;
+
+        if (_decisionProvider is null)
+        {
+            return Pending(
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                resolution,
+                request,
+                stage,
+                remainingSecurityResolutions,
+                remainingOptionResolutions,
+                isResolvingActivatedMainOption);
+        }
+
+        var selection = _decisionProvider.ChooseSelection(request);
+        return ContinuePendingResolutionAfterSelection(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            allSecurityResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            resolution,
+            request,
+            stage,
+            selection,
+            remainingSecurityResolutions,
+            remainingOptionResolutions,
+            isResolvingActivatedMainOption,
+            trace);
+    }
+
+    private SecurityEffectExecutionResult ContinuePendingResolutionAfterSelection(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        EffectResolution resolution,
+        SelectionRequest request,
+        EffectDecisionStage stage,
+        SelectionResult selectionResult,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        bool isResolvingActivatedMainOption,
+        GameTrace? trace)
+    {
+        if (!string.Equals(selectionResult.RequestId, request.Id, StringComparison.Ordinal))
+        {
+            throw new DomainException(
+                $"SelectionResult request id '{selectionResult.RequestId}' does not match pending request '{request.Id}'.");
+        }
+
+        if (stage == EffectDecisionStage.Optional)
+        {
+            SelectionValidator.Validate(request, selectionResult);
+            if (selectionResult.SelectedBoolean == false)
+            {
+                return ContinueAfterSkippedOptional(
+                    state,
+                    script,
+                    securityCard,
+                    defender,
+                    wasFaceDown,
+                    allSecurityResolutions,
+                    activatedMainOptions,
+                    selectionApplications,
+                    remainingSecurityResolutions,
+                    remainingOptionResolutions,
+                    isResolvingActivatedMainOption,
+                    trace);
+            }
+
+            if (resolution.SelectionRequest is not null)
+            {
+                return Pending(
+                    securityCard,
+                    defender,
+                    wasFaceDown,
+                    allSecurityResolutions,
+                    activatedMainOptions,
+                    selectionApplications,
+                    resolution,
+                    resolution.SelectionRequest,
+                    EffectDecisionStage.Selection,
+                    remainingSecurityResolutions,
+                    remainingOptionResolutions,
+                    isResolvingActivatedMainOption);
+            }
+
+            script.Resolve(new CardScriptExecutionContext(state, resolution, _primitives, trace));
+            return ContinueAfterSkippedOptional(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                remainingSecurityResolutions,
+                remainingOptionResolutions,
+                isResolvingActivatedMainOption,
+                trace);
+        }
+
+        if (stage != EffectDecisionStage.Selection)
+        {
+            throw new DomainException($"Unsupported security decision stage '{stage}' for '{resolution.StableId}'.");
+        }
+
+        var application = _selectionApplicator.Apply(state, resolution, request, selectionResult, _primitives, trace);
+        selectionApplications.Add(application);
+        return ContinueAfterSelectionApplication(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            allSecurityResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            application,
+            remainingSecurityResolutions,
+            remainingOptionResolutions,
+            isResolvingActivatedMainOption,
+            trace);
+    }
+
+    private SecurityEffectExecutionResult ContinueAfterSkippedOptional(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        bool isResolvingActivatedMainOption,
+        GameTrace? trace) =>
+        isResolvingActivatedMainOption
+            ? ContinueOptionResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                remainingSecurityResolutions,
+                remainingOptionResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace)
+            : ContinueSecurityResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                remainingSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace);
+
     private IReadOnlyList<EffectResolution> CollectOptionResolutions(
         GameState state,
         ICardScript script,
@@ -502,26 +659,26 @@ public sealed class SecurityEffectExecutionService
         IReadOnlyList<EffectResolution> activatedMainOptions,
         IReadOnlyList<SelectionResultApplicationResult> selectionApplications,
         EffectResolution pendingResolution,
+        SelectionRequest pendingRequest,
+        EffectDecisionStage pendingStage,
         IReadOnlyList<EffectResolution> remainingSecurityResolutions,
         IReadOnlyList<EffectResolution> remainingOptionResolutions,
         bool isResolvingActivatedMainOption)
     {
-        var request = pendingResolution.PendingSelectionRequest
-            ?? throw new DomainException($"Effect resolution '{pendingResolution.StableId}' has no pending selection.");
-
         return new SecurityEffectExecutionResult(
             securityCard,
             securityResolutions,
             activatedMainOptions.ToArray(),
             selectionApplications.ToArray(),
             pendingResolution,
-            request,
+            pendingRequest,
             new SecurityEffectExecutionContinuation(
                 securityCard,
                 defender,
                 wasFaceDown,
                 pendingResolution,
-                request,
+                pendingRequest,
+                pendingStage,
                 securityResolutions.ToArray(),
                 activatedMainOptions.ToArray(),
                 selectionApplications.ToArray(),

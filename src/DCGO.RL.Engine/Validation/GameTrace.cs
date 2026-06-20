@@ -46,6 +46,16 @@ public sealed class GameTrace
     public TraceEvent AddUnsupportedMechanic(string label, GameState state, string details) =>
         Add(TraceEventKind.UnsupportedMechanic, label, state, state, Details: details);
 
+    internal void Truncate(int count)
+    {
+        if (count < 0 || count > _events.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(count));
+        }
+
+        _events.RemoveRange(count, _events.Count - count);
+    }
+
     private TraceEvent Add(
         TraceEventKind kind,
         string label,

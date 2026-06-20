@@ -88,12 +88,23 @@ public sealed class SelectionResultApplicator
         Tier1PrimitiveService primitives,
         GameTrace? trace = null)
     {
+        var request = RequireSingleSelectionRequest(resolution);
+        return Apply(state, resolution, request, result, primitives, trace);
+    }
+
+    public SelectionResultApplicationResult Apply(
+        GameState state,
+        EffectResolution resolution,
+        SelectionRequest request,
+        SelectionResult result,
+        Tier1PrimitiveService primitives,
+        GameTrace? trace = null)
+    {
         ArgumentNullException.ThrowIfNull(state);
         ArgumentNullException.ThrowIfNull(resolution);
+        ArgumentNullException.ThrowIfNull(request);
         ArgumentNullException.ThrowIfNull(result);
         ArgumentNullException.ThrowIfNull(primitives);
-
-        var request = RequireSingleSelectionRequest(resolution);
 
         _invariantChecker.ThrowIfInvalid(state);
         SelectionValidator.Validate(request, result);

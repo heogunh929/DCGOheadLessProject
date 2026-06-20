@@ -8,19 +8,22 @@ public sealed record DecisionPoint(
     Phase Phase,
     string Reason,
     IReadOnlyList<LegalAction> LegalActions,
-    SelectionRequest? SelectionRequest)
+    SelectionRequest? SelectionRequest,
+    DecisionToken? Token = null)
 {
     public static DecisionPoint ForLegalActions(
         PlayerId player,
         Phase phase,
         string reason,
-        IReadOnlyList<LegalAction> legalActions) =>
-        new(DecisionKind.LegalAction, player, phase, reason, legalActions, null);
+        IReadOnlyList<LegalAction> legalActions,
+        DecisionToken? token = null) =>
+        new(DecisionKind.LegalAction, player, phase, reason, legalActions, null, token);
 
     public static DecisionPoint ForSelection(
         PlayerId player,
         Phase phase,
         string reason,
-        SelectionRequest selectionRequest) =>
-        new(DecisionKind.Selection, player, phase, reason, Array.Empty<LegalAction>(), selectionRequest);
+        SelectionRequest selectionRequest,
+        DecisionToken? token = null) =>
+        new(DecisionKind.Selection, player, phase, reason, Array.Empty<LegalAction>(), selectionRequest, token);
 }

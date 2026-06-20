@@ -87,12 +87,22 @@ public sealed class ReplayRunner
                         throw new DomainException("ReplayRunner requires BattleEngineServices to replay phase events.");
                     }
 
+                    if (string.Equals(traceEvent.Details, "RunMainPhase", StringComparison.Ordinal))
+                    {
+                        session.RunMainPhase();
+                        break;
+                    }
+
+                    if (string.Equals(traceEvent.Details, "RunToMainPhase", StringComparison.Ordinal))
+                    {
+                        session.RunToMainPhase();
+                        break;
+                    }
+
                     if (!string.Equals(traceEvent.Details, "RunMainPhase", StringComparison.Ordinal))
                     {
                         throw new UnsupportedMechanicException($"Trace phase replay '{traceEvent.Details}'.");
                     }
-
-                    session.RunMainPhase();
                     break;
             }
 

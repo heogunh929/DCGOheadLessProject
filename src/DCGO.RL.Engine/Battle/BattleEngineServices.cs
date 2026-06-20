@@ -346,7 +346,6 @@ public sealed class BattleEngineServices
         var playCardService = new PlayCardService(
             triggerPipelineService,
             zoneMover,
-            selectionApplicator,
             primitiveService,
             invariantChecker);
         var digivolveService = new DigivolveService(zoneMover, drawService, triggerPipelineService);

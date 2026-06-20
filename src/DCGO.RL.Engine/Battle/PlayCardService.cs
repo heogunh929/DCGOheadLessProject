@@ -35,20 +35,17 @@ public sealed class PlayCardService
 {
     private readonly IZoneMover _zoneMover;
     private readonly TriggerPipelineService _triggerPipelineService;
-    private readonly SelectionResultApplicator _selectionApplicator;
     private readonly EngineInvariantChecker _invariantChecker;
     private Tier1PrimitiveService? _primitives;
 
     public PlayCardService(
         TriggerPipelineService triggerPipelineService,
         IZoneMover? zoneMover = null,
-        SelectionResultApplicator? selectionApplicator = null,
         Tier1PrimitiveService? primitives = null,
         EngineInvariantChecker? invariantChecker = null)
     {
         _triggerPipelineService = triggerPipelineService ?? throw new ArgumentNullException(nameof(triggerPipelineService));
         _zoneMover = zoneMover ?? new ZoneMover();
-        _selectionApplicator = selectionApplicator ?? new SelectionResultApplicator();
         _primitives = primitives;
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
     }
@@ -61,9 +58,12 @@ public sealed class PlayCardService
 
     public PermanentState? Play(GameState state, PlayCardAction action, GameTrace? trace = null)
     {
+        var snapshot = state.Clone();
+        var traceCount = trace?.Events.Count ?? 0;
         var result = PlayWithResult(state, action, trace);
         if (result.HasPendingSelection)
         {
+            RestoreAfterPendingSynchronousCall(state, snapshot, trace, traceCount);
             throw new DomainException(
                 $"Card '{action.Card}' requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
         }
@@ -134,52 +134,6 @@ public sealed class PlayCardService
 
         return PlayOptionFromHandAfterValidation(state, action, definition, trace);
     }
-
-    public OptionPlayResult ApplyOptionSelection(
-        GameState state,
-        EffectResolution pendingResolution,
-        SelectionResult selectionResult,
-        GameTrace? trace = null)
-    {
-        ArgumentNullException.ThrowIfNull(state);
-        ArgumentNullException.ThrowIfNull(pendingResolution);
-        ArgumentNullException.ThrowIfNull(selectionResult);
-
-        var sourceCard = pendingResolution.SourceCard
-            ?? throw new DomainException($"Effect resolution '{pendingResolution.StableId}' requires an option source card.");
-
-        var application = _selectionApplicator.Apply(
-            state,
-            pendingResolution,
-            selectionResult,
-            Primitives,
-            trace);
-        _invariantChecker.ThrowIfInvalid(state);
-
-        if (application.NextResolution is not null)
-        {
-            return new OptionPlayResult(
-                sourceCard,
-                PipelineResult: null,
-                new[] { application },
-                application.NextResolution,
-                application.NextResolution.PendingSelectionRequest,
-                MovedToTrash: false);
-        }
-
-        var moved = TrashIfStillExecuting(state, state.Cards[sourceCard].Owner, sourceCard, trace);
-        _invariantChecker.ThrowIfInvalid(state);
-        return new OptionPlayResult(
-            sourceCard,
-            PipelineResult: null,
-            new[] { application },
-            PendingResolution: null,
-            PendingSelectionRequest: null,
-            moved);
-    }
-
-    private Tier1PrimitiveService Primitives =>
-        _primitives ??= new Tier1PrimitiveService(_zoneMover, playCardService: this);
 
     private OptionPlayResult PlayOptionFromHandAfterValidation(
         GameState state,
@@ -291,6 +245,16 @@ public sealed class PlayCardService
             PendingResolution: null,
             PendingSelectionRequest: null,
             moved);
+    }
+
+    private static void RestoreAfterPendingSynchronousCall(
+        GameState state,
+        GameState snapshot,
+        GameTrace? trace,
+        int traceCount)
+    {
+        state.RestoreFrom(snapshot);
+        trace?.Truncate(traceCount);
     }
 
     private TriggerPipelineResult RunOptionTriggerPipeline(
