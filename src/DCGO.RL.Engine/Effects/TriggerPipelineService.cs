@@ -61,7 +61,10 @@ public sealed record TriggerStackFrame
         TriggerStackFrameKind kind = TriggerStackFrameKind.Batch,
         IReadOnlyList<EffectResolution>? orderingCandidates = null,
         bool afterEffectsActivateScheduled = false,
-        int depth = 0)
+        int depth = 0,
+        bool hadCandidate = false,
+        bool hadResolutionAttempt = false,
+        IReadOnlyList<string>? afterEffectsCandidateSignatures = null)
     {
         Context = context;
         RemainingEffects = remainingEffects.ToArray();
@@ -72,6 +75,10 @@ public sealed record TriggerStackFrame
         OrderingCandidates = orderingCandidates?.ToArray() ?? Array.Empty<EffectResolution>();
         AfterEffectsActivateScheduled = afterEffectsActivateScheduled;
         Depth = depth;
+        HadCandidate = hadCandidate;
+        HadResolutionAttempt = hadResolutionAttempt;
+        AfterEffectsCandidateSignatures = afterEffectsCandidateSignatures?.ToArray()
+            ?? Array.Empty<string>();
     }
 
     public EffectContext Context { get; init; }
@@ -83,6 +90,9 @@ public sealed record TriggerStackFrame
     public IReadOnlyList<EffectResolution> OrderingCandidates { get; init; }
     public bool AfterEffectsActivateScheduled { get; init; }
     public int Depth { get; init; }
+    public bool HadCandidate { get; init; }
+    public bool HadResolutionAttempt { get; init; }
+    public IReadOnlyList<string> AfterEffectsCandidateSignatures { get; init; }
 }
 
 public sealed record TriggerPipelineContinuation(
@@ -119,7 +129,7 @@ public sealed class TriggerPipelineService
     private readonly EngineInvariantChecker _invariantChecker;
     private readonly TriggerPipelineOptions _defaultOptions;
     private readonly bool _pauseForOrderingWithoutProvider;
-    private Func<GameState, GameTrace?, int>? _stateOnlyStabilizer;
+    private Func<GameState, GameTrace?, RuleStabilizationResult>? _stateOnlyStabilizer;
 
     public TriggerPipelineService(
         ICardScriptRegistry cardScriptRegistry,
@@ -145,7 +155,7 @@ public sealed class TriggerPipelineService
 
     internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
 
-    public void AttachStateOnlyStabilizer(Func<GameState, GameTrace?, int> stabilizer)
+    public void AttachStateOnlyStabilizer(Func<GameState, GameTrace?, RuleStabilizationResult> stabilizer)
     {
         _stateOnlyStabilizer = stabilizer ?? throw new ArgumentNullException(nameof(stabilizer));
     }
@@ -158,13 +168,35 @@ public sealed class TriggerPipelineService
     {
         ArgumentNullException.ThrowIfNull(state);
 
-        _ = _stateOnlyStabilizer?.Invoke(state, trace);
-        return Run(
+        var resolvedOptions = options ?? _defaultOptions;
+        var stabilization = _stateOnlyStabilizer?.Invoke(state, trace)
+            ?? RuleStabilizationResult.Empty;
+        var preparedGroups = new List<PreparedTriggerGroup>();
+        preparedGroups.AddRange(PrepareRuleEventGroups(state, stabilization.Events, resolvedOptions));
+
+        var rulesTiming = Prepare(
             state,
             EffectTiming.RulesTiming,
             player ?? state.TurnPlayerId,
-            options: options,
-            trace: trace);
+            options: resolvedOptions);
+        if (HasPreparedEffects(rulesTiming))
+        {
+            preparedGroups.Add(rulesTiming);
+        }
+
+        var context = rulesTiming.Context;
+        if (preparedGroups.Count == 0)
+        {
+            return new TriggerPipelineResult(
+                context,
+                Array.Empty<EffectResolution>(),
+                Array.Empty<EffectResolution>(),
+                Array.Empty<EffectResolution>(),
+                Array.Empty<EffectResolution>(),
+                Array.Empty<SelectionResultApplicationResult>());
+        }
+
+        return RunPreparedSequence(state, context, preparedGroups, trace);
     }
 
     public TriggerPipelineResult Run(
@@ -253,6 +285,38 @@ public sealed class TriggerPipelineService
             outcome.Pending?.Continuation);
     }
 
+    private TriggerPipelineResult RunPreparedSequence(
+        GameState state,
+        EffectContext resultContext,
+        IReadOnlyList<PreparedTriggerGroup> preparedGroups,
+        GameTrace? trace)
+    {
+        var executedEffects = new List<EffectResolution>();
+        var skippedOptionalEffects = new List<EffectResolution>();
+        var selectionApplications = new List<SelectionResultApplicationResult>();
+        var rootFrame = CreateFrameChain(preparedGroups, parentFrame: null, depthBase: -1)
+            ?? throw new DomainException("Prepared trigger sequence must contain at least one group.");
+
+        var outcome = DrainFrame(
+            rootFrame,
+            state,
+            trace,
+            executedEffects,
+            skippedOptionalEffects,
+            selectionApplications);
+
+        return new TriggerPipelineResult(
+            resultContext,
+            preparedGroups.SelectMany(group => group.QueuedEffects).ToArray(),
+            preparedGroups.SelectMany(group => group.BackgroundEffects).ToArray(),
+            executedEffects,
+            skippedOptionalEffects,
+            selectionApplications,
+            outcome.Pending?.Continuation.PendingResolution,
+            outcome.Pending?.Continuation.PendingSelectionRequest,
+            outcome.Pending?.Continuation);
+    }
+
     public TriggerPipelineResult Resume(
         GameState state,
         TriggerPipelineContinuation continuation,
@@ -298,9 +362,10 @@ public sealed class TriggerPipelineService
 
         if (executedEffects.Count > executedBeforeResume)
         {
+            var resumeFrame = continuation.Frame with { HadResolutionAttempt = true };
             var autoProcessOutcome = RunAutoProcessAfterEffect(
                 state,
-                continuation.Frame,
+                resumeFrame,
                 trace,
                 executedEffects,
                 skippedOptionalEffects,
@@ -317,7 +382,9 @@ public sealed class TriggerPipelineService
         }
 
         outcome = DrainFrame(
-            continuation.Frame,
+            executedEffects.Count > executedBeforeResume
+                ? continuation.Frame with { HadResolutionAttempt = true }
+                : continuation.Frame,
             state,
             trace,
             executedEffects,
@@ -417,6 +484,7 @@ public sealed class TriggerPipelineService
 
             if (executedEffects.Count > executedBefore)
             {
+                current = current with { HadResolutionAttempt = true };
                 var autoProcessOutcome = RunAutoProcessAfterEffect(
                     state,
                     current,
@@ -561,6 +629,7 @@ public sealed class TriggerPipelineService
 
         if (executedEffects.Count > executedBefore)
         {
+            frame = frame with { HadResolutionAttempt = true };
             var autoProcessOutcome = RunAutoProcessAfterEffect(
                 state,
                 frame,
@@ -596,30 +665,55 @@ public sealed class TriggerPipelineService
             return null;
         }
 
-        var changes = _stateOnlyStabilizer?.Invoke(state, trace) ?? 0;
-        if (parentFrame.Context.Timing == EffectTiming.RulesTiming && changes == 0)
+        var stabilization = _stateOnlyStabilizer.Invoke(state, trace);
+        var preparedGroups = new List<PreparedTriggerGroup>();
+        preparedGroups.AddRange(PrepareRuleEventGroups(state, stabilization.Events, parentFrame.Options));
+
+        var shouldCollectRulesTiming =
+            parentFrame.Context.Timing != EffectTiming.RulesTiming
+            || stabilization.ChangesApplied != 0
+            || preparedGroups.Count > 0;
+        if (shouldCollectRulesTiming)
         {
-            return null;
+            var rulesTiming = Prepare(
+                state,
+                EffectTiming.RulesTiming,
+                state.TurnPlayerId,
+                options: parentFrame.Options);
+            if (HasPreparedEffects(rulesTiming))
+            {
+                preparedGroups.Add(rulesTiming);
+            }
         }
 
-        var prepared = Prepare(
-            state,
-            EffectTiming.RulesTiming,
-            state.TurnPlayerId,
-            options: parentFrame.Options);
-        if (!HasPreparedEffects(prepared))
+        if (preparedGroups.Count == 0)
         {
             return null;
         }
 
         return DrainFrame(
-            CreateFrame(prepared, parentFrame, TriggerStackFrameKind.Batch, parentFrame.Depth + 1),
+            CreateFrameChain(preparedGroups, parentFrame, parentFrame.Depth)
+                ?? throw new DomainException("Auto-process trigger sequence must contain at least one group."),
             state,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
     }
+
+    private IReadOnlyList<PreparedTriggerGroup> PrepareRuleEventGroups(
+        GameState state,
+        IReadOnlyList<RuleStabilizationEvent> events,
+        TriggerPipelineOptions options) =>
+        events
+            .Select(ruleEvent => Prepare(
+                state,
+                ruleEvent.Timing,
+                ruleEvent.Player,
+                values: ruleEvent.Values,
+                options: options))
+            .Where(HasPreparedEffects)
+            .ToArray();
 
     private static IReadOnlyList<EffectResolution> SelectPriorityCandidates(
         GameState state,
@@ -682,10 +776,7 @@ public sealed class TriggerPipelineService
     }
 
     private static bool ShouldSelectEffectOrder(IReadOnlyList<EffectResolution> candidates) =>
-        candidates.Count > 1
-        && candidates.All(candidate =>
-            candidate.OptionalSelectionRequest is null
-            && candidate.SelectionRequest is null);
+        candidates.Count > 1;
 
     private static EffectResolution? ResolveOrderingChoice(
         IReadOnlyList<EffectResolution> candidates,
@@ -736,12 +827,14 @@ public sealed class TriggerPipelineService
         }
 
         if (resolution.SourceSnapshot is not null
+            && resolution.SourcePersistencePolicy == TriggerSourcePersistencePolicy.RequireSameRole
             && !IsSourceSnapshotStillValid(state, resolution.SourceSnapshot))
         {
             return false;
         }
 
-        if (resolution.SourcePermanent is not null)
+        if (resolution.SourcePermanent is not null
+            && resolution.SourcePersistencePolicy == TriggerSourcePersistencePolicy.RequireSameRole)
         {
             var permanent = FindPermanent(state, resolution.SourcePermanent.Value);
             if (permanent is null)
@@ -1183,7 +1276,10 @@ public sealed class TriggerPipelineService
                 frame.Options,
                 frame.ParentFrame,
                 TriggerStackFrameKind.Background,
-                depth: frame.Depth);
+                depth: frame.Depth,
+                hadCandidate: frame.BackgroundEffects.Count > 0,
+                hadResolutionAttempt: false,
+                afterEffectsCandidateSignatures: frame.AfterEffectsCandidateSignatures);
         }
 
         if (ShouldScheduleAfterEffects(frame))
@@ -1200,7 +1296,7 @@ public sealed class TriggerPipelineService
 
     private bool ShouldScheduleAfterEffects(TriggerStackFrame frame) =>
         frame.Options.ResolveAfterEffectsActivate
-        && frame.Kind != TriggerStackFrameKind.AfterEffectsActivate
+        && frame.HadResolutionAttempt
         && !frame.AfterEffectsActivateScheduled;
 
     private TriggerStackFrame? CreateAfterEffectsFrame(GameState state, TriggerStackFrame completedFrame)
@@ -1215,18 +1311,27 @@ public sealed class TriggerPipelineService
             return null;
         }
 
+        var signature = CreateAfterEffectsSignature(prepared);
+        if (completedFrame.AfterEffectsCandidateSignatures.Contains(signature, StringComparer.Ordinal))
+        {
+            throw new UnsupportedMechanicException(
+                $"Repeated AfterEffectsActivate candidate set detected: '{signature}'.");
+        }
+
         return CreateFrame(
             prepared,
             completedFrame.ParentFrame,
             TriggerStackFrameKind.AfterEffectsActivate,
-            completedFrame.Depth + 1);
+            completedFrame.Depth + 1,
+            completedFrame.AfterEffectsCandidateSignatures.Concat(new[] { signature }).ToArray());
     }
 
     private static TriggerStackFrame CreateFrame(
         PreparedTriggerGroup prepared,
         TriggerStackFrame? parentFrame,
         TriggerStackFrameKind kind,
-        int depth) =>
+        int depth,
+        IReadOnlyList<string>? afterEffectsCandidateSignatures = null) =>
         new(
             prepared.Context,
             prepared.QueuedEffects,
@@ -1234,7 +1339,38 @@ public sealed class TriggerPipelineService
             prepared.Options,
             parentFrame,
             kind,
-            depth: depth);
+            depth: depth,
+            hadCandidate: HasPreparedEffects(prepared),
+            hadResolutionAttempt: false,
+            afterEffectsCandidateSignatures: afterEffectsCandidateSignatures
+                ?? parentFrame?.AfterEffectsCandidateSignatures);
+
+    private static TriggerStackFrame? CreateFrameChain(
+        IReadOnlyList<PreparedTriggerGroup> preparedGroups,
+        TriggerStackFrame? parentFrame,
+        int depthBase)
+    {
+        TriggerStackFrame? next = parentFrame;
+        for (var index = preparedGroups.Count - 1; index >= 0; index--)
+        {
+            next = CreateFrame(
+                preparedGroups[index],
+                next,
+                TriggerStackFrameKind.Batch,
+                depthBase + index + 1,
+                parentFrame?.AfterEffectsCandidateSignatures);
+        }
+
+        return next;
+    }
+
+    private static string CreateAfterEffectsSignature(PreparedTriggerGroup prepared) =>
+        string.Join(
+            "|",
+            prepared.QueuedEffects
+                .Concat(prepared.BackgroundEffects)
+                .Select(effect => effect.StableId)
+                .OrderBy(stableId => stableId, StringComparer.Ordinal));
 
     private static bool HasPreparedEffects(PreparedTriggerGroup prepared) =>
         prepared.QueuedEffects.Count > 0 || prepared.BackgroundEffects.Count > 0;

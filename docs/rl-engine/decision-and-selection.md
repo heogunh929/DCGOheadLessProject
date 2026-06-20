@@ -1,5 +1,13 @@
 # Decision and Selection 구조
 
+## Queue 54B Ordering/Effect Decision 분리
+
+같은 player group의 활성 `EffectResolution`이 2개 이상이면 optional yes/no 또는 target selection 보유 여부와 무관하게 먼저 ordering `DecisionPoint`를 반환한다. ordering으로 효과를 고른 뒤 선택된 effect의 optional request, target request, chained continuation이 순서대로 pause/resume된다.
+
+모든 후보가 optional인 ordering group만 `SelectionRequest.CanSkip == true`가 된다. optional과 non-optional 후보가 섞인 group에서는 전체 skip을 허용하지 않는다. 이 정책은 원본 `MultipleSkills`의 “동시 trigger 선택 후 선택된 effect 자체 처리” 흐름에 맞춘다.
+
+EngineSession/replay boundary는 기존대로 `DecisionResult.Player`, `DecisionToken`, `SelectionResult.RequestId`를 모두 검증한다. ordering -> optional -> target selection처럼 연속 decision이 발생해도 각 decision은 별도 token을 가진다.
+
 ## Queue 54A Trigger Ordering Decision
 
 `TriggerPipelineService`는 같은 timing에서 준비된 활성 effect batch를 `EffectResolution` 단위로 ordering할 수 있다. 같은 source card가 만든 script-authored descriptor가 2개 이상이어도 source card 단위로 자동 평탄화하지 않는다.
@@ -8,8 +16,8 @@ ordering request 정책:
 
 - turn player group 전체를 먼저 처리하고, 그 다음 non-turn player group을 처리한다.
 - 같은 player group의 활성 effect가 2개 이상이면 provider graph에서는 provider가 선택하고, providerless production external-decision graph에서는 `DecisionPoint`로 pause한다.
-- optional yes/no 또는 explicit target selection이 필요한 effect는 그 자체 decision boundary를 먼저 노출한다. ordering decision이 optional 승인/거절 또는 target selection pause를 숨기지 않는다.
-- 모두 optional인 ordering group의 전체 skip은 `SelectionRequest.CanSkip`로 표현할 수 있다. 현재 구현은 explicit optional/target boundary가 필요한 effect를 ordering보다 먼저 처리해 52A의 stage-aware continuation 의미를 보존한다.
+- optional yes/no 또는 explicit target selection이 필요한 effect도 같은 group에 활성 후보가 2개 이상이면 먼저 ordering decision을 노출한다. ordering 이후 선택된 effect의 own decision boundary로 이어지며, ordering decision이 optional 승인/거절 또는 target selection pause를 숨기지 않는다.
+- 모두 optional인 ordering group의 전체 skip은 `SelectionRequest.CanSkip`로 표현한다. optional/non-optional 혼합 group은 전체 skip을 금지한다.
 
 pending ordering resume도 `DecisionResult.Player`, `SelectionResult.RequestId`, `DecisionToken` 검증을 통과해야 하며, stale token/replay 정책은 기존 EngineSession boundary를 따른다.
 

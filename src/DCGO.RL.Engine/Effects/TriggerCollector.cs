@@ -57,7 +57,8 @@ public sealed class TriggerCollector
                 descriptor.IsOncePerTurn,
                 descriptor.OncePerTurnKey,
                 descriptor.CanActivate,
-                descriptor.SourceSnapshot);
+                descriptor.SourceSnapshot,
+                descriptor.SourcePersistencePolicy);
 
             if (descriptor.IsBackground)
             {

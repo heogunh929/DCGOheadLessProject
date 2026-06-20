@@ -1,5 +1,29 @@
 # 검증 전략
 
+## Queue 54B 검증 - 2026-06-21
+
+추가/유지된 검증 항목:
+
+- empty `RulesTiming` batch는 `AfterEffectsActivate`를 실행하지 않는다.
+- stale source/`CanActivate` 실패만 있었던 batch도 `AfterEffectsActivate`를 예약하지 않는다.
+- ordering -> optional yes/no, ordering -> target selection, same-source multi descriptor ordering을 분리 검증한다.
+- 모두 optional인 ordering group은 전체 skip 가능, optional/non-optional 혼합 group은 전체 skip 불가로 검증한다.
+- DP 0 삭제가 `RuleProcessor.StabilizeStateOnly`에서 event로 보존되고 `OnDestroyedAnyone` nested frame이 parent tail보다 먼저 drain된다.
+- nested event frame의 selection pause/resume이 parent tail과 섞이지 않는다.
+- `AfterEffectsActivate` A -> B 정상 연쇄와 동일 candidate self-loop guard를 각각 검증한다.
+- `RequireSameRole` source role policy와 `AllowTriggeredSourceMove` policy를 분리 검증한다.
+- ordering -> optional -> target replay/hash determinism을 검증한다.
+
+실행 결과:
+
+```powershell
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 337 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
 ## Queue 54A 검증 - 2026-06-21
 
 추가/유지된 검증 항목:

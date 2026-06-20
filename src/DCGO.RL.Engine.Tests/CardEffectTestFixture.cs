@@ -324,6 +324,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
     private readonly bool _isBackground;
     private readonly bool _isOncePerTurn;
     private readonly bool _throwsUnsupported;
+    private readonly TriggerSourcePersistencePolicy _sourcePersistencePolicy;
 
     public TimingMemoryCardScript(
         string cardId,
@@ -332,13 +333,15 @@ internal sealed class TimingMemoryCardScript : ICardScript
         int amount,
         bool isBackground = false,
         bool isOncePerTurn = false,
-        bool throwsUnsupported = false)
+        bool throwsUnsupported = false,
+        TriggerSourcePersistencePolicy sourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole)
     {
         _timing = timing;
         _amount = amount;
         _isBackground = isBackground;
         _isOncePerTurn = isOncePerTurn;
         _throwsUnsupported = throwsUnsupported;
+        _sourcePersistencePolicy = sourcePersistencePolicy;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -359,7 +362,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
                 Controller: context.Controller,
                 IsBackground: _isBackground,
                 IsOncePerTurn: _isOncePerTurn,
-                OncePerTurnKey: $"{Porting.CardId}:{_timing}"),
+                OncePerTurnKey: $"{Porting.CardId}:{_timing}",
+                SourcePersistencePolicy: _sourcePersistencePolicy),
         };
 
     public void Resolve(CardScriptExecutionContext context)

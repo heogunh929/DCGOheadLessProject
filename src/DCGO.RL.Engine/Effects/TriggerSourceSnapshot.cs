@@ -14,6 +14,12 @@ public enum TriggerSourceRole
     FaceUpSecurity,
 }
 
+public enum TriggerSourcePersistencePolicy
+{
+    RequireSameRole,
+    AllowTriggeredSourceMove,
+}
+
 public sealed record TriggerSourceSnapshot(
     TriggerSourceRole Role,
     Zone SourceZone,

@@ -1,5 +1,17 @@
 # AfterEffectsActivate / MultipleSkills Source Mapping
 
+## 54B 보정 결과 - trigger stack semantic hardening
+
+54B부터 `TriggerStackFrame`은 batch 상태로 `HadCandidate`, `HadResolutionAttempt`, `AfterEffectsActivate` candidate signature 이력을 보존한다. `RulesTiming` 후보가 0개인 empty batch 또는 stale source/`CanActivate` 실패만 있었던 batch는 원본 `TriggeredSkillProcess`에서 실제 해소 batch가 없는 경우로 취급하며, `AfterEffectsActivate`를 수집하지 않는다.
+
+ordering decision과 effect 자체 decision은 분리한다. 같은 player group의 활성 `EffectResolution`이 2개 이상이면 optional yes/no 또는 target selection 여부와 관계없이 먼저 ordering `SelectionRequest`를 반환한다. ordering으로 효과를 하나 고른 뒤에만 해당 효과의 optional request 또는 explicit target request로 이어진다. 모든 후보가 optional이면 ordering request의 전체 skip을 허용하고, 일부 후보만 optional이면 전체 skip을 금지한다.
+
+`RuleProcessor.StabilizeStateOnly`는 DP 0 삭제 같은 rule event를 `RuleStabilizationResult.Events`로 반환한다. `TriggerPipelineService`는 이 event를 `OnDestroyedAnyone` 등 원본 timing의 nested `TriggerStackFrame`으로 준비하고, parent frame의 remaining tail보다 먼저 모두 drain한다. `TriggerPipelineService`와 `RuleProcessor`는 직접 생성 또는 순환 의존을 만들지 않고, `BattleEngineServices`가 delegate를 연결한다.
+
+`AfterEffectsActivate` frame이라는 이유만으로 후속 `AfterEffectsActivate` 수집을 금지하지 않는다. 현재 batch에서 실제 effect resolution이 있었고 새 `AfterEffectsActivate` 후보가 생겼다면 새 frame을 허용한다. 같은 candidate signature가 반복되면 self-loop로 보고 `UnsupportedMechanicException`으로 실패시키며, 별도 `MaxTriggerStackDepth` guard도 유지한다.
+
+source persistence는 기본 `RequireSameRole`이다. 이는 원본 `PutStackedSkill()`의 `PermanentWhenTriggered`/`TopCardWhenTriggered` 재검증 의미에 맞춰 source role, source zone, owner/controller, trigger 당시 top card가 유지되어야 함을 뜻한다. 원본상 trigger 후 source 이동이 허용되는 효과는 카드별 descriptor가 `AllowTriggeredSourceMove`를 명시해야 하며, core service나 catalog에 CardId 분기를 만들지 않는다.
+
 ## 54A 보정 결과 - TriggerStackFrame
 
 54A부터 `TriggerPipelineService`는 nested trigger tail과 외부 trigger tail을 하나의 list로 평탄화하지 않는다. pending continuation은 `TriggerStackFrame`을 보존하며, 각 frame은 현재 timing/context, 현재 batch의 remaining effects, background effects, parent frame, ordering candidates, AfterEffectsActivate scheduling 상태, depth guard를 가진다.
@@ -54,7 +66,7 @@ Source snapshot/revalidation:
   - production `BattleEngineServices` graph는 provider 없는 external decision mode에서 ordering decision을 pause로 반환한다.
   - direct/test fixture pipeline 기본값은 deterministic first-order로 유지해 legacy synchronous helper가 불필요하게 pause되지 않게 한다.
   - 같은 source card가 만든 내부 tail descriptor는 script-authored order로 drain한다.
-  - effect body가 실제 실행된 뒤 `AfterEffectsActivate` timing을 한 번 stack/drain한다. `AfterEffectsActivate` 자체는 다시 자기 자신을 재귀 stack하지 않는다.
+  - effect body가 실제 실행된 뒤 현재 batch 종료 시 `AfterEffectsActivate` timing을 stack/drain한다. `AfterEffectsActivate` frame 내부에서 새 후보가 실제로 생기면 연쇄 frame을 허용하고, 동일 candidate signature 반복은 self-loop로 명시 실패시킨다.
 
 - `SecurityCheckService`
   - security card 1장 state machine에 원본 `AutoProcessCheck()` 위치를 반영했다.

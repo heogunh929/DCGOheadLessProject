@@ -1,5 +1,17 @@
 # Effect System Foundation
 
+## Queue 54B Trigger Stack Semantic Hardening
+
+`TriggerPipelineService`는 frame별 batch 상태를 `HadCandidate`, `HadResolutionAttempt`, `AfterEffectsActivate` candidate signature 이력으로 보존한다. 실제 해소된 effect가 없는 empty/stale-only batch는 `AfterEffectsActivate`를 예약하지 않는다.
+
+같은 player group의 활성 `EffectResolution`이 2개 이상이면 optional/target selection 여부와 무관하게 ordering decision을 먼저 반환한다. ordering 이후 선택된 effect의 optional yes/no, target selection, chained selection이 이어진다. 모두 optional인 group만 ordering 단계에서 전체 skip이 가능하다.
+
+`RuleProcessor.StabilizeStateOnly`는 state 정리 중 발생한 rule event를 버리지 않고 `RuleStabilizationResult`에 담는다. DP 0 삭제는 `OnDestroyedAnyone` nested trigger frame으로 parent tail보다 먼저 drain된다. 이 경계는 delegate 기반이라 `RuleProcessor`와 `TriggerPipelineService` 사이에 직접 생성 또는 순환 의존을 만들지 않는다.
+
+`AfterEffectsActivate`는 현재 batch 종료 후 실제 후보가 있으면 frame으로 scheduling된다. `AfterEffectsActivate` frame 내부에서 새 AfterEffects 후보가 생기는 정상 연쇄는 허용하고, 동일 candidate signature 반복과 `MaxTriggerStackDepth`로 self-loop를 명시 차단한다.
+
+source snapshot revalidation의 기본 정책은 `RequireSameRole`이다. trigger 후 source 이동이 원본 의미상 허용되는 효과는 카드별 descriptor에서 `AllowTriggeredSourceMove`를 명시해야 하며, core service의 CardId shortcut은 사용하지 않는다.
+
 ## Queue 54A Trigger Stack Frame 보정
 
 `TriggerPipelineService`의 trigger drain 단위는 flat queue tail이 아니라 `TriggerStackFrame`이다. frame은 현재 timing/context, 현재 batch remaining effects, background effects, parent frame, ordering state, AfterEffectsActivate scheduling state를 보존한다. nested `RulesTiming`/`AfterEffectsActivate` frame은 parent frame의 remaining tail과 concat되지 않으며, child frame이 종료된 뒤 parent frame으로 복귀한다.

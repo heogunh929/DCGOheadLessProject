@@ -146,25 +146,27 @@ public sealed class RuleProcessor
             ?? throw new DomainException("Completed RuleProcessor result is missing.");
     }
 
-    public int StabilizeStateOnly(GameState state, GameTrace? trace = null)
+    public RuleStabilizationResult StabilizeStateOnly(GameState state, GameTrace? trace = null)
     {
         ArgumentNullException.ThrowIfNull(state);
 
         var totalChanges = 0;
+        var events = new List<RuleStabilizationEvent>();
         for (var iteration = 1; iteration <= _options.MaxIterations; iteration++)
         {
             var staleCleanupChanges = _durationCleanupService.CleanupStaleTargets(state).RemovedModifierStableIds.Count;
             _invariantChecker.ThrowIfInvalid(state);
             if (state.IsGameOver)
             {
-                return totalChanges + staleCleanupChanges;
+                return new RuleStabilizationResult(totalChanges + staleCleanupChanges, events.ToArray());
             }
 
             var passResult = ProcessSinglePassWithResult(
                 state,
                 trace,
                 skipRulesTiming: true,
-                runDestroyedTriggers: false);
+                runDestroyedTriggers: false,
+                stateOnlyEvents: events);
             if (passResult.HasPendingSelection)
             {
                 throw new DomainException("State-only rule stabilization cannot pause for a trigger decision.");
@@ -175,7 +177,7 @@ public sealed class RuleProcessor
             _invariantChecker.ThrowIfInvalid(state);
             if (changes == 0)
             {
-                return totalChanges;
+                return new RuleStabilizationResult(totalChanges, events.ToArray());
             }
         }
 
@@ -229,7 +231,8 @@ public sealed class RuleProcessor
         GameState state,
         GameTrace? trace,
         bool skipRulesTiming,
-        bool runDestroyedTriggers)
+        bool runDestroyedTriggers,
+        List<RuleStabilizationEvent>? stateOnlyEvents = null)
     {
         if (!skipRulesTiming)
         {
@@ -285,6 +288,20 @@ public sealed class RuleProcessor
                         destroyedByDpZero: true,
                         trace)
                     : null;
+                if (!runDestroyedTriggers)
+                {
+                    stateOnlyEvents?.Add(new RuleStabilizationEvent(
+                        EffectTiming.OnDestroyedAnyone,
+                        state.TurnPlayerId,
+                        new Dictionary<string, object?>
+                        {
+                            ["DestroyedPermanent"] = permanentId,
+                            ["DestroyedController"] = controller,
+                            ["DestroyedTopCard"] = topCard,
+                            ["DestroyedByDpZero"] = true,
+                        }));
+                }
+
                 if (destroyedTrigger?.HasPendingSelection == true)
                 {
                     return RuleProcessorSinglePassResult.Pending(

@@ -1,5 +1,13 @@
 # Security Timing Source Mapping
 
+## 54B 보정 결과 - Security AutoProcessCheck semantic
+
+Security auto-process도 공통 `TriggerPipelineService.RunAutoProcess`를 사용하므로 54B trigger stack semantic을 그대로 따른다. `RuleProcessor.StabilizeStateOnly`가 DP 0 삭제 같은 event를 반환하면 `OnDestroyedAnyone` nested frame이 security continuation의 parent tail보다 먼저 drain된다.
+
+security check 중 `RulesTiming` 후보가 0개이거나 stale/`CanActivate` 실패 후보만 있으면 `AfterEffectsActivate` frame을 만들지 않는다. 실제 effect resolution이 있었던 batch 뒤에만 `AfterEffectsActivate` 후보를 수집하며, 후보 signature 반복은 self-loop로 명시 실패한다.
+
+selection이 발생하면 `SecurityCheckContinuationStage`와 pending `TriggerPipelineContinuation`이 함께 보존된다. 따라서 security card state-machine 단계, RuleProcessor event frame, ordering/optional/target decision이 resume 이후에도 동일한 순서로 재개된다.
+
 ## 54A 보정 결과 - Security AutoProcessCheck
 
 Security check 중 세 auto-process 지점은 `TriggerPipelineService.RunAutoProcess`를 사용한다.

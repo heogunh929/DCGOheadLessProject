@@ -24,7 +24,8 @@ public sealed record EffectDescriptor(
     bool IsOncePerTurn = false,
     string? OncePerTurnKey = null,
     Func<EffectContext, bool>? CanActivate = null,
-    TriggerSourceSnapshot? SourceSnapshot = null)
+    TriggerSourceSnapshot? SourceSnapshot = null,
+    TriggerSourcePersistencePolicy SourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole)
 {
     public bool Matches(EffectContext context) =>
         Timing == context.Timing && (CanTrigger?.Invoke(context) ?? true);
