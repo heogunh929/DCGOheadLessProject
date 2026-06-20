@@ -136,6 +136,10 @@ var tests = new (string Name, Action Test)[]
     ("Option lifecycle moved source skips follow-up Trash", OptionLifecycleMovedSourceSkipsFollowupTrash),
     ("Option lifecycle invalid action leaves zones clean", OptionLifecycleInvalidActionLeavesZonesClean),
     ("Option lifecycle action trace replay deterministic", OptionLifecycleActionTraceReplayDeterministic),
+    ("Runtime composition production graph validates required services", RuntimeCompositionProductionGraphValidatesRequiredServices),
+    ("Runtime composition missing TriggerPipeline fails validation", RuntimeCompositionMissingTriggerPipelineFailsValidation),
+    ("Runtime composition PlayCardService requires TriggerPipeline", RuntimeCompositionPlayCardServiceRequiresTriggerPipeline),
+    ("Runtime composition ActionExecutor returns pending option selection", RuntimeCompositionActionExecutorReturnsPendingOptionSelection),
     ("Option lifecycle ST1 hand option regression", OptionLifecycleSt1HandOptionRegression),
     ("Option lifecycle ST2/ST3 hand option regression", OptionLifecycleSt2St3HandOptionRegression),
     ("TriggerPipeline ST1-09 OnBlockAnyone hook", TriggerPipelineSt1OnBlockAnyoneHook),
@@ -2665,6 +2669,63 @@ static void OptionLifecycleActionTraceReplayDeterministic()
 
     AssertEqual(first.Hash, second.Hash);
     AssertTrue(first.Trace.Events.Count > 0);
+}
+
+static void RuntimeCompositionProductionGraphValidatesRequiredServices()
+{
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry());
+
+    AssertTrue(services.ValidationReport.IsValid);
+    AssertTrue(services.TriggerPipelineService is not null);
+    AssertTrue(services.PrimitiveService is not null);
+    AssertTrue(services.ActionExecutor is not null);
+    AssertTrue(services.TurnRunner is not null);
+}
+
+static void RuntimeCompositionMissingTriggerPipelineFailsValidation()
+{
+    var report = BattleEngineServices.Validate(
+        triggerPipelineService: null,
+        zoneMover: new ZoneMover(),
+        primitiveService: new Tier1PrimitiveService(),
+        invariantChecker: new EngineInvariantChecker());
+
+    AssertFalse(report.IsValid);
+    AssertTrue(report.Issues.Any(issue => issue.DependencyName == nameof(TriggerPipelineService)));
+    AssertThrows<DomainException>(() => report.ThrowIfInvalid());
+}
+
+static void RuntimeCompositionPlayCardServiceRequiresTriggerPipeline()
+{
+    AssertThrows<ArgumentNullException>(() => new PlayCardService(null!));
+}
+
+static void RuntimeCompositionActionExecutorReturnsPendingOptionSelection()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
+    var option = AddCardToZone(state, 6265, "FX-SELECT", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6266, 866, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT",
+            "FX_Select",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1)));
+    var executor = new ActionExecutor(playCardService: new PlayCardService(triggerPipelineService: pipeline));
+
+    var result = executor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertTrue(result.HasPendingSelection);
+    AssertFalse(result.RulesProcessed);
+    AssertTrue(result.PendingDecisionPoint is not null);
+    AssertEqual(DecisionKind.Selection, result.PendingDecisionPoint!.Kind);
+    AssertEqual(result.PendingSelectionRequest, result.PendingDecisionPoint.SelectionRequest);
+    AssertEqual("test-selection:FX-SELECT", result.PendingSelectionRequest!.Id);
+    AssertEqual(target.Id, result.PendingSelectionRequest.Candidates[0].Permanent!.Value);
+    AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
 }
 
 static void OptionLifecycleSt1HandOptionRegression()

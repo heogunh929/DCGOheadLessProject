@@ -8,7 +8,7 @@ public sealed class TurnRunner
 
     public TurnRunner(PhaseRunner? phaseRunner = null)
     {
-        _phaseRunner = phaseRunner ?? new PhaseRunner();
+        _phaseRunner = phaseRunner ?? BattleEngineServices.CreateLegacyDefault().PhaseRunner;
     }
 
     public void RunToMainPhase(GameState state)

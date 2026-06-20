@@ -67,10 +67,13 @@ public sealed class ScriptedScenarioRunner
         PhaseRunner? phaseRunner = null,
         TurnRunner? turnRunner = null)
     {
+        var defaults = actionExecutor is null || phaseRunner is null || turnRunner is null
+            ? BattleEngineServices.CreateLegacyDefault()
+            : null;
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
-        _actionExecutor = actionExecutor ?? new ActionExecutor();
-        _phaseRunner = phaseRunner ?? new PhaseRunner();
-        _turnRunner = turnRunner ?? new TurnRunner(_phaseRunner);
+        _actionExecutor = actionExecutor ?? defaults!.ActionExecutor;
+        _phaseRunner = phaseRunner ?? defaults!.PhaseRunner;
+        _turnRunner = turnRunner ?? (phaseRunner is null ? defaults!.TurnRunner : new TurnRunner(_phaseRunner));
     }
 
     public ScenarioResult Run(ScriptedScenario scenario)

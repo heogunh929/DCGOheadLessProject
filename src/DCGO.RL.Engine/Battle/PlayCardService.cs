@@ -18,23 +18,32 @@ public sealed record OptionPlayResult(
     public bool HasPendingSelection => PendingSelectionRequest is not null;
 }
 
+public sealed record PlayCardResult(PermanentState? Permanent, OptionPlayResult? OptionPlay)
+{
+    public bool HasPendingSelection => OptionPlay?.HasPendingSelection == true;
+
+    public SelectionRequest? PendingSelectionRequest => OptionPlay?.PendingSelectionRequest;
+
+    public EffectResolution? PendingResolution => OptionPlay?.PendingResolution;
+}
+
 public sealed class PlayCardService
 {
     private readonly IZoneMover _zoneMover;
-    private readonly TriggerPipelineService? _triggerPipelineService;
+    private readonly TriggerPipelineService _triggerPipelineService;
     private readonly SelectionResultApplicator _selectionApplicator;
     private readonly EngineInvariantChecker _invariantChecker;
     private Tier1PrimitiveService? _primitives;
 
     public PlayCardService(
+        TriggerPipelineService triggerPipelineService,
         IZoneMover? zoneMover = null,
-        TriggerPipelineService? triggerPipelineService = null,
         SelectionResultApplicator? selectionApplicator = null,
         Tier1PrimitiveService? primitives = null,
         EngineInvariantChecker? invariantChecker = null)
     {
+        _triggerPipelineService = triggerPipelineService ?? throw new ArgumentNullException(nameof(triggerPipelineService));
         _zoneMover = zoneMover ?? new ZoneMover();
-        _triggerPipelineService = triggerPipelineService;
         _selectionApplicator = selectionApplicator ?? new SelectionResultApplicator();
         _primitives = primitives;
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
@@ -42,19 +51,25 @@ public sealed class PlayCardService
 
     public PermanentState? Play(GameState state, PlayCardAction action, GameTrace? trace = null)
     {
+        var result = PlayWithResult(state, action, trace);
+        if (result.HasPendingSelection)
+        {
+            throw new DomainException(
+                $"Card '{action.Card}' requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
+        }
+
+        return result.Permanent;
+    }
+
+    public PlayCardResult PlayWithResult(GameState state, PlayCardAction action, GameTrace? trace = null)
+    {
         var player = ValidateHandPlay(state, action);
         var definition = BattleRules.Definition(state, action.Card);
 
         if (definition.CardKinds.Contains(CardKind.Option))
         {
             var result = PlayOptionFromHandAfterValidation(state, action, definition, trace);
-            if (result.HasPendingSelection)
-            {
-                throw new DomainException(
-                    $"Option card '{action.Card}' requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
-            }
-
-            return null;
+            return new PlayCardResult(Permanent: null, result);
         }
 
         if (!definition.CardKinds.Contains(CardKind.Digimon) && !definition.CardKinds.Contains(CardKind.Tamer))
@@ -95,7 +110,7 @@ public sealed class PlayCardService
                 ["Permanent"] = permanent.Id,
                 ["Played"] = true,
             });
-        return permanent;
+        return new PlayCardResult(permanent, OptionPlay: null);
     }
 
     public OptionPlayResult PlayOptionFromHand(GameState state, PlayCardAction action, GameTrace? trace = null)
@@ -169,7 +184,7 @@ public sealed class PlayCardService
         _invariantChecker.ThrowIfInvalid(state);
 
         var pipelineResult = RunOptionTriggerPipeline(state, action.Actor, action.Card, trace);
-        if (pipelineResult?.PendingSelectionRequest is not null)
+        if (pipelineResult.PendingSelectionRequest is not null)
         {
             return new OptionPlayResult(
                 action.Card,
@@ -185,7 +200,7 @@ public sealed class PlayCardService
         return new OptionPlayResult(
             action.Card,
             pipelineResult,
-            pipelineResult?.SelectionApplications ?? Array.Empty<SelectionResultApplicationResult>(),
+            pipelineResult.SelectionApplications,
             PendingResolution: null,
             PendingSelectionRequest: null,
             moved);
@@ -237,17 +252,12 @@ public sealed class PlayCardService
         return true;
     }
 
-    private TriggerPipelineResult? RunOptionTriggerPipeline(
+    private TriggerPipelineResult RunOptionTriggerPipeline(
         GameState state,
         PlayerId player,
         CardInstanceId sourceCard,
         GameTrace? trace)
     {
-        if (_triggerPipelineService is null)
-        {
-            return null;
-        }
-
         return _triggerPipelineService.Run(
             state,
             EffectTiming.OptionSkill,
@@ -272,11 +282,6 @@ public sealed class PlayCardService
         PermanentId? sourcePermanent,
         IReadOnlyDictionary<string, object?> values)
     {
-        if (_triggerPipelineService is null)
-        {
-            return;
-        }
-
         var result = _triggerPipelineService.Run(
             state,
             timing,

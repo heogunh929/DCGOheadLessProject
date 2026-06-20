@@ -1,9 +1,46 @@
 using DCGO.RL.Engine.Actions;
+using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Effects;
 using DCGO.RL.Engine.Mechanics;
 using DCGO.RL.Engine.Validation;
 
 namespace DCGO.RL.Engine.Battle;
+
+public sealed record ActionExecutionResult(
+    GameAction Action,
+    PermanentState? PlayedPermanent = null,
+    OptionPlayResult? OptionPlay = null,
+    SelectionRequest? PendingSelectionRequest = null,
+    EffectResolution? PendingResolution = null,
+    DecisionPoint? PendingDecisionPoint = null,
+    bool RulesProcessed = false)
+{
+    public bool HasPendingSelection => PendingSelectionRequest is not null;
+
+    public static ActionExecutionResult Completed(GameAction action, PermanentState? playedPermanent = null) =>
+        new(action, playedPermanent);
+
+    public static ActionExecutionResult FromPlay(GameState state, PlayCardAction action, PlayCardResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return new ActionExecutionResult(
+            action,
+            result.Permanent,
+            result.OptionPlay,
+            pendingRequest,
+            result.PendingResolution,
+            pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-pending-selection",
+                    pendingRequest));
+    }
+
+    public ActionExecutionResult MarkRulesProcessed() => this with { RulesProcessed = true };
+}
 
 public sealed class ActionExecutor
 {
@@ -26,17 +63,29 @@ public sealed class ActionExecutor
         PhaseRunner? phaseRunner = null,
         RuleProcessor? ruleProcessor = null)
     {
-        _hatchService = hatchService ?? new HatchService();
-        _moveFromBreedingService = moveFromBreedingService ?? new MoveFromBreedingService();
-        _playCardService = playCardService ?? new PlayCardService();
-        _digivolveService = digivolveService ?? new DigivolveService();
-        _attackService = attackService ?? new AttackService();
-        _complexMechanicService = complexMechanicService ?? new ComplexMechanicService();
-        _phaseRunner = phaseRunner ?? new PhaseRunner();
-        _ruleProcessor = ruleProcessor ?? new RuleProcessor(_phaseRunner);
+        var defaults = NeedsDefaults(
+            hatchService,
+            moveFromBreedingService,
+            playCardService,
+            digivolveService,
+            attackService,
+            complexMechanicService,
+            phaseRunner,
+            ruleProcessor)
+            ? BattleEngineServices.CreateLegacyDefault()
+            : null;
+
+        _hatchService = hatchService ?? defaults!.HatchService;
+        _moveFromBreedingService = moveFromBreedingService ?? defaults!.MoveFromBreedingService;
+        _playCardService = playCardService ?? defaults!.PlayCardService;
+        _digivolveService = digivolveService ?? defaults!.DigivolveService;
+        _attackService = attackService ?? defaults!.AttackService;
+        _complexMechanicService = complexMechanicService ?? defaults!.ComplexMechanicService;
+        _phaseRunner = phaseRunner ?? defaults!.PhaseRunner;
+        _ruleProcessor = ruleProcessor ?? defaults!.RuleProcessor;
     }
 
-    public void Execute(GameState state, GameAction action, GameTrace? trace = null)
+    public ActionExecutionResult Execute(GameState state, GameAction action, GameTrace? trace = null)
     {
         if (state.IsGameOver)
         {
@@ -44,6 +93,7 @@ public sealed class ActionExecutor
         }
 
         var before = trace is null ? null : state.Clone();
+        var result = ActionExecutionResult.Completed(action);
 
         switch (action)
         {
@@ -56,7 +106,10 @@ public sealed class ActionExecutor
                 break;
 
             case PlayCardAction play:
-                _playCardService.Play(state, play, trace);
+                result = ActionExecutionResult.FromPlay(
+                    state,
+                    play,
+                    _playCardService.PlayWithResult(state, play, trace));
                 break;
 
             case DigivolveAction digivolve:
@@ -109,6 +162,30 @@ public sealed class ActionExecutor
         }
 
         trace?.AddAction($"action:{action.GetType().Name}", before!, state, action);
+        if (result.HasPendingSelection)
+        {
+            return result;
+        }
+
         _ruleProcessor.ProcessAfterAction(state);
+        return result.MarkRulesProcessed();
     }
+
+    private static bool NeedsDefaults(
+        HatchService? hatchService,
+        MoveFromBreedingService? moveFromBreedingService,
+        PlayCardService? playCardService,
+        DigivolveService? digivolveService,
+        AttackService? attackService,
+        ComplexMechanicService? complexMechanicService,
+        PhaseRunner? phaseRunner,
+        RuleProcessor? ruleProcessor) =>
+        hatchService is null
+        || moveFromBreedingService is null
+        || playCardService is null
+        || digivolveService is null
+        || attackService is null
+        || complexMechanicService is null
+        || phaseRunner is null
+        || ruleProcessor is null;
 }

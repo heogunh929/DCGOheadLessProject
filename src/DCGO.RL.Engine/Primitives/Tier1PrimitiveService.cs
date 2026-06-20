@@ -32,8 +32,8 @@ public sealed class Tier1PrimitiveService
     private readonly DrawService _drawService;
     private readonly BattleResolver _battleResolver;
     private readonly SecurityCheckService _securityCheckService;
-    private readonly PlayCardService _playCardService;
-    private readonly DigivolveService _digivolveService;
+    private PlayCardService? _playCardService;
+    private DigivolveService _digivolveService;
 
     public Tier1PrimitiveService(
         IZoneMover? zoneMover = null,
@@ -47,8 +47,14 @@ public sealed class Tier1PrimitiveService
         _drawService = drawService ?? new DrawService(_zoneMover);
         _battleResolver = battleResolver ?? new BattleResolver(_zoneMover);
         _securityCheckService = securityCheckService ?? new SecurityCheckService(_zoneMover, _battleResolver);
-        _playCardService = playCardService ?? new PlayCardService(_zoneMover);
+        _playCardService = playCardService;
         _digivolveService = digivolveService ?? new DigivolveService(_zoneMover, _drawService);
+    }
+
+    internal void AttachRuntimeServices(PlayCardService playCardService, DigivolveService digivolveService)
+    {
+        _playCardService = playCardService ?? throw new ArgumentNullException(nameof(playCardService));
+        _digivolveService = digivolveService ?? throw new ArgumentNullException(nameof(digivolveService));
     }
 
     public MoveCardResult MoveCard(GameState state, MoveCardCommand command) =>
@@ -650,7 +656,9 @@ public sealed class Tier1PrimitiveService
     }
 
     public PermanentState? PlayCard(GameState state, PlayCardAction action) =>
-        _playCardService.Play(state, action);
+        (_playCardService
+            ?? throw new DomainException("Tier1PrimitiveService requires PlayCardService to execute PlayCard."))
+        .Play(state, action);
 
     public PermanentState PlayWithoutPayingCost(
         GameState state,

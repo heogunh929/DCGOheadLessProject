@@ -8,7 +8,7 @@
 | 48 | needs-review | prompts/48_asset_effect_mapping_reconcile.md | ST2-07/ST3-07 shared effect와 ST3-02 variant 원본 mapping 정리 |
 | 49 | done | prompts/49_asset_registry_mapping_validator.md | 원본 asset ↔ registry/status/file 자동 대조 validator |
 | 50 | done | prompts/50_option_execution_lifecycle_parity.md | Option Hand→Executing→OptionSkill→Trash 원본 lifecycle 정렬 |
-| 51 | todo | prompts/51_runtime_composition_guard.md | TriggerPipeline 없는 runtime 구성과 silent trigger skip 금지 |
+| 51 | done | prompts/51_runtime_composition_guard.md | TriggerPipeline 없는 runtime 구성과 silent trigger skip 금지 |
 | 52 | todo | prompts/52_ruleprocessor_zone_mover_injection.md | RuleProcessor와 core service dependency/ZoneMover 주입 정렬 |
 | 53 | todo | prompts/53_security_trigger_timing_parity.md | OnSecurityCheck/OnLoseSecurity/SecuritySkill/cleanup 순서 정렬 |
 | 54 | todo | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate와 동시 trigger priority 모델 |
