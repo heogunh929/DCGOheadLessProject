@@ -7,6 +7,7 @@ public enum EffectDecisionStage
 {
     Optional,
     Selection,
+    Ordering,
 }
 
 public sealed record EffectResolution(
@@ -23,7 +24,8 @@ public sealed record EffectResolution(
     SelectionResultContinuation? SelectionContinuation = null,
     SecurityEffectExecutionMode SecurityExecutionMode = SecurityEffectExecutionMode.Direct,
     bool IsOncePerTurn = false,
-    string? OncePerTurnKey = null)
+    string? OncePerTurnKey = null,
+    Func<EffectContext, bool>? CanActivate = null)
 {
     public SelectionRequest? PendingSelectionRequest => OptionalSelectionRequest ?? SelectionRequest;
 }

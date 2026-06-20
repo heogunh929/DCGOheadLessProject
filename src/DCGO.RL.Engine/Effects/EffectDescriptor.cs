@@ -22,7 +22,8 @@ public sealed record EffectDescriptor(
     SelectionResultContinuation? SelectionContinuation = null,
     SecurityEffectExecutionMode SecurityExecutionMode = SecurityEffectExecutionMode.Direct,
     bool IsOncePerTurn = false,
-    string? OncePerTurnKey = null)
+    string? OncePerTurnKey = null,
+    Func<EffectContext, bool>? CanActivate = null)
 {
     public bool Matches(EffectContext context) =>
         Timing == context.Timing && (CanTrigger?.Invoke(context) ?? true);

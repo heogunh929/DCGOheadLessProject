@@ -340,7 +340,9 @@ public sealed class BattleEngineServices
             decisionProvider,
             selectionApplicator: selectionApplicator,
             primitives: primitiveService,
-            invariantChecker: invariantChecker);
+            invariantChecker: invariantChecker,
+            resolveAfterEffectsByDefault: true,
+            pauseForOrderingWithoutProvider: true);
         var securityEffectExecutionService = new SecurityEffectExecutionService(
             cardScriptRegistry,
             decisionProvider,

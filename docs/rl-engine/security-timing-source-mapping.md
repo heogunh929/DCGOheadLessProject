@@ -81,7 +81,7 @@ RL.Engine은 이를 다음처럼 대응한다.
 - `OnLoseSecurity`: Security -> Executing 이동 직후 `Prepare()`로 후보를 준비한다.
 - 두 후보 group은 `SecuritySkill` 이후 `RunPrepared()`로 해소한다.
 - `SecuritySkill` 이후 새로 생긴 source는 이미 진행 중인 `OnSecurityCheck`/`OnLoseSecurity` 후보에 포함되지 않는다.
-- 준비된 source가 이후 zone을 벗어나도 후보 목록은 유지한다. activation 가능성의 세부 재검증, `MultipleSkills` 선택 순서, `AfterEffectsActivate` interleaving은 queue 54에서 원본 `CanActivate`/priority 정책과 함께 정렬한다.
+- 준비된 source가 이후 zone을 벗어나도 후보 목록은 유지한다. 다만 queue 54 이후 실행 직전에는 source card/permanent 소속과 `CanActivate`를 다시 확인한다. 따라서 후보 snapshot에는 남아 있어도 source가 사라진 effect body는 실행되지 않는다.
 
 ## Source Zone Policy
 
@@ -95,11 +95,14 @@ Security timing 후보 source zone:
 
 `Executing`은 제외한다. checked security card 자신의 `SecuritySkill`은 card별 body로 처리하며, 같은 checked card가 common `OnSecurityCheck`/`OnLoseSecurity` source로 중복 수집되지 않게 한다.
 
-## 남은 54 범위
+## queue 54 반영
 
-다음 항목은 53A 범위 밖이며 queue 54에서 다룬다.
+queue 54에서 `TriggerPipelineService`에 turn player/non-turn player priority, source/`CanActivate` 재검증, distinct source ordering selection, `AfterEffectsActivate` 후속 stack을 추가했다. 세부 source mapping은 `docs/rl-engine/after-effects-multiple-skills-source-mapping.md`에 기록한다.
 
-- `MultipleSkills` priority와 UI 선택 순서의 원본 동등성
-- `TriggeredSkillProcess()`와 `AfterEffectsActivate` timing의 전체 priority model
-- security check 중간 `AutoProcessCheck()`의 rule process/RulesTiming/AfterEffectsActivate 세부 interleaving
-- prepared trigger source의 activation 재검증 세부 정책
+`SecurityCheckService`는 원본 `ISecurityCheck.SecurityCheck()`의 세 지점에 `RulesTiming` auto process를 배치한다.
+
+- `SecuritySkill` 완료 직후.
+- prepared `OnSecurityCheck`/`OnLoseSecurity` 해소 직후와 security battle 전.
+- `UntilSecurityCheckEnd` cleanup 직후와 다음 card check 판단 전.
+
+counter/cut-in 및 attack target 변경 priority 전체는 queue 55 범위로 남긴다.

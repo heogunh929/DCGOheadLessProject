@@ -126,6 +126,10 @@ var tests = new (string Name, Action Test)[]
     ("TriggerPipeline optional provider pauses explicit selection", TriggerPipelineOptionalProviderPausesExplicitSelection),
     ("TriggerPipeline unsupported body fails explicitly", TriggerPipelineUnsupportedBodyFailsExplicitly),
     ("TriggerPipeline once-per-turn prevents duplicate execution", TriggerPipelineOncePerTurnPreventsDuplicateExecution),
+    ("TriggerPipeline resolves turn player before non-turn player", TriggerPipelineResolvesTurnPlayerBeforeNonTurnPlayer),
+    ("TriggerPipeline ordering selection pauses and resumes", TriggerPipelineOrderingSelectionPausesAndResumes),
+    ("TriggerPipeline skips stale source on activation revalidation", TriggerPipelineSkipsStaleSourceOnActivationRevalidation),
+    ("TriggerPipeline AfterEffectsActivate interleaves after effect", TriggerPipelineAfterEffectsActivateInterleavesAfterEffect),
     ("TriggerPipeline OnStartMainPhase hook invokes descriptor", TriggerPipelineOnStartMainPhaseHookInvokesDescriptor),
     ("TriggerPipeline WhenDigivolving hook invokes descriptor", TriggerPipelineWhenDigivolvingHookInvokesDescriptor),
     ("TriggerPipeline OnAllyAttack hook invokes descriptor", TriggerPipelineOnAllyAttackHookInvokesDescriptor),
@@ -145,6 +149,7 @@ var tests = new (string Name, Action Test)[]
     ("SecuritySkill-created source excluded from current timing", SecuritySkillCreatedSourceExcludedFromCurrentTiming),
     ("Security multi-check selection pauses on first and second card", SecurityMultiCheckSelectionPauseResumeFirstAndSecondCards),
     ("Security timing replay deterministic", SecurityTimingReplayDeterministic),
+    ("Security check auto process interleaves rules timing", SecurityCheckAutoProcessInterleavesRulesTiming),
     ("Provider optional target one-shot Run rejects pause", ProviderOptionalTargetOneShotRunRejectsPause),
     ("Option lifecycle hand play moves through Executing to Trash", OptionLifecycleHandPlayMovesThroughExecutingToTrash),
     ("Option lifecycle source context is Executing", OptionLifecycleSourceContextIsExecuting),
@@ -2514,6 +2519,115 @@ static void TriggerPipelineOncePerTurnPreventsDuplicateExecution()
     AssertThrows<DomainException>(() => pipeline.Run(state, EffectTiming.OnStartMainPhase, PlayerId.Player0));
 }
 
+static void TriggerPipelineResolvesTurnPlayerBeforeNonTurnPlayer()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.TurnPlayerId = PlayerId.Player1;
+    state.CardDefinitions["FX-TURN"] = CardEffectTestFixture.EffectDefinition("FX-TURN", "FX_Turn");
+    state.CardDefinitions["FX-NONTURN"] = CardEffectTestFixture.EffectDefinition("FX-NONTURN", "FX_NonTurn");
+    AddBattlePermanent(state, 6062, 662, "FX-NONTURN", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6063, 663, "FX-TURN", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new RecordingTimingCardScript("FX-NONTURN", "FX_NonTurn", EffectTiming.RulesTiming, "non-turn", order),
+        new RecordingTimingCardScript("FX-TURN", "FX_Turn", EffectTiming.RulesTiming, "turn", order)));
+
+    var result = pipeline.Run(state, EffectTiming.RulesTiming, state.TurnPlayerId);
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "turn", "non-turn" }, order);
+}
+
+static void TriggerPipelineOrderingSelectionPausesAndResumes()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-FIRST"] = CardEffectTestFixture.EffectDefinition("FX-FIRST", "FX_First");
+    state.CardDefinitions["FX-SECOND"] = CardEffectTestFixture.EffectDefinition("FX-SECOND", "FX_Second");
+    AddBattlePermanent(state, 6064, 664, "FX-FIRST", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6065, 665, "FX-SECOND", PlayerId.Player0, 1, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript("FX-FIRST", "FX_First", EffectTiming.RulesTiming, amount: 1),
+        new TimingMemoryCardScript("FX-SECOND", "FX_Second", EffectTiming.RulesTiming, amount: 10)),
+        pauseForOrderingWithoutProvider: true);
+
+    var pending = pipeline.Run(state, EffectTiming.RulesTiming, PlayerId.Player0);
+
+    AssertTrue(pending.HasPendingSelection);
+    AssertEqual(EffectDecisionStage.Ordering, pending.PendingContinuation!.PendingStage);
+    AssertEqual(2, pending.PendingSelectionRequest!.Candidates.Count);
+    AssertEqual(5, state.Memory);
+
+    var completed = pipeline.Resume(
+        state,
+        pending.PendingContinuation!,
+        SelectionResult.ForOption(pending.PendingSelectionRequest.Id, "1"));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertSequence(
+        new[]
+        {
+            "FX-SECOND:RulesTiming:memory:10",
+            "FX-FIRST:RulesTiming:memory:1",
+        },
+        completed.ExecutedEffects.Select(effect => effect.StableId).ToArray());
+    AssertEqual(10, state.Memory);
+}
+
+static void TriggerPipelineSkipsStaleSourceOnActivationRevalidation()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-STALE"] = CardEffectTestFixture.EffectDefinition("FX-STALE", "FX_Stale");
+    var source = AddBattlePermanent(state, 6066, 666, "FX-STALE", PlayerId.Player0, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript("FX-STALE", "FX_Stale", EffectTiming.OnSecurityCheck, amount: 1)));
+    var prepared = pipeline.Prepare(state, EffectTiming.OnSecurityCheck, PlayerId.Player0);
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(
+            source.TopCardId,
+            Zone.BattleArea,
+            Zone.Lost,
+            MoveReason.Effect,
+            SourcePermanent: source.Id,
+            FaceUp: true));
+
+    var result = pipeline.RunPrepared(state, prepared);
+
+    AssertEqual(1, result.QueuedEffects.Count);
+    AssertEqual(0, result.ExecutedEffects.Count);
+    AssertEqual(5, state.Memory);
+    AssertEqual(Zone.Lost, state.Cards[source.TopCardId].CurrentZone);
+}
+
+static void TriggerPipelineAfterEffectsActivateInterleavesAfterEffect()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-MAIN"] = CardEffectTestFixture.EffectDefinition("FX-MAIN", "FX_Main");
+    state.CardDefinitions["FX-AFTER"] = CardEffectTestFixture.EffectDefinition("FX-AFTER", "FX_After");
+    AddBattlePermanent(state, 6067, 667, "FX-MAIN", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6068, 668, "FX-AFTER", PlayerId.Player0, 1, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new RecordingTimingCardScript("FX-MAIN", "FX_Main", EffectTiming.RulesTiming, "main", order),
+        new RecordingTimingCardScript("FX-AFTER", "FX_After", EffectTiming.AfterEffectsActivate, "after", order)));
+
+    var result = pipeline.Run(
+        state,
+        EffectTiming.RulesTiming,
+        PlayerId.Player0,
+        options: new TriggerPipelineOptions(ResolveAfterEffectsActivate: true));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "main", "after" }, order);
+    AssertSequence(
+        new[]
+        {
+            "FX-MAIN:RulesTiming:record:main",
+            "FX-AFTER:AfterEffectsActivate:record:after",
+        },
+        result.ExecutedEffects.Select(effect => effect.StableId).ToArray());
+}
+
 static void TriggerPipelineOnStartMainPhaseHookInvokesDescriptor()
 {
     var state = CreateMinimalBattleState();
@@ -2890,9 +3004,10 @@ static void OnSecurityCheckCandidatesSnapshotBeforeSecuritySkill()
     var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
 
     AssertSequence(new[] { security }, result.CheckedCards);
-    AssertEqual(6, state.Memory);
+    AssertEqual(5, state.Memory);
     AssertEqual(Zone.Lost, state.Cards[source.TopCardId].CurrentZone);
     AssertEqual(1, result.SecurityTimingResults.Single(timing => timing.Context.Timing == EffectTiming.OnSecurityCheck).QueuedEffects.Count);
+    AssertEqual(0, result.SecurityTimingResults.Single(timing => timing.Context.Timing == EffectTiming.OnSecurityCheck).ExecutedEffects.Count);
 }
 
 static void SecuritySkillCreatedSourceExcludedFromCurrentTiming()
@@ -3013,6 +3128,49 @@ static void SecurityTimingReplayDeterministic()
     var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
     AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
     AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void SecurityCheckAutoProcessInterleavesRulesTiming()
+{
+    var order = new List<string>();
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    var attacker = AddBattlePermanent(state, 9304, 1304, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9305, 1305, "FX-RULES", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 9306, 1306, "FX-CHECK", PlayerId.Player0, 2, enterTurn: 1);
+    AddBattlePermanent(state, 9307, 1307, "FX-LOSE", PlayerId.Player1, 0, enterTurn: 1);
+    var security = AddCardToZone(state, 9308, "FX-SEC", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    state.CardDefinitions["FX-RULES"] = CardEffectTestFixture.EffectDefinition("FX-RULES", "FX_Rules");
+    state.CardDefinitions["FX-CHECK"] = CardEffectTestFixture.EffectDefinition("FX-CHECK", "FX_Check");
+    state.CardDefinitions["FX-LOSE"] = CardEffectTestFixture.EffectDefinition("FX-LOSE", "FX_Lose");
+    state.CardDefinitions["FX-SEC"] = CardEffectTestFixture.EffectDefinition("FX-SEC", "FX_Sec") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Level = 0,
+        Dp = 0,
+    };
+    var registry = SecurityMultiCheckRegistry(
+        new RecordingTimingCardScript("FX-RULES", "FX_Rules", EffectTiming.RulesTiming, "RulesTiming", order),
+        new RecordingTimingCardScript("FX-CHECK", "FX_Check", EffectTiming.OnSecurityCheck, "OnSecurityCheck", order),
+        new RecordingTimingCardScript("FX-LOSE", "FX_Lose", EffectTiming.OnLoseSecurity, "OnLoseSecurity", order),
+        new RecordingTimingCardScript("FX-SEC", "FX_Sec", EffectTiming.SecuritySkill, "SecuritySkill", order));
+    var service = CreateSecurityTimingCheckService(registry);
+
+    var result = service.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(
+        new[]
+        {
+            "SecuritySkill",
+            "RulesTiming",
+            "OnSecurityCheck",
+            "OnLoseSecurity",
+            "RulesTiming",
+            "RulesTiming",
+        },
+        order);
+    AssertSequence(new[] { security }, result.CheckedCards);
+    AssertEqual(5, result.SecurityTimingResults.Count);
+    AssertEqual(3, result.SecurityTimingResults.Count(timing => timing.Context.Timing == EffectTiming.RulesTiming));
 }
 
 static void ProviderOptionalTargetOneShotRunRejectsPause()
