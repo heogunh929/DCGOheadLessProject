@@ -178,6 +178,17 @@ var tests = new (string Name, Action Test)[]
     ("EngineSession RunToMainPhase OnStartTurn pause/resume", EngineSessionRunToMainPhaseOnStartTurnPauseResume),
     ("ScriptedScenarioRunner returns phase decision", ScriptedScenarioRunnerReturnsPhaseDecision),
     ("RandomLegalActionRunner returns phase decision", RandomLegalActionRunnerReturnsPhaseDecision),
+    ("ScriptedScenarioRunner session resumes next step", ScriptedScenarioRunnerSessionResumesNextStep),
+    ("ScriptedScenarioRunner session chained decision", ScriptedScenarioRunnerSessionChainedDecision),
+    ("RandomLegalActionRunner session resumes action", RandomLegalActionRunnerSessionResumesAction),
+    ("RandomLegalActionRunner session preserves RNG sequence", RandomLegalActionRunnerSessionPreservesRngSequence),
+    ("RandomLegalActionRunner pause resume matches uninterrupted run", RandomLegalActionRunnerPauseResumeMatchesUninterruptedRun),
+    ("Runner continuation rejects wrong owner", RunnerContinuationRejectsWrongOwner),
+    ("Runner continuation rejects stale token", RunnerContinuationRejectsStaleToken),
+    ("Runner continuation isolates parallel sessions", RunnerContinuationIsolatesParallelSessions),
+    ("RandomLegalActionRunner max action count survives resume", RandomLegalActionRunnerMaxActionCountSurvivesResume),
+    ("Runner resumable trace replay deterministic", RunnerResumableTraceReplayDeterministic),
+    ("Runner external decision rejects shared provider", RunnerExternalDecisionRejectsSharedProvider),
     ("EngineSession validates pending resume boundary", EngineSessionValidatesPendingResumeBoundary),
     ("Direct synchronous pending calls roll back state", DirectSynchronousPendingCallsRollbackState),
     ("EngineSession action and selection replay deterministic", EngineSessionActionAndSelectionReplayDeterministic),
@@ -3956,6 +3967,299 @@ static void RandomLegalActionRunnerReturnsPhaseDecision()
     AssertTrue(result.PendingDecisionToken is not null);
 }
 
+static void ScriptedScenarioRunnerSessionResumesNextStep()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select", playCost: 0);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var freeCard = AddCardToZone(state, 6380, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    var scenario = new ScriptedScenario(
+        "scripted-resume-next-step",
+        state,
+        new ScriptedScenarioStep[]
+        {
+            new ActionScenarioStep(new PlayCardAction(PlayerId.Player0, option, -1)),
+            new ActionScenarioStep(new PlayCardAction(PlayerId.Player0, freeCard, 0)),
+        });
+    var runner = new ScriptedScenarioRunner(services);
+
+    var session = runner.StartSession(scenario);
+    var paused = session.Result;
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, paused.Status);
+    AssertEqual(0, session.NextStepIndex);
+    AssertTrue(paused.PendingRunnerSession is not null);
+
+    var completed = runner.Resume(session, CreateScenarioDecisionResult(
+        paused,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    AssertEqual(ScenarioRunStatus.Completed, completed.Status);
+    AssertEqual(2, session.NextStepIndex);
+    AssertTrue(completed.FinalState.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertEqual(Zone.BattleArea, completed.FinalState.Cards[freeCard].CurrentZone);
+}
+
+static void ScriptedScenarioRunnerSessionChainedDecision()
+{
+    var services = CreateOptionalSelectionServices();
+    var state = CreateOptionalSelectionScenarioState("FX-OPT", out var option, out var target);
+    var scenario = new ScriptedScenario(
+        "scripted-chained-decision",
+        state,
+        new[] { new PlayCardAction(PlayerId.Player0, option, -1) });
+    var runner = new ScriptedScenarioRunner(services);
+
+    var session = runner.StartSession(scenario);
+    var optional = session.Result;
+    AssertEqual(ScenarioRunStatus.PausedForDecision, optional.Status);
+
+    var targetDecision = runner.Resume(session, CreateScenarioDecisionResult(
+        optional,
+        SelectionResult.ForBoolean("optional:FX-OPT:optional-target:OptionSkill", true)));
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, targetDecision.Status);
+    AssertEqual(session.SessionId, targetDecision.PendingRunnerSession!.SessionId);
+    AssertEqual("test-target:FX-OPT", targetDecision.PendingDecisionPoint!.SelectionRequest!.Id);
+
+    var completed = runner.Resume(session, CreateScenarioDecisionResult(
+        targetDecision,
+        SelectionResult.ForTargets(
+            "test-target:FX-OPT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    AssertEqual(ScenarioRunStatus.Completed, completed.Status);
+    AssertEqual(1, session.NextStepIndex);
+    AssertTrue(completed.FinalState.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+}
+
+static void RandomLegalActionRunnerSessionResumesAction()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out _);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var runner = new RandomLegalActionRunner(services);
+
+    var session = runner.StartSession(new RandomLegalActionRunRequest(
+        "random-resume-action",
+        state,
+        MaxActions: 1,
+        Seed: 2));
+    var paused = session.Result;
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, paused.Status);
+    AssertEqual(0, session.ActionsExecuted);
+
+    var completed = runner.Resume(session, CreateScenarioDecisionResult(
+        paused,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    AssertEqual(ScenarioRunStatus.MaxTurnAbort, completed.Status);
+    AssertEqual(1, session.ActionsExecuted);
+    AssertEqual(1, completed.MaxTurnAbort!.ActionsExecuted);
+    AssertTrue(completed.FinalState.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+}
+
+static void RandomLegalActionRunnerSessionPreservesRngSequence()
+{
+    var services = CreatePendingOptionServices();
+    var firstState = CreatePendingOptionScenarioState(out _);
+    var secondState = CreatePendingOptionScenarioState(out _);
+    AddCardToZone(firstState, 6381, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(secondState, 6381, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    var firstRunner = new RandomLegalActionRunner(services);
+    var secondRunner = new RandomLegalActionRunner(services);
+    var request1 = new RandomLegalActionRunRequest("random-rng-1", firstState, MaxActions: 2, Seed: 2);
+    var request2 = new RandomLegalActionRunRequest("random-rng-2", secondState, MaxActions: 2, Seed: 2);
+
+    var firstSession = firstRunner.StartSession(request1);
+    var secondSession = secondRunner.StartSession(request2);
+    var first = DriveRandomSessionToTerminal(firstRunner, firstSession);
+    var second = DriveRandomSessionToTerminal(secondRunner, secondSession);
+
+    AssertEqual(first.FinalStateHash, second.FinalStateHash);
+    AssertEqual(first.Status, second.Status);
+    AssertEqual(2, firstSession.ActionsExecuted);
+    AssertEqual(2, secondSession.ActionsExecuted);
+}
+
+static void RandomLegalActionRunnerPauseResumeMatchesUninterruptedRun()
+{
+    var pauseServices = CreatePendingOptionServices();
+    var pauseState = CreatePendingOptionScenarioState(out _);
+    var pauseTarget = pauseState.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    AddCardToZone(pauseState, 6382, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    var pauseRunner = new RandomLegalActionRunner(pauseServices);
+    var pauseSession = pauseRunner.StartSession(new RandomLegalActionRunRequest(
+        "pause-resume",
+        pauseState,
+        MaxActions: 2,
+        Seed: 2));
+    var pauseResult = pauseRunner.Resume(pauseSession, CreateScenarioDecisionResult(
+        pauseSession.Result,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(pauseTarget) })));
+    pauseResult = pauseResult.Status == ScenarioRunStatus.PausedForDecision
+        ? DriveRandomSessionToTerminal(pauseRunner, pauseSession)
+        : pauseResult;
+
+    var provider = new TestDecisionProvider();
+    var uninterruptedState = CreatePendingOptionScenarioState(out _);
+    var uninterruptedTarget = uninterruptedState.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    AddCardToZone(uninterruptedState, 6382, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    provider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "test-selection:FX-SELECT",
+        new[] { PermanentSelectionTarget(uninterruptedTarget) }));
+    var uninterrupted = new RandomLegalActionRunner(CreatePendingOptionServices(provider)).Run(
+        new RandomLegalActionRunRequest(
+            "uninterrupted",
+            uninterruptedState,
+            MaxActions: 2,
+            Seed: 2));
+
+    AssertEqual(uninterrupted.FinalStateHash, pauseResult.FinalStateHash);
+    AssertEqual(uninterrupted.Status, pauseResult.Status);
+}
+
+static void RunnerContinuationRejectsWrongOwner()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out _);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var firstRunner = new ScriptedScenarioRunner(services);
+    var secondRunner = new ScriptedScenarioRunner(services);
+    var session = firstRunner.StartSession(new ScriptedScenario(
+        "wrong-runner",
+        state,
+        new[] { new PlayCardAction(PlayerId.Player0, state.GetPlayer(PlayerId.Player0).Hand.Single(), -1) }));
+
+    AssertThrows<DomainException>(() => secondRunner.Resume(session, CreateScenarioDecisionResult(
+        session.Result,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) }))));
+}
+
+static void RunnerContinuationRejectsStaleToken()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out _);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var runner = new RandomLegalActionRunner(services);
+    var session = runner.StartSession(new RandomLegalActionRunRequest(
+        "stale-runner-token",
+        state,
+        MaxActions: 1,
+        Seed: 2));
+    var paused = session.Result;
+    var stale = new DecisionResult(
+        paused.PendingDecisionPoint!.Player,
+        new DecisionToken(paused.PendingDecisionToken!.Value.Value + 1),
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) }));
+
+    AssertThrows<DomainException>(() => runner.Resume(session, stale));
+}
+
+static void RunnerContinuationIsolatesParallelSessions()
+{
+    var services = CreatePendingOptionServices();
+    var firstState = CreatePendingOptionScenarioState(out _);
+    var secondState = CreatePendingOptionScenarioState(out _);
+    var firstTarget = firstState.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var secondTarget = secondState.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var firstRunner = new RandomLegalActionRunner(services);
+    var secondRunner = new RandomLegalActionRunner(services);
+
+    var firstSession = firstRunner.StartSession(new RandomLegalActionRunRequest("parallel-1", firstState, 2, 2));
+    var secondSession = secondRunner.StartSession(new RandomLegalActionRunRequest("parallel-2", secondState, 2, 2));
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, firstSession.Result.Status);
+    AssertEqual(ScenarioRunStatus.PausedForDecision, secondSession.Result.Status);
+    AssertNotEqual(firstSession.Result.PendingRunnerSession!.RunnerId, secondSession.Result.PendingRunnerSession!.RunnerId);
+
+    _ = firstRunner.Resume(firstSession, CreateScenarioDecisionResult(
+        firstSession.Result,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(firstTarget) })));
+
+    AssertTrue(firstSession.Result.FinalState.GetPlayer(PlayerId.Player1).Trash.Contains(firstTarget.TopCardId));
+    AssertFalse(secondSession.Result.FinalState.GetPlayer(PlayerId.Player1).Trash.Contains(secondTarget.TopCardId));
+    AssertEqual(0, secondSession.ActionsExecuted);
+}
+
+static void RandomLegalActionRunnerMaxActionCountSurvivesResume()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out _);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var runner = new RandomLegalActionRunner(services);
+    var session = runner.StartSession(new RandomLegalActionRunRequest("max-after-resume", state, MaxActions: 1, Seed: 2));
+
+    var result = runner.Resume(session, CreateScenarioDecisionResult(
+        session.Result,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    AssertEqual(ScenarioRunStatus.MaxTurnAbort, result.Status);
+    AssertEqual(1, result.MaxTurnAbort!.ActionsExecuted);
+    AssertEqual(1, session.ActionsExecuted);
+}
+
+static void RunnerResumableTraceReplayDeterministic()
+{
+    var services = CreateOptionalSelectionServices();
+    var state = CreateOptionalSelectionScenarioState("FX-OPT", out var option, out var target);
+    var initial = state.Clone();
+    var runner = new ScriptedScenarioRunner(services);
+    var session = runner.StartSession(new ScriptedScenario(
+        "runner-replay",
+        state,
+        new[] { new PlayCardAction(PlayerId.Player0, option, -1) }));
+
+    _ = runner.Resume(session, CreateScenarioDecisionResult(
+        session.Result,
+        SelectionResult.ForBoolean("optional:FX-OPT:optional-target:OptionSkill", true)));
+    var completed = runner.Resume(session, CreateScenarioDecisionResult(
+        session.Result,
+        SelectionResult.ForTargets(
+            "test-target:FX-OPT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    var replay = new ReplayRunner(services: services).Replay(initial, completed.Trace);
+
+    AssertEqual(completed.FinalStateHash, replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void RunnerExternalDecisionRejectsSharedProvider()
+{
+    var provider = new TestDecisionProvider();
+    var services = CreateOptionalSelectionServices(decisionProvider: provider);
+    var state = CreateOptionalSelectionScenarioState("FX-OPT", out var option, out _);
+    var scripted = new ScriptedScenarioRunner(services);
+    var random = new RandomLegalActionRunner(services);
+
+    AssertThrows<DomainException>(() => scripted.StartSession(new ScriptedScenario(
+        "provider-scripted",
+        state,
+        new[] { new PlayCardAction(PlayerId.Player0, option, -1) })));
+    AssertThrows<DomainException>(() => random.StartSession(new RandomLegalActionRunRequest(
+        "provider-random",
+        state,
+        MaxActions: 1,
+        Seed: 2)));
+}
+
 static void EngineSessionChainedDecisionReplayDeterministic()
 {
     var services = CreateOptionalSelectionServices();
@@ -6749,6 +7053,42 @@ static DecisionResult CreateDecisionResult(EngineStepResult pending, SelectionRe
     return new DecisionResult(decisionPoint.Player, token, selectionResult);
 }
 
+static DecisionResult CreateScenarioDecisionResult(ScenarioResult pending, SelectionResult selectionResult)
+{
+    var decisionPoint = pending.PendingDecisionPoint
+        ?? throw new InvalidOperationException("Pending scenario result has no DecisionPoint.");
+    var token = pending.PendingDecisionToken
+        ?? throw new InvalidOperationException("Pending scenario result has no DecisionToken.");
+    return new DecisionResult(decisionPoint.Player, token, selectionResult);
+}
+
+static ScenarioResult DriveRandomSessionToTerminal(
+    RandomLegalActionRunner runner,
+    RandomLegalActionRunnerSession session)
+{
+    var result = session.Result;
+    while (result.Status == ScenarioRunStatus.PausedForDecision)
+    {
+        var request = result.PendingDecisionPoint?.SelectionRequest
+            ?? throw new InvalidOperationException("Pending random runner result has no SelectionRequest.");
+        var selection = request.Kind switch
+        {
+            SelectionKind.SelectYesNo => SelectionResult.ForBoolean(request.Id, true),
+            SelectionKind.ChooseAction => SelectionResult.ForOption(
+                request.Id,
+                request.Candidates.First().StableId),
+            _ when request.Candidates.Count > 0 => SelectionResult.ForTargets(
+                request.Id,
+                new[] { request.Candidates[0] }),
+            _ when request.CanSkip => SelectionResult.Skip(request.Id),
+            _ => throw new InvalidOperationException($"Cannot auto-select for request '{request.Id}'."),
+        };
+        result = runner.Resume(session, CreateScenarioDecisionResult(result, selection));
+    }
+
+    return result;
+}
+
 static void AssertReplayDecisionMutationFails(
     BattleEngineServices services,
     GameState initial,
@@ -7285,14 +7625,16 @@ static EngineCompletionChecklistRunner CreateTestEngineCompletionChecklistRunner
         invariantFuzzRunner: new InvariantFuzzRunner(new RandomLegalActionRunner(services)));
 }
 
-static BattleEngineServices CreatePendingOptionServices() =>
+static BattleEngineServices CreatePendingOptionServices(IDecisionProvider? decisionProvider = null) =>
     BattleEngineServices.Create(CardEffectTestFixture.Registry(
         new SelectionPrimitiveCardScript(
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
             PlayerId.Player1),
-        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pending option target.")));
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pending option target."),
+        new NoEffectCardScript("BT1-FREE", notes: "Test-only runner continuation action.")),
+        decisionProvider);
 
 static GameState CreatePendingOptionScenarioState(out CardInstanceId option)
 {

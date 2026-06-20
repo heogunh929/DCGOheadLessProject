@@ -50,7 +50,8 @@ public sealed class BattleEngineServices
         PhaseRunner phaseRunner,
         RuleProcessor ruleProcessor,
         TurnRunner turnRunner,
-        ActionExecutor actionExecutor)
+        ActionExecutor actionExecutor,
+        bool hasRuntimeDecisionProvider)
     {
         ZoneMover = zoneMover;
         TriggerPipelineService = triggerPipelineService;
@@ -67,6 +68,7 @@ public sealed class BattleEngineServices
         RuleProcessor = ruleProcessor;
         TurnRunner = turnRunner;
         ActionExecutor = actionExecutor;
+        HasRuntimeDecisionProvider = hasRuntimeDecisionProvider;
     }
 
     public IZoneMover ZoneMover { get; }
@@ -98,6 +100,8 @@ public sealed class BattleEngineServices
     public TurnRunner TurnRunner { get; }
 
     public ActionExecutor ActionExecutor { get; }
+
+    public bool HasRuntimeDecisionProvider { get; }
 
     public BattleEngineServiceGraphValidationReport ValidationReport =>
         Validate(this);
@@ -401,7 +405,8 @@ public sealed class BattleEngineServices
             phaseRunner,
             ruleProcessor,
             turnRunner,
-            actionExecutor);
+            actionExecutor,
+            decisionProvider is not null);
         services.ValidationReport.ThrowIfInvalid();
         return services;
     }

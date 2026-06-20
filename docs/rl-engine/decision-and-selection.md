@@ -57,7 +57,13 @@ Queue 52B에서 token 우회를 제거했다.
 
 SecuritySkill selection은 공통 boundary로 재개되지만, `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate` 등 원본 security timing 전체 순서는 queue 53의 source-aligned 정렬 범위로 남긴다. `EngineSession.RunMainPhase()`는 `TraceEventKind.Phase`/`RunMainPhase` event로 replay할 수 있고, `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 노출한다.
 
-Runner continuation 정책은 queue 52C로 분리한다. 현재 runner는 pending decision을 버리지 않고 `ScenarioResult`에 `DecisionPoint`, `DecisionToken`, stable continuation id를 반환하지만, 재개 가능한 public runner session handle은 아직 제공하지 않는다. 52C에서는 mutable `EngineSession`을 그대로 노출하지 않는 runner-owned session API를 설계한다.
+Queue 52C에서 runner continuation 정책을 구현했다. `ScriptedScenarioRunner.StartSession`과 `RandomLegalActionRunner.StartSession`은 runner-owned session을 만들고, `Resume(session, DecisionResult)`로만 재개한다.
+
+- `ScenarioResult`는 pending `DecisionPoint`, `DecisionToken`, stable continuation id와 `RunnerSessionHandle`을 반환하지만 mutable `EngineSession`은 노출하지 않는다.
+- scripted session은 scenario, 현재 step index, `GameState`, `GameTrace`, pending decision, 내부 `EngineSession`을 소유한다. selection 완료 뒤 이미 처리한 step을 다시 실행하지 않고 다음 step부터 계속한다.
+- random session은 request, RNG, actions executed, max action count, phase normalization/action/main-phase pause 위치, `GameState`, `GameTrace`, pending decision, 내부 `EngineSession`을 소유한다. selection 완료 뒤 이미 선택한 random action을 다시 뽑지 않는다.
+- runner resume은 session owner id를 검증하고, EngineSession resume은 player, `DecisionToken`, request id를 검증한다. 다른 runner에 session을 넘기거나 stale token을 제출하면 명시적으로 실패한다.
+- external decision session은 providerless `BattleEngineServices` graph만 허용한다. shared stateful `IDecisionProvider`는 one-shot `Run` 비교/legacy 경로에서만 사용하며 runner session continuation에는 들어가지 않는다.
 
 ## 원본 Unity Mapping
 

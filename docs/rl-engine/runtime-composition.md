@@ -84,4 +84,11 @@ Queue 52A는 hand option, chained option, `OnPlay`, `WhenDigivolving`, `OnAllyAt
 
 ## Runner Continuation
 
-`ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 pending decision을 `ScenarioResult`로 반환하지만, 재개 가능한 runner-owned continuation/session API는 아직 없다. mutable `EngineSession`을 그대로 public 반환하지 않는 정책이 필요하므로 queue 52C로 분리한다.
+Queue 52C 기준 `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 재개 가능한 runner-owned session API를 제공한다.
+
+- `StartSession(...)`은 external decision 모드이며 providerless `BattleEngineServices` graph만 허용한다.
+- `Resume(session, DecisionResult)`는 session owner id를 먼저 검증하고, 내부 `EngineSession.Resume`에서 player, `DecisionToken`, request id를 검증한다.
+- `ScenarioResult`에는 pending `DecisionPoint`, `DecisionToken`, stable continuation id, `RunnerSessionHandle`만 담고 mutable `EngineSession`은 노출하지 않는다.
+- scripted session은 scenario와 현재 step index를 소유해 pause된 step을 완료한 뒤 다음 step부터 이어 간다.
+- random session은 RNG, actions executed, max action count, phase normalization/action/main-phase pause 위치를 소유해 pause/resume 전후 random action sequence를 보존한다.
+- shared stateful `IDecisionProvider`가 여러 `EngineSession`에 섞이지 않도록 external decision session에서는 provider graph를 거부한다. provider graph는 one-shot `Run` 비교/legacy 경로에서만 사용한다.

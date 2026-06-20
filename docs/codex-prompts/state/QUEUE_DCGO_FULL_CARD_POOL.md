@@ -8,7 +8,7 @@
 | 52 | done | prompts/52_ruleprocessor_zone_mover_injection.md | core dependency/ZoneMover 주입 정렬 |
 | 52A | done | prompts/52A_engine_decision_resume_boundary.md | 모든 timing의 공통 pending decision pause/resume |
 | 52B | done | prompts/52B_runtime_state_decision_token_hardening.md | runtime rule state와 DecisionToken replay hardening |
-| 52C | todo | prompts/52C_resumable_runner_continuation.md | Scripted/Random runner 재개 가능한 continuation/session API |
+| 52C | done | prompts/52C_resumable_runner_continuation.md | Scripted/Random runner 재개 가능한 continuation/session API |
 | 53 | todo | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
 | 54 | todo | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
 | 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |

@@ -262,3 +262,31 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 
 - runner 재개 가능한 continuation/session API는 queue 52C로 분리한다.
 - full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
+
+## Queue 52C runner continuation 검증 - 2026-06-20
+
+검증 항목:
+
+- scripted action이 selection pause 후 resume되면 같은 action을 다시 실행하지 않고 다음 step부터 계속한다.
+- scripted optional yes -> target selection 같은 chained decision을 같은 runner session에서 이어 간다.
+- random action이 selection pause 후 resume되면 이미 선택한 random action을 다시 뽑지 않고 action count를 이어 간다.
+- random runner의 pause/resume 실행과 provider 기반 one-shot 실행의 final hash가 같다.
+- 같은 seed/request의 두 random session이 같은 final hash와 action count를 만든다.
+- 다른 runner에 session continuation을 넘기면 실패한다.
+- stale `DecisionToken` resume은 실패한다.
+- 두 runner 병렬 session은 state/RNG/decision state를 공유하지 않는다.
+- `MaxActions` count는 resume 후 초기화되지 않는다.
+- runner session trace는 `ReplayRunner`로 재생했을 때 같은 final hash를 만든다.
+- external decision session은 shared stateful provider graph를 거부한다.
+
+실행 결과:
+
+```powershell
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 296 tests passed.`
+
+남은 범위:
+
+- full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.

@@ -42,6 +42,8 @@ public enum ScenarioRunStatus
 
 public sealed record MaxTurnAbortResult(int MaxActions, int ActionsExecuted, string FinalStateHash);
 
+public sealed record RunnerSessionHandle(Guid RunnerId, Guid SessionId);
+
 public sealed record ScenarioResult(
     string ScenarioName,
     ScenarioRunStatus Status,
@@ -52,15 +54,61 @@ public sealed record ScenarioResult(
     MaxTurnAbortResult? MaxTurnAbort = null,
     DecisionPoint? PendingDecisionPoint = null,
     DecisionToken? PendingDecisionToken = null,
-    string? PendingStableContinuationId = null)
+    string? PendingStableContinuationId = null,
+    RunnerSessionHandle? PendingRunnerSession = null)
 {
     public EngineInvariantReport InvariantReport => InvariantReports.Count == 0
         ? new EngineInvariantReport(Array.Empty<EngineInvariantViolation>())
         : InvariantReports[^1];
 }
 
+public sealed class ScriptedScenarioRunnerSession
+{
+    internal ScriptedScenarioRunnerSession(
+        Guid ownerRunnerId,
+        ScriptedScenario scenario,
+        GameState state,
+        GameTrace trace,
+        EngineSession engineSession)
+    {
+        OwnerRunnerId = ownerRunnerId;
+        SessionId = Guid.NewGuid();
+        Scenario = scenario;
+        State = state;
+        Trace = trace;
+        EngineSession = engineSession;
+    }
+
+    public Guid SessionId { get; }
+
+    public string ScenarioName => Scenario.Name;
+
+    public int NextStepIndex { get; internal set; }
+
+    public ScenarioResult Result { get; internal set; } = null!;
+
+    public bool IsCompleted { get; internal set; }
+
+    internal Guid OwnerRunnerId { get; }
+
+    internal ScriptedScenario Scenario { get; }
+
+    internal GameState State { get; }
+
+    internal GameTrace Trace { get; }
+
+    internal EngineSession EngineSession { get; }
+
+    internal List<EngineInvariantReport> InvariantReports { get; } = new();
+
+    internal int? PendingStepIndex { get; set; }
+
+    internal EngineStepResult? PendingStepResult { get; set; }
+}
+
 public sealed class ScriptedScenarioRunner
 {
+    private readonly Guid _runnerId = Guid.NewGuid();
     private readonly EngineInvariantChecker _invariantChecker;
     private readonly BattleEngineServices? _services;
     private readonly ActionExecutor _actionExecutor;
@@ -89,47 +137,114 @@ public sealed class ScriptedScenarioRunner
 
     public ScenarioResult Run(ScriptedScenario scenario)
     {
+        var session = StartSession(scenario, requireProviderless: false);
+        return session.Result;
+    }
+
+    public ScriptedScenarioRunnerSession StartSession(ScriptedScenario scenario)
+    {
+        return StartSession(scenario, requireProviderless: true);
+    }
+
+    private ScriptedScenarioRunnerSession StartSession(ScriptedScenario scenario, bool requireProviderless)
+    {
         var state = scenario.InitialState.Clone();
         var trace = new GameTrace();
-        var session = _services?.CreateSession(state, trace);
-        var invariantReports = new List<EngineInvariantReport>();
+        var session = new ScriptedScenarioRunnerSession(
+            _runnerId,
+            scenario,
+            state,
+            trace,
+            RequiredServices(requireProviderless).CreateSession(state, trace));
 
         trace.AddStateSnapshot($"scenario:{scenario.Name}:initial", state);
-        AddInvariantReport(state, invariantReports);
+        AddInvariantReport(state, session.InvariantReports);
+        session.Result = Continue(session);
+        return session;
+    }
 
-        for (var i = 0; i < scenario.Steps.Count; i++)
+    public ScenarioResult Resume(ScriptedScenarioRunnerSession session, DecisionResult result)
+    {
+        ValidateSession(session);
+        if (session.IsCompleted)
+        {
+            throw new DomainException($"Scripted runner session '{session.SessionId}' is already completed.");
+        }
+
+        if (session.PendingStepResult is null || session.PendingStepIndex is null)
+        {
+            throw new DomainException($"Scripted runner session '{session.SessionId}' has no pending decision.");
+        }
+
+        var stepResult = session.EngineSession.Resume(result);
+        AddInvariantReport(session.State, session.InvariantReports);
+        if (stepResult.IsPaused)
+        {
+            return Pause(session, session.PendingStepIndex.Value, stepResult);
+        }
+
+        session.NextStepIndex = session.PendingStepIndex.Value + 1;
+        session.PendingStepIndex = null;
+        session.PendingStepResult = null;
+        session.Result = Continue(session);
+        return session.Result;
+    }
+
+    private ScenarioResult Continue(ScriptedScenarioRunnerSession session)
+    {
+        var scenario = session.Scenario;
+        var state = session.State;
+        var trace = session.Trace;
+
+        for (var i = session.NextStepIndex; i < scenario.Steps.Count; i++)
         {
             if (state.IsGameOver)
             {
                 break;
             }
 
-            var stepResult = ExecuteStep(scenario.Name, i, scenario.Steps[i], state, trace, session);
-            AddInvariantReport(state, invariantReports);
+            var stepResult = ExecuteStep(scenario.Name, i, scenario.Steps[i], state, trace, session.EngineSession);
+            AddInvariantReport(state, session.InvariantReports);
             if (stepResult?.IsPaused == true)
             {
-                trace.AddStateSnapshot($"scenario:{scenario.Name}:paused:{i}", state);
-                return new ScenarioResult(
-                    scenario.Name,
-                    ScenarioRunStatus.PausedForDecision,
-                    state,
-                    trace,
-                    invariantReports,
-                    state.ComputeStateHash(),
-                    PendingDecisionPoint: stepResult.PendingDecisionPoint,
-                    PendingDecisionToken: stepResult.PendingDecisionToken,
-                    PendingStableContinuationId: stepResult.PendingStableContinuationId);
+                return Pause(session, i, stepResult);
             }
+
+            session.NextStepIndex = i + 1;
         }
 
         trace.AddStateSnapshot($"scenario:{scenario.Name}:final", state);
-        return new ScenarioResult(
+        session.IsCompleted = true;
+        session.Result = new ScenarioResult(
             scenario.Name,
             state.IsGameOver ? ScenarioRunStatus.GameOver : ScenarioRunStatus.Completed,
             state,
             trace,
-            invariantReports,
+            session.InvariantReports,
             state.ComputeStateHash());
+        return session.Result;
+    }
+
+    private ScenarioResult Pause(
+        ScriptedScenarioRunnerSession session,
+        int stepIndex,
+        EngineStepResult stepResult)
+    {
+        session.PendingStepIndex = stepIndex;
+        session.PendingStepResult = stepResult;
+        session.Trace.AddStateSnapshot($"scenario:{session.Scenario.Name}:paused:{stepIndex}", session.State);
+        session.Result = new ScenarioResult(
+            session.Scenario.Name,
+            ScenarioRunStatus.PausedForDecision,
+            session.State,
+            session.Trace,
+            session.InvariantReports,
+            session.State.ComputeStateHash(),
+            PendingDecisionPoint: stepResult.PendingDecisionPoint,
+            PendingDecisionToken: stepResult.PendingDecisionToken,
+            PendingStableContinuationId: stepResult.PendingStableContinuationId,
+            PendingRunnerSession: new RunnerSessionHandle(_runnerId, session.SessionId));
+        return session.Result;
     }
 
     private EngineStepResult? ExecuteStep(
@@ -170,6 +285,34 @@ public sealed class ScriptedScenarioRunner
 
             default:
                 throw new UnsupportedMechanicException($"Scripted scenario step '{step.GetType().Name}'");
+        }
+    }
+
+    private BattleEngineServices RequiredServices(bool requireProviderless)
+    {
+        var services = _services ?? throw new DomainException(
+            "ScriptedScenarioRunner resumable sessions require a complete BattleEngineServices graph.");
+        return requireProviderless ? RequireProviderlessServices(services) : services;
+    }
+
+    private static BattleEngineServices RequireProviderlessServices(BattleEngineServices services)
+    {
+        if (services.HasRuntimeDecisionProvider)
+        {
+            throw new DomainException(
+                "ScriptedScenarioRunner resumable sessions require a providerless BattleEngineServices graph; submit selections through Resume(DecisionResult).");
+        }
+
+        return services;
+    }
+
+    private void ValidateSession(ScriptedScenarioRunnerSession session)
+    {
+        ArgumentNullException.ThrowIfNull(session);
+        if (session.OwnerRunnerId != _runnerId)
+        {
+            throw new DomainException(
+                $"Scripted runner session '{session.SessionId}' does not belong to this runner.");
         }
     }
 
