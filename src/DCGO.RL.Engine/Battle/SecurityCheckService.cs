@@ -44,6 +44,10 @@ public sealed class SecurityCheckService
         _securityEffectExecutionService = securityEffectExecutionService;
     }
 
+    internal IZoneMover RuntimeZoneMover => _zoneMover;
+
+    internal SecurityEffectExecutionService? RuntimeSecurityEffectExecutionService => _securityEffectExecutionService;
+
     public SecurityCheckResult CheckSecurity(GameState state, PermanentId attackerId, PlayerId defenderId, GameTrace? trace = null)
     {
         var defender = state.GetPlayer(defenderId);

@@ -63,7 +63,7 @@ public sealed class ActionExecutor
         PhaseRunner? phaseRunner = null,
         RuleProcessor? ruleProcessor = null)
     {
-        var defaults = NeedsDefaults(
+        if (HasMissingDependency(
             hatchService,
             moveFromBreedingService,
             playCardService,
@@ -71,19 +71,31 @@ public sealed class ActionExecutor
             attackService,
             complexMechanicService,
             phaseRunner,
-            ruleProcessor)
-            ? BattleEngineServices.CreateLegacyDefault()
-            : null;
+            ruleProcessor))
+        {
+            throw new DomainException(
+                "ActionExecutor requires a complete service graph from BattleEngineServices. Partial dependency injection is not allowed.");
+        }
 
-        _hatchService = hatchService ?? defaults!.HatchService;
-        _moveFromBreedingService = moveFromBreedingService ?? defaults!.MoveFromBreedingService;
-        _playCardService = playCardService ?? defaults!.PlayCardService;
-        _digivolveService = digivolveService ?? defaults!.DigivolveService;
-        _attackService = attackService ?? defaults!.AttackService;
-        _complexMechanicService = complexMechanicService ?? defaults!.ComplexMechanicService;
-        _phaseRunner = phaseRunner ?? defaults!.PhaseRunner;
-        _ruleProcessor = ruleProcessor ?? defaults!.RuleProcessor;
+        _hatchService = hatchService!;
+        _moveFromBreedingService = moveFromBreedingService!;
+        _playCardService = playCardService!;
+        _digivolveService = digivolveService!;
+        _attackService = attackService!;
+        _complexMechanicService = complexMechanicService!;
+        _phaseRunner = phaseRunner!;
+        _ruleProcessor = ruleProcessor!;
     }
+
+    internal PlayCardService RuntimePlayCardService => _playCardService;
+
+    internal DigivolveService RuntimeDigivolveService => _digivolveService;
+
+    internal AttackService RuntimeAttackService => _attackService;
+
+    internal PhaseRunner RuntimePhaseRunner => _phaseRunner;
+
+    internal RuleProcessor RuntimeRuleProcessor => _ruleProcessor;
 
     public ActionExecutionResult Execute(GameState state, GameAction action, GameTrace? trace = null)
     {
@@ -171,7 +183,7 @@ public sealed class ActionExecutor
         return result.MarkRulesProcessed();
     }
 
-    private static bool NeedsDefaults(
+    private static bool HasMissingDependency(
         HatchService? hatchService,
         MoveFromBreedingService? moveFromBreedingService,
         PlayCardService? playCardService,

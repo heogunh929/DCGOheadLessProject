@@ -13,7 +13,8 @@ public sealed class ReplayRunner
     public ReplayRunner(EngineInvariantChecker? invariantChecker = null, ActionExecutor? actionExecutor = null)
     {
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
-        _actionExecutor = actionExecutor ?? new ActionExecutor();
+        _actionExecutor = actionExecutor
+            ?? throw new DomainException("ReplayRunner requires an ActionExecutor from BattleEngineServices.");
     }
 
     public ReplayResult Replay(GameState initialState, GameTrace trace)
@@ -40,7 +41,12 @@ public sealed class ReplayRunner
                 throw new DomainException($"Trace replay hash mismatch before event '{traceEvent.Index}'.");
             }
 
-            _actionExecutor.Execute(state, traceEvent.Action);
+            var result = _actionExecutor.Execute(state, traceEvent.Action);
+            if (result.HasPendingSelection)
+            {
+                throw new DomainException(
+                    $"ReplayRunner cannot ignore pending SelectionRequest '{result.PendingSelectionRequest!.Id}' at trace event '{traceEvent.Index}'.");
+            }
 
             var afterHash = state.ComputeStateHash();
             if (!string.Equals(afterHash, traceEvent.StateHashAfter, StringComparison.Ordinal))

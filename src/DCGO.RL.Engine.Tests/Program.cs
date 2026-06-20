@@ -140,6 +140,14 @@ var tests = new (string Name, Action Test)[]
     ("Runtime composition missing TriggerPipeline fails validation", RuntimeCompositionMissingTriggerPipelineFailsValidation),
     ("Runtime composition PlayCardService requires TriggerPipeline", RuntimeCompositionPlayCardServiceRequiresTriggerPipeline),
     ("Runtime composition ActionExecutor returns pending option selection", RuntimeCompositionActionExecutorReturnsPendingOptionSelection),
+    ("Runtime composition primitive SecurityCheck uses security effects", RuntimeCompositionPrimitiveSecurityCheckUsesSecurityEffects),
+    ("Runtime composition primitive SecurityCheck uses continuous SecurityAttack", RuntimeCompositionPrimitiveSecurityCheckUsesContinuousSecurityAttack),
+    ("Runtime composition primitive SecurityCheck uses continuous SecurityDigimonDP", RuntimeCompositionPrimitiveSecurityCheckUsesContinuousSecurityDigimonDp),
+    ("Runtime composition default constructors fail", RuntimeCompositionDefaultConstructorsFail),
+    ("Runtime composition effect-bearing cards do not become legacy NoEffect", RuntimeCompositionEffectBearingCardDoesNotBecomeLegacyNoEffect),
+    ("Runtime composition mixed custom/default graph fails", RuntimeCompositionMixedCustomDefaultGraphFails),
+    ("Runtime composition scripted runner rejects pending selection", RuntimeCompositionScriptedRunnerRejectsPendingSelection),
+    ("Runtime composition random runner rejects pending selection", RuntimeCompositionRandomRunnerRejectsPendingSelection),
     ("Option lifecycle ST1 hand option regression", OptionLifecycleSt1HandOptionRegression),
     ("Option lifecycle ST2/ST3 hand option regression", OptionLifecycleSt2St3HandOptionRegression),
     ("TriggerPipeline ST1-09 OnBlockAnyone hook", TriggerPipelineSt1OnBlockAnyoneHook),
@@ -1224,7 +1232,7 @@ static void ReplayRunnerEmptyTrace()
 {
     var state = CreateInvariantValidState();
     var trace = new GameTrace();
-    var result = new ReplayRunner().Replay(state, trace);
+    var result = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, trace);
 
     AssertTrue(result.InvariantReport.IsValid);
     AssertEqual(0, result.Trace.Events.Count);
@@ -1336,7 +1344,7 @@ static void MinimalBattleDirectAttackSecurityZeroWins()
     var state = CreateMinimalBattleState();
     var attacker = AddBattlePermanent(state, 1001, 1, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
 
-    new ActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, null));
+    CreateTestActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, null));
 
     AssertEqual(GameResultKind.Win, state.Result.Kind);
     AssertEqual<PlayerId?>(PlayerId.Player0, state.Result.Winner);
@@ -1349,7 +1357,7 @@ static void MinimalBattleLowerDpTrashesLoser()
     var attacker = AddBattlePermanent(state, 1011, 11, "BT1-WEAK", PlayerId.Player0, 0, enterTurn: 1);
     var defender = AddBattlePermanent(state, 1012, 12, "BT1-STRONG", PlayerId.Player1, 0, enterTurn: 1);
 
-    new ActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+    CreateTestActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
 
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(attacker.TopCardId));
     AssertFalse(state.GetPlayer(PlayerId.Player0).FieldPermanents.Any(permanent => permanent.Id == attacker.Id));
@@ -1362,7 +1370,7 @@ static void MinimalBattleTieTrashesBoth()
     var attacker = AddBattlePermanent(state, 1021, 21, "BT1-TIE", PlayerId.Player0, 0, enterTurn: 1);
     var defender = AddBattlePermanent(state, 1022, 22, "BT1-TIE", PlayerId.Player1, 0, enterTurn: 1);
 
-    new ActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+    CreateTestActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
 
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(attacker.TopCardId));
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
@@ -1376,7 +1384,7 @@ static void MinimalBattleAttackSecurityReducesSecurity()
     var attacker = AddBattlePermanent(state, 1031, 31, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
     var security = AddCardToZone(state, 1032, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
 
-    new ActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, null));
+    CreateTestActionExecutor().Execute(state, new AttackAction(PlayerId.Player0, attacker.Id, null));
 
     AssertEqual(0, state.GetPlayer(PlayerId.Player1).Security.Count);
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
@@ -1393,7 +1401,7 @@ static void MinimalBattleNormalDigivolveDrawsOne()
     var legalActions = new LegalActionGenerator().Generate(state, PlayerId.Player0);
     AssertTrue(legalActions.Any(action => action.Kind == LegalActionKind.Digivolve));
 
-    new ActionExecutor().Execute(state, new DigivolveAction(PlayerId.Player0, champion, target.Id));
+    CreateTestActionExecutor().Execute(state, new DigivolveAction(PlayerId.Player0, champion, target.Id));
 
     AssertEqual(champion, target.TopCardId);
     AssertSequence(new[] { new CardInstanceId(1035) }, target.SourceCardIds);
@@ -1412,7 +1420,7 @@ static void MinimalBattleHatchCondition()
     var legalActions = new LegalActionGenerator().Generate(state, PlayerId.Player0);
     AssertTrue(legalActions.Any(action => action.Kind == LegalActionKind.Hatch));
 
-    new ActionExecutor().Execute(state, new HatchAction(PlayerId.Player0));
+    CreateTestActionExecutor().Execute(state, new HatchAction(PlayerId.Player0));
 
     AssertFalse(state.GetPlayer(PlayerId.Player0).DigiEggDeck.Contains(egg));
     AssertEqual(Zone.BreedingArea, state.Cards[egg].CurrentZone);
@@ -1428,7 +1436,7 @@ static void MinimalBattleMoveFromBreedingCondition()
     var legalActions = new LegalActionGenerator().Generate(state, PlayerId.Player0);
     AssertTrue(legalActions.Any(action => action.Kind == LegalActionKind.MoveFromBreeding));
 
-    new ActionExecutor().Execute(state, new MoveFromBreedingAction(PlayerId.Player0, permanent.Id, 2));
+    CreateTestActionExecutor().Execute(state, new MoveFromBreedingAction(PlayerId.Player0, permanent.Id, 2));
 
     AssertFalse(permanent.IsBreedingArea);
     AssertEqual(2, permanent.FrameIndex);
@@ -1441,7 +1449,7 @@ static void MinimalBattleMemoryCrossingChangesTurn()
     state.Memory = 1;
     var card = AddCardToZone(state, 1061, "BT1-COST3", PlayerId.Player0, Zone.Hand);
 
-    new ActionExecutor().Execute(state, new PlayCardAction(PlayerId.Player0, card, 0));
+    CreateTestActionExecutor().Execute(state, new PlayCardAction(PlayerId.Player0, card, 0));
 
     AssertEqual(PlayerId.Player1, state.TurnPlayerId);
     AssertEqual(2, state.Memory);
@@ -1455,7 +1463,7 @@ static void LegalActionGeneratorGeneratedActionsExecute()
     AddBattlePermanent(state, 1072, 72, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
     AddCardToZone(state, 1073, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
     var generator = new LegalActionGenerator();
-    var executor = new ActionExecutor();
+    var executor = CreateTestActionExecutor();
 
     var legalActions = generator.Generate(state, PlayerId.Player0);
 
@@ -1472,7 +1480,7 @@ static void ActionExecutorInvalidActionFails()
     var state = CreateMinimalBattleState();
 
     AssertThrows<DomainException>(() =>
-        new ActionExecutor().Execute(state, new PlayCardAction(PlayerId.Player0, new CardInstanceId(9999), 0)));
+        CreateTestActionExecutor().Execute(state, new PlayCardAction(PlayerId.Player0, new CardInstanceId(9999), 0)));
 }
 
 static void MinimalBattleSameActionSequenceSameHash()
@@ -1481,7 +1489,7 @@ static void MinimalBattleSameActionSequenceSameHash()
     var second = CreateMinimalBattleState();
     var firstCard = AddCardToZone(first, 1091, "BT1-FREE", PlayerId.Player0, Zone.Hand);
     var secondCard = AddCardToZone(second, 1091, "BT1-FREE", PlayerId.Player0, Zone.Hand);
-    var executor = new ActionExecutor();
+    var executor = CreateTestActionExecutor();
 
     executor.Execute(first, new PlayCardAction(PlayerId.Player0, firstCard, 0));
     executor.Execute(first, new PassAction(PlayerId.Player0));
@@ -1493,7 +1501,7 @@ static void MinimalBattleSameActionSequenceSameHash()
 
 static void ValidationHarnessV1ScriptedScenariosPass()
 {
-    var runner = new ScriptedScenarioRunner();
+    var runner = CreateTestScriptedScenarioRunner();
     var scenarios = CreateValidationHarnessV1Scenarios();
 
     AssertEqual(7, scenarios.Count);
@@ -1515,7 +1523,7 @@ static void ValidationHarnessV1RandomLegalActionSmoke()
     AddCardToZone(state, 1102, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
     AddCardToZone(state, 1103, "BT1-FREE", PlayerId.Player0, Zone.Hand);
 
-    var result = new RandomLegalActionRunner().Run(new RandomLegalActionRunRequest("smoke", state, MaxActions: 8, Seed: 77));
+    var result = CreateTestRandomLegalActionRunner().Run(new RandomLegalActionRunRequest("smoke", state, MaxActions: 8, Seed: 77));
 
     AssertTrue(result.Status is ScenarioRunStatus.Completed or ScenarioRunStatus.GameOver or ScenarioRunStatus.MaxTurnAbort);
     AssertTrue(result.InvariantReport.IsValid);
@@ -1527,7 +1535,7 @@ static void ValidationHarnessV1RandomMaxActionAbort()
     var state = CreateMinimalBattleState();
     AddCardToZone(state, 1104, "BT1-OPTION", PlayerId.Player1, Zone.Deck);
 
-    var result = new RandomLegalActionRunner().Run(new RandomLegalActionRunRequest("max-abort", state, MaxActions: 1, Seed: 78));
+    var result = CreateTestRandomLegalActionRunner().Run(new RandomLegalActionRunRequest("max-abort", state, MaxActions: 1, Seed: 78));
 
     AssertEqual(ScenarioRunStatus.MaxTurnAbort, result.Status);
     AssertTrue(result.MaxTurnAbort is not null);
@@ -1548,7 +1556,7 @@ static void ValidationHarnessV1InvariantAfterEveryAction()
             new ActionScenarioStep(new MoveFromBreedingAction(PlayerId.Player0, new PermanentId(1), 0)),
         });
 
-    var result = new ScriptedScenarioRunner().Run(scenario);
+    var result = CreateTestScriptedScenarioRunner().Run(scenario);
 
     AssertEqual(3, result.InvariantReports.Count);
     AssertTrue(result.InvariantReports.All(report => report.IsValid));
@@ -1557,9 +1565,9 @@ static void ValidationHarnessV1InvariantAfterEveryAction()
 static void ValidationHarnessV1TraceReplaySameFinalHash()
 {
     var scenario = CreateValidationHarnessV1Scenarios().First(candidate => candidate.Name == "normal digivolve draw");
-    var result = new ScriptedScenarioRunner().Run(scenario);
+    var result = CreateTestScriptedScenarioRunner().Run(scenario);
 
-    var replay = new ReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, result.Trace, result.FinalStateHash);
+    var replay = CreateTestReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, result.Trace, result.FinalStateHash);
 
     AssertTrue(replay.Matches);
     AssertEqual(result.FinalStateHash, replay.ActualFinalStateHash);
@@ -1568,12 +1576,12 @@ static void ValidationHarnessV1TraceReplaySameFinalHash()
 static void ValidationHarnessV1TraceSaveLoad()
 {
     var scenario = CreateValidationHarnessV1Scenarios().First(candidate => candidate.Name == "security 0 direct attack win");
-    var result = new ScriptedScenarioRunner().Run(scenario);
+    var result = CreateTestScriptedScenarioRunner().Run(scenario);
     var store = new TraceStore();
 
     var serialized = store.Save(result.Trace);
     var loaded = store.Load(serialized);
-    var replay = new ReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, loaded, result.FinalStateHash);
+    var replay = CreateTestReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, loaded, result.FinalStateHash);
 
     AssertEqual(result.Trace.Events.Count, loaded.Events.Count);
     AssertTrue(replay.Matches);
@@ -1582,7 +1590,7 @@ static void ValidationHarnessV1TraceSaveLoad()
 static void ValidationHarnessV1CliDebugRenderer()
 {
     var scenario = CreateValidationHarnessV1Scenarios().First(candidate => candidate.Name == "lower DP Digimon deleted");
-    var result = new ScriptedScenarioRunner().Run(scenario);
+    var result = CreateTestScriptedScenarioRunner().Run(scenario);
     var renderer = new CliDebugRenderer();
 
     var rendered = renderer.RenderScenarioResult(result);
@@ -1593,7 +1601,7 @@ static void ValidationHarnessV1CliDebugRenderer()
 
 static void ValidationHarnessV2CompletionGateReportsSt1Complete()
 {
-    var report = new EngineCompletionChecklistRunner().Run(CreateSt1EngineCompletionRequest());
+    var report = CreateTestEngineCompletionChecklistRunner().Run(CreateSt1EngineCompletionRequest());
 
     AssertTrue(report.IsComplete);
     AssertTrue(report.Gates.Any(gate => gate.Id == "forbidden-dependencies" && gate.Status == CompletionGateStatus.Passed));
@@ -1644,7 +1652,7 @@ static void ValidationHarnessV2InvariantFuzzCapturesFailures()
     var card = AddCardToZone(invalidState, 12101, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
     invalidState.GetPlayer(PlayerId.Player0).Hand.Add(card);
 
-    var report = new InvariantFuzzRunner().Run(new[]
+    var report = new InvariantFuzzRunner(CreateTestRandomLegalActionRunner()).Run(new[]
     {
         new RandomLegalActionRunRequest("invalid-duplicate-membership", invalidState, MaxActions: 2, Seed: 1701),
     });
@@ -1910,7 +1918,7 @@ static void DurationReplayDeterminismIncludesModifiers()
         PlayerId.Player0,
         stableId: "duration:test:replay");
 
-    var replay = new ReplayRunner().Replay(state, new GameTrace());
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
 
     AssertTrue(replay.InvariantReport.IsValid);
     AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
@@ -2650,10 +2658,9 @@ static void OptionLifecycleActionTraceReplayDeterministic()
         state.CardDefinitions["FX-OPTION"] = CardEffectTestFixture.OptionEffectDefinition("FX-OPTION", "FX_Option");
         var option = AddCardToZone(state, 6261, "FX-OPTION", PlayerId.Player0, Zone.Hand);
         var initial = state.Clone();
-        var service = new PlayCardService(
-            triggerPipelineService: new TriggerPipelineService(CardEffectTestFixture.Registry(
-                new TimingMemoryCardScript("FX-OPTION", "FX_Option", EffectTiming.OptionSkill, amount: 1))));
-        var executor = new ActionExecutor(playCardService: service);
+        var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+            new TimingMemoryCardScript("FX-OPTION", "FX_Option", EffectTiming.OptionSkill, amount: 1)));
+        var executor = services.ActionExecutor;
         var trace = new GameTrace();
 
         executor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1), trace);
@@ -2688,7 +2695,8 @@ static void RuntimeCompositionMissingTriggerPipelineFailsValidation()
         triggerPipelineService: null,
         zoneMover: new ZoneMover(),
         primitiveService: new Tier1PrimitiveService(),
-        invariantChecker: new EngineInvariantChecker());
+        invariantChecker: new EngineInvariantChecker(),
+        securityCheckService: new SecurityCheckService());
 
     AssertFalse(report.IsValid);
     AssertTrue(report.Issues.Any(issue => issue.DependencyName == nameof(TriggerPipelineService)));
@@ -2706,13 +2714,13 @@ static void RuntimeCompositionActionExecutorReturnsPendingOptionSelection()
     state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
     var option = AddCardToZone(state, 6265, "FX-SELECT", PlayerId.Player0, Zone.Hand);
     var target = AddBattlePermanent(state, 6266, 866, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
-    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
         new SelectionPrimitiveCardScript(
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
             PlayerId.Player1)));
-    var executor = new ActionExecutor(playCardService: new PlayCardService(triggerPipelineService: pipeline));
+    var executor = services.ActionExecutor;
 
     var result = executor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1));
 
@@ -2726,6 +2734,125 @@ static void RuntimeCompositionActionExecutorReturnsPendingOptionSelection()
     AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
     AssertTrue(state.GetPlayer(PlayerId.Player0).Executing.Contains(option));
     AssertTrue(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+}
+
+static void RuntimeCompositionPrimitiveSecurityCheckUsesSecurityEffects()
+{
+    var state = CreateSt1ScenarioState();
+    var attacker = AddBattlePermanent(state, 6267, 867, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6268, 868, "ST1-06", PlayerId.Player0, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 6269, "ST1-16", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var provider = new TestDecisionProvider();
+    provider.EnqueueSelectionResult(SelectionResult.ForTargets(
+        "ST1-16:option:delete",
+        new[] { PermanentSelectionTarget(target) }));
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry(), provider);
+
+    var result = services.PrimitiveService.SecurityCheck(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { security }, result.CheckedCards);
+    AssertEqual(1, result.SecurityEffectResults.Count);
+    AssertEqual("ST1-16:security:main-option-activation", result.SecurityEffectResults[0].SecurityResolutions[0].StableId);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+}
+
+static void RuntimeCompositionPrimitiveSecurityCheckUsesContinuousSecurityAttack()
+{
+    var state = CreateSt1ScenarioState();
+    var attacker = AddBattlePermanent(state, 6270, 870, "ST1-11", PlayerId.Player0, 0, enterTurn: 1);
+    AddEvolutionSource(state, 6271, "ST1-02", PlayerId.Player0, attacker.Id);
+    AddEvolutionSource(state, 6272, "ST1-03", PlayerId.Player0, attacker.Id);
+    AddEvolutionSource(state, 6273, "ST1-04", PlayerId.Player0, attacker.Id);
+    AddEvolutionSource(state, 6274, "ST1-05", PlayerId.Player0, attacker.Id);
+    var first = AddCardToZone(state, 6275, "ST1-04", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var second = AddCardToZone(state, 6276, "ST1-04", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var third = AddCardToZone(state, 6277, "ST1-04", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry());
+
+    var result = services.PrimitiveService.SecurityCheck(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { first, second, third }, result.CheckedCards);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(first));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(second));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(third));
+}
+
+static void RuntimeCompositionPrimitiveSecurityCheckUsesContinuousSecurityDigimonDp()
+{
+    var state = CreateSt2St3ScenarioState();
+    AddBattlePermanent(state, 6278, 878, "ST3-12", PlayerId.Player1, 0, enterTurn: 1);
+    var attacker = AddBattlePermanent(state, 6279, 879, "ST3-09", PlayerId.Player0, 0, enterTurn: 1);
+    var security = AddCardToZone(state, 6280, "ST3-06", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var services = BattleEngineServices.Create(St2St3CardScriptCatalog.CreateCombinedWithSt1Registry());
+
+    var result = services.PrimitiveService.SecurityCheck(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { security }, result.CheckedCards);
+    AssertTrue(result.BattleResult is not null);
+    AssertSequence(new[] { attacker.Id }, result.BattleResult!.DestroyedPermanents);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(attacker.TopCardId));
+}
+
+static void RuntimeCompositionDefaultConstructorsFail()
+{
+    AssertThrows<DomainException>(() => new ActionExecutor());
+    AssertThrows<DomainException>(() => new TurnRunner());
+    AssertThrows<DomainException>(() => new ScriptedScenarioRunner());
+    AssertThrows<DomainException>(() => new RandomLegalActionRunner());
+    AssertThrows<DomainException>(() => new ReplayRunner());
+    AssertThrows<DomainException>(() => new ReplayDeterminismHelper());
+}
+
+static void RuntimeCompositionEffectBearingCardDoesNotBecomeLegacyNoEffect()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-EFFECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-EFFECT", "FX_Effect", playCost: 0);
+    var option = AddCardToZone(state, 6281, "FX-EFFECT", PlayerId.Player0, Zone.Hand);
+    var services = BattleEngineServices.Create(new CardScriptRegistry());
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        services.ActionExecutor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1)));
+}
+
+static void RuntimeCompositionMixedCustomDefaultGraphFails()
+{
+    var playCardService = new PlayCardService(
+        new TriggerPipelineService(new TestNoEffectCardScriptRegistry()));
+
+    AssertThrows<DomainException>(() => new ActionExecutor(playCardService: playCardService));
+}
+
+static void RuntimeCompositionScriptedRunnerRejectsPendingSelection()
+{
+    var state = CreatePendingOptionScenarioState(out var option);
+    var services = CreatePendingOptionServices();
+    var scenario = new ScriptedScenario(
+        "pending option",
+        state,
+        new[] { new PlayCardAction(PlayerId.Player0, option, -1) });
+    var runner = new ScriptedScenarioRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+
+    AssertThrows<DomainException>(() => runner.Run(scenario));
+}
+
+static void RuntimeCompositionRandomRunnerRejectsPendingSelection()
+{
+    var state = CreatePendingOptionScenarioState(out _);
+    var services = CreatePendingOptionServices();
+    var runner = new RandomLegalActionRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+
+    AssertThrows<DomainException>(() => runner.Run(new RandomLegalActionRunRequest(
+        "pending-option",
+        state,
+        MaxActions: 1,
+        Seed: 1)));
 }
 
 static void OptionLifecycleSt1HandOptionRegression()
@@ -5224,7 +5351,7 @@ static void ComplexMechanicsJogressExecutionTopSources()
     var right = AddBattlePermanent(state, 3013, 313, "CM-BLUE-L4", PlayerId.Player0, 1, enterTurn: 1);
     AddCardToZone(state, 3014, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
 
-    new ActionExecutor().Execute(state, new JogressAction(PlayerId.Player0, jogress, new[] { left.Id, right.Id }));
+    CreateTestActionExecutor().Execute(state, new JogressAction(PlayerId.Player0, jogress, new[] { left.Id, right.Id }));
 
     var permanent = state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Single(candidate => candidate.TopCardId == jogress);
     AssertEqual(jogress, permanent.TopCardId);
@@ -5295,7 +5422,7 @@ static void ComplexMechanicsDigiXrosMaterialsAndCost()
         .ToArray();
     var request = new ComplexMechanicSelectionFactory().CreateDigiXrosMaterialSelection(state, PlayerId.Player0, card, candidates, maxCount: 2);
 
-    new ActionExecutor().Execute(state, new DigiXrosPlayAction(PlayerId.Player0, card, 0, new[] { handMaterial, trashMaterial }));
+    CreateTestActionExecutor().Execute(state, new DigiXrosPlayAction(PlayerId.Player0, card, 0, new[] { handMaterial, trashMaterial }));
 
     var permanent = state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Single(candidate => candidate.TopCardId == card);
     AssertEqual(2, cost.FinalCost);
@@ -5317,7 +5444,7 @@ static void ComplexMechanicsAssemblyMaterialSelection()
         .ToArray();
     var request = new ComplexMechanicSelectionFactory().CreateAssemblyMaterialSelection(state, PlayerId.Player0, card, candidates, count: 2);
 
-    new ActionExecutor().Execute(state, new AssemblyPlayAction(PlayerId.Player0, card, 0, new[] { first, second }));
+    CreateTestActionExecutor().Execute(state, new AssemblyPlayAction(PlayerId.Player0, card, 0, new[] { first, second }));
 
     var permanent = state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Single(candidate => candidate.TopCardId == card);
     AssertEqual(2, request.MinCount);
@@ -5332,7 +5459,7 @@ static void ComplexMechanicsLinkCardStateConsistency()
     var linkCard = AddCardToZone(state, 3071, "CM-LINK", PlayerId.Player0, Zone.Hand);
     var target = AddBattlePermanent(state, 3072, 372, "CM-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
 
-    new ActionExecutor().Execute(state, new LinkAction(PlayerId.Player0, linkCard, target.Id));
+    CreateTestActionExecutor().Execute(state, new LinkAction(PlayerId.Player0, linkCard, target.Id));
 
     AssertSequence(new[] { linkCard }, target.LinkedCards);
     AssertEqual(Zone.LinkedCards, state.Cards[linkCard].CurrentZone);
@@ -5349,7 +5476,7 @@ static void ComplexMechanicsUnsupportedMechanicExplicit()
     var right = AddBattlePermanent(state, 3083, 383, "CM-BLUE-L4", PlayerId.Player0, 1, enterTurn: 1);
 
     AssertThrows<UnsupportedMechanicException>(() =>
-        new ActionExecutor().Execute(state, new JogressAction(PlayerId.Player0, card, new[] { left.Id, right.Id })));
+        CreateTestActionExecutor().Execute(state, new JogressAction(PlayerId.Player0, card, new[] { left.Id, right.Id })));
 }
 
 static void ComplexMechanicsReplayDeterminism()
@@ -5363,8 +5490,8 @@ static void ComplexMechanicsReplayDeterminism()
         state,
         new[] { new JogressAction(PlayerId.Player0, jogress, new[] { left.Id, right.Id }) });
 
-    var result = new ScriptedScenarioRunner().Run(scenario);
-    var replay = new ReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, result.Trace, result.FinalStateHash);
+    var result = CreateTestScriptedScenarioRunner().Run(scenario);
+    var replay = CreateTestReplayDeterminismHelper().ReplayAndCompare(scenario.InitialState, result.Trace, result.FinalStateHash);
 
     AssertTrue(replay.Matches);
     AssertEqual(result.FinalStateHash, replay.ActualFinalStateHash);
@@ -5925,6 +6052,76 @@ static ICardDatabase CreateSt1CardDatabase() =>
 
 static ICardDatabase CreateSt1ToSt3CardDatabase() =>
     new InMemoryCardDatabase(CreateSt1CardDefinitions().Concat(CreateSt2St3CardDefinitions()));
+
+static BattleEngineServices CreateTestNoEffectServices() =>
+    BattleEngineServices.Create(new TestNoEffectCardScriptRegistry());
+
+static ActionExecutor CreateTestActionExecutor() =>
+    CreateTestNoEffectServices().ActionExecutor;
+
+static ScriptedScenarioRunner CreateTestScriptedScenarioRunner()
+{
+    var services = CreateTestNoEffectServices();
+    return new ScriptedScenarioRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+}
+
+static RandomLegalActionRunner CreateTestRandomLegalActionRunner()
+{
+    var services = CreateTestNoEffectServices();
+    return new RandomLegalActionRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+}
+
+static ReplayDeterminismHelper CreateTestReplayDeterminismHelper()
+{
+    var services = CreateTestNoEffectServices();
+    return new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor));
+}
+
+static EngineCompletionChecklistRunner CreateTestEngineCompletionChecklistRunner()
+{
+    var services = CreateTestNoEffectServices();
+    var scriptedRunner = new ScriptedScenarioRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+    var replayScriptedRunner = new ScriptedScenarioRunner(
+        actionExecutor: services.ActionExecutor,
+        phaseRunner: services.PhaseRunner,
+        turnRunner: services.TurnRunner);
+
+    return new EngineCompletionChecklistRunner(
+        scenarioSuiteRunner: new ScenarioSuiteRunner(scriptedRunner),
+        replayDeterminismRunner: new ReplayDeterminismRunner(
+            replayScriptedRunner,
+            new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor))),
+        invariantFuzzRunner: new InvariantFuzzRunner(new RandomLegalActionRunner(
+            actionExecutor: services.ActionExecutor,
+            phaseRunner: services.PhaseRunner,
+            turnRunner: services.TurnRunner)));
+}
+
+static BattleEngineServices CreatePendingOptionServices() =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT",
+            "FX_Select",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1)));
+
+static GameState CreatePendingOptionScenarioState(out CardInstanceId option)
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
+    option = AddCardToZone(state, 6290, "FX-SELECT", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(state, 6291, 891, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    return state;
+}
 
 static EngineCompletionRequest CreateSt1EngineCompletionRequest() =>
     new(
@@ -6722,5 +6919,26 @@ internal sealed class MutatingSelectionDecisionProvider : IDecisionProvider
     {
         _beforeSelection(request);
         return SelectionResult.ForTargets(request.Id, new[] { request.Candidates[0] });
+    }
+}
+
+internal sealed class TestNoEffectCardScriptRegistry : ICardScriptRegistry
+{
+    public IReadOnlyCollection<CardEffectPortingRecord> PortingRecords => Array.Empty<CardEffectPortingRecord>();
+
+    public bool TryGetScript(CardDefinition definition, out ICardScript script)
+    {
+        ArgumentNullException.ThrowIfNull(definition);
+        script = new NoEffectCardScript(
+            definition.CardId,
+            definition.CardEffectClassName,
+            "Test-only no-effect registry.");
+        return true;
+    }
+
+    public ICardScript GetScript(CardDefinition definition)
+    {
+        TryGetScript(definition, out var script);
+        return script;
     }
 }

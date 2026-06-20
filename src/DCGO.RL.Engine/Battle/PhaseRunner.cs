@@ -23,6 +23,8 @@ public sealed class PhaseRunner
         _triggerPipelineService = triggerPipelineService;
     }
 
+    internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
+
     public void RunActivePhase(GameState state)
     {
         state.TurnCount++;

@@ -13,7 +13,8 @@ public sealed class ReplayDeterminismHelper
 
     public ReplayDeterminismHelper(ReplayRunner? replayRunner = null)
     {
-        _replayRunner = replayRunner ?? new ReplayRunner();
+        _replayRunner = replayRunner
+            ?? throw new DomainException("ReplayDeterminismHelper requires a ReplayRunner from BattleEngineServices.");
     }
 
     public ReplayDeterminismResult ReplayAndCompare(GameState initialState, GameTrace trace, string expectedFinalStateHash)

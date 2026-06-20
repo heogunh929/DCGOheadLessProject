@@ -22,6 +22,10 @@ public sealed class DigivolveService
         _triggerPipelineService = triggerPipelineService;
     }
 
+    internal IZoneMover RuntimeZoneMover => _zoneMover;
+
+    internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
+
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null)
     {
         var player = state.GetPlayer(action.Actor);

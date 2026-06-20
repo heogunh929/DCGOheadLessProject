@@ -39,6 +39,10 @@ public sealed class RuleProcessor
         _triggerPipelineService = triggerPipelineService;
     }
 
+    internal PhaseRunner RuntimePhaseRunner => _phaseRunner;
+
+    internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
+
     public void ProcessAfterAction(GameState state)
     {
         ProcessUntilStable(state);

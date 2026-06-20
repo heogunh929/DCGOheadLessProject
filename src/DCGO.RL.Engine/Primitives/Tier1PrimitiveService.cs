@@ -31,7 +31,7 @@ public sealed class Tier1PrimitiveService
     private readonly IZoneMover _zoneMover;
     private readonly DrawService _drawService;
     private readonly BattleResolver _battleResolver;
-    private readonly SecurityCheckService _securityCheckService;
+    private SecurityCheckService _securityCheckService;
     private PlayCardService? _playCardService;
     private DigivolveService _digivolveService;
 
@@ -51,8 +51,20 @@ public sealed class Tier1PrimitiveService
         _digivolveService = digivolveService ?? new DigivolveService(_zoneMover, _drawService);
     }
 
-    internal void AttachRuntimeServices(PlayCardService playCardService, DigivolveService digivolveService)
+    internal IZoneMover RuntimeZoneMover => _zoneMover;
+
+    internal SecurityCheckService RuntimeSecurityCheckService => _securityCheckService;
+
+    internal PlayCardService? RuntimePlayCardService => _playCardService;
+
+    internal DigivolveService RuntimeDigivolveService => _digivolveService;
+
+    internal void AttachRuntimeServices(
+        SecurityCheckService securityCheckService,
+        PlayCardService playCardService,
+        DigivolveService digivolveService)
     {
+        _securityCheckService = securityCheckService ?? throw new ArgumentNullException(nameof(securityCheckService));
         _playCardService = playCardService ?? throw new ArgumentNullException(nameof(playCardService));
         _digivolveService = digivolveService ?? throw new ArgumentNullException(nameof(digivolveService));
     }

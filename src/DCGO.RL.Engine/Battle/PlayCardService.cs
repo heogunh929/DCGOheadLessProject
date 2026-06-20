@@ -49,6 +49,12 @@ public sealed class PlayCardService
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
     }
 
+    internal IZoneMover RuntimeZoneMover => _zoneMover;
+
+    internal TriggerPipelineService RuntimeTriggerPipelineService => _triggerPipelineService;
+
+    internal Tier1PrimitiveService? RuntimePrimitiveService => _primitives;
+
     public PermanentState? Play(GameState state, PlayCardAction action, GameTrace? trace = null)
     {
         var result = PlayWithResult(state, action, trace);

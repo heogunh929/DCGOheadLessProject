@@ -66,6 +66,8 @@ public sealed class TriggerPipelineService
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
     }
 
+    internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
+
     public TriggerPipelineResult Run(
         GameState state,
         EffectTiming timing,

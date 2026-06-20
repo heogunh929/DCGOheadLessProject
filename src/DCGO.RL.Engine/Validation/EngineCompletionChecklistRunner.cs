@@ -1,3 +1,4 @@
+using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Domain;
 
 namespace DCGO.RL.Engine.Validation;
@@ -84,7 +85,8 @@ public sealed class ScenarioSuiteRunner
 
     public ScenarioSuiteRunner(ScriptedScenarioRunner? scenarioRunner = null)
     {
-        _scenarioRunner = scenarioRunner ?? new ScriptedScenarioRunner();
+        _scenarioRunner = scenarioRunner
+            ?? throw new DomainException("ScenarioSuiteRunner requires a ScriptedScenarioRunner from BattleEngineServices.");
     }
 
     public ScenarioSuiteReport Run(IReadOnlyList<ScriptedScenario> scenarios)
@@ -122,8 +124,10 @@ public sealed class ReplayDeterminismRunner
         ScriptedScenarioRunner? scenarioRunner = null,
         ReplayDeterminismHelper? replayDeterminismHelper = null)
     {
-        _scenarioRunner = scenarioRunner ?? new ScriptedScenarioRunner();
-        _replayDeterminismHelper = replayDeterminismHelper ?? new ReplayDeterminismHelper();
+        _scenarioRunner = scenarioRunner
+            ?? throw new DomainException("ReplayDeterminismRunner requires a ScriptedScenarioRunner from BattleEngineServices.");
+        _replayDeterminismHelper = replayDeterminismHelper
+            ?? throw new DomainException("ReplayDeterminismRunner requires a ReplayDeterminismHelper from BattleEngineServices.");
     }
 
     public ReplayDeterminismSuiteReport Run(IReadOnlyList<ScriptedScenario> scenarios)
@@ -162,7 +166,8 @@ public sealed class InvariantFuzzRunner
 
     public InvariantFuzzRunner(RandomLegalActionRunner? randomLegalActionRunner = null)
     {
-        _randomLegalActionRunner = randomLegalActionRunner ?? new RandomLegalActionRunner();
+        _randomLegalActionRunner = randomLegalActionRunner
+            ?? throw new DomainException("InvariantFuzzRunner requires a RandomLegalActionRunner from BattleEngineServices.");
     }
 
     public InvariantFuzzReport Run(IReadOnlyList<RandomLegalActionRunRequest> requests)
@@ -218,9 +223,9 @@ public sealed class EngineCompletionChecklistRunner
     };
 
     private readonly TargetCardPoolValidator _targetCardPoolValidator;
-    private readonly ScenarioSuiteRunner _scenarioSuiteRunner;
-    private readonly ReplayDeterminismRunner _replayDeterminismRunner;
-    private readonly InvariantFuzzRunner _invariantFuzzRunner;
+    private readonly ScenarioSuiteRunner? _scenarioSuiteRunner;
+    private readonly ReplayDeterminismRunner? _replayDeterminismRunner;
+    private readonly InvariantFuzzRunner? _invariantFuzzRunner;
     private readonly UnsupportedMechanicZeroCheck _unsupportedMechanicZeroCheck;
 
     public EngineCompletionChecklistRunner(
@@ -231,9 +236,9 @@ public sealed class EngineCompletionChecklistRunner
         UnsupportedMechanicZeroCheck? unsupportedMechanicZeroCheck = null)
     {
         _targetCardPoolValidator = targetCardPoolValidator ?? new TargetCardPoolValidator();
-        _scenarioSuiteRunner = scenarioSuiteRunner ?? new ScenarioSuiteRunner();
-        _replayDeterminismRunner = replayDeterminismRunner ?? new ReplayDeterminismRunner();
-        _invariantFuzzRunner = invariantFuzzRunner ?? new InvariantFuzzRunner();
+        _scenarioSuiteRunner = scenarioSuiteRunner;
+        _replayDeterminismRunner = replayDeterminismRunner;
+        _invariantFuzzRunner = invariantFuzzRunner;
         _unsupportedMechanicZeroCheck = unsupportedMechanicZeroCheck ?? new UnsupportedMechanicZeroCheck();
     }
 
@@ -244,9 +249,13 @@ public sealed class EngineCompletionChecklistRunner
         var dependencyErrors = CheckForbiddenDependencies();
         var cardPoolReport = _targetCardPoolValidator.Validate(request.TargetCardPool);
         var unsupportedZeroCheck = _unsupportedMechanicZeroCheck.Check(cardPoolReport);
-        var scenarioSuite = _scenarioSuiteRunner.Run(request.GoldenScenarios);
-        var replayDeterminism = _replayDeterminismRunner.Run(request.ReplayScenarios ?? request.GoldenScenarios);
-        var invariantFuzz = _invariantFuzzRunner.Run(request.InvariantFuzzRuns);
+        var runtimeServices = BattleEngineServices.Create(request.TargetCardPool.CardScriptRegistry);
+        var scenarioSuiteRunner = _scenarioSuiteRunner ?? CreateScenarioSuiteRunner(runtimeServices);
+        var replayDeterminismRunner = _replayDeterminismRunner ?? CreateReplayDeterminismRunner(runtimeServices);
+        var invariantFuzzRunner = _invariantFuzzRunner ?? CreateInvariantFuzzRunner(runtimeServices);
+        var scenarioSuite = scenarioSuiteRunner.Run(request.GoldenScenarios);
+        var replayDeterminism = replayDeterminismRunner.Run(request.ReplayScenarios ?? request.GoldenScenarios);
+        var invariantFuzz = invariantFuzzRunner.Run(request.InvariantFuzzRuns);
 
         var gates = new List<CompletionGateResult>
         {
@@ -317,6 +326,26 @@ public sealed class EngineCompletionChecklistRunner
 
     private static CompletionGateResult Gate(string id, string name, bool passed, string details) =>
         new(id, name, passed ? CompletionGateStatus.Passed : CompletionGateStatus.Failed, details);
+
+    private static ScenarioSuiteRunner CreateScenarioSuiteRunner(BattleEngineServices services) =>
+        new(new ScriptedScenarioRunner(
+            actionExecutor: services.ActionExecutor,
+            phaseRunner: services.PhaseRunner,
+            turnRunner: services.TurnRunner));
+
+    private static ReplayDeterminismRunner CreateReplayDeterminismRunner(BattleEngineServices services) =>
+        new(
+            new ScriptedScenarioRunner(
+                actionExecutor: services.ActionExecutor,
+                phaseRunner: services.PhaseRunner,
+                turnRunner: services.TurnRunner),
+            new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor)));
+
+    private static InvariantFuzzRunner CreateInvariantFuzzRunner(BattleEngineServices services) =>
+        new(new RandomLegalActionRunner(
+            actionExecutor: services.ActionExecutor,
+            phaseRunner: services.PhaseRunner,
+            turnRunner: services.TurnRunner));
 
     private static string DescribeMissingScripts(TargetCardPoolValidationReport report)
     {

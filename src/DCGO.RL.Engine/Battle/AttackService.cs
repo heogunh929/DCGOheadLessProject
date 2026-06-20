@@ -42,6 +42,10 @@ public sealed class AttackService
         _triggerPipelineService = triggerPipelineService;
     }
 
+    internal SecurityCheckService RuntimeSecurityCheckService => _securityCheckService;
+
+    internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
+
     public SelectionRequest? CreateBlockerSelectionRequest(GameState state, AttackAction action)
     {
         if (action.Actor != state.TurnPlayerId)

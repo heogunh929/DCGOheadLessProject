@@ -37,6 +37,8 @@ public sealed class SecurityEffectExecutionService
         _primitives = primitives ?? new Tier1PrimitiveService();
     }
 
+    internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
+
     public SecurityEffectExecutionResult ExecuteSecurityEffects(
         GameState state,
         CardInstanceId securityCard,

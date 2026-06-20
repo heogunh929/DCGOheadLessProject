@@ -25,13 +25,13 @@ public sealed class RandomLegalActionRunner
         TurnRunner? turnRunner = null,
         EngineInvariantChecker? invariantChecker = null)
     {
-        var defaults = actionExecutor is null || phaseRunner is null || turnRunner is null
-            ? BattleEngineServices.CreateLegacyDefault()
-            : null;
         _legalActionGenerator = legalActionGenerator ?? new LegalActionGenerator();
-        _actionExecutor = actionExecutor ?? defaults!.ActionExecutor;
-        _phaseRunner = phaseRunner ?? defaults!.PhaseRunner;
-        _turnRunner = turnRunner ?? (phaseRunner is null ? defaults!.TurnRunner : new TurnRunner(_phaseRunner));
+        _actionExecutor = actionExecutor
+            ?? throw new DomainException("RandomLegalActionRunner requires an ActionExecutor from BattleEngineServices.");
+        _phaseRunner = phaseRunner
+            ?? throw new DomainException("RandomLegalActionRunner requires a PhaseRunner from BattleEngineServices.");
+        _turnRunner = turnRunner
+            ?? throw new DomainException("RandomLegalActionRunner requires a TurnRunner from BattleEngineServices.");
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
     }
 
@@ -80,7 +80,7 @@ public sealed class RandomLegalActionRunner
             }
 
             var action = legalActions[rng.NextInt(legalActions.Count)].Action;
-            _actionExecutor.Execute(state, action, trace);
+            ThrowIfPendingSelection(_actionExecutor.Execute(state, action, trace), $"random:{request.Name}:{actionsExecuted}");
             actionsExecuted++;
             AddInvariantReport(state, invariantReports);
 
@@ -157,5 +157,16 @@ public sealed class RandomLegalActionRunner
         var report = _invariantChecker.Check(state);
         report.ThrowIfInvalid();
         invariantReports.Add(report);
+    }
+
+    private static void ThrowIfPendingSelection(ActionExecutionResult result, string context)
+    {
+        if (!result.HasPendingSelection)
+        {
+            return;
+        }
+
+        throw new DomainException(
+            $"RandomLegalActionRunner cannot ignore pending SelectionRequest '{result.PendingSelectionRequest!.Id}' at {context}.");
     }
 }

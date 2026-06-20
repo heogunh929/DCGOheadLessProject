@@ -8,8 +8,10 @@ public sealed class TurnRunner
 
     public TurnRunner(PhaseRunner? phaseRunner = null)
     {
-        _phaseRunner = phaseRunner ?? BattleEngineServices.CreateLegacyDefault().PhaseRunner;
+        _phaseRunner = phaseRunner ?? throw new DomainException("TurnRunner requires a PhaseRunner from BattleEngineServices.");
     }
+
+    internal PhaseRunner RuntimePhaseRunner => _phaseRunner;
 
     public void RunToMainPhase(GameState state)
     {
