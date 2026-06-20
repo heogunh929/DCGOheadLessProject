@@ -1,5 +1,15 @@
 # Effect System Foundation
 
+## Queue 54A Trigger Stack Frame 보정
+
+`TriggerPipelineService`의 trigger drain 단위는 flat queue tail이 아니라 `TriggerStackFrame`이다. frame은 현재 timing/context, 현재 batch remaining effects, background effects, parent frame, ordering state, AfterEffectsActivate scheduling state를 보존한다. nested `RulesTiming`/`AfterEffectsActivate` frame은 parent frame의 remaining tail과 concat되지 않으며, child frame이 종료된 뒤 parent frame으로 복귀한다.
+
+`EffectDescriptor`와 `EffectResolution`에는 `TriggerSourceSnapshot`이 추가되었다. snapshot은 trigger 당시 source role과 zone, source permanent, top card, owner/controller를 보존한다. 실행 직전 source role별 위치를 재검증하고 `CanActivate`를 다시 평가한다. 이 때문에 후보 snapshot에는 남아 있지만 source가 Hand/Trash/Security/Inherited/Linked/FieldTop 역할에서 이탈한 effect는 silent no-op이 아니라 activation skip으로 처리된다.
+
+effect body 하나가 완료되면 production graph의 `RuleProcessor.StabilizeStateOnly` delegate가 먼저 실행되고, 이어 새 `RulesTiming` 후보가 있으면 nested frame으로 drain된다. `TriggerPipelineService`가 `RuleProcessor`를 생성하지 않고 `BattleEngineServices`가 delegate를 연결하므로 core service 간 순환 생성 의존성은 만들지 않는다.
+
+`AfterEffectsActivate`는 effect body마다 실행되지 않고 현재 batch가 끝난 뒤 frame으로 수집된다. 직접 self-recursive AfterEffectsActivate는 무한 stack이 되지 않도록 depth guard를 둔다.
+
 최신 기준일: 2026-06-14
 
 이 문서는 Unity 원본 `ICardEffect`, `AutoProcessing`, `SkillInfo`, `MultipleSkills`, `CardController` 흐름을 RL.Engine의 headless effect system으로 이식한 현재 구조를 요약한다.

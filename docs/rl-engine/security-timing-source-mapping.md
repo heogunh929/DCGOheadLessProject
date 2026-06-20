@@ -1,5 +1,26 @@
 # Security Timing Source Mapping
 
+## 54A 보정 결과 - Security AutoProcessCheck
+
+Security check 중 세 auto-process 지점은 `TriggerPipelineService.RunAutoProcess`를 사용한다.
+
+공통 순서:
+
+1. `RuleProcessor.StabilizeStateOnly`로 DP 0, invalid permanent, stale duration cleanup 같은 rule-visible state를 먼저 안정화한다.
+2. `RulesTiming` 후보를 현재 state에서 수집한다.
+3. `TriggerStackFrame` 기반 trigger stack을 drain한다.
+4. 해당 batch 종료 시 `AfterEffectsActivate` frame을 스케줄한다.
+
+이 경로는 다음 지점에서 동일하게 사용된다.
+
+- `SecuritySkill` 완료 직후.
+- prepared `OnSecurityCheck`/`OnLoseSecurity` 해소 직후, security battle 전.
+- checked card final zone 처리와 `UntilSecurityCheckEnd` cleanup 직후, 다음 security card 판단 전.
+
+selection이 발생하면 기존 `SecurityCheckContinuationStage`와 pending `TriggerPipelineContinuation`이 함께 보존된다. 따라서 security card 1장 단위 state machine과 nested trigger frame은 resume 이후에도 서로 섞이지 않는다.
+
+54A 검증은 `Security auto process stabilizes state before RulesTiming` 테스트로 고정한다. SecuritySkill이 DP 0 상태를 만들면 RulesTiming 후보가 실행되기 전에 대상 permanent가 먼저 rule cleanup으로 제거된다.
+
 이 문서는 DCGO Unity 원본의 security check 흐름과 headless `DCGO.RL.Engine` 구현의 대응 관계를 기록한다. `DCGO/Assets/Scripts` 원본은 읽기 전용 Source of Truth이며 이 작업에서 수정하지 않는다.
 
 ## 원본 Source

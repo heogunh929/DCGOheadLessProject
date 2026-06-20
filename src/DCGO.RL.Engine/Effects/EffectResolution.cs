@@ -25,7 +25,8 @@ public sealed record EffectResolution(
     SecurityEffectExecutionMode SecurityExecutionMode = SecurityEffectExecutionMode.Direct,
     bool IsOncePerTurn = false,
     string? OncePerTurnKey = null,
-    Func<EffectContext, bool>? CanActivate = null)
+    Func<EffectContext, bool>? CanActivate = null,
+    TriggerSourceSnapshot? SourceSnapshot = null)
 {
     public SelectionRequest? PendingSelectionRequest => OptionalSelectionRequest ?? SelectionRequest;
 }

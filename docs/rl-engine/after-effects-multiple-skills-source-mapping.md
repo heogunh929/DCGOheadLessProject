@@ -1,5 +1,26 @@
 # AfterEffectsActivate / MultipleSkills Source Mapping
 
+## 54A 보정 결과 - TriggerStackFrame
+
+54A부터 `TriggerPipelineService`는 nested trigger tail과 외부 trigger tail을 하나의 list로 평탄화하지 않는다. pending continuation은 `TriggerStackFrame`을 보존하며, 각 frame은 현재 timing/context, 현재 batch의 remaining effects, background effects, parent frame, ordering candidates, AfterEffectsActivate scheduling 상태, depth guard를 가진다.
+
+Frame drain 정책:
+
+- 현재 frame의 활성 batch를 turn player group 전체, 그 다음 non-turn player group 순서로 처리한다.
+- 같은 player group에서 활성 effect가 2개 이상이고 explicit optional/target decision이 아닌 경우 `EffectResolution` 단위 ordering request를 만든다. 같은 source card에서 script-authored descriptor가 2개 나온 경우도 자동 순서로 강제하지 않는다.
+- effect body 하나가 끝나면 `RuleProcessor.StabilizeStateOnly`를 통해 state-only rule stabilization을 수행하고, 새 `RulesTiming` 후보가 있으면 nested frame으로 먼저 drain한다. nested frame이 완전히 끝난 뒤에만 parent frame으로 복귀한다.
+- `AfterEffectsActivate`는 effect 1개마다 실행하지 않고 현재 batch가 끝난 뒤 다음 frame으로 수집한다. `AfterEffectsActivate` frame은 parent frame과 섞이지 않으며, 무한 재귀는 trigger stack depth guard로 차단한다.
+- optional yes/no와 explicit target selection이 필요한 effect는 ordering decision이 그 decision boundary를 가리지 않도록 먼저 해당 effect의 own decision으로 pause한다.
+
+`TriggerPipelineService`는 `RuleProcessor`를 직접 생성하지 않는다. production `BattleEngineServices`가 `RuleProcessor.StabilizeStateOnly` delegate를 trigger pipeline에 연결해 순환 생성 의존성을 피한다.
+
+Source snapshot/revalidation:
+
+- `EffectDescriptor`/`EffectResolution`은 trigger 당시 `TriggerSourceSnapshot`을 보존한다.
+- snapshot에는 source role, source zone, source permanent, trigger 당시 top card, owner/controller가 포함된다.
+- 실행 직전 `FieldTop`, `Inherited`, `Linked`, `Hand`, `Trash`, `Executing`, `FaceUpSecurity` role별 위치를 재검증하고, 그 뒤 `CanActivate`를 다시 확인한다.
+- Hand->Trash, Trash->Hand, FaceUpSecurity->Trash, inherited->top, inherited->linked, field top->source 전환은 stale source로 판단되어 실행되지 않는다.
+
 이 문서는 DCGO Unity 원본의 `AutoProcessing`, `MultipleSkills`, `ISecurityCheck` 흐름을 queue 54 구현과 대응시킨다. 원본 `DCGO/Assets/Scripts`는 읽기 전용 Source of Truth로 유지한다.
 
 ## 원본 Source

@@ -388,6 +388,7 @@ public sealed class BattleEngineServices
             invariantChecker,
             triggerPipelineService: triggerPipelineService,
             effectiveStats: effectiveStats);
+        triggerPipelineService.AttachStateOnlyStabilizer(ruleProcessor.StabilizeStateOnly);
         var turnRunner = new TurnRunner(phaseRunner);
         var actionExecutor = new ActionExecutor(
             hatchService,

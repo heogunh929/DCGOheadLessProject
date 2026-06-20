@@ -80,6 +80,7 @@ public sealed class SecurityCheckService
     private static readonly TriggerPipelineOptions SecurityTimingOptions = new(
         TriggerSourceZone.FieldTop
         | TriggerSourceZone.Inherited
+        | TriggerSourceZone.Linked
         | TriggerSourceZone.Hand
         | TriggerSourceZone.Trash
         | TriggerSourceZone.FaceUpSecurity,
@@ -737,9 +738,8 @@ public sealed class SecurityCheckService
             return null;
         }
 
-        return _triggerPipelineService.Run(
+        return _triggerPipelineService.RunAutoProcess(
             state,
-            EffectTiming.RulesTiming,
             state.TurnPlayerId,
             options: SecurityTimingOptions,
             trace: trace);

@@ -273,7 +273,7 @@ public sealed class EngineSession
             }
         }
 
-        var rulesAlreadyProcessed = false;
+        var rulesAlreadyProcessed = pending.Resolution.Timing == EffectTiming.RulesTiming;
 
         if (pending.PhaseContinuation is not null)
         {

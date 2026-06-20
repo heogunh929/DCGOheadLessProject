@@ -130,6 +130,12 @@ var tests = new (string Name, Action Test)[]
     ("TriggerPipeline ordering selection pauses and resumes", TriggerPipelineOrderingSelectionPausesAndResumes),
     ("TriggerPipeline skips stale source on activation revalidation", TriggerPipelineSkipsStaleSourceOnActivationRevalidation),
     ("TriggerPipeline AfterEffectsActivate interleaves after effect", TriggerPipelineAfterEffectsActivateInterleavesAfterEffect),
+    ("TriggerPipeline batch AfterEffectsActivate runs once after batch", TriggerPipelineBatchAfterEffectsRunsOnceAfterBatch),
+    ("TriggerPipeline same source descriptors require ordering", TriggerPipelineSameSourceDescriptorsRequireOrdering),
+    ("TriggerPipeline turn player group drains before non-turn group", TriggerPipelineTurnPlayerGroupDrainsBeforeNonTurnGroup),
+    ("TriggerPipeline auto process stabilizes before outer tail", TriggerPipelineAutoProcessStabilizesBeforeOuterTail),
+    ("TriggerPipeline nested rules timing drains before outer tail", TriggerPipelineNestedRulesTimingDrainsBeforeOuterTail),
+    ("TriggerPipeline source snapshot role validation", TriggerPipelineSourceSnapshotRoleValidation),
     ("TriggerPipeline OnStartMainPhase hook invokes descriptor", TriggerPipelineOnStartMainPhaseHookInvokesDescriptor),
     ("TriggerPipeline WhenDigivolving hook invokes descriptor", TriggerPipelineWhenDigivolvingHookInvokesDescriptor),
     ("TriggerPipeline OnAllyAttack hook invokes descriptor", TriggerPipelineOnAllyAttackHookInvokesDescriptor),
@@ -150,6 +156,7 @@ var tests = new (string Name, Action Test)[]
     ("Security multi-check selection pauses on first and second card", SecurityMultiCheckSelectionPauseResumeFirstAndSecondCards),
     ("Security timing replay deterministic", SecurityTimingReplayDeterministic),
     ("Security check auto process interleaves rules timing", SecurityCheckAutoProcessInterleavesRulesTiming),
+    ("Security auto process stabilizes state before RulesTiming", SecurityAutoProcessStabilizesStateBeforeRulesTiming),
     ("Provider optional target one-shot Run rejects pause", ProviderOptionalTargetOneShotRunRejectsPause),
     ("Option lifecycle hand play moves through Executing to Trash", OptionLifecycleHandPlayMovesThroughExecutingToTrash),
     ("Option lifecycle source context is Executing", OptionLifecycleSourceContextIsExecuting),
@@ -2628,6 +2635,247 @@ static void TriggerPipelineAfterEffectsActivateInterleavesAfterEffect()
         result.ExecutedEffects.Select(effect => effect.StableId).ToArray());
 }
 
+static void TriggerPipelineBatchAfterEffectsRunsOnceAfterBatch()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-A"] = CardEffectTestFixture.EffectDefinition("FX-A", "FX_A");
+    state.CardDefinitions["FX-B"] = CardEffectTestFixture.EffectDefinition("FX-B", "FX_B");
+    state.CardDefinitions["FX-C"] = CardEffectTestFixture.EffectDefinition("FX-C", "FX_C");
+    AddBattlePermanent(state, 9341, 1341, "FX-A", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9342, 1342, "FX-B", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 9343, 1343, "FX-C", PlayerId.Player0, 2, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new RecordingTimingCardScript("FX-A", "FX_A", EffectTiming.RulesTiming, "A", order),
+        new RecordingTimingCardScript("FX-B", "FX_B", EffectTiming.RulesTiming, "B", order),
+        new RecordingTimingCardScript("FX-C", "FX_C", EffectTiming.AfterEffectsActivate, "C", order)));
+
+    var result = pipeline.Run(
+        state,
+        EffectTiming.RulesTiming,
+        PlayerId.Player0,
+        options: new TriggerPipelineOptions(ResolveAfterEffectsActivate: true));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "A", "B", "C" }, order);
+    AssertEqual(1, order.Count(label => label == "C"));
+}
+
+static void TriggerPipelineSameSourceDescriptorsRequireOrdering()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DUAL"] = CardEffectTestFixture.EffectDefinition("FX-DUAL", "FX_Dual");
+    AddBattlePermanent(state, 9344, 1344, "FX-DUAL", PlayerId.Player0, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(
+        CardEffectTestFixture.Registry(new DoubleDescriptorRecordingCardScript(
+            "FX-DUAL",
+            "FX_Dual",
+            EffectTiming.RulesTiming,
+            "first",
+            "second",
+            order)),
+        pauseForOrderingWithoutProvider: true);
+
+    var pending = pipeline.Run(state, EffectTiming.RulesTiming, PlayerId.Player0);
+
+    AssertTrue(pending.HasPendingSelection);
+    AssertEqual(EffectDecisionStage.Ordering, pending.PendingContinuation!.PendingStage);
+    AssertEqual(2, pending.PendingSelectionRequest!.Candidates.Count);
+
+    var completed = pipeline.Resume(
+        state,
+        pending.PendingContinuation,
+        SelectionResult.ForOption(pending.PendingSelectionRequest.Id, "1"));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertSequence(new[] { "second", "first" }, order);
+}
+
+static void TriggerPipelineTurnPlayerGroupDrainsBeforeNonTurnGroup()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.TurnPlayerId = PlayerId.Player0;
+    state.CardDefinitions["FX-NON"] = CardEffectTestFixture.EffectDefinition("FX-NON", "FX_Non");
+    state.CardDefinitions["FX-TURN-A"] = CardEffectTestFixture.EffectDefinition("FX-TURN-A", "FX_TurnA");
+    state.CardDefinitions["FX-TURN-B"] = CardEffectTestFixture.EffectDefinition("FX-TURN-B", "FX_TurnB");
+    AddBattlePermanent(state, 9345, 1345, "FX-NON", PlayerId.Player1, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9346, 1346, "FX-TURN-A", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9347, 1347, "FX-TURN-B", PlayerId.Player0, 1, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new RecordingTimingCardScript("FX-NON", "FX_Non", EffectTiming.RulesTiming, "non-turn", order),
+        new RecordingTimingCardScript("FX-TURN-A", "FX_TurnA", EffectTiming.RulesTiming, "turn-a", order),
+        new RecordingTimingCardScript("FX-TURN-B", "FX_TurnB", EffectTiming.RulesTiming, "turn-b", order)));
+
+    var result = pipeline.Run(state, EffectTiming.RulesTiming, state.TurnPlayerId);
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "turn-a", "turn-b", "non-turn" }, order);
+}
+
+static void TriggerPipelineAutoProcessStabilizesBeforeOuterTail()
+{
+    var order = new List<string>();
+    var registry = CardEffectTestFixture.Registry(
+        new DpZeroCardScript("FX-ZERO", "FX_Zero", EffectTiming.OnPlay, "FX-TARGET", "zero", order),
+        new PermanentPresenceProbeScript("FX-PROBE", "FX_Probe", EffectTiming.OnPlay, "FX-TARGET", "probe", order),
+        new NoEffectCardScript("FX-TARGET", notes: "Test target for state-only rule stabilization."));
+    var services = BattleEngineServices.Create(registry);
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ZERO"] = CardEffectTestFixture.EffectDefinition("FX-ZERO", "FX_Zero");
+    state.CardDefinitions["FX-PROBE"] = CardEffectTestFixture.EffectDefinition("FX-PROBE", "FX_Probe");
+    state.CardDefinitions["FX-TARGET"] = CardEffectTestFixture.NoEffectDefinition("FX-TARGET") with { Dp = 3000 };
+    AddBattlePermanent(state, 9348, 1348, "FX-ZERO", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9349, 1349, "FX-PROBE", PlayerId.Player0, 1, enterTurn: 1);
+    var target = AddBattlePermanent(state, 9350, 1350, "FX-TARGET", PlayerId.Player1, 0, enterTurn: 1);
+
+    var result = services.TriggerPipelineService.Run(
+        state,
+        EffectTiming.OnPlay,
+        PlayerId.Player0,
+        options: new TriggerPipelineOptions(UseMultipleSkillsOrdering: false));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertSequence(new[] { "zero", "probe:absent" }, order);
+}
+
+static void TriggerPipelineNestedRulesTimingDrainsBeforeOuterTail()
+{
+    var order = new List<string>();
+    var registry = CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript("FX-A", "FX_A", EffectTiming.OnPlay, amount: 1),
+        new RecordingTimingCardScript("FX-B", "FX_B", EffectTiming.OnPlay, "outer-tail", order),
+        new ConditionalRecordingTimingCardScript(
+            "FX-RULES",
+            "FX_Rules",
+            EffectTiming.RulesTiming,
+            "nested-rules",
+            order,
+            context => context.State.Memory == 6 && !order.Contains("nested-rules")));
+    var services = BattleEngineServices.Create(registry);
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-A"] = CardEffectTestFixture.EffectDefinition("FX-A", "FX_A");
+    state.CardDefinitions["FX-B"] = CardEffectTestFixture.EffectDefinition("FX-B", "FX_B");
+    state.CardDefinitions["FX-RULES"] = CardEffectTestFixture.EffectDefinition("FX-RULES", "FX_Rules");
+    AddBattlePermanent(state, 9351, 1351, "FX-A", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9352, 1352, "FX-B", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 9353, 1353, "FX-RULES", PlayerId.Player0, 2, enterTurn: 1);
+
+    var result = services.TriggerPipelineService.Run(
+        state,
+        EffectTiming.OnPlay,
+        PlayerId.Player0,
+        options: new TriggerPipelineOptions(UseMultipleSkillsOrdering: false));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "nested-rules", "outer-tail" }, order);
+}
+
+static void TriggerPipelineSourceSnapshotRoleValidation()
+{
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.Hand,
+        Zone.Hand,
+        state => AddCardToZone(state, 9354, "FX-SOURCE", PlayerId.Player0, Zone.Hand),
+        (state, card, _) => new ZoneMover().MoveCard(state, new MoveCardCommand(card, Zone.Hand, Zone.Trash, MoveReason.Effect)));
+
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.Trash,
+        Zone.Trash,
+        state => AddCardToZone(state, 9355, "FX-SOURCE", PlayerId.Player0, Zone.Trash),
+        (state, card, _) => new ZoneMover().MoveCard(state, new MoveCardCommand(card, Zone.Trash, Zone.Hand, MoveReason.Effect)));
+
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.FaceUpSecurity,
+        Zone.Security,
+        state => AddCardToZone(state, 9356, "FX-SOURCE", PlayerId.Player0, Zone.Security, isFaceUp: true),
+        (state, card, _) => new ZoneMover().MoveCard(state, new MoveCardCommand(card, Zone.Security, Zone.Trash, MoveReason.Effect, FaceUp: true)));
+
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.Inherited,
+        Zone.EvolutionSources,
+        state =>
+        {
+            var host = AddBattlePermanent(state, 9357, 1357, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+            return AddEvolutionSource(state, 9358, "FX-SOURCE", PlayerId.Player0, host.Id);
+        },
+        (state, _, permanent) => new ZoneMover().MoveCard(
+            state,
+            new MoveCardCommand(
+                permanent!.TopCardId,
+                Zone.BattleArea,
+                Zone.Trash,
+                MoveReason.Effect,
+                SourcePermanent: permanent.Id,
+                FaceUp: true)));
+
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.Inherited,
+        Zone.EvolutionSources,
+        state =>
+        {
+            var host = AddBattlePermanent(state, 9359, 1359, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+            return AddEvolutionSource(state, 9360, "FX-SOURCE", PlayerId.Player0, host.Id);
+        },
+        (state, card, permanent) => new ZoneMover().MoveCard(
+            state,
+            new MoveCardCommand(
+                card,
+                Zone.EvolutionSources,
+                Zone.LinkedCards,
+                MoveReason.Link,
+                SourcePermanent: permanent!.Id,
+                DestinationPermanent: permanent.Id,
+                FaceUp: true)));
+
+    AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone.FieldTop,
+        Zone.BattleArea,
+        state =>
+        {
+            var host = AddBattlePermanent(state, 9361, 1361, "FX-SOURCE", PlayerId.Player0, 0, enterTurn: 1);
+            AddCardToZone(state, 9362, "BT1-CHAMPION", PlayerId.Player0, Zone.Hand);
+            return host.TopCardId;
+        },
+        (state, _, permanent) => new ZoneMover().DigivolveCard(
+            state,
+            new DigivolveCardCommand(
+                new CardInstanceId(9362),
+                Zone.Hand,
+                permanent!.Id)));
+
+    static void AssertPreparedSourceSkipsAfterMove(
+        TriggerSourceZone sourceZone,
+        Zone expectedSourceZone,
+        Func<GameState, CardInstanceId> addSource,
+        Action<GameState, CardInstanceId, PermanentState?> moveSource)
+    {
+        var state = CreateMinimalBattleState();
+        state.CardDefinitions["FX-SOURCE"] = CardEffectTestFixture.EffectDefinition("FX-SOURCE", "FX_Source");
+        var source = addSource(state);
+        var sourcePermanent = state.Cards[source].PermanentId is { } permanentId
+            ? state.Players.SelectMany(player => player.FieldPermanents).First(permanent => permanent.Id == permanentId)
+            : null;
+        var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+            new TimingMemoryCardScript("FX-SOURCE", "FX_Source", EffectTiming.RulesTiming, amount: 1)));
+        var prepared = pipeline.Prepare(
+            state,
+            EffectTiming.RulesTiming,
+            PlayerId.Player0,
+            options: new TriggerPipelineOptions(SourceZones: sourceZone));
+
+        AssertEqual(expectedSourceZone, state.Cards[source].CurrentZone);
+        moveSource(state, source, sourcePermanent);
+        var result = pipeline.RunPrepared(state, prepared);
+
+        AssertEqual(1, result.QueuedEffects.Count);
+        AssertEqual(0, result.ExecutedEffects.Count);
+        AssertEqual(5, state.Memory);
+    }
+}
+
 static void TriggerPipelineOnStartMainPhaseHookInvokesDescriptor()
 {
     var state = CreateMinimalBattleState();
@@ -3171,6 +3419,31 @@ static void SecurityCheckAutoProcessInterleavesRulesTiming()
     AssertSequence(new[] { security }, result.CheckedCards);
     AssertEqual(5, result.SecurityTimingResults.Count);
     AssertEqual(3, result.SecurityTimingResults.Count(timing => timing.Context.Timing == EffectTiming.RulesTiming));
+}
+
+static void SecurityAutoProcessStabilizesStateBeforeRulesTiming()
+{
+    var order = new List<string>();
+    var registry = CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-ATTACKER", notes: "Test-only attacker."),
+        new NoEffectCardScript("FX-TARGET", notes: "Test-only DP zero target."),
+        new DpZeroCardScript("FX-SEC", "FX_Sec", EffectTiming.SecuritySkill, "FX-TARGET", "security-zero", order),
+        new PermanentPresenceProbeScript("FX-RULES", "FX_Rules", EffectTiming.RulesTiming, "FX-TARGET", "rules", order));
+    var services = BattleEngineServices.Create(registry);
+    var state = CreateSecurityMultiCheckState(securityAttackModifier: 0);
+    state.CardDefinitions["FX-TARGET"] = CardEffectTestFixture.NoEffectDefinition("FX-TARGET") with { Dp = 3000 };
+    state.CardDefinitions["FX-RULES"] = CardEffectTestFixture.EffectDefinition("FX-RULES", "FX_Rules");
+    state.CardDefinitions["FX-SEC"] = CardEffectTestFixture.OptionEffectDefinition("FX-SEC", "FX_Sec");
+    var attacker = AddBattlePermanent(state, 9363, 1363, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 9364, 1364, "FX-TARGET", PlayerId.Player1, 0, enterTurn: 1);
+    AddBattlePermanent(state, 9365, 1365, "FX-RULES", PlayerId.Player0, 1, enterTurn: 1);
+    AddCardToZone(state, 9366, "FX-SEC", PlayerId.Player1, Zone.Security, isFaceUp: false);
+
+    var result = services.SecurityCheckService.CheckSecurity(state, attacker.Id, PlayerId.Player1);
+
+    AssertSequence(new[] { "security-zero", "rules:absent" }, order.Take(2).ToArray());
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertSequence(new[] { new CardInstanceId(9366) }, result.CheckedCards);
 }
 
 static void ProviderOptionalTargetOneShotRunRejectsPause()

@@ -13,6 +13,7 @@
 | 53 | done | prompts/53_security_trigger_timing_parity.md | security timing 원본 정렬 |
 | 53A | done | prompts/53A_source_aligned_security_multi_check_correction.md | source-aligned security multi-check state machine 보정 |
 | 54 | done | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
+| 54A | done | prompts/54A_source_aligned_trigger_stack_frame_correction.md | source-aligned trigger stack frame, nested trigger, RuleProcess, AfterEffectsActivate 보정 |
 | 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |
 | 57 | todo | prompts/57_parity_trace_contract_and_exporter.md | rule-visible parity trace 계약 |

@@ -1,5 +1,28 @@
 # 검증 전략
 
+## Queue 54A 검증 - 2026-06-21
+
+추가/유지된 검증 항목:
+
+- batch A/B가 모두 처리된 뒤 `AfterEffectsActivate` C가 1회만 실행된다.
+- 같은 source card의 두 descriptor도 ordering decision 대상이다.
+- turn player group 전체가 non-turn player group보다 먼저 drain된다.
+- effect 1개가 DP 0 상태를 만들면 outer tail의 다음 effect 전에 state-only RuleProcessor stabilization이 먼저 적용된다.
+- 첫 effect가 새 `RulesTiming` trigger를 만들면 nested trigger가 outer tail보다 먼저 drain된다.
+- Hand->Trash, Trash->Hand, FaceUpSecurity->Trash, inherited->top, inherited->linked, field top->source 전환은 trigger source snapshot revalidation에서 stale source로 skip된다.
+- security auto-process는 `RulesTiming`보다 state-only RuleProcessor stabilization을 먼저 수행한다.
+- 기존 optional/chained/security/phase replay regression과 ST1~ST3 card effect regression이 계속 통과한다.
+
+실행 결과:
+
+```powershell
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 327 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
 최신 기준일: 2026-06-18
 
 검증의 목적은 Unity 원본 battle 로직과 RL.Engine의 rule-visible state 차이를 찾는 것이다. self-play/trace는 엔진 완성 전 학습 데이터가 아니라 검증 데이터로만 사용한다.

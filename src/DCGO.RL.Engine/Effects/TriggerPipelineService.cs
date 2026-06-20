@@ -16,11 +16,13 @@ public enum TriggerSourceZone
     Trash = 8,
     Executing = 16,
     FaceUpSecurity = 32,
+    Linked = 64,
 }
 
 public sealed record TriggerPipelineOptions(
     TriggerSourceZone SourceZones = TriggerSourceZone.FieldTop
         | TriggerSourceZone.Inherited
+        | TriggerSourceZone.Linked
         | TriggerSourceZone.Executing
         | TriggerSourceZone.FaceUpSecurity,
     bool ExecuteBackgroundEffects = false,
@@ -41,17 +43,60 @@ public sealed record TriggerPipelineResult(
     public bool HasPendingSelection => PendingContinuation is not null || PendingSelectionRequest is not null;
 }
 
+public enum TriggerStackFrameKind
+{
+    Batch,
+    Background,
+    AfterEffectsActivate,
+}
+
+public sealed record TriggerStackFrame
+{
+    public TriggerStackFrame(
+        EffectContext context,
+        IReadOnlyList<EffectResolution> remainingEffects,
+        IReadOnlyList<EffectResolution> backgroundEffects,
+        TriggerPipelineOptions options,
+        TriggerStackFrame? parentFrame = null,
+        TriggerStackFrameKind kind = TriggerStackFrameKind.Batch,
+        IReadOnlyList<EffectResolution>? orderingCandidates = null,
+        bool afterEffectsActivateScheduled = false,
+        int depth = 0)
+    {
+        Context = context;
+        RemainingEffects = remainingEffects.ToArray();
+        BackgroundEffects = backgroundEffects.ToArray();
+        Options = options;
+        ParentFrame = parentFrame;
+        Kind = kind;
+        OrderingCandidates = orderingCandidates?.ToArray() ?? Array.Empty<EffectResolution>();
+        AfterEffectsActivateScheduled = afterEffectsActivateScheduled;
+        Depth = depth;
+    }
+
+    public EffectContext Context { get; init; }
+    public IReadOnlyList<EffectResolution> RemainingEffects { get; init; }
+    public IReadOnlyList<EffectResolution> BackgroundEffects { get; init; }
+    public TriggerPipelineOptions Options { get; init; }
+    public TriggerStackFrame? ParentFrame { get; init; }
+    public TriggerStackFrameKind Kind { get; init; }
+    public IReadOnlyList<EffectResolution> OrderingCandidates { get; init; }
+    public bool AfterEffectsActivateScheduled { get; init; }
+    public int Depth { get; init; }
+}
+
 public sealed record TriggerPipelineContinuation(
-    EffectContext Context,
     EffectResolution PendingResolution,
     SelectionRequest PendingSelectionRequest,
     EffectDecisionStage PendingStage,
-    IReadOnlyList<EffectResolution> OrderingCandidates,
-    IReadOnlyList<EffectResolution> RemainingQueuedEffects,
-    IReadOnlyList<EffectResolution> RemainingBackgroundEffects,
-    TriggerPipelineOptions Options,
-    bool WasDrainingBackground)
+    TriggerStackFrame Frame)
 {
+    public EffectContext Context => Frame.Context;
+    public IReadOnlyList<EffectResolution> OrderingCandidates => Frame.OrderingCandidates;
+    public IReadOnlyList<EffectResolution> RemainingQueuedEffects => Frame.RemainingEffects;
+    public IReadOnlyList<EffectResolution> RemainingBackgroundEffects => Frame.BackgroundEffects;
+    public TriggerPipelineOptions Options => Frame.Options;
+    public bool WasDrainingBackground => Frame.Kind == TriggerStackFrameKind.Background;
     public string StableContinuationId => PendingResolution.StableId;
 }
 
@@ -63,6 +108,8 @@ public sealed record PreparedTriggerGroup(
 
 public sealed class TriggerPipelineService
 {
+    private const int MaxTriggerStackDepth = 64;
+
     private readonly ICardScriptRegistry _cardScriptRegistry;
     private readonly IDecisionProvider? _decisionProvider;
     private readonly TriggerCollector _triggerCollector;
@@ -72,6 +119,7 @@ public sealed class TriggerPipelineService
     private readonly EngineInvariantChecker _invariantChecker;
     private readonly TriggerPipelineOptions _defaultOptions;
     private readonly bool _pauseForOrderingWithoutProvider;
+    private Func<GameState, GameTrace?, int>? _stateOnlyStabilizer;
 
     public TriggerPipelineService(
         ICardScriptRegistry cardScriptRegistry,
@@ -96,6 +144,28 @@ public sealed class TriggerPipelineService
     }
 
     internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
+
+    public void AttachStateOnlyStabilizer(Func<GameState, GameTrace?, int> stabilizer)
+    {
+        _stateOnlyStabilizer = stabilizer ?? throw new ArgumentNullException(nameof(stabilizer));
+    }
+
+    public TriggerPipelineResult RunAutoProcess(
+        GameState state,
+        PlayerId? player = null,
+        TriggerPipelineOptions? options = null,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        _ = _stateOnlyStabilizer?.Invoke(state, trace);
+        return Run(
+            state,
+            EffectTiming.RulesTiming,
+            player ?? state.TurnPlayerId,
+            options: options,
+            trace: trace);
+    }
 
     public TriggerPipelineResult Run(
         GameState state,
@@ -158,18 +228,14 @@ public sealed class TriggerPipelineService
             throw new DomainException("Prepared trigger group must run against the same GameState instance used to prepare it.");
         }
 
-        var queue = new EffectQueue();
-        queue.EnqueueRange(prepared.QueuedEffects);
-
         var executedEffects = new List<EffectResolution>();
         var skippedOptionalEffects = new List<EffectResolution>();
         var selectionApplications = new List<SelectionResultApplicationResult>();
 
-        var pending = DrainQueue(
-            queue,
+        var rootFrame = CreateFrame(prepared, parentFrame: null, TriggerStackFrameKind.Batch, depth: 0);
+        var outcome = DrainFrame(
+            rootFrame,
             state,
-            prepared.BackgroundEffects,
-            prepared.Options,
             trace,
             executedEffects,
             skippedOptionalEffects,
@@ -182,9 +248,9 @@ public sealed class TriggerPipelineService
             executedEffects,
             skippedOptionalEffects,
             selectionApplications,
-            pending?.Continuation.PendingResolution,
-            pending?.Continuation.PendingSelectionRequest,
-            pending?.Continuation);
+            outcome.Pending?.Continuation.PendingResolution,
+            outcome.Pending?.Continuation.PendingSelectionRequest,
+            outcome.Pending?.Continuation);
     }
 
     public TriggerPipelineResult Resume(
@@ -201,9 +267,10 @@ public sealed class TriggerPipelineService
         var skippedOptionalEffects = new List<EffectResolution>();
         var selectionApplications = new List<SelectionResultApplicationResult>();
 
+        FrameDrainOutcome outcome;
         if (continuation.PendingStage == EffectDecisionStage.Ordering)
         {
-            var orderingPending = ResolveOrderingSelectionAndDrainTail(
+            outcome = ResolveOrderingSelectionAndDrainFrame(
                 state,
                 continuation,
                 selectionResult,
@@ -212,7 +279,7 @@ public sealed class TriggerPipelineService
                 skippedOptionalEffects,
                 selectionApplications);
 
-            return BuildResumeResult(continuation, orderingPending, executedEffects, skippedOptionalEffects, selectionApplications);
+            return BuildResumeResult(continuation, outcome.Pending, executedEffects, skippedOptionalEffects, selectionApplications);
         }
 
         var executedBeforeResume = executedEffects.Count;
@@ -231,76 +298,64 @@ public sealed class TriggerPipelineService
 
         if (executedEffects.Count > executedBeforeResume)
         {
-            pending = RunAfterEffectsActivate(
+            var autoProcessOutcome = RunAutoProcessAfterEffect(
                 state,
-                continuation.PendingResolution.Context,
-                continuation.Options,
+                continuation.Frame,
                 trace,
                 executedEffects,
                 skippedOptionalEffects,
                 selectionApplications);
-            if (pending is not null)
+            if (autoProcessOutcome is not null)
             {
-                pending = AttachNestedTail(pending, continuation);
-                return BuildResumeResult(continuation, pending, executedEffects, skippedOptionalEffects, selectionApplications);
+                return BuildResumeResult(
+                    continuation,
+                    autoProcessOutcome.Pending,
+                    executedEffects,
+                    skippedOptionalEffects,
+                    selectionApplications);
             }
         }
 
-        pending = DrainContinuationTail(
-            continuation,
+        outcome = DrainFrame(
+            continuation.Frame,
             state,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
 
-        return BuildResumeResult(continuation, pending, executedEffects, skippedOptionalEffects, selectionApplications);
+        return BuildResumeResult(continuation, outcome.Pending, executedEffects, skippedOptionalEffects, selectionApplications);
     }
 
-    private PendingSelection? DrainQueue(
-        EffectQueue queue,
+    private FrameDrainOutcome DrainFrame(
+        TriggerStackFrame frame,
         GameState state,
-        IReadOnlyList<EffectResolution> backgroundEffects,
-        TriggerPipelineOptions options,
         GameTrace? trace,
         List<EffectResolution> executedEffects,
         List<EffectResolution> skippedOptionalEffects,
         List<SelectionResultApplicationResult> selectionApplications)
     {
-        return DrainQueuedEffects(
-            queue.Pending,
-            state,
-            backgroundEffects,
-            options,
-            trace,
-            executedEffects,
-            skippedOptionalEffects,
-            selectionApplications);
-    }
-
-    private PendingSelection? DrainQueuedEffects(
-        IReadOnlyList<EffectResolution> queuedEffects,
-        GameState state,
-        IReadOnlyList<EffectResolution> backgroundEffects,
-        TriggerPipelineOptions options,
-        GameTrace? trace,
-        List<EffectResolution> executedEffects,
-        List<EffectResolution> skippedOptionalEffects,
-        List<SelectionResultApplicationResult> selectionApplications)
-    {
-        var remaining = queuedEffects.ToList();
-        while (remaining.Count > 0)
+        var current = frame;
+        while (current is not null)
         {
+            if (current.Depth > MaxTriggerStackDepth)
+            {
+                throw new UnsupportedMechanicException(
+                    $"Trigger stack exceeded max depth '{MaxTriggerStackDepth}'.");
+            }
+
+            var remaining = current.RemainingEffects.ToList();
             var active = remaining
                 .Where(resolution => CanActivateNow(state, resolution))
                 .ToArray();
             if (active.Length == 0)
             {
-                break;
+                current = CompleteFrameOrScheduleAfterEffects(state, current);
+                continue;
             }
 
-            var candidates = SelectPriorityCandidates(state, active, options);
-            EffectResolution resolution;
+            var candidates = SelectPriorityCandidates(state, active, current.Options);
+            EffectResolution? resolution;
             if (ShouldSelectEffectOrder(candidates))
             {
                 var request = CreateEffectOrderingRequest(state, candidates);
@@ -308,66 +363,31 @@ public sealed class TriggerPipelineService
                 {
                     if (_pauseForOrderingWithoutProvider)
                     {
-                        return new PendingSelection(new TriggerPipelineContinuation(
-                            candidates[0].Context,
+                        return FrameDrainOutcome.ForPending(new PendingSelection(new TriggerPipelineContinuation(
                             candidates[0],
                             request,
                             EffectDecisionStage.Ordering,
-                            candidates,
-                            remaining,
-                            backgroundEffects,
-                            options,
-                            WasDrainingBackground: false));
+                            current with { OrderingCandidates = candidates })));
                     }
 
                     resolution = candidates[0];
-                    RemoveFirst(remaining, resolution);
-                    var executedBeforeAutomaticOrder = executedEffects.Count;
-                    var automaticOrderPending = ExecuteResolution(
-                        state,
-                        resolution,
-                        trace,
-                        executedEffects,
-                        skippedOptionalEffects,
-                        selectionApplications);
-                    if (automaticOrderPending is not null)
-                    {
-                        return AttachTail(
-                            automaticOrderPending,
-                            resolution.Context,
-                            remaining,
-                            backgroundEffects,
-                            options,
-                            wasDrainingBackground: false);
-                    }
-
-                    if (executedEffects.Count > executedBeforeAutomaticOrder)
-                    {
-                        automaticOrderPending = RunAfterEffectsActivate(
-                            state,
-                            resolution.Context,
-                            options,
-                            trace,
-                            executedEffects,
-                            skippedOptionalEffects,
-                            selectionApplications);
-                        if (automaticOrderPending is not null)
-                        {
-                            return AttachTail(
-                                automaticOrderPending,
-                                resolution.Context,
-                                remaining,
-                                backgroundEffects,
-                                options,
-                                wasDrainingBackground: false);
-                        }
-                    }
-
-                    continue;
                 }
-
-                var orderingResult = _decisionProvider.ChooseSelection(request);
-                resolution = ResolveOrderingChoice(candidates, request, orderingResult);
+                else
+                {
+                    var orderingResult = _decisionProvider.ChooseSelection(request);
+                    resolution = ResolveOrderingChoice(candidates, request, orderingResult);
+                    if (resolution is null)
+                    {
+                        RemoveAll(remaining, candidates);
+                        skippedOptionalEffects.AddRange(candidates);
+                        current = current with
+                        {
+                            RemainingEffects = remaining.ToArray(),
+                            OrderingCandidates = Array.Empty<EffectResolution>(),
+                        };
+                        continue;
+                    }
+                }
             }
             else
             {
@@ -375,104 +395,49 @@ public sealed class TriggerPipelineService
             }
 
             RemoveFirst(remaining, resolution);
+            current = current with
+            {
+                RemainingEffects = remaining.ToArray(),
+                OrderingCandidates = Array.Empty<EffectResolution>(),
+            };
+
             var executedBefore = executedEffects.Count;
             var pending = ExecuteResolution(
                 state,
                 resolution,
+                current,
                 trace,
                 executedEffects,
                 skippedOptionalEffects,
                 selectionApplications);
             if (pending is not null)
             {
-                return AttachTail(
-                    pending,
-                    resolution.Context,
-                    remaining,
-                    backgroundEffects,
-                    options,
-                    wasDrainingBackground: false);
+                return FrameDrainOutcome.ForPending(pending);
             }
 
             if (executedEffects.Count > executedBefore)
             {
-                pending = RunAfterEffectsActivate(
+                var autoProcessOutcome = RunAutoProcessAfterEffect(
                     state,
-                    resolution.Context,
-                    options,
+                    current,
                     trace,
                     executedEffects,
                     skippedOptionalEffects,
                     selectionApplications);
-                if (pending is not null)
+                if (autoProcessOutcome is not null)
                 {
-                    return AttachTail(
-                        pending,
-                        resolution.Context,
-                        remaining,
-                        backgroundEffects,
-                        options,
-                        wasDrainingBackground: false);
+                    return autoProcessOutcome;
                 }
             }
         }
 
-        if (!options.ExecuteBackgroundEffects)
-        {
-            return null;
-        }
-
-        for (var i = 0; i < backgroundEffects.Count; i++)
-        {
-            var background = backgroundEffects[i];
-            var executedBefore = executedEffects.Count;
-            var pending = ExecuteResolution(
-                state,
-                background,
-                trace,
-                executedEffects,
-                skippedOptionalEffects,
-                selectionApplications);
-            if (pending is not null)
-            {
-                return AttachTail(
-                    pending,
-                    background.Context,
-                    Array.Empty<EffectResolution>(),
-                    backgroundEffects.Skip(i + 1).ToArray(),
-                    options,
-                    wasDrainingBackground: true);
-            }
-
-            if (executedEffects.Count > executedBefore)
-            {
-                pending = RunAfterEffectsActivate(
-                    state,
-                    background.Context,
-                    options,
-                    trace,
-                    executedEffects,
-                    skippedOptionalEffects,
-                    selectionApplications);
-                if (pending is not null)
-                {
-                    return AttachTail(
-                        pending,
-                        background.Context,
-                        Array.Empty<EffectResolution>(),
-                        backgroundEffects.Skip(i + 1).ToArray(),
-                        options,
-                        wasDrainingBackground: true);
-                }
-            }
-        }
-
-        return null;
+        return FrameDrainOutcome.Completed;
     }
 
     private PendingSelection? ExecuteResolution(
         GameState state,
         EffectResolution resolution,
+        TriggerStackFrame frame,
         GameTrace? trace,
         List<EffectResolution> executedEffects,
         List<EffectResolution> skippedOptionalEffects,
@@ -487,7 +452,7 @@ public sealed class TriggerPipelineService
         {
             if (_decisionProvider is null)
             {
-                return CreatePendingSelection(resolution, resolution.OptionalSelectionRequest, EffectDecisionStage.Optional);
+                return CreatePendingSelection(resolution, resolution.OptionalSelectionRequest, EffectDecisionStage.Optional, frame);
             }
 
             var optionalResult = _decisionProvider.ChooseSelection(resolution.OptionalSelectionRequest);
@@ -500,7 +465,7 @@ public sealed class TriggerPipelineService
 
             if (resolution.SelectionRequest is not null)
             {
-                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection);
+                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection, frame);
             }
         }
 
@@ -508,7 +473,7 @@ public sealed class TriggerPipelineService
         {
             if (_decisionProvider is null)
             {
-                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection);
+                return CreatePendingSelection(resolution, resolution.SelectionRequest, EffectDecisionStage.Selection, frame);
             }
 
             var result = _decisionProvider.ChooseSelection(resolution.SelectionRequest);
@@ -527,6 +492,7 @@ public sealed class TriggerPipelineService
                 return ExecuteResolution(
                     state,
                     application.NextResolution,
+                    frame,
                     trace,
                     executedEffects,
                     skippedOptionalEffects,
@@ -544,7 +510,7 @@ public sealed class TriggerPipelineService
         return null;
     }
 
-    private PendingSelection? ResolveOrderingSelectionAndDrainTail(
+    private FrameDrainOutcome ResolveOrderingSelectionAndDrainFrame(
         GameState state,
         TriggerPipelineContinuation continuation,
         SelectionResult selectionResult,
@@ -554,75 +520,101 @@ public sealed class TriggerPipelineService
         List<SelectionResultApplicationResult> selectionApplications)
     {
         var selected = ResolveOrderingChoice(continuation.OrderingCandidates, continuation.PendingSelectionRequest, selectionResult);
-        var remaining = continuation.RemainingQueuedEffects.ToList();
+        var remaining = continuation.Frame.RemainingEffects.ToList();
+        if (selected is null)
+        {
+            RemoveAll(remaining, continuation.OrderingCandidates);
+            skippedOptionalEffects.AddRange(continuation.OrderingCandidates);
+            return DrainFrame(
+                continuation.Frame with
+                {
+                    RemainingEffects = remaining.ToArray(),
+                    OrderingCandidates = Array.Empty<EffectResolution>(),
+                },
+                state,
+                trace,
+                executedEffects,
+                skippedOptionalEffects,
+                selectionApplications);
+        }
+
         RemoveFirst(remaining, selected);
+        var frame = continuation.Frame with
+        {
+            RemainingEffects = remaining.ToArray(),
+            OrderingCandidates = Array.Empty<EffectResolution>(),
+        };
 
         var executedBefore = executedEffects.Count;
         var pending = ExecuteResolution(
             state,
             selected,
+            frame,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
         if (pending is not null)
         {
-            return AttachNestedTail(pending, continuation with { RemainingQueuedEffects = remaining });
+            return FrameDrainOutcome.ForPending(pending);
         }
 
         if (executedEffects.Count > executedBefore)
         {
-            pending = RunAfterEffectsActivate(
+            var autoProcessOutcome = RunAutoProcessAfterEffect(
                 state,
-                selected.Context,
-                continuation.Options,
+                frame,
                 trace,
                 executedEffects,
                 skippedOptionalEffects,
                 selectionApplications);
-            if (pending is not null)
+            if (autoProcessOutcome is not null)
             {
-                return AttachNestedTail(pending, continuation with { RemainingQueuedEffects = remaining });
+                return autoProcessOutcome;
             }
         }
 
-        return DrainQueuedEffects(
-            remaining,
+        return DrainFrame(
+            frame,
             state,
-            continuation.RemainingBackgroundEffects,
-            continuation.Options,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
     }
 
-    private PendingSelection? RunAfterEffectsActivate(
+    private FrameDrainOutcome? RunAutoProcessAfterEffect(
         GameState state,
-        EffectContext completedContext,
-        TriggerPipelineOptions options,
+        TriggerStackFrame parentFrame,
         GameTrace? trace,
         List<EffectResolution> executedEffects,
         List<EffectResolution> skippedOptionalEffects,
         List<SelectionResultApplicationResult> selectionApplications)
     {
-        if (!options.ResolveAfterEffectsActivate || completedContext.Timing == EffectTiming.AfterEffectsActivate)
+        if (_stateOnlyStabilizer is null)
         {
             return null;
         }
 
-        var afterOptions = options with { ResolveAfterEffectsActivate = false };
+        var changes = _stateOnlyStabilizer?.Invoke(state, trace) ?? 0;
+        if (parentFrame.Context.Timing == EffectTiming.RulesTiming && changes == 0)
+        {
+            return null;
+        }
+
         var prepared = Prepare(
             state,
-            EffectTiming.AfterEffectsActivate,
+            EffectTiming.RulesTiming,
             state.TurnPlayerId,
-            options: afterOptions);
+            options: parentFrame.Options);
+        if (!HasPreparedEffects(prepared))
+        {
+            return null;
+        }
 
-        return DrainQueuedEffects(
-            prepared.QueuedEffects,
+        return DrainFrame(
+            CreateFrame(prepared, parentFrame, TriggerStackFrameKind.Batch, parentFrame.Depth + 1),
             state,
-            prepared.BackgroundEffects,
-            prepared.Options,
             trace,
             executedEffects,
             skippedOptionalEffects,
@@ -661,6 +653,7 @@ public sealed class TriggerPipelineService
         IReadOnlyList<EffectResolution> candidates)
     {
         var player = ControllerOf(candidates[0]);
+        var canSkip = candidates.All(candidate => candidate.IsOptional);
         var optionCandidates = candidates
             .Select((resolution, index) => new SelectableTarget(
                 SelectionTargetKind.Option,
@@ -682,32 +675,31 @@ public sealed class TriggerPipelineService
             targetKind: SelectionTargetKind.Option,
             minCount: 1,
             maxCount: 1,
-            canSkip: false,
-            canEndNotMax: false,
+            canSkip: canSkip,
+            canEndNotMax: canSkip,
             candidates: optionCandidates,
             prompt: "Choose effect order.");
     }
 
-    private static bool ShouldSelectEffectOrder(IReadOnlyList<EffectResolution> candidates)
-    {
-        if (candidates.Count <= 1)
-        {
-            return false;
-        }
+    private static bool ShouldSelectEffectOrder(IReadOnlyList<EffectResolution> candidates) =>
+        candidates.Count > 1
+        && candidates.All(candidate =>
+            candidate.OptionalSelectionRequest is null
+            && candidate.SelectionRequest is null);
 
-        return candidates
-            .Select(resolution => resolution.SourceCard)
-            .Where(source => source is not null)
-            .Distinct()
-            .Count() > 1;
-    }
-
-    private static EffectResolution ResolveOrderingChoice(
+    private static EffectResolution? ResolveOrderingChoice(
         IReadOnlyList<EffectResolution> candidates,
         SelectionRequest request,
         SelectionResult result)
     {
         SelectionValidator.Validate(request, result);
+
+        if (request.CanSkip
+            && string.IsNullOrWhiteSpace(result.SelectedOption)
+            && result.SelectedTargets.Count == 0)
+        {
+            return null;
+        }
 
         string? selectedOption = result.SelectedOption;
         if (selectedOption is null && result.SelectedTargets.Count == 1)
@@ -743,6 +735,12 @@ public sealed class TriggerPipelineService
             return false;
         }
 
+        if (resolution.SourceSnapshot is not null
+            && !IsSourceSnapshotStillValid(state, resolution.SourceSnapshot))
+        {
+            return false;
+        }
+
         if (resolution.SourcePermanent is not null)
         {
             var permanent = FindPermanent(state, resolution.SourcePermanent.Value);
@@ -761,6 +759,63 @@ public sealed class TriggerPipelineService
         }
 
         return resolution.CanActivate?.Invoke(resolution.Context) ?? true;
+    }
+
+    private static bool IsSourceSnapshotStillValid(GameState state, TriggerSourceSnapshot snapshot)
+    {
+        if (!state.Cards.TryGetValue(snapshot.SourceCard, out var card))
+        {
+            return false;
+        }
+
+        if (card.Owner != snapshot.Owner)
+        {
+            return false;
+        }
+
+        var permanent = snapshot.SourcePermanent is null
+            ? null
+            : FindPermanent(state, snapshot.SourcePermanent.Value);
+
+        return snapshot.Role switch
+        {
+            TriggerSourceRole.FieldTop =>
+                permanent is not null
+                && permanent.ControllerPlayerId == snapshot.Controller
+                && permanent.TopCardId == snapshot.SourceCard
+                && snapshot.TopCardWhenTriggered == permanent.TopCardId
+                && card.CurrentZone == snapshot.SourceZone,
+
+            TriggerSourceRole.Inherited =>
+                permanent is not null
+                && permanent.ControllerPlayerId == snapshot.Controller
+                && permanent.TopCardId == snapshot.TopCardWhenTriggered
+                && permanent.SourceCardIds.Contains(snapshot.SourceCard)
+                && card.CurrentZone == Zone.EvolutionSources,
+
+            TriggerSourceRole.Linked =>
+                permanent is not null
+                && permanent.ControllerPlayerId == snapshot.Controller
+                && permanent.TopCardId == snapshot.TopCardWhenTriggered
+                && permanent.LinkedCards.Contains(snapshot.SourceCard)
+                && card.CurrentZone == Zone.LinkedCards,
+
+            TriggerSourceRole.Hand =>
+                card.CurrentZone == Zone.Hand && state.GetPlayer(snapshot.Owner).Hand.Contains(snapshot.SourceCard),
+
+            TriggerSourceRole.Trash =>
+                card.CurrentZone == Zone.Trash && state.GetPlayer(snapshot.Owner).Trash.Contains(snapshot.SourceCard),
+
+            TriggerSourceRole.Executing =>
+                card.CurrentZone == Zone.Executing && state.GetPlayer(snapshot.Owner).Executing.Contains(snapshot.SourceCard),
+
+            TriggerSourceRole.FaceUpSecurity =>
+                card.CurrentZone == Zone.Security
+                && card.IsFaceUp
+                && state.GetPlayer(snapshot.Owner).Security.Contains(snapshot.SourceCard),
+
+            _ => true,
+        };
     }
 
     private static PlayerId ControllerOf(EffectResolution resolution) =>
@@ -824,11 +879,16 @@ public sealed class TriggerPipelineService
             }
 
             var script = _cardScriptRegistry.GetScript(definition);
-            descriptors.AddRange(script.CreateEffectDescriptors(new CardScriptContext(
-                state,
-                source.Card,
-                source.Permanent,
-                source.Controller)));
+            descriptors.AddRange(script
+                .CreateEffectDescriptors(new CardScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent,
+                    source.Controller))
+                .Select(descriptor => descriptor with
+                {
+                    SourceSnapshot = descriptor.SourceSnapshot ?? source.Snapshot,
+                }));
         }
 
         return descriptors;
@@ -851,14 +911,22 @@ public sealed class TriggerPipelineService
             {
                 if (sourceZones.HasFlag(TriggerSourceZone.FieldTop))
                 {
-                    yield return CreatePermanentSource(state, permanent.TopCardId, permanent);
+                    yield return CreatePermanentSource(state, permanent.TopCardId, permanent, TriggerSourceRole.FieldTop);
                 }
 
                 if (sourceZones.HasFlag(TriggerSourceZone.Inherited))
                 {
                     foreach (var sourceCard in permanent.SourceCardIds)
                     {
-                        yield return CreatePermanentSource(state, sourceCard, permanent);
+                        yield return CreatePermanentSource(state, sourceCard, permanent, TriggerSourceRole.Inherited);
+                    }
+                }
+
+                if (sourceZones.HasFlag(TriggerSourceZone.Linked))
+                {
+                    foreach (var linkedCard in permanent.LinkedCards)
+                    {
+                        yield return CreatePermanentSource(state, linkedCard, permanent, TriggerSourceRole.Linked);
                     }
                 }
             }
@@ -867,7 +935,7 @@ public sealed class TriggerPipelineService
             {
                 foreach (var card in player.Hand)
                 {
-                    yield return CreatePlayerZoneSource(state, card);
+                    yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.Hand);
                 }
             }
 
@@ -875,7 +943,7 @@ public sealed class TriggerPipelineService
             {
                 foreach (var card in player.Trash)
                 {
-                    yield return CreatePlayerZoneSource(state, card);
+                    yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.Trash);
                 }
             }
 
@@ -883,7 +951,7 @@ public sealed class TriggerPipelineService
             {
                 foreach (var card in player.Executing)
                 {
-                    yield return CreatePlayerZoneSource(state, card);
+                    yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.Executing);
                 }
             }
 
@@ -891,7 +959,7 @@ public sealed class TriggerPipelineService
             {
                 foreach (var card in player.Security.Where(card => state.Cards[card].IsFaceUp))
                 {
-                    yield return CreatePlayerZoneSource(state, card);
+                    yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.FaceUpSecurity);
                 }
             }
         }
@@ -916,23 +984,66 @@ public sealed class TriggerPipelineService
         }
 
         var controller = permanent?.ControllerPlayerId ?? contextPlayer ?? instance.Owner;
-        return new TriggerSource(card, instance, permanent?.Id, controller);
+        return new TriggerSource(
+            card,
+            instance,
+            permanent?.Id,
+            controller,
+            CreateSourceSnapshot(instance, permanent, controller, RoleFromZone(instance.CurrentZone)));
     }
 
     private static TriggerSource CreatePermanentSource(
         GameState state,
         CardInstanceId card,
-        PermanentState permanent)
+        PermanentState permanent,
+        TriggerSourceRole role)
     {
         var instance = RequireCard(state, card);
-        return new TriggerSource(card, instance, permanent.Id, permanent.ControllerPlayerId);
+        return new TriggerSource(
+            card,
+            instance,
+            permanent.Id,
+            permanent.ControllerPlayerId,
+            CreateSourceSnapshot(instance, permanent, permanent.ControllerPlayerId, role));
     }
 
-    private static TriggerSource CreatePlayerZoneSource(GameState state, CardInstanceId card)
+    private static TriggerSource CreatePlayerZoneSource(GameState state, CardInstanceId card, TriggerSourceRole role)
     {
         var instance = RequireCard(state, card);
-        return new TriggerSource(card, instance, null, instance.Owner);
+        return new TriggerSource(
+            card,
+            instance,
+            null,
+            instance.Owner,
+            CreateSourceSnapshot(instance, permanent: null, instance.Owner, role));
     }
+
+    private static TriggerSourceSnapshot CreateSourceSnapshot(
+        CardInstance instance,
+        PermanentState? permanent,
+        PlayerId controller,
+        TriggerSourceRole role) =>
+        new(
+            role,
+            instance.CurrentZone,
+            instance.Id,
+            permanent?.Id,
+            permanent?.TopCardId,
+            instance.Owner,
+            controller);
+
+    private static TriggerSourceRole RoleFromZone(Zone zone) =>
+        zone switch
+        {
+            Zone.Hand => TriggerSourceRole.Hand,
+            Zone.Trash => TriggerSourceRole.Trash,
+            Zone.Executing => TriggerSourceRole.Executing,
+            Zone.Security => TriggerSourceRole.FaceUpSecurity,
+            Zone.EvolutionSources => TriggerSourceRole.Inherited,
+            Zone.LinkedCards => TriggerSourceRole.Linked,
+            Zone.BattleArea or Zone.BreedingArea => TriggerSourceRole.FieldTop,
+            _ => TriggerSourceRole.Unknown,
+        };
 
     private static CardInstance RequireCard(GameState state, CardInstanceId card) =>
         state.Cards.TryGetValue(card, out var instance)
@@ -984,12 +1095,11 @@ public sealed class TriggerPipelineService
 
             if (resolution.SelectionRequest is not null)
             {
-                return AttachNestedTail(
-                    CreatePendingSelection(
+                return CreatePendingSelection(
                     resolution,
                     resolution.SelectionRequest,
-                        EffectDecisionStage.Selection),
-                    continuation);
+                    EffectDecisionStage.Selection,
+                    continuation.Frame);
             }
 
             RegisterOncePerTurnIfNeeded(state, resolution);
@@ -1024,101 +1134,12 @@ public sealed class TriggerPipelineService
         var pending = ExecuteResolution(
             state,
             application.NextResolution,
+            continuation.Frame,
             trace,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications);
-        return pending is null
-            ? null
-            : AttachNestedTail(pending, continuation);
-    }
-
-    private PendingSelection? DrainContinuationTail(
-        TriggerPipelineContinuation continuation,
-        GameState state,
-        GameTrace? trace,
-        List<EffectResolution> executedEffects,
-        List<EffectResolution> skippedOptionalEffects,
-        List<SelectionResultApplicationResult> selectionApplications)
-    {
-        if (continuation.WasDrainingBackground)
-        {
-            return DrainBackgroundEffects(
-                continuation,
-                state,
-                trace,
-                executedEffects,
-                skippedOptionalEffects,
-                selectionApplications);
-        }
-
-        var queue = new EffectQueue();
-        queue.EnqueueRange(continuation.RemainingQueuedEffects);
-        return DrainQueue(
-            queue,
-            state,
-            continuation.RemainingBackgroundEffects,
-            continuation.Options,
-            trace,
-            executedEffects,
-            skippedOptionalEffects,
-            selectionApplications);
-    }
-
-    private PendingSelection? DrainBackgroundEffects(
-        TriggerPipelineContinuation continuation,
-        GameState state,
-        GameTrace? trace,
-        List<EffectResolution> executedEffects,
-        List<EffectResolution> skippedOptionalEffects,
-        List<SelectionResultApplicationResult> selectionApplications)
-    {
-        for (var i = 0; i < continuation.RemainingBackgroundEffects.Count; i++)
-        {
-            var background = continuation.RemainingBackgroundEffects[i];
-            var executedBefore = executedEffects.Count;
-            var pending = ExecuteResolution(
-                state,
-                background,
-                trace,
-                executedEffects,
-                skippedOptionalEffects,
-                selectionApplications);
-            if (pending is not null)
-            {
-                return AttachTail(
-                    pending,
-                    background.Context,
-                    Array.Empty<EffectResolution>(),
-                    continuation.RemainingBackgroundEffects.Skip(i + 1).ToArray(),
-                    continuation.Options,
-                    wasDrainingBackground: true);
-            }
-
-            if (executedEffects.Count > executedBefore)
-            {
-                pending = RunAfterEffectsActivate(
-                    state,
-                    background.Context,
-                    continuation.Options,
-                    trace,
-                    executedEffects,
-                    skippedOptionalEffects,
-                    selectionApplications);
-                if (pending is not null)
-                {
-                    return AttachTail(
-                        pending,
-                        background.Context,
-                        Array.Empty<EffectResolution>(),
-                        continuation.RemainingBackgroundEffects.Skip(i + 1).ToArray(),
-                        continuation.Options,
-                        wasDrainingBackground: true);
-                }
-            }
-        }
-
-        return null;
+        return pending;
     }
 
     private static TriggerPipelineResult BuildResumeResult(
@@ -1128,9 +1149,9 @@ public sealed class TriggerPipelineService
         IReadOnlyList<EffectResolution> skippedOptionalEffects,
         IReadOnlyList<SelectionResultApplicationResult> selectionApplications) =>
         new(
-            continuation.Context,
-            continuation.RemainingQueuedEffects,
-            continuation.RemainingBackgroundEffects,
+            pending?.Continuation.Context ?? continuation.Context,
+            pending?.Continuation.RemainingQueuedEffects ?? continuation.RemainingQueuedEffects,
+            pending?.Continuation.RemainingBackgroundEffects ?? continuation.RemainingBackgroundEffects,
             executedEffects,
             skippedOptionalEffects,
             selectionApplications,
@@ -1141,49 +1162,106 @@ public sealed class TriggerPipelineService
     private static PendingSelection CreatePendingSelection(
         EffectResolution resolution,
         SelectionRequest request,
-        EffectDecisionStage stage) =>
+        EffectDecisionStage stage,
+        TriggerStackFrame frame) =>
         new(new TriggerPipelineContinuation(
-            resolution.Context,
             resolution,
             request,
             stage,
-            Array.Empty<EffectResolution>(),
-            Array.Empty<EffectResolution>(),
-            Array.Empty<EffectResolution>(),
-            new TriggerPipelineOptions(),
-            WasDrainingBackground: false));
+            frame));
 
-    private static PendingSelection AttachTail(
-        PendingSelection pending,
-        EffectContext context,
-        IReadOnlyList<EffectResolution> remainingQueuedEffects,
-        IReadOnlyList<EffectResolution> remainingBackgroundEffects,
-        TriggerPipelineOptions options,
-        bool wasDrainingBackground) =>
-        new(pending.Continuation with
+    private TriggerStackFrame? CompleteFrameOrScheduleAfterEffects(GameState state, TriggerStackFrame frame)
+    {
+        if (frame.Kind == TriggerStackFrameKind.Batch
+            && frame.Options.ExecuteBackgroundEffects
+            && frame.BackgroundEffects.Count > 0)
         {
-            Context = context,
-            RemainingQueuedEffects = pending.Continuation.RemainingQueuedEffects.Concat(remainingQueuedEffects).ToArray(),
-            RemainingBackgroundEffects = pending.Continuation.RemainingBackgroundEffects.Concat(remainingBackgroundEffects).ToArray(),
-            Options = options,
-            WasDrainingBackground = wasDrainingBackground,
-        });
+            return new TriggerStackFrame(
+                frame.Context,
+                frame.BackgroundEffects,
+                Array.Empty<EffectResolution>(),
+                frame.Options,
+                frame.ParentFrame,
+                TriggerStackFrameKind.Background,
+                depth: frame.Depth);
+        }
 
-    private static PendingSelection AttachNestedTail(PendingSelection pending, TriggerPipelineContinuation tail) =>
-        new(pending.Continuation with
+        if (ShouldScheduleAfterEffects(frame))
         {
-            Context = tail.Context,
-            RemainingQueuedEffects = pending.Continuation.RemainingQueuedEffects.Concat(tail.RemainingQueuedEffects).ToArray(),
-            RemainingBackgroundEffects = pending.Continuation.RemainingBackgroundEffects.Concat(tail.RemainingBackgroundEffects).ToArray(),
-            Options = tail.Options,
-            WasDrainingBackground = tail.WasDrainingBackground,
-        });
+            var afterFrame = CreateAfterEffectsFrame(state, frame);
+            if (afterFrame is not null)
+            {
+                return afterFrame;
+            }
+        }
+
+        return frame.ParentFrame;
+    }
+
+    private bool ShouldScheduleAfterEffects(TriggerStackFrame frame) =>
+        frame.Options.ResolveAfterEffectsActivate
+        && frame.Kind != TriggerStackFrameKind.AfterEffectsActivate
+        && !frame.AfterEffectsActivateScheduled;
+
+    private TriggerStackFrame? CreateAfterEffectsFrame(GameState state, TriggerStackFrame completedFrame)
+    {
+        var prepared = Prepare(
+            state,
+            EffectTiming.AfterEffectsActivate,
+            state.TurnPlayerId,
+            options: completedFrame.Options);
+        if (!HasPreparedEffects(prepared))
+        {
+            return null;
+        }
+
+        return CreateFrame(
+            prepared,
+            completedFrame.ParentFrame,
+            TriggerStackFrameKind.AfterEffectsActivate,
+            completedFrame.Depth + 1);
+    }
+
+    private static TriggerStackFrame CreateFrame(
+        PreparedTriggerGroup prepared,
+        TriggerStackFrame? parentFrame,
+        TriggerStackFrameKind kind,
+        int depth) =>
+        new(
+            prepared.Context,
+            prepared.QueuedEffects,
+            prepared.BackgroundEffects,
+            prepared.Options,
+            parentFrame,
+            kind,
+            depth: depth);
+
+    private static bool HasPreparedEffects(PreparedTriggerGroup prepared) =>
+        prepared.QueuedEffects.Count > 0 || prepared.BackgroundEffects.Count > 0;
+
+    private static void RemoveAll(
+        List<EffectResolution> effects,
+        IReadOnlyList<EffectResolution> removals)
+    {
+        foreach (var removal in removals)
+        {
+            RemoveFirst(effects, removal);
+        }
+    }
 
     private sealed record TriggerSource(
         CardInstanceId Card,
         CardInstance Instance,
         PermanentId? Permanent,
-        PlayerId Controller);
+        PlayerId Controller,
+        TriggerSourceSnapshot Snapshot);
+
+    private sealed record FrameDrainOutcome(PendingSelection? Pending)
+    {
+        public static FrameDrainOutcome Completed { get; } = new((PendingSelection?)null);
+
+        public static FrameDrainOutcome ForPending(PendingSelection pending) => new(pending);
+    }
 
     private sealed record PendingSelection(TriggerPipelineContinuation Continuation);
 }

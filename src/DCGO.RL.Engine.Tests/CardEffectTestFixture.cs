@@ -418,6 +418,214 @@ internal sealed class RecordingTimingCardScript : ICardScript
     public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
 }
 
+internal sealed class DoubleDescriptorRecordingCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _firstLabel;
+    private readonly string _secondLabel;
+    private readonly IList<string> _order;
+
+    public DoubleDescriptorRecordingCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string firstLabel,
+        string secondLabel,
+        IList<string> order)
+    {
+        _timing = timing;
+        _firstLabel = firstLabel;
+        _secondLabel = secondLabel;
+        _order = order;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that emits two independent descriptors from one source card.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:record:{_firstLabel}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:record:{_secondLabel}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        if (context.Resolution.StableId.EndsWith(_firstLabel, StringComparison.Ordinal))
+        {
+            _order.Add(_firstLabel);
+            return;
+        }
+
+        _order.Add(_secondLabel);
+    }
+}
+
+internal sealed class ConditionalRecordingTimingCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _label;
+    private readonly IList<string> _order;
+    private readonly Func<EffectContext, bool> _canTrigger;
+
+    public ConditionalRecordingTimingCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string label,
+        IList<string> order,
+        Func<EffectContext, bool> canTrigger)
+    {
+        _timing = timing;
+        _label = label;
+        _order = order;
+        _canTrigger = canTrigger;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records only when CanTrigger is true.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:record:{_label}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                CanTrigger: _canTrigger),
+        };
+
+    public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
+}
+
+internal sealed class DpZeroCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _targetDefinitionId;
+    private readonly string _label;
+    private readonly IList<string> _order;
+
+    public DpZeroCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string targetDefinitionId,
+        string label,
+        IList<string> order)
+    {
+        _timing = timing;
+        _targetDefinitionId = targetDefinitionId;
+        _label = label;
+        _order = order;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that reduces a target permanent to DP zero.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:dp-zero:{_targetDefinitionId}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, primitives) =>
+        {
+            var target = state.Players
+                .SelectMany(player => player.FieldPermanents)
+                .FirstOrDefault(permanent => state.Cards[permanent.TopCardId].DefinitionId == _targetDefinitionId);
+            if (target is null)
+            {
+                throw new DomainException($"{Porting.CardId} could not find target '{_targetDefinitionId}'.");
+            }
+
+            primitives.ModifyDP(state, target.Id, -10000);
+            _order.Add(_label);
+        });
+    }
+}
+
+internal sealed class PermanentPresenceProbeScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _targetDefinitionId;
+    private readonly string _label;
+    private readonly IList<string> _order;
+
+    public PermanentPresenceProbeScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string targetDefinitionId,
+        string label,
+        IList<string> order)
+    {
+        _timing = timing;
+        _targetDefinitionId = targetDefinitionId;
+        _label = label;
+        _order = order;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records whether a target permanent still exists.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:probe:{_targetDefinitionId}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, _) =>
+        {
+            var exists = state.Players
+                .SelectMany(player => player.FieldPermanents)
+                .Any(permanent => state.Cards[permanent.TopCardId].DefinitionId == _targetDefinitionId);
+            _order.Add($"{_label}:{(exists ? "present" : "absent")}");
+        });
+    }
+}
+
 internal sealed class SecurityAttackModifierCardScript : ICardScript
 {
     private readonly EffectTiming _timing;

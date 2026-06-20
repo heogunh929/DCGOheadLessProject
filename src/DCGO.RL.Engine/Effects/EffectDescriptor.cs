@@ -23,7 +23,8 @@ public sealed record EffectDescriptor(
     SecurityEffectExecutionMode SecurityExecutionMode = SecurityEffectExecutionMode.Direct,
     bool IsOncePerTurn = false,
     string? OncePerTurnKey = null,
-    Func<EffectContext, bool>? CanActivate = null)
+    Func<EffectContext, bool>? CanActivate = null,
+    TriggerSourceSnapshot? SourceSnapshot = null)
 {
     public bool Matches(EffectContext context) =>
         Timing == context.Timing && (CanTrigger?.Invoke(context) ?? true);
