@@ -152,6 +152,13 @@ var tests = new (string Name, Action Test)[]
     ("Runtime composition mixed custom/default graph fails", RuntimeCompositionMixedCustomDefaultGraphFails),
     ("Runtime composition scripted runner returns pending selection", RuntimeCompositionScriptedRunnerReturnsPendingSelection),
     ("Runtime composition random runner returns pending selection", RuntimeCompositionRandomRunnerReturnsPendingSelection),
+    ("Runtime rule state clone restore hash", RuntimeRuleStateCloneRestoreHash),
+    ("Direct API rollback restores once-per-turn availability", DirectApiRollbackRestoresOncePerTurnAvailability),
+    ("EngineSession once-per-turn state is session local", EngineSessionOncePerTurnStateIsSessionLocal),
+    ("Repeated games do not accumulate once-per-turn state", RepeatedGamesDoNotAccumulateOncePerTurnState),
+    ("EngineSession public resume requires DecisionToken", EngineSessionPublicResumeRequiresDecisionToken),
+    ("Replay uses recorded DecisionToken", ReplayUsesRecordedDecisionToken),
+    ("Replay rejects invalid decision payloads", ReplayRejectsInvalidDecisionPayloads),
     ("EngineSession option selection pause/resume", EngineSessionOptionSelectionPauseResume),
     ("EngineSession OnPlay selection pause/resume", EngineSessionOnPlaySelectionPauseResume),
     ("EngineSession WhenDigivolving selection pause/resume", EngineSessionWhenDigivolvingSelectionPauseResume),
@@ -2694,7 +2701,7 @@ static void OptionLifecycleSelectionCompletionTrashesOption()
     var request = pending.PendingDecisionPoint!.SelectionRequest!;
     var selected = request.Candidates.Single(candidate => candidate.Permanent == target.Id);
 
-    var completed = session.Resume(SelectionResult.ForTargets(request.Id, new[] { selected }));
+    var completed = ResumeWithDecision(session, pending, SelectionResult.ForTargets(request.Id, new[] { selected }));
 
     AssertFalse(completed.IsPaused);
     AssertFalse(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
@@ -2955,6 +2962,162 @@ static void RuntimeCompositionRandomRunnerReturnsPendingSelection()
     AssertEqual("FX-SELECT:selection:Destroy", result.PendingStableContinuationId);
 }
 
+static void RuntimeRuleStateCloneRestoreHash()
+{
+    var state = CreateMinimalBattleState();
+    state.TurnCount = 1;
+    state.RuntimeRules.RegisterOncePerTurnUse(
+        state.TurnCount,
+        PlayerId.Player0,
+        "effect:once",
+        new CardInstanceId(1));
+    var clone = state.Clone();
+    var beforeHash = state.ComputeStateHash();
+
+    AssertEqual(1, clone.RuntimeRules.OncePerTurnUses.Count);
+    AssertEqual(beforeHash, clone.ComputeStateHash());
+
+    state.RuntimeRules.RegisterOncePerTurnUse(
+        state.TurnCount,
+        PlayerId.Player0,
+        "effect:other",
+        new CardInstanceId(2));
+    AssertNotEqual(beforeHash, state.ComputeStateHash());
+
+    state.RestoreFrom(clone);
+    AssertEqual(beforeHash, state.ComputeStateHash());
+    AssertEqual(1, state.RuntimeRules.OncePerTurnUses.Count);
+
+    state.TurnCount = 2;
+    AssertEqual(0, state.RuntimeRules.OncePerTurnUses.Count);
+}
+
+static void DirectApiRollbackRestoresOncePerTurnAvailability()
+{
+    var services = CreateOnceThenSelectionServices();
+    var state = CreateOnceThenSelectionScenarioState(out var card, out _);
+    var beforeHash = state.ComputeStateHash();
+
+    AssertPendingSynchronousCallRollsBack(
+        state,
+        (currentState, trace) => services.PlayCardService.Play(
+            currentState,
+            new PlayCardAction(PlayerId.Player0, card, 0),
+            trace));
+    AssertEqual(beforeHash, state.ComputeStateHash());
+    AssertEqual(0, state.RuntimeRules.OncePerTurnUses.Count);
+
+    var session = services.CreateSession(state);
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, card, 0));
+
+    AssertTrue(paused.IsPaused);
+    AssertEqual(1, state.RuntimeRules.OncePerTurnUses.Count);
+    AssertEqual("test-once-selection:FX-ONCE-SELECT", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+}
+
+static void EngineSessionOncePerTurnStateIsSessionLocal()
+{
+    var services = CreateOnceThenSelectionServices();
+    var firstState = CreateOnceThenSelectionScenarioState(out var firstCard, out _);
+    var secondState = CreateOnceThenSelectionScenarioState(out var secondCard, out _);
+    var firstSession = services.CreateSession(firstState);
+    var secondSession = services.CreateSession(secondState);
+
+    var firstPaused = firstSession.Step(new PlayCardAction(PlayerId.Player0, firstCard, 0));
+    var secondPaused = secondSession.Step(new PlayCardAction(PlayerId.Player0, secondCard, 0));
+
+    AssertTrue(firstPaused.IsPaused);
+    AssertTrue(secondPaused.IsPaused);
+    AssertEqual(1, firstState.RuntimeRules.OncePerTurnUses.Count);
+    AssertEqual(1, secondState.RuntimeRules.OncePerTurnUses.Count);
+}
+
+static void RepeatedGamesDoNotAccumulateOncePerTurnState()
+{
+    var services = CreateOnceThenSelectionServices();
+
+    for (var i = 0; i < 5; i++)
+    {
+        var state = CreateOnceThenSelectionScenarioState(out var card, out _);
+        var session = services.CreateSession(state);
+
+        var paused = session.Step(new PlayCardAction(PlayerId.Player0, card, 0));
+
+        AssertTrue(paused.IsPaused);
+        AssertEqual(1, state.RuntimeRules.OncePerTurnUses.Count);
+    }
+}
+
+static void EngineSessionPublicResumeRequiresDecisionToken()
+{
+    var resumeMethods = typeof(EngineSession)
+        .GetMethods()
+        .Where(method => method.Name == nameof(EngineSession.Resume))
+        .ToArray();
+
+    AssertTrue(resumeMethods.All(method =>
+        method.GetParameters().Length == 1
+        && method.GetParameters()[0].ParameterType == typeof(DecisionResult)));
+    AssertFalse(typeof(DecisionResult).GetConstructors()
+        .Any(ctor => ctor.GetParameters().Length == 2));
+}
+
+static void ReplayUsesRecordedDecisionToken()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    var initial = state.Clone();
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        "test-selection:FX-SELECT",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var selectionEvent = session.Trace.Events.Single(traceEvent => traceEvent.Kind == TraceEventKind.Selection);
+    AssertEqual(paused.PendingDecisionToken!.Value, selectionEvent.DecisionResult!.Token);
+
+    var serialized = new TraceStore().Save(session.Trace);
+    var loaded = new TraceStore().Load(serialized);
+    var loadedSelection = loaded.Events.Single(traceEvent => traceEvent.Kind == TraceEventKind.Selection);
+    AssertEqual(paused.PendingDecisionToken.Value, loadedSelection.DecisionResult!.Token);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, loaded);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+}
+
+static void ReplayRejectsInvalidDecisionPayloads()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    var initial = state.Clone();
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+    _ = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        "test-selection:FX-SELECT",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertReplayDecisionMutationFails(
+        services,
+        initial,
+        session.Trace,
+        decision => decision with { Token = new DecisionToken(decision.Token.Value + 1) });
+    AssertReplayDecisionMutationFails(
+        services,
+        initial,
+        session.Trace,
+        decision => decision with { Player = PlayerId.Player1 });
+    AssertReplayDecisionMutationFails(
+        services,
+        initial,
+        session.Trace,
+        decision => decision with { SelectionResult = SelectionResult.Skip("wrong-request") });
+}
+
 static void EngineSessionOptionSelectionPauseResume()
 {
     var services = CreatePendingOptionServices();
@@ -3008,7 +3171,7 @@ static void EngineSessionOnPlaySelectionPauseResume()
     AssertEqual("FX-ONPLAY:selection:Destroy", paused.PendingStableContinuationId);
     AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == card));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-ONPLAY",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3051,7 +3214,7 @@ static void EngineSessionWhenDigivolvingSelectionPauseResume()
     AssertEqual(card, host.TopCardId);
     AssertTrue(host.SourceCardIds.Contains(new CardInstanceId(6297)));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-DIGI",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3076,7 +3239,7 @@ static void EngineSessionOnStartMainPhaseSelectionPauseResume()
     AssertEqual("FX-PHASE:selection:Destroy", paused.PendingStableContinuationId);
     AssertThrows<DomainException>(() => session.Step(new PassAction(PlayerId.Player0)));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-PHASE",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3112,7 +3275,7 @@ static void EngineSessionPassOnEndTurnSelectionPauseResume()
     AssertEqual("test-selection:FX-END", paused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("FX-END:selection:Destroy", paused.PendingStableContinuationId);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-END",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3151,7 +3314,7 @@ static void EngineSessionPassOnStartTurnSelectionPauseResume()
     AssertEqual("test-selection:FX-START", paused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("FX-START:selection:Destroy", paused.PendingStableContinuationId);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-START",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3195,7 +3358,7 @@ static void EngineSessionOnAllyAttackSelectionPauseResume()
     AssertEqual("test-selection:FX-ATTACK", paused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("FX-ATTACK:selection:Destroy", paused.PendingStableContinuationId);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-ATTACK",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3239,7 +3402,7 @@ static void EngineSessionOnEndAttackSelectionPauseResume()
     AssertEqual("test-selection:FX-END-ATTACK", paused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("FX-END-ATTACK:selection:Destroy", paused.PendingStableContinuationId);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-END-ATTACK",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3265,7 +3428,7 @@ static void EngineSessionRulesTimingSelectionPauseResume()
     AssertEqual("test-selection:FX-RULES", paused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("FX-RULES:selection:Destroy", paused.PendingStableContinuationId);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-RULES",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3297,7 +3460,7 @@ static void EngineSessionSecuritySkillSelectionPauseResume()
     AssertTrue(state.Cards[security].IsFaceUp);
     AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "ST1-16:option:delete",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3327,7 +3490,7 @@ static void EngineSessionChainedSelectionPauseResume()
     AssertEqual("ST2-15:option:source-host", firstPaused.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual("ST2-15:option:select-source-host", firstPaused.PendingStableContinuationId);
 
-    var secondPaused = session.Resume(SelectionResult.ForTargets(
+    var secondPaused = ResumeWithDecision(session, firstPaused, SelectionResult.ForTargets(
         "ST2-15:option:source-host",
         new[] { PermanentSelectionTarget(host) }));
 
@@ -3336,7 +3499,7 @@ static void EngineSessionChainedSelectionPauseResume()
     AssertEqual($"ST2-15:option:play-source-card:{host.Id.Value}", secondPaused.PendingStableContinuationId);
     AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, secondPaused, SelectionResult.ForTargets(
         $"ST2-15:option:source-card:{host.Id.Value}",
         new[] { CardSelectionTarget(source, PlayerId.Player0, Zone.EvolutionSources, host.Id) }));
 
@@ -3353,7 +3516,10 @@ static void EngineSessionValidatesPendingResumeBoundary()
     var state = CreatePendingOptionScenarioState(out var option);
     var session = services.CreateSession(state);
 
-    AssertThrows<DomainException>(() => session.Resume(SelectionResult.Skip("missing")));
+    AssertThrows<DomainException>(() => session.Resume(new DecisionResult(
+        PlayerId.Player0,
+        new DecisionToken(1),
+        SelectionResult.Skip("missing"))));
 
     var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     AssertTrue(paused.IsPaused);
@@ -3456,7 +3622,7 @@ static void EngineSessionActionAndSelectionReplayDeterministic()
 
     var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-SELECT",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3476,7 +3642,7 @@ static void EngineSessionPhaseSelectionReplayDeterministic()
 
     var paused = session.RunMainPhase();
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-PHASE",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3506,7 +3672,7 @@ static void EngineSessionPassSelectionReplayDeterministic()
 
     var paused = session.Step(new PassAction(PlayerId.Player0));
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-START",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3543,7 +3709,7 @@ static void EngineSessionAttackSelectionReplayDeterministic()
 
     var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-ATTACK",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3563,7 +3729,7 @@ static void EngineSessionRulesTimingSelectionReplayDeterministic()
 
     var paused = session.Step(new PlayCardAction(PlayerId.Player0, playedCard, 1));
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-RULES",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3586,7 +3752,7 @@ static void EngineSessionSecuritySelectionReplayDeterministic()
 
     var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
     AssertTrue(paused.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "ST1-16:option:delete",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3610,7 +3776,7 @@ static void EngineSessionOptionalYesThenTargetSelectionResolves()
     AssertEqual(optional.PendingDecisionToken, optional.PendingDecisionPoint.Token);
     AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
 
-    var targetDecision = session.Resume(SelectionResult.ForBoolean(
+    var targetDecision = ResumeWithDecision(session, optional, SelectionResult.ForBoolean(
         "optional:FX-OPT:optional-target:OptionSkill",
         true));
 
@@ -3619,7 +3785,7 @@ static void EngineSessionOptionalYesThenTargetSelectionResolves()
     AssertNotEqual(optional.PendingDecisionToken!.Value.Value, targetDecision.PendingDecisionToken!.Value.Value);
     AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, targetDecision, SelectionResult.ForTargets(
         "test-target:FX-OPT",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3637,7 +3803,7 @@ static void EngineSessionOptionalNoSkipsAndDrainsQueueTail()
     var optional = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     AssertTrue(optional.IsPaused);
 
-    var completed = session.Resume(SelectionResult.ForBoolean(
+    var completed = ResumeWithDecision(session, optional, SelectionResult.ForBoolean(
         "optional:FX-OPT:optional-target:OptionSkill",
         false));
 
@@ -3661,7 +3827,7 @@ static void EngineSessionSecurityOptionalThenTargetSelection()
     AssertEqual("optional:FX-OPT:optional-target:OptionSkill", optional.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertEqual(Zone.Executing, state.Cards[security].CurrentZone);
 
-    var targetDecision = session.Resume(SelectionResult.ForBoolean(
+    var targetDecision = ResumeWithDecision(session, optional, SelectionResult.ForBoolean(
         "optional:FX-OPT:optional-target:OptionSkill",
         true));
 
@@ -3669,7 +3835,7 @@ static void EngineSessionSecurityOptionalThenTargetSelection()
     AssertEqual("test-target:FX-OPT", targetDecision.PendingDecisionPoint!.SelectionRequest!.Id);
     AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, targetDecision, SelectionResult.ForTargets(
         "test-target:FX-OPT",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3720,7 +3886,7 @@ static void EngineSessionSelectionThenRulesTimingPausesAgain()
     var first = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     AssertTrue(first.IsPaused);
 
-    var second = session.Resume(SelectionResult.ForTargets(
+    var second = ResumeWithDecision(session, first, SelectionResult.ForTargets(
         "test-selection:FX-SELECT",
         new[] { PermanentSelectionTarget(firstTarget) }));
 
@@ -3729,7 +3895,7 @@ static void EngineSessionSelectionThenRulesTimingPausesAgain()
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(firstTarget.TopCardId));
     AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == secondTarget.Id));
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, second, SelectionResult.ForTargets(
         "test-selection:FX-RULES",
         new[] { PermanentSelectionTarget(secondTarget) }));
 
@@ -3749,7 +3915,7 @@ static void EngineSessionRunToMainPhaseOnStartTurnPauseResume()
     AssertEqual(Phase.Active, state.Phase);
     AssertEqual("test-selection:FX-START", paused.PendingDecisionPoint!.SelectionRequest!.Id);
 
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
         "test-selection:FX-START",
         new[] { PermanentSelectionTarget(target) }));
 
@@ -3799,11 +3965,11 @@ static void EngineSessionChainedDecisionReplayDeterministic()
 
     var optional = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     AssertTrue(optional.IsPaused);
-    var targetDecision = session.Resume(SelectionResult.ForBoolean(
+    var targetDecision = ResumeWithDecision(session, optional, SelectionResult.ForBoolean(
         "optional:FX-OPT:optional-target:OptionSkill",
         true));
     AssertTrue(targetDecision.IsPaused);
-    var completed = session.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(session, targetDecision, SelectionResult.ForTargets(
         "test-target:FX-OPT",
         new[] { PermanentSelectionTarget(target) }));
     AssertFalse(completed.IsPaused);
@@ -3902,13 +4068,13 @@ static void OptionLifecycleSt2St3HandOptionRegression()
     AssertTrue(firstPending.IsPaused);
     AssertEqual(Zone.Executing, sourcePlayState.Cards[sourcePlayOption].CurrentZone);
 
-    var secondPending = sourcePlaySession.Resume(SelectionResult.ForTargets(
+    var secondPending = ResumeWithDecision(sourcePlaySession, firstPending, SelectionResult.ForTargets(
             "ST2-15:option:source-host",
             new[] { PermanentSelectionTarget(host) }));
     AssertTrue(secondPending.IsPaused);
     AssertEqual(Zone.Executing, sourcePlayState.Cards[sourcePlayOption].CurrentZone);
 
-    var completed = sourcePlaySession.Resume(SelectionResult.ForTargets(
+    var completed = ResumeWithDecision(sourcePlaySession, secondPending, SelectionResult.ForTargets(
             $"ST2-15:option:source-card:{host.Id.Value}",
             new[] { CardSelectionTarget(source, PlayerId.Player0, Zone.EvolutionSources, host.Id) }));
     AssertFalse(completed.IsPaused);
@@ -6568,6 +6734,45 @@ static void AssertPendingSynchronousCallRollsBack(GameState state, Action<GameSt
     AssertEqual(0, trace.Events.Count);
 }
 
+static EngineStepResult ResumeWithDecision(
+    EngineSession session,
+    EngineStepResult pending,
+    SelectionResult selectionResult) =>
+    session.Resume(CreateDecisionResult(pending, selectionResult));
+
+static DecisionResult CreateDecisionResult(EngineStepResult pending, SelectionResult selectionResult)
+{
+    var decisionPoint = pending.PendingDecisionPoint
+        ?? throw new InvalidOperationException("Pending step result has no DecisionPoint.");
+    var token = pending.PendingDecisionToken
+        ?? throw new InvalidOperationException("Pending step result has no DecisionToken.");
+    return new DecisionResult(decisionPoint.Player, token, selectionResult);
+}
+
+static void AssertReplayDecisionMutationFails(
+    BattleEngineServices services,
+    GameState initial,
+    GameTrace trace,
+    Func<DecisionResult, DecisionResult> mutate)
+{
+    var mutated = new GameTrace(trace.Events.Select(traceEvent =>
+    {
+        if (traceEvent.Kind != TraceEventKind.Selection || traceEvent.DecisionResult is null)
+        {
+            return traceEvent;
+        }
+
+        var decision = mutate(traceEvent.DecisionResult);
+        return traceEvent with
+        {
+            SelectionResult = decision.SelectionResult,
+            DecisionResult = decision,
+        };
+    }));
+
+    AssertThrows<DomainException>(() => new ReplayRunner(services: services).Replay(initial, mutated));
+}
+
 static void AssertThrows<TException>(Action action)
     where TException : Exception
 {
@@ -7095,6 +7300,32 @@ static GameState CreatePendingOptionScenarioState(out CardInstanceId option)
     state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
     option = AddCardToZone(state, 6290, "FX-SELECT", PlayerId.Player0, Zone.Hand);
     AddBattlePermanent(state, 6291, 891, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    return state;
+}
+
+static BattleEngineServices CreateOnceThenSelectionServices() =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new OnceThenSelectionCardScript(
+            "FX-ONCE-SELECT",
+            "FX_OnceSelect",
+            EffectTiming.OnPlay,
+            PlayerId.Player1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only once rollback target.")));
+
+static GameState CreateOnceThenSelectionScenarioState(
+    out CardInstanceId card,
+    out PermanentState target)
+{
+    var state = CreateMinimalBattleState();
+    state.Memory = 10;
+    state.CardDefinitions["FX-ONCE-SELECT"] = CardEffectTestFixture.EffectDefinition("FX-ONCE-SELECT", "FX_OnceSelect") with
+    {
+        Level = 4,
+        PlayCost = 3,
+        Dp = 5000,
+    };
+    card = AddCardToZone(state, 6370, "FX-ONCE-SELECT", PlayerId.Player0, Zone.Hand);
+    target = AddBattlePermanent(state, 6371, 970, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
     return state;
 }
 

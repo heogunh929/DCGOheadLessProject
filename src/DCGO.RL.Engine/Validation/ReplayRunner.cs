@@ -73,12 +73,12 @@ public sealed class ReplayRunner
                         throw new DomainException("ReplayRunner requires BattleEngineServices to replay selection results.");
                     }
 
-                    if (traceEvent.SelectionResult is null)
+                    if (traceEvent.DecisionResult is null)
                     {
-                        throw new DomainException($"Trace selection event '{traceEvent.Index}' has no selection payload.");
+                        throw new DomainException($"Trace selection event '{traceEvent.Index}' has no decision result payload.");
                     }
 
-                    session.Resume(traceEvent.SelectionResult);
+                    session.Resume(traceEvent.DecisionResult);
                     break;
 
                 case TraceEventKind.Phase:

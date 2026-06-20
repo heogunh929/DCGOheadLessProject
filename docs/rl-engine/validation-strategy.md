@@ -235,3 +235,30 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 
 - full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
 - 52A는 보완 요구사항 통과로 `done` 처리한다.
+
+## Queue 52B runtime state/token hardening 검증 - 2026-06-20
+
+검증 항목:
+
+- once-per-turn 사용 이력은 `GameState.RuntimeRules`에 저장되고 `Clone`, `RestoreFrom`, `ComputeStateHash`에 반영된다.
+- `TurnCount`가 진행되면 과거 once-per-turn 이력이 정리된다.
+- 직접 동기 `Play` pending rollback은 once-per-turn 사용 이력까지 호출 전으로 복구한다.
+- 같은 `BattleEngineServices`에서 만든 두 `EngineSession`은 once-per-turn 이력을 공유하지 않는다.
+- 반복 game/session 실행은 service graph에 once-per-turn 이력을 누적하지 않는다.
+- public `EngineSession.Resume`은 `DecisionResult`만 받으며 token 없는 resume path가 없다.
+- selection trace와 `TraceStore`는 `DecisionResult(Player, DecisionToken, SelectionResult)`를 보존한다.
+- `ReplayRunner`는 trace에 기록된 token을 사용하고 stale token, wrong player, wrong request id를 거부한다.
+- optional/chained/security/phase pause/resume 회귀가 계속 통과한다.
+
+실행 결과:
+
+```powershell
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 285 tests passed.`
+
+남은 범위:
+
+- runner 재개 가능한 continuation/session API는 queue 52C로 분리한다.
+- full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.

@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.Actions;
+using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 
@@ -34,11 +35,23 @@ public sealed class GameTrace
     public TraceEvent AddDecision(string label, GameState state, DecisionPoint decisionPoint) =>
         Add(TraceEventKind.Decision, label, state, state, DecisionPoint: decisionPoint);
 
-    public TraceEvent AddSelection(string label, GameState state, SelectionResult selectionResult) =>
-        Add(TraceEventKind.Selection, label, state, state, SelectionResult: selectionResult);
+    public TraceEvent AddSelection(string label, GameState state, DecisionResult decisionResult) =>
+        Add(
+            TraceEventKind.Selection,
+            label,
+            state,
+            state,
+            SelectionResult: decisionResult.SelectionResult,
+            DecisionResult: decisionResult);
 
-    public TraceEvent AddSelection(string label, GameState before, GameState after, SelectionResult selectionResult) =>
-        Add(TraceEventKind.Selection, label, before, after, SelectionResult: selectionResult);
+    public TraceEvent AddSelection(string label, GameState before, GameState after, DecisionResult decisionResult) =>
+        Add(
+            TraceEventKind.Selection,
+            label,
+            before,
+            after,
+            SelectionResult: decisionResult.SelectionResult,
+            DecisionResult: decisionResult);
 
     public TraceEvent AddPhase(string label, GameState before, GameState after, string details) =>
         Add(TraceEventKind.Phase, label, before, after, Details: details);
@@ -66,6 +79,7 @@ public sealed class GameTrace
         MoveCardResult? MoveResult = null,
         DecisionPoint? DecisionPoint = null,
         SelectionResult? SelectionResult = null,
+        DecisionResult? DecisionResult = null,
         string Details = "")
     {
         var traceEvent = new TraceEvent(
@@ -79,6 +93,7 @@ public sealed class GameTrace
             MoveResult: MoveResult,
             DecisionPoint: DecisionPoint,
             SelectionResult: SelectionResult,
+            DecisionResult: DecisionResult,
             Details: Details);
 
         _events.Add(traceEvent);

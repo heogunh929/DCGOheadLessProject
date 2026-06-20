@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.Actions;
+using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 
@@ -26,4 +27,5 @@ public sealed record TraceEvent(
     MoveCardResult? MoveResult = null,
     DecisionPoint? DecisionPoint = null,
     SelectionResult? SelectionResult = null,
+    DecisionResult? DecisionResult = null,
     string Details = "");

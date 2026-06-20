@@ -379,6 +379,102 @@ internal sealed class TimingMemoryCardScript : ICardScript
     }
 }
 
+internal sealed class OnceThenSelectionCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly PlayerId _targetController;
+
+    public OnceThenSelectionCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        PlayerId targetController)
+    {
+        _timing = timing;
+        _targetController = targetController;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that registers once-per-turn state before a later selection pause.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:once-memory",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                IsOncePerTurn: true,
+                OncePerTurnKey: $"{Porting.CardId}:{_timing}:once-memory"),
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:selection",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                CreateSelectionRequest: effectContext => CreateTargetRequest(
+                    effectContext.State,
+                    context.Controller ?? effectContext.Player ?? PlayerId.Player0),
+                SelectionContinuation: ApplySelection),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        if (!context.Resolution.StableId.EndsWith(":once-memory", StringComparison.Ordinal))
+        {
+            throw new DomainException(
+                $"Card script '{Porting.CardId}' selection body must be resolved through SelectionResultApplicator.");
+        }
+
+        context.WithState((state, primitives) =>
+        {
+            var player = context.Resolution.Controller
+                ?? context.Resolution.Context.Player
+                ?? PlayerId.Player0;
+            primitives.ModifyMemory(state, player, amount: 1);
+        });
+    }
+
+    private SelectionRequest CreateTargetRequest(GameState state, PlayerId player)
+    {
+        var candidates = state.GetPlayer(_targetController)
+            .BattleAreaPermanents
+            .Select(permanent => new SelectableTarget(
+                SelectionTargetKind.Permanent,
+                $"permanent:{permanent.Id.Value}",
+                permanent.ControllerPlayerId,
+                Permanent: permanent.Id,
+                Zone: Zone.BattleArea))
+            .ToArray();
+
+        return new SelectionRequest(
+            $"test-once-selection:{Porting.CardId}",
+            player,
+            SelectionKind.SelectPermanent,
+            SelectionTargetKind.Permanent,
+            minCount: 1,
+            maxCount: 1,
+            canSkip: false,
+            canEndNotMax: false,
+            candidates,
+            "Select once-per-turn target.");
+    }
+
+    private static void ApplySelection(SelectionResultApplicationContext context)
+    {
+        foreach (var permanent in context.SelectedPermanentIds)
+        {
+            context.Primitives.DestroyPermanent(context.State, permanent, context.Trace);
+        }
+    }
+}
+
 internal sealed class OptionSourceZoneProbeScript : ICardScript
 {
     public OptionSourceZoneProbeScript(string cardId, string effectClassName)

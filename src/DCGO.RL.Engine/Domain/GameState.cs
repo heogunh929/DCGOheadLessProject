@@ -5,6 +5,8 @@ namespace DCGO.RL.Engine.Domain;
 
 public sealed class GameState
 {
+    private int _turnCount;
+
     public GameState(GameConfig config)
     {
         Config = config;
@@ -13,10 +15,20 @@ public sealed class GameState
     public GameConfig Config { get; }
     public int Memory { get; set; }
     public Phase Phase { get; set; } = Phase.None;
-    public int TurnCount { get; set; }
+    public int TurnCount
+    {
+        get => _turnCount;
+        set
+        {
+            _turnCount = value;
+            RuntimeRules.ClearOncePerTurnBefore(value);
+        }
+    }
+
     public PlayerId TurnPlayerId { get; set; } = PlayerId.Player0;
     public PlayerId FirstPlayerId { get; set; } = PlayerId.Player0;
     public GameResult Result { get; set; } = GameResult.Ongoing;
+    public RuntimeRuleState RuntimeRules { get; } = new();
     public List<PlayerState> Players { get; } = new();
     public List<CardInstanceId> ActiveCardIds { get; } = new();
     public List<TemporaryModifier> TemporaryModifiers { get; } = new();
@@ -66,6 +78,7 @@ public sealed class GameState
 
         clone.ActiveCardIds.AddRange(ActiveCardIds);
         clone.TemporaryModifiers.AddRange(TemporaryModifiers);
+        clone.RuntimeRules.RestoreFrom(RuntimeRules);
 
         foreach (var player in Players)
         {
@@ -85,7 +98,7 @@ public sealed class GameState
         return clone;
     }
 
-    internal void RestoreFrom(GameState snapshot)
+    public void RestoreFrom(GameState snapshot)
     {
         ArgumentNullException.ThrowIfNull(snapshot);
         if (!ReferenceEquals(Config, snapshot.Config))
@@ -105,6 +118,8 @@ public sealed class GameState
 
         TemporaryModifiers.Clear();
         TemporaryModifiers.AddRange(snapshot.TemporaryModifiers);
+
+        RuntimeRules.RestoreFrom(snapshot.RuntimeRules);
 
         Players.Clear();
         Players.AddRange(snapshot.Players.Select(player => player.Clone()));
@@ -166,6 +181,19 @@ public sealed class GameState
                 .Append(modifier.CreatedPhase).Append('|')
                 .Append(modifier.ExpiresAtTurnPlayerId?.Value.ToString() ?? "-").Append('|')
                 .Append(modifier.DebugLabel).AppendLine();
+        }
+
+        foreach (var use in RuntimeRules.OncePerTurnUses
+            .OrderBy(use => use.TurnCount)
+            .ThenBy(use => use.Player.Value)
+            .ThenBy(use => use.EffectStableId, StringComparer.Ordinal)
+            .ThenBy(use => use.SourceCard?.Value ?? -1))
+        {
+            builder.Append("runtime-once-per-turn:")
+                .Append(use.TurnCount).Append('|')
+                .Append(use.Player.Value).Append('|')
+                .Append(use.EffectStableId).Append('|')
+                .Append(use.SourceCard?.Value.ToString() ?? "-").AppendLine();
         }
 
         foreach (var definition in CardDefinitions.OrderBy(pair => pair.Key, StringComparer.Ordinal))

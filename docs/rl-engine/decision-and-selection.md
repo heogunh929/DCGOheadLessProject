@@ -45,9 +45,19 @@ Queue 52A에서 `EngineSession.Step(GameAction)` / `EngineSession.Resume(Decisio
 - `RunToMainPhase()`는 `None`/`End`에서 `Active` -> `Draw` -> `Breeding` -> `Main`으로 진행하면서 `OnStartTurn`/`OnStartMainPhase` selection을 pause/resume할 수 있다.
 - trace에는 action, selection result, phase-only step event가 기록되며, pending continuation identity는 `EffectResolution.StableId`를 사용한다.
 
+Queue 52B에서 token 우회를 제거했다.
+
+- public resume entry point는 `EngineSession.Resume(DecisionResult)`만 허용한다.
+- `DecisionResult`는 `Player`, `DecisionToken`, `SelectionResult`를 모두 요구한다.
+- token 없는 `DecisionResult` 생성자와 `Resume(SelectionResult)` convenience overload는 없다.
+- selection trace event는 `SelectionResult`뿐 아니라 `DecisionResult` payload를 함께 저장한다.
+- `ReplayRunner`는 현재 pending token을 자동 주입하지 않고 trace에 기록된 token을 그대로 제출한다. stale token, wrong player, wrong request id는 replay에서도 실패한다.
+
 현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, optional yes/no + explicit target selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`/`RunToMainPhase()`의 `OnStartMainPhase`/`OnStartTurn`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail 또는 security-check loop를 이어서 drain한다.
 
 SecuritySkill selection은 공통 boundary로 재개되지만, `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate` 등 원본 security timing 전체 순서는 queue 53의 source-aligned 정렬 범위로 남긴다. `EngineSession.RunMainPhase()`는 `TraceEventKind.Phase`/`RunMainPhase` event로 replay할 수 있고, `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 노출한다.
+
+Runner continuation 정책은 queue 52C로 분리한다. 현재 runner는 pending decision을 버리지 않고 `ScenarioResult`에 `DecisionPoint`, `DecisionToken`, stable continuation id를 반환하지만, 재개 가능한 public runner session handle은 아직 제공하지 않는다. 52C에서는 mutable `EngineSession`을 그대로 노출하지 않는 runner-owned session API를 설계한다.
 
 ## 원본 Unity Mapping
 

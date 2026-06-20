@@ -13,13 +13,7 @@ public enum EngineStepStatus
     GameOver,
 }
 
-public sealed record DecisionResult(PlayerId Player, DecisionToken Token, SelectionResult SelectionResult)
-{
-    public DecisionResult(PlayerId player, SelectionResult selectionResult)
-        : this(player, default, selectionResult)
-    {
-    }
-}
+public sealed record DecisionResult(PlayerId Player, DecisionToken Token, SelectionResult SelectionResult);
 
 public sealed record EngineStepResult(
     EngineStepStatus Status,
@@ -198,7 +192,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -215,7 +209,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -227,7 +221,7 @@ public sealed class EngineSession
                 $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                 beforeSelection,
                 State,
-                result.SelectionResult);
+                result);
             return CompletedResult(pending.Action, pending.Resolution.Timing, rulesProcessed: true, traceStart);
         }
 
@@ -244,7 +238,7 @@ public sealed class EngineSession
                 $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                 beforeSelection,
                 State,
-                result.SelectionResult);
+                result);
             Trace.AddDecision(
                 $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                 State,
@@ -270,7 +264,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -291,7 +285,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -313,7 +307,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -326,7 +320,7 @@ public sealed class EngineSession
 
         if (pending.ContinueToMainPhaseAfterResume)
         {
-            return ContinueRunToMainPhaseAfterSelection(pending, beforeSelection, result.SelectionResult, traceStart);
+            return ContinueRunToMainPhaseAfterSelection(pending, beforeSelection, result, traceStart);
         }
 
         _pending = null;
@@ -340,7 +334,7 @@ public sealed class EngineSession
                     $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
                     beforeSelection,
                     State,
-                    result.SelectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -353,18 +347,8 @@ public sealed class EngineSession
             $"selection:{pending.StableContinuationId}:{pending.Request.Id}",
             beforeSelection,
             State,
-            result.SelectionResult);
+            result);
         return CompletedResult(pending.Action, pending.Resolution.Timing, rulesProcessed: true, traceStart);
-    }
-
-    public EngineStepResult Resume(SelectionResult selectionResult)
-    {
-        if (_pending is null)
-        {
-            throw new DomainException("Cannot resume because no engine decision is pending.");
-        }
-
-        return Resume(new DecisionResult(_pending.Request.Player, _pending.DecisionToken, selectionResult));
     }
 
     private DecisionToken NextDecisionToken() => new(_nextDecisionToken++);
@@ -420,7 +404,7 @@ public sealed class EngineSession
     private EngineStepResult ContinueRunToMainPhaseAfterSelection(
         PendingEngineInteraction completedPending,
         GameState beforeSelection,
-        SelectionResult selectionResult,
+        DecisionResult result,
         int traceStart)
     {
         _pending = null;
@@ -445,7 +429,7 @@ public sealed class EngineSession
                     $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
                     beforeSelection,
                     State,
-                    selectionResult);
+                    result);
                 Trace.AddDecision(
                     $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                     State,
@@ -462,7 +446,7 @@ public sealed class EngineSession
                 $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
                 beforeSelection,
                 State,
-                selectionResult);
+                result);
             Trace.AddDecision(
                 $"decision:{_pending.StableContinuationId}:{_pending.Request.Id}",
                 State,
@@ -474,7 +458,7 @@ public sealed class EngineSession
             $"selection:{completedPending.StableContinuationId}:{completedPending.Request.Id}",
             beforeSelection,
             State,
-            selectionResult);
+            result);
         return CompletedResult(action: null, EffectTiming.OnStartMainPhase, rulesProcessed: true, traceStart);
     }
 
