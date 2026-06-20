@@ -29,6 +29,23 @@ RL.Engine은 Unity UI를 구현하지 않는다. 선택이 필요한 rule/effect
 | `SelectionResult` | request에 대한 typed 응답 |
 | `SelectionValidator` | request/result id, 후보 포함 여부, 개수, skip 규칙 검증 |
 | `SelectionResultApplicator` | stale target 재검증 후 continuation 실행 |
+| `EngineSession` | action 실행과 pending selection resume을 묶는 UI 비종속 runtime boundary |
+| `EngineStepResult` | action 또는 resume 이후 완료/일시정지 상태, pending `DecisionPoint`, stable continuation id, trace delta를 반환 |
+
+## EngineSession pause/resume boundary - 2026-06-20
+
+Queue 52A에서 `EngineSession.Step(GameAction)` / `EngineSession.Resume(DecisionResult)` 경계를 추가했다.
+
+- pending interaction은 session당 최대 하나만 허용한다.
+- pending 중 새 `GameAction` 실행은 실패한다.
+- `DecisionResult.Player`와 `SelectionResult.RequestId`가 pending `SelectionRequest`와 일치하는지 검증한다.
+- selection 적용 후 다음 chained selection이 있으면 다시 `PausedForDecision`을 반환한다.
+- selection chain이 완료된 뒤에만 `RuleProcessor.ProcessAfterAction`을 실행한다.
+- trace에는 action, selection result, phase-only step event가 기록되며, pending continuation identity는 `EffectResolution.StableId`를 사용한다.
+
+현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`의 `OnStartMainPhase`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail 또는 security-check loop를 이어서 drain한다.
+
+SecuritySkill selection은 공통 boundary로 재개되지만, `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate` 등 원본 security timing 전체 순서는 queue 53의 source-aligned 정렬 범위로 남긴다. `EngineSession.RunMainPhase()`는 `TraceEventKind.Phase`/`RunMainPhase` event로 replay할 수 있고, `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 노출한다.
 
 ## 원본 Unity Mapping
 
@@ -87,3 +104,4 @@ ST1-12 security effect는 원본 `PlaySelfTamerSecurityEffect`처럼 `Executing`
 - full `MultipleSkills` simultaneous trigger priority와 선택 순서
 - block/counter 세부 timing의 end-to-end selection result application
 - `BeforePayCost` / `AfterPayCost` timing에서의 optional/selection boundary
+- full security timing sequence: `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`

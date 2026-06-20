@@ -114,7 +114,9 @@ var tests = new (string Name, Action Test)[]
     ("Tier1 RuleProcessor stabilizes invalid permanents", Tier1RuleProcessorStabilizesInvalidPermanents),
     ("Tier1 RuleProcessor DP zero permanent", Tier1RuleProcessorDpZeroPermanent),
     ("Tier1 RuleProcessor trims excess link cards", Tier1RuleProcessorTrimsExcessLinkCards),
+    ("Tier1 RuleProcessor uses injected ZoneMover for link trim", Tier1RuleProcessorUsesInjectedZoneMoverForLinkTrim),
     ("Tier1 RuleProcessor max iteration guard", Tier1RuleProcessorMaxIterationGuard),
+    ("Tier1 RuleProcessor has no direct ZoneMover construction", Tier1RuleProcessorHasNoDirectZoneMoverConstruction),
     ("Tier1 EffectQueue trigger collection by timing", Tier1EffectQueueTriggerCollectionByTiming),
     ("TriggerPipeline collects field top card descriptor", TriggerPipelineCollectsFieldTopCardDescriptor),
     ("TriggerPipeline collects inherited source descriptor", TriggerPipelineCollectsInheritedSourceDescriptor),
@@ -146,8 +148,26 @@ var tests = new (string Name, Action Test)[]
     ("Runtime composition default constructors fail", RuntimeCompositionDefaultConstructorsFail),
     ("Runtime composition effect-bearing cards do not become legacy NoEffect", RuntimeCompositionEffectBearingCardDoesNotBecomeLegacyNoEffect),
     ("Runtime composition mixed custom/default graph fails", RuntimeCompositionMixedCustomDefaultGraphFails),
-    ("Runtime composition scripted runner rejects pending selection", RuntimeCompositionScriptedRunnerRejectsPendingSelection),
-    ("Runtime composition random runner rejects pending selection", RuntimeCompositionRandomRunnerRejectsPendingSelection),
+    ("Runtime composition scripted runner returns pending selection", RuntimeCompositionScriptedRunnerReturnsPendingSelection),
+    ("Runtime composition random runner returns pending selection", RuntimeCompositionRandomRunnerReturnsPendingSelection),
+    ("EngineSession option selection pause/resume", EngineSessionOptionSelectionPauseResume),
+    ("EngineSession OnPlay selection pause/resume", EngineSessionOnPlaySelectionPauseResume),
+    ("EngineSession WhenDigivolving selection pause/resume", EngineSessionWhenDigivolvingSelectionPauseResume),
+    ("EngineSession OnStartMainPhase selection pause/resume", EngineSessionOnStartMainPhaseSelectionPauseResume),
+    ("EngineSession Pass OnEndTurn selection pause/resume", EngineSessionPassOnEndTurnSelectionPauseResume),
+    ("EngineSession Pass OnStartTurn selection pause/resume", EngineSessionPassOnStartTurnSelectionPauseResume),
+    ("EngineSession OnAllyAttack selection pause/resume", EngineSessionOnAllyAttackSelectionPauseResume),
+    ("EngineSession OnEndAttack selection pause/resume", EngineSessionOnEndAttackSelectionPauseResume),
+    ("EngineSession RulesTiming selection pause/resume", EngineSessionRulesTimingSelectionPauseResume),
+    ("EngineSession SecuritySkill selection pause/resume", EngineSessionSecuritySkillSelectionPauseResume),
+    ("EngineSession chained selection pause/resume", EngineSessionChainedSelectionPauseResume),
+    ("EngineSession validates pending resume boundary", EngineSessionValidatesPendingResumeBoundary),
+    ("EngineSession action and selection replay deterministic", EngineSessionActionAndSelectionReplayDeterministic),
+    ("EngineSession phase selection replay deterministic", EngineSessionPhaseSelectionReplayDeterministic),
+    ("EngineSession pass selection replay deterministic", EngineSessionPassSelectionReplayDeterministic),
+    ("EngineSession attack selection replay deterministic", EngineSessionAttackSelectionReplayDeterministic),
+    ("EngineSession rules timing selection replay deterministic", EngineSessionRulesTimingSelectionReplayDeterministic),
+    ("EngineSession security selection replay deterministic", EngineSessionSecuritySelectionReplayDeterministic),
     ("Option lifecycle ST1 hand option regression", OptionLifecycleSt1HandOptionRegression),
     ("Option lifecycle ST2/ST3 hand option regression", OptionLifecycleSt2St3HandOptionRegression),
     ("TriggerPipeline ST1-09 OnBlockAnyone hook", TriggerPipelineSt1OnBlockAnyoneHook),
@@ -2197,7 +2217,7 @@ static void Tier1RuleProcessorStabilizesInvalidPermanents()
     var faceDown = AddBattlePermanent(state, 2052, 252, "BT1-ROOKIE", PlayerId.Player0, 1, enterTurn: 1);
     state.Cards[faceDown.TopCardId].IsFaceUp = false;
 
-    var result = new RuleProcessor().ProcessUntilStable(state);
+    var result = CreateTestRuleProcessor().ProcessUntilStable(state);
 
     AssertEqual(2, result.ChangesApplied);
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(breedingOption.TopCardId));
@@ -2211,7 +2231,7 @@ static void Tier1RuleProcessorDpZeroPermanent()
     var permanent = AddBattlePermanent(state, 2061, 261, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
     new Tier1PrimitiveService().ModifyDP(state, permanent.Id, -3000);
 
-    new RuleProcessor().ProcessUntilStable(state);
+    CreateTestRuleProcessor().ProcessUntilStable(state);
 
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(permanent.TopCardId));
     AssertFalse(state.GetPlayer(PlayerId.Player0).FieldPermanents.Any(candidate => candidate.Id == permanent.Id));
@@ -2236,10 +2256,29 @@ static void Tier1RuleProcessorTrimsExcessLinkCards()
         PermanentId = permanent.Id,
     });
 
-    new RuleProcessor().ProcessUntilStable(state);
+    CreateTestRuleProcessor().ProcessUntilStable(state);
 
     AssertSequence(new[] { first }, permanent.LinkedCards);
     AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(second));
+}
+
+static void Tier1RuleProcessorUsesInjectedZoneMoverForLinkTrim()
+{
+    var state = CreateMinimalBattleState();
+    var permanent = AddBattlePermanent(state, 2074, 274, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var first = AddLinkedCard(state, 2075, "BT1-OPTION", PlayerId.Player0, permanent.Id);
+    var second = AddLinkedCard(state, 2076, "BT1-OPTION", PlayerId.Player0, permanent.Id);
+    var spyMover = new SpyZoneMover();
+
+    CreateTestRuleProcessor(zoneMover: spyMover).ProcessUntilStable(state);
+
+    AssertSequence(new[] { first }, permanent.LinkedCards);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(second));
+    AssertEqual(1, spyMover.MoveCardCommands.Count(command =>
+        command.Card == second
+        && command.SourceZone == Zone.LinkedCards
+        && command.DestinationZone == Zone.Trash
+        && command.SourcePermanent == permanent.Id));
 }
 
 static void Tier1RuleProcessorMaxIterationGuard()
@@ -2247,7 +2286,15 @@ static void Tier1RuleProcessorMaxIterationGuard()
     var state = CreateMinimalBattleState();
 
     AssertThrows<UnsupportedMechanicException>(() =>
-        new RuleProcessor(options: new RuleProcessorOptions(MaxIterations: 0)).ProcessUntilStable(state));
+        CreateTestRuleProcessor(options: new RuleProcessorOptions(MaxIterations: 0)).ProcessUntilStable(state));
+}
+
+static void Tier1RuleProcessorHasNoDirectZoneMoverConstruction()
+{
+    var path = Path.Combine(WorkspaceRoot(), "src", "DCGO.RL.Engine", "Battle", "RuleProcessor.cs");
+    var content = File.ReadAllText(path);
+
+    AssertFalse(content.Contains("new ZoneMover", StringComparison.Ordinal));
 }
 
 static void Tier1EffectQueueTriggerCollectionByTiming()
@@ -2823,7 +2870,7 @@ static void RuntimeCompositionMixedCustomDefaultGraphFails()
     AssertThrows<DomainException>(() => new ActionExecutor(playCardService: playCardService));
 }
 
-static void RuntimeCompositionScriptedRunnerRejectsPendingSelection()
+static void RuntimeCompositionScriptedRunnerReturnsPendingSelection()
 {
     var state = CreatePendingOptionScenarioState(out var option);
     var services = CreatePendingOptionServices();
@@ -2831,28 +2878,593 @@ static void RuntimeCompositionScriptedRunnerRejectsPendingSelection()
         "pending option",
         state,
         new[] { new PlayCardAction(PlayerId.Player0, option, -1) });
-    var runner = new ScriptedScenarioRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
+    var runner = new ScriptedScenarioRunner(services);
 
-    AssertThrows<DomainException>(() => runner.Run(scenario));
+    var result = runner.Run(scenario);
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, result.Status);
+    AssertTrue(result.InvariantReport.IsValid);
+    AssertEqual("test-selection:FX-SELECT", result.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-SELECT:selection:Destroy", result.PendingStableContinuationId);
 }
 
-static void RuntimeCompositionRandomRunnerRejectsPendingSelection()
+static void RuntimeCompositionRandomRunnerReturnsPendingSelection()
 {
     var state = CreatePendingOptionScenarioState(out _);
     var services = CreatePendingOptionServices();
-    var runner = new RandomLegalActionRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
+    var runner = new RandomLegalActionRunner(services);
 
-    AssertThrows<DomainException>(() => runner.Run(new RandomLegalActionRunRequest(
+    var result = runner.Run(new RandomLegalActionRunRequest(
         "pending-option",
         state,
         MaxActions: 1,
-        Seed: 1)));
+        Seed: 2));
+
+    AssertEqual(ScenarioRunStatus.PausedForDecision, result.Status);
+    AssertTrue(result.InvariantReport.IsValid);
+    AssertEqual("test-selection:FX-SELECT", result.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-SELECT:selection:Destroy", result.PendingStableContinuationId);
+}
+
+static void EngineSessionOptionSelectionPauseResume()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual("test-selection:FX-SELECT", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-SELECT:selection:Destroy", paused.PendingStableContinuationId);
+    AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
+    AssertThrows<DomainException>(() => session.Step(new PassAction(PlayerId.Player0)));
+
+    var completed = session.Resume(new DecisionResult(
+        PlayerId.Player0,
+        SelectionResult.ForTargets(
+            "test-selection:FX-SELECT",
+            new[] { PermanentSelectionTarget(target) })));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertFalse(session.HasPendingDecision);
+}
+
+static void EngineSessionOnPlaySelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-ONPLAY",
+            "FX_OnPlay",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnPlay)));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ONPLAY"] = CardEffectTestFixture.EffectDefinition("FX-ONPLAY", "FX_OnPlay");
+    var card = AddCardToZone(state, 6295, "FX-ONPLAY", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6296, 896, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, card, 0));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual("test-selection:FX-ONPLAY", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-ONPLAY:selection:Destroy", paused.PendingStableContinuationId);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == card));
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-ONPLAY",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == card));
+}
+
+static void EngineSessionWhenDigivolvingSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-DIGI",
+            "FX_Digi",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.WhenDigivolving),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only digivolution source host.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DIGI"] = CardEffectTestFixture.EffectDefinition("FX-DIGI", "FX_Digi") with
+    {
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+        EvoCosts = new[] { new EvoCostDefinition(CardColor.Red, 3, 2) },
+    };
+    state.Memory = 5;
+    var host = AddBattlePermanent(state, 6297, 897, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var card = AddCardToZone(state, 6298, "FX-DIGI", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6299, 898, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new DigivolveAction(PlayerId.Player0, card, host.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual("test-selection:FX-DIGI", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-DIGI:selection:Destroy", paused.PendingStableContinuationId);
+    AssertEqual(card, host.TopCardId);
+    AssertTrue(host.SourceCardIds.Contains(new CardInstanceId(6297)));
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-DIGI",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertEqual(card, host.TopCardId);
+}
+
+static void EngineSessionOnStartMainPhaseSelectionPauseResume()
+{
+    var services = CreatePhaseSelectionServices();
+    var state = CreatePhaseSelectionScenarioState(out var target);
+    var session = services.CreateSession(state);
+
+    var paused = session.RunMainPhase();
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual(Phase.Main, state.Phase);
+    AssertEqual("test-selection:FX-PHASE", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-PHASE:selection:Destroy", paused.PendingStableContinuationId);
+    AssertThrows<DomainException>(() => session.Step(new PassAction(PlayerId.Player0)));
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-PHASE",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnStartMainPhase, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertEqual(Phase.Main, state.Phase);
+}
+
+static void EngineSessionPassOnEndTurnSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-END",
+            "FX_End",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnEndTurn),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pass end-turn target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-END"] = CardEffectTestFixture.EffectDefinition("FX-END", "FX_End");
+    AddBattlePermanent(state, 6302, 901, "FX-END", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6303, 902, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PassAction(PlayerId.Player0));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual(Phase.End, state.Phase);
+    AssertEqual(PlayerId.Player0, state.TurnPlayerId);
+    AssertEqual("test-selection:FX-END", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-END:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-END",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnEndTurn, completed.CompletedTiming);
+    AssertEqual(Phase.Active, state.Phase);
+    AssertEqual(PlayerId.Player1, state.TurnPlayerId);
+    AssertEqual(3, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+}
+
+static void EngineSessionPassOnStartTurnSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-START",
+            "FX_Start",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player0,
+            timing: EffectTiming.OnStartTurn),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pass start-turn target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-START"] = CardEffectTestFixture.EffectDefinition("FX-START", "FX_Start");
+    AddBattlePermanent(state, 6304, 903, "FX-START", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6305, 904, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PassAction(PlayerId.Player0));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual(Phase.Active, state.Phase);
+    AssertEqual(PlayerId.Player1, state.TurnPlayerId);
+    AssertEqual(3, state.Memory);
+    AssertEqual("test-selection:FX-START", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-START:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-START",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnStartTurn, completed.CompletedTiming);
+    AssertEqual(Phase.Active, state.Phase);
+    AssertEqual(PlayerId.Player1, state.TurnPlayerId);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(target.TopCardId));
+}
+
+static void EngineSessionOnAllyAttackSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-ATTACK",
+            "FX_Attack",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnAllyAttack),
+        new NoEffectCardScript("BT1-WEAK", notes: "Test-only attack defender."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only attack trigger target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ATTACK"] = CardEffectTestFixture.EffectDefinition("FX-ATTACK", "FX_Attack") with
+    {
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+    };
+    var attacker = AddBattlePermanent(state, 6308, 907, "FX-ATTACK", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 6309, 908, "BT1-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6310, 909, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertTrue(attacker.IsSuspended);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == defender.Id));
+    AssertEqual("test-selection:FX-ATTACK", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-ATTACK:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-ATTACK",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnAllyAttack, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+}
+
+static void EngineSessionOnEndAttackSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-END-ATTACK",
+            "FX_EndAttack",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnEndAttack),
+        new NoEffectCardScript("BT1-WEAK", notes: "Test-only end-attack defender."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only end-attack target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-END-ATTACK"] = CardEffectTestFixture.EffectDefinition("FX-END-ATTACK", "FX_EndAttack") with
+    {
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+    };
+    var attacker = AddBattlePermanent(state, 6311, 910, "FX-END-ATTACK", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 6312, 911, "BT1-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6313, 912, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertTrue(attacker.IsSuspended);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
+    AssertEqual("test-selection:FX-END-ATTACK", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-END-ATTACK:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-END-ATTACK",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnEndAttack, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+}
+
+static void EngineSessionRulesTimingSelectionPauseResume()
+{
+    var services = CreateRulesTimingSelectionServices();
+    var state = CreateRulesTimingSelectionScenarioState(out var playedCard, out var target);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, playedCard, 1));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual(Zone.BattleArea, state.Cards[playedCard].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertEqual("test-selection:FX-RULES", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-RULES:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-RULES",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.RulesTiming, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == playedCard));
+}
+
+static void EngineSessionSecuritySkillSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry());
+    var state = CreateSt1ScenarioState();
+    var attacker = AddBattlePermanent(state, 6320, 918, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6321, 919, "ST1-06", PlayerId.Player0, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 6322, "ST1-16", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertEqual("ST1-16:option:delete", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("ST1-16:option:delete-selection", paused.PendingStableContinuationId);
+    AssertFalse(state.GetPlayer(PlayerId.Player1).Security.Contains(security));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Executing.Contains(security));
+    AssertEqual(Zone.Executing, state.Cards[security].CurrentZone);
+    AssertTrue(state.Cards[security].IsFaceUp);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "ST1-16:option:delete",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OptionSkill, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+    AssertFalse(state.GetPlayer(PlayerId.Player1).Executing.Contains(security));
+    AssertEqual(Zone.Trash, state.Cards[security].CurrentZone);
+}
+
+static void EngineSessionChainedSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(St2St3CardScriptCatalog.CreateCombinedWithSt1Registry());
+    var state = CreateSt2St3ScenarioState();
+    state.Memory = 10;
+    var option = AddCardToZone(state, 6292, "ST2-15", PlayerId.Player0, Zone.Hand);
+    var host = AddBattlePermanent(state, 6293, 893, "ST2-06", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddEvolutionSource(state, 6294, "ST2-03", PlayerId.Player0, host.Id);
+    var session = services.CreateSession(state);
+
+    var firstPaused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertTrue(firstPaused.IsPaused);
+    AssertEqual("ST2-15:option:source-host", firstPaused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("ST2-15:option:select-source-host", firstPaused.PendingStableContinuationId);
+
+    var secondPaused = session.Resume(SelectionResult.ForTargets(
+        "ST2-15:option:source-host",
+        new[] { PermanentSelectionTarget(host) }));
+
+    AssertTrue(secondPaused.IsPaused);
+    AssertEqual($"ST2-15:option:source-card:{host.Id.Value}", secondPaused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual($"ST2-15:option:play-source-card:{host.Id.Value}", secondPaused.PendingStableContinuationId);
+    AssertEqual(Zone.Executing, state.Cards[option].CurrentZone);
+
+    var completed = session.Resume(SelectionResult.ForTargets(
+        $"ST2-15:option:source-card:{host.Id.Value}",
+        new[] { CardSelectionTarget(source, PlayerId.Player0, Zone.EvolutionSources, host.Id) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertFalse(host.SourceCardIds.Contains(source));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.TopCardId == source));
+}
+
+static void EngineSessionValidatesPendingResumeBoundary()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    var session = services.CreateSession(state);
+
+    AssertThrows<DomainException>(() => session.Resume(SelectionResult.Skip("missing")));
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+    AssertTrue(paused.IsPaused);
+
+    AssertThrows<DomainException>(() => session.Resume(new DecisionResult(
+        PlayerId.Player1,
+        SelectionResult.Skip("test-selection:FX-SELECT"))));
+    AssertThrows<DomainException>(() => session.Resume(new DecisionResult(
+        PlayerId.Player0,
+        SelectionResult.Skip("wrong-request"))));
+}
+
+static void EngineSessionActionAndSelectionReplayDeterministic()
+{
+    var services = CreatePendingOptionServices();
+    var state = CreatePendingOptionScenarioState(out var option);
+    var initial = state.Clone();
+    var target = state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Single();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-SELECT",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void EngineSessionPhaseSelectionReplayDeterministic()
+{
+    var services = CreatePhaseSelectionServices();
+    var state = CreatePhaseSelectionScenarioState(out var target);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.RunMainPhase();
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-PHASE",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void EngineSessionPassSelectionReplayDeterministic()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-START",
+            "FX_Start",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player0,
+            timing: EffectTiming.OnStartTurn),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pass replay target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-START"] = CardEffectTestFixture.EffectDefinition("FX-START", "FX_Start");
+    AddBattlePermanent(state, 6306, 905, "FX-START", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6307, 906, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PassAction(PlayerId.Player0));
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-START",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void EngineSessionAttackSelectionReplayDeterministic()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-ATTACK",
+            "FX_Attack",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnAllyAttack),
+        new NoEffectCardScript("BT1-WEAK", notes: "Test-only attack replay defender."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only attack replay target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ATTACK"] = CardEffectTestFixture.EffectDefinition("FX-ATTACK", "FX_Attack") with
+    {
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+    };
+    var attacker = AddBattlePermanent(state, 6314, 913, "FX-ATTACK", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 6315, 914, "BT1-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6316, 915, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-ATTACK",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void EngineSessionRulesTimingSelectionReplayDeterministic()
+{
+    var services = CreateRulesTimingSelectionServices();
+    var state = CreateRulesTimingSelectionScenarioState(out var playedCard, out var target);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new PlayCardAction(PlayerId.Player0, playedCard, 1));
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "test-selection:FX-RULES",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
+static void EngineSessionSecuritySelectionReplayDeterministic()
+{
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry());
+    var state = CreateSt1ScenarioState();
+    var attacker = AddBattlePermanent(state, 6323, 920, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6324, 921, "ST1-06", PlayerId.Player0, 1, enterTurn: 1);
+    AddCardToZone(state, 6325, "ST1-16", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+    AssertTrue(paused.IsPaused);
+    var completed = session.Resume(SelectionResult.ForTargets(
+        "ST1-16:option:delete",
+        new[] { PermanentSelectionTarget(target) }));
+    AssertFalse(completed.IsPaused);
+
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
 }
 
 static void OptionLifecycleSt1HandOptionRegression()
@@ -4308,7 +4920,7 @@ static void St3DpZeroDeletionTriggersInheritedEffects()
         stableId: "test:dp-zero-target");
     var pipeline = new TriggerPipelineService(registry);
     var stats = new EffectiveStatService(registry);
-    var rules = new RuleProcessor(triggerPipelineService: pipeline, effectiveStats: stats);
+    var rules = CreateTestRuleProcessor(triggerPipelineService: pipeline, effectiveStats: stats);
 
     var result = rules.ProcessUntilStable(state);
 
@@ -4611,7 +5223,7 @@ static void St3SevenHeavensMainAndSecurityDpReduction()
 
     AssertEqual(1, optionResult.SelectionApplications.Count);
     AssertTrue(EffectiveStatService.NoContinuous.Dp(state, target) <= 0);
-    new RuleProcessor().ProcessUntilStable(state);
+    CreateTestRuleProcessor().ProcessUntilStable(state);
     AssertFalse(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
     AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
 
@@ -5328,7 +5940,7 @@ static void BattleKeywordsDecoyUnsupportedExplicit()
     AddBattlePermanent(state, 4081, 481, "KW-DECOY", PlayerId.Player0, 0, enterTurn: 1);
 
     AssertThrows<UnsupportedMechanicException>(() =>
-        new RuleProcessor().ProcessUntilStable(state));
+        CreateTestRuleProcessor().ProcessUntilStable(state));
 }
 
 static void ComplexMechanicsJogressLegalAction()
@@ -6056,54 +6668,69 @@ static ICardDatabase CreateSt1ToSt3CardDatabase() =>
 static BattleEngineServices CreateTestNoEffectServices() =>
     BattleEngineServices.Create(new TestNoEffectCardScriptRegistry());
 
+static RuleProcessor CreateTestRuleProcessor(
+    IZoneMover? zoneMover = null,
+    RuleProcessorOptions? options = null,
+    TriggerPipelineService? triggerPipelineService = null,
+    EffectiveStatService? effectiveStats = null)
+{
+    var mover = zoneMover ?? new ZoneMover();
+    var stats = effectiveStats ?? EffectiveStatService.NoContinuous;
+    var keywordService = new BattleKeywordService(stats);
+    var durationCleanupService = new DurationCleanupService();
+    var drawService = new DrawService(mover);
+    var phaseRunner = new PhaseRunner(
+        drawService,
+        keywordService,
+        durationCleanupService,
+        triggerPipelineService);
+    var battleResolver = new BattleResolver(mover, keywordService, stats);
+
+    return new RuleProcessor(
+        mover,
+        phaseRunner,
+        battleResolver,
+        keywordService,
+        durationCleanupService,
+        new EngineInvariantChecker(),
+        options,
+        triggerPipelineService,
+        stats);
+}
+
 static ActionExecutor CreateTestActionExecutor() =>
     CreateTestNoEffectServices().ActionExecutor;
 
 static ScriptedScenarioRunner CreateTestScriptedScenarioRunner()
 {
     var services = CreateTestNoEffectServices();
-    return new ScriptedScenarioRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
+    return new ScriptedScenarioRunner(services);
 }
 
 static RandomLegalActionRunner CreateTestRandomLegalActionRunner()
 {
     var services = CreateTestNoEffectServices();
-    return new RandomLegalActionRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
+    return new RandomLegalActionRunner(services);
 }
 
 static ReplayDeterminismHelper CreateTestReplayDeterminismHelper()
 {
     var services = CreateTestNoEffectServices();
-    return new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor));
+    return new ReplayDeterminismHelper(new ReplayRunner(services: services));
 }
 
 static EngineCompletionChecklistRunner CreateTestEngineCompletionChecklistRunner()
 {
     var services = CreateTestNoEffectServices();
-    var scriptedRunner = new ScriptedScenarioRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
-    var replayScriptedRunner = new ScriptedScenarioRunner(
-        actionExecutor: services.ActionExecutor,
-        phaseRunner: services.PhaseRunner,
-        turnRunner: services.TurnRunner);
+    var scriptedRunner = new ScriptedScenarioRunner(services);
+    var replayScriptedRunner = new ScriptedScenarioRunner(services);
 
     return new EngineCompletionChecklistRunner(
         scenarioSuiteRunner: new ScenarioSuiteRunner(scriptedRunner),
         replayDeterminismRunner: new ReplayDeterminismRunner(
             replayScriptedRunner,
-            new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor))),
-        invariantFuzzRunner: new InvariantFuzzRunner(new RandomLegalActionRunner(
-            actionExecutor: services.ActionExecutor,
-            phaseRunner: services.PhaseRunner,
-            turnRunner: services.TurnRunner)));
+            new ReplayDeterminismHelper(new ReplayRunner(services: services))),
+        invariantFuzzRunner: new InvariantFuzzRunner(new RandomLegalActionRunner(services)));
 }
 
 static BattleEngineServices CreatePendingOptionServices() =>
@@ -6112,7 +6739,8 @@ static BattleEngineServices CreatePendingOptionServices() =>
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
-            PlayerId.Player1)));
+            PlayerId.Player1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only pending option target.")));
 
 static GameState CreatePendingOptionScenarioState(out CardInstanceId option)
 {
@@ -6120,6 +6748,54 @@ static GameState CreatePendingOptionScenarioState(out CardInstanceId option)
     state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.OptionEffectDefinition("FX-SELECT", "FX_Select");
     option = AddCardToZone(state, 6290, "FX-SELECT", PlayerId.Player0, Zone.Hand);
     AddBattlePermanent(state, 6291, 891, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    return state;
+}
+
+static BattleEngineServices CreatePhaseSelectionServices() =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-PHASE",
+            "FX_Phase",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnStartMainPhase),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only phase target.")));
+
+static GameState CreatePhaseSelectionScenarioState(out PermanentState target)
+{
+    var state = CreateMinimalBattleState();
+    state.Phase = Phase.Breeding;
+    state.CardDefinitions["FX-PHASE"] = CardEffectTestFixture.EffectDefinition("FX-PHASE", "FX_Phase");
+    AddBattlePermanent(state, 6300, 899, "FX-PHASE", PlayerId.Player0, 0, enterTurn: 1);
+    target = AddBattlePermanent(state, 6301, 900, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    return state;
+}
+
+static BattleEngineServices CreateRulesTimingSelectionServices() =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-RULES",
+            "FX_Rules",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.RulesTiming),
+        new NoEffectCardScript("BT1-FREE", notes: "Test-only no-effect played card."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only rules timing target.")));
+
+static GameState CreateRulesTimingSelectionScenarioState(
+    out CardInstanceId playedCard,
+    out PermanentState target)
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-RULES"] = CardEffectTestFixture.EffectDefinition("FX-RULES", "FX_Rules") with
+    {
+        Level = 3,
+        PlayCost = 3,
+        Dp = 3000,
+    };
+    AddBattlePermanent(state, 6317, 916, "FX-RULES", PlayerId.Player0, 0, enterTurn: 1);
+    playedCard = AddCardToZone(state, 6318, "BT1-FREE", PlayerId.Player0, Zone.Hand);
+    target = AddBattlePermanent(state, 6319, 917, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
     return state;
 }
 
@@ -6920,6 +7596,26 @@ internal sealed class MutatingSelectionDecisionProvider : IDecisionProvider
         _beforeSelection(request);
         return SelectionResult.ForTargets(request.Id, new[] { request.Candidates[0] });
     }
+}
+
+internal sealed class SpyZoneMover : IZoneMover
+{
+    private readonly ZoneMover _inner = new();
+    private readonly List<MoveCardCommand> _moveCardCommands = new();
+
+    public IReadOnlyList<MoveCardCommand> MoveCardCommands => _moveCardCommands;
+
+    public MoveCardResult MoveCard(GameState state, MoveCardCommand command)
+    {
+        _moveCardCommands.Add(command);
+        return _inner.MoveCard(state, command);
+    }
+
+    public PermanentZoneMoveResult MovePermanent(GameState state, PermanentZoneMoveCommand command) =>
+        _inner.MovePermanent(state, command);
+
+    public DigivolveCardResult DigivolveCard(GameState state, DigivolveCardCommand command) =>
+        _inner.DigivolveCard(state, command);
 }
 
 internal sealed class TestNoEffectCardScriptRegistry : ICardScriptRegistry

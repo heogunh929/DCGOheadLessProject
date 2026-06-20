@@ -11,8 +11,12 @@ public sealed record ActionExecutionResult(
     GameAction Action,
     PermanentState? PlayedPermanent = null,
     OptionPlayResult? OptionPlay = null,
+    PhaseExecutionResult? PhaseExecution = null,
+    AttackExecutionResult? AttackExecution = null,
+    RuleProcessorExecutionResult? RuleProcessing = null,
     SelectionRequest? PendingSelectionRequest = null,
     EffectResolution? PendingResolution = null,
+    TriggerPipelineContinuation? PendingContinuation = null,
     DecisionPoint? PendingDecisionPoint = null,
     bool RulesProcessed = false)
 {
@@ -25,18 +29,108 @@ public sealed record ActionExecutionResult(
     {
         var pendingRequest = result.PendingSelectionRequest;
         return new ActionExecutionResult(
-            action,
-            result.Permanent,
-            result.OptionPlay,
-            pendingRequest,
-            result.PendingResolution,
-            pendingRequest is null
+            Action: action,
+            PlayedPermanent: result.Permanent,
+            OptionPlay: result.OptionPlay,
+            PhaseExecution: null,
+            AttackExecution: null,
+            RuleProcessing: null,
+            PendingSelectionRequest: pendingRequest,
+            PendingResolution: result.PendingResolution,
+            PendingContinuation: result.PendingContinuation,
+            PendingDecisionPoint: pendingRequest is null
                 ? null
                 : DecisionPoint.ForSelection(
                     pendingRequest.Player,
                     state.Phase,
                     "action-pending-selection",
                     pendingRequest));
+    }
+
+    public static ActionExecutionResult FromDigivolve(GameState state, DigivolveAction action, DigivolveResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return new ActionExecutionResult(
+            Action: action,
+            PlayedPermanent: result.Permanent,
+            OptionPlay: null,
+            PhaseExecution: null,
+            AttackExecution: null,
+            RuleProcessing: null,
+            PendingSelectionRequest: pendingRequest,
+            PendingResolution: result.PendingResolution,
+            PendingContinuation: result.PendingContinuation,
+            PendingDecisionPoint: pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-pending-selection",
+                    pendingRequest));
+    }
+
+    public static ActionExecutionResult FromPhase(GameState state, GameAction action, PhaseExecutionResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return new ActionExecutionResult(
+            Action: action,
+            PlayedPermanent: null,
+            OptionPlay: null,
+            PhaseExecution: result,
+            AttackExecution: null,
+            RuleProcessing: null,
+            PendingSelectionRequest: pendingRequest,
+            PendingResolution: result.PendingResolution,
+            PendingContinuation: result.PendingContinuation,
+            PendingDecisionPoint: pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-phase-pending-selection",
+                    pendingRequest));
+    }
+
+    public static ActionExecutionResult FromAttack(GameState state, AttackAction action, AttackExecutionResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return new ActionExecutionResult(
+            Action: action,
+            PlayedPermanent: null,
+            OptionPlay: null,
+            PhaseExecution: null,
+            AttackExecution: result,
+            RuleProcessing: null,
+            PendingSelectionRequest: pendingRequest,
+            PendingResolution: result.PendingResolution,
+            PendingContinuation: result.PendingContinuation,
+            PendingDecisionPoint: pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-attack-pending-selection",
+                    pendingRequest));
+    }
+
+    public ActionExecutionResult WithRuleProcessing(GameState state, RuleProcessorExecutionResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return this with
+        {
+            PhaseExecution = result.PhaseExecution ?? PhaseExecution,
+            RuleProcessing = result,
+            PendingSelectionRequest = pendingRequest,
+            PendingResolution = result.PendingResolution,
+            PendingContinuation = result.PendingContinuation,
+            PendingDecisionPoint = pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-rules-pending-selection",
+                    pendingRequest),
+        };
     }
 
     public ActionExecutionResult MarkRulesProcessed() => this with { RulesProcessed = true };
@@ -125,7 +219,10 @@ public sealed class ActionExecutor
                 break;
 
             case DigivolveAction digivolve:
-                _digivolveService.Digivolve(state, digivolve, trace);
+                result = ActionExecutionResult.FromDigivolve(
+                    state,
+                    digivolve,
+                    _digivolveService.DigivolveWithResult(state, digivolve, trace));
                 break;
 
             case JogressAction jogress:
@@ -157,7 +254,10 @@ public sealed class ActionExecutor
                 break;
 
             case AttackAction attack:
-                _attackService.Attack(state, attack, trace);
+                result = ActionExecutionResult.FromAttack(
+                    state,
+                    attack,
+                    _attackService.AttackWithResult(state, attack, trace));
                 break;
 
             case PassAction pass:
@@ -166,7 +266,10 @@ public sealed class ActionExecutor
                     throw new DomainException($"Only turn player '{state.TurnPlayerId}' can pass.");
                 }
 
-                _phaseRunner.EndCurrentTurn(state, 3);
+                result = ActionExecutionResult.FromPhase(
+                    state,
+                    pass,
+                    _phaseRunner.EndCurrentTurnWithResult(state, 3, trace));
                 break;
 
             default:
@@ -179,7 +282,12 @@ public sealed class ActionExecutor
             return result;
         }
 
-        _ruleProcessor.ProcessAfterAction(state);
+        var rulesResult = _ruleProcessor.ProcessAfterActionWithResult(state, trace);
+        if (rulesResult.HasPendingSelection)
+        {
+            return result.WithRuleProcessing(state, rulesResult);
+        }
+
         return result.MarkRulesProcessed();
     }
 

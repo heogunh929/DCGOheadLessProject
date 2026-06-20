@@ -19,6 +19,16 @@ public sealed class CliDebugRenderer
             builder.Append("ActionsExecuted: ").Append(result.MaxTurnAbort.ActionsExecuted).AppendLine();
         }
 
+        if (result.PendingDecisionPoint is not null)
+        {
+            builder.Append("PendingPlayer: ").Append(result.PendingDecisionPoint.Player).AppendLine();
+            builder.Append("PendingReason: ").Append(result.PendingDecisionPoint.Reason).AppendLine();
+            builder.Append("PendingContinuation: ").Append(result.PendingStableContinuationId).AppendLine();
+            builder.Append("PendingSelection: ")
+                .Append(result.PendingDecisionPoint.SelectionRequest?.Id ?? string.Empty)
+                .AppendLine();
+        }
+
         return builder.ToString();
     }
 

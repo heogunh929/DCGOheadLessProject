@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DCGO.RL.Engine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b8260e3015ef5e78c1fe6e95c93213ec5f993ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+535163addd18f6a94f04b5ac46e39ead9ef3d804")]
 [assembly: System.Reflection.AssemblyProductAttribute("DCGO.RL.Engine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DCGO.RL.Engine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

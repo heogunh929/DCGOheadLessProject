@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Effects;
 using DCGO.RL.Engine.Validation;
 
@@ -8,8 +9,40 @@ public sealed record RuleProcessorOptions(int MaxIterations = 32);
 
 public sealed record RuleProcessorResult(int Iterations, int ChangesApplied);
 
+public enum RuleProcessorContinuationKind
+{
+    ContinueAfterRulesTiming,
+    ContinueAfterOnDestroyedAnyone,
+}
+
+public sealed record RuleProcessorContinuation(RuleProcessorContinuationKind Kind);
+
+public sealed record RuleProcessorExecutionResult(
+    RuleProcessorResult? Result = null,
+    PhaseExecutionResult? PhaseExecution = null,
+    TriggerPipelineResult? TriggerResult = null,
+    RuleProcessorContinuation? Continuation = null)
+{
+    public bool HasPendingSelection =>
+        TriggerResult?.HasPendingSelection == true
+        || PhaseExecution?.HasPendingSelection == true;
+
+    public SelectionRequest? PendingSelectionRequest =>
+        TriggerResult?.PendingSelectionRequest
+        ?? PhaseExecution?.PendingSelectionRequest;
+
+    public EffectResolution? PendingResolution =>
+        TriggerResult?.PendingResolution
+        ?? PhaseExecution?.PendingResolution;
+
+    public TriggerPipelineContinuation? PendingContinuation =>
+        TriggerResult?.PendingContinuation
+        ?? PhaseExecution?.PendingContinuation;
+}
+
 public sealed class RuleProcessor
 {
+    private readonly IZoneMover _zoneMover;
     private readonly PhaseRunner _phaseRunner;
     private readonly BattleResolver _battleResolver;
     private readonly BattleKeywordService _keywordService;
@@ -20,6 +53,7 @@ public sealed class RuleProcessor
     private readonly EffectiveStatService _effectiveStats;
 
     public RuleProcessor(
+        IZoneMover? zoneMover = null,
         PhaseRunner? phaseRunner = null,
         BattleResolver? battleResolver = null,
         BattleKeywordService? keywordService = null,
@@ -29,6 +63,7 @@ public sealed class RuleProcessor
         TriggerPipelineService? triggerPipelineService = null,
         EffectiveStatService? effectiveStats = null)
     {
+        _zoneMover = zoneMover ?? throw new ArgumentNullException(nameof(zoneMover));
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
         _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats);
         _durationCleanupService = durationCleanupService ?? new DurationCleanupService();
@@ -39,26 +74,82 @@ public sealed class RuleProcessor
         _triggerPipelineService = triggerPipelineService;
     }
 
+    internal IZoneMover RuntimeZoneMover => _zoneMover;
+
     internal PhaseRunner RuntimePhaseRunner => _phaseRunner;
 
     internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
 
     public void ProcessAfterAction(GameState state)
     {
-        ProcessUntilStable(state);
+        var result = ProcessAfterActionWithResult(state);
+        ThrowIfPending(result, "ProcessAfterAction");
+    }
+
+    public RuleProcessorExecutionResult ProcessAfterActionWithResult(GameState state, GameTrace? trace = null) =>
+        ProcessAfterActionWithResult(state, trace, skipInitialRulesTiming: false);
+
+    public RuleProcessorExecutionResult CompleteRuleContinuationWithResult(
+        GameState state,
+        RuleProcessorContinuation continuation,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(continuation);
+
+        return continuation.Kind switch
+        {
+            RuleProcessorContinuationKind.ContinueAfterRulesTiming
+                or RuleProcessorContinuationKind.ContinueAfterOnDestroyedAnyone =>
+                ProcessAfterActionWithResult(state, trace, skipInitialRulesTiming: true),
+
+            _ => throw new UnsupportedMechanicException($"RuleProcessor continuation '{continuation.Kind}'"),
+        };
+    }
+
+    private RuleProcessorExecutionResult ProcessAfterActionWithResult(
+        GameState state,
+        GameTrace? trace,
+        bool skipInitialRulesTiming)
+    {
+        var result = ProcessUntilStableWithResult(state, trace, skipInitialRulesTiming);
+        if (result.HasPendingSelection || state.IsGameOver)
+        {
+            return result;
+        }
+
         if (state.IsGameOver)
         {
-            return;
+            return result;
         }
 
         if (state.Phase == Phase.Main && state.Memory < 0)
         {
-            _phaseRunner.EndCurrentTurn(state, Math.Abs(state.Memory));
-            ProcessUntilStable(state);
+            var phaseResult = _phaseRunner.EndCurrentTurnWithResult(state, Math.Abs(state.Memory), trace);
+            if (phaseResult.HasPendingSelection)
+            {
+                return new RuleProcessorExecutionResult(PhaseExecution: phaseResult);
+            }
+
+            return ProcessUntilStableWithResult(state, trace, skipInitialRulesTiming: false);
         }
+
+        return result;
     }
 
     public RuleProcessorResult ProcessUntilStable(GameState state)
+    {
+        var result = ProcessUntilStableWithResult(state);
+        ThrowIfPending(result, "ProcessUntilStable");
+
+        return result.Result
+            ?? throw new DomainException("Completed RuleProcessor result is missing.");
+    }
+
+    public RuleProcessorExecutionResult ProcessUntilStableWithResult(
+        GameState state,
+        GameTrace? trace = null,
+        bool skipInitialRulesTiming = false)
     {
         var totalChanges = 0;
 
@@ -69,25 +160,50 @@ public sealed class RuleProcessor
 
             if (state.IsGameOver)
             {
-                return new RuleProcessorResult(iteration, totalChanges);
+                return new RuleProcessorExecutionResult(new RuleProcessorResult(iteration, totalChanges));
             }
 
-            var changes = staleCleanupChanges + ProcessSinglePass(state);
+            var passResult = ProcessSinglePassWithResult(
+                state,
+                trace,
+                skipRulesTiming: skipInitialRulesTiming && iteration == 1);
+            if (passResult.HasPendingSelection)
+            {
+                return new RuleProcessorExecutionResult(
+                    new RuleProcessorResult(iteration, totalChanges + staleCleanupChanges + passResult.ChangesApplied),
+                    TriggerResult: passResult.TriggerResult,
+                    Continuation: passResult.Continuation);
+            }
+
+            var changes = staleCleanupChanges + passResult.ChangesApplied;
             totalChanges += changes;
             _invariantChecker.ThrowIfInvalid(state);
 
             if (changes == 0)
             {
-                return new RuleProcessorResult(iteration, totalChanges);
+                return new RuleProcessorExecutionResult(new RuleProcessorResult(iteration, totalChanges));
             }
         }
 
         throw new UnsupportedMechanicException($"RuleProcessor exceeded max iteration guard '{_options.MaxIterations}'.");
     }
 
-    private int ProcessSinglePass(GameState state)
+    private RuleProcessorSinglePassResult ProcessSinglePassWithResult(
+        GameState state,
+        GameTrace? trace,
+        bool skipRulesTiming)
     {
-        RunRulesTiming(state);
+        if (!skipRulesTiming)
+        {
+            var rulesTiming = RunRulesTimingWithResult(state, trace);
+            if (rulesTiming?.HasPendingSelection == true)
+            {
+                return RuleProcessorSinglePassResult.Pending(
+                    rulesTiming,
+                    new RuleProcessorContinuation(RuleProcessorContinuationKind.ContinueAfterRulesTiming));
+            }
+        }
+
         _keywordService.EnsureSupportedKeywords(state);
 
         var invalidOrFaceDown = state.Players
@@ -122,41 +238,51 @@ public sealed class RuleProcessor
                 var controller = permanent.ControllerPlayerId;
                 var topCard = permanent.TopCardId;
                 _battleResolver.DestroyPermanent(state, permanent);
-                RunOnDestroyedAnyone(state, permanentId, controller, topCard, destroyedByDpZero: true);
+                var destroyedTrigger = RunOnDestroyedAnyoneWithResult(
+                    state,
+                    permanentId,
+                    controller,
+                    topCard,
+                    destroyedByDpZero: true,
+                    trace);
+                if (destroyedTrigger?.HasPendingSelection == true)
+                {
+                    return RuleProcessorSinglePassResult.Pending(
+                        destroyedTrigger,
+                        new RuleProcessorContinuation(RuleProcessorContinuationKind.ContinueAfterOnDestroyedAnyone),
+                        invalidOrFaceDown.Length + 1);
+                }
             }
         }
 
-        return invalidOrFaceDown.Length + dpZero.Length + TrimExcessLinkedCards(state);
+        return RuleProcessorSinglePassResult.Completed(
+            invalidOrFaceDown.Length + dpZero.Length + TrimExcessLinkedCards(state));
     }
 
-    private void RunRulesTiming(GameState state)
+    private TriggerPipelineResult? RunRulesTimingWithResult(GameState state, GameTrace? trace)
     {
         if (_triggerPipelineService is null)
         {
-            return;
+            return null;
         }
 
-        var result = _triggerPipelineService.Run(state, EffectTiming.RulesTiming, state.TurnPlayerId);
-        if (result.PendingSelectionRequest is not null)
-        {
-            throw new DomainException(
-                $"RulesTiming requires SelectionResult for request '{result.PendingSelectionRequest.Id}'.");
-        }
+        return _triggerPipelineService.Run(state, EffectTiming.RulesTiming, state.TurnPlayerId, trace: trace);
     }
 
-    private void RunOnDestroyedAnyone(
+    private TriggerPipelineResult? RunOnDestroyedAnyoneWithResult(
         GameState state,
         PermanentId destroyedPermanent,
         PlayerId destroyedController,
         CardInstanceId destroyedTopCard,
-        bool destroyedByDpZero)
+        bool destroyedByDpZero,
+        GameTrace? trace)
     {
         if (_triggerPipelineService is null)
         {
-            return;
+            return null;
         }
 
-        var result = _triggerPipelineService.Run(
+        return _triggerPipelineService.Run(
             state,
             EffectTiming.OnDestroyedAnyone,
             state.TurnPlayerId,
@@ -166,12 +292,19 @@ public sealed class RuleProcessor
                 ["DestroyedController"] = destroyedController,
                 ["DestroyedTopCard"] = destroyedTopCard,
                 ["DestroyedByDpZero"] = destroyedByDpZero,
-            });
-        if (result.PendingSelectionRequest is not null)
+            },
+            trace: trace);
+    }
+
+    private static void ThrowIfPending(RuleProcessorExecutionResult result, string operation)
+    {
+        if (!result.HasPendingSelection)
         {
-            throw new DomainException(
-                $"OnDestroyedAnyone requires SelectionResult for request '{result.PendingSelectionRequest.Id}'.");
+            return;
         }
+
+        throw new DomainException(
+            $"{operation} requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
     }
 
     private static bool IsInvalidBreedingPermanent(GameState state, PermanentState permanent) =>
@@ -192,7 +325,7 @@ public sealed class RuleProcessor
             while (permanent.LinkedCards.Count > max)
             {
                 var linked = permanent.LinkedCards[^1];
-                new ZoneMover().MoveCard(
+                _zoneMover.MoveCard(
                     state,
                     new MoveCardCommand(
                         linked,
@@ -220,5 +353,22 @@ public sealed class RuleProcessor
 
         permanent = null!;
         return false;
+    }
+
+    private sealed record RuleProcessorSinglePassResult(
+        int ChangesApplied,
+        TriggerPipelineResult? TriggerResult = null,
+        RuleProcessorContinuation? Continuation = null)
+    {
+        public bool HasPendingSelection => TriggerResult?.HasPendingSelection == true;
+
+        public static RuleProcessorSinglePassResult Completed(int changesApplied) =>
+            new(changesApplied);
+
+        public static RuleProcessorSinglePassResult Pending(
+            TriggerPipelineResult result,
+            RuleProcessorContinuation continuation,
+            int changesApplied = 0) =>
+            new(changesApplied, result, continuation);
     }
 }

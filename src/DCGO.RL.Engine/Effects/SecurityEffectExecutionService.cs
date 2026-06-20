@@ -6,16 +6,37 @@ using DCGO.RL.Engine.Validation;
 
 namespace DCGO.RL.Engine.Effects;
 
+public sealed record SecurityEffectExecutionContinuation(
+    CardInstanceId SecurityCard,
+    PlayerId Defender,
+    bool WasFaceDown,
+    EffectResolution PendingResolution,
+    SelectionRequest PendingSelectionRequest,
+    IReadOnlyList<EffectResolution> SecurityResolutions,
+    IReadOnlyList<EffectResolution> ActivatedMainOptionResolutions,
+    IReadOnlyList<SelectionResultApplicationResult> SelectionApplications,
+    IReadOnlyList<EffectResolution> RemainingSecurityResolutions,
+    IReadOnlyList<EffectResolution> RemainingOptionResolutions,
+    bool IsResolvingActivatedMainOption)
+{
+    public string StableContinuationId => PendingResolution.StableId;
+}
+
 public sealed record SecurityEffectExecutionResult(
     CardInstanceId SecurityCard,
     IReadOnlyList<EffectResolution> SecurityResolutions,
     IReadOnlyList<EffectResolution> ActivatedMainOptionResolutions,
-    IReadOnlyList<SelectionResultApplicationResult> SelectionApplications)
+    IReadOnlyList<SelectionResultApplicationResult> SelectionApplications,
+    EffectResolution? PendingResolution = null,
+    SelectionRequest? PendingSelectionRequest = null,
+    SecurityEffectExecutionContinuation? Continuation = null)
 {
     public bool ExecutedAny =>
         SecurityResolutions.Count > 0
         || ActivatedMainOptionResolutions.Count > 0
         || SelectionApplications.Count > 0;
+
+    public bool HasPendingSelection => Continuation is not null || PendingSelectionRequest is not null;
 }
 
 public sealed class SecurityEffectExecutionService
@@ -46,6 +67,96 @@ public sealed class SecurityEffectExecutionService
         bool wasFaceDown,
         GameTrace? trace = null)
     {
+        var result = ExecuteSecurityEffectsWithResult(state, securityCard, defender, wasFaceDown, trace);
+        if (result.HasPendingSelection)
+        {
+            throw new DomainException(
+                $"Security effect resolution '{result.PendingResolution!.StableId}' requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
+        }
+
+        return result;
+    }
+
+    public SecurityEffectExecutionResult ExecuteSecurityEffectsWithResult(
+        GameState state,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        GameTrace? trace = null)
+    {
+        var script = GetSecurityScript(state, securityCard, defender);
+        var descriptors = script.CreateEffectDescriptors(new CardScriptContext(
+            state,
+            securityCard,
+            SourcePermanent: null,
+            Controller: defender));
+
+        var securityContext = new EffectContext(
+            state,
+            EffectTiming.SecuritySkill,
+            defender,
+            securityCard,
+            Values: new Dictionary<string, object?>
+            {
+                ["Card"] = securityCard,
+                ["IsFaceDown"] = wasFaceDown,
+                ["SourceZone"] = state.Cards[securityCard].CurrentZone,
+            });
+        var collected = new TriggerCollector().Collect(securityContext, descriptors);
+
+        return ContinueSecurityResolutions(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            collected.QueuedEffects,
+            collected.QueuedEffects,
+            new List<EffectResolution>(),
+            new List<SelectionResultApplicationResult>(),
+            trace);
+    }
+
+    public SecurityEffectExecutionResult ResumeSecurityEffects(
+        GameState state,
+        SecurityEffectExecutionContinuation continuation,
+        SelectionResult selectionResult,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(continuation);
+        ArgumentNullException.ThrowIfNull(selectionResult);
+
+        var script = GetSecurityScript(state, continuation.SecurityCard, continuation.Defender);
+        var activatedMainOptions = continuation.ActivatedMainOptionResolutions.ToList();
+        var selectionApplications = continuation.SelectionApplications.ToList();
+
+        var application = _selectionApplicator.Apply(
+            state,
+            continuation.PendingResolution,
+            selectionResult,
+            _primitives,
+            trace);
+        selectionApplications.Add(application);
+
+        return ContinueAfterSelectionApplication(
+            state,
+            script,
+            continuation.SecurityCard,
+            continuation.Defender,
+            continuation.WasFaceDown,
+            continuation.SecurityResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            application,
+            continuation.RemainingSecurityResolutions,
+            continuation.RemainingOptionResolutions,
+            continuation.IsResolvingActivatedMainOption,
+            trace);
+    }
+
+    private ICardScript GetSecurityScript(GameState state, CardInstanceId securityCard, PlayerId defender)
+    {
         ArgumentNullException.ThrowIfNull(state);
         _ = state.GetPlayer(defender);
 
@@ -69,63 +180,284 @@ public sealed class SecurityEffectExecutionService
         var definition = state.CardDefinitions.TryGetValue(instance.DefinitionId, out var cardDefinition)
             ? cardDefinition
             : throw new DomainException($"Card definition '{instance.DefinitionId}' does not exist.");
-        var script = _cardScriptRegistry.GetScript(definition);
-        var descriptors = script.CreateEffectDescriptors(new CardScriptContext(
-            state,
-            securityCard,
-            SourcePermanent: null,
-            Controller: instance.Owner));
 
-        var securityContext = new EffectContext(
-            state,
-            EffectTiming.SecuritySkill,
-            instance.Owner,
-            securityCard,
-            Values: new Dictionary<string, object?>
-            {
-                ["Card"] = securityCard,
-                ["IsFaceDown"] = wasFaceDown,
-                ["SourceZone"] = instance.CurrentZone,
-            });
-        var collected = new TriggerCollector().Collect(securityContext, descriptors);
-
-        var activatedMainOptions = new List<EffectResolution>();
-        var selectionApplications = new List<SelectionResultApplicationResult>();
-        foreach (var resolution in collected.QueuedEffects)
-        {
-            if (resolution.SecurityExecutionMode == SecurityEffectExecutionMode.ActivateMainOption)
-            {
-                ActivateMainOption(
-                    state,
-                    script,
-                    descriptors,
-                    securityCard,
-                    instance.Owner,
-                    trace,
-                    activatedMainOptions,
-                    selectionApplications);
-                continue;
-            }
-
-            ExecuteDirectSecurityResolution(state, script, resolution, trace, selectionApplications);
-        }
-
-        return new SecurityEffectExecutionResult(
-            securityCard,
-            collected.QueuedEffects,
-            activatedMainOptions,
-            selectionApplications);
+        return _cardScriptRegistry.GetScript(definition);
     }
 
-    private void ActivateMainOption(
+    private SecurityEffectExecutionResult ContinueSecurityResolutions(
         GameState state,
         ICardScript script,
-        IReadOnlyList<EffectDescriptor> descriptors,
-        CardInstanceId sourceCard,
-        PlayerId controller,
-        GameTrace? trace,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
         List<EffectResolution> activatedMainOptions,
-        List<SelectionResultApplicationResult> selectionApplications)
+        List<SelectionResultApplicationResult> selectionApplications,
+        GameTrace? trace)
+    {
+        if (remainingSecurityResolutions.Count == 0)
+        {
+            return Completed(securityCard, allSecurityResolutions, activatedMainOptions, selectionApplications);
+        }
+
+        var resolution = remainingSecurityResolutions[0];
+        var nextSecurityResolutions = remainingSecurityResolutions.Skip(1).ToArray();
+        if (resolution.SecurityExecutionMode == SecurityEffectExecutionMode.ActivateMainOption)
+        {
+            var optionResolutions = CollectOptionResolutions(state, script, securityCard, defender).ToArray();
+            return ContinueOptionResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                nextSecurityResolutions,
+                optionResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace);
+        }
+
+        return ContinueDirectSecurityResolution(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            allSecurityResolutions,
+            resolution,
+            nextSecurityResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            trace);
+    }
+
+    private SecurityEffectExecutionResult ContinueDirectSecurityResolution(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        EffectResolution resolution,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        GameTrace? trace)
+    {
+        if (resolution.PendingSelectionRequest is not null)
+        {
+            if (_decisionProvider is null)
+            {
+                return Pending(
+                    securityCard,
+                    defender,
+                    wasFaceDown,
+                    allSecurityResolutions,
+                    activatedMainOptions,
+                    selectionApplications,
+                    resolution,
+                    remainingSecurityResolutions,
+                    Array.Empty<EffectResolution>(),
+                    isResolvingActivatedMainOption: false);
+            }
+
+            var selection = _decisionProvider.ChooseSelection(resolution.PendingSelectionRequest);
+            var application = _selectionApplicator.Apply(state, resolution, selection, _primitives, trace);
+            selectionApplications.Add(application);
+            return ContinueAfterSelectionApplication(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                application,
+                remainingSecurityResolutions,
+                Array.Empty<EffectResolution>(),
+                isResolvingActivatedMainOption: false,
+                trace);
+        }
+
+        script.Resolve(new CardScriptExecutionContext(state, resolution, _primitives, trace));
+        return ContinueSecurityResolutions(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            allSecurityResolutions,
+            remainingSecurityResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            trace);
+    }
+
+    private SecurityEffectExecutionResult ContinueOptionResolutions(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        GameTrace? trace)
+    {
+        if (remainingOptionResolutions.Count == 0)
+        {
+            return ContinueSecurityResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                remainingSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace);
+        }
+
+        var resolution = remainingOptionResolutions[0];
+        var nextOptionResolutions = remainingOptionResolutions.Skip(1).ToArray();
+        activatedMainOptions.Add(resolution);
+
+        if (resolution.PendingSelectionRequest is not null)
+        {
+            if (_decisionProvider is null)
+            {
+                return Pending(
+                    securityCard,
+                    defender,
+                    wasFaceDown,
+                    allSecurityResolutions,
+                    activatedMainOptions,
+                    selectionApplications,
+                    resolution,
+                    remainingSecurityResolutions,
+                    nextOptionResolutions,
+                    isResolvingActivatedMainOption: true);
+            }
+
+            var selection = _decisionProvider.ChooseSelection(resolution.PendingSelectionRequest);
+            var application = _selectionApplicator.Apply(state, resolution, selection, _primitives, trace);
+            selectionApplications.Add(application);
+            return ContinueAfterSelectionApplication(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                application,
+                remainingSecurityResolutions,
+                nextOptionResolutions,
+                isResolvingActivatedMainOption: true,
+                trace);
+        }
+
+        script.Resolve(new CardScriptExecutionContext(state, resolution, _primitives, trace));
+        return ContinueOptionResolutions(
+            state,
+            script,
+            securityCard,
+            defender,
+            wasFaceDown,
+            allSecurityResolutions,
+            remainingSecurityResolutions,
+            nextOptionResolutions,
+            activatedMainOptions,
+            selectionApplications,
+            trace);
+    }
+
+    private SecurityEffectExecutionResult ContinueAfterSelectionApplication(
+        GameState state,
+        ICardScript script,
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> allSecurityResolutions,
+        List<EffectResolution> activatedMainOptions,
+        List<SelectionResultApplicationResult> selectionApplications,
+        SelectionResultApplicationResult application,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        bool isResolvingActivatedMainOption,
+        GameTrace? trace)
+    {
+        if (application.NextResolution is not null)
+        {
+            if (isResolvingActivatedMainOption)
+            {
+                return ContinueOptionResolutions(
+                    state,
+                    script,
+                    securityCard,
+                    defender,
+                    wasFaceDown,
+                    allSecurityResolutions,
+                    remainingSecurityResolutions,
+                    new[] { application.NextResolution }.Concat(remainingOptionResolutions).ToArray(),
+                    activatedMainOptions,
+                    selectionApplications,
+                    trace);
+            }
+
+            return ContinueDirectSecurityResolution(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                application.NextResolution,
+                remainingSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace);
+        }
+
+        return isResolvingActivatedMainOption
+            ? ContinueOptionResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                remainingSecurityResolutions,
+                remainingOptionResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace)
+            : ContinueSecurityResolutions(
+                state,
+                script,
+                securityCard,
+                defender,
+                wasFaceDown,
+                allSecurityResolutions,
+                remainingSecurityResolutions,
+                activatedMainOptions,
+                selectionApplications,
+                trace);
+    }
+
+    private IReadOnlyList<EffectResolution> CollectOptionResolutions(
+        GameState state,
+        ICardScript script,
+        CardInstanceId sourceCard,
+        PlayerId controller)
     {
         var optionContext = new EffectContext(
             state,
@@ -139,6 +471,11 @@ public sealed class SecurityEffectExecutionService
                 ["PayCost"] = false,
                 ["SourceZone"] = state.Cards[sourceCard].CurrentZone,
             });
+        var descriptors = script.CreateEffectDescriptors(new CardScriptContext(
+            state,
+            sourceCard,
+            SourcePermanent: null,
+            Controller: controller));
         var collected = new TriggerCollector().Collect(optionContext, descriptors);
 
         if (collected.QueuedEffects.Count == 0)
@@ -147,84 +484,49 @@ public sealed class SecurityEffectExecutionService
                 $"Security activation for card '{sourceCard}' requires at least one runnable OptionSkill main effect.");
         }
 
-        foreach (var optionResolution in collected.QueuedEffects)
-        {
-            activatedMainOptions.Add(optionResolution);
-            ExecuteOptionMainResolution(
-                state,
-                script,
-                optionResolution,
-                trace,
-                activatedMainOptions,
-                selectionApplications);
-        }
+        return collected.QueuedEffects;
     }
 
-    private void ExecuteDirectSecurityResolution(
-        GameState state,
-        ICardScript script,
-        EffectResolution resolution,
-        GameTrace? trace,
-        List<SelectionResultApplicationResult> selectionApplications)
+    private static SecurityEffectExecutionResult Completed(
+        CardInstanceId securityCard,
+        IReadOnlyList<EffectResolution> securityResolutions,
+        IReadOnlyList<EffectResolution> activatedMainOptions,
+        IReadOnlyList<SelectionResultApplicationResult> selectionApplications) =>
+        new(securityCard, securityResolutions, activatedMainOptions.ToArray(), selectionApplications.ToArray());
+
+    private static SecurityEffectExecutionResult Pending(
+        CardInstanceId securityCard,
+        PlayerId defender,
+        bool wasFaceDown,
+        IReadOnlyList<EffectResolution> securityResolutions,
+        IReadOnlyList<EffectResolution> activatedMainOptions,
+        IReadOnlyList<SelectionResultApplicationResult> selectionApplications,
+        EffectResolution pendingResolution,
+        IReadOnlyList<EffectResolution> remainingSecurityResolutions,
+        IReadOnlyList<EffectResolution> remainingOptionResolutions,
+        bool isResolvingActivatedMainOption)
     {
-        if (resolution.PendingSelectionRequest is not null)
-        {
-            ApplyRequiredSelection(state, script, resolution, trace, null, selectionApplications);
-            return;
-        }
+        var request = pendingResolution.PendingSelectionRequest
+            ?? throw new DomainException($"Effect resolution '{pendingResolution.StableId}' has no pending selection.");
 
-        script.Resolve(new CardScriptExecutionContext(state, resolution, _primitives, trace));
-    }
-
-    private void ExecuteOptionMainResolution(
-        GameState state,
-        ICardScript script,
-        EffectResolution resolution,
-        GameTrace? trace,
-        List<EffectResolution> activatedMainOptions,
-        List<SelectionResultApplicationResult> selectionApplications)
-    {
-        if (resolution.PendingSelectionRequest is not null)
-        {
-            ApplyRequiredSelection(state, script, resolution, trace, activatedMainOptions, selectionApplications);
-            return;
-        }
-
-        script.Resolve(new CardScriptExecutionContext(state, resolution, _primitives, trace));
-    }
-
-    private void ApplyRequiredSelection(
-        GameState state,
-        ICardScript script,
-        EffectResolution resolution,
-        GameTrace? trace,
-        List<EffectResolution>? activatedMainOptions,
-        List<SelectionResultApplicationResult> selectionApplications)
-    {
-        if (_decisionProvider is null)
-        {
-            throw new DomainException(
-                $"Effect resolution '{resolution.StableId}' requires a SelectionResult, but no decision provider was supplied.");
-        }
-
-        var request = resolution.PendingSelectionRequest
-            ?? throw new DomainException($"Effect resolution '{resolution.StableId}' has no selection request.");
-        var result = _decisionProvider.ChooseSelection(request);
-        var application = _selectionApplicator.Apply(state, resolution, result, _primitives, trace);
-        selectionApplications.Add(application);
-
-        if (application.NextResolution is null)
-        {
-            return;
-        }
-
-        activatedMainOptions?.Add(application.NextResolution);
-        ExecuteOptionMainResolution(
-            state,
-            script,
-            application.NextResolution,
-            trace,
-            activatedMainOptions ?? new List<EffectResolution>(),
-            selectionApplications);
+        return new SecurityEffectExecutionResult(
+            securityCard,
+            securityResolutions,
+            activatedMainOptions.ToArray(),
+            selectionApplications.ToArray(),
+            pendingResolution,
+            request,
+            new SecurityEffectExecutionContinuation(
+                securityCard,
+                defender,
+                wasFaceDown,
+                pendingResolution,
+                request,
+                securityResolutions.ToArray(),
+                activatedMainOptions.ToArray(),
+                selectionApplications.ToArray(),
+                remainingSecurityResolutions.ToArray(),
+                remainingOptionResolutions.ToArray(),
+                isResolvingActivatedMainOption));
     }
 }

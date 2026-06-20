@@ -110,6 +110,9 @@ public sealed class BattleEngineServices
         return CreateCore(cardScriptRegistry, decisionProvider);
     }
 
+    public EngineSession CreateSession(GameState state, GameTrace? trace = null) =>
+        new(this, state, trace);
+
     public static BattleEngineServiceGraphValidationReport Validate(
         TriggerPipelineService? triggerPipelineService,
         IZoneMover? zoneMover,
@@ -206,6 +209,12 @@ public sealed class BattleEngineServices
             nameof(TriggerPipelineService),
             services.TriggerPipelineService,
             services.PhaseRunner.RuntimeTriggerPipelineService);
+        AddMismatch(
+            issues,
+            nameof(RuleProcessor),
+            nameof(IZoneMover),
+            services.ZoneMover,
+            services.RuleProcessor.RuntimeZoneMover);
         AddMismatch(
             issues,
             nameof(RuleProcessor),
@@ -359,6 +368,7 @@ public sealed class BattleEngineServices
             durationCleanupService,
             triggerPipelineService);
         var ruleProcessor = new RuleProcessor(
+            zoneMover,
             phaseRunner,
             battleResolver,
             keywordService,

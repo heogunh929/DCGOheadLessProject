@@ -37,6 +37,12 @@ public sealed class GameTrace
     public TraceEvent AddSelection(string label, GameState state, SelectionResult selectionResult) =>
         Add(TraceEventKind.Selection, label, state, state, SelectionResult: selectionResult);
 
+    public TraceEvent AddSelection(string label, GameState before, GameState after, SelectionResult selectionResult) =>
+        Add(TraceEventKind.Selection, label, before, after, SelectionResult: selectionResult);
+
+    public TraceEvent AddPhase(string label, GameState before, GameState after, string details) =>
+        Add(TraceEventKind.Phase, label, before, after, Details: details);
+
     public TraceEvent AddUnsupportedMechanic(string label, GameState state, string details) =>
         Add(TraceEventKind.UnsupportedMechanic, label, state, state, Details: details);
 

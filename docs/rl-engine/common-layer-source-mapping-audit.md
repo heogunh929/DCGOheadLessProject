@@ -50,8 +50,8 @@
 - `Tier1PrimitiveService`는 원본 `CardEffectCommons`, `CardController`, `Player`, `Permanent`, `AttackProcess`의 primitive 역할을 넓게 흡수했다. 카드 ID shortcut은 없지만 계속 커지면 원본 책임 추적성이 떨어질 수 있다.
 - `PlayCardService`의 hand option 처리 흐름은 원본 `UseOptionClass`와 차이가 있다. 원본은 option을 executing으로 이동해 `OptionSkill`을 실행한 뒤 trash로 보낸다. 현재 구현은 hand option을 바로 trash로 이동한 뒤 `OptionSkill`을 실행하고 `SourceZone = Trash`로 기록한다. 이 차이는 source-alignment 재검토가 필요하다.
 - `SecurityCheckService`는 security card를 `Security -> Executing -> Trash`로 처리하고 `SecurityEffectExecutionService`를 호출하지만, 원본 `ISecurityCheck`의 `OnSecurityCheck`, `OnLoseSecurity` stack 흐름 전체를 아직 실행하지 않는다.
-- `PlayCardService`, `DigivolveService`, `AttackService`, `PhaseRunner`, `RuleProcessor`는 `TriggerPipelineService`가 주입되지 않으면 trigger hook을 조용히 건너뛴다. composition root 또는 validation에서 "pipeline 없는 runtime"을 금지해야 한다.
-- `RuleProcessor.TrimExcessLinkedCards`는 injected `IZoneMover`가 아니라 `new ZoneMover()`를 직접 생성한다. 기능 shortcut은 아니지만 공통 primitive 주입 일관성을 깨는 구조 위험이다.
+- `PlayCardService`, `DigivolveService`, `AttackService`, `PhaseRunner`, `RuleProcessor`는 production `BattleEngineServices` graph에서 동일 `TriggerPipelineService`와 `IZoneMover`를 공유하도록 검증한다. 개별 service를 테스트 편의로 직접 생성하는 경로는 production runtime으로 쓰지 않는다.
+- `RuleProcessor.TrimExcessLinkedCards`는 queue 52에서 injected `IZoneMover`를 사용하도록 정렬했다. linked overflow 테스트는 spy mover 호출을 확인하고, source guard는 `RuleProcessor` 내부 direct `new ZoneMover` 재발을 막는다.
 
 ## 원본 vs RL.Engine 공통 layer 매핑
 
@@ -66,7 +66,7 @@
 | `Tier1PrimitiveService` | `CardEffectCommons`, `CardController.DrawClass`, `IAddSecurity`, `IRecovery`, `ITrashStack`, `ITrashDigivolutionCards`, `DestroyPermanentsClass`, `UseOptionClass`, `PlayPermanentClass`, `IBattle`, `ISecurityCheck` | draw/reveal/search request/trash/delete/return/recover/memory/modifier/play/digivolve/security/battle primitive를 카드 body에 제공한다 | 카드 ID shortcut은 없음. 다만 원본 여러 책임을 한 service가 흡수 | 적합하나 넓음 / 과도 통합 위험 | primitive별 source mapping 표와 invariant test를 유지한다. card id 조건 또는 ST 전용 분기를 추가하면 구조 위반으로 간주한다. |
 | `ZoneMover` | `CardObjectController`의 area remove/add, field/source/link movement, permanent top/source 전환 | 모든 zone 이동의 단일 primitive, `CardInstance.CurrentZone`과 zone membership 일관성 유지 | 카드별 로직 없음 | 적합 | 원본 UI frame/preferred placement와 1:1은 아니므로 deterministic placement 정책을 계속 문서화한다. |
 | `BattleKeywordService` | `CardEffectCommons/KeyWordEffects/*`, `Permanent` keyword query, attack/security keyword query | keyword 합산, SecurityAttack 수 계산, blocker 후보 생성, unsupported keyword 실패 처리 | 카드별 로직 없음 | 부분 적합 | Decoy/replacement류는 `UnsupportedMechanicException` 유지. keyword가 card definition/source/continuous에서 오는 범위를 지속 검증한다. |
-| `RuleProcessor` | `AutoProcessing.AutoProcessCheck`, `RuleProcess`, `EffectTiming.RulesTiming`, DP 0 삭제, invalid permanent cleanup | rules timing hook, invariant 확인, stale duration cleanup, DP zero/invalid breeding/face-down permanent 정리, linked overflow trim | 카드별 로직 없음 | 부분 적합 | `TrimExcessLinkedCards`의 직접 `new ZoneMover()`는 주입 일관성 위반 후보다. `OnDestroyedAnyone` payload와 원본 deletion timing 순서를 추가 검증한다. |
+| `RuleProcessor` | `AutoProcessing.AutoProcessCheck`, `RuleProcess`, `EffectTiming.RulesTiming`, DP 0 삭제, invalid permanent cleanup | rules timing hook, invariant 확인, stale duration cleanup, DP zero/invalid breeding/face-down permanent 정리, linked overflow trim | 카드별 로직 없음 | 부분 적합 | linked overflow 이동은 injected `IZoneMover`를 사용한다. `OnDestroyedAnyone` payload와 원본 deletion timing 순서를 추가 검증한다. |
 | `PhaseRunner` | `TurnStateMachine.ActivePhase`, `DrawPhase`, `BreedingPhase`, `MainPhase`, `EndTurnProcess` | phase 전환, start/end timing hook, turn-end duration cleanup, draw phase 처리 | 카드별 로직 없음 | 부분 적합 | 원본 breeding/main UI/action 대기와 `EndTurnCheck` 전체는 아직 단순화되어 있다. pipeline 미주입 시 trigger silent skip 방지 guard가 필요하다. |
 | `PlayCardService` | `CardController.PlayCardClass`, `PlayPermanentClass`, `UseOptionClass` | hand card play, cost 지불, permanent 생성, option play, `OnPlay`/`OptionSkill` hook | 카드별 로직 없음 | 부분 적합 / 불명확 | hand option을 `Hand -> Trash` 후 `OptionSkill` 실행하는 현재 흐름은 원본 `Hand -> Executing -> Trash`와 다르다. option source zone과 after-resolution trash 정책을 source-aligned로 재검토한다. |
 | `DigivolveService` | `CardController.PlayCardClass`, `PlayPermanentClass`, digivolve path | hand digivolve, cost 지불, `ZoneMover.DigivolveCard`, draw 1, `WhenDigivolving` hook | 카드별 로직 없음 | 부분 적합 | special digivolve, burst/jogress/app fusion, Before/AfterPayCost timing은 지원 범위 밖으로 유지한다. pipeline 미주입 silent skip guard가 필요하다. |
@@ -81,7 +81,7 @@
 | `Tier1PrimitiveService` | 많은 원본 primitive가 한 service에 누적됨 | 현재는 카드 ID shortcut이 없어 허용 가능 | primitive별 source mapping과 구조 guard를 추가한다. service가 커지면 draw/security/source/field primitive 그룹으로 분리 검토한다. |
 | `StarterScriptSupport`, set별 `St*ScriptSupport` | 카드별 body가 helper 안으로 숨을 수 있음 | queue 43 guard가 concrete class 위치를 강화했지만 support helper body 위험은 남음 | helper는 candidate/query/primitive wrapper까지만 허용하고, card-specific amount/timing/source mapping은 카드별 파일에 남긴다. |
 | `PlayCardService` option path | 원본 `UseOptionClass`의 executing zone 흐름과 다름 | source zone audit 필요 | option play도 `Executing`을 거치는 generic path로 맞출지 별도 작업에서 결정한다. |
-| `RuleProcessor.TrimExcessLinkedCards` | injected mover 대신 `new ZoneMover()` 직접 생성 | 동작은 primitive를 쓰지만 dependency boundary가 흐림 | constructor 주입 mover를 사용하도록 refactor 후보로 기록한다. |
+| `RuleProcessor.TrimExcessLinkedCards` | queue 52에서 injected `IZoneMover` 사용으로 정렬 | dependency boundary 위험은 해소. 원본 deletion timing parity는 별도 검증 필요 | spy mover/guard 테스트를 유지하고, future rules timing 변경 시 같은 mover graph를 유지한다. |
 
 ## 누락 또는 불명확한 원본 대응
 
@@ -109,8 +109,8 @@
 1. `PlayCardService` option lifecycle을 원본 `UseOptionClass`와 대조해 `Hand -> Executing -> Trash` 흐름으로 맞출지 결정한다.
 2. `SecurityCheckService`에 `OnSecurityCheck`/`OnLoseSecurity` trigger hook이 필요한지 원본 security 흐름 기준으로 별도 작업을 만든다.
 3. `TriggerPipelineService`의 `AfterEffectsActivate`와 full `MultipleSkills` priority 미지원 범위를 completion report에 직접 노출한다.
-4. `RuleProcessor.TrimExcessLinkedCards`가 injected `IZoneMover`를 사용하도록 refactor 후보로 남긴다.
-5. service composition guard를 추가해 `PlayCardService`, `DigivolveService`, `AttackService`, `PhaseRunner`, `RuleProcessor`가 pipeline 없이 실전 runner에서 사용되지 않도록 검증한다.
+4. service composition guard를 유지해 `PlayCardService`, `DigivolveService`, `AttackService`, `PhaseRunner`, `RuleProcessor`가 production에서 동일 `TriggerPipelineService`/`IZoneMover` graph를 공유하는지 검증한다.
+5. 개별 service 생성자의 테스트 편의 fallback은 production runtime으로 쓰지 않으며, full-card-pool 단계에서 필요하면 테스트 전용 builder로 더 분리한다.
 
 ## 테스트 상태
 

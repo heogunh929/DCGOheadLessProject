@@ -106,6 +106,7 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
     private readonly int _maxCount;
     private readonly bool _canSkip;
     private readonly bool _canEndNotMax;
+    private readonly EffectTiming _timing;
 
     public SelectionPrimitiveCardScript(
         string cardId,
@@ -115,7 +116,8 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         int minCount = 1,
         int maxCount = 1,
         bool canSkip = false,
-        bool canEndNotMax = false)
+        bool canEndNotMax = false,
+        EffectTiming timing = EffectTiming.OptionSkill)
     {
         _mode = mode;
         _targetController = targetController;
@@ -123,6 +125,7 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         _maxCount = maxCount;
         _canSkip = canSkip;
         _canEndNotMax = canEndNotMax;
+        _timing = timing;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -137,7 +140,7 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         {
             new EffectDescriptor(
                 $"{Porting.CardId}:selection:{_mode}",
-                EffectTiming.OptionSkill,
+                _timing,
                 SourceCard: context.SourceCard,
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,

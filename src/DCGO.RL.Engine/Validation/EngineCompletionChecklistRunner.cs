@@ -328,24 +328,15 @@ public sealed class EngineCompletionChecklistRunner
         new(id, name, passed ? CompletionGateStatus.Passed : CompletionGateStatus.Failed, details);
 
     private static ScenarioSuiteRunner CreateScenarioSuiteRunner(BattleEngineServices services) =>
-        new(new ScriptedScenarioRunner(
-            actionExecutor: services.ActionExecutor,
-            phaseRunner: services.PhaseRunner,
-            turnRunner: services.TurnRunner));
+        new(new ScriptedScenarioRunner(services));
 
     private static ReplayDeterminismRunner CreateReplayDeterminismRunner(BattleEngineServices services) =>
         new(
-            new ScriptedScenarioRunner(
-                actionExecutor: services.ActionExecutor,
-                phaseRunner: services.PhaseRunner,
-                turnRunner: services.TurnRunner),
-            new ReplayDeterminismHelper(new ReplayRunner(actionExecutor: services.ActionExecutor)));
+            new ScriptedScenarioRunner(services),
+            new ReplayDeterminismHelper(new ReplayRunner(services: services)));
 
     private static InvariantFuzzRunner CreateInvariantFuzzRunner(BattleEngineServices services) =>
-        new(new RandomLegalActionRunner(
-            actionExecutor: services.ActionExecutor,
-            phaseRunner: services.PhaseRunner,
-            turnRunner: services.TurnRunner));
+        new(new RandomLegalActionRunner(services));
 
     private static string DescribeMissingScripts(TargetCardPoolValidationReport report)
     {

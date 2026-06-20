@@ -26,7 +26,7 @@
 | `Tier1PrimitiveService` | `CardEffectCommons`, `CardController`, `CardObjectController`, `Player`, `Permanent`, `AttackProcess`의 공통 조작 | draw/search/reveal/trash/delete/recover/memory/source 이동/play/digivolve/battle 등 카드 효과 공통 primitive | 카드별 body가 직접 zone list를 건드리지 않도록 명시 command와 validation 제공 | 적합하나 넓음 | 메서드가 계속 늘면 원본 mapping 주석과 capability별 테스트가 필요 |
 | `ZoneMover` | `CardObjectController.RemoveFromAllArea`, zone add/remove, `Permanent` top/source/link 이동 | 카드가 여러 zone에 중복 존재하지 않게 이동 처리 | 모든 zone 이동의 단일 primitive, `CardInstance.CurrentZone`/permanent membership 일관성 유지 | 적합 | 원본 UI frame/preferred placement와 1:1은 아니며 deterministic headless placement 정책 필요 |
 | `AttackService`, `BattleResolver`, `SecurityCheckService` | `AttackProcess`, `IBattle`, `ISecurityCheck`, blocker/security battle 흐름 | 공격 선언, blocker, battle, security check, attack end cleanup | attack/security/battle 흐름을 service로 분리하고 trigger/security service 연결 | 부분 적합 | counter timing, attack target change, blocker priority, security multiple choice는 partial |
-| `PhaseRunner`, `RuleProcessor` | `TurnStateMachine`, `AutoProcessing.AutoProcessCheck`, rules timing | phase transition, start/end timing, rule process, DP 0 처리 | start turn/main/end turn hook, rule processing, duration cleanup 연결 | 부분 적합 | breeding/main UI 단계, pay-cost 전후/counter 세부 hook은 아직 완전하지 않음 |
+| `PhaseRunner`, `RuleProcessor` | `TurnStateMachine`, `AutoProcessing.AutoProcessCheck`, rules timing | phase transition, start/end timing, rule process, DP 0 처리 | start turn/main/end turn hook, rule processing, duration cleanup 연결. `RuleProcessor`의 linked overflow 정리는 injected `IZoneMover` 사용 | 부분 적합 | breeding/main UI 단계, pay-cost 전후/counter 세부 hook은 아직 완전하지 않음 |
 | `StarterScriptSupport` | `CardEffectCommons`, `SelectCardEffect`, `SelectPermanentEffect` 중 starter 카드 공통 후보/선택 helper | 반복되는 target 조건과 선택 request 구성 | ST1~ST3 starter 카드에서 재사용되는 candidate/selection helper 제공 | 과도 통합 위험 | 카드별 body를 숨기지 않도록 helper를 candidate/validation 수준으로 제한해야 함 |
 | `St1ScriptSupport` | ST1 카드 효과 파일들의 반복 body 및 `CardEffectCommons` 호출 패턴 | ST1 option delete, inherited continuous, declared capability helper | ST1 카드별 파일에서 호출하는 반복 script 구현 | 과도 통합 위험 | `Porting.CardId == "ST1-15"` 분기 제거 필요. 카드별 prompt/label은 카드 파일 또는 생성자 config로 이동 권장 |
 | `St2ScriptSupport`, `St3ScriptSupport` | ST2/ST3 원본 카드 효과의 반복 선택/continuous/trigger body | source trash, no-source inherited continuous, DP zero/on-attack DP 등 반복 body | set별 parameterized script helper | 중간 위험 | 카드 파일이 timing/조건/amount/source mapping을 계속 노출해야 하며 helper가 커지면 card-specific 파일로 분리 필요 |
@@ -81,4 +81,3 @@
 ```
 
 결과: `All 212 tests passed.`
-

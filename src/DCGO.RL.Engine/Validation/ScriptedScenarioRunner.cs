@@ -1,5 +1,6 @@
 using DCGO.RL.Engine.Actions;
 using DCGO.RL.Engine.Battle;
+using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 
 namespace DCGO.RL.Engine.Validation;
@@ -36,6 +37,7 @@ public enum ScenarioRunStatus
     Completed,
     GameOver,
     MaxTurnAbort,
+    PausedForDecision,
 }
 
 public sealed record MaxTurnAbortResult(int MaxActions, int ActionsExecuted, string FinalStateHash);
@@ -47,7 +49,9 @@ public sealed record ScenarioResult(
     GameTrace Trace,
     IReadOnlyList<EngineInvariantReport> InvariantReports,
     string FinalStateHash,
-    MaxTurnAbortResult? MaxTurnAbort = null)
+    MaxTurnAbortResult? MaxTurnAbort = null,
+    DecisionPoint? PendingDecisionPoint = null,
+    string? PendingStableContinuationId = null)
 {
     public EngineInvariantReport InvariantReport => InvariantReports.Count == 0
         ? new EngineInvariantReport(Array.Empty<EngineInvariantViolation>())
@@ -57,22 +61,28 @@ public sealed record ScenarioResult(
 public sealed class ScriptedScenarioRunner
 {
     private readonly EngineInvariantChecker _invariantChecker;
+    private readonly BattleEngineServices? _services;
     private readonly ActionExecutor _actionExecutor;
     private readonly PhaseRunner _phaseRunner;
     private readonly TurnRunner _turnRunner;
 
     public ScriptedScenarioRunner(
+        BattleEngineServices? services = null,
         EngineInvariantChecker? invariantChecker = null,
         ActionExecutor? actionExecutor = null,
         PhaseRunner? phaseRunner = null,
         TurnRunner? turnRunner = null)
     {
-        _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
+        _services = services;
+        _invariantChecker = invariantChecker ?? services?.InvariantChecker ?? new EngineInvariantChecker();
         _actionExecutor = actionExecutor
+            ?? services?.ActionExecutor
             ?? throw new DomainException("ScriptedScenarioRunner requires an ActionExecutor from BattleEngineServices.");
         _phaseRunner = phaseRunner
+            ?? services?.PhaseRunner
             ?? throw new DomainException("ScriptedScenarioRunner requires a PhaseRunner from BattleEngineServices.");
         _turnRunner = turnRunner
+            ?? services?.TurnRunner
             ?? throw new DomainException("ScriptedScenarioRunner requires a TurnRunner from BattleEngineServices.");
     }
 
@@ -80,6 +90,7 @@ public sealed class ScriptedScenarioRunner
     {
         var state = scenario.InitialState.Clone();
         var trace = new GameTrace();
+        var session = _services?.CreateSession(state, trace);
         var invariantReports = new List<EngineInvariantReport>();
 
         trace.AddStateSnapshot($"scenario:{scenario.Name}:initial", state);
@@ -92,8 +103,21 @@ public sealed class ScriptedScenarioRunner
                 break;
             }
 
-            ExecuteStep(scenario.Name, i, scenario.Steps[i], state, trace);
+            var stepResult = ExecuteStep(scenario.Name, i, scenario.Steps[i], state, trace, session);
             AddInvariantReport(state, invariantReports);
+            if (stepResult?.IsPaused == true)
+            {
+                trace.AddStateSnapshot($"scenario:{scenario.Name}:paused:{i}", state);
+                return new ScenarioResult(
+                    scenario.Name,
+                    ScenarioRunStatus.PausedForDecision,
+                    state,
+                    trace,
+                    invariantReports,
+                    state.ComputeStateHash(),
+                    PendingDecisionPoint: stepResult.PendingDecisionPoint,
+                    PendingStableContinuationId: stepResult.PendingStableContinuationId);
+            }
         }
 
         trace.AddStateSnapshot($"scenario:{scenario.Name}:final", state);
@@ -106,25 +130,41 @@ public sealed class ScriptedScenarioRunner
             state.ComputeStateHash());
     }
 
-    private void ExecuteStep(string scenarioName, int stepIndex, ScriptedScenarioStep step, GameState state, GameTrace trace)
+    private EngineStepResult? ExecuteStep(
+        string scenarioName,
+        int stepIndex,
+        ScriptedScenarioStep step,
+        GameState state,
+        GameTrace trace,
+        EngineSession? session)
     {
         switch (step)
         {
             case ActionScenarioStep actionStep:
+                if (session is not null)
+                {
+                    return session.Step(actionStep.Action);
+                }
+
                 ThrowIfPendingSelection(
                     _actionExecutor.Execute(state, actionStep.Action, trace),
                     $"scenario:{scenarioName}:action:{stepIndex}");
-                break;
+                return null;
 
             case DrawPhaseScenarioStep:
                 _phaseRunner.RunDrawPhase(state);
                 trace.AddStateSnapshot($"scenario:{scenarioName}:draw-phase:{stepIndex}", state);
-                break;
+                return null;
 
             case RunToMainPhaseScenarioStep:
+                if (session is not null && state.Phase == Phase.Breeding)
+                {
+                    return session.RunMainPhase();
+                }
+
                 _turnRunner.RunToMainPhase(state);
                 trace.AddStateSnapshot($"scenario:{scenarioName}:main-phase:{stepIndex}", state);
-                break;
+                return null;
 
             default:
                 throw new UnsupportedMechanicException($"Scripted scenario step '{step.GetType().Name}'");

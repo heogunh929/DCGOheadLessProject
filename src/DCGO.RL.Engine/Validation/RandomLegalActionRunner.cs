@@ -13,26 +13,32 @@ public sealed record RandomLegalActionRunRequest(
 public sealed class RandomLegalActionRunner
 {
     private readonly LegalActionGenerator _legalActionGenerator;
+    private readonly BattleEngineServices? _services;
     private readonly ActionExecutor _actionExecutor;
     private readonly PhaseRunner _phaseRunner;
     private readonly TurnRunner _turnRunner;
     private readonly EngineInvariantChecker _invariantChecker;
 
     public RandomLegalActionRunner(
+        BattleEngineServices? services = null,
         LegalActionGenerator? legalActionGenerator = null,
         ActionExecutor? actionExecutor = null,
         PhaseRunner? phaseRunner = null,
         TurnRunner? turnRunner = null,
         EngineInvariantChecker? invariantChecker = null)
     {
+        _services = services;
         _legalActionGenerator = legalActionGenerator ?? new LegalActionGenerator();
         _actionExecutor = actionExecutor
+            ?? services?.ActionExecutor
             ?? throw new DomainException("RandomLegalActionRunner requires an ActionExecutor from BattleEngineServices.");
         _phaseRunner = phaseRunner
+            ?? services?.PhaseRunner
             ?? throw new DomainException("RandomLegalActionRunner requires a PhaseRunner from BattleEngineServices.");
         _turnRunner = turnRunner
+            ?? services?.TurnRunner
             ?? throw new DomainException("RandomLegalActionRunner requires a TurnRunner from BattleEngineServices.");
-        _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
+        _invariantChecker = invariantChecker ?? services?.InvariantChecker ?? new EngineInvariantChecker();
     }
 
     public ScenarioResult Run(RandomLegalActionRunRequest request)
@@ -44,6 +50,7 @@ public sealed class RandomLegalActionRunner
 
         var state = request.InitialState.Clone();
         var trace = new GameTrace();
+        var session = _services?.CreateSession(state, trace);
         var invariantReports = new List<EngineInvariantReport>();
         var rng = new XorShiftDeterministicRng(request.Seed);
         var actionsExecuted = 0;
@@ -53,7 +60,12 @@ public sealed class RandomLegalActionRunner
 
         while (!state.IsGameOver)
         {
-            NormalizeToActionPhase(state, trace, invariantReports);
+            var normalizeResult = NormalizeToActionPhase(state, trace, invariantReports, session);
+            if (normalizeResult?.IsPaused == true)
+            {
+                return PausedResult(request.Name, state, trace, invariantReports, normalizeResult);
+            }
+
             if (state.IsGameOver)
             {
                 break;
@@ -80,14 +92,42 @@ public sealed class RandomLegalActionRunner
             }
 
             var action = legalActions[rng.NextInt(legalActions.Count)].Action;
-            ThrowIfPendingSelection(_actionExecutor.Execute(state, action, trace), $"random:{request.Name}:{actionsExecuted}");
+            var actionResult = session?.Step(action);
+            if (actionResult is not null)
+            {
+                if (actionResult.IsPaused)
+                {
+                    AddInvariantReport(state, invariantReports);
+                    return PausedResult(request.Name, state, trace, invariantReports, actionResult);
+                }
+            }
+            else
+            {
+                ThrowIfPendingSelection(
+                    _actionExecutor.Execute(state, action, trace),
+                    $"random:{request.Name}:{actionsExecuted}");
+            }
+
             actionsExecuted++;
             AddInvariantReport(state, invariantReports);
 
             if (state.Phase == Phase.Breeding && !state.IsGameOver)
             {
-                _phaseRunner.RunMainPhase(state);
-                trace.AddStateSnapshot($"random:{request.Name}:after-breeding-action", state);
+                var mainPhaseResult = session?.RunMainPhase();
+                if (mainPhaseResult is not null)
+                {
+                    if (mainPhaseResult.IsPaused)
+                    {
+                        AddInvariantReport(state, invariantReports);
+                        return PausedResult(request.Name, state, trace, invariantReports, mainPhaseResult);
+                    }
+                }
+                else
+                {
+                    _phaseRunner.RunMainPhase(state);
+                    trace.AddStateSnapshot($"random:{request.Name}:after-breeding-action", state);
+                }
+
                 AddInvariantReport(state, invariantReports);
             }
         }
@@ -102,7 +142,11 @@ public sealed class RandomLegalActionRunner
             state.ComputeStateHash());
     }
 
-    private void NormalizeToActionPhase(GameState state, GameTrace trace, List<EngineInvariantReport> invariantReports)
+    private EngineStepResult? NormalizeToActionPhase(
+        GameState state,
+        GameTrace trace,
+        List<EngineInvariantReport> invariantReports,
+        EngineSession? session)
     {
         while (!state.IsGameOver)
         {
@@ -135,21 +179,36 @@ public sealed class RandomLegalActionRunner
                 case Phase.Breeding:
                     if (_legalActionGenerator.Generate(state, state.TurnPlayerId).Count == 0)
                     {
-                        _phaseRunner.RunMainPhase(state);
-                        trace.AddStateSnapshot("random:breeding-to-main", state);
+                        var mainPhaseResult = session?.RunMainPhase();
+                        if (mainPhaseResult is not null)
+                        {
+                            if (mainPhaseResult.IsPaused)
+                            {
+                                AddInvariantReport(state, invariantReports);
+                                return mainPhaseResult;
+                            }
+                        }
+                        else
+                        {
+                            _phaseRunner.RunMainPhase(state);
+                            trace.AddStateSnapshot("random:breeding-to-main", state);
+                        }
+
                         AddInvariantReport(state, invariantReports);
                         continue;
                     }
 
-                    return;
+                    return null;
 
                 case Phase.Main:
-                    return;
+                    return null;
 
                 default:
                     throw new UnsupportedMechanicException($"Random runner phase '{state.Phase}'");
             }
         }
+
+        return null;
     }
 
     private void AddInvariantReport(GameState state, List<EngineInvariantReport> invariantReports)
@@ -168,5 +227,24 @@ public sealed class RandomLegalActionRunner
 
         throw new DomainException(
             $"RandomLegalActionRunner cannot ignore pending SelectionRequest '{result.PendingSelectionRequest!.Id}' at {context}.");
+    }
+
+    private static ScenarioResult PausedResult(
+        string name,
+        GameState state,
+        GameTrace trace,
+        IReadOnlyList<EngineInvariantReport> invariantReports,
+        EngineStepResult stepResult)
+    {
+        trace.AddStateSnapshot($"random:{name}:paused", state);
+        return new ScenarioResult(
+            name,
+            ScenarioRunStatus.PausedForDecision,
+            state,
+            trace,
+            invariantReports,
+            state.ComputeStateHash(),
+            PendingDecisionPoint: stepResult.PendingDecisionPoint,
+            PendingStableContinuationId: stepResult.PendingStableContinuationId);
     }
 }

@@ -16,15 +16,19 @@ public sealed record OptionPlayResult(
     bool MovedToTrash)
 {
     public bool HasPendingSelection => PendingSelectionRequest is not null;
+
+    public TriggerPipelineContinuation? PendingContinuation => PipelineResult?.PendingContinuation;
 }
 
-public sealed record PlayCardResult(PermanentState? Permanent, OptionPlayResult? OptionPlay)
+public sealed record PlayCardResult(PermanentState? Permanent, OptionPlayResult? OptionPlay, TriggerPipelineResult? TriggerResult = null)
 {
-    public bool HasPendingSelection => OptionPlay?.HasPendingSelection == true;
+    public bool HasPendingSelection => OptionPlay?.HasPendingSelection == true || TriggerResult?.HasPendingSelection == true;
 
-    public SelectionRequest? PendingSelectionRequest => OptionPlay?.PendingSelectionRequest;
+    public SelectionRequest? PendingSelectionRequest => OptionPlay?.PendingSelectionRequest ?? TriggerResult?.PendingSelectionRequest;
 
-    public EffectResolution? PendingResolution => OptionPlay?.PendingResolution;
+    public EffectResolution? PendingResolution => OptionPlay?.PendingResolution ?? TriggerResult?.PendingResolution;
+
+    public TriggerPipelineContinuation? PendingContinuation => OptionPlay?.PendingContinuation ?? TriggerResult?.PendingContinuation;
 }
 
 public sealed class PlayCardService
@@ -104,7 +108,7 @@ public sealed class PlayCardService
 
         var permanent = BattleRules.Permanent(state, permanentId);
         permanent.EnterFieldTurnCount = state.TurnCount;
-        RunTriggerPipeline(
+        var triggerResult = RunTriggerPipeline(
             state,
             EffectTiming.OnPlay,
             action.Actor,
@@ -116,7 +120,7 @@ public sealed class PlayCardService
                 ["Permanent"] = permanent.Id,
                 ["Played"] = true,
             });
-        return new PlayCardResult(permanent, OptionPlay: null);
+        return new PlayCardResult(permanent, OptionPlay: null, triggerResult);
     }
 
     public OptionPlayResult PlayOptionFromHand(GameState state, PlayCardAction action, GameTrace? trace = null)
@@ -258,6 +262,37 @@ public sealed class PlayCardService
         return true;
     }
 
+    internal OptionPlayResult CompleteOptionPipelineResult(
+        GameState state,
+        CardInstanceId optionCard,
+        TriggerPipelineResult pipelineResult,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(pipelineResult);
+
+        if (pipelineResult.PendingSelectionRequest is not null)
+        {
+            return new OptionPlayResult(
+                optionCard,
+                pipelineResult,
+                pipelineResult.SelectionApplications,
+                pipelineResult.PendingResolution,
+                pipelineResult.PendingSelectionRequest,
+                MovedToTrash: false);
+        }
+
+        var moved = TrashIfStillExecuting(state, state.Cards[optionCard].Owner, optionCard, trace);
+        _invariantChecker.ThrowIfInvalid(state);
+        return new OptionPlayResult(
+            optionCard,
+            pipelineResult,
+            pipelineResult.SelectionApplications,
+            PendingResolution: null,
+            PendingSelectionRequest: null,
+            moved);
+    }
+
     private TriggerPipelineResult RunOptionTriggerPipeline(
         GameState state,
         PlayerId player,
@@ -280,7 +315,7 @@ public sealed class PlayCardService
             trace: trace);
     }
 
-    private void RunTriggerPipeline(
+    private TriggerPipelineResult RunTriggerPipeline(
         GameState state,
         EffectTiming timing,
         PlayerId player,
@@ -288,17 +323,12 @@ public sealed class PlayCardService
         PermanentId? sourcePermanent,
         IReadOnlyDictionary<string, object?> values)
     {
-        var result = _triggerPipelineService.Run(
+        return _triggerPipelineService.Run(
             state,
             timing,
             player,
             sourceCard,
             sourcePermanent,
             values);
-        if (result.PendingSelectionRequest is not null)
-        {
-            throw new DomainException(
-                $"Trigger timing '{timing}' requires SelectionResult for request '{result.PendingSelectionRequest.Id}'.");
-        }
     }
 }

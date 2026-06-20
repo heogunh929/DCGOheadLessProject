@@ -1,10 +1,22 @@
 using DCGO.RL.Engine.Actions;
+using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 using DCGO.RL.Engine.Effects;
 using DCGO.RL.Engine.Setup;
 using DCGO.RL.Engine.Validation;
 
 namespace DCGO.RL.Engine.Battle;
+
+public sealed record DigivolveResult(PermanentState Permanent, TriggerPipelineResult? TriggerResult)
+{
+    public bool HasPendingSelection => TriggerResult?.HasPendingSelection == true;
+
+    public SelectionRequest? PendingSelectionRequest => TriggerResult?.PendingSelectionRequest;
+
+    public EffectResolution? PendingResolution => TriggerResult?.PendingResolution;
+
+    public TriggerPipelineContinuation? PendingContinuation => TriggerResult?.PendingContinuation;
+}
 
 public sealed class DigivolveService
 {
@@ -27,6 +39,18 @@ public sealed class DigivolveService
     internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
 
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null)
+    {
+        var result = DigivolveWithResult(state, action, trace);
+        if (result.HasPendingSelection)
+        {
+            throw new DomainException(
+                $"WhenDigivolving requires SelectionResult for request '{result.PendingSelectionRequest!.Id}'.");
+        }
+
+        return result.Permanent;
+    }
+
+    public DigivolveResult DigivolveWithResult(GameState state, DigivolveAction action, GameTrace? trace = null)
     {
         var player = state.GetPlayer(action.Actor);
         if (action.Actor != state.TurnPlayerId)
@@ -53,11 +77,11 @@ public sealed class DigivolveService
         BattleRules.PayMemory(state, action.Actor, cost);
         _zoneMover.DigivolveCard(state, new DigivolveCardCommand(action.Card, Zone.Hand, action.TargetPermanent));
         _drawService.DrawCards(state, action.Actor, 1, trace);
-        RunTriggerPipeline(state, action.Actor, action.Card, action.TargetPermanent, trace);
-        return permanent;
+        var triggerResult = RunTriggerPipeline(state, action.Actor, action.Card, action.TargetPermanent, trace);
+        return new DigivolveResult(permanent, triggerResult);
     }
 
-    private void RunTriggerPipeline(
+    private TriggerPipelineResult? RunTriggerPipeline(
         GameState state,
         PlayerId player,
         CardInstanceId sourceCard,
@@ -66,10 +90,10 @@ public sealed class DigivolveService
     {
         if (_triggerPipelineService is null)
         {
-            return;
+            return null;
         }
 
-        var result = _triggerPipelineService.Run(
+        return _triggerPipelineService.Run(
             state,
             EffectTiming.WhenDigivolving,
             player,
@@ -81,10 +105,5 @@ public sealed class DigivolveService
                 ["Permanent"] = sourcePermanent,
             },
             trace: trace);
-        if (result.PendingSelectionRequest is not null)
-        {
-            throw new DomainException(
-                $"WhenDigivolving requires SelectionResult for request '{result.PendingSelectionRequest.Id}'.");
-        }
     }
 }

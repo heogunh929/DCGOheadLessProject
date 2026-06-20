@@ -11,6 +11,7 @@ public enum TraceEventKind
     MoveCard,
     Decision,
     Selection,
+    Phase,
     UnsupportedMechanic,
 }
 
