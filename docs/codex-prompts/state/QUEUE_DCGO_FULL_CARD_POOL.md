@@ -19,7 +19,7 @@
 | 55A | done | prompts/55A_source_aligned_attack_lifecycle_correction.md | source-aligned attack lifecycle: single-counter policy, runtime context, switch/block/suspend, duration cleanup |
 | 55B | done | prompts/55B_counter_source_collection_attack_stage_ordering_correction.md | counter source collection and attack stage ordering correction |
 | 55C | done | prompts/55C_counter_resolution_target_switch_event_semantic_correction.md | counter resolution 시점, optional decline 진행, source coverage, target-switch event payload 보정 |
-| 61 | todo | prompts/61_dcgo_source_snapshot_pin.md | DCGO2/DCGO 원본 revision 고정. 사용자 승인 전에는 needs-review로 종료 |
+| 61 | needs-review | prompts/61_dcgo_source_snapshot_pin.md | DCGO2/DCGO 원본 revision 고정. 사용자 승인 전에는 needs-review로 종료 |
 | 62 | todo | prompts/62_full_card_asset_manifest.md | 전체 CardBaseEntity asset manifest |
 | 63 | todo | prompts/63_full_mechanic_effect_inventory.md | 전체 mechanic/effect timing inventory |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |
