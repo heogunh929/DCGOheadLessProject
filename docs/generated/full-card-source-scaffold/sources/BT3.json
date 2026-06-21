@@ -1,0 +1,4567 @@
+{
+  "schemaVersion": 1,
+  "setId": "BT3",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "BT3_001@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_001.cs",
+      "sourceEffectClassName": "BT3_001",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_001.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_001.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-001#587@base",
+          "cardId": "BT3-001",
+          "cardIndex": 587,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/DigiEgg/BT3_001.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_002@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_002.cs",
+      "sourceEffectClassName": "BT3_002",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_002.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_002.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-002#588@base",
+          "cardId": "BT3-002",
+          "cardIndex": 588,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/DigiEgg/BT3_002.asset"
+        },
+        {
+          "definitionStableId": "BT3-002#589@P1",
+          "cardId": "BT3-002",
+          "cardIndex": 589,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_002_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-002#590@P2",
+          "cardId": "BT3-002",
+          "cardIndex": 590,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_002_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-002#8454@P1",
+          "cardId": "BT3-002",
+          "cardIndex": 8454,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/DigiEgg/BT3_002_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-002#8455@P2",
+          "cardId": "BT3-002",
+          "cardIndex": 8455,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/DigiEgg/BT3_002_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-002#8456@P3",
+          "cardId": "BT3-002",
+          "cardIndex": 8456,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/DigiEgg/BT3_002_P3.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "BT3_003@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_003.cs",
+      "sourceEffectClassName": "BT3_003",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_003.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_003.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-003#591@base",
+          "cardId": "BT3-003",
+          "cardIndex": 591,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/DigiEgg/BT3_003.asset"
+        },
+        {
+          "definitionStableId": "BT3-003#592@P1",
+          "cardId": "BT3-003",
+          "cardIndex": 592,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_003_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-003#593@P2",
+          "cardId": "BT3-003",
+          "cardIndex": 593,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_003_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-003#8457@P1",
+          "cardId": "BT3-003",
+          "cardIndex": 8457,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/DigiEgg/BT3_003_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-003#8458@P2",
+          "cardId": "BT3-003",
+          "cardIndex": 8458,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/DigiEgg/BT3_003_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-003#8459@P3",
+          "cardId": "BT3-003",
+          "cardIndex": 8459,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/DigiEgg/BT3_003_P3.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "BT3_004@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_004.cs",
+      "sourceEffectClassName": "BT3_004",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_004.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_004.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "ChangeDigimonDP",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-004#594@base",
+          "cardId": "BT3-004",
+          "cardIndex": 594,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/DigiEgg/BT3_004.asset"
+        },
+        {
+          "definitionStableId": "BT3-004#595@P1",
+          "cardId": "BT3-004",
+          "cardIndex": 595,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_004_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-004#596@P2",
+          "cardId": "BT3-004",
+          "cardIndex": 596,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_004_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-004#8460@P1",
+          "cardId": "BT3-004",
+          "cardIndex": 8460,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/DigiEgg/BT3_004_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-004#8461@P2",
+          "cardId": "BT3-004",
+          "cardIndex": 8461,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/DigiEgg/BT3_004_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-004#8462@P3",
+          "cardId": "BT3-004",
+          "cardIndex": 8462,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/DigiEgg/BT3_004_P3.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "BT3_005@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_005.cs",
+      "sourceEffectClassName": "BT3_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_005.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_005.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-005#597@base",
+          "cardId": "BT3-005",
+          "cardIndex": 597,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/DigiEgg/BT3_005.asset"
+        },
+        {
+          "definitionStableId": "BT4-001#759@base",
+          "cardId": "BT4-001",
+          "cardIndex": 759,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Red/DigiEgg/BT4_001.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_006@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_006.cs",
+      "sourceEffectClassName": "BT3_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_006.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_006.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectHand"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-006#598@base",
+          "cardId": "BT3-006",
+          "cardIndex": 598,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/DigiEgg/BT3_006.asset"
+        },
+        {
+          "definitionStableId": "BT3-006#599@P1",
+          "cardId": "BT3-006",
+          "cardIndex": 599,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_006_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-006#600@P2",
+          "cardId": "BT3-006",
+          "cardIndex": 600,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_006_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-006#8463@P1",
+          "cardId": "BT3-006",
+          "cardIndex": 8463,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/DigiEgg/BT3_006_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-006#8464@P2",
+          "cardId": "BT3-006",
+          "cardIndex": 8464,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/DigiEgg/BT3_006_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-006#8465@P3",
+          "cardId": "BT3-006",
+          "cardIndex": 8465,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/DigiEgg/BT3_006_P3.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "BT3_008@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_008.cs",
+      "sourceEffectClassName": "BT3_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_008.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_008.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "ReturnRevealedCardsToLibraryBottom",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-008#602@base",
+          "cardId": "BT3-008",
+          "cardIndex": 602,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_008.asset"
+        },
+        {
+          "definitionStableId": "BT3-008#8466@P1",
+          "cardId": "BT3-008",
+          "cardIndex": 8466,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_008_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-062#687@base",
+          "cardId": "BT3-062",
+          "cardIndex": 687,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_062.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_010@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_010.cs",
+      "sourceEffectClassName": "BT3_010",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_010.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_010.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-010#605@base",
+          "cardId": "BT3-010",
+          "cardIndex": 605,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_010.asset"
+        },
+        {
+          "definitionStableId": "BT3-013#609@base",
+          "cardId": "BT3-013",
+          "cardIndex": 609,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_013.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_011@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_011.cs",
+      "sourceEffectClassName": "BT3_011",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_011.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_011.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "SecuritySkill"
+      ],
+      "flags": {
+        "security": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "PlaySelfDigimonAfterBattleSecurityEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-011#606@base",
+          "cardId": "BT3-011",
+          "cardIndex": 606,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_011.asset"
+        },
+        {
+          "definitionStableId": "BT3-011#607@P1",
+          "cardId": "BT3-011",
+          "cardIndex": 607,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_011_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-024#626@base",
+          "cardId": "BT3-024",
+          "cardIndex": 626,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_024.asset"
+        },
+        {
+          "definitionStableId": "BT3-024#627@P1",
+          "cardId": "BT3-024",
+          "cardIndex": 627,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_024_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-024#628@P2",
+          "cardId": "BT3-024",
+          "cardIndex": 628,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_024_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-036#645@base",
+          "cardId": "BT3-036",
+          "cardIndex": 645,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_036.asset"
+        },
+        {
+          "definitionStableId": "BT3-036#646@P1",
+          "cardId": "BT3-036",
+          "cardIndex": 646,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_036_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-049#665@base",
+          "cardId": "BT3-049",
+          "cardIndex": 665,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_049.asset"
+        },
+        {
+          "definitionStableId": "BT3-049#666@P1",
+          "cardId": "BT3-049",
+          "cardIndex": 666,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_049_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-065#690@base",
+          "cardId": "BT3-065",
+          "cardIndex": 690,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_065.asset"
+        },
+        {
+          "definitionStableId": "BT3-065#691@P1",
+          "cardId": "BT3-065",
+          "cardIndex": 691,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_065_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-082#714@base",
+          "cardId": "BT3-082",
+          "cardIndex": 714,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_082.asset"
+        },
+        {
+          "definitionStableId": "BT3-082#715@P1",
+          "cardId": "BT3-082",
+          "cardIndex": 715,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_082_P1.asset"
+        },
+        {
+          "definitionStableId": "BT6-058#1187@base",
+          "cardId": "BT6-058",
+          "cardIndex": 1187,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Black/Digimon/BT6_058.asset"
+        }
+      ],
+      "affectedCardCount": 14
+    },
+    {
+      "sourceScaffoldId": "BT3_014@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_014.cs",
+      "sourceEffectClassName": "BT3_014",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_014.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_014.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeBaseDPClass",
+        "ChangeCardColorClass"
+      ],
+      "setMethods": [
+        "SetActivatedTime",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeBaseDPClass",
+        "SetUpChangeCardColorClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-014#610@base",
+          "cardId": "BT3-014",
+          "cardIndex": 610,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_014.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_015@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_015.cs",
+      "sourceEffectClassName": "BT3_015",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_015.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_015.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-015#611@base",
+          "cardId": "BT3-015",
+          "cardIndex": 611,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_015.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_016@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_016.cs",
+      "sourceEffectClassName": "BT3_016",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_016.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_016.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck"
+      ],
+      "flags": {
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-016#612@base",
+          "cardId": "BT3-016",
+          "cardIndex": 612,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_016.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_017@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_017.cs",
+      "sourceEffectClassName": "BT3_017",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_017.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_017.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-017#613@base",
+          "cardId": "BT3-017",
+          "cardIndex": 613,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_017.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_018@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_018.cs",
+      "sourceEffectClassName": "BT3_018",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_018.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_018.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-018#614@base",
+          "cardId": "BT3-018",
+          "cardIndex": 614,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_018.asset"
+        },
+        {
+          "definitionStableId": "BT3-018#615@P1",
+          "cardId": "BT3-018",
+          "cardIndex": 615,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_018_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_019@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_019.cs",
+      "sourceEffectClassName": "BT3_019",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_019.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_019.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect",
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-019#616@base",
+          "cardId": "BT3-019",
+          "cardIndex": 616,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_019.asset"
+        },
+        {
+          "definitionStableId": "BT3-019#617@P1",
+          "cardId": "BT3-019",
+          "cardIndex": 617,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Digimon/BT3_019_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_025@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_025.cs",
+      "sourceEffectClassName": "BT3_025",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_025.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_025.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-025#629@base",
+          "cardId": "BT3-025",
+          "cardIndex": 629,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_025.asset"
+        },
+        {
+          "definitionStableId": "BT3-025#630@P1",
+          "cardId": "BT3-025",
+          "cardIndex": 630,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_025_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_027@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_027.cs",
+      "sourceEffectClassName": "BT3_027",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_027.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_027.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "JammingSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-027#632@base",
+          "cardId": "BT3-027",
+          "cardIndex": 632,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_027.asset"
+        },
+        {
+          "definitionStableId": "BT3-027#8468@P1",
+          "cardId": "BT3-027",
+          "cardIndex": 8468,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_027_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-027#8469@P2",
+          "cardId": "BT3-027",
+          "cardIndex": 8469,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_027_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-027#8470@P3",
+          "cardId": "BT3-027",
+          "cardIndex": 8470,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_027_P3.asset"
+        },
+        {
+          "definitionStableId": "BT3-027#8471@P4",
+          "cardId": "BT3-027",
+          "cardIndex": 8471,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_027_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "BT3_029@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_029.cs",
+      "sourceEffectClassName": "BT3_029",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_029.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_029.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-029#634@base",
+          "cardId": "BT3-029",
+          "cardIndex": 634,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_029.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_030@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_030.cs",
+      "sourceEffectClassName": "BT3_030",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_030.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_030.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "JammingStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-030#635@base",
+          "cardId": "BT3-030",
+          "cardIndex": 635,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_030.asset"
+        },
+        {
+          "definitionStableId": "BT3-030#636@P1",
+          "cardId": "BT3-030",
+          "cardIndex": 636,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_030_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_031@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_031.cs",
+      "sourceEffectClassName": "BT3_031",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_031.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_031.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDigivolutionCostStaticEffect",
+        "JammingSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-031#637@base",
+          "cardId": "BT3-031",
+          "cardIndex": 637,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_031.asset"
+        },
+        {
+          "definitionStableId": "BT3-031#638@P1",
+          "cardId": "BT3-031",
+          "cardIndex": 638,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_031_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-031#639@P2",
+          "cardId": "BT3-031",
+          "cardIndex": 639,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_031_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_034@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_034.cs",
+      "sourceEffectClassName": "BT3_034",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_034.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_034.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-034#642@base",
+          "cardId": "BT3-034",
+          "cardIndex": 642,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_034.asset"
+        },
+        {
+          "definitionStableId": "BT3-034#8472@P1",
+          "cardId": "BT3-034",
+          "cardIndex": 8472,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_034_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_039@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_039.cs",
+      "sourceEffectClassName": "BT3_039",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_039.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_039.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-039#650@base",
+          "cardId": "BT3-039",
+          "cardIndex": 650,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_039.asset"
+        },
+        {
+          "definitionStableId": "BT3-039#651@P1",
+          "cardId": "BT3-039",
+          "cardIndex": 651,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_039_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-039#8473@P2",
+          "cardId": "BT3-039",
+          "cardIndex": 8473,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_039_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-039#8474@P3",
+          "cardId": "BT3-039",
+          "cardIndex": 8474,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_039_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "BT3_040@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_040.cs",
+      "sourceEffectClassName": "BT3_040",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_040.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_040.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ChangeCardColorClass"
+      ],
+      "setMethods": [
+        "SetUpChangeCardColorClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-040#652@base",
+          "cardId": "BT3-040",
+          "cardIndex": 652,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_040.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_041@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_041.cs",
+      "sourceEffectClassName": "BT3_041",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_041.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_041.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Trash",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-041#653@base",
+          "cardId": "BT3-041",
+          "cardIndex": 653,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_041.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_042@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_042.cs",
+      "sourceEffectClassName": "BT3_042",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_042.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_042.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-042#654@base",
+          "cardId": "BT3-042",
+          "cardIndex": 654,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_042.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_043@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_043.cs",
+      "sourceEffectClassName": "BT3_043",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_043.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_043.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-043#655@base",
+          "cardId": "BT3-043",
+          "cardIndex": 655,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_043.asset"
+        },
+        {
+          "definitionStableId": "BT3-043#656@P1",
+          "cardId": "BT3-043",
+          "cardIndex": 656,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Digimon/BT3_043_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_046@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_046.cs",
+      "sourceEffectClassName": "BT3_046",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_046.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_046.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "CannotAddMemoryClass"
+      ],
+      "setMethods": [
+        "SetUpCannotAddMemoryClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-046#659@base",
+          "cardId": "BT3-046",
+          "cardIndex": 659,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#660@P1",
+          "cardId": "BT3-046",
+          "cardIndex": 660,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#6768@P2",
+          "cardId": "BT3-046",
+          "cardIndex": 6768,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#6769@P3",
+          "cardId": "BT3-046",
+          "cardIndex": 6769,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P3.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#6770@P4",
+          "cardId": "BT3-046",
+          "cardIndex": 6770,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P4.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#6771@P5",
+          "cardId": "BT3-046",
+          "cardIndex": 6771,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P5.asset"
+        },
+        {
+          "definitionStableId": "BT3-046#8475@P6",
+          "cardId": "BT3-046",
+          "cardIndex": 8475,
+          "variantKey": "P6",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_046_P6.asset"
+        },
+        {
+          "definitionStableId": "BT3-061#685@base",
+          "cardId": "BT3-061",
+          "cardIndex": 685,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_061.asset"
+        },
+        {
+          "definitionStableId": "BT3-061#686@P1",
+          "cardId": "BT3-061",
+          "cardIndex": 686,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_061_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-077#708@base",
+          "cardId": "BT3-077",
+          "cardIndex": 708,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_077.asset"
+        },
+        {
+          "definitionStableId": "BT3-077#709@P1",
+          "cardId": "BT3-077",
+          "cardIndex": 709,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_077_P1.asset"
+        },
+        {
+          "definitionStableId": "BT6-021#1136@base",
+          "cardId": "BT6-021",
+          "cardIndex": 1136,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Blue/Digimon/BT6_021.asset"
+        },
+        {
+          "definitionStableId": "BT6-021#1137@P1",
+          "cardId": "BT6-021",
+          "cardIndex": 1137,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Blue/Digimon/BT6_021_P1.asset"
+        }
+      ],
+      "affectedCardCount": 13
+    },
+    {
+      "sourceScaffoldId": "BT3_047@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_047.cs",
+      "sourceEffectClassName": "BT3_047",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_047.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_047.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-047#661@base",
+          "cardId": "BT3-047",
+          "cardIndex": 661,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_047.asset"
+        },
+        {
+          "definitionStableId": "BT3-047#662@P1",
+          "cardId": "BT3-047",
+          "cardIndex": 662,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_047_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_050@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_050.cs",
+      "sourceEffectClassName": "BT3_050",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_050.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_050.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndBattle"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-050#667@base",
+          "cardId": "BT3-050",
+          "cardIndex": 667,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_050.asset"
+        },
+        {
+          "definitionStableId": "BT3-050#668@P1",
+          "cardId": "BT3-050",
+          "cardIndex": 668,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_050_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-050#669@P2",
+          "cardId": "BT3-050",
+          "cardIndex": 669,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_050_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_051@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_051.cs",
+      "sourceEffectClassName": "BT3_051",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_051.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_051.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-051#670@base",
+          "cardId": "BT3-051",
+          "cardIndex": 670,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_051.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_054@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+      "sourceEffectClassName": "BT3_054",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_054.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "WhenDigisorption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_priority": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-054#673@base",
+          "cardId": "BT3-054",
+          "cardIndex": 673,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054.asset"
+        },
+        {
+          "definitionStableId": "BT3-054#674@P1",
+          "cardId": "BT3-054",
+          "cardIndex": 674,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-054#8476@P2",
+          "cardId": "BT3-054",
+          "cardIndex": 8476,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_055@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_055.cs",
+      "sourceEffectClassName": "BT3_055",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_055.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_055.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDetermineDoSecurityCheck"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "JammingSelfStaticEffect",
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-055#675@base",
+          "cardId": "BT3-055",
+          "cardIndex": 675,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_055.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_056@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs",
+      "sourceEffectClassName": "BT3_056",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_056.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "None",
+        "WhenDigisorption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_priority": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanSuspendByDigisorptionClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanSuspendByDigisorptionClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-056#676@base",
+          "cardId": "BT3-056",
+          "cardIndex": 676,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_056.asset"
+        },
+        {
+          "definitionStableId": "BT3-056#677@P1",
+          "cardId": "BT3-056",
+          "cardIndex": 677,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_056_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_057@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_057.cs",
+      "sourceEffectClassName": "BT3_057",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_057.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_057.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "GainCantUnsuspendNextActivePhase",
+        "HasMatchConditionOpponentsPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-057#678@base",
+          "cardId": "BT3-057",
+          "cardIndex": 678,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_057.asset"
+        },
+        {
+          "definitionStableId": "BT3-057#679@P1",
+          "cardId": "BT3-057",
+          "cardIndex": 679,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_057_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-057#680@P2",
+          "cardId": "BT3-057",
+          "cardIndex": 680,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_057_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-057#8477@P3",
+          "cardId": "BT3-057",
+          "cardIndex": 8477,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_057_P3.asset"
+        },
+        {
+          "definitionStableId": "BT3-057#8478@P4",
+          "cardId": "BT3-057",
+          "cardIndex": 8478,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_057_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "BT3_058@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_058.cs",
+      "sourceEffectClassName": "BT3_058",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_058.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_058.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnDetermineDoSecurityCheck"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-058#681@base",
+          "cardId": "BT3-058",
+          "cardIndex": 681,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_058.asset"
+        },
+        {
+          "definitionStableId": "BT3-058#8479@P1",
+          "cardId": "BT3-058",
+          "cardIndex": 8479,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_058_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_063@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_063.cs",
+      "sourceEffectClassName": "BT3_063",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_063.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_063.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-063#688@base",
+          "cardId": "BT3-063",
+          "cardIndex": 688,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_063.asset"
+        },
+        {
+          "definitionStableId": "BT3-063#8482@P1",
+          "cardId": "BT3-063",
+          "cardIndex": 8482,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_063_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_064@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_064.cs",
+      "sourceEffectClassName": "BT3_064",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_064.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_064.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-064#689@base",
+          "cardId": "BT3-064",
+          "cardIndex": 689,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_064.asset"
+        },
+        {
+          "definitionStableId": "BT3-069#696@base",
+          "cardId": "BT3-069",
+          "cardIndex": 696,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_069.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_066@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_066.cs",
+      "sourceEffectClassName": "BT3_066",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_066.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_066.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOpponentTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-066#692@base",
+          "cardId": "BT3-066",
+          "cardIndex": 692,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_066.asset"
+        },
+        {
+          "definitionStableId": "BT3-068#695@base",
+          "cardId": "BT3-068",
+          "cardIndex": 695,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_068.asset"
+        },
+        {
+          "definitionStableId": "P-013#6031@base",
+          "cardId": "P-013",
+          "cardIndex": 6031,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Black/Digimon/P_013.asset"
+        },
+        {
+          "definitionStableId": "P-013#6032@P1",
+          "cardId": "P-013",
+          "cardIndex": 6032,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Black/Digimon/P_013_P1.asset"
+        },
+        {
+          "definitionStableId": "P-013#10340@P2",
+          "cardId": "P-013",
+          "cardIndex": 10340,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Black/Digimon/P_013_P2.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "BT3_070@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_070.cs",
+      "sourceEffectClassName": "BT3_070",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_070.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_070.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "IsExistOnTrash",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-070#697@base",
+          "cardId": "BT3-070",
+          "cardIndex": 697,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_070.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_071@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_071.cs",
+      "sourceEffectClassName": "BT3_071",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_071.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_071.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-071#698@base",
+          "cardId": "BT3-071",
+          "cardIndex": 698,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_071.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_073@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_073.cs",
+      "sourceEffectClassName": "BT3_073",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_073.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_073.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetEffectName",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-073#700@base",
+          "cardId": "BT3-073",
+          "cardIndex": 700,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_073.asset"
+        },
+        {
+          "definitionStableId": "BT3-073#701@P1",
+          "cardId": "BT3-073",
+          "cardIndex": 701,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_073_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_074@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_074.cs",
+      "sourceEffectClassName": "BT3_074",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_074.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_074.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "CanNotBeBlockedStaticSelfEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-074#702@base",
+          "cardId": "BT3-074",
+          "cardIndex": 702,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_074.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_075@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_075.cs",
+      "sourceEffectClassName": "BT3_075",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_075.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_075.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "CanNotBeDestroyedBySkillStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-075#703@base",
+          "cardId": "BT3-075",
+          "cardIndex": 703,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_075.asset"
+        },
+        {
+          "definitionStableId": "BT3-075#704@P1",
+          "cardId": "BT3-075",
+          "cardIndex": 704,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_075_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-075#705@P2",
+          "cardId": "BT3-075",
+          "cardIndex": 705,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_075_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-075#8483@P3",
+          "cardId": "BT3-075",
+          "cardIndex": 8483,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_075_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "BT3_080@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_080.cs",
+      "sourceEffectClassName": "BT3_080",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_080.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_080.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "RetaliationSelfEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-080#712@base",
+          "cardId": "BT3-080",
+          "cardIndex": 712,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_080.asset"
+        },
+        {
+          "definitionStableId": "BT8-075#1657@base",
+          "cardId": "BT8-075",
+          "cardIndex": 1657,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Purple/Digimon/BT8_075.asset"
+        },
+        {
+          "definitionStableId": "P-019#6044@base",
+          "cardId": "P-019",
+          "cardIndex": 6044,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Purple/Digimon/P_019.asset"
+        },
+        {
+          "definitionStableId": "ST16-04#2849@base",
+          "cardId": "ST16-04",
+          "cardIndex": 2849,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST16/Purple/Digimon/ST16_04.asset"
+        },
+        {
+          "definitionStableId": "ST16-04#4947@P0",
+          "cardId": "ST16-04",
+          "cardIndex": 4947,
+          "variantKey": "P0",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST16/Purple/Digimon/ST16_04_P0.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "BT3_084@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_084.cs",
+      "sourceEffectClassName": "BT3_084",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_084.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_084.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-084#717@base",
+          "cardId": "BT3-084",
+          "cardIndex": 717,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_084.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_086@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_086.cs",
+      "sourceEffectClassName": "BT3_086",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_086.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_086.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-086#719@base",
+          "cardId": "BT3-086",
+          "cardIndex": 719,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_086.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_087@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_087.cs",
+      "sourceEffectClassName": "BT3_087",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_087.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_087.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CardEffectHashtable",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-087#720@base",
+          "cardId": "BT3-087",
+          "cardIndex": 720,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_087.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_088@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_088.cs",
+      "sourceEffectClassName": "BT3_088",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_088.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_088.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnUseOption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenOwnerUseOption",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-088#721@base",
+          "cardId": "BT3-088",
+          "cardIndex": 721,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_088.asset"
+        },
+        {
+          "definitionStableId": "BT3-088#722@P1",
+          "cardId": "BT3-088",
+          "cardIndex": 722,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_088_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-088#8485@P2",
+          "cardId": "BT3-088",
+          "cardIndex": 8485,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_088_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-088#8486@P3",
+          "cardId": "BT3-088",
+          "cardIndex": 8486,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_088_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "BT3_090@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_090.cs",
+      "sourceEffectClassName": "BT3_090",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_090.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_090.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-090#724@base",
+          "cardId": "BT3-090",
+          "cardIndex": 724,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_090.asset"
+        },
+        {
+          "definitionStableId": "BT3-090#725@P1",
+          "cardId": "BT3-090",
+          "cardIndex": 725,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_090_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_091@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_091.cs",
+      "sourceEffectClassName": "BT3_091",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_091.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_091.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnUseOption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenOwnerUseOption",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasNoElement",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-091#726@base",
+          "cardId": "BT3-091",
+          "cardIndex": 726,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091.asset"
+        },
+        {
+          "definitionStableId": "BT3-091#727@P1",
+          "cardId": "BT3-091",
+          "cardIndex": 727,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-091#728@P2",
+          "cardId": "BT3-091",
+          "cardIndex": 728,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-091#729@P3",
+          "cardId": "BT3-091",
+          "cardIndex": 729,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091_P3.asset"
+        },
+        {
+          "definitionStableId": "BT3-091#730@P4",
+          "cardId": "BT3-091",
+          "cardIndex": 730,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091_P4.asset"
+        },
+        {
+          "definitionStableId": "BT3-091#8487@P5",
+          "cardId": "BT3-091",
+          "cardIndex": 8487,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_091_P5.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "BT3_092@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_092.cs",
+      "sourceEffectClassName": "BT3_092",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_092.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_092.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnDetermineDoSecurityCheck"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentDeleted",
+        "GetHashtablesFromHashtable",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-092#731@base",
+          "cardId": "BT3-092",
+          "cardIndex": 731,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_092.asset"
+        },
+        {
+          "definitionStableId": "BT3-092#8488@P1",
+          "cardId": "BT3-092",
+          "cardIndex": 8488,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_092_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_093@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_093.cs",
+      "sourceEffectClassName": "BT3_093",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_093.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_093.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect",
+        "SetMemoryTo3TamerEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetMemoryTo3TamerEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-093#732@base",
+          "cardId": "BT3-093",
+          "cardIndex": 732,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Tamer/BT3_093.asset"
+        },
+        {
+          "definitionStableId": "BT3-093#733@P1",
+          "cardId": "BT3-093",
+          "cardIndex": 733,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Tamer/BT3_093_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-093#8489@P2",
+          "cardId": "BT3-093",
+          "cardIndex": 8489,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Tamer/BT3_093_P2.asset"
+        },
+        {
+          "definitionStableId": "BT3-093#8490@P3",
+          "cardId": "BT3-093",
+          "cardIndex": 8490,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Tamer/BT3_093_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "BT3_094@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_094.cs",
+      "sourceEffectClassName": "BT3_094",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_094.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_094.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndBattle",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect",
+        "SetMemoryTo3TamerEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerPermanent",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetMemoryTo3TamerEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-094#734@base",
+          "cardId": "BT3-094",
+          "cardIndex": 734,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Tamer/BT3_094.asset"
+        },
+        {
+          "definitionStableId": "BT3-094#735@P1",
+          "cardId": "BT3-094",
+          "cardIndex": 735,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Tamer/BT3_094_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_095@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_095.cs",
+      "sourceEffectClassName": "BT3_095",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_095.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_095.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-095#736@base",
+          "cardId": "BT3-095",
+          "cardIndex": 736,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Tamer/BT3_095.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_096@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_096.cs",
+      "sourceEffectClassName": "BT3_096",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_096.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_096.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnUseOption",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenUseOption",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-096#737@base",
+          "cardId": "BT3-096",
+          "cardIndex": 737,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Tamer/BT3_096.asset"
+        },
+        {
+          "definitionStableId": "BT3-096#8491@P1",
+          "cardId": "BT3-096",
+          "cardIndex": 8491,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Tamer/BT3_096_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_097@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_097.cs",
+      "sourceEffectClassName": "BT3_097",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_097.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_097.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DisableEffectClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpDisableEffectClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-097#738@base",
+          "cardId": "BT3-097",
+          "cardIndex": 738,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Option/BT3_097.asset"
+        },
+        {
+          "definitionStableId": "BT3-097#6772@P1",
+          "cardId": "BT3-097",
+          "cardIndex": 6772,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Option/BT3_097_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_098@DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_098.cs",
+      "sourceEffectClassName": "BT3_098",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Red/BT3_098.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Red/BT3_098.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-098#739@base",
+          "cardId": "BT3-098",
+          "cardIndex": 739,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Red/Option/BT3_098.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_099@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_099.cs",
+      "sourceEffectClassName": "BT3_099",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_099.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_099.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "GainCanNotBeDeletedPlayerEffect",
+        "IsPermanentExistsOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-099#740@base",
+          "cardId": "BT3-099",
+          "cardIndex": 740,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Option/BT3_099.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_100@DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_100.cs",
+      "sourceEffectClassName": "BT3_100",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Blue/BT3_100.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Blue/BT3_100.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectCount",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-100#741@base",
+          "cardId": "BT3-100",
+          "cardIndex": 741,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Option/BT3_100.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_101@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_101.cs",
+      "sourceEffectClassName": "BT3_101",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_101.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_101.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-101#742@base",
+          "cardId": "BT3-101",
+          "cardIndex": 742,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Option/BT3_101.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_102@DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_102.cs",
+      "sourceEffectClassName": "BT3_102",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Yellow/BT3_102.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Yellow/BT3_102.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectBoolean",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-102#743@base",
+          "cardId": "BT3-102",
+          "cardIndex": 743,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Yellow/Option/BT3_102.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_103@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+      "sourceEffectClassName": "BT3_103",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_103.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "AfterPayCost",
+        "BeforePayCost",
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "background": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddEffectToPlayer",
+        "AddThisCardToHand",
+        "CanActivateSuspendCostEffect",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "CanTriggerWhenPermanentWouldDigivolve",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetIsBackgroundProcess",
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-103#744@base",
+          "cardId": "BT3-103",
+          "cardIndex": 744,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103.asset"
+        },
+        {
+          "definitionStableId": "BT3-103#745@P1",
+          "cardId": "BT3-103",
+          "cardIndex": 745,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-103#8492@P2",
+          "cardId": "BT3-103",
+          "cardIndex": 8492,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_104@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_104.cs",
+      "sourceEffectClassName": "BT3_104",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_104.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_104.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "GainCanNotAttack",
+        "GainCanNotBlock",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-104#746@base",
+          "cardId": "BT3-104",
+          "cardIndex": 746,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_104.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_105@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_105.cs",
+      "sourceEffectClassName": "BT3_105",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_105.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_105.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "GainCanNotAttackPlayerEffect",
+        "GainCanNotReturnToDeck",
+        "GainCanNotReturnToHand",
+        "GainImmuneFromDPMinus",
+        "GainReboot",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-105#747@base",
+          "cardId": "BT3-105",
+          "cardIndex": 747,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Option/BT3_105.asset"
+        },
+        {
+          "definitionStableId": "BT3-105#8493@P1",
+          "cardId": "BT3-105",
+          "cardIndex": 8493,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Option/BT3_105_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "BT3_106@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_106.cs",
+      "sourceEffectClassName": "BT3_106",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_106.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_106.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "ChangeDigimonSAttackPlayerEffect",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-106#748@base",
+          "cardId": "BT3-106",
+          "cardIndex": 748,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Option/BT3_106.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_107@DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_107.cs",
+      "sourceEffectClassName": "BT3_107",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Black/BT3_107.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Black/BT3_107.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "CardEffectHashtable",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-107#749@base",
+          "cardId": "BT3-107",
+          "cardIndex": 749,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Option/BT3_107.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_108@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_108.cs",
+      "sourceEffectClassName": "BT3_108",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_108.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_108.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "GainRetaliation",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-108#750@base",
+          "cardId": "BT3-108",
+          "cardIndex": 750,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Option/BT3_108.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_109@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_109.cs",
+      "sourceEffectClassName": "BT3_109",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_109.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_109.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OptionSkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddEffectToPermanent",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerOptionMainEffect",
+        "GetTopCardFromEffectHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "IsTopCardInTrashOnDeletion",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetEffectSourcePermanent",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-109#751@base",
+          "cardId": "BT3-109",
+          "cardIndex": 751,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Option/BT3_109.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_110@DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_110.cs",
+      "sourceEffectClassName": "BT3_110",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_110.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Purple/BT3_110.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionOwnersCardInTrash",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-110#752@base",
+          "cardId": "BT3-110",
+          "cardIndex": 752,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Option/BT3_110.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "BT3_111@DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_111.cs",
+      "sourceEffectClassName": "BT3_111",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_111.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/Green/BT3_111.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDetermineDoSecurityCheck",
+        "OnEndBattle"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDigivolutionCostStaticEffect",
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-111#753@base",
+          "cardId": "BT3-111",
+          "cardIndex": 753,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_111.asset"
+        },
+        {
+          "definitionStableId": "BT3-111#754@P1",
+          "cardId": "BT3-111",
+          "cardIndex": 754,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_111_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-111#755@P2",
+          "cardId": "BT3-111",
+          "cardIndex": 755,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_111_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "BT3_112@DCGO/Assets/Scripts/CardEffect/BT3/White/BT3_112.cs",
+      "sourceEffectClassName": "BT3_112",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/White/BT3_112.cs",
+      "sourceSetId": "BT3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/BT3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/BT3/White/BT3_112.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "GainCanNotBeBlocked",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT3-112#756@base",
+          "cardId": "BT3-112",
+          "cardIndex": 756,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/White/Digimon/BT3_112.asset"
+        },
+        {
+          "definitionStableId": "BT3-112#757@P1",
+          "cardId": "BT3-112",
+          "cardIndex": 757,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/White/Digimon/BT3_112_P1.asset"
+        },
+        {
+          "definitionStableId": "BT3-112#758@P2",
+          "cardId": "BT3-112",
+          "cardIndex": 758,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT3/White/Digimon/BT3_112_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    }
+  ]
+}

@@ -108,6 +108,23 @@ counter candidate selection id는 session-local identity로 만든다.
 
 따라서 같은 ACE 카드 두 장이 hand에 있어도 각각 선택할 수 있고, replay trace에도 선택된 source instance가 보존된다.
 
+## 55D Counter Execution Persistence
+
+`TriggerPipelineResult.ExecutedEffects`는 `TriggerPipelineService.RunPrepared()` 또는 `Resume()` 한 번의 반환 segment 안에서만 누적된다. counter body 실행 뒤 `RulesTiming` 또는 `AfterEffectsActivate`가 decision으로 다시 pause되면, 다음 `Resume()` 결과의 `ExecutedEffects`에는 이전 segment에서 실행된 counter effect가 포함되지 않을 수 있다.
+
+따라서 counter 사용 여부는 마지막 pipeline segment의 `ExecutedEffects`만으로 판단하지 않는다. RL.Engine은 counter 후보 선택 시점에는 `CounterUsed=false`를 유지하고, 실제 counter body가 실행되어 해당 segment의 `ExecutedEffects.Any(effect => effect.IsCounterEffect)`가 확인되는 즉시 `AttackRuntimeContext.MarkCounterUsed()`를 호출해 `GameState.RuntimeRules.Attack`에 persistent하게 기록한다.
+
+이 기록은 다음 상황에서 모두 유지된다.
+
+- counter 선택 직후: `CounterUsed=false`
+- optional yes/no 전: `CounterUsed=false`
+- optional no 또는 `CanActivate` 재검증 실패: `CounterUsed=false`
+- target selection 전: `CounterUsed=false`
+- counter body 실행 직후: `CounterUsed=true`
+- counter body 이후 nested `RulesTiming`/`AfterEffectsActivate` decision pause/resume: `CounterUsed=true`
+
+`CompleteCounterEffectWithResult()`는 현재 resume segment의 `ExecutedEffects`와 이미 persisted된 `AttackRuntimeContext.CounterUsed`를 함께 확인한다. 이미 counter가 사용된 상태라면 같은 counter window의 남은 후보와 non-turn player group을 제시하지 않고 block designation으로 진행한다.
+
 ## Target Switch Event Payload
 
 `AttackTargetSwitch`는 각 전환 당시 다음 payload를 보존한다.
@@ -119,6 +136,28 @@ counter candidate selection id는 session-local identity로 만든다.
 - `SourceEffectStableId`
 
 `OnAttackTargetChanged`의 `Defender`, `Blocker`, `IsBlocking` payload는 최종 `AttackRuntimeContext`가 아니라 해당 event snapshot을 사용한다. 예를 들어 A -> B -> C 전환에서는 첫 trigger에 `Defender=B`, 두 번째 trigger에 `Defender=C`가 전달된다. non-block target switch에서는 `Blocker=null`을 유지한다.
+
+## 55D Target Switch Stage Resume
+
+target switch drain은 `OnAttackTargetChanged`를 실행한 뒤 항상 switch가 발생한 원래 intended stage로 복귀해야 한다. 단일 `ContinueAfterAttackTargetChangedToBlockDesignation`으로 평탄화하면 `OnAllyAttack` 또는 non-counter timing에서 발생한 target switch가 counter stage를 건너뛰는 문제가 생긴다.
+
+현재 stage mapping은 다음과 같다.
+
+| switch 발생 위치 | `OnAttackTargetChanged` drain 뒤 복귀 |
+| --- | --- |
+| `OnAllyAttack` 이후 | `RunCounterNonCounterWithResult` |
+| non-counter `OnCounterTiming` 이후 | `RunCounterCounterWithResult` |
+| 실제 counter window 이후 | `RunBlockDesignationWithResult` |
+| `OnBlockAnyone` 이후 | `ResolveBattleWithResult` |
+
+이를 위해 attack continuation은 다음 네 경로를 구분한다.
+
+- `ContinueAfterAttackTargetChangedToCounterNonCounter`
+- `ContinueAfterAttackTargetChangedToCounterCounter`
+- `ContinueAfterAttackTargetChangedToBlockDesignation`
+- `ContinueAfterAttackTargetChangedToBattle`
+
+한 effect batch에서 A -> B -> C target switch가 발생하면 `TargetSwitchQueue`의 각 event를 순서대로 drain하고, 모든 `OnAttackTargetChanged` frame이 끝난 뒤에만 원래 intended stage로 한 번 복귀한다. 이 보정은 target switch event snapshot payload와 non-block switch `Blocker=null` 의미를 변경하지 않는다.
 
 ## Target Revalidation
 

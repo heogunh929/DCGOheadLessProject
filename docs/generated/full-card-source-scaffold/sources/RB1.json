@@ -1,0 +1,2068 @@
+{
+  "schemaVersion": 1,
+  "setId": "RB1",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "RB1_002@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_002.cs",
+      "sourceEffectClassName": "RB1_002",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_002.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_002.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-002#2863@base",
+          "cardId": "RB1-002",
+          "cardIndex": 2863,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/DigiEgg/RB1_002.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_003@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_003.cs",
+      "sourceEffectClassName": "RB1_003",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_003.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_003.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-003#2864@base",
+          "cardId": "RB1-003",
+          "cardIndex": 2864,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/DigiEgg/RB1_003.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_005@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_005.cs",
+      "sourceEffectClassName": "RB1_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_005.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_005.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-005#2866@base",
+          "cardId": "RB1-005",
+          "cardIndex": 2866,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_005.asset"
+        },
+        {
+          "definitionStableId": "RB1-005#2867@P1",
+          "cardId": "RB1-005",
+          "cardIndex": 2867,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_005_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_008@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_008.cs",
+      "sourceEffectClassName": "RB1_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_008.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_008.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "RaidSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-008#2870@base",
+          "cardId": "RB1-008",
+          "cardIndex": 2870,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_008.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_009@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_009.cs",
+      "sourceEffectClassName": "RB1_009",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_009.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_009.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea"
+      ],
+      "classApi": [
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUpAddSkillClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-009#2871@base",
+          "cardId": "RB1-009",
+          "cardIndex": 2871,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_009.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_010@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_010.cs",
+      "sourceEffectClassName": "RB1_010",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_010.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_010.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerWhenDigivolving",
+        "CanUnsuspend",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-010#2872@base",
+          "cardId": "RB1-010",
+          "cardIndex": 2872,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_010.asset"
+        },
+        {
+          "definitionStableId": "RB1-010#2873@P1",
+          "cardId": "RB1-010",
+          "cardIndex": 2873,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_010_P1.asset"
+        },
+        {
+          "definitionStableId": "RB1-010#2874@P2",
+          "cardId": "RB1-010",
+          "cardIndex": 2874,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_010_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "RB1_011@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_011.cs",
+      "sourceEffectClassName": "RB1_011",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_011.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_011.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDiscardHand",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerOnTrashHand",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-011#2875@base",
+          "cardId": "RB1-011",
+          "cardIndex": 2875,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_011.asset"
+        },
+        {
+          "definitionStableId": "RB1-011#2876@P1",
+          "cardId": "RB1-011",
+          "cardIndex": 2876,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_011_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_012@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_012.cs",
+      "sourceEffectClassName": "RB1_012",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_012.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_012.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "EvadeSelfEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-012#2877@base",
+          "cardId": "RB1-012",
+          "cardIndex": 2877,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_012.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_013@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_013.cs",
+      "sourceEffectClassName": "RB1_013",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_013.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_013.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDiscardHand",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnTrashHand",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-013#2878@base",
+          "cardId": "RB1-013",
+          "cardIndex": 2878,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_013.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_014@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_014.cs",
+      "sourceEffectClassName": "RB1_014",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_014.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_014.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectOrder"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSuspendClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotSuspendClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-014#2879@base",
+          "cardId": "RB1-014",
+          "cardIndex": 2879,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_014.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_015@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_015.cs",
+      "sourceEffectClassName": "RB1_015",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_015.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_015.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "GainCanNotAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddSkillClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-015#2880@base",
+          "cardId": "RB1-015",
+          "cardIndex": 2880,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_015.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_016@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_016.cs",
+      "sourceEffectClassName": "RB1_016",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_016.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_016.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectOrder"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentRemoveField",
+        "GetPermanentsFromHashtable",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-016#2881@base",
+          "cardId": "RB1-016",
+          "cardIndex": 2881,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_016.asset"
+        },
+        {
+          "definitionStableId": "RB1-016#2882@P1",
+          "cardId": "RB1-016",
+          "cardIndex": 2882,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Digimon/RB1_016_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_017@DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_017.cs",
+      "sourceEffectClassName": "RB1_017",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_017.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Yellow/RB1_017.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-017#2883@base",
+          "cardId": "RB1-017",
+          "cardIndex": 2883,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Yellow/Digimon/RB1_017.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_018@DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_018.cs",
+      "sourceEffectClassName": "RB1_018",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_018.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Yellow/RB1_018.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-018#2884@base",
+          "cardId": "RB1-018",
+          "cardIndex": 2884,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Yellow/Digimon/RB1_018.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_019@DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_019.cs",
+      "sourceEffectClassName": "RB1_019",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Yellow/RB1_019.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Yellow/RB1_019.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectOrder",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "ChangeDigimonDPPlayerEffect",
+        "ChangeDigimonSAttackPlayerEffect",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeBaseDPClass"
+      ],
+      "setMethods": [
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpSkillInfos"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-019#2885@base",
+          "cardId": "RB1-019",
+          "cardIndex": 2885,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Yellow/Digimon/RB1_019.asset"
+        },
+        {
+          "definitionStableId": "RB1-019#2886@P1",
+          "cardId": "RB1-019",
+          "cardIndex": 2886,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Yellow/Digimon/RB1_019_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_020@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_020.cs",
+      "sourceEffectClassName": "RB1_020",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_020.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_020.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-020#2887@base",
+          "cardId": "RB1-020",
+          "cardIndex": 2887,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_020.asset"
+        },
+        {
+          "definitionStableId": "RB1-020#2888@P1",
+          "cardId": "RB1-020",
+          "cardIndex": 2888,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_020_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_021@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_021.cs",
+      "sourceEffectClassName": "RB1_021",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_021.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_021.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-021#2889@base",
+          "cardId": "RB1-021",
+          "cardIndex": 2889,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_021.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_022@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_022.cs",
+      "sourceEffectClassName": "RB1_022",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_022.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_022.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-022#2890@base",
+          "cardId": "RB1-022",
+          "cardIndex": 2890,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_022.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_023@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_023.cs",
+      "sourceEffectClassName": "RB1_023",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_023.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_023.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "GainCantUnsuspendUntilOpponentTurnEnd",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddSkillClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-023#2891@base",
+          "cardId": "RB1-023",
+          "cardIndex": 2891,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_023.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_024@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_024.cs",
+      "sourceEffectClassName": "RB1_024",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_024.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_024.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndBattle",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "CanTriggerWhenDigivolving",
+        "GainPierce",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-024#2892@base",
+          "cardId": "RB1-024",
+          "cardIndex": 2892,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_024.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_025@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_025.cs",
+      "sourceEffectClassName": "RB1_025",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_025.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_025.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEndTurn",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectAttackTarget"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOpponentsPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-025#2893@base",
+          "cardId": "RB1-025",
+          "cardIndex": 2893,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_025.asset"
+        },
+        {
+          "definitionStableId": "RB1-025#2894@P1",
+          "cardId": "RB1-025",
+          "cardIndex": 2894,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Digimon/RB1_025_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_026@DCGO/Assets/Scripts/CardEffect/RB1/Black/RB1_026.cs",
+      "sourceEffectClassName": "RB1_026",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Black/RB1_026.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Black/RB1_026.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionPermanent",
+        "IsOpponentTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-026#2895@base",
+          "cardId": "RB1-026",
+          "cardIndex": 2895,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Black/Digimon/RB1_026.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_027@DCGO/Assets/Scripts/CardEffect/RB1/Black/RB1_027.cs",
+      "sourceEffectClassName": "RB1_027",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Black/RB1_027.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Black/RB1_027.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectBoolean",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "CanNotBeDestroyedBySkillStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentEffect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetBoolSelection",
+        "SetReverse",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-027#2896@base",
+          "cardId": "RB1-027",
+          "cardIndex": 2896,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Black/Digimon/RB1_027.asset"
+        },
+        {
+          "definitionStableId": "RB1-027#2897@P1",
+          "cardId": "RB1-027",
+          "cardIndex": 2897,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Black/Digimon/RB1_027_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_028@DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_028.cs",
+      "sourceEffectClassName": "RB1_028",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_028.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Purple/RB1_028.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfDigimonAfterBattleSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-028#2898@base",
+          "cardId": "RB1-028",
+          "cardIndex": 2898,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Purple/Digimon/RB1_028.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_029@DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_029.cs",
+      "sourceEffectClassName": "RB1_029",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_029.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Purple/RB1_029.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEndAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnDeletion",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-029#2899@base",
+          "cardId": "RB1-029",
+          "cardIndex": 2899,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Purple/Digimon/RB1_029.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_030@DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_030.cs",
+      "sourceEffectClassName": "RB1_030",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_030.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Purple/RB1_030.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "AddEffectToPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsMinLevel",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "IsTopCardInTrashOnDeletion",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetEffectSourcePermanent",
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddSkillClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-030#2900@base",
+          "cardId": "RB1-030",
+          "cardIndex": 2900,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Purple/Digimon/RB1_030.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_031@DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_031.cs",
+      "sourceEffectClassName": "RB1_031",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Purple/RB1_031.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Purple/RB1_031.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-031#2901@base",
+          "cardId": "RB1-031",
+          "cardIndex": 2901,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Purple/Digimon/RB1_031.asset"
+        },
+        {
+          "definitionStableId": "RB1-031#2902@P1",
+          "cardId": "RB1-031",
+          "cardIndex": 2902,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Purple/Digimon/RB1_031_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_032@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_032.cs",
+      "sourceEffectClassName": "RB1_032",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_032.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_032.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnStartMainPhase",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentDigivolving",
+        "CardEffectHashtable",
+        "ChangeDigimonDP",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-032#2903@base",
+          "cardId": "RB1-032",
+          "cardIndex": 2903,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Tamer/RB1_032.asset"
+        },
+        {
+          "definitionStableId": "RB1-032#2904@P1",
+          "cardId": "RB1-032",
+          "cardIndex": 2904,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Tamer/RB1_032_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_033@DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_033.cs",
+      "sourceEffectClassName": "RB1_033",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Blue/RB1_033.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Blue/RB1_033.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnUnTappedAnyone",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerOnPermanentAttack",
+        "CanTriggerWhenPermanentUnsuspends",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-033#2905@base",
+          "cardId": "RB1-033",
+          "cardIndex": 2905,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Tamer/RB1_033.asset"
+        },
+        {
+          "definitionStableId": "RB1-033#2906@P1",
+          "cardId": "RB1-033",
+          "cardIndex": 2906,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Blue/Tamer/RB1_033_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_034@DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_034.cs",
+      "sourceEffectClassName": "RB1_034",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Green/RB1_034.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Green/RB1_034.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "OnEndTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentWouldDigivolve",
+        "CardEffectHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-034#2907@base",
+          "cardId": "RB1-034",
+          "cardIndex": 2907,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Tamer/RB1_034.asset"
+        },
+        {
+          "definitionStableId": "RB1-034#2908@P1",
+          "cardId": "RB1-034",
+          "cardIndex": 2908,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Green/Tamer/RB1_034_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "RB1_035@DCGO/Assets/Scripts/CardEffect/RB1/White/RB1_035.cs",
+      "sourceEffectClassName": "RB1_035",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/White/RB1_035.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/White/RB1_035.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerOnPermanentPlay",
+        "CardEffectHashtable",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-035#2909@base",
+          "cardId": "RB1-035",
+          "cardIndex": 2909,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/White/Tamer/RB1_035.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "RB1_036@DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_036.cs",
+      "sourceEffectClassName": "RB1_036",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/RB1/Red/RB1_036.cs",
+      "sourceSetId": "RB1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/RB1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/RB1/Red/RB1_036.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEndTurn"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentDeleted",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "RB1-036#2910@base",
+          "cardId": "RB1-036",
+          "cardIndex": 2910,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_036.asset"
+        },
+        {
+          "definitionStableId": "RB1-036#2911@P1",
+          "cardId": "RB1-036",
+          "cardIndex": 2911,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/RB1/Red/Digimon/RB1_036_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    }
+  ]
+}

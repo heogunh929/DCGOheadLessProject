@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "dcgo.engine-core-expansion-readiness.60A.v1",
+  "targetName": "DCGO full-card-pool inventory readiness",
+  "decision": "ReadyForFullCardPoolInventory",
+  "readyForFullCardPoolInventory": true,
+  "readyForRlEnvironmentDesign": false,
+  "recommendedNextQueue": "61_dcgo_source_snapshot_pin, or skip to next unfinished queue if source snapshot is already approved.",
+  "scope": "60A only reviews readiness for full DCGO snapshot inventory. It is not a full snapshot completion gate and not RL environment approval.",
+  "evidence": [
+    {
+      "id": "full-regression",
+      "category": "CoreParity",
+      "status": "Passed",
+      "details": "All regression tests pass for the current engine-core surface."
+    },
+    {
+      "id": "engine-core-gate",
+      "category": "CoreParity",
+      "status": "Passed",
+      "details": "59A engine-core gate has no core parity blocker."
+    },
+    {
+      "id": "multiple-deterministic-seeds",
+      "category": "Determinism",
+      "status": "Passed",
+      "details": "Game setup and replay determinism tests cover repeated deterministic seeds."
+    },
+    {
+      "id": "random-legal-action-smoke",
+      "category": "RandomLegalActionSmoke",
+      "status": "Passed",
+      "details": "RandomLegalActionRunner smoke, max action, continuation, and invariant tests pass."
+    },
+    {
+      "id": "decision-pause-resume-smoke",
+      "category": "RuntimeDecisionBoundary",
+      "status": "Passed",
+      "details": "EngineSession and runner pause/resume tests cover chained decisions and DecisionToken validation."
+    },
+    {
+      "id": "golden-scenario-batch1",
+      "category": "GoldenScenario",
+      "status": "Passed",
+      "details": "Golden scenario batch 1 replay scenarios pass."
+    },
+    {
+      "id": "trace-export-compare-synthetic-fixture",
+      "category": "TraceParity",
+      "status": "Passed",
+      "details": "ParityTrace export and synthetic ParityFixtureComparer tests pass; missing Unity fixture remains NotRun."
+    },
+    {
+      "id": "invariant-fuzz",
+      "category": "RandomLegalActionSmoke",
+      "status": "Passed",
+      "details": "Invariant fuzz and failure-capture tests pass."
+    },
+    {
+      "id": "source-mapping-audit",
+      "category": "SourceAlignment",
+      "status": "Passed",
+      "details": "AssetRegistryMapping audit preserves ST3-02 needs-review without blocking inventory."
+    },
+    {
+      "id": "runtime-composition-audit",
+      "category": "RuntimeComposition",
+      "status": "Passed",
+      "details": "BattleEngineServices graph validation passes."
+    },
+    {
+      "id": "unity-source-unchanged",
+      "category": "SourceAlignment",
+      "status": "Passed",
+      "details": "DCGO/Assets/Scripts remains unchanged."
+    }
+  ],
+  "carryForwardFindings": [
+    {
+      "id": "ST3-02-P2-source-body-unconfirmed",
+      "status": "NeedsReview",
+      "details": "ST3-02 base/P1 remain NoEffect candidates, but P2 has CardEffectClassName ST3_02 without source body. Do not guess implementation.",
+      "blocksFullCardPoolInventory": false,
+      "blocksVariantImplementation": true,
+      "blocksRlEnvironmentDesign": true
+    }
+  ],
+  "currentWorkspaceNote": "Source snapshot pin, full asset manifest, and mechanic inventory are already present in this worktree from queues 61, 62, and 63. 60A does not re-run or reinterpret them as RL readiness."
+}

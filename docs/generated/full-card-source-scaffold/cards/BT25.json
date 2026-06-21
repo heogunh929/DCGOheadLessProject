@@ -1,0 +1,3018 @@
+{
+  "schemaVersion": 1,
+  "setId": "BT25",
+  "recordKind": "card-variant-mapping",
+  "records": [
+    {
+      "definitionStableId": "BT25-001#7963@base",
+      "cardId": "BT25-001",
+      "cardIndex": 7963,
+      "variantKey": "base",
+      "assetName": "BT25_001",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/DigiEgg/BT25_001.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_001",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_001.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_001@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_001.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-002#7964@base",
+      "cardId": "BT25-002",
+      "cardIndex": 7964,
+      "variantKey": "base",
+      "assetName": "BT25_002",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/DigiEgg/BT25_002.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_002",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_002.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_002.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_002@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_002.cs",
+        "BT25_002@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_002.cs"
+      ],
+      "mappingStatus": "NeedsSourceReview",
+      "statusReason": "CardEffectClassName resolves to multiple source bodies; manual source review is required.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-003#7965@base",
+      "cardId": "BT25-003",
+      "cardIndex": 7965,
+      "variantKey": "base",
+      "assetName": "BT25_003",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/DigiEgg/BT25_003.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_003",
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NeedsSourceReview",
+      "statusReason": "CardEffectClassName exists but no matching source body was found.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-004#7966@base",
+      "cardId": "BT25-004",
+      "cardIndex": 7966,
+      "variantKey": "base",
+      "assetName": "BT25_004",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/DigiEgg/BT25_004.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_004",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_004@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-005#7967@base",
+      "cardId": "BT25-005",
+      "cardIndex": 7967,
+      "variantKey": "base",
+      "assetName": "BT25_005",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/DigiEgg/BT25_005.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_005",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_005.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_005@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_005.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-006#7968@base",
+      "cardId": "BT25-006",
+      "cardIndex": 7968,
+      "variantKey": "base",
+      "assetName": "BT25_006",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/DigiEgg/BT25_006.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT25_006",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_006.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_006@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_006.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-007#7969@base",
+      "cardId": "BT25-007",
+      "cardIndex": 7969,
+      "variantKey": "base",
+      "assetName": "BT25_007",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_007.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_007",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_007.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_007@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_007.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-008#7970@base",
+      "cardId": "BT25-008",
+      "cardIndex": 7970,
+      "variantKey": "base",
+      "assetName": "BT25_008",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_008.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_008",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_008.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_008@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_008.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-009#7971@base",
+      "cardId": "BT25-009",
+      "cardIndex": 7971,
+      "variantKey": "base",
+      "assetName": "BT25_009",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_009.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_009",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_009.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_009@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_009.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-010#7972@base",
+      "cardId": "BT25-010",
+      "cardIndex": 7972,
+      "variantKey": "base",
+      "assetName": "BT25_010",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_010.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_010",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_010.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_010@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_010.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-011#7973@base",
+      "cardId": "BT25-011",
+      "cardIndex": 7973,
+      "variantKey": "base",
+      "assetName": "BT25_011",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_011.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_011@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-012#7974@base",
+      "cardId": "BT25-012",
+      "cardIndex": 7974,
+      "variantKey": "base",
+      "assetName": "BT25_012",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_012.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_012",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_012.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_012@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_012.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-013#7975@base",
+      "cardId": "BT25-013",
+      "cardIndex": 7975,
+      "variantKey": "base",
+      "assetName": "BT25_013",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_013.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_013",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_013.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_013@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_013.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-014#7976@base",
+      "cardId": "BT25-014",
+      "cardIndex": 7976,
+      "variantKey": "base",
+      "assetName": "BT25_014",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_014.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_014",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_014.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_014@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_014.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-015#7977@base",
+      "cardId": "BT25-015",
+      "cardIndex": 7977,
+      "variantKey": "base",
+      "assetName": "BT25_015",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_015.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_015",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_015.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_015@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_015.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-016#7978@base",
+      "cardId": "BT25-016",
+      "cardIndex": 7978,
+      "variantKey": "base",
+      "assetName": "BT25_016",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_016.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_016",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_016.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_016@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_016.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-017#7979@base",
+      "cardId": "BT25-017",
+      "cardIndex": 7979,
+      "variantKey": "base",
+      "assetName": "BT25_017",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_017.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_017",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_017.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_017@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_017.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-018#7980@base",
+      "cardId": "BT25-018",
+      "cardIndex": 7980,
+      "variantKey": "base",
+      "assetName": "BT25_018",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_018.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_018@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-018#7981@P1",
+      "cardId": "BT25-018",
+      "cardIndex": 7981,
+      "variantKey": "P1",
+      "assetName": "BT25_018_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_018_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_018@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-019#7982@base",
+      "cardId": "BT25-019",
+      "cardIndex": 7982,
+      "variantKey": "base",
+      "assetName": "BT25_019",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_019.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_019",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_019.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_019@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_019.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-020#7983@base",
+      "cardId": "BT25-020",
+      "cardIndex": 7983,
+      "variantKey": "base",
+      "assetName": "BT25_020",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_020.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_020",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_020.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_020@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_020.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-020#7984@P1",
+      "cardId": "BT25-020",
+      "cardIndex": 7984,
+      "variantKey": "P1",
+      "assetName": "BT25_020_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_020_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_020",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_020.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_020@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_020.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-021#7985@base",
+      "cardId": "BT25-021",
+      "cardIndex": 7985,
+      "variantKey": "base",
+      "assetName": "BT25_021",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_021.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_021",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_021.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_021@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_021.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-022#7986@base",
+      "cardId": "BT25-022",
+      "cardIndex": 7986,
+      "variantKey": "base",
+      "assetName": "BT25_022",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_022.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_022",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_022.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_022@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_022.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-023#7987@base",
+      "cardId": "BT25-023",
+      "cardIndex": 7987,
+      "variantKey": "base",
+      "assetName": "BT25_023",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_023.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_023",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_023.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_023@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_023.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-024#7988@base",
+      "cardId": "BT25-024",
+      "cardIndex": 7988,
+      "variantKey": "base",
+      "assetName": "BT25_024",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_024.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_024",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_024.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_024@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_024.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-025#7989@base",
+      "cardId": "BT25-025",
+      "cardIndex": 7989,
+      "variantKey": "base",
+      "assetName": "BT25_025",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_025.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_025",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_025.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_025@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_025.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-026#7990@base",
+      "cardId": "BT25-026",
+      "cardIndex": 7990,
+      "variantKey": "base",
+      "assetName": "BT25_026",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_026.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_026",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_026.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_026@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_026.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-027#7991@base",
+      "cardId": "BT25-027",
+      "cardIndex": 7991,
+      "variantKey": "base",
+      "assetName": "BT25_027",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_027.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_027@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-028#7992@base",
+      "cardId": "BT25-028",
+      "cardIndex": 7992,
+      "variantKey": "base",
+      "assetName": "BT25_028",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_028.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_028",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_028.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_028@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_028.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-028#7993@P1",
+      "cardId": "BT25-028",
+      "cardIndex": 7993,
+      "variantKey": "P1",
+      "assetName": "BT25_028_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_028_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_028",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_028.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_028@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_028.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-029#7994@base",
+      "cardId": "BT25-029",
+      "cardIndex": 7994,
+      "variantKey": "base",
+      "assetName": "BT25_029",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_029.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_029",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_029.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_029@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_029.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-029#7995@P1",
+      "cardId": "BT25-029",
+      "cardIndex": 7995,
+      "variantKey": "P1",
+      "assetName": "BT25_029_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Digimon/BT25_029_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_029",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_029.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_029@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_029.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-030#7996@base",
+      "cardId": "BT25-030",
+      "cardIndex": 7996,
+      "variantKey": "base",
+      "assetName": "BT25_030",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_030.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_030",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_030.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_030@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_030.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-031#7997@base",
+      "cardId": "BT25-031",
+      "cardIndex": 7997,
+      "variantKey": "base",
+      "assetName": "BT25_031",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_031.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_031",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_031.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_031@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_031.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-032#7998@base",
+      "cardId": "BT25-032",
+      "cardIndex": 7998,
+      "variantKey": "base",
+      "assetName": "BT25_032",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_032.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_032",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_032.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_032@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_032.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-033#7999@base",
+      "cardId": "BT25-033",
+      "cardIndex": 7999,
+      "variantKey": "base",
+      "assetName": "BT25_033",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_033.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_033",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_033.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_033@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_033.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-034#8000@base",
+      "cardId": "BT25-034",
+      "cardIndex": 8000,
+      "variantKey": "base",
+      "assetName": "BT25_034",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_034.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_034",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_034.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_034@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_034.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-035#8001@base",
+      "cardId": "BT25-035",
+      "cardIndex": 8001,
+      "variantKey": "base",
+      "assetName": "BT25_035",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_035.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_035",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_035.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_035@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_035.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-036#8002@base",
+      "cardId": "BT25-036",
+      "cardIndex": 8002,
+      "variantKey": "base",
+      "assetName": "BT25_036",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_036.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_036",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_036.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_036@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_036.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-037#8003@base",
+      "cardId": "BT25-037",
+      "cardIndex": 8003,
+      "variantKey": "base",
+      "assetName": "BT25_037",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_037.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_037@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-038#8004@base",
+      "cardId": "BT25-038",
+      "cardIndex": 8004,
+      "variantKey": "base",
+      "assetName": "BT25_038",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_038.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_038",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_038.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_038@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_038.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-039#8005@base",
+      "cardId": "BT25-039",
+      "cardIndex": 8005,
+      "variantKey": "base",
+      "assetName": "BT25_039",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_039.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_039",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_039.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_039@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_039.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-040#8006@base",
+      "cardId": "BT25-040",
+      "cardIndex": 8006,
+      "variantKey": "base",
+      "assetName": "BT25_040",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_040.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_040",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_040.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_040@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_040.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-041#8007@base",
+      "cardId": "BT25-041",
+      "cardIndex": 8007,
+      "variantKey": "base",
+      "assetName": "BT25_041",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_041.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_041",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_041.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_041@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_041.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-042#8008@base",
+      "cardId": "BT25-042",
+      "cardIndex": 8008,
+      "variantKey": "base",
+      "assetName": "BT25_042",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_042.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_042",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_042.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_042@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_042.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-043#8009@base",
+      "cardId": "BT25-043",
+      "cardIndex": 8009,
+      "variantKey": "base",
+      "assetName": "BT25_043",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_043.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_043@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-043#8010@P1",
+      "cardId": "BT25-043",
+      "cardIndex": 8010,
+      "variantKey": "P1",
+      "assetName": "BT25_043_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_043_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_043@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-043#8011@P2",
+      "cardId": "BT25-043",
+      "cardIndex": 8011,
+      "variantKey": "P2",
+      "assetName": "BT25_043_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_043_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_043@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-044#8012@base",
+      "cardId": "BT25-044",
+      "cardIndex": 8012,
+      "variantKey": "base",
+      "assetName": "BT25_044",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_044.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_044",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_044.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_044@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_044.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-044#8013@P1",
+      "cardId": "BT25-044",
+      "cardIndex": 8013,
+      "variantKey": "P1",
+      "assetName": "BT25_044_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Digimon/BT25_044_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_044",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_044.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_044@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_044.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-045#8014@base",
+      "cardId": "BT25-045",
+      "cardIndex": 8014,
+      "variantKey": "base",
+      "assetName": "BT25_045",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_045.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_045",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_045@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-046#8015@base",
+      "cardId": "BT25-046",
+      "cardIndex": 8015,
+      "variantKey": "base",
+      "assetName": "BT25_046",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_046.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_046",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_046.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_046@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_046.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-047#8016@base",
+      "cardId": "BT25-047",
+      "cardIndex": 8016,
+      "variantKey": "base",
+      "assetName": "BT25_047",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_047.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_047",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_047.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_047@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_047.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-048#8017@base",
+      "cardId": "BT25-048",
+      "cardIndex": 8017,
+      "variantKey": "base",
+      "assetName": "BT25_048",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_048.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_048",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_048.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_048@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_048.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-049#8018@base",
+      "cardId": "BT25-049",
+      "cardIndex": 8018,
+      "variantKey": "base",
+      "assetName": "BT25_049",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_049.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_049",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_049.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_049@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_049.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-050#8019@base",
+      "cardId": "BT25-050",
+      "cardIndex": 8019,
+      "variantKey": "base",
+      "assetName": "BT25_050",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_050.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_050@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-051#8020@base",
+      "cardId": "BT25-051",
+      "cardIndex": 8020,
+      "variantKey": "base",
+      "assetName": "BT25_051",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_051.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_051",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_051.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_051@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_051.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-052#8021@base",
+      "cardId": "BT25-052",
+      "cardIndex": 8021,
+      "variantKey": "base",
+      "assetName": "BT25_052",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_052.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_052@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-053#8022@base",
+      "cardId": "BT25-053",
+      "cardIndex": 8022,
+      "variantKey": "base",
+      "assetName": "BT25_053",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_053.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_053",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_053.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_053@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_053.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-054#8023@base",
+      "cardId": "BT25-054",
+      "cardIndex": 8023,
+      "variantKey": "base",
+      "assetName": "BT25_054",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_054.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_054",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_054.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_054@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_054.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-055#8024@base",
+      "cardId": "BT25-055",
+      "cardIndex": 8024,
+      "variantKey": "base",
+      "assetName": "BT25_055",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_055.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_055",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_055.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_055@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_055.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-056#8025@base",
+      "cardId": "BT25-056",
+      "cardIndex": 8025,
+      "variantKey": "base",
+      "assetName": "BT25_056",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_056.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_056",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_056.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_056@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_056.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-057#8026@base",
+      "cardId": "BT25-057",
+      "cardIndex": 8026,
+      "variantKey": "base",
+      "assetName": "BT25_057",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_057.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_057@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-057#8027@P1",
+      "cardId": "BT25-057",
+      "cardIndex": 8027,
+      "variantKey": "P1",
+      "assetName": "BT25_057_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_057_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_057@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-057#8028@P2",
+      "cardId": "BT25-057",
+      "cardIndex": 8028,
+      "variantKey": "P2",
+      "assetName": "BT25_057_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_057_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_057@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-058#8029@base",
+      "cardId": "BT25-058",
+      "cardIndex": 8029,
+      "variantKey": "base",
+      "assetName": "BT25_058",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_058.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_058",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_058.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_058@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_058.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-059#8030@base",
+      "cardId": "BT25-059",
+      "cardIndex": 8030,
+      "variantKey": "base",
+      "assetName": "BT25_059",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_059.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_059",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_059.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_059@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_059.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-059#8031@P1",
+      "cardId": "BT25-059",
+      "cardIndex": 8031,
+      "variantKey": "P1",
+      "assetName": "BT25_059_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_059_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_059",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_059.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_059@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_059.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-060#8032@base",
+      "cardId": "BT25-060",
+      "cardIndex": 8032,
+      "variantKey": "base",
+      "assetName": "BT25_060",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_060.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_060",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_060.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_060@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_060.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-060#8033@P1",
+      "cardId": "BT25-060",
+      "cardIndex": 8033,
+      "variantKey": "P1",
+      "assetName": "BT25_060_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_060_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_060",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_060.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_060@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_060.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-061#8034@base",
+      "cardId": "BT25-061",
+      "cardIndex": 8034,
+      "variantKey": "base",
+      "assetName": "BT25_061",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_061.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_061",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_061.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_061@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_061.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-062#8035@base",
+      "cardId": "BT25-062",
+      "cardIndex": 8035,
+      "variantKey": "base",
+      "assetName": "BT25_062",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_062.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_062",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_062.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_062@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_062.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-063#8036@base",
+      "cardId": "BT25-063",
+      "cardIndex": 8036,
+      "variantKey": "base",
+      "assetName": "BT25_063",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_063.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_063",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_063.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_063@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_063.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-064#8037@base",
+      "cardId": "BT25-064",
+      "cardIndex": 8037,
+      "variantKey": "base",
+      "assetName": "BT25_064",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_064.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_064@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-065#8038@base",
+      "cardId": "BT25-065",
+      "cardIndex": 8038,
+      "variantKey": "base",
+      "assetName": "BT25_065",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_065.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_065",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_065.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_065@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_065.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-066#8039@base",
+      "cardId": "BT25-066",
+      "cardIndex": 8039,
+      "variantKey": "base",
+      "assetName": "BT25_066",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_066.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_066",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_066.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_066@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_066.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-067#8040@base",
+      "cardId": "BT25-067",
+      "cardIndex": 8040,
+      "variantKey": "base",
+      "assetName": "BT25_067",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_067.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_067@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-068#8041@base",
+      "cardId": "BT25-068",
+      "cardIndex": 8041,
+      "variantKey": "base",
+      "assetName": "BT25_068",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_068.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_068",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_068.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_068@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_068.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-069#8042@base",
+      "cardId": "BT25-069",
+      "cardIndex": 8042,
+      "variantKey": "base",
+      "assetName": "BT25_069",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_069.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_069",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_069.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_069@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_069.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-070#8043@base",
+      "cardId": "BT25-070",
+      "cardIndex": 8043,
+      "variantKey": "base",
+      "assetName": "BT25_070",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_070.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_070",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_070.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_070@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_070.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-071#8044@base",
+      "cardId": "BT25-071",
+      "cardIndex": 8044,
+      "variantKey": "base",
+      "assetName": "BT25_071",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_071.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_071",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_071.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_071@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_071.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-072#8045@base",
+      "cardId": "BT25-072",
+      "cardIndex": 8045,
+      "variantKey": "base",
+      "assetName": "BT25_072",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_072.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_072@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-073#8046@base",
+      "cardId": "BT25-073",
+      "cardIndex": 8046,
+      "variantKey": "base",
+      "assetName": "BT25_073",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_073.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_073@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-074#8047@base",
+      "cardId": "BT25-074",
+      "cardIndex": 8047,
+      "variantKey": "base",
+      "assetName": "BT25_074",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_074.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_074@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-075#8048@base",
+      "cardId": "BT25-075",
+      "cardIndex": 8048,
+      "variantKey": "base",
+      "assetName": "BT25_075",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_075.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_075",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_075.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_075@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_075.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-075#8049@P1",
+      "cardId": "BT25-075",
+      "cardIndex": 8049,
+      "variantKey": "P1",
+      "assetName": "BT25_075_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_075_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_075",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_075.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_075@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_075.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-076#8050@base",
+      "cardId": "BT25-076",
+      "cardIndex": 8050,
+      "variantKey": "base",
+      "assetName": "BT25_076",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_076.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_076",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_076.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_076@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_076.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-077#8051@base",
+      "cardId": "BT25-077",
+      "cardIndex": 8051,
+      "variantKey": "base",
+      "assetName": "BT25_077",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_077.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_077",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_077.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_077@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_077.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-077#8052@P1",
+      "cardId": "BT25-077",
+      "cardIndex": 8052,
+      "variantKey": "P1",
+      "assetName": "BT25_077_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Digimon/BT25_077_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_077",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_077.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_077@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_077.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-078#8053@base",
+      "cardId": "BT25-078",
+      "cardIndex": 8053,
+      "variantKey": "base",
+      "assetName": "BT25_078",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_078.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_078",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_078.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_078@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_078.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-079#8054@base",
+      "cardId": "BT25-079",
+      "cardIndex": 8054,
+      "variantKey": "base",
+      "assetName": "BT25_079",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_079.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_079",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_079.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_079@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_079.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-080#8055@base",
+      "cardId": "BT25-080",
+      "cardIndex": 8055,
+      "variantKey": "base",
+      "assetName": "BT25_080",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_080.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_080",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_080.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_080@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_080.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-081#8056@base",
+      "cardId": "BT25-081",
+      "cardIndex": 8056,
+      "variantKey": "base",
+      "assetName": "BT25_081",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_081.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_081",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_081.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_081@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_081.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-082#8057@base",
+      "cardId": "BT25-082",
+      "cardIndex": 8057,
+      "variantKey": "base",
+      "assetName": "BT25_082",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_082.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_082",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_082.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_082@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_082.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-083#8058@base",
+      "cardId": "BT25-083",
+      "cardIndex": 8058,
+      "variantKey": "base",
+      "assetName": "BT25_083",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_083.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_083",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_083.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_083@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_083.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-084#8059@base",
+      "cardId": "BT25-084",
+      "cardIndex": 8059,
+      "variantKey": "base",
+      "assetName": "BT25_084",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_084.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_084",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_084.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_084@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_084.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-084#8060@P1",
+      "cardId": "BT25-084",
+      "cardIndex": 8060,
+      "variantKey": "P1",
+      "assetName": "BT25_084_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_084_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_084",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_084.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_084@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_084.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-085#8061@base",
+      "cardId": "BT25-085",
+      "cardIndex": 8061,
+      "variantKey": "base",
+      "assetName": "BT25_085",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_085.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_085",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_085@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-085#8062@P1",
+      "cardId": "BT25-085",
+      "cardIndex": 8062,
+      "variantKey": "P1",
+      "assetName": "BT25_085_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_085_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_085",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_085@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-085#8063@P2",
+      "cardId": "BT25-085",
+      "cardIndex": 8063,
+      "variantKey": "P2",
+      "assetName": "BT25_085_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Digimon/BT25_085_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_085",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_085@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_085.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-086#8064@base",
+      "cardId": "BT25-086",
+      "cardIndex": 8064,
+      "variantKey": "base",
+      "assetName": "BT25_086",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Tamer/BT25_086.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_086",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_086.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_086@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_086.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-086#8065@P1",
+      "cardId": "BT25-086",
+      "cardIndex": 8065,
+      "variantKey": "P1",
+      "assetName": "BT25_086_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Tamer/BT25_086_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_086",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_086.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_086@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_086.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-087#8067@base",
+      "cardId": "BT25-087",
+      "cardIndex": 8067,
+      "variantKey": "base",
+      "assetName": "BT25_087",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Tamer/BT25_087.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_087",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_087.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_087@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_087.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-088#8068@base",
+      "cardId": "BT25-088",
+      "cardIndex": 8068,
+      "variantKey": "base",
+      "assetName": "BT25_088",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Tamer/BT25_088.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_088",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_088.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_088@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_088.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-088#8069@P1",
+      "cardId": "BT25-088",
+      "cardIndex": 8069,
+      "variantKey": "P1",
+      "assetName": "BT25_088_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Tamer/BT25_088_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_088",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_088.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_088@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_088.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-089#8070@base",
+      "cardId": "BT25-089",
+      "cardIndex": 8070,
+      "variantKey": "base",
+      "assetName": "BT25_089",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Tamer/BT25_089.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_089",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_089.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_089@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_089.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-090#8071@base",
+      "cardId": "BT25-090",
+      "cardIndex": 8071,
+      "variantKey": "base",
+      "assetName": "BT25_090",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Tamer/BT25_090.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_090",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_090.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_090@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_090.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-090#8072@P1",
+      "cardId": "BT25-090",
+      "cardIndex": 8072,
+      "variantKey": "P1",
+      "assetName": "BT25_090_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Tamer/BT25_090_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_090",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_090.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_090@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_090.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-091#8073@base",
+      "cardId": "BT25-091",
+      "cardIndex": 8073,
+      "variantKey": "base",
+      "assetName": "BT25_091",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Tamer/BT25_091.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_091",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_091@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-091#8074@P1",
+      "cardId": "BT25-091",
+      "cardIndex": 8074,
+      "variantKey": "P1",
+      "assetName": "BT25_091_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Tamer/BT25_091_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_091",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_091@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-091#8075@P2",
+      "cardId": "BT25-091",
+      "cardIndex": 8075,
+      "variantKey": "P2",
+      "assetName": "BT25_091_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Tamer/BT25_091_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_091",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_091@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-092#8076@base",
+      "cardId": "BT25-092",
+      "cardIndex": 8076,
+      "variantKey": "base",
+      "assetName": "BT25_092",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Tamer/BT25_092.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_092",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_092@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-092#8077@P1",
+      "cardId": "BT25-092",
+      "cardIndex": 8077,
+      "variantKey": "P1",
+      "assetName": "BT25_092_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Tamer/BT25_092_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_092",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_092@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-092#8078@P2",
+      "cardId": "BT25-092",
+      "cardIndex": 8078,
+      "variantKey": "P2",
+      "assetName": "BT25_092_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Purple/Tamer/BT25_092_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT25_092",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_092@DCGO/Assets/Scripts/CardEffect/BT25/Purple/BT25_092.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-093#8079@base",
+      "cardId": "BT25-093",
+      "cardIndex": 8079,
+      "variantKey": "base",
+      "assetName": "BT25_093",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Option/BT25_093.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_093",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_093.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_093@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_093.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-094#8080@base",
+      "cardId": "BT25-094",
+      "cardIndex": 8080,
+      "variantKey": "base",
+      "assetName": "BT25_094",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Option/BT25_094.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_094",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_094.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_094@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_094.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-095#8081@base",
+      "cardId": "BT25-095",
+      "cardIndex": 8081,
+      "variantKey": "base",
+      "assetName": "BT25_095",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Option/BT25_095.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_095",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_095.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_095@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_095.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-096#8082@base",
+      "cardId": "BT25-096",
+      "cardIndex": 8082,
+      "variantKey": "base",
+      "assetName": "BT25_096",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/Option/BT25_096.asset",
+      "setId": "BT25",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_096",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_096.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_096@DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_096.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-097#8083@base",
+      "cardId": "BT25-097",
+      "cardIndex": 8083,
+      "variantKey": "base",
+      "assetName": "BT25_097",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Option/BT25_097.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_097",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_097.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_097@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_097.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-098#8084@base",
+      "cardId": "BT25-098",
+      "cardIndex": 8084,
+      "variantKey": "base",
+      "assetName": "BT25_098",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/Option/BT25_098.asset",
+      "setId": "BT25",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_098",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_098.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_098@DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_098.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-099#8085@base",
+      "cardId": "BT25-099",
+      "cardIndex": 8085,
+      "variantKey": "base",
+      "assetName": "BT25_099",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Option/BT25_099.asset",
+      "setId": "BT25",
+      "assetColorPath": "Green",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_099",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_099.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_099@DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_099.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-100#8086@base",
+      "cardId": "BT25-100",
+      "cardIndex": 8086,
+      "variantKey": "base",
+      "assetName": "BT25_100",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Option/BT25_100.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_100",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_100.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_100@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_100.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-101#8087@base",
+      "cardId": "BT25-101",
+      "cardIndex": 8087,
+      "variantKey": "base",
+      "assetName": "BT25_101",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Option/BT25_101.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_101",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_101.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_101@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_101.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-102#8088@base",
+      "cardId": "BT25-102",
+      "cardIndex": 8088,
+      "variantKey": "base",
+      "assetName": "BT25_102",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Black/Option/BT25_102.asset",
+      "setId": "BT25",
+      "assetColorPath": "Black",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT25_102",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_102.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_102@DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_102.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-103#8089@base",
+      "cardId": "BT25-103",
+      "cardIndex": 8089,
+      "variantKey": "base",
+      "assetName": "BT25_103",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_103.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_103",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_103@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-103#8090@P1",
+      "cardId": "BT25-103",
+      "cardIndex": 8090,
+      "variantKey": "P1",
+      "assetName": "BT25_103_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_103_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_103",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_103@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-103#8091@P2",
+      "cardId": "BT25-103",
+      "cardIndex": 8091,
+      "variantKey": "P2",
+      "assetName": "BT25_103_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_103_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_103",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_103@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_103.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-104#8092@base",
+      "cardId": "BT25-104",
+      "cardIndex": 8092,
+      "variantKey": "base",
+      "assetName": "BT25_104",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_104.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_104",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_104@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-104#8093@P1",
+      "cardId": "BT25-104",
+      "cardIndex": 8093,
+      "variantKey": "P1",
+      "assetName": "BT25_104_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_104_P1.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_104",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_104@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    },
+    {
+      "definitionStableId": "BT25-104#8094@P2",
+      "cardId": "BT25-104",
+      "cardIndex": 8094,
+      "variantKey": "P2",
+      "assetName": "BT25_104_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Red/Digimon/BT25_104_P2.asset",
+      "setId": "BT25",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT25_104",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT25_104@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT25.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT25.json"
+    }
+  ]
+}

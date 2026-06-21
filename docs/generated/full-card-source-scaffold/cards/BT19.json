@@ -1,0 +1,3572 @@
+{
+  "schemaVersion": 1,
+  "setId": "BT19",
+  "recordKind": "card-variant-mapping",
+  "records": [
+    {
+      "definitionStableId": "BT19-001#5005@base",
+      "cardId": "BT19-001",
+      "cardIndex": 5005,
+      "variantKey": "base",
+      "assetName": "BT19_001",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/DigiEgg/BT19_001.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_001",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_001.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_001@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_001.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-002#3977@base",
+      "cardId": "BT19-002",
+      "cardIndex": 3977,
+      "variantKey": "base",
+      "assetName": "BT19_002",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/DigiEgg/BT19_002.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_002",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_002.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_002@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_002.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-003#5006@base",
+      "cardId": "BT19-003",
+      "cardIndex": 5006,
+      "variantKey": "base",
+      "assetName": "BT19_003",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/DigiEgg/BT19_003.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_003",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_003.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_003@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_003.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-004#3978@base",
+      "cardId": "BT19-004",
+      "cardIndex": 3978,
+      "variantKey": "base",
+      "assetName": "BT19_004",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/DigiEgg/BT19_004.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_004",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_004.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_004@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_004.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-005#5007@base",
+      "cardId": "BT19-005",
+      "cardIndex": 5007,
+      "variantKey": "base",
+      "assetName": "BT19_005",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/DigiEgg/BT19_005.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_005",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_005.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_005@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_005.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-006#3979@base",
+      "cardId": "BT19-006",
+      "cardIndex": 3979,
+      "variantKey": "base",
+      "assetName": "BT19_006",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/DigiEgg/BT19_006.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "BT19_006",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_006.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_006@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_006.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-007#5008@base",
+      "cardId": "BT19-007",
+      "cardIndex": 5008,
+      "variantKey": "base",
+      "assetName": "BT19_007",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_007.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_007",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_007.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_007@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_007.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-008#5009@base",
+      "cardId": "BT19-008",
+      "cardIndex": 5009,
+      "variantKey": "base",
+      "assetName": "BT19_008",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_008.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_008",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_008.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_008@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_008.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-008#8273@P1",
+      "cardId": "BT19-008",
+      "cardIndex": 8273,
+      "variantKey": "P1",
+      "assetName": "BT19_008_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_008_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_008",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_008.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_008@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_008.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-009#5010@base",
+      "cardId": "BT19-009",
+      "cardIndex": 5010,
+      "variantKey": "base",
+      "assetName": "BT19_009",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_009.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_009",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_009.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_009@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_009.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-009#8274@P1",
+      "cardId": "BT19-009",
+      "cardIndex": 8274,
+      "variantKey": "P1",
+      "assetName": "BT19_009_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_009_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_009",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_009.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_009@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_009.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-010#5011@base",
+      "cardId": "BT19-010",
+      "cardIndex": 5011,
+      "variantKey": "base",
+      "assetName": "BT19_010",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_010.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_010",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_010.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_010@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_010.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-010#8275@P1",
+      "cardId": "BT19-010",
+      "cardIndex": 8275,
+      "variantKey": "P1",
+      "assetName": "BT19_010_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_010_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_010",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_010.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_010@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_010.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-011#5012@base",
+      "cardId": "BT19-011",
+      "cardIndex": 5012,
+      "variantKey": "base",
+      "assetName": "BT19_011",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_011.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_011@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-011#5013@P1",
+      "cardId": "BT19-011",
+      "cardIndex": 5013,
+      "variantKey": "P1",
+      "assetName": "BT19_011_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_011_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_011@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-011#5014@P2",
+      "cardId": "BT19-011",
+      "cardIndex": 5014,
+      "variantKey": "P2",
+      "assetName": "BT19_011_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_011_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_011@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-012#5015@base",
+      "cardId": "BT19-012",
+      "cardIndex": 5015,
+      "variantKey": "base",
+      "assetName": "BT19_012",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_012.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_012",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_012.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_012@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_012.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-013#5016@base",
+      "cardId": "BT19-013",
+      "cardIndex": 5016,
+      "variantKey": "base",
+      "assetName": "BT19_013",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_013.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_013",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_013.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_013@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_013.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-014#5017@base",
+      "cardId": "BT19-014",
+      "cardIndex": 5017,
+      "variantKey": "base",
+      "assetName": "BT19_014",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_014.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_014",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_014.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_014@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_014.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-014#6828@P1",
+      "cardId": "BT19-014",
+      "cardIndex": 6828,
+      "variantKey": "P1",
+      "assetName": "BT19_014_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_014_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_014",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_014.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_014@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_014.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-015#5018@base",
+      "cardId": "BT19-015",
+      "cardIndex": 5018,
+      "variantKey": "base",
+      "assetName": "BT19_015",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_015.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_015",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_015.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_015@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_015.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-016#5019@base",
+      "cardId": "BT19-016",
+      "cardIndex": 5019,
+      "variantKey": "base",
+      "assetName": "BT19_016",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_016.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_016",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_016.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_016@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_016.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-017#3980@base",
+      "cardId": "BT19-017",
+      "cardIndex": 3980,
+      "variantKey": "base",
+      "assetName": "BT19_017",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_017.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_017",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_017.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_017@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_017.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-017#6757@P1",
+      "cardId": "BT19-017",
+      "cardIndex": 6757,
+      "variantKey": "P1",
+      "assetName": "BT19_017_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_017_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_017",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_017.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_017@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_017.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-018#3982@base",
+      "cardId": "BT19-018",
+      "cardIndex": 3982,
+      "variantKey": "base",
+      "assetName": "BT19_018",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_018.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_018@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-019#3981@base",
+      "cardId": "BT19-019",
+      "cardIndex": 3981,
+      "variantKey": "base",
+      "assetName": "BT19_019",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_019.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_019",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_019.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_019@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_019.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-019#8276@P1",
+      "cardId": "BT19-019",
+      "cardIndex": 8276,
+      "variantKey": "P1",
+      "assetName": "BT19_019_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_019_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_019",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_019.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_019@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_019.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-020#5020@base",
+      "cardId": "BT19-020",
+      "cardIndex": 5020,
+      "variantKey": "base",
+      "assetName": "BT19_020",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_020.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_020",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_020.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_020@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_020.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-021#3988@base",
+      "cardId": "BT19-021",
+      "cardIndex": 3988,
+      "variantKey": "base",
+      "assetName": "BT19_021",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_021.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_021",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_021.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_021@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_021.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-022#5021@base",
+      "cardId": "BT19-022",
+      "cardIndex": 5021,
+      "variantKey": "base",
+      "assetName": "BT19_022",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_022.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_022",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_022.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_022@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_022.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-023#3983@base",
+      "cardId": "BT19-023",
+      "cardIndex": 3983,
+      "variantKey": "base",
+      "assetName": "BT19_023",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_023.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_023",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_023.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_023@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_023.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-024#3984@base",
+      "cardId": "BT19-024",
+      "cardIndex": 3984,
+      "variantKey": "base",
+      "assetName": "BT19_024",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_024.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_024",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_024.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_024@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_024.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-024#8277@P1",
+      "cardId": "BT19-024",
+      "cardIndex": 8277,
+      "variantKey": "P1",
+      "assetName": "BT19_024_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_024_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_024",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_024.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_024@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_024.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-025#5022@base",
+      "cardId": "BT19-025",
+      "cardIndex": 5022,
+      "variantKey": "base",
+      "assetName": "BT19_025",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_025.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_025",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_025.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_025@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_025.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-026#5023@base",
+      "cardId": "BT19-026",
+      "cardIndex": 5023,
+      "variantKey": "base",
+      "assetName": "BT19_026",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_026.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_026",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_026.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_026@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_026.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-027#3985@base",
+      "cardId": "BT19-027",
+      "cardIndex": 3985,
+      "variantKey": "base",
+      "assetName": "BT19_027",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_027.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_027@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-027#3986@P1",
+      "cardId": "BT19-027",
+      "cardIndex": 3986,
+      "variantKey": "P1",
+      "assetName": "BT19_027_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_027_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_027@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-027#8278@P2",
+      "cardId": "BT19-027",
+      "cardIndex": 8278,
+      "variantKey": "P2",
+      "assetName": "BT19_027_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_027_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_027@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-028#3987@base",
+      "cardId": "BT19-028",
+      "cardIndex": 3987,
+      "variantKey": "base",
+      "assetName": "BT19_028",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Digimon/BT19_028.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_028",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_028.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_028@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_028.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-029#3989@base",
+      "cardId": "BT19-029",
+      "cardIndex": 3989,
+      "variantKey": "base",
+      "assetName": "BT19_029",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_029.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_029",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_029.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_029@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_029.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-030#5024@base",
+      "cardId": "BT19-030",
+      "cardIndex": 5024,
+      "variantKey": "base",
+      "assetName": "BT19_030",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_030.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_030",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_030.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_030@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_030.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-031#5025@base",
+      "cardId": "BT19-031",
+      "cardIndex": 5025,
+      "variantKey": "base",
+      "assetName": "BT19_031",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_031.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_031",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_031.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_031@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_031.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-032#3990@base",
+      "cardId": "BT19-032",
+      "cardIndex": 3990,
+      "variantKey": "base",
+      "assetName": "BT19_032",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_032.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_032",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_032.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_032@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_032.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-033#5026@base",
+      "cardId": "BT19-033",
+      "cardIndex": 5026,
+      "variantKey": "base",
+      "assetName": "BT19_033",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_033.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_033",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_033.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_033@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_033.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-034#5027@base",
+      "cardId": "BT19-034",
+      "cardIndex": 5027,
+      "variantKey": "base",
+      "assetName": "BT19_034",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_034.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_034",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_034@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-034#8279@P1",
+      "cardId": "BT19-034",
+      "cardIndex": 8279,
+      "variantKey": "P1",
+      "assetName": "BT19_034_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_034_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_034",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_034@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-035#5028@base",
+      "cardId": "BT19-035",
+      "cardIndex": 5028,
+      "variantKey": "base",
+      "assetName": "BT19_035",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_035.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_035",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_035.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_035@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_035.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-036#3992@base",
+      "cardId": "BT19-036",
+      "cardIndex": 3992,
+      "variantKey": "base",
+      "assetName": "BT19_036",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_036.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_036",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_036.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_036@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_036.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-037#5029@base",
+      "cardId": "BT19-037",
+      "cardIndex": 5029,
+      "variantKey": "base",
+      "assetName": "BT19_037",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_037.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_037@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-037#5030@P1",
+      "cardId": "BT19-037",
+      "cardIndex": 5030,
+      "variantKey": "P1",
+      "assetName": "BT19_037_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_037_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_037@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-037#5031@P2",
+      "cardId": "BT19-037",
+      "cardIndex": 5031,
+      "variantKey": "P2",
+      "assetName": "BT19_037_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_037_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_037@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-037#8280@P3",
+      "cardId": "BT19-037",
+      "cardIndex": 8280,
+      "variantKey": "P3",
+      "assetName": "BT19_037_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_037_P3.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_037@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-038#5032@base",
+      "cardId": "BT19-038",
+      "cardIndex": 5032,
+      "variantKey": "base",
+      "assetName": "BT19_038",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_038.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_038",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_038.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_038@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_038.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-039#3991@base",
+      "cardId": "BT19-039",
+      "cardIndex": 3991,
+      "variantKey": "base",
+      "assetName": "BT19_039",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_039.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_039",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_039.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_039@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_039.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-040#5033@base",
+      "cardId": "BT19-040",
+      "cardIndex": 5033,
+      "variantKey": "base",
+      "assetName": "BT19_040",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_040.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_040",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_040.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_040@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_040.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-041#3996@base",
+      "cardId": "BT19-041",
+      "cardIndex": 3996,
+      "variantKey": "base",
+      "assetName": "BT19_041",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_041.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_041",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_041.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_041@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_041.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-042#3997@base",
+      "cardId": "BT19-042",
+      "cardIndex": 3997,
+      "variantKey": "base",
+      "assetName": "BT19_042",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_042.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_042",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_042.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_042@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_042.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-042#3998@P1",
+      "cardId": "BT19-042",
+      "cardIndex": 3998,
+      "variantKey": "P1",
+      "assetName": "BT19_042_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_042_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_042",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_042.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_042@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_042.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-043#3999@base",
+      "cardId": "BT19-043",
+      "cardIndex": 3999,
+      "variantKey": "base",
+      "assetName": "BT19_043",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_043.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_043@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-043#4000@P1",
+      "cardId": "BT19-043",
+      "cardIndex": 4000,
+      "variantKey": "P1",
+      "assetName": "BT19_043_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Digimon/BT19_043_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_043@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-044#5034@base",
+      "cardId": "BT19-044",
+      "cardIndex": 5034,
+      "variantKey": "base",
+      "assetName": "BT19_044",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_044.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_044",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_044.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_044@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_044.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-045#3995@base",
+      "cardId": "BT19-045",
+      "cardIndex": 3995,
+      "variantKey": "base",
+      "assetName": "BT19_045",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_045.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_045",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_045.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_045@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_045.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-046#3993@base",
+      "cardId": "BT19-046",
+      "cardIndex": 3993,
+      "variantKey": "base",
+      "assetName": "BT19_046",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_046.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_046",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_046.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_046@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_046.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-047#5079@base",
+      "cardId": "BT19-047",
+      "cardIndex": 5079,
+      "variantKey": "base",
+      "assetName": "BT19_047",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_047.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_047",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_047.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_047@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_047.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-048#3994@base",
+      "cardId": "BT19-048",
+      "cardIndex": 3994,
+      "variantKey": "base",
+      "assetName": "BT19_048",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_048.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_048",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_048.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_048@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_048.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-048#8281@P1",
+      "cardId": "BT19-048",
+      "cardIndex": 8281,
+      "variantKey": "P1",
+      "assetName": "BT19_048_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_048_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_048",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_048.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_048@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_048.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-049#5035@base",
+      "cardId": "BT19-049",
+      "cardIndex": 5035,
+      "variantKey": "base",
+      "assetName": "BT19_049",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_049.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_049",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_049.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_049@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_049.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-050#5036@base",
+      "cardId": "BT19-050",
+      "cardIndex": 5036,
+      "variantKey": "base",
+      "assetName": "BT19_050",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_050.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_050@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-050#5037@P1",
+      "cardId": "BT19-050",
+      "cardIndex": 5037,
+      "variantKey": "P1",
+      "assetName": "BT19_050_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_050_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_050@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-050#5038@P2",
+      "cardId": "BT19-050",
+      "cardIndex": 5038,
+      "variantKey": "P2",
+      "assetName": "BT19_050_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_050_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_050@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-051#5039@base",
+      "cardId": "BT19-051",
+      "cardIndex": 5039,
+      "variantKey": "base",
+      "assetName": "BT19_051",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_051.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_051",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_051.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_051@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_051.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-052#4006@base",
+      "cardId": "BT19-052",
+      "cardIndex": 4006,
+      "variantKey": "base",
+      "assetName": "BT19_052",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_052.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_052@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-052#8282@P1",
+      "cardId": "BT19-052",
+      "cardIndex": 8282,
+      "variantKey": "P1",
+      "assetName": "BT19_052_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_052_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_052@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-052#8283@P2",
+      "cardId": "BT19-052",
+      "cardIndex": 8283,
+      "variantKey": "P2",
+      "assetName": "BT19_052_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_052_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_052@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-053#4004@base",
+      "cardId": "BT19-053",
+      "cardIndex": 4004,
+      "variantKey": "base",
+      "assetName": "BT19_053",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_053.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_053",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_053@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-053#4005@P1",
+      "cardId": "BT19-053",
+      "cardIndex": 4005,
+      "variantKey": "P1",
+      "assetName": "BT19_053_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_053_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_053",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_053@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-053#8284@P2",
+      "cardId": "BT19-053",
+      "cardIndex": 8284,
+      "variantKey": "P2",
+      "assetName": "BT19_053_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_053_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_053",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_053@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_053.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-054#5040@base",
+      "cardId": "BT19-054",
+      "cardIndex": 5040,
+      "variantKey": "base",
+      "assetName": "BT19_054",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Digimon/BT19_054.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_054",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_054.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_054@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_054.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-055#4002@base",
+      "cardId": "BT19-055",
+      "cardIndex": 4002,
+      "variantKey": "base",
+      "assetName": "BT19_055",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_055.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_055",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_055.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_055@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_055.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-056#5041@base",
+      "cardId": "BT19-056",
+      "cardIndex": 5041,
+      "variantKey": "base",
+      "assetName": "BT19_056",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_056.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_056",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_056.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_056@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_056.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-057#5042@base",
+      "cardId": "BT19-057",
+      "cardIndex": 5042,
+      "variantKey": "base",
+      "assetName": "BT19_057",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_057.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_057@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-058#4003@base",
+      "cardId": "BT19-058",
+      "cardIndex": 4003,
+      "variantKey": "base",
+      "assetName": "BT19_058",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_058.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_058",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_058.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_058@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_058.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-059#4001@base",
+      "cardId": "BT19-059",
+      "cardIndex": 4001,
+      "variantKey": "base",
+      "assetName": "BT19_059",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_059.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_059",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_059.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_059@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_059.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-060#5043@base",
+      "cardId": "BT19-060",
+      "cardIndex": 5043,
+      "variantKey": "base",
+      "assetName": "BT19_060",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_060.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_060",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_060.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_060@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_060.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-061#5044@base",
+      "cardId": "BT19-061",
+      "cardIndex": 5044,
+      "variantKey": "base",
+      "assetName": "BT19_061",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_061.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_061",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_061.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_061@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_061.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-062#5045@base",
+      "cardId": "BT19-062",
+      "cardIndex": 5045,
+      "variantKey": "base",
+      "assetName": "BT19_062",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_062.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_062",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_062.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_062@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_062.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-063#4007@base",
+      "cardId": "BT19-063",
+      "cardIndex": 4007,
+      "variantKey": "base",
+      "assetName": "BT19_063",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_063.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_063",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_063.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_063@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_063.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-064#5046@base",
+      "cardId": "BT19-064",
+      "cardIndex": 5046,
+      "variantKey": "base",
+      "assetName": "BT19_064",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_064.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_064@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-064#5047@P1",
+      "cardId": "BT19-064",
+      "cardIndex": 5047,
+      "variantKey": "P1",
+      "assetName": "BT19_064_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_064_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_064@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-064#5048@P2",
+      "cardId": "BT19-064",
+      "cardIndex": 5048,
+      "variantKey": "P2",
+      "assetName": "BT19_064_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_064_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_064@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-065#4008@base",
+      "cardId": "BT19-065",
+      "cardIndex": 4008,
+      "variantKey": "base",
+      "assetName": "BT19_065",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_065.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_065",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_065.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_065@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_065.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-065#8285@P1",
+      "cardId": "BT19-065",
+      "cardIndex": 8285,
+      "variantKey": "P1",
+      "assetName": "BT19_065_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Digimon/BT19_065_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_065",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_065.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_065@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_065.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-066#4010@base",
+      "cardId": "BT19-066",
+      "cardIndex": 4010,
+      "variantKey": "base",
+      "assetName": "BT19_066",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_066.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_066",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_066.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_066@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_066.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-067#5049@base",
+      "cardId": "BT19-067",
+      "cardIndex": 5049,
+      "variantKey": "base",
+      "assetName": "BT19_067",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_067.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_067@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-067#8286@P1",
+      "cardId": "BT19-067",
+      "cardIndex": 8286,
+      "variantKey": "P1",
+      "assetName": "BT19_067_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_067_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_067@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-068#5050@base",
+      "cardId": "BT19-068",
+      "cardIndex": 5050,
+      "variantKey": "base",
+      "assetName": "BT19_068",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_068.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_068",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_068.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_068@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_068.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-069#4009@base",
+      "cardId": "BT19-069",
+      "cardIndex": 4009,
+      "variantKey": "base",
+      "assetName": "BT19_069",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_069.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_069",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_069.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_069@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_069.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-070#4011@base",
+      "cardId": "BT19-070",
+      "cardIndex": 4011,
+      "variantKey": "base",
+      "assetName": "BT19_070",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_070.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_070",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_070.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_070@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_070.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-070#8287@P1",
+      "cardId": "BT19-070",
+      "cardIndex": 8287,
+      "variantKey": "P1",
+      "assetName": "BT19_070_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_070_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_070",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_070.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_070@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_070.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-071#5051@base",
+      "cardId": "BT19-071",
+      "cardIndex": 5051,
+      "variantKey": "base",
+      "assetName": "BT19_071",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_071.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_071",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_071@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-072#4012@base",
+      "cardId": "BT19-072",
+      "cardIndex": 4012,
+      "variantKey": "base",
+      "assetName": "BT19_072",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_072.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_072@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-072#8288@P1",
+      "cardId": "BT19-072",
+      "cardIndex": 8288,
+      "variantKey": "P1",
+      "assetName": "BT19_072_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_072_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_072@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-072#8289@P2",
+      "cardId": "BT19-072",
+      "cardIndex": 8289,
+      "variantKey": "P2",
+      "assetName": "BT19_072_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_072_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_072@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-073#4013@base",
+      "cardId": "BT19-073",
+      "cardIndex": 4013,
+      "variantKey": "base",
+      "assetName": "BT19_073",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_073.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_073@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-073#4014@P1",
+      "cardId": "BT19-073",
+      "cardIndex": 4014,
+      "variantKey": "P1",
+      "assetName": "BT19_073_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_073_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_073@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-074#5052@base",
+      "cardId": "BT19-074",
+      "cardIndex": 5052,
+      "variantKey": "base",
+      "assetName": "BT19_074",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_074.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_074@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-074#5053@P1",
+      "cardId": "BT19-074",
+      "cardIndex": 5053,
+      "variantKey": "P1",
+      "assetName": "BT19_074_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_074_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_074@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-074#5054@P2",
+      "cardId": "BT19-074",
+      "cardIndex": 5054,
+      "variantKey": "P2",
+      "assetName": "BT19_074_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_074_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_074@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-074#8290@P3",
+      "cardId": "BT19-074",
+      "cardIndex": 8290,
+      "variantKey": "P3",
+      "assetName": "BT19_074_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_074_P3.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_074@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-075#4015@base",
+      "cardId": "BT19-075",
+      "cardIndex": 4015,
+      "variantKey": "base",
+      "assetName": "BT19_075",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_075.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_075",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_075.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_075@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_075.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-075#4016@P1",
+      "cardId": "BT19-075",
+      "cardIndex": 4016,
+      "variantKey": "P1",
+      "assetName": "BT19_075_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_075_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_075",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_075.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_075@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_075.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-076#5055@base",
+      "cardId": "BT19-076",
+      "cardIndex": 5055,
+      "variantKey": "base",
+      "assetName": "BT19_076",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_076.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_076",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_076.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_076@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_076.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-077#5056@base",
+      "cardId": "BT19-077",
+      "cardIndex": 5056,
+      "variantKey": "base",
+      "assetName": "BT19_077",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_077.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_077",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_077.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_077@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_077.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-077#8291@P1",
+      "cardId": "BT19-077",
+      "cardIndex": 8291,
+      "variantKey": "P1",
+      "assetName": "BT19_077_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_077_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_077",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_077.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_077@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_077.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-078#5057@base",
+      "cardId": "BT19-078",
+      "cardIndex": 5057,
+      "variantKey": "base",
+      "assetName": "BT19_078",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_078.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_078",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_078.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_078@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_078.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-079#5058@base",
+      "cardId": "BT19-079",
+      "cardIndex": 5058,
+      "variantKey": "base",
+      "assetName": "BT19_079",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Tamer/BT19_079.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_079",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_079.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_079@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_079.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-079#5060@P1",
+      "cardId": "BT19-079",
+      "cardIndex": 5060,
+      "variantKey": "P1",
+      "assetName": "BT19_079_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Tamer/BT19_079_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_079",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_079.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_079@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_079.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-080#5061@base",
+      "cardId": "BT19-080",
+      "cardIndex": 5061,
+      "variantKey": "base",
+      "assetName": "BT19_080",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Tamer/BT19_080.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_080",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_080.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_080@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_080.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-080#8292@P1",
+      "cardId": "BT19-080",
+      "cardIndex": 8292,
+      "variantKey": "P1",
+      "assetName": "BT19_080_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Tamer/BT19_080_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_080",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_080.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_080@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_080.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-081#5062@base",
+      "cardId": "BT19-081",
+      "cardIndex": 5062,
+      "variantKey": "base",
+      "assetName": "BT19_081",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Tamer/BT19_081.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_081",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_081.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_081@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_081.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-081#5064@P1",
+      "cardId": "BT19-081",
+      "cardIndex": 5064,
+      "variantKey": "P1",
+      "assetName": "BT19_081_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Tamer/BT19_081_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_081",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_081.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_081@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_081.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-082#4019@base",
+      "cardId": "BT19-082",
+      "cardIndex": 4019,
+      "variantKey": "base",
+      "assetName": "BT19_082",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Tamer/BT19_082.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_082",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_082@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-082#4020@P1",
+      "cardId": "BT19-082",
+      "cardIndex": 4020,
+      "variantKey": "P1",
+      "assetName": "BT19_082_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Tamer/BT19_082_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_082",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_082@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-082#8293@P2",
+      "cardId": "BT19-082",
+      "cardIndex": 8293,
+      "variantKey": "P2",
+      "assetName": "BT19_082_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Tamer/BT19_082_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_082",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_082@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_082.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-083#5065@base",
+      "cardId": "BT19-083",
+      "cardIndex": 5065,
+      "variantKey": "base",
+      "assetName": "BT19_083",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Tamer/BT19_083.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_083",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_083@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-083#8294@P1",
+      "cardId": "BT19-083",
+      "cardIndex": 8294,
+      "variantKey": "P1",
+      "assetName": "BT19_083_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Tamer/BT19_083_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_083",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_083@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-083#8295@P2",
+      "cardId": "BT19-083",
+      "cardIndex": 8295,
+      "variantKey": "P2",
+      "assetName": "BT19_083_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Tamer/BT19_083_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_083",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_083@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-084#4021@base",
+      "cardId": "BT19-084",
+      "cardIndex": 4021,
+      "variantKey": "base",
+      "assetName": "BT19_084",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Tamer/BT19_084.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_084",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_084@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-084#4022@P1",
+      "cardId": "BT19-084",
+      "cardIndex": 4022,
+      "variantKey": "P1",
+      "assetName": "BT19_084_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Tamer/BT19_084_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_084",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_084@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-084#8296@P2",
+      "cardId": "BT19-084",
+      "cardIndex": 8296,
+      "variantKey": "P2",
+      "assetName": "BT19_084_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Tamer/BT19_084_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_084",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_084@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_084.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-085#5066@base",
+      "cardId": "BT19-085",
+      "cardIndex": 5066,
+      "variantKey": "base",
+      "assetName": "BT19_085",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Tamer/BT19_085.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_085",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_085.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_085@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_085.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-085#8297@P1",
+      "cardId": "BT19-085",
+      "cardIndex": 8297,
+      "variantKey": "P1",
+      "assetName": "BT19_085_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Tamer/BT19_085_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_085",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_085.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_085@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_085.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-086#5067@base",
+      "cardId": "BT19-086",
+      "cardIndex": 5067,
+      "variantKey": "base",
+      "assetName": "BT19_086",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Tamer/BT19_086.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_086",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_086.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_086@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_086.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-086#8298@P1",
+      "cardId": "BT19-086",
+      "cardIndex": 8298,
+      "variantKey": "P1",
+      "assetName": "BT19_086_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Tamer/BT19_086_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_086",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_086.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_086@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_086.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-087#4017@base",
+      "cardId": "BT19-087",
+      "cardIndex": 4017,
+      "variantKey": "base",
+      "assetName": "BT19_087",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Tamer/BT19_087.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_087",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_087.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_087@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_087.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-087#4018@P1",
+      "cardId": "BT19-087",
+      "cardIndex": 4018,
+      "variantKey": "P1",
+      "assetName": "BT19_087_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Black/Tamer/BT19_087_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_087",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_087.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_087@DCGO/Assets/Scripts/CardEffect/BT19/Black/BT19_087.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-088#5068@base",
+      "cardId": "BT19-088",
+      "cardIndex": 5068,
+      "variantKey": "base",
+      "assetName": "BT19_088",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Tamer/BT19_088.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_088",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_088.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_088@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_088.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-088#8299@P1",
+      "cardId": "BT19-088",
+      "cardIndex": 8299,
+      "variantKey": "P1",
+      "assetName": "BT19_088_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Tamer/BT19_088_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "BT19_088",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_088.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_088@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_088.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-089#5069@base",
+      "cardId": "BT19-089",
+      "cardIndex": 5069,
+      "variantKey": "base",
+      "assetName": "BT19_089",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Option/BT19_089.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_089",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_089.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_089@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_089.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-090#5070@base",
+      "cardId": "BT19-090",
+      "cardIndex": 5070,
+      "variantKey": "base",
+      "assetName": "BT19_090",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Option/BT19_090.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_090",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_090.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_090@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_090.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-091#5071@base",
+      "cardId": "BT19-091",
+      "cardIndex": 5071,
+      "variantKey": "base",
+      "assetName": "BT19_091",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Option/BT19_091.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_091",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_091.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_091@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_091.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-092#4023@base",
+      "cardId": "BT19-092",
+      "cardIndex": 4023,
+      "variantKey": "base",
+      "assetName": "BT19_092",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Blue/Option/BT19_092.asset",
+      "setId": "BT19",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_092",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_092.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_092@DCGO/Assets/Scripts/CardEffect/BT19/Blue/BT19_092.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-093#5072@base",
+      "cardId": "BT19-093",
+      "cardIndex": 5072,
+      "variantKey": "base",
+      "assetName": "BT19_093",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Option/BT19_093.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_093",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_093.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_093@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_093.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-094#4026@base",
+      "cardId": "BT19-094",
+      "cardIndex": 4026,
+      "variantKey": "base",
+      "assetName": "BT19_094",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Yellow/Option/BT19_094.asset",
+      "setId": "BT19",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_094",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_094.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_094@DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_094.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-095#5073@base",
+      "cardId": "BT19-095",
+      "cardIndex": 5073,
+      "variantKey": "base",
+      "assetName": "BT19_095",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Option/BT19_095.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_095",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_095.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_095@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_095.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-096#4024@base",
+      "cardId": "BT19-096",
+      "cardIndex": 4024,
+      "variantKey": "base",
+      "assetName": "BT19_096",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Green/Option/BT19_096.asset",
+      "setId": "BT19",
+      "assetColorPath": "Green",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_096",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_096.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_096@DCGO/Assets/Scripts/CardEffect/BT19/Green/BT19_096.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-097#5074@base",
+      "cardId": "BT19-097",
+      "cardIndex": 5074,
+      "variantKey": "base",
+      "assetName": "BT19_097",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Option/BT19_097.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_097",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_097@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-098#5075@base",
+      "cardId": "BT19-098",
+      "cardIndex": 5075,
+      "variantKey": "base",
+      "assetName": "BT19_098",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Option/BT19_098.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_098",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_098.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_098@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_098.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-099#4025@base",
+      "cardId": "BT19-099",
+      "cardIndex": 4025,
+      "variantKey": "base",
+      "assetName": "BT19_099",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Option/BT19_099.asset",
+      "setId": "BT19",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_099",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_099.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_099@DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_099.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-100#5076@base",
+      "cardId": "BT19-100",
+      "cardIndex": 5076,
+      "variantKey": "base",
+      "assetName": "BT19_100",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Option/BT19_100.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "BT19_100",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_100.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_100@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_100.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-101#4027@base",
+      "cardId": "BT19-101",
+      "cardIndex": 4027,
+      "variantKey": "base",
+      "assetName": "BT19_101",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_101.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_101",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_101@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-101#4028@P1",
+      "cardId": "BT19-101",
+      "cardIndex": 4028,
+      "variantKey": "P1",
+      "assetName": "BT19_101_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_101_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_101",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_101@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-101#4029@P2",
+      "cardId": "BT19-101",
+      "cardIndex": 4029,
+      "variantKey": "P2",
+      "assetName": "BT19_101_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Red/Digimon/BT19_101_P2.asset",
+      "setId": "BT19",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_101",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_101@DCGO/Assets/Scripts/CardEffect/BT19/Red/BT19_101.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-102#5077@base",
+      "cardId": "BT19-102",
+      "cardIndex": 5077,
+      "variantKey": "base",
+      "assetName": "BT19_102",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_102.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_102",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_102.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_102@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_102.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    },
+    {
+      "definitionStableId": "BT19-102#5078@P1",
+      "cardId": "BT19-102",
+      "cardIndex": 5078,
+      "variantKey": "P1",
+      "assetName": "BT19_102_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT19/White/Digimon/BT19_102_P1.asset",
+      "setId": "BT19",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "BT19_102",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_102.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "BT19_102@DCGO/Assets/Scripts/CardEffect/BT19/White/BT19_102.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/BT19.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/BT19.json"
+    }
+  ]
+}

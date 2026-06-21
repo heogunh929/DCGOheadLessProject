@@ -1,0 +1,4276 @@
+{
+  "schemaVersion": 1,
+  "setId": "LM",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "LM_001@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_001.cs",
+      "sourceEffectClassName": "LM_001",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_001.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_001.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GetHashtablesFromHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-001#3247@base",
+          "cardId": "LM-001",
+          "cardIndex": 3247,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Digimon/LM_001.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_002@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_002.cs",
+      "sourceEffectClassName": "LM_002",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_002.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_002.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnStartMainPhase"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-002#3248@base",
+          "cardId": "LM-002",
+          "cardIndex": 3248,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_002.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_003@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_003.cs",
+      "sourceEffectClassName": "LM_003",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_003.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_003.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectHand"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "GainCanNotBeDeletedPlayerEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-003#3249@base",
+          "cardId": "LM-003",
+          "cardIndex": 3249,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_003.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_004@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_004.cs",
+      "sourceEffectClassName": "LM_004",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_004.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_004.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDiscardHand",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerOnTrashHand",
+        "CanTriggerWhenDigivolving",
+        "GainBlocker",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-004#3250@base",
+          "cardId": "LM-004",
+          "cardIndex": 3250,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_004.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_005@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_005.cs",
+      "sourceEffectClassName": "LM_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_005.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_005.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "DigiEggDeck"
+      ],
+      "factoryApi": [
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "MatchConditionPermanentCount",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-005#3251@base",
+          "cardId": "LM-005",
+          "cardIndex": 3251,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_005.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_006@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_006.cs",
+      "sourceEffectClassName": "LM_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_006.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_006.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDeclaration",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainCanNotAttack",
+        "GainCanNotAttackPlayerEffect",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards",
+        "ShowReducedCost",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-006#3252@base",
+          "cardId": "LM-006",
+          "cardIndex": 3252,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_006.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_007@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_007.cs",
+      "sourceEffectClassName": "LM_007",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_007.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_007.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndAttack",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfDigimonAfterBattleSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-007#3253@base",
+          "cardId": "LM-007",
+          "cardIndex": 3253,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Digimon/LM_007.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_008@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_008.cs",
+      "sourceEffectClassName": "LM_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_008.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_008.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnStartMainPhase"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-008#3254@base",
+          "cardId": "LM-008",
+          "cardIndex": 3254,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_008.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_009@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_009.cs",
+      "sourceEffectClassName": "LM_009",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_009.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_009.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentSuspends",
+        "CanTriggerWhenPermanentWouldDigivolve",
+        "CanTriggerWhenPermanentWouldPlay",
+        "CardEffectHashtable",
+        "GainRush",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnHand",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-009#3255@base",
+          "cardId": "LM-009",
+          "cardIndex": 3255,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_009.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_010@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_010.cs",
+      "sourceEffectClassName": "LM_010",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_010.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_010.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "GainCantUnsuspendUntilOpponentTurnEnd",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-010#3256@base",
+          "cardId": "LM-010",
+          "cardIndex": 3256,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_010.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_011@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_011.cs",
+      "sourceEffectClassName": "LM_011",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_011.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_011.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainBlocker",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-011#3257@base",
+          "cardId": "LM-011",
+          "cardIndex": 3257,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_011.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_012@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_012.cs",
+      "sourceEffectClassName": "LM_012",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_012.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_012.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndBattle",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "CanTriggerWhenDigivolving",
+        "GainCantUnsuspendUntilOpponentTurnEnd",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-012#3258@base",
+          "cardId": "LM-012",
+          "cardIndex": 3258,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_012.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_013@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_013.cs",
+      "sourceEffectClassName": "LM_013",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_013.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_013.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEndTurn",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "BouncePeremanentAndProcessAccordingToResult",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetEffectSourcePermanent",
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-013#3259@base",
+          "cardId": "LM-013",
+          "cardIndex": 3259,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_013.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_014@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_014.cs",
+      "sourceEffectClassName": "LM_014",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_014.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_014.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAttackTargetChanged",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectAttackTarget"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentAttackTargetSwitch",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-014#3260@base",
+          "cardId": "LM-014",
+          "cardIndex": 3260,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Digimon/LM_014.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_015@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_015.cs",
+      "sourceEffectClassName": "LM_015",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_015.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_015.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-015#3261@base",
+          "cardId": "LM-015",
+          "cardIndex": 3261,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Digimon/LM_015.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_016@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_016.cs",
+      "sourceEffectClassName": "LM_016",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_016.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_016.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPermanentDeleted",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-016#3262@base",
+          "cardId": "LM-016",
+          "cardIndex": 3262,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_016.asset"
+        },
+        {
+          "definitionStableId": "LM-016#7865@P1",
+          "cardId": "LM-016",
+          "cardIndex": 7865,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_016_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-016#7866@P2",
+          "cardId": "LM-016",
+          "cardIndex": 7866,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_016_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-016#7867@P3",
+          "cardId": "LM-016",
+          "cardIndex": 7867,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_016_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_017@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_017.cs",
+      "sourceEffectClassName": "LM_017",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_017.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_017.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAddDigivolutionCards",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAddDigivolutionCard",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-017#3263@base",
+          "cardId": "LM-017",
+          "cardIndex": 3263,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_017.asset"
+        },
+        {
+          "definitionStableId": "LM-017#7868@P1",
+          "cardId": "LM-017",
+          "cardIndex": 7868,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_017_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "LM_018@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_018.cs",
+      "sourceEffectClassName": "LM_018",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_018.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_018.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "PlayGyuukimonToken"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-018#3264@base",
+          "cardId": "LM-018",
+          "cardIndex": 3264,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_018.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_019@DCGO/Assets/Scripts/CardEffect/LM/White/LM_019.cs",
+      "sourceEffectClassName": "LM_019",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/White/LM_019.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/White/LM_019.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "WhenRemoveField"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenPermanentRemoveField",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerEffect",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-019#3265@base",
+          "cardId": "LM-019",
+          "cardIndex": 3265,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/White/Digimon/LM_019.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_020@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_020.cs",
+      "sourceEffectClassName": "LM_020",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_020.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_020.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnStartTurn"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectInteger",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea",
+        "DigiEggDeck",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnBattleAreaDigimon",
+        "PlacePermanentInSecurityAndProcessAccordingToResult",
+        "RevealDeckTopCardsAndProcessForAll"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotAffectedClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetIntSelection",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotAffectedClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-020#3266@base",
+          "cardId": "LM-020",
+          "cardIndex": 3266,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Digimon/LM_020.asset"
+        },
+        {
+          "definitionStableId": "LM-020#6827@P1",
+          "cardId": "LM-020",
+          "cardIndex": 6827,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Digimon/LM_020_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "LM_021@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_021.cs",
+      "sourceEffectClassName": "LM_021",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_021.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_021.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-021#4031@base",
+          "cardId": "LM-021",
+          "cardIndex": 4031,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Digimon/LM_021.asset"
+        },
+        {
+          "definitionStableId": "LM-021#7869@P1",
+          "cardId": "LM-021",
+          "cardIndex": 7869,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Digimon/LM_021_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-021#7870@P2",
+          "cardId": "LM-021",
+          "cardIndex": 7870,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Digimon/LM_021_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "LM_022@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_022.cs",
+      "sourceEffectClassName": "LM_022",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_022.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_022.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanUnsuspend",
+        "HasMatchConditionOpponentsPermanent",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-022#4032@base",
+          "cardId": "LM-022",
+          "cardIndex": 4032,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_022.asset"
+        },
+        {
+          "definitionStableId": "LM-022#7871@P1",
+          "cardId": "LM-022",
+          "cardIndex": 7871,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_022_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-022#7872@P2",
+          "cardId": "LM-022",
+          "cardIndex": 7872,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_022_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "LM_023@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_023.cs",
+      "sourceEffectClassName": "LM_023",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_023.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_023.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAddSecurity",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone",
+        "OnUseOption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenAddSecurity",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenUseOption",
+        "ChangeDigimonDP",
+        "HasMatchConditionOwnersHand",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-023#4033@base",
+          "cardId": "LM-023",
+          "cardIndex": 4033,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Digimon/LM_023.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_024@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_024.cs",
+      "sourceEffectClassName": "LM_024",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_024.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_024.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsOpponentEffect",
+        "IsPermanentExistsOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotAffectedClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotAffectedClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-024#4034@base",
+          "cardId": "LM-024",
+          "cardIndex": 4034,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_024.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_025@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_025.cs",
+      "sourceEffectClassName": "LM_025",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_025.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_025.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "counter": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-025#4035@base",
+          "cardId": "LM-025",
+          "cardIndex": 4035,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Digimon/LM_025.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_026@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_026.cs",
+      "sourceEffectClassName": "LM_026",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_026.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_026.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone",
+        "WhenRemoveField"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "counter": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenRemoveField",
+        "GetCardEffectFromHashtable",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCardNamesClass",
+        "ChangeDPDeleteEffectMaxDPClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCardNamesClass",
+        "SetUpChangeDPDeleteEffectMaxDPClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-026#4036@base",
+          "cardId": "LM-026",
+          "cardIndex": 4036,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_026.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_027@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_027.cs",
+      "sourceEffectClassName": "LM_027",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_027.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_027.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-027#4037@base",
+          "cardId": "LM-027",
+          "cardIndex": 4037,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_027.asset"
+        },
+        {
+          "definitionStableId": "LM-027#7873@P1",
+          "cardId": "LM-027",
+          "cardIndex": 7873,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_027_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-027#7874@P2",
+          "cardId": "LM-027",
+          "cardIndex": 7874,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_027_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-027#7875@P3",
+          "cardId": "LM-027",
+          "cardIndex": 7875,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_027_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_028@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_028.cs",
+      "sourceEffectClassName": "LM_028",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_028.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_028.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-028#4038@base",
+          "cardId": "LM-028",
+          "cardIndex": 4038,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_028.asset"
+        },
+        {
+          "definitionStableId": "LM-028#7876@P1",
+          "cardId": "LM-028",
+          "cardIndex": 7876,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_028_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-028#7877@P2",
+          "cardId": "LM-028",
+          "cardIndex": 7877,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_028_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-028#7878@P3",
+          "cardId": "LM-028",
+          "cardIndex": 7878,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_028_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_029@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_029.cs",
+      "sourceEffectClassName": "LM_029",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_029.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_029.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-029#4039@base",
+          "cardId": "LM-029",
+          "cardIndex": 4039,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_029.asset"
+        },
+        {
+          "definitionStableId": "LM-029#7879@P1",
+          "cardId": "LM-029",
+          "cardIndex": 7879,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_029_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-029#7880@P2",
+          "cardId": "LM-029",
+          "cardIndex": 7880,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_029_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-029#7881@P3",
+          "cardId": "LM-029",
+          "cardIndex": 7881,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_029_P3.asset"
+        },
+        {
+          "definitionStableId": "LM-029#7882@P4",
+          "cardId": "LM-029",
+          "cardIndex": 7882,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_029_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "LM_030@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_030.cs",
+      "sourceEffectClassName": "LM_030",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_030.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_030.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-030#4040@base",
+          "cardId": "LM-030",
+          "cardIndex": 4040,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_030.asset"
+        },
+        {
+          "definitionStableId": "LM-030#7883@P1",
+          "cardId": "LM-030",
+          "cardIndex": 7883,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_030_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-030#7884@P2",
+          "cardId": "LM-030",
+          "cardIndex": 7884,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_030_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-030#7885@P3",
+          "cardId": "LM-030",
+          "cardIndex": 7885,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_030_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_031@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_031.cs",
+      "sourceEffectClassName": "LM_031",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_031.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_031.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-031#4041@base",
+          "cardId": "LM-031",
+          "cardIndex": 4041,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_031.asset"
+        },
+        {
+          "definitionStableId": "LM-031#7886@P1",
+          "cardId": "LM-031",
+          "cardIndex": 7886,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_031_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-031#7887@P2",
+          "cardId": "LM-031",
+          "cardIndex": 7887,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_031_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-031#7888@P3",
+          "cardId": "LM-031",
+          "cardIndex": 7888,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_031_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_032@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_032.cs",
+      "sourceEffectClassName": "LM_032",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_032.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_032.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnStartTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-032#4042@base",
+          "cardId": "LM-032",
+          "cardIndex": 4042,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_032.asset"
+        },
+        {
+          "definitionStableId": "LM-032#7889@P1",
+          "cardId": "LM-032",
+          "cardIndex": 7889,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_032_P1.asset"
+        },
+        {
+          "definitionStableId": "LM-032#7890@P2",
+          "cardId": "LM-032",
+          "cardIndex": 7890,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_032_P2.asset"
+        },
+        {
+          "definitionStableId": "LM-032#7891@P3",
+          "cardId": "LM-032",
+          "cardIndex": 7891,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_032_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "LM_033@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_033.cs",
+      "sourceEffectClassName": "LM_033",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_033.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_033.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-033#4043@base",
+          "cardId": "LM-033",
+          "cardIndex": 4043,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_033.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_034@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_034.cs",
+      "sourceEffectClassName": "LM_034",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_034.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_034.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-034#4044@base",
+          "cardId": "LM-034",
+          "cardIndex": 4044,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_034.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_035@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_035.cs",
+      "sourceEffectClassName": "LM_035",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_035.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_035.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-035#4045@base",
+          "cardId": "LM-035",
+          "cardIndex": 4045,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_035.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_036@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_036.cs",
+      "sourceEffectClassName": "LM_036",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_036.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_036.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-036#4046@base",
+          "cardId": "LM-036",
+          "cardIndex": 4046,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_036.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_037@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_037.cs",
+      "sourceEffectClassName": "LM_037",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_037.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_037.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-037#4047@base",
+          "cardId": "LM-037",
+          "cardIndex": 4047,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_037.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_038@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_038.cs",
+      "sourceEffectClassName": "LM_038",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_038.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_038.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-038#4048@base",
+          "cardId": "LM-038",
+          "cardIndex": 4048,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_038.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_039@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_039.cs",
+      "sourceEffectClassName": "LM_039",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_039.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_039.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectAttackTarget",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "BlitzProcess",
+        "CanActivateBlitz",
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonSAttack",
+        "DeckBouncePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSwitchAttackTargetClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotSwitchAttackTargetClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-039#5440@base",
+          "cardId": "LM-039",
+          "cardIndex": 5440,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Digimon/LM_039.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_040@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_040.cs",
+      "sourceEffectClassName": "LM_040",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_040.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_040.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea",
+        "Executing"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "IcecladSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "ChangeSecurityDigimonCardDPPlayerEffect",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-040#5441@base",
+          "cardId": "LM-040",
+          "cardIndex": 5441,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_040.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_041@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_041.cs",
+      "sourceEffectClassName": "LM_041",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_041.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_041.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainCanNotSuspendPlayerEffect",
+        "HasMatchConditionOpponentsPermanent",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-041#5442@base",
+          "cardId": "LM-041",
+          "cardIndex": 5442,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Digimon/LM_041.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_042@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_042.cs",
+      "sourceEffectClassName": "LM_042",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_042.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_042.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainCantUnsuspendUntilOpponentTurnEnd",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DisableEffectClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpDisableEffectClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-042#5443@base",
+          "cardId": "LM-042",
+          "cardIndex": 5443,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_042.asset"
+        },
+        {
+          "definitionStableId": "LM-042#9210@P1",
+          "cardId": "LM-042",
+          "cardIndex": 9210,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Digimon/LM_042_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "LM_043@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_043.cs",
+      "sourceEffectClassName": "LM_043",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_043.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_043.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect",
+        "CollisionSelfStaticEffect",
+        "ScapegoatSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleAreaDigimon",
+        "IsMinCost",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-043#5444@base",
+          "cardId": "LM-043",
+          "cardIndex": 5444,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Digimon/LM_043.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_044@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_044.cs",
+      "sourceEffectClassName": "LM_044",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_044.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_044.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlastDigivolveEffect",
+        "BlockerSelfStaticEffect",
+        "RetaliationSelfEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "HasMatchConditionOpponentsPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-044#5445@base",
+          "cardId": "LM-044",
+          "cardIndex": 5445,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Digimon/LM_044.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_045@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_045.cs",
+      "sourceEffectClassName": "LM_045",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_045.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_045.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-045#7461@base",
+          "cardId": "LM-045",
+          "cardIndex": 7461,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_045.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_046@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_046.cs",
+      "sourceEffectClassName": "LM_046",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_046.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_046.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-046#7462@base",
+          "cardId": "LM-046",
+          "cardIndex": 7462,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_046.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_047@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_047.cs",
+      "sourceEffectClassName": "LM_047",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_047.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_047.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-047#7463@base",
+          "cardId": "LM-047",
+          "cardIndex": 7463,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_047.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_048@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_048.cs",
+      "sourceEffectClassName": "LM_048",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_048.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_048.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-048#7464@base",
+          "cardId": "LM-048",
+          "cardIndex": 7464,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_048.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_049@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_049.cs",
+      "sourceEffectClassName": "LM_049",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_049.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_049.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-049#7465@base",
+          "cardId": "LM-049",
+          "cardIndex": 7465,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_049.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_050@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_050.cs",
+      "sourceEffectClassName": "LM_050",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_050.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_050.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-050#7466@base",
+          "cardId": "LM-050",
+          "cardIndex": 7466,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_050.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_051@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_051.cs",
+      "sourceEffectClassName": "LM_051",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_051.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_051.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-051#7812@base",
+          "cardId": "LM-051",
+          "cardIndex": 7812,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_051.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_052@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_052.cs",
+      "sourceEffectClassName": "LM_052",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_052.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_052.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-052#7813@base",
+          "cardId": "LM-052",
+          "cardIndex": 7813,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_052.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_053@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_053.cs",
+      "sourceEffectClassName": "LM_053",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_053.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_053.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "Gain2MemoryOptionDelayEffect",
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "PlaceDelayOptionCards",
+        "RevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-053#7814@base",
+          "cardId": "LM-053",
+          "cardIndex": 7814,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_053.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_054@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_054.cs",
+      "sourceEffectClassName": "LM_054",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_054.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_054.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-054#7811@base",
+          "cardId": "LM-054",
+          "cardIndex": 7811,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_054.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_055@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_055.cs",
+      "sourceEffectClassName": "LM_055",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_055.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_055.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-055#7815@base",
+          "cardId": "LM-055",
+          "cardIndex": 7815,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_055.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_056@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_056.cs",
+      "sourceEffectClassName": "LM_056",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_056.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_056.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-056#7816@base",
+          "cardId": "LM-056",
+          "cardIndex": 7816,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_056.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_057@DCGO/Assets/Scripts/CardEffect/LM/Red/LM_057.cs",
+      "sourceEffectClassName": "LM_057",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Red/LM_057.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Red/LM_057.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-057#7892@base",
+          "cardId": "LM-057",
+          "cardIndex": 7892,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Red/Option/LM_057.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_058@DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_058.cs",
+      "sourceEffectClassName": "LM_058",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Blue/LM_058.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Blue/LM_058.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-058#7893@base",
+          "cardId": "LM-058",
+          "cardIndex": 7893,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Blue/Option/LM_058.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_059@DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_059.cs",
+      "sourceEffectClassName": "LM_059",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Yellow/LM_059.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Yellow/LM_059.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-059#7894@base",
+          "cardId": "LM-059",
+          "cardIndex": 7894,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Yellow/Option/LM_059.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_060@DCGO/Assets/Scripts/CardEffect/LM/Green/LM_060.cs",
+      "sourceEffectClassName": "LM_060",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Green/LM_060.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Green/LM_060.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-060#7895@base",
+          "cardId": "LM-060",
+          "cardIndex": 7895,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Green/Option/LM_060.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_061@DCGO/Assets/Scripts/CardEffect/LM/Black/LM_061.cs",
+      "sourceEffectClassName": "LM_061",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Black/LM_061.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Black/LM_061.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-061#7896@base",
+          "cardId": "LM-061",
+          "cardIndex": 7896,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Black/Option/LM_061.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "LM_062@DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_062.cs",
+      "sourceEffectClassName": "LM_062",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/LM/Purple/LM_062.cs",
+      "sourceSetId": "LM",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/LM.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/LM/Purple/LM_062.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "LM-062#7897@base",
+          "cardId": "LM-062",
+          "cardIndex": 7897,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/LM/Purple/Option/LM_062.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    }
+  ]
+}

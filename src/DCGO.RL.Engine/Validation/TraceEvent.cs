@@ -28,4 +28,7 @@ public sealed record TraceEvent(
     DecisionPoint? DecisionPoint = null,
     SelectionResult? SelectionResult = null,
     DecisionResult? DecisionResult = null,
-    string Details = "");
+    string Details = "",
+    ulong? Seed = null,
+    RuleVisibleSnapshot? RuleVisibleStateBefore = null,
+    RuleVisibleSnapshot? RuleVisibleStateAfter = null);

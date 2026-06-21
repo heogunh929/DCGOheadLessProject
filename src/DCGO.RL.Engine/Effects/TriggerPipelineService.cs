@@ -1290,7 +1290,7 @@ public sealed class TriggerPipelineService
                 TriggerStackFrameKind.Background,
                 depth: frame.Depth,
                 hadCandidate: frame.BackgroundEffects.Count > 0,
-                hadResolutionAttempt: false,
+                hadResolutionAttempt: frame.HadResolutionAttempt,
                 afterEffectsCandidateSignatures: frame.AfterEffectsCandidateSignatures);
         }
 
@@ -1323,7 +1323,7 @@ public sealed class TriggerPipelineService
             return null;
         }
 
-        var signature = CreateAfterEffectsSignature(prepared);
+        var signature = CreateAfterEffectsSignature(state, prepared);
         if (completedFrame.AfterEffectsCandidateSignatures.Contains(signature, StringComparer.Ordinal))
         {
             throw new UnsupportedMechanicException(
@@ -1376,13 +1376,42 @@ public sealed class TriggerPipelineService
         return next;
     }
 
-    private static string CreateAfterEffectsSignature(PreparedTriggerGroup prepared) =>
-        string.Join(
+    private static string CreateAfterEffectsSignature(GameState state, PreparedTriggerGroup prepared)
+    {
+        var contextValues = (prepared.Context.Values ?? new Dictionary<string, object?>())
+            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
+            .Select(pair => $"{pair.Key}={FormatAfterEffectsSignatureValue(pair.Value)}");
+        var effectFingerprints = prepared.QueuedEffects
+            .Concat(prepared.BackgroundEffects)
+            .Select(effect => string.Join(
+                ";",
+                effect.StableId,
+                effect.Timing,
+                effect.SourceCard?.Value.ToString() ?? "null",
+                effect.SourcePermanent?.Value.ToString() ?? "null",
+                effect.Controller?.Value.ToString() ?? "null"))
+            .OrderBy(fingerprint => fingerprint, StringComparer.Ordinal);
+
+        return string.Join(
             "|",
-            prepared.QueuedEffects
-                .Concat(prepared.BackgroundEffects)
-                .Select(effect => effect.StableId)
-                .OrderBy(stableId => stableId, StringComparer.Ordinal));
+            $"state={state.ComputeStateHash()}",
+            $"timing={prepared.Context.Timing}",
+            $"player={prepared.Context.Player?.Value.ToString() ?? "null"}",
+            $"sourceCard={prepared.Context.SourceCard?.Value.ToString() ?? "null"}",
+            $"sourcePermanent={prepared.Context.SourcePermanent?.Value.ToString() ?? "null"}",
+            $"values={string.Join(",", contextValues)}",
+            $"effects={string.Join(",", effectFingerprints)}");
+    }
+
+    private static string FormatAfterEffectsSignatureValue(object? value) =>
+        value switch
+        {
+            null => "null",
+            PlayerId player => $"player:{player.Value}",
+            CardInstanceId card => $"card:{card.Value}",
+            PermanentId permanent => $"permanent:{permanent.Value}",
+            _ => value.ToString() ?? string.Empty,
+        };
 
     private static bool HasPreparedEffects(PreparedTriggerGroup prepared) =>
         prepared.QueuedEffects.Count > 0 || prepared.BackgroundEffects.Count > 0;

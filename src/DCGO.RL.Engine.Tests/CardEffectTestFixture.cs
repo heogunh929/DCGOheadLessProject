@@ -112,6 +112,8 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
     private readonly bool _isCounterEffect;
     private readonly bool _isSkippable;
     private readonly bool _counterSelectionConsumesOptional;
+    private readonly Func<EffectContext, bool>? _canTrigger;
+    private readonly Func<EffectContext, bool>? _canActivate;
 
     public SelectionPrimitiveCardScript(
         string cardId,
@@ -126,7 +128,9 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         bool isOptional = false,
         bool isCounterEffect = false,
         bool isSkippable = false,
-        bool counterSelectionConsumesOptional = false)
+        bool counterSelectionConsumesOptional = false,
+        Func<EffectContext, bool>? canTrigger = null,
+        Func<EffectContext, bool>? canActivate = null)
     {
         _mode = mode;
         _targetController = targetController;
@@ -139,6 +143,8 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         _isCounterEffect = isCounterEffect;
         _isSkippable = isSkippable;
         _counterSelectionConsumesOptional = counterSelectionConsumesOptional;
+        _canTrigger = canTrigger;
+        _canActivate = canActivate;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -158,13 +164,15 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
                 IsOptional: _isOptional,
+                CanTrigger: _canTrigger,
                 CreateSelectionRequest: effectContext => CreateSelectionRequest(
                     effectContext.State,
                     context.Controller ?? effectContext.Player ?? PlayerId.Player0),
                 SelectionContinuation: ApplySelection,
                 IsCounterEffect: _isCounterEffect,
                 IsSkippable: _isSkippable,
-                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional),
+                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional,
+                CanActivate: _canActivate),
         };
 
     public void Resolve(CardScriptExecutionContext context) =>
@@ -346,6 +354,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
     private readonly bool _isSkippable;
     private readonly bool _counterSelectionConsumesOptional;
     private readonly bool _isOptional;
+    private readonly Func<EffectContext, bool>? _canActivate;
 
     public TimingMemoryCardScript(
         string cardId,
@@ -359,7 +368,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
         bool isCounterEffect = false,
         bool isSkippable = false,
         bool counterSelectionConsumesOptional = false,
-        bool isOptional = false)
+        bool isOptional = false,
+        Func<EffectContext, bool>? canActivate = null)
     {
         _timing = timing;
         _amount = amount;
@@ -371,6 +381,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
         _isSkippable = isSkippable;
         _counterSelectionConsumesOptional = counterSelectionConsumesOptional;
         _isOptional = isOptional;
+        _canActivate = canActivate;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -396,7 +407,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
                 SourcePersistencePolicy: _sourcePersistencePolicy,
                 IsCounterEffect: _isCounterEffect,
                 IsSkippable: _isSkippable,
-                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional),
+                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional,
+                CanActivate: _canActivate),
         };
 
     public void Resolve(CardScriptExecutionContext context)

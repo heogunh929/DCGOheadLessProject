@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": {
+    "kind": "local-manifest",
+    "path": "DCGO",
+    "fileManifest": "docs/source/dcgo-source-file-manifest.json",
+    "fileManifestSha256": "d0b46c4d82901494e2cfa51c423dc70a7f8f29bbd0bc38eda6c91b7ebd90ef30",
+    "fileCount": 26882,
+    "approvedAt": "2026-06-21T17:46:31.2087982+09:00"
+  },
+  "manifestPath": "docs/generated/full-card-pool-manifest.json",
+  "manifestSha256": "a254765908d21d436dece44216858cd0e70ec14776a4107f9532a4df969ad269",
+  "counts": {
+    "total": 42,
+    "missingSourceBody": 39,
+    "parseFailure": 0,
+    "duplicateCardIndex": 0,
+    "duplicateDefinitionStableId": 0,
+    "nonGameplayAsset": 1
+  },
+  "anomalies": [
+    {
+      "code": "DuplicateCardEffectSourcePath",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Blue/DigiEgg/BT25_002.asset",
+      "message": "CardEffectClassName에 대응하는 source 파일이 여러 개입니다.",
+      "details": {
+        "cardId": "BT25-002",
+        "cardIndex": 7964,
+        "variantKey": "base",
+        "cardEffectClassName": "BT25_002",
+        "sourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_002.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_002.cs"
+        ]
+      }
+    },
+    {
+      "code": "DuplicateEffectSourceClassName",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_002.cs",
+      "message": "동일 CardEffect source class/file name이 여러 source path에서 발견됐습니다.",
+      "details": {
+        "effectClassName": "BT25_002",
+        "paths": [
+          "DCGO/Assets/Scripts/CardEffect/BT25/Blue/BT25_002.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_002.cs"
+        ]
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_055_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT10-055",
+        "cardIndex": 4326,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT10_055"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Red/Digimon/BT14_009_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT14-009",
+        "cardIndex": 8167,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT14_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Red/Digimon/BT14_009_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT14-009",
+        "cardIndex": 8168,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT14_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Red/Digimon/BT14_009_P3.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT14-009",
+        "cardIndex": 8169,
+        "variantKey": "P3",
+        "cardEffectClassName": "BT14_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Red/Digimon/BT14_009_P4.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT14-009",
+        "cardIndex": 8170,
+        "variantKey": "P4",
+        "cardEffectClassName": "BT14_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT18/Blue/Digimon/BT18_020.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT18-020",
+        "cardIndex": 3880,
+        "variantKey": "base",
+        "cardEffectClassName": "BT18_020"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Red/Digimon/BT2_009_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT2-009",
+        "cardIndex": 8305,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT2_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Red/Digimon/BT2_009_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT2-009",
+        "cardIndex": 8306,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT2_009"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Yellow/DigiEgg/BT25_003.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT25-003",
+        "cardIndex": 7965,
+        "variantKey": "base",
+        "cardEffectClassName": "BT25_003"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_061_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT3-061",
+        "cardIndex": 8480,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT3_061"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Black/Digimon/BT3_062_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT3-062",
+        "cardIndex": 8481,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT3_062"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Blue/Digimon/BT3_021_P5.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT3-021",
+        "cardIndex": 8467,
+        "variantKey": "P5",
+        "cardEffectClassName": "BT3_021"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Purple/Digimon/BT3_077_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT3-077",
+        "cardIndex": 8484,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT3_077"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Black/Digimon/BT4_064_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-064",
+        "cardIndex": 8529,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_064"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Black/Digimon/BT4_067_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-067",
+        "cardIndex": 8530,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_067"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Green/Digimon/BT4_052_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-052",
+        "cardIndex": 8521,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_052"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Green/Digimon/BT4_053_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-053",
+        "cardIndex": 8522,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_053"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Purple/Digimon/BT4_077_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-077",
+        "cardIndex": 8535,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_077"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Purple/Digimon/BT4_080_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-080",
+        "cardIndex": 8538,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_080"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Purple/Digimon/BT4_082_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-082",
+        "cardIndex": 8539,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_082"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Red/DigiEgg/BT4_001_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-001",
+        "cardIndex": 8494,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_001"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Yellow/Digimon/BT4_042_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-042",
+        "cardIndex": 8516,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT4_042"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Yellow/Digimon/BT4_043_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT4-043",
+        "cardIndex": 8517,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT4_043"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Black/Digimon/BT5_061_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT5-061",
+        "cardIndex": 8609,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT5_061"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Black/Digimon/BT5_066_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT5-066",
+        "cardIndex": 8612,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT5_066"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Yellow/Digimon/BT5_033_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT5-033",
+        "cardIndex": 8590,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT5_033"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Yellow/Digimon/BT5_033_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT5-033",
+        "cardIndex": 8591,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT5_033"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Yellow/Digimon/BT5_040_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT5-040",
+        "cardIndex": 8596,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT5_040"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Black/Digimon/BT6_055_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT6-055",
+        "cardIndex": 8698,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT6_055"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Blue/Digimon/BT6_021_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT6-021",
+        "cardIndex": 8684,
+        "variantKey": "P2",
+        "cardEffectClassName": "BT6_021"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT6/Green/Digimon/BT6_046_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT6-046",
+        "cardIndex": 8693,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT6_046"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT7/Green/Digimon/BT7_049_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT7-049",
+        "cardIndex": 8780,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT7_049"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT7/Yellow/Digimon/BT7_031_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT7-031",
+        "cardIndex": 8772,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT7_031"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Purple/Digimon/BT8_075_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT8-075",
+        "cardIndex": 8890,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT8_075"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Red/Digimon/BT8_011_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT8-011",
+        "cardIndex": 8848,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT8_011"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Yellow/Digimon/BT8_037_P0.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT8-037",
+        "cardIndex": 8863,
+        "variantKey": "P0",
+        "cardEffectClassName": "BT8_037"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/BT9/Green/Digimon/BT9_047_P1.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "BT9-047",
+        "cardIndex": 8976,
+        "variantKey": "P1",
+        "cardEffectClassName": "BT9_047"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST12/Red/Digimon/ST12_03_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "ST12-03",
+        "cardIndex": 9030,
+        "variantKey": "P2",
+        "cardEffectClassName": "ST12_03"
+      }
+    },
+    {
+      "code": "MissingCardEffectSourceBody",
+      "severity": "needs-review",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST3/Yellow/Digimon/ST3_02_P2.asset",
+      "message": "CardEffectClassName에 대응하는 CardEffect source 파일을 찾지 못했습니다.",
+      "details": {
+        "cardId": "ST3-02",
+        "cardIndex": 4977,
+        "variantKey": "P2",
+        "cardEffectClassName": "ST3_02"
+      }
+    },
+    {
+      "code": "NonGameplayAssetNoCardId",
+      "severity": "info",
+      "assetPath": "DCGO/Assets/CardBaseEntity/CardEntity_JSONLoader.asset",
+      "message": "CardID가 없어 gameplay card asset manifest record에서는 제외했습니다.",
+      "details": {
+        "assetName": "CardEntity_JSONLoader",
+        "cardIndex": null
+      }
+    }
+  ]
+}

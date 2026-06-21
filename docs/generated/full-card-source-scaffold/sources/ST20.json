@@ -1,0 +1,1038 @@
+{
+  "schemaVersion": 1,
+  "setId": "ST20",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "ST20_01@DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_01.cs",
+      "sourceEffectClassName": "ST20_01",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_01.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Black/ST20_01.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-01#5263@base",
+          "cardId": "ST20-01",
+          "cardIndex": 5263,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/DigiEgg/ST20_01.asset"
+        },
+        {
+          "definitionStableId": "ST20-01#9051@P2",
+          "cardId": "ST20-01",
+          "cardIndex": 9051,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/DigiEgg/ST20_01_P2.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_02@DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_02.cs",
+      "sourceEffectClassName": "ST20_02",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_02.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Red/ST20_02.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-02#5264@base",
+          "cardId": "ST20-02",
+          "cardIndex": 5264,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_02.asset"
+        },
+        {
+          "definitionStableId": "ST20-02#9052@P1",
+          "cardId": "ST20-02",
+          "cardIndex": 9052,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_02_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_03@DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_03.cs",
+      "sourceEffectClassName": "ST20_03",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_03.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Red/ST20_03.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "DigivolveIntoHandOrTrashCard",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-03#5265@base",
+          "cardId": "ST20-03",
+          "cardIndex": 5265,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_03.asset"
+        },
+        {
+          "definitionStableId": "ST20-03#9053@P1",
+          "cardId": "ST20-03",
+          "cardIndex": 9053,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_03_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_04@DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_04.cs",
+      "sourceEffectClassName": "ST20_04",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_04.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Red/ST20_04.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectAttackTarget"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "AllianceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentDigivolving",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "GainAlliance",
+        "GetHashtablesFromHashtable",
+        "GetPermanentFromHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetAfterOnAttackCoroutine",
+        "SetHashString",
+        "SetIsSkippableFunction",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-04#5266@base",
+          "cardId": "ST20-04",
+          "cardIndex": 5266,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_04.asset"
+        },
+        {
+          "definitionStableId": "ST20-04#9054@P1",
+          "cardId": "ST20-04",
+          "cardIndex": 9054,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Digimon/ST20_04_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_05@DCGO/Assets/Scripts/CardEffect/ST20/Yellow/ST20_05.cs",
+      "sourceEffectClassName": "ST20_05",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Yellow/ST20_05.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Yellow/ST20_05.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "PlaySelfDigimonAfterBattleSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-05#5267@base",
+          "cardId": "ST20-05",
+          "cardIndex": 5267,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Yellow/Digimon/ST20_05.asset"
+        },
+        {
+          "definitionStableId": "ST20-05#9055@P1",
+          "cardId": "ST20-05",
+          "cardIndex": 9055,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Yellow/Digimon/ST20_05_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_06@DCGO/Assets/Scripts/CardEffect/ST20/Yellow/ST20_06.cs",
+      "sourceEffectClassName": "ST20_06",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Yellow/ST20_06.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Yellow/ST20_06.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectAttackTarget"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "AllianceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentDigivolving",
+        "DigivolveIntoHandOrTrashCard",
+        "GainAlliance",
+        "GetHashtablesFromHashtable",
+        "GetPermanentFromHashtable",
+        "HasMatchConditionOwnersHand",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetAfterOnAttackCoroutine",
+        "SetHashString",
+        "SetIsSkippableFunction",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-06#5268@base",
+          "cardId": "ST20-06",
+          "cardIndex": 5268,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Yellow/Digimon/ST20_06.asset"
+        },
+        {
+          "definitionStableId": "ST20-06#9056@P1",
+          "cardId": "ST20-06",
+          "cardIndex": 9056,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Yellow/Digimon/ST20_06_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_07@DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_07.cs",
+      "sourceEffectClassName": "ST20_07",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_07.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Green/ST20_07.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOpponentTurn"
+      ],
+      "classApi": [
+        "CannotReduceCostClass"
+      ],
+      "setMethods": [
+        "SetUpCannotReduceCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-07#5269@base",
+          "cardId": "ST20-07",
+          "cardIndex": 5269,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_07.asset"
+        },
+        {
+          "definitionStableId": "ST20-07#9057@P1",
+          "cardId": "ST20-07",
+          "cardIndex": 9057,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_07_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_08@DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_08.cs",
+      "sourceEffectClassName": "ST20_08",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_08.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Green/ST20_08.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersHand",
+        "IsExistOnBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-08#5270@base",
+          "cardId": "ST20-08",
+          "cardIndex": 5270,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_08.asset"
+        },
+        {
+          "definitionStableId": "ST20-08#9058@P1",
+          "cardId": "ST20-08",
+          "cardIndex": 9058,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_08_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_09@DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_09.cs",
+      "sourceEffectClassName": "ST20_09",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Green/ST20_09.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Green/ST20_09.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectAttackTarget"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "AllianceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentDigivolving",
+        "GainAlliance",
+        "GetHashtablesFromHashtable",
+        "GetPermanentFromHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetAfterOnAttackCoroutine",
+        "SetHashString",
+        "SetIsSkippableFunction",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-09#5271@base",
+          "cardId": "ST20-09",
+          "cardIndex": 5271,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_09.asset"
+        },
+        {
+          "definitionStableId": "ST20-09#9059@P1",
+          "cardId": "ST20-09",
+          "cardIndex": 9059,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Green/Digimon/ST20_09_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_10@DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_10.cs",
+      "sourceEffectClassName": "ST20_10",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_10.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Black/ST20_10.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-10#5272@base",
+          "cardId": "ST20-10",
+          "cardIndex": 5272,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_10.asset"
+        },
+        {
+          "definitionStableId": "ST20-10#5273@P1",
+          "cardId": "ST20-10",
+          "cardIndex": 5273,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_10_P1.asset"
+        },
+        {
+          "definitionStableId": "ST20-10#9060@P2",
+          "cardId": "ST20-10",
+          "cardIndex": 9060,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_10_P2.asset"
+        },
+        {
+          "definitionStableId": "ST20-10#9061@P3",
+          "cardId": "ST20-10",
+          "cardIndex": 9061,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_10_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "ST20_11@DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_11.cs",
+      "sourceEffectClassName": "ST20_11",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_11.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Black/ST20_11.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnBattleAreaDigimon",
+        "IsMinDP",
+        "IsOpponentEffect",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotAffectedClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotAffectedClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-11#5274@base",
+          "cardId": "ST20-11",
+          "cardIndex": 5274,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_11.asset"
+        },
+        {
+          "definitionStableId": "ST20-11#9062@P1",
+          "cardId": "ST20-11",
+          "cardIndex": 9062,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Digimon/ST20_11_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST20_12@DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_12.cs",
+      "sourceEffectClassName": "ST20_12",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Red/ST20_12.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Red/ST20_12.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "OnStartMainPhase",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentWouldPlay",
+        "CardEffectHashtable",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnHand",
+        "IsOwnerTurn",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-12#5275@base",
+          "cardId": "ST20-12",
+          "cardIndex": 5275,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Red/Tamer/ST20_12.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "ST20_13@DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_13.cs",
+      "sourceEffectClassName": "ST20_13",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_13.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Black/ST20_13.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "None",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerStaticEffect",
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentWouldPlay",
+        "CardEffectHashtable",
+        "IsExistOnBattleArea",
+        "IsExistOnHand",
+        "IsOpponentTurn",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-13#5276@base",
+          "cardId": "ST20-13",
+          "cardIndex": 5276,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Tamer/ST20_13.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "ST20_14@DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_14.cs",
+      "sourceEffectClassName": "ST20_14",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/Black/ST20_14.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/Black/ST20_14.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill",
+        "WhenRemoveField"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerWhenPermanentRemoveField",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "GetPermanentsFromHashtable",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-14#5277@base",
+          "cardId": "ST20-14",
+          "cardIndex": 5277,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/Black/Option/ST20_14.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "ST20_15@DCGO/Assets/Scripts/CardEffect/ST20/White/ST20_15.cs",
+      "sourceEffectClassName": "ST20_15",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST20/White/ST20_15.cs",
+      "sourceSetId": "ST20",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST20.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST20/White/ST20_15.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDPStaticEffect",
+        "ReplaceTopSecurityWithFaceUpOptionMainEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerSecurityEffect",
+        "HasMatchConditionOwnersHand",
+        "IsExistInSecurity",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST20-15#5278@base",
+          "cardId": "ST20-15",
+          "cardIndex": 5278,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST20/White/Option/ST20_15.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    }
+  ]
+}

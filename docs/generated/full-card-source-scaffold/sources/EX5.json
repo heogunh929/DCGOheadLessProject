@@ -1,0 +1,5187 @@
+{
+  "schemaVersion": 1,
+  "setId": "EX5",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "EX5_001@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_001.cs",
+      "sourceEffectClassName": "EX5_001",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_001.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_001.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAddDigivolutionCards"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAddDigivolutionCard",
+        "DigivolveIntoHandOrTrashCard",
+        "IsExistOnBattleArea",
+        "IsFromSameDigimon",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-001#3040@base",
+          "cardId": "EX5-001",
+          "cardIndex": 3040,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/DigiEgg/EX5_001.asset"
+        },
+        {
+          "definitionStableId": "EX5-001#4199@P1",
+          "cardId": "EX5-001",
+          "cardIndex": 4199,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/DigiEgg/EX5_001_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-001#9143@P2",
+          "cardId": "EX5-001",
+          "cardIndex": 9143,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/DigiEgg/EX5_001_P2.asset"
+        },
+        {
+          "definitionStableId": "EX5-001#9144@P3",
+          "cardId": "EX5-001",
+          "cardIndex": 9144,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/DigiEgg/EX5_001_P3.asset"
+        },
+        {
+          "definitionStableId": "EX5-001#9145@P4",
+          "cardId": "EX5-001",
+          "cardIndex": 9145,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/DigiEgg/EX5_001_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "EX5_002@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_002.cs",
+      "sourceEffectClassName": "EX5_002",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_002.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_002.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "DigivolveIntoHandOrTrashCard",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-002#3041@base",
+          "cardId": "EX5-002",
+          "cardIndex": 3041,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/DigiEgg/EX5_002.asset"
+        },
+        {
+          "definitionStableId": "EX5-002#4200@P1",
+          "cardId": "EX5-002",
+          "cardIndex": 4200,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/DigiEgg/EX5_002_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_003@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_003.cs",
+      "sourceEffectClassName": "EX5_003",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_003.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_003.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-003#3042@base",
+          "cardId": "EX5-003",
+          "cardIndex": 3042,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/DigiEgg/EX5_003.asset"
+        },
+        {
+          "definitionStableId": "EX5-003#4201@P1",
+          "cardId": "EX5-003",
+          "cardIndex": 4201,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/DigiEgg/EX5_003_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_004@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_004.cs",
+      "sourceEffectClassName": "EX5_004",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_004.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_004.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-004#3043@base",
+          "cardId": "EX5-004",
+          "cardIndex": 3043,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/DigiEgg/EX5_004.asset"
+        },
+        {
+          "definitionStableId": "EX5-004#4202@P1",
+          "cardId": "EX5-004",
+          "cardIndex": 4202,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/DigiEgg/EX5_004_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_005@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_005.cs",
+      "sourceEffectClassName": "EX5_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_005.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_005.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Deck"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "IsOpponentTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-005#3044@base",
+          "cardId": "EX5-005",
+          "cardIndex": 3044,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/DigiEgg/EX5_005.asset"
+        },
+        {
+          "definitionStableId": "EX5-005#4203@P1",
+          "cardId": "EX5-005",
+          "cardIndex": 4203,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/DigiEgg/EX5_005_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_006@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_006.cs",
+      "sourceEffectClassName": "EX5_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_006.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_006.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-006#3045@base",
+          "cardId": "EX5-006",
+          "cardIndex": 3045,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/DigiEgg/EX5_006.asset"
+        },
+        {
+          "definitionStableId": "EX5-006#4204@P1",
+          "cardId": "EX5-006",
+          "cardIndex": 4204,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/DigiEgg/EX5_006_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_007@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_007.cs",
+      "sourceEffectClassName": "EX5_007",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_007.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_007.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OnStartMainPhase"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-007#3046@base",
+          "cardId": "EX5-007",
+          "cardIndex": 3046,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_007.asset"
+        },
+        {
+          "definitionStableId": "EX5-007#4205@P1",
+          "cardId": "EX5-007",
+          "cardIndex": 4205,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_007_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_008@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_008.cs",
+      "sourceEffectClassName": "EX5_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_008.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_008.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-008#3047@base",
+          "cardId": "EX5-008",
+          "cardIndex": 3047,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_008.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_009@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_009.cs",
+      "sourceEffectClassName": "EX5_009",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_009.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_009.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-009#3048@base",
+          "cardId": "EX5-009",
+          "cardIndex": 3048,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_009.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_010@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_010.cs",
+      "sourceEffectClassName": "EX5_010",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_010.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_010.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-010#3049@base",
+          "cardId": "EX5-010",
+          "cardIndex": 3049,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_010.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_011@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_011.cs",
+      "sourceEffectClassName": "EX5_011",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_011.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_011.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "HasMatchConditionOpponentsPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-011#3050@base",
+          "cardId": "EX5-011",
+          "cardIndex": 3050,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_011.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_012@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_012.cs",
+      "sourceEffectClassName": "EX5_012",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_012.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_012.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeDigivolutionCostStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-012#3051@base",
+          "cardId": "EX5-012",
+          "cardIndex": 3051,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_012.asset"
+        },
+        {
+          "definitionStableId": "EX5-012#4206@P1",
+          "cardId": "EX5-012",
+          "cardIndex": 4206,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_012_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-012#4207@P2",
+          "cardId": "EX5-012",
+          "cardIndex": 4207,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_012_P2.asset"
+        },
+        {
+          "definitionStableId": "EX5-012#4208@P3",
+          "cardId": "EX5-012",
+          "cardIndex": 4208,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_012_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "EX5_013@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_013.cs",
+      "sourceEffectClassName": "EX5_013",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_013.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_013.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnCounterTiming",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnAttack",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonSAttack",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsMaxDP",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-013#3052@base",
+          "cardId": "EX5-013",
+          "cardIndex": 3052,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_013.asset"
+        },
+        {
+          "definitionStableId": "EX5-013#4209@P1",
+          "cardId": "EX5-013",
+          "cardIndex": 4209,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_013_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_014@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_014.cs",
+      "sourceEffectClassName": "EX5_014",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_014.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_014.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "OnLoseSecurity"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlitzSelfEffect",
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenLoseSecurity",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-014#3053@base",
+          "cardId": "EX5-014",
+          "cardIndex": 3053,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_014.asset"
+        },
+        {
+          "definitionStableId": "EX5-014#4210@P1",
+          "cardId": "EX5-014",
+          "cardIndex": 4210,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_014_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_015@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_015.cs",
+      "sourceEffectClassName": "EX5_015",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_015.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_015.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "DigiEggDeck",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenRemoveField",
+        "IsByBattle",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-015#3054@base",
+          "cardId": "EX5-015",
+          "cardIndex": 3054,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_015.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_016@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_016.cs",
+      "sourceEffectClassName": "EX5_016",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_016.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_016.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OnStartMainPhase"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "BouncePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-016#3055@base",
+          "cardId": "EX5-016",
+          "cardIndex": 3055,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_016.asset"
+        },
+        {
+          "definitionStableId": "EX5-016#4211@P1",
+          "cardId": "EX5-016",
+          "cardIndex": 4211,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_016_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_017@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_017.cs",
+      "sourceEffectClassName": "EX5_017",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_017.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_017.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-017#3056@base",
+          "cardId": "EX5-017",
+          "cardIndex": 3056,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_017.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_018@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_018.cs",
+      "sourceEffectClassName": "EX5_018",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_018.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_018.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "DigiEggDeck"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenRemoveField",
+        "IsByBattle",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-018#3057@base",
+          "cardId": "EX5-018",
+          "cardIndex": 3057,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_018.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_019@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_019.cs",
+      "sourceEffectClassName": "EX5_019",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_019.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_019.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-019#3058@base",
+          "cardId": "EX5-019",
+          "cardIndex": 3058,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_019.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_020@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_020.cs",
+      "sourceEffectClassName": "EX5_020",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_020.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_020.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "ChangeDigivolutionCostStaticEffect",
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSuspendClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotSuspendClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-020#3059@base",
+          "cardId": "EX5-020",
+          "cardIndex": 3059,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_020.asset"
+        },
+        {
+          "definitionStableId": "EX5-020#4212@P1",
+          "cardId": "EX5-020",
+          "cardIndex": 4212,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_020_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-020#4213@P2",
+          "cardId": "EX5-020",
+          "cardIndex": 4213,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_020_P2.asset"
+        },
+        {
+          "definitionStableId": "EX5-020#4214@P3",
+          "cardId": "EX5-020",
+          "cardIndex": 4214,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_020_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "EX5_021@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_021.cs",
+      "sourceEffectClassName": "EX5_021",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_021.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_021.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "OnUseOption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenOwnerUseOption",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-021#3060@base",
+          "cardId": "EX5-021",
+          "cardIndex": 3060,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_021.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_022@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_022.cs",
+      "sourceEffectClassName": "EX5_022",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_022.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_022.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-022#3061@base",
+          "cardId": "EX5-022",
+          "cardIndex": 3061,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_022.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_023@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_023.cs",
+      "sourceEffectClassName": "EX5_023",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_023.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_023.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-023#3062@base",
+          "cardId": "EX5-023",
+          "cardIndex": 3062,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_023.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_024@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_024.cs",
+      "sourceEffectClassName": "EX5_024",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_024.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_024.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsMaxLevel",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-024#3063@base",
+          "cardId": "EX5-024",
+          "cardIndex": 3063,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_024.asset"
+        },
+        {
+          "definitionStableId": "EX5-024#4215@P1",
+          "cardId": "EX5-024",
+          "cardIndex": 4215,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_024_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_025@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_025.cs",
+      "sourceEffectClassName": "EX5_025",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_025.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_025.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnDigivolutionCardDiscarded",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnTrashDigivolutionCard",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSuspendClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpCanNotSuspendClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-025#3064@base",
+          "cardId": "EX5-025",
+          "cardIndex": 3064,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_025.asset"
+        },
+        {
+          "definitionStableId": "EX5-025#4216@P1",
+          "cardId": "EX5-025",
+          "cardIndex": 4216,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_025_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-025#9146@P2",
+          "cardId": "EX5-025",
+          "cardIndex": 9146,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_025_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "EX5_026@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_026.cs",
+      "sourceEffectClassName": "EX5_026",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_026.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_026.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetEffectSourcePermanent",
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddSkillClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-026#3065@base",
+          "cardId": "EX5-026",
+          "cardIndex": 3065,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_026.asset"
+        },
+        {
+          "definitionStableId": "EX5-026#4217@P1",
+          "cardId": "EX5-026",
+          "cardIndex": 4217,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_026_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-026#4220@P2",
+          "cardId": "EX5-026",
+          "cardIndex": 4220,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_026_P2.asset"
+        },
+        {
+          "definitionStableId": "EX5-026#4223@P3",
+          "cardId": "EX5-026",
+          "cardIndex": 4223,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Digimon/EX5_026_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "EX5_027@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_027.cs",
+      "sourceEffectClassName": "EX5_027",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_027.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_027.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-027#3066@base",
+          "cardId": "EX5-027",
+          "cardIndex": 3066,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_027.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_028@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_028.cs",
+      "sourceEffectClassName": "EX5_028",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_028.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_028.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-028#3067@base",
+          "cardId": "EX5-028",
+          "cardIndex": 3067,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_028.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_029@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+      "sourceEffectClassName": "EX5_029",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_029.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "AfterPayCost",
+        "None",
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "background": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddEffectToPlayer",
+        "CanTriggerOnAttack",
+        "CanTriggerWhenPermanentWouldDigivolve",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsBackgroundProcess",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-029#3068@base",
+          "cardId": "EX5-029",
+          "cardIndex": 3068,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_029.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_030@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_030.cs",
+      "sourceEffectClassName": "EX5_030",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_030.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_030.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnAttack",
+        "CanTriggerOnDeletion",
+        "ChangeDigimonDP",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCardNamesClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCardNamesClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-030#3069@base",
+          "cardId": "EX5-030",
+          "cardIndex": 3069,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_030.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_031@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_031.cs",
+      "sourceEffectClassName": "EX5_031",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_031.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_031.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-031#3070@base",
+          "cardId": "EX5-031",
+          "cardIndex": 3070,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_031.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_032@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_032.cs",
+      "sourceEffectClassName": "EX5_032",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_032.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_032.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect",
+        "FortitudeSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "customPermanentMessageArray_ChangeDP"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-032#3071@base",
+          "cardId": "EX5-032",
+          "cardIndex": 3071,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_032.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_033@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_033.cs",
+      "sourceEffectClassName": "EX5_033",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_033.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_033.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BarrierSelfEffect",
+        "ChangeSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "GainRush",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddSkillClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddSkillClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-033#3072@base",
+          "cardId": "EX5-033",
+          "cardIndex": 3072,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_033.asset"
+        },
+        {
+          "definitionStableId": "EX5-033#4226@P1",
+          "cardId": "EX5-033",
+          "cardIndex": 4226,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_033_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_034@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_034.cs",
+      "sourceEffectClassName": "EX5_034",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_034.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_034.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentSuspends",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-034#3073@base",
+          "cardId": "EX5-034",
+          "cardIndex": 3073,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_034.asset"
+        },
+        {
+          "definitionStableId": "EX5-034#4227@P1",
+          "cardId": "EX5-034",
+          "cardIndex": 4227,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_034_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_035@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_035.cs",
+      "sourceEffectClassName": "EX5_035",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_035.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_035.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "RevealDeckTopCardsAndProcessForAll"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-035#3074@base",
+          "cardId": "EX5-035",
+          "cardIndex": 3074,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_035.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_036@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_036.cs",
+      "sourceEffectClassName": "EX5_036",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_036.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_036.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect",
+        "FortitudeSelfEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-036#3075@base",
+          "cardId": "EX5-036",
+          "cardIndex": 3075,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_036.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_037@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_037.cs",
+      "sourceEffectClassName": "EX5_037",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_037.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_037.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone",
+        "OnUseOption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenOwnerUseOption",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-037#3076@base",
+          "cardId": "EX5-037",
+          "cardIndex": 3076,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_037.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_038@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_038.cs",
+      "sourceEffectClassName": "EX5_038",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_038.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_038.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEndBattle",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOwnerPermanent",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-038#3077@base",
+          "cardId": "EX5-038",
+          "cardIndex": 3077,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_038.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_039@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_039.cs",
+      "sourceEffectClassName": "EX5_039",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_039.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_039.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect",
+        "FortitudeSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-039#3078@base",
+          "cardId": "EX5-039",
+          "cardIndex": 3078,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_039.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_040@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_040.cs",
+      "sourceEffectClassName": "EX5_040",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_040.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_040.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenPermanentSuspends",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-040#3079@base",
+          "cardId": "EX5-040",
+          "cardIndex": 3079,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_040.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_041@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_041.cs",
+      "sourceEffectClassName": "EX5_041",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_041.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_041.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainCanNotUnsuspendPlayerEffect",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-041#3080@base",
+          "cardId": "EX5-041",
+          "cardIndex": 3080,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_041.asset"
+        },
+        {
+          "definitionStableId": "EX5-041#4228@P1",
+          "cardId": "EX5-041",
+          "cardIndex": 4228,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_041_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_042@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_042.cs",
+      "sourceEffectClassName": "EX5_042",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_042.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_042.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "FortitudeSelfEffect",
+        "RushStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards",
+        "RevealDeckTopCardsAndProcessForAll"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-042#3081@base",
+          "cardId": "EX5-042",
+          "cardIndex": 3081,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_042.asset"
+        },
+        {
+          "definitionStableId": "EX5-042#4229@P1",
+          "cardId": "EX5-042",
+          "cardIndex": 4229,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_042_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_043@DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_043.cs",
+      "sourceEffectClassName": "EX5_043",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Green/EX5_043.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Green/EX5_043.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-043#3082@base",
+          "cardId": "EX5-043",
+          "cardIndex": 3082,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_043.asset"
+        },
+        {
+          "definitionStableId": "EX5-043#4230@P1",
+          "cardId": "EX5-043",
+          "cardIndex": 4230,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Green/Digimon/EX5_043_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_044@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_044.cs",
+      "sourceEffectClassName": "EX5_044",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_044.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_044.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-044#3083@base",
+          "cardId": "EX5-044",
+          "cardIndex": 3083,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_044.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_045@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_045.cs",
+      "sourceEffectClassName": "EX5_045",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_045.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_045.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanActivateSelfOnDeletionWithContainingCardName",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-045#3084@base",
+          "cardId": "EX5-045",
+          "cardIndex": 3084,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_045.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_046@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_046.cs",
+      "sourceEffectClassName": "EX5_046",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_046.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_046.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenRemoveField",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCardNamesClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCardNamesClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-046#3085@base",
+          "cardId": "EX5-046",
+          "cardIndex": 3085,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_046.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_047@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_047.cs",
+      "sourceEffectClassName": "EX5_047",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_047.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_047.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnAttack",
+        "CanTriggerOnDeletion",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-047#3086@base",
+          "cardId": "EX5-047",
+          "cardIndex": 3086,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_047.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_048@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_048.cs",
+      "sourceEffectClassName": "EX5_048",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_048.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_048.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "OnStartMainPhase"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectAttackTarget",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetCanNotSelectNotAttack",
+        "SetEffectSourcePermanent",
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-048#3087@base",
+          "cardId": "EX5-048",
+          "cardIndex": 3087,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_048.asset"
+        },
+        {
+          "definitionStableId": "EX5-048#9147@P1",
+          "cardId": "EX5-048",
+          "cardIndex": 9147,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_048_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_049@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_049.cs",
+      "sourceEffectClassName": "EX5_049",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_049.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_049.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "FortitudeSelfEffect",
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-049#3088@base",
+          "cardId": "EX5-049",
+          "cardIndex": 3088,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_049.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_050@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_050.cs",
+      "sourceEffectClassName": "EX5_050",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_050.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_050.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "DecoySelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-050#3089@base",
+          "cardId": "EX5-050",
+          "cardIndex": 3089,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_050.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_051@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_051.cs",
+      "sourceEffectClassName": "EX5_051",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_051.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_051.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-051#3090@base",
+          "cardId": "EX5-051",
+          "cardIndex": 3090,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_051.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_052@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_052.cs",
+      "sourceEffectClassName": "EX5_052",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_052.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_052.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea",
+        "Breeding"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSuspendClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotSuspendClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-052#3091@base",
+          "cardId": "EX5-052",
+          "cardIndex": 3091,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_052.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_053@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_053.cs",
+      "sourceEffectClassName": "EX5_053",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_053.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_053.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnCounterTiming",
+        "OnDestroyedAnyone",
+        "OnSecurityCheck"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "counter": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea",
+        "Executing"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlastDigivolveEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanUseIgnoreBattle",
+        "GetCardFromHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsMaxCost",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DontBattleSecurityDigimonClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpDontBattleSecurityDigimonClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-053#3092@base",
+          "cardId": "EX5-053",
+          "cardIndex": 3092,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_053.asset"
+        },
+        {
+          "definitionStableId": "EX5-053#4231@P1",
+          "cardId": "EX5-053",
+          "cardIndex": 4231,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_053_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_054@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_054.cs",
+      "sourceEffectClassName": "EX5_054",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_054.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_054.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectPermanent",
+        "SelectInteger",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIntSelection",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-054#3093@base",
+          "cardId": "EX5-054",
+          "cardIndex": 3093,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_054.asset"
+        },
+        {
+          "definitionStableId": "EX5-054#4232@P1",
+          "cardId": "EX5-054",
+          "cardIndex": 4232,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_054_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_055@DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_055.cs",
+      "sourceEffectClassName": "EX5_055",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Black/EX5_055.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Black/EX5_055.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEndAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "FortitudeSelfEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnAttack",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "DeckBouncePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-055#3094@base",
+          "cardId": "EX5-055",
+          "cardIndex": 3094,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_055.asset"
+        },
+        {
+          "definitionStableId": "EX5-055#4233@P1",
+          "cardId": "EX5-055",
+          "cardIndex": 4233,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Black/Digimon/EX5_055_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_056@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_056.cs",
+      "sourceEffectClassName": "EX5_056",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_056.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_056.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectHand"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-056#3095@base",
+          "cardId": "EX5-056",
+          "cardIndex": 3095,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_056.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_057@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_057.cs",
+      "sourceEffectClassName": "EX5_057",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_057.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_057.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-057#3096@base",
+          "cardId": "EX5-057",
+          "cardIndex": 3096,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_057.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_058@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_058.cs",
+      "sourceEffectClassName": "EX5_058",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_058.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_058.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayFujitsumonToken"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-058#3097@base",
+          "cardId": "EX5-058",
+          "cardIndex": 3097,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_058.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_058_token@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_058_token.cs",
+      "sourceEffectClassName": "EX5_058_token",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_058_token.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_058_token.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectHand"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "CantUnsuspendStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnDeletion",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [],
+      "affectedCardCount": 0
+    },
+    {
+      "sourceScaffoldId": "EX5_059@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_059.cs",
+      "sourceEffectClassName": "EX5_059",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_059.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_059.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GainRetaliation",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "OnPlayCheckHashtableOfCard"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAfterSelectIndexCoroutine",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpSkillInfos"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-059#3098@base",
+          "cardId": "EX5-059",
+          "cardIndex": 3098,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_059.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_060@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_060.cs",
+      "sourceEffectClassName": "EX5_060",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_060.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_060.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionOpponentsCardInTrash",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-060#3099@base",
+          "cardId": "EX5-060",
+          "cardIndex": 3099,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_060.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_061@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_061.cs",
+      "sourceEffectClassName": "EX5_061",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_061.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_061.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "OnPlayCheckHashtableOfCard",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAfterSelectIndexCoroutine",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpSkillInfos"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-061#3100@base",
+          "cardId": "EX5-061",
+          "cardIndex": 3100,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_061.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_062@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_062.cs",
+      "sourceEffectClassName": "EX5_062",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_062.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_062.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDeclaration",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-062#3101@base",
+          "cardId": "EX5-062",
+          "cardIndex": 3101,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_062.asset"
+        },
+        {
+          "definitionStableId": "EX5-062#4234@P1",
+          "cardId": "EX5-062",
+          "cardIndex": 4234,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_062_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX5_063@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_063.cs",
+      "sourceEffectClassName": "EX5_063",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_063.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_063.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "GetHashtablesFromHashtable",
+        "GetTopCardFromOneHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsMaxLevel",
+        "IsMinLevel",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-063#3102@base",
+          "cardId": "EX5-063",
+          "cardIndex": 3102,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_063.asset"
+        },
+        {
+          "definitionStableId": "EX5-063#4235@P1",
+          "cardId": "EX5-063",
+          "cardIndex": 4235,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_063_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-063#9148@P2",
+          "cardId": "EX5-063",
+          "cardIndex": 9148,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Digimon/EX5_063_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "EX5_064@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_064.cs",
+      "sourceEffectClassName": "EX5_064",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_064.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_064.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDeclaration",
+        "OnEnterFieldAnyone",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect",
+        "SetMemoryTo3TamerEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerOnPlay",
+        "CardEffectHashtable",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetMemoryTo3TamerEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-064#3103@base",
+          "cardId": "EX5-064",
+          "cardIndex": 3103,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Tamer/EX5_064.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_065@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_065.cs",
+      "sourceEffectClassName": "EX5_065",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_065.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_065.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAddDigivolutionCards",
+        "OnEndTurn",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "AddEffectToPlayer",
+        "CanActivateSuspendCostEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAddDigivolutionCard",
+        "CardEffectHashtable",
+        "DNADigivolvePermanentsIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsFromDigimon",
+        "IsOpponentTurn",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-065#3104@base",
+          "cardId": "EX5-065",
+          "cardIndex": 3104,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Tamer/EX5_065.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_066@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_066.cs",
+      "sourceEffectClassName": "EX5_066",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_066.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_066.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsMinDP",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-066#3105@base",
+          "cardId": "EX5-066",
+          "cardIndex": 3105,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Option/EX5_066.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_067@DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_067.cs",
+      "sourceEffectClassName": "EX5_067",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Blue/EX5_067.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Blue/EX5_067.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "IsPermanentExistsOnOpponentBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotSuspendClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotSuspendClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-067#3106@base",
+          "cardId": "EX5-067",
+          "cardIndex": 3106,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Blue/Option/EX5_067.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_068@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_068.cs",
+      "sourceEffectClassName": "EX5_068",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_068.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_068.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectAttackTarget",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-068#3107@base",
+          "cardId": "EX5-068",
+          "cardIndex": 3107,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Option/EX5_068.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_069@DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_069.cs",
+      "sourceEffectClassName": "EX5_069",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Purple/EX5_069.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Purple/EX5_069.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOptionMainEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-069#3108@base",
+          "cardId": "EX5-069",
+          "cardIndex": 3108,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Purple/Option/EX5_069.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_070@DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_070.cs",
+      "sourceEffectClassName": "EX5_070",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_070.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/White/EX5_070.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill",
+        "WhenRemoveField"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "CanTriggerWhenRemoveField",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerEffect",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCardNamesClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCardNamesClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-070#3109@base",
+          "cardId": "EX5-070",
+          "cardIndex": 3109,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_070.asset"
+        },
+        {
+          "definitionStableId": "EX5-070#4236@P1",
+          "cardId": "EX5-070",
+          "cardIndex": 4236,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_070_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-070#4237@P2",
+          "cardId": "EX5-070",
+          "cardIndex": 4237,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_070_P2.asset"
+        },
+        {
+          "definitionStableId": "EX5-070#9149@P3",
+          "cardId": "EX5-070",
+          "cardIndex": 9149,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_070_P3.asset"
+        },
+        {
+          "definitionStableId": "EX5-070#9150@P4",
+          "cardId": "EX5-070",
+          "cardIndex": 9150,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_070_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    },
+    {
+      "sourceScaffoldId": "EX5_071@DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_071.cs",
+      "sourceEffectClassName": "EX5_071",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_071.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/White/EX5_071.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-071#3110@base",
+          "cardId": "EX5-071",
+          "cardIndex": 3110,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_071.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_072@DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_072.cs",
+      "sourceEffectClassName": "EX5_072",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/White/EX5_072.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/White/EX5_072.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddThisCardToHand",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-072#3111@base",
+          "cardId": "EX5-072",
+          "cardIndex": 3111,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/White/Option/EX5_072.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX5_073@DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_073.cs",
+      "sourceEffectClassName": "EX5_073",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Red/EX5_073.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Red/EX5_073.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone",
+        "WhenRemoveField"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenRemoveField",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsJogress",
+        "IsOpponentEffect",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowCard",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddJogressConditionClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-073#3112@base",
+          "cardId": "EX5-073",
+          "cardIndex": 3112,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_073.asset"
+        },
+        {
+          "definitionStableId": "EX5-073#4238@P1",
+          "cardId": "EX5-073",
+          "cardIndex": 4238,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_073_P1.asset"
+        },
+        {
+          "definitionStableId": "EX5-073#9151@P2",
+          "cardId": "EX5-073",
+          "cardIndex": 9151,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Red/Digimon/EX5_073_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "EX5_074@DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_074.cs",
+      "sourceEffectClassName": "EX5_074",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_074.cs",
+      "sourceSetId": "EX5",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX5.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX5/Yellow/EX5_074.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "Security",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "ChangeDigimonDPPlayerEffect",
+        "HasNoElement",
+        "IsExistOnBattleArea",
+        "IsOpponentEffect",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotAffectedClass"
+      ],
+      "setMethods": [
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotAffectedClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX5-074#3113@base",
+          "cardId": "EX5-074",
+          "cardIndex": 3113,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_074.asset"
+        },
+        {
+          "definitionStableId": "EX5-074#4239@P1",
+          "cardId": "EX5-074",
+          "cardIndex": 4239,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX5/Yellow/Digimon/EX5_074_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    }
+  ]
+}

@@ -1,0 +1,3411 @@
+{
+  "schemaVersion": 1,
+  "setId": "EX9",
+  "recordKind": "card-variant-mapping",
+  "records": [
+    {
+      "definitionStableId": "EX9-001#6831@base",
+      "cardId": "EX9-001",
+      "cardIndex": 6831,
+      "variantKey": "base",
+      "assetName": "EX9_001",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/DigiEgg/EX9_001.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_001",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_001.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_001@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_001.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-001#6832@P1",
+      "cardId": "EX9-001",
+      "cardIndex": 6832,
+      "variantKey": "P1",
+      "assetName": "EX9_001_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/DigiEgg/EX9_001_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_001",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_001.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_001@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_001.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-002#6833@base",
+      "cardId": "EX9-002",
+      "cardIndex": 6833,
+      "variantKey": "base",
+      "assetName": "EX9_002",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/DigiEgg/EX9_002.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_002",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_002.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_002@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_002.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-002#6834@P1",
+      "cardId": "EX9-002",
+      "cardIndex": 6834,
+      "variantKey": "P1",
+      "assetName": "EX9_002_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/DigiEgg/EX9_002_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_002",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_002.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_002@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_002.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-003#6835@base",
+      "cardId": "EX9-003",
+      "cardIndex": 6835,
+      "variantKey": "base",
+      "assetName": "EX9_003",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/DigiEgg/EX9_003.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_003",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_003.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_003@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_003.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-003#6836@P1",
+      "cardId": "EX9-003",
+      "cardIndex": 6836,
+      "variantKey": "P1",
+      "assetName": "EX9_003_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/DigiEgg/EX9_003_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_003",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_003.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_003@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_003.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-004#6837@base",
+      "cardId": "EX9-004",
+      "cardIndex": 6837,
+      "variantKey": "base",
+      "assetName": "EX9_004",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/DigiEgg/EX9_004.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_004",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_004.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_004@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_004.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-004#6838@P1",
+      "cardId": "EX9-004",
+      "cardIndex": 6838,
+      "variantKey": "P1",
+      "assetName": "EX9_004_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/DigiEgg/EX9_004_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_004",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_004.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_004@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_004.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-005#6839@base",
+      "cardId": "EX9-005",
+      "cardIndex": 6839,
+      "variantKey": "base",
+      "assetName": "EX9_005",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/DigiEgg/EX9_005.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_005",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_005.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_005@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_005.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-005#6840@P1",
+      "cardId": "EX9-005",
+      "cardIndex": 6840,
+      "variantKey": "P1",
+      "assetName": "EX9_005_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/DigiEgg/EX9_005_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_005",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_005.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_005@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_005.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-006#6841@base",
+      "cardId": "EX9-006",
+      "cardIndex": 6841,
+      "variantKey": "base",
+      "assetName": "EX9_006",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/DigiEgg/EX9_006.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_006",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_006.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_006@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_006.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-006#6842@P1",
+      "cardId": "EX9-006",
+      "cardIndex": 6842,
+      "variantKey": "P1",
+      "assetName": "EX9_006_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/DigiEgg/EX9_006_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "EX9_006",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_006.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_006@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_006.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-007#6843@base",
+      "cardId": "EX9-007",
+      "cardIndex": 6843,
+      "variantKey": "base",
+      "assetName": "EX9_007",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_007.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_007",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_007@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-007#6844@P1",
+      "cardId": "EX9-007",
+      "cardIndex": 6844,
+      "variantKey": "P1",
+      "assetName": "EX9_007_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_007_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_007",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_007@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-007#6845@P2",
+      "cardId": "EX9-007",
+      "cardIndex": 6845,
+      "variantKey": "P2",
+      "assetName": "EX9_007_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_007_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_007",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_007@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_007.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-008#6846@base",
+      "cardId": "EX9-008",
+      "cardIndex": 6846,
+      "variantKey": "base",
+      "assetName": "EX9_008",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_008.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_008",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_008.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_008@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_008.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-008#6847@P1",
+      "cardId": "EX9-008",
+      "cardIndex": 6847,
+      "variantKey": "P1",
+      "assetName": "EX9_008_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_008_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_008",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_008.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_008@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_008.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-009#6848@base",
+      "cardId": "EX9-009",
+      "cardIndex": 6848,
+      "variantKey": "base",
+      "assetName": "EX9_009",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_009.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_009",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_009.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_009@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_009.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-009#6849@P1",
+      "cardId": "EX9-009",
+      "cardIndex": 6849,
+      "variantKey": "P1",
+      "assetName": "EX9_009_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_009_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_009",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_009.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_009@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_009.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-010#6850@base",
+      "cardId": "EX9-010",
+      "cardIndex": 6850,
+      "variantKey": "base",
+      "assetName": "EX9_010",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_010.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_010",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_010.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_010@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_010.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-010#6851@P1",
+      "cardId": "EX9-010",
+      "cardIndex": 6851,
+      "variantKey": "P1",
+      "assetName": "EX9_010_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_010_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_010",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_010.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_010@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_010.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-011#6852@base",
+      "cardId": "EX9-011",
+      "cardIndex": 6852,
+      "variantKey": "base",
+      "assetName": "EX9_011",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_011.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_011@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-011#6853@P1",
+      "cardId": "EX9-011",
+      "cardIndex": 6853,
+      "variantKey": "P1",
+      "assetName": "EX9_011_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_011_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_011@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-011#6854@P2",
+      "cardId": "EX9-011",
+      "cardIndex": 6854,
+      "variantKey": "P2",
+      "assetName": "EX9_011_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_011_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_011",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_011@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_011.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-012#6855@base",
+      "cardId": "EX9-012",
+      "cardIndex": 6855,
+      "variantKey": "base",
+      "assetName": "EX9_012",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_012.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_012",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_012.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_012@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_012.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-012#6856@P1",
+      "cardId": "EX9-012",
+      "cardIndex": 6856,
+      "variantKey": "P1",
+      "assetName": "EX9_012_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_012_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_012",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_012.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_012@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_012.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-013#6857@base",
+      "cardId": "EX9-013",
+      "cardIndex": 6857,
+      "variantKey": "base",
+      "assetName": "EX9_013",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_013.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_013",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_013.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_013@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_013.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-013#6858@P1",
+      "cardId": "EX9-013",
+      "cardIndex": 6858,
+      "variantKey": "P1",
+      "assetName": "EX9_013_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Digimon/EX9_013_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_013",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_013.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_013@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_013.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-014#6859@base",
+      "cardId": "EX9-014",
+      "cardIndex": 6859,
+      "variantKey": "base",
+      "assetName": "EX9_014",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_014.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_014",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_014.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_014@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_014.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-014#6860@P1",
+      "cardId": "EX9-014",
+      "cardIndex": 6860,
+      "variantKey": "P1",
+      "assetName": "EX9_014_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_014_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_014",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_014.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_014@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_014.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-015#6861@base",
+      "cardId": "EX9-015",
+      "cardIndex": 6861,
+      "variantKey": "base",
+      "assetName": "EX9_015",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_015.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_015",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_015.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_015@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_015.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-015#6862@P1",
+      "cardId": "EX9-015",
+      "cardIndex": 6862,
+      "variantKey": "P1",
+      "assetName": "EX9_015_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_015_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_015",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_015.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_015@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_015.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-016#6863@base",
+      "cardId": "EX9-016",
+      "cardIndex": 6863,
+      "variantKey": "base",
+      "assetName": "EX9_016",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_016.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_016",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_016.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_016@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_016.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-016#6864@P1",
+      "cardId": "EX9-016",
+      "cardIndex": 6864,
+      "variantKey": "P1",
+      "assetName": "EX9_016_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_016_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_016",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_016.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_016@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_016.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-017#6865@base",
+      "cardId": "EX9-017",
+      "cardIndex": 6865,
+      "variantKey": "base",
+      "assetName": "EX9_017",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_017.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_017",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_017.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_017@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_017.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-017#6866@P1",
+      "cardId": "EX9-017",
+      "cardIndex": 6866,
+      "variantKey": "P1",
+      "assetName": "EX9_017_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_017_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_017",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_017.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_017@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_017.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-018#6867@base",
+      "cardId": "EX9-018",
+      "cardIndex": 6867,
+      "variantKey": "base",
+      "assetName": "EX9_018",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_018.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_018@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-018#6868@P1",
+      "cardId": "EX9-018",
+      "cardIndex": 6868,
+      "variantKey": "P1",
+      "assetName": "EX9_018_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_018_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_018@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-018#6869@P2",
+      "cardId": "EX9-018",
+      "cardIndex": 6869,
+      "variantKey": "P2",
+      "assetName": "EX9_018_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_018_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_018",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_018@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_018.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-019#6870@base",
+      "cardId": "EX9-019",
+      "cardIndex": 6870,
+      "variantKey": "base",
+      "assetName": "EX9_019",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_019.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_019",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_019.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_019@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_019.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-019#6871@P1",
+      "cardId": "EX9-019",
+      "cardIndex": 6871,
+      "variantKey": "P1",
+      "assetName": "EX9_019_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_019_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_019",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_019.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_019@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_019.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-020#6872@base",
+      "cardId": "EX9-020",
+      "cardIndex": 6872,
+      "variantKey": "base",
+      "assetName": "EX9_020",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_020.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_020",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_020.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_020@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_020.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-020#6873@P1",
+      "cardId": "EX9-020",
+      "cardIndex": 6873,
+      "variantKey": "P1",
+      "assetName": "EX9_020_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_020_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_020",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_020.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_020@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_020.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-021#6874@base",
+      "cardId": "EX9-021",
+      "cardIndex": 6874,
+      "variantKey": "base",
+      "assetName": "EX9_021",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_021.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_021",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_021@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-021#6875@P1",
+      "cardId": "EX9-021",
+      "cardIndex": 6875,
+      "variantKey": "P1",
+      "assetName": "EX9_021_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_021_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_021",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_021@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-021#9206@P2",
+      "cardId": "EX9-021",
+      "cardIndex": 9206,
+      "variantKey": "P2",
+      "assetName": "EX9_021_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Digimon/EX9_021_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_021",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_021@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_021.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-022#6876@base",
+      "cardId": "EX9-022",
+      "cardIndex": 6876,
+      "variantKey": "base",
+      "assetName": "EX9_022",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_022.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_022",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_022.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_022@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_022.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-022#6877@P1",
+      "cardId": "EX9-022",
+      "cardIndex": 6877,
+      "variantKey": "P1",
+      "assetName": "EX9_022_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_022_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_022",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_022.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_022@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_022.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-023#6878@base",
+      "cardId": "EX9-023",
+      "cardIndex": 6878,
+      "variantKey": "base",
+      "assetName": "EX9_023",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_023.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_023",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_023.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_023@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_023.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-023#6879@P1",
+      "cardId": "EX9-023",
+      "cardIndex": 6879,
+      "variantKey": "P1",
+      "assetName": "EX9_023_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_023_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_023",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_023.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_023@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_023.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-024#6880@base",
+      "cardId": "EX9-024",
+      "cardIndex": 6880,
+      "variantKey": "base",
+      "assetName": "EX9_024",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_024.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_024",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_024.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_024@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_024.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-024#6881@P1",
+      "cardId": "EX9-024",
+      "cardIndex": 6881,
+      "variantKey": "P1",
+      "assetName": "EX9_024_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_024_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_024",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_024.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_024@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_024.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-025#6882@base",
+      "cardId": "EX9-025",
+      "cardIndex": 6882,
+      "variantKey": "base",
+      "assetName": "EX9_025",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_025.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_025",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_025.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_025@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_025.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-025#6883@P1",
+      "cardId": "EX9-025",
+      "cardIndex": 6883,
+      "variantKey": "P1",
+      "assetName": "EX9_025_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_025_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_025",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_025.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_025@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_025.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-026#6884@base",
+      "cardId": "EX9-026",
+      "cardIndex": 6884,
+      "variantKey": "base",
+      "assetName": "EX9_026",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_026.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_026",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_026.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_026@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_026.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-026#6885@P1",
+      "cardId": "EX9-026",
+      "cardIndex": 6885,
+      "variantKey": "P1",
+      "assetName": "EX9_026_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_026_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_026",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_026.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_026@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_026.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-027#6886@base",
+      "cardId": "EX9-027",
+      "cardIndex": 6886,
+      "variantKey": "base",
+      "assetName": "EX9_027",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_027.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_027@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-027#6887@P1",
+      "cardId": "EX9-027",
+      "cardIndex": 6887,
+      "variantKey": "P1",
+      "assetName": "EX9_027_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_027_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_027",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_027.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_027@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_027.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-028#6888@base",
+      "cardId": "EX9-028",
+      "cardIndex": 6888,
+      "variantKey": "base",
+      "assetName": "EX9_028",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_028.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_028",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_028.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_028@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_028.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-028#6889@P1",
+      "cardId": "EX9-028",
+      "cardIndex": 6889,
+      "variantKey": "P1",
+      "assetName": "EX9_028_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_028_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_028",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_028.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_028@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_028.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-029#6890@base",
+      "cardId": "EX9-029",
+      "cardIndex": 6890,
+      "variantKey": "base",
+      "assetName": "EX9_029",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_029.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_029",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_029.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_029@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_029.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-029#6891@P1",
+      "cardId": "EX9-029",
+      "cardIndex": 6891,
+      "variantKey": "P1",
+      "assetName": "EX9_029_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_029_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_029",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_029.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_029@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_029.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-030#6892@base",
+      "cardId": "EX9-030",
+      "cardIndex": 6892,
+      "variantKey": "base",
+      "assetName": "EX9_030",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_030.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_030",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_030@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-030#6893@P1",
+      "cardId": "EX9-030",
+      "cardIndex": 6893,
+      "variantKey": "P1",
+      "assetName": "EX9_030_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_030_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_030",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_030@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-030#6894@P2",
+      "cardId": "EX9-030",
+      "cardIndex": 6894,
+      "variantKey": "P2",
+      "assetName": "EX9_030_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_030_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_030",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_030@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_030.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-031#6895@base",
+      "cardId": "EX9-031",
+      "cardIndex": 6895,
+      "variantKey": "base",
+      "assetName": "EX9_031",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_031.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_031",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_031.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_031@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_031.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-032#6896@base",
+      "cardId": "EX9-032",
+      "cardIndex": 6896,
+      "variantKey": "base",
+      "assetName": "EX9_032",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_032.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_032",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_032.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_032@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_032.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-032#9207@P1",
+      "cardId": "EX9-032",
+      "cardIndex": 9207,
+      "variantKey": "P1",
+      "assetName": "EX9_032_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_032_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_032",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_032.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_032@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_032.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-033#6897@base",
+      "cardId": "EX9-033",
+      "cardIndex": 6897,
+      "variantKey": "base",
+      "assetName": "EX9_033",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_033.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_033",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_033@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-033#6898@P1",
+      "cardId": "EX9-033",
+      "cardIndex": 6898,
+      "variantKey": "P1",
+      "assetName": "EX9_033_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_033_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_033",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_033@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-033#9208@P2",
+      "cardId": "EX9-033",
+      "cardIndex": 9208,
+      "variantKey": "P2",
+      "assetName": "EX9_033_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Digimon/EX9_033_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_033",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_033@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_033.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-034#6900@base",
+      "cardId": "EX9-034",
+      "cardIndex": 6900,
+      "variantKey": "base",
+      "assetName": "EX9_034",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_034.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_034",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_034.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_034@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_034.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-034#6901@P1",
+      "cardId": "EX9-034",
+      "cardIndex": 6901,
+      "variantKey": "P1",
+      "assetName": "EX9_034_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_034_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_034",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_034.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_034@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_034.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-035#6902@base",
+      "cardId": "EX9-035",
+      "cardIndex": 6902,
+      "variantKey": "base",
+      "assetName": "EX9_035",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_035.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_035",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_035.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_035@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_035.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-035#6903@P1",
+      "cardId": "EX9-035",
+      "cardIndex": 6903,
+      "variantKey": "P1",
+      "assetName": "EX9_035_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_035_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_035",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_035.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_035@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_035.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-036#6904@base",
+      "cardId": "EX9-036",
+      "cardIndex": 6904,
+      "variantKey": "base",
+      "assetName": "EX9_036",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_036.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_036",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_036.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_036@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_036.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-036#6905@P1",
+      "cardId": "EX9-036",
+      "cardIndex": 6905,
+      "variantKey": "P1",
+      "assetName": "EX9_036_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_036_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_036",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_036.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_036@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_036.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-037#6906@base",
+      "cardId": "EX9-037",
+      "cardIndex": 6906,
+      "variantKey": "base",
+      "assetName": "EX9_037",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_037.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_037@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-037#6907@P1",
+      "cardId": "EX9-037",
+      "cardIndex": 6907,
+      "variantKey": "P1",
+      "assetName": "EX9_037_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_037_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_037",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_037.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_037@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_037.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-038#6908@base",
+      "cardId": "EX9-038",
+      "cardIndex": 6908,
+      "variantKey": "base",
+      "assetName": "EX9_038",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_038.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_038",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_038.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_038@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_038.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-038#6909@P1",
+      "cardId": "EX9-038",
+      "cardIndex": 6909,
+      "variantKey": "P1",
+      "assetName": "EX9_038_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_038_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_038",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_038.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_038@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_038.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-039#6910@base",
+      "cardId": "EX9-039",
+      "cardIndex": 6910,
+      "variantKey": "base",
+      "assetName": "EX9_039",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_039.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_039",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_039.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_039@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_039.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-039#6911@P1",
+      "cardId": "EX9-039",
+      "cardIndex": 6911,
+      "variantKey": "P1",
+      "assetName": "EX9_039_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_039_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_039",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_039.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_039@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_039.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-040#6912@base",
+      "cardId": "EX9-040",
+      "cardIndex": 6912,
+      "variantKey": "base",
+      "assetName": "EX9_040",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_040.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_040",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_040.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_040@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_040.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-040#6913@P1",
+      "cardId": "EX9-040",
+      "cardIndex": 6913,
+      "variantKey": "P1",
+      "assetName": "EX9_040_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_040_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_040",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_040.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_040@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_040.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-041#6914@base",
+      "cardId": "EX9-041",
+      "cardIndex": 6914,
+      "variantKey": "base",
+      "assetName": "EX9_041",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_041.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_041",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_041.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_041@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_041.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-042#6915@base",
+      "cardId": "EX9-042",
+      "cardIndex": 6915,
+      "variantKey": "base",
+      "assetName": "EX9_042",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_042.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_042",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_042.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_042@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_042.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-042#6916@P1",
+      "cardId": "EX9-042",
+      "cardIndex": 6916,
+      "variantKey": "P1",
+      "assetName": "EX9_042_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_042_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_042",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_042.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_042@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_042.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-043#6917@base",
+      "cardId": "EX9-043",
+      "cardIndex": 6917,
+      "variantKey": "base",
+      "assetName": "EX9_043",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_043.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_043@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-043#6918@P1",
+      "cardId": "EX9-043",
+      "cardIndex": 6918,
+      "variantKey": "P1",
+      "assetName": "EX9_043_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_043_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_043@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-043#6919@P2",
+      "cardId": "EX9-043",
+      "cardIndex": 6919,
+      "variantKey": "P2",
+      "assetName": "EX9_043_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_043_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_043",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_043@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_043.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-044#6920@base",
+      "cardId": "EX9-044",
+      "cardIndex": 6920,
+      "variantKey": "base",
+      "assetName": "EX9_044",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_044.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_044",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_044.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_044@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_044.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-045#6921@base",
+      "cardId": "EX9-045",
+      "cardIndex": 6921,
+      "variantKey": "base",
+      "assetName": "EX9_045",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_045.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_045",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_045.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_045@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_045.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-045#6922@P1",
+      "cardId": "EX9-045",
+      "cardIndex": 6922,
+      "variantKey": "P1",
+      "assetName": "EX9_045_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Green/Digimon/EX9_045_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Green",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_045",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_045.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_045@DCGO/Assets/Scripts/CardEffect/EX9/Green/EX9_045.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-046#6923@base",
+      "cardId": "EX9-046",
+      "cardIndex": 6923,
+      "variantKey": "base",
+      "assetName": "EX9_046",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_046.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_046",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_046.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_046@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_046.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-046#6924@P1",
+      "cardId": "EX9-046",
+      "cardIndex": 6924,
+      "variantKey": "P1",
+      "assetName": "EX9_046_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_046_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_046",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_046.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_046@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_046.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-047#6925@base",
+      "cardId": "EX9-047",
+      "cardIndex": 6925,
+      "variantKey": "base",
+      "assetName": "EX9_047",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_047.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_047",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_047.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_047@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_047.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-047#6926@P1",
+      "cardId": "EX9-047",
+      "cardIndex": 6926,
+      "variantKey": "P1",
+      "assetName": "EX9_047_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_047_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_047",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_047.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_047@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_047.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-048#6927@base",
+      "cardId": "EX9-048",
+      "cardIndex": 6927,
+      "variantKey": "base",
+      "assetName": "EX9_048",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_048.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_048",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_048.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_048@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_048.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-048#6928@P1",
+      "cardId": "EX9-048",
+      "cardIndex": 6928,
+      "variantKey": "P1",
+      "assetName": "EX9_048_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_048_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_048",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_048.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_048@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_048.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-049#6929@base",
+      "cardId": "EX9-049",
+      "cardIndex": 6929,
+      "variantKey": "base",
+      "assetName": "EX9_049",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_049.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_049",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_049.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_049@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_049.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-049#6930@P1",
+      "cardId": "EX9-049",
+      "cardIndex": 6930,
+      "variantKey": "P1",
+      "assetName": "EX9_049_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_049_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_049",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_049.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_049@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_049.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-050#6931@base",
+      "cardId": "EX9-050",
+      "cardIndex": 6931,
+      "variantKey": "base",
+      "assetName": "EX9_050",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_050.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_050@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-050#6932@P1",
+      "cardId": "EX9-050",
+      "cardIndex": 6932,
+      "variantKey": "P1",
+      "assetName": "EX9_050_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_050_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_050",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_050.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_050@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_050.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-051#6933@base",
+      "cardId": "EX9-051",
+      "cardIndex": 6933,
+      "variantKey": "base",
+      "assetName": "EX9_051",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_051.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_051",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_051.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_051@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_051.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-051#6934@P1",
+      "cardId": "EX9-051",
+      "cardIndex": 6934,
+      "variantKey": "P1",
+      "assetName": "EX9_051_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_051_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_051",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_051.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_051@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_051.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-052#6935@base",
+      "cardId": "EX9-052",
+      "cardIndex": 6935,
+      "variantKey": "base",
+      "assetName": "EX9_052",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_052.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_052@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-052#6936@P1",
+      "cardId": "EX9-052",
+      "cardIndex": 6936,
+      "variantKey": "P1",
+      "assetName": "EX9_052_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_052_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_052",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_052.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_052@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_052.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-053#6937@base",
+      "cardId": "EX9-053",
+      "cardIndex": 6937,
+      "variantKey": "base",
+      "assetName": "EX9_053",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_053.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_053",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_053.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_053@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_053.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-054#6938@base",
+      "cardId": "EX9-054",
+      "cardIndex": 6938,
+      "variantKey": "base",
+      "assetName": "EX9_054",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_054.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_054",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_054.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_054@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_054.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-055#6939@base",
+      "cardId": "EX9-055",
+      "cardIndex": 6939,
+      "variantKey": "base",
+      "assetName": "EX9_055",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_055.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_055",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_055.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_055@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_055.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-056#6940@base",
+      "cardId": "EX9-056",
+      "cardIndex": 6940,
+      "variantKey": "base",
+      "assetName": "EX9_056",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_056.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_056",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_056.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_056@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_056.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-057#6941@base",
+      "cardId": "EX9-057",
+      "cardIndex": 6941,
+      "variantKey": "base",
+      "assetName": "EX9_057",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_057.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_057@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-057#6942@P1",
+      "cardId": "EX9-057",
+      "cardIndex": 6942,
+      "variantKey": "P1",
+      "assetName": "EX9_057_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_057_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_057",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_057.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_057@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_057.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-058#6943@base",
+      "cardId": "EX9-058",
+      "cardIndex": 6943,
+      "variantKey": "base",
+      "assetName": "EX9_058",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_058.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_058",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_058.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_058@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_058.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-058#6944@P1",
+      "cardId": "EX9-058",
+      "cardIndex": 6944,
+      "variantKey": "P1",
+      "assetName": "EX9_058_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_058_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_058",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_058.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_058@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_058.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-059#6945@base",
+      "cardId": "EX9-059",
+      "cardIndex": 6945,
+      "variantKey": "base",
+      "assetName": "EX9_059",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_059.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_059",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_059.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_059@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_059.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-059#6946@P1",
+      "cardId": "EX9-059",
+      "cardIndex": 6946,
+      "variantKey": "P1",
+      "assetName": "EX9_059_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_059_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_059",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_059.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_059@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_059.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-060#6947@base",
+      "cardId": "EX9-060",
+      "cardIndex": 6947,
+      "variantKey": "base",
+      "assetName": "EX9_060",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_060.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_060",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_060.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_060@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_060.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-060#6948@P1",
+      "cardId": "EX9-060",
+      "cardIndex": 6948,
+      "variantKey": "P1",
+      "assetName": "EX9_060_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_060_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_060",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_060.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_060@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_060.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-061#6949@base",
+      "cardId": "EX9-061",
+      "cardIndex": 6949,
+      "variantKey": "base",
+      "assetName": "EX9_061",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_061.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_061",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_061.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_061@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_061.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-061#6950@P1",
+      "cardId": "EX9-061",
+      "cardIndex": 6950,
+      "variantKey": "P1",
+      "assetName": "EX9_061_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_061_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_061",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_061.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_061@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_061.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-062#6951@base",
+      "cardId": "EX9-062",
+      "cardIndex": 6951,
+      "variantKey": "base",
+      "assetName": "EX9_062",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_062.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_062",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_062.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_062@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_062.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-063#6952@base",
+      "cardId": "EX9-063",
+      "cardIndex": 6952,
+      "variantKey": "base",
+      "assetName": "EX9_063",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_063.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_063",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_063.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_063@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_063.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-064#6953@base",
+      "cardId": "EX9-064",
+      "cardIndex": 6953,
+      "variantKey": "base",
+      "assetName": "EX9_064",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_064.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_064@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-064#6954@P1",
+      "cardId": "EX9-064",
+      "cardIndex": 6954,
+      "variantKey": "P1",
+      "assetName": "EX9_064_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_064_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_064@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-064#6955@P2",
+      "cardId": "EX9-064",
+      "cardIndex": 6955,
+      "variantKey": "P2",
+      "assetName": "EX9_064_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_064_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_064",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_064@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_064.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-065#6956@base",
+      "cardId": "EX9-065",
+      "cardIndex": 6956,
+      "variantKey": "base",
+      "assetName": "EX9_065",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Purple/Digimon/EX9_065.asset",
+      "setId": "EX9",
+      "assetColorPath": "Purple",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_065",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_065.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_065@DCGO/Assets/Scripts/CardEffect/EX9/Purple/EX9_065.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-066#6957@base",
+      "cardId": "EX9-066",
+      "cardIndex": 6957,
+      "variantKey": "base",
+      "assetName": "EX9_066",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Tamer/EX9_066.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_066",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_066.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_066@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_066.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-066#6958@P1",
+      "cardId": "EX9-066",
+      "cardIndex": 6958,
+      "variantKey": "P1",
+      "assetName": "EX9_066_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Tamer/EX9_066_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_066",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_066.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_066@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_066.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-067#6959@base",
+      "cardId": "EX9-067",
+      "cardIndex": 6959,
+      "variantKey": "base",
+      "assetName": "EX9_067",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Tamer/EX9_067.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_067@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-067#6960@P1",
+      "cardId": "EX9-067",
+      "cardIndex": 6960,
+      "variantKey": "P1",
+      "assetName": "EX9_067_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Tamer/EX9_067_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_067@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-067#9209@P2",
+      "cardId": "EX9-067",
+      "cardIndex": 9209,
+      "variantKey": "P2",
+      "assetName": "EX9_067_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Yellow/Tamer/EX9_067_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Yellow",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_067",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_067@DCGO/Assets/Scripts/CardEffect/EX9/Yellow/EX9_067.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-068#6962@base",
+      "cardId": "EX9-068",
+      "cardIndex": 6962,
+      "variantKey": "base",
+      "assetName": "EX9_068",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Tamer/EX9_068.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_068",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_068.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_068@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_068.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-068#6963@P1",
+      "cardId": "EX9-068",
+      "cardIndex": 6963,
+      "variantKey": "P1",
+      "assetName": "EX9_068_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Tamer/EX9_068_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_068",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_068.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_068@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_068.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-069#6964@base",
+      "cardId": "EX9-069",
+      "cardIndex": 6964,
+      "variantKey": "base",
+      "assetName": "EX9_069",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Tamer/EX9_069.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_069",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_069.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_069@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_069.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-069#6965@P1",
+      "cardId": "EX9-069",
+      "cardIndex": 6965,
+      "variantKey": "P1",
+      "assetName": "EX9_069_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Tamer/EX9_069_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "EX9_069",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_069.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_069@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_069.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-070#6966@base",
+      "cardId": "EX9-070",
+      "cardIndex": 6966,
+      "variantKey": "base",
+      "assetName": "EX9_070",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Option/EX9_070.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_070",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_070.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_070@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_070.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-070#6967@P1",
+      "cardId": "EX9-070",
+      "cardIndex": 6967,
+      "variantKey": "P1",
+      "assetName": "EX9_070_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Red/Option/EX9_070_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_070",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_070.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_070@DCGO/Assets/Scripts/CardEffect/EX9/Red/EX9_070.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-071#6968@base",
+      "cardId": "EX9-071",
+      "cardIndex": 6968,
+      "variantKey": "base",
+      "assetName": "EX9_071",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Option/EX9_071.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_071",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_071.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_071@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_071.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-071#6969@P1",
+      "cardId": "EX9-071",
+      "cardIndex": 6969,
+      "variantKey": "P1",
+      "assetName": "EX9_071_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Blue/Option/EX9_071_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Blue",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_071",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_071.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_071@DCGO/Assets/Scripts/CardEffect/EX9/Blue/EX9_071.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-072#6970@base",
+      "cardId": "EX9-072",
+      "cardIndex": 6970,
+      "variantKey": "base",
+      "assetName": "EX9_072",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Option/EX9_072.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_072@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-072#6971@P1",
+      "cardId": "EX9-072",
+      "cardIndex": 6971,
+      "variantKey": "P1",
+      "assetName": "EX9_072_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Option/EX9_072_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "EX9_072",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_072.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_072@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_072.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-073#6972@base",
+      "cardId": "EX9-073",
+      "cardIndex": 6972,
+      "variantKey": "base",
+      "assetName": "EX9_073",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_073.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_073@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-073#6973@P1",
+      "cardId": "EX9-073",
+      "cardIndex": 6973,
+      "variantKey": "P1",
+      "assetName": "EX9_073_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_073_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_073@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-073#6974@P2",
+      "cardId": "EX9-073",
+      "cardIndex": 6974,
+      "variantKey": "P2",
+      "assetName": "EX9_073_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/Black/Digimon/EX9_073_P2.asset",
+      "setId": "EX9",
+      "assetColorPath": "Black",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_073",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_073@DCGO/Assets/Scripts/CardEffect/EX9/Black/EX9_073.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-074#6975@base",
+      "cardId": "EX9-074",
+      "cardIndex": 6975,
+      "variantKey": "base",
+      "assetName": "EX9_074",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Digimon/EX9_074.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_074@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    },
+    {
+      "definitionStableId": "EX9-074#6976@P1",
+      "cardId": "EX9-074",
+      "cardIndex": 6976,
+      "variantKey": "P1",
+      "assetName": "EX9_074_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/EX9/White/Digimon/EX9_074_P1.asset",
+      "setId": "EX9",
+      "assetColorPath": "White",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "EX9_074",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_074.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "EX9_074@DCGO/Assets/Scripts/CardEffect/EX9/White/EX9_074.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/EX9.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/EX9.json"
+    }
+  ]
+}

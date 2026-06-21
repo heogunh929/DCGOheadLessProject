@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": 1,
+  "setId": "ST1",
+  "recordKind": "card-variant-mapping",
+  "records": [
+    {
+      "definitionStableId": "ST1-01#1@base",
+      "cardId": "ST1-01",
+      "cardIndex": 1,
+      "variantKey": "base",
+      "assetName": "ST1_01",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/DigiEgg/ST1_01.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "ST1_01",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_01@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-01#4892@P1",
+      "cardId": "ST1-01",
+      "cardIndex": 4892,
+      "variantKey": "P1",
+      "assetName": "ST1_01_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/DigiEgg/ST1_01_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "DigiEgg",
+      "cardEffectClassName": "ST1_01",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_01@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-02#2@base",
+      "cardId": "ST1-02",
+      "cardIndex": 2,
+      "variantKey": "base",
+      "assetName": "ST1_02",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_02.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-02#3@P1",
+      "cardId": "ST1-02",
+      "cardIndex": 3,
+      "variantKey": "P1",
+      "assetName": "ST1_02_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_02_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-02#4@P2",
+      "cardId": "ST1-02",
+      "cardIndex": 4,
+      "variantKey": "P2",
+      "assetName": "ST1_02_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_02_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-02#5@P3",
+      "cardId": "ST1-02",
+      "cardIndex": 5,
+      "variantKey": "P3",
+      "assetName": "ST1_02_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_02_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#6@base",
+      "cardId": "ST1-03",
+      "cardIndex": 6,
+      "variantKey": "base",
+      "assetName": "ST1_03",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#7@P1",
+      "cardId": "ST1-03",
+      "cardIndex": 7,
+      "variantKey": "P1",
+      "assetName": "ST1_03_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#8@P2",
+      "cardId": "ST1-03",
+      "cardIndex": 8,
+      "variantKey": "P2",
+      "assetName": "ST1_03_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#9@P3",
+      "cardId": "ST1-03",
+      "cardIndex": 9,
+      "variantKey": "P3",
+      "assetName": "ST1_03_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#10@P4",
+      "cardId": "ST1-03",
+      "cardIndex": 10,
+      "variantKey": "P4",
+      "assetName": "ST1_03_P4",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P4.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#11@P5",
+      "cardId": "ST1-03",
+      "cardIndex": 11,
+      "variantKey": "P5",
+      "assetName": "ST1_03_P5",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P5.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-03#12@P6",
+      "cardId": "ST1-03",
+      "cardIndex": 12,
+      "variantKey": "P6",
+      "assetName": "ST1_03_P6",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P6.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_03",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-04#13@base",
+      "cardId": "ST1-04",
+      "cardIndex": 13,
+      "variantKey": "base",
+      "assetName": "ST1_04",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_04.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-05#14@base",
+      "cardId": "ST1-05",
+      "cardIndex": 14,
+      "variantKey": "base",
+      "assetName": "ST1_05",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_05.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-06#15@base",
+      "cardId": "ST1-06",
+      "cardIndex": 15,
+      "variantKey": "base",
+      "assetName": "ST1_06",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_06.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_06",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_06@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-06#16@P1",
+      "cardId": "ST1-06",
+      "cardIndex": 16,
+      "variantKey": "P1",
+      "assetName": "ST1_06_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_06_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_06",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_06@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#17@base",
+      "cardId": "ST1-07",
+      "cardIndex": 17,
+      "variantKey": "base",
+      "assetName": "ST1_07",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#18@P1",
+      "cardId": "ST1-07",
+      "cardIndex": 18,
+      "variantKey": "P1",
+      "assetName": "ST1_07_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#19@P2",
+      "cardId": "ST1-07",
+      "cardIndex": 19,
+      "variantKey": "P2",
+      "assetName": "ST1_07_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#20@P3",
+      "cardId": "ST1-07",
+      "cardIndex": 20,
+      "variantKey": "P3",
+      "assetName": "ST1_07_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#4893@P4",
+      "cardId": "ST1-07",
+      "cardIndex": 4893,
+      "variantKey": "P4",
+      "assetName": "ST1_07_P4",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P4.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#4894@P5",
+      "cardId": "ST1-07",
+      "cardIndex": 4894,
+      "variantKey": "P5",
+      "assetName": "ST1_07_P5",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P5.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-07#4895@P6",
+      "cardId": "ST1-07",
+      "cardIndex": 4895,
+      "variantKey": "P6",
+      "assetName": "ST1_07_P6",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P6.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_07",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-08#21@base",
+      "cardId": "ST1-08",
+      "cardIndex": 21,
+      "variantKey": "base",
+      "assetName": "ST1_08",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_08.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_08",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_08@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-08#22@P1",
+      "cardId": "ST1-08",
+      "cardIndex": 22,
+      "variantKey": "P1",
+      "assetName": "ST1_08_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_08_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_08",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_08@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#23@base",
+      "cardId": "ST1-09",
+      "cardIndex": 23,
+      "variantKey": "base",
+      "assetName": "ST1_09",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#24@P1",
+      "cardId": "ST1-09",
+      "cardIndex": 24,
+      "variantKey": "P1",
+      "assetName": "ST1_09_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#25@P2",
+      "cardId": "ST1-09",
+      "cardIndex": 25,
+      "variantKey": "P2",
+      "assetName": "ST1_09_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#4896@P3",
+      "cardId": "ST1-09",
+      "cardIndex": 4896,
+      "variantKey": "P3",
+      "assetName": "ST1_09_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#4897@P4",
+      "cardId": "ST1-09",
+      "cardIndex": 4897,
+      "variantKey": "P4",
+      "assetName": "ST1_09_P4",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P4.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-09#4898@P5",
+      "cardId": "ST1-09",
+      "cardIndex": 4898,
+      "variantKey": "P5",
+      "assetName": "ST1_09_P5",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P5.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_09",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-10#26@base",
+      "cardId": "ST1-10",
+      "cardIndex": 26,
+      "variantKey": "base",
+      "assetName": "ST1_10",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_10.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-10#27@P1",
+      "cardId": "ST1-10",
+      "cardIndex": 27,
+      "variantKey": "P1",
+      "assetName": "ST1_10_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_10_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": null,
+      "sourceEffectPaths": [],
+      "sourceBodyExists": false,
+      "sourceEffectScaffoldRefs": [],
+      "mappingStatus": "NoEffect",
+      "statusReason": "CardEffectClassName is empty in the source asset; this is an explicit no-effect marker only.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#28@base",
+      "cardId": "ST1-11",
+      "cardIndex": 28,
+      "variantKey": "base",
+      "assetName": "ST1_11",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#29@P1",
+      "cardId": "ST1-11",
+      "cardIndex": 29,
+      "variantKey": "P1",
+      "assetName": "ST1_11_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#30@P2",
+      "cardId": "ST1-11",
+      "cardIndex": 30,
+      "variantKey": "P2",
+      "assetName": "ST1_11_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#31@P3",
+      "cardId": "ST1-11",
+      "cardIndex": 31,
+      "variantKey": "P3",
+      "assetName": "ST1_11_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#4899@P4",
+      "cardId": "ST1-11",
+      "cardIndex": 4899,
+      "variantKey": "P4",
+      "assetName": "ST1_11_P4",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P4.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-11#4900@P5",
+      "cardId": "ST1-11",
+      "cardIndex": 4900,
+      "variantKey": "P5",
+      "assetName": "ST1_11_P5",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P5.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Digimon",
+      "cardEffectClassName": "ST1_11",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-12#32@base",
+      "cardId": "ST1-12",
+      "cardIndex": 32,
+      "variantKey": "base",
+      "assetName": "ST1_12",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Tamer/ST1_12.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "ST1_12",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_12@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-12#33@P1",
+      "cardId": "ST1-12",
+      "cardIndex": 33,
+      "variantKey": "P1",
+      "assetName": "ST1_12_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Tamer/ST1_12_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Tamer",
+      "cardEffectClassName": "ST1_12",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_12@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-13#34@base",
+      "cardId": "ST1-13",
+      "cardIndex": 34,
+      "variantKey": "base",
+      "assetName": "ST1_13",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_13",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_13@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-13#35@P1",
+      "cardId": "ST1-13",
+      "cardIndex": 35,
+      "variantKey": "P1",
+      "assetName": "ST1_13_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_13",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_13@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-13#36@P2",
+      "cardId": "ST1-13",
+      "cardIndex": 36,
+      "variantKey": "P2",
+      "assetName": "ST1_13_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_13",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_13@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-14#37@base",
+      "cardId": "ST1-14",
+      "cardIndex": 37,
+      "variantKey": "base",
+      "assetName": "ST1_14",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_14.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_14",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_14.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_14@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_14.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-15#38@base",
+      "cardId": "ST1-15",
+      "cardIndex": 38,
+      "variantKey": "base",
+      "assetName": "ST1_15",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_15.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_15",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_15.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_15@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_15.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-16#39@base",
+      "cardId": "ST1-16",
+      "cardIndex": 39,
+      "variantKey": "base",
+      "assetName": "ST1_16",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_16",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-16#40@P1",
+      "cardId": "ST1-16",
+      "cardIndex": 40,
+      "variantKey": "P1",
+      "assetName": "ST1_16_P1",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P1.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_16",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-16#41@P2",
+      "cardId": "ST1-16",
+      "cardIndex": 41,
+      "variantKey": "P2",
+      "assetName": "ST1_16_P2",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P2.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_16",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-16#42@P3",
+      "cardId": "ST1-16",
+      "cardIndex": 42,
+      "variantKey": "P3",
+      "assetName": "ST1_16_P3",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P3.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_16",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    },
+    {
+      "definitionStableId": "ST1-16#43@P4",
+      "cardId": "ST1-16",
+      "cardIndex": 43,
+      "variantKey": "P4",
+      "assetName": "ST1_16_P4",
+      "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P4.asset",
+      "setId": "ST1",
+      "assetColorPath": "Red",
+      "assetKindPath": "Option",
+      "cardEffectClassName": "ST1_16",
+      "sourceEffectPaths": [
+        "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "sourceBodyExists": true,
+      "sourceEffectScaffoldRefs": [
+        "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs"
+      ],
+      "mappingStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 only creates scaffold and does not implement the effect body.",
+      "cardMappingFile": "docs/generated/full-card-source-scaffold/cards/ST1.json",
+      "registryCatalogFile": "docs/generated/full-card-source-scaffold/catalogs/ST1.json"
+    }
+  ]
+}

@@ -1,5 +1,184 @@
 # 검증 전략
 
+## Queue 66 검증 - 2026-06-21
+
+`generate_full_card_porting_batches.py`는 62~65 산출물을 읽어 full-card porting generated subqueue를 만든다. 이 단계는 효과 구현 없이 dependency-aware batch prompt와 control files만 생성한다.
+
+검증 항목:
+
+- source scaffold coverage: 3,918 / 3,918 assigned
+- NeedsSourceReview coverage: 40 / 40 assigned
+- source 불명확 항목은 `source-review` batch로 분리
+- generated prompt count와 manifest batch count 일치
+- generated prompt에 `{카드명}`, `{CardId}` 같은 placeholder 없음
+- `effectBodiesChanged=false`, `rlComponentsGenerated=false`
+- control files 존재: goal, active runner, queue, progress
+
+산출물:
+
+- `scripts/generate_full_card_porting_batches.py`
+- `docs/generated/full-card-porting-batches-66.json`
+- `docs/rl-engine/full-card-porting-batches-66.md`
+- `docs/codex-prompts/GOAL_FULL_CARD_PORTING_BATCHES.md`
+- `docs/codex-prompts/ACTIVE/RUN_NEXT_FULL_CARD_PORTING_BATCHES.md`
+- `docs/codex-prompts/state/QUEUE_FULL_CARD_PORTING_BATCHES.md`
+- `docs/codex-prompts/state/PROGRESS_FULL_CARD_PORTING_BATCHES.md`
+- `docs/codex-prompts/prompts/generated/full-card/*.md`
+
+실행 결과:
+
+```powershell
+python .\scripts\generate_full_card_porting_batches.py --workspace .
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: batch 423개 생성, `All 421 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
+## Queue 65 검증 - 2026-06-21
+
+`FullCardPoolValidator`는 64번 scaffold를 전체 카드풀 completion gate의 baseline 입력으로 검증한다. 현재 결과는 `Blocked`가 정상이며, 이는 source-bearing 효과가 아직 porting되지 않았음을 structured blocker로 드러내기 위한 것이다.
+
+검증 항목:
+
+- 전체 manifest count: 8,186 card mapping records
+- status counts: `Unsupported` 7,921 / `NoEffect` 225 / `NeedsSourceReview` 40
+- source unavailable: missing source body 39, ambiguous source mapping 1
+- mechanic inventory blocker: `Unsupported`, `PartiallyImplemented`, `NeedsSourceReview`
+- deck subset validation API: no-effect subset pass, blocked/missing subset blocked
+- deterministic report serialization
+- ST1~ST3 및 기존 전체 regression 유지
+
+산출물:
+
+- `src/DCGO.RL.Engine/Validation/FullCardPoolValidator.cs`
+- `scripts/generate_full_card_pool_validation_baseline.py`
+- `docs/generated/full-card-pool-validation-baseline-65.json`
+- `docs/rl-engine/full-card-pool-validation-baseline-65.md`
+
+실행 결과:
+
+```powershell
+python .\scripts\generate_full_card_pool_validation_baseline.py --workspace .
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `Blocked` baseline report 생성, `All 417 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
+## Queue 64 검증 - 2026-06-21
+
+`generate_full_per_card_source_scaffold.py`는 승인된 local manifest snapshot을 재검증한 뒤 `docs/generated/full-card-source-scaffold/` 아래에 전체 카드/source-effect scaffold를 생성한다. 이 단계는 효과 body 구현이 아니라 mapping/scaffold 계약 고정이다.
+
+검증 항목:
+
+- manifest identity coverage: 8,186 card mapping records
+- source class coverage: 3,918 source scaffold records
+- per-card mapping coverage: `CardId#CardIndex@VariantKey` 보존
+- catalog registry-only: set catalog 63개, `registryOnly=true`
+- conservative status policy: source-bearing default `Unsupported`, missing/ambiguous source `NeedsSourceReview`, empty `CardEffectClassName` only `NoEffect`
+- no automatic `Implemented`/`Verified` promotion
+
+산출물:
+
+- `scripts/generate_full_per_card_source_scaffold.py`
+- `docs/generated/full-card-source-scaffold/index.json`
+- `docs/generated/full-card-source-scaffold/status-registry.json`
+- `docs/generated/full-card-source-scaffold/cards/*.json`
+- `docs/generated/full-card-source-scaffold/sources/*.json`
+- `docs/generated/full-card-source-scaffold/catalogs/*.json`
+- `docs/rl-engine/full-per-card-source-scaffold.md`
+- `src/DCGO.RL.Engine/Validation/FullCardSourceScaffoldValidator.cs`
+
+실행 결과:
+
+```powershell
+python .\scripts\generate_full_per_card_source_scaffold.py --workspace .
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: All 413 tests passed. MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
+## Queue 60A 검증 - 2026-06-21
+
+`EngineCoreExpansionReadinessRunner`는 52~59A evidence를 종합해 `ReadyForFullCardPoolInventory`로 판정한다. 이 판정은 전체 DCGO snapshot inventory 진입 readiness이며, `ReadyForRlEnvironmentDesign`은 false로 고정한다.
+
+검증 항목:
+
+- 전체 regression
+- 59A engine-core gate
+- multiple deterministic seeds
+- random legal action smoke
+- decision pause/resume smoke
+- golden scenario batch 1
+- trace export/compare synthetic fixture
+- invariant fuzz
+- source mapping audit
+- runtime composition audit
+- Unity source unchanged
+
+`ST3-02` P2 source body 미확인은 carry-forward finding으로 유지한다. full inventory는 막지 않지만 variant implementation, full snapshot completion, RL environment design은 계속 막는다.
+
+산출물:
+
+- `docs/generated/engine-core-expansion-readiness-60A.json`
+- `docs/rl-engine/engine-core-expansion-readiness-60A.md`
+
+실행 결과:
+
+```powershell
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: All 409 tests passed. MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
+## Queue 59A 검증 - 2026-06-21
+
+`EngineCoreMilestoneGateRunner`는 ST1~ST3 engine-core milestone을 `NeedsReview`로 판정한다. core parity 자체는 runtime composition, shared dependency identity, RuleProcessor/ZoneMover injection, decision pause/resume, option Executing lifecycle, security timing, MultipleSkills/AfterEffects, counter/block/target timing, golden scenario, replay determinism, invariant fuzz, parity trace contract/comparer evidence가 통과한다.
+
+남은 finding은 `ST3-02` P2 source body 미확인이다. base/P1은 NoEffect 후보로 유지하고, P2는 `CardEffectClassName: ST3_02` source body가 없어 `NeedsReview`로 유지한다. 이 finding은 full card pool inventory 자체를 막지는 않지만 variant implementation, full snapshot completion, RL environment design을 막는다.
+
+산출물:
+
+- `docs/generated/engine-core-milestone-gate-59A.json`
+- `docs/rl-engine/engine-core-milestone-gate-59A.md`
+
+실행 결과:
+
+```powershell
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 407 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
+## Queue 54C 검증 - 2026-06-21
+
+추가 검증 항목:
+
+- `AfterEffectsActivate` candidate가 같아도 state hash가 바뀌면 재활성될 수 있다.
+- 같은 state와 같은 `AfterEffectsActivate` candidate 반복은 self-loop guard로 명시 실패한다.
+- foreground batch 실행 후 stale background frame으로 넘어가도 foreground `HadResolutionAttempt`가 보존되어 `AfterEffectsActivate`가 정확히 한 번 실행된다.
+- `RuleProcessor.StabilizeStateOnly`가 DP 0 destruction을 `RuleStabilizationResult.Events`의 `OnDestroyedAnyone` payload로 보존한다.
+- invalid/face-down permanent 정리, linked trim, stale duration cleanup은 현재 state-only cleanup으로 남겨 source evidence 없는 trigger 확장을 막는다.
+
+실행 결과:
+
+```powershell
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
+결과: `All 405 tests passed.` MSBuild temp/cache access warning은 있었지만 test runner는 성공 종료했다.
+
 ## Queue 54B 검증 - 2026-06-21
 
 추가/유지된 검증 항목:

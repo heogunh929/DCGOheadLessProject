@@ -1,0 +1,1102 @@
+{
+  "schemaVersion": 1,
+  "setId": "ST1",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "ST1_01@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs",
+      "sourceEffectClassName": "ST1_01",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_01.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_01.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-01#1@base",
+          "cardId": "ST1-01",
+          "cardIndex": 1,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/DigiEgg/ST1_01.asset"
+        },
+        {
+          "definitionStableId": "ST1-01#4892@P1",
+          "cardId": "ST1-01",
+          "cardIndex": 4892,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/DigiEgg/ST1_01_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST1_03@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs",
+      "sourceEffectClassName": "ST1_03",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_03.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_03.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT2-043#438@base",
+          "cardId": "BT2-043",
+          "cardIndex": 438,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Green/Digimon/BT2_043.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#6@base",
+          "cardId": "ST1-03",
+          "cardIndex": 6,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#7@P1",
+          "cardId": "ST1-03",
+          "cardIndex": 7,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#8@P2",
+          "cardId": "ST1-03",
+          "cardIndex": 8,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P2.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#9@P3",
+          "cardId": "ST1-03",
+          "cardIndex": 9,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P3.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#10@P4",
+          "cardId": "ST1-03",
+          "cardIndex": 10,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P4.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#11@P5",
+          "cardId": "ST1-03",
+          "cardIndex": 11,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P5.asset"
+        },
+        {
+          "definitionStableId": "ST1-03#12@P6",
+          "cardId": "ST1-03",
+          "cardIndex": 12,
+          "variantKey": "P6",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_03_P6.asset"
+        }
+      ],
+      "affectedCardCount": 8
+    },
+    {
+      "sourceScaffoldId": "ST1_06@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs",
+      "sourceEffectClassName": "ST1_06",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_06.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_06.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT1-072#240@base",
+          "cardId": "BT1-072",
+          "cardIndex": 240,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_072.asset"
+        },
+        {
+          "definitionStableId": "BT1-072#241@P1",
+          "cardId": "BT1-072",
+          "cardIndex": 241,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_072_P1.asset"
+        },
+        {
+          "definitionStableId": "BT1-072#4272@P2",
+          "cardId": "BT1-072",
+          "cardIndex": 4272,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_072_P2.asset"
+        },
+        {
+          "definitionStableId": "BT2-054#459@base",
+          "cardId": "BT2-054",
+          "cardIndex": 459,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Black/Digimon/BT2_054.asset"
+        },
+        {
+          "definitionStableId": "BT2-072#497@base",
+          "cardId": "BT2-072",
+          "cardIndex": 497,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Purple/Digimon/BT2_072.asset"
+        },
+        {
+          "definitionStableId": "BT2-072#498@P1",
+          "cardId": "BT2-072",
+          "cardIndex": 498,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Purple/Digimon/BT2_072_P1.asset"
+        },
+        {
+          "definitionStableId": "BT2-072#499@P2",
+          "cardId": "BT2-072",
+          "cardIndex": 499,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Purple/Digimon/BT2_072_P2.asset"
+        },
+        {
+          "definitionStableId": "BT4-042#819@base",
+          "cardId": "BT4-042",
+          "cardIndex": 819,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Yellow/Digimon/BT4_042.asset"
+        },
+        {
+          "definitionStableId": "BT4-042#820@P1",
+          "cardId": "BT4-042",
+          "cardIndex": 820,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Yellow/Digimon/BT4_042_P1.asset"
+        },
+        {
+          "definitionStableId": "BT4-067#850@base",
+          "cardId": "BT4-067",
+          "cardIndex": 850,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Black/Digimon/BT4_067.asset"
+        },
+        {
+          "definitionStableId": "BT4-067#851@P1",
+          "cardId": "BT4-067",
+          "cardIndex": 851,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Black/Digimon/BT4_067_P1.asset"
+        },
+        {
+          "definitionStableId": "BT5-012#950@base",
+          "cardId": "BT5-012",
+          "cardIndex": 950,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Red/Digimon/BT5_012.asset"
+        },
+        {
+          "definitionStableId": "BT5-012#951@P1",
+          "cardId": "BT5-012",
+          "cardIndex": 951,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Red/Digimon/BT5_012_P1.asset"
+        },
+        {
+          "definitionStableId": "BT5-012#952@P2",
+          "cardId": "BT5-012",
+          "cardIndex": 952,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Red/Digimon/BT5_012_P2.asset"
+        },
+        {
+          "definitionStableId": "BT5-026#971@base",
+          "cardId": "BT5-026",
+          "cardIndex": 971,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Blue/Digimon/BT5_026.asset"
+        },
+        {
+          "definitionStableId": "BT5-026#972@P1",
+          "cardId": "BT5-026",
+          "cardIndex": 972,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Blue/Digimon/BT5_026_P1.asset"
+        },
+        {
+          "definitionStableId": "BT5-026#973@P2",
+          "cardId": "BT5-026",
+          "cardIndex": 973,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Blue/Digimon/BT5_026_P2.asset"
+        },
+        {
+          "definitionStableId": "P-014#6033@base",
+          "cardId": "P-014",
+          "cardIndex": 6033,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Black/Digimon/P_014.asset"
+        },
+        {
+          "definitionStableId": "P-014#6034@P1",
+          "cardId": "P-014",
+          "cardIndex": 6034,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/P/Black/Digimon/P_014_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-06#15@base",
+          "cardId": "ST1-06",
+          "cardIndex": 15,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_06.asset"
+        },
+        {
+          "definitionStableId": "ST1-06#16@P1",
+          "cardId": "ST1-06",
+          "cardIndex": 16,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_06_P1.asset"
+        },
+        {
+          "definitionStableId": "ST2-07#53@base",
+          "cardId": "ST2-07",
+          "cardIndex": 53,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST2/Blue/Digimon/ST2_07.asset"
+        },
+        {
+          "definitionStableId": "ST2-07#54@P1",
+          "cardId": "ST2-07",
+          "cardIndex": 54,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST2/Blue/Digimon/ST2_07_P1.asset"
+        },
+        {
+          "definitionStableId": "ST2-07#55@P2",
+          "cardId": "ST2-07",
+          "cardIndex": 55,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST2/Blue/Digimon/ST2_07_P2.asset"
+        },
+        {
+          "definitionStableId": "ST3-07#87@base",
+          "cardId": "ST3-07",
+          "cardIndex": 87,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST3/Yellow/Digimon/ST3_07.asset"
+        },
+        {
+          "definitionStableId": "ST3-07#88@P1",
+          "cardId": "ST3-07",
+          "cardIndex": 88,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST3/Yellow/Digimon/ST3_07_P1.asset"
+        },
+        {
+          "definitionStableId": "ST3-07#89@P2",
+          "cardId": "ST3-07",
+          "cardIndex": 89,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST3/Yellow/Digimon/ST3_07_P2.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#117@base",
+          "cardId": "ST4-08",
+          "cardIndex": 117,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#118@P1",
+          "cardId": "ST4-08",
+          "cardIndex": 118,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08_P1.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#119@P2",
+          "cardId": "ST4-08",
+          "cardIndex": 119,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08_P2.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#120@P3",
+          "cardId": "ST4-08",
+          "cardIndex": 120,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08_P3.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#121@P4",
+          "cardId": "ST4-08",
+          "cardIndex": 121,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08_P4.asset"
+        },
+        {
+          "definitionStableId": "ST4-08#122@P5",
+          "cardId": "ST4-08",
+          "cardIndex": 122,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST4/Green/Digimon/ST4_08_P5.asset"
+        },
+        {
+          "definitionStableId": "ST5-08#328@base",
+          "cardId": "ST5-08",
+          "cardIndex": 328,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST5/Black/Digimon/ST5_08.asset"
+        },
+        {
+          "definitionStableId": "ST5-08#329@P1",
+          "cardId": "ST5-08",
+          "cardIndex": 329,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST5/Black/Digimon/ST5_08_P1.asset"
+        },
+        {
+          "definitionStableId": "ST5-08#4985@P2",
+          "cardId": "ST5-08",
+          "cardIndex": 4985,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST5/Black/Digimon/ST5_08_P2.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#347@base",
+          "cardId": "ST6-08",
+          "cardIndex": 347,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#348@P1",
+          "cardId": "ST6-08",
+          "cardIndex": 348,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P1.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#349@P2",
+          "cardId": "ST6-08",
+          "cardIndex": 349,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P2.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#350@P3",
+          "cardId": "ST6-08",
+          "cardIndex": 350,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P3.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#4989@P4",
+          "cardId": "ST6-08",
+          "cardIndex": 4989,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P4.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#4990@P5",
+          "cardId": "ST6-08",
+          "cardIndex": 4990,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P5.asset"
+        },
+        {
+          "definitionStableId": "ST6-08#4991@P6",
+          "cardId": "ST6-08",
+          "cardIndex": 4991,
+          "variantKey": "P6",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST6/Purple/Digimon/ST6_08_P6.asset"
+        }
+      ],
+      "affectedCardCount": 43
+    },
+    {
+      "sourceScaffoldId": "ST1_07@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs",
+      "sourceEffectClassName": "ST1_07",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_07.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_07.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "BT4-015#783@base",
+          "cardId": "BT4-015",
+          "cardIndex": 783,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Red/Digimon/BT4_015.asset"
+        },
+        {
+          "definitionStableId": "BT4-015#784@P1",
+          "cardId": "BT4-015",
+          "cardIndex": 784,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/BT4/Red/Digimon/BT4_015_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#17@base",
+          "cardId": "ST1-07",
+          "cardIndex": 17,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#18@P1",
+          "cardId": "ST1-07",
+          "cardIndex": 18,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#19@P2",
+          "cardId": "ST1-07",
+          "cardIndex": 19,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P2.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#20@P3",
+          "cardId": "ST1-07",
+          "cardIndex": 20,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P3.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#4893@P4",
+          "cardId": "ST1-07",
+          "cardIndex": 4893,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P4.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#4894@P5",
+          "cardId": "ST1-07",
+          "cardIndex": 4894,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P5.asset"
+        },
+        {
+          "definitionStableId": "ST1-07#4895@P6",
+          "cardId": "ST1-07",
+          "cardIndex": 4895,
+          "variantKey": "P6",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_07_P6.asset"
+        }
+      ],
+      "affectedCardCount": 9
+    },
+    {
+      "sourceScaffoldId": "ST1_08@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs",
+      "sourceEffectClassName": "ST1_08",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_08.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_08.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-08#21@base",
+          "cardId": "ST1-08",
+          "cardIndex": 21,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_08.asset"
+        },
+        {
+          "definitionStableId": "ST1-08#22@P1",
+          "cardId": "ST1-08",
+          "cardIndex": 22,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_08_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST1_09@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs",
+      "sourceEffectClassName": "ST1_09",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_09.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_09.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnBlockAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-09#23@base",
+          "cardId": "ST1-09",
+          "cardIndex": 23,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09.asset"
+        },
+        {
+          "definitionStableId": "ST1-09#24@P1",
+          "cardId": "ST1-09",
+          "cardIndex": 24,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-09#25@P2",
+          "cardId": "ST1-09",
+          "cardIndex": 25,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P2.asset"
+        },
+        {
+          "definitionStableId": "ST1-09#4896@P3",
+          "cardId": "ST1-09",
+          "cardIndex": 4896,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P3.asset"
+        },
+        {
+          "definitionStableId": "ST1-09#4897@P4",
+          "cardId": "ST1-09",
+          "cardIndex": 4897,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P4.asset"
+        },
+        {
+          "definitionStableId": "ST1-09#4898@P5",
+          "cardId": "ST1-09",
+          "cardIndex": 4898,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_09_P5.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "ST1_11@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs",
+      "sourceEffectClassName": "ST1_11",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_11.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_11.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-11#28@base",
+          "cardId": "ST1-11",
+          "cardIndex": 28,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11.asset"
+        },
+        {
+          "definitionStableId": "ST1-11#29@P1",
+          "cardId": "ST1-11",
+          "cardIndex": 29,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-11#30@P2",
+          "cardId": "ST1-11",
+          "cardIndex": 30,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P2.asset"
+        },
+        {
+          "definitionStableId": "ST1-11#31@P3",
+          "cardId": "ST1-11",
+          "cardIndex": 31,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P3.asset"
+        },
+        {
+          "definitionStableId": "ST1-11#4899@P4",
+          "cardId": "ST1-11",
+          "cardIndex": 4899,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P4.asset"
+        },
+        {
+          "definitionStableId": "ST1-11#4900@P5",
+          "cardId": "ST1-11",
+          "cardIndex": 4900,
+          "variantKey": "P5",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Digimon/ST1_11_P5.asset"
+        }
+      ],
+      "affectedCardCount": 6
+    },
+    {
+      "sourceScaffoldId": "ST1_12@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs",
+      "sourceEffectClassName": "ST1_12",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_12.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_12.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "security": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDPStaticEffect",
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-12#32@base",
+          "cardId": "ST1-12",
+          "cardIndex": 32,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Tamer/ST1_12.asset"
+        },
+        {
+          "definitionStableId": "ST1-12#33@P1",
+          "cardId": "ST1-12",
+          "cardIndex": 33,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Tamer/ST1_12_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "ST1_13@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs",
+      "sourceEffectClassName": "ST1_13",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_13.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_13.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "ChangeDigimonDP",
+        "ChangeDigimonSAttackPlayerEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "customPermanentMessageArray_ChangeDP"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-13#34@base",
+          "cardId": "ST1-13",
+          "cardIndex": 34,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13.asset"
+        },
+        {
+          "definitionStableId": "ST1-13#35@P1",
+          "cardId": "ST1-13",
+          "cardIndex": 35,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-13#36@P2",
+          "cardId": "ST1-13",
+          "cardIndex": 36,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_13_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "ST1_14@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_14.cs",
+      "sourceEffectClassName": "ST1_14",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_14.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_14.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Executing"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "ChangeSecurityDigimonCardDPPlayerEffect"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-14#37@base",
+          "cardId": "ST1-14",
+          "cardIndex": 37,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_14.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "ST1_15@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_15.cs",
+      "sourceEffectClassName": "ST1_15",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_15.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_15.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-15#38@base",
+          "cardId": "ST1-15",
+          "cardIndex": 38,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_15.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "ST1_16@DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs",
+      "sourceEffectClassName": "ST1_16",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/ST1/Red/ST1_16.cs",
+      "sourceSetId": "ST1",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/ST1.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/ST1/Red/ST1_16.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "ST1-16#39@base",
+          "cardId": "ST1-16",
+          "cardIndex": 39,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16.asset"
+        },
+        {
+          "definitionStableId": "ST1-16#40@P1",
+          "cardId": "ST1-16",
+          "cardIndex": 40,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P1.asset"
+        },
+        {
+          "definitionStableId": "ST1-16#41@P2",
+          "cardId": "ST1-16",
+          "cardIndex": 41,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P2.asset"
+        },
+        {
+          "definitionStableId": "ST1-16#42@P3",
+          "cardId": "ST1-16",
+          "cardIndex": 42,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P3.asset"
+        },
+        {
+          "definitionStableId": "ST1-16#43@P4",
+          "cardId": "ST1-16",
+          "cardIndex": 43,
+          "variantKey": "P4",
+          "assetPath": "DCGO/Assets/CardBaseEntity/ST1/Red/Option/ST1_16_P4.asset"
+        }
+      ],
+      "affectedCardCount": 5
+    }
+  ]
+}

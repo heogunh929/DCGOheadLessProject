@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "needs-review",
-  "approved": false,
+  "status": "done",
+  "approved": true,
+  "approvedAt": "2026-06-21T17:46:31.2087982+09:00",
   "generatedAt": "2026-06-21T17:04:11.8493884+09:00",
   "upstream": {
     "repository": "https://github.com/DCGO2/DCGO.git",
@@ -10,8 +11,21 @@
     "promptCandidateSha": "3b68b9c49d80002a1e75ce4304dcf2c3295d28af",
     "fetchPullCheckoutPerformed": false
   },
-  "selectedSnapshot": null,
-  "approvalRequired": true,
+  "selectedSnapshot": {
+    "kind": "local-manifest",
+    "path": "DCGO",
+    "fileManifest": "docs/source/dcgo-source-file-manifest.json",
+    "fileManifestSha256": "d0b46c4d82901494e2cfa51c423dc70a7f8f29bbd0bc38eda6c91b7ebd90ef30",
+    "fileCount": 26882,
+    "roots": [
+      "DCGO/Assets/CardBaseEntity",
+      "DCGO/Assets/Scripts/CardEffect",
+      "DCGO/Assets/Scripts/Script"
+    ],
+    "approvedByUser": true,
+    "approvalNote": "User approved the pending source snapshot after the lock reported no independent DCGO Git metadata; the deterministic local manifest is the verifiable source snapshot for subsequent inventory work."
+  },
+  "approvalRequired": false,
   "localSource": {
     "path": "DCGO",
     "hasIndependentGitMetadata": false,
@@ -41,6 +55,6 @@
   "notes": [
     "DCGO/ is not an independent Git checkout in this workspace.",
     "The official upstream develop ref was read with git ls-remote only.",
-    "User approval is required before queue 61 can move from needs-review to done."
+    "User approved the local deterministic manifest snapshot on 2026-06-21."
   ]
 }

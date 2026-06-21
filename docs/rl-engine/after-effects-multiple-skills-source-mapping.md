@@ -1,5 +1,13 @@
 # AfterEffectsActivate / MultipleSkills Source Mapping
 
+## 54C 보정 결과 - AfterEffects fingerprint/background state
+
+54C부터 `AfterEffectsActivate` 반복 guard의 fingerprint는 candidate stable id만 보지 않는다. fingerprint에는 현재 `GameState.ComputeStateHash()`, trigger context timing/player/source card/source permanent, context payload, 각 candidate의 stable id/timing/source card instance/source permanent/controller가 포함된다. 따라서 같은 candidate set이라도 effect body가 rule-visible state를 바꾼 뒤 다시 합법적으로 준비되면 다음 `AfterEffectsActivate` frame을 허용한다. 반대로 같은 state와 같은 candidate fingerprint가 반복되면 원본 의미를 추정해 silent loop로 처리하지 않고 `UnsupportedMechanicException`으로 중단한다.
+
+foreground batch가 실제 effect를 해소한 뒤 background frame으로 전환될 때 `HadResolutionAttempt`를 유지한다. background candidate가 stale source 또는 `CanActivate` 실패로 모두 skip되더라도 foreground에서 effect가 해소된 batch라면 `AfterEffectsActivate` 수집은 정확히 한 번 예약된다. 이 보정은 foreground 실행 여부와 background 실행 여부를 섞지 않기 위한 frame-local 상태 보존이다.
+
+`RuleProcessor.StabilizeStateOnly` event coverage는 현재 DP 0 destruction을 `RuleStabilizationResult.Events`의 `OnDestroyedAnyone` payload로 보존한다. invalid breeding/face-down permanent 정리, excess linked card trim, stale duration cleanup은 현재 원본 trigger evidence가 분리되지 않았으므로 state-only stabilization으로 남긴다. 이 범위를 넘어서는 event trigger가 필요하면 source mapping을 먼저 보강한 뒤 별도 queue에서 확장한다.
+
 ## 54B 보정 결과 - trigger stack semantic hardening
 
 54B부터 `TriggerStackFrame`은 batch 상태로 `HadCandidate`, `HadResolutionAttempt`, `AfterEffectsActivate` candidate signature 이력을 보존한다. `RulesTiming` 후보가 0개인 empty batch 또는 stale source/`CanActivate` 실패만 있었던 batch는 원본 `TriggeredSkillProcess`에서 실제 해소 batch가 없는 경우로 취급하며, `AfterEffectsActivate`를 수집하지 않는다.

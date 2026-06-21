@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "dcgo.engine-core-milestone.59A.v1",
+  "targetName": "ST1-ST3 engine-core milestone",
+  "decision": "NeedsReview",
+  "coreParityBlocked": false,
+  "fullCardPoolInventoryBlocked": false,
+  "readyForRlEnvironmentDesign": false,
+  "scope": "ST1~ST3 engine-core milestone only. This is not a full DCGO snapshot completion gate and not RL training approval.",
+  "gates": [
+    {
+      "id": "runtime-composition-graph",
+      "status": "Passed",
+      "details": "BattleEngineServices graph validates shared dependencies."
+    },
+    {
+      "id": "st1-st3-target-pool",
+      "status": "Passed",
+      "details": "Target pool 'ST1-ST3' validates with 48 card records."
+    },
+    {
+      "id": "asset-registry-validator",
+      "status": "NeedsReview",
+      "details": "ST3-02 has variant-specific CardEffectClassName values; ST3-02#4977:P2 has CardEffectClassName ST3_02 but no source body."
+    },
+    {
+      "id": "common-decision-pause-resume",
+      "status": "Passed",
+      "details": "EngineSession option/security/rules/phase/attack selection replay tests pass."
+    },
+    {
+      "id": "option-executing-lifecycle",
+      "status": "Passed",
+      "details": "Option hand play moves through Executing to Trash and rollback tests pass."
+    },
+    {
+      "id": "security-timing",
+      "status": "Passed",
+      "details": "Security multi-check, dynamic SecurityAttack, per-card cleanup, snapshot, replay tests pass."
+    },
+    {
+      "id": "multiple-skills-aftereffects",
+      "status": "Passed",
+      "details": "Trigger stack frame, ordering, source revalidation, AfterEffects fingerprint tests pass."
+    },
+    {
+      "id": "counter-block-target-timing",
+      "status": "Passed",
+      "details": "Counter source collection, counter resolution, block, switch, OnEndAttack context tests pass."
+    },
+    {
+      "id": "golden-scenario-batch1",
+      "status": "Passed",
+      "details": "GoldenScenarios batch1 replay scenarios pass."
+    },
+    {
+      "id": "parity-trace-contract-comparer",
+      "status": "Passed",
+      "details": "ParityTrace and ParityFixtureComparer tests pass; missing Unity fixture reports NotRun, not Passed."
+    }
+  ],
+  "findings": [
+    {
+      "id": "ST3-02-P2-source-body-unconfirmed",
+      "status": "NeedsReview",
+      "details": "ST3-02 base/P1 remain NoEffect candidates, but P2 has CardEffectClassName ST3_02 without source body. Do not guess implementation.",
+      "evidence": [
+        "ST3-02#4977:P2"
+      ],
+      "blocksFullCardPoolInventory": false,
+      "blocksVariantImplementation": true,
+      "blocksRlEnvironmentDesign": true
+    }
+  ]
+}

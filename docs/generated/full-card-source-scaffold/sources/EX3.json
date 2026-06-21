@@ -1,0 +1,4608 @@
+{
+  "schemaVersion": 1,
+  "setId": "EX3",
+  "recordKind": "source-effect-scaffold",
+  "records": [
+    {
+      "sourceScaffoldId": "EX3_001@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_001.cs",
+      "sourceEffectClassName": "EX3_001",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_001.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_001.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnUnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenPermanentUnsuspends",
+        "ChangeDigimonDP",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-001#2171@base",
+          "cardId": "EX3-001",
+          "cardIndex": 2171,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/DigiEgg/EX3_001.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_002@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_002.cs",
+      "sourceEffectClassName": "EX3_002",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_002.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_002.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-002#2172@base",
+          "cardId": "EX3-002",
+          "cardIndex": 2172,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/DigiEgg/EX3_002.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_003@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_003.cs",
+      "sourceEffectClassName": "EX3_003",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_003.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_003.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-003#2173@base",
+          "cardId": "EX3-003",
+          "cardIndex": 2173,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_003.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_004@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_004.cs",
+      "sourceEffectClassName": "EX3_004",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_004.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_004.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-004#2174@base",
+          "cardId": "EX3-004",
+          "cardIndex": 2174,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_004.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_005@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_005.cs",
+      "sourceEffectClassName": "EX3_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_005.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_005.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPermanentPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-005#2175@base",
+          "cardId": "EX3-005",
+          "cardIndex": 2175,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_005.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_006@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_006.cs",
+      "sourceEffectClassName": "EX3_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_006.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_006.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-006#2176@base",
+          "cardId": "EX3-006",
+          "cardIndex": 2176,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_006.asset"
+        },
+        {
+          "definitionStableId": "EX3-009#2179@base",
+          "cardId": "EX3-009",
+          "cardIndex": 2179,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_009.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_007@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_007.cs",
+      "sourceEffectClassName": "EX3_007",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_007.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_007.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-007#2177@base",
+          "cardId": "EX3-007",
+          "cardIndex": 2177,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_007.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_008@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_008.cs",
+      "sourceEffectClassName": "EX3_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_008.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_008.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndTurn",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "DNADigivolvePermanentsIntoHandOrTrashCard",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetBoolSelection",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-008#2178@base",
+          "cardId": "EX3-008",
+          "cardIndex": 2178,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_008.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_010@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_010.cs",
+      "sourceEffectClassName": "EX3_010",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_010.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_010.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsJogress",
+        "IsOwnerTurn",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressConditionClass"
+      ],
+      "setMethods": [
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddJogressConditionClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-010#2180@base",
+          "cardId": "EX3-010",
+          "cardIndex": 2180,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_010.asset"
+        },
+        {
+          "definitionStableId": "EX3-010#2181@P1",
+          "cardId": "EX3-010",
+          "cardIndex": 2181,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_010_P1.asset"
+        },
+        {
+          "definitionStableId": "EX3-010#6829@P2",
+          "cardId": "EX3-010",
+          "cardIndex": 6829,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_010_P2.asset"
+        },
+        {
+          "definitionStableId": "EX3-010#6830@P3",
+          "cardId": "EX3-010",
+          "cardIndex": 6830,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_010_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "EX3_011@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_011.cs",
+      "sourceEffectClassName": "EX3_011",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_011.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_011.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentDeleted",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-011#2182@base",
+          "cardId": "EX3-011",
+          "cardIndex": 2182,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_011.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_012@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_012.cs",
+      "sourceEffectClassName": "EX3_012",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_012.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_012.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Security",
+        "BattleArea",
+        "DigiEggDeck"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerOnPlay",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsMinDP"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotPutFieldClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpCanNotPutFieldClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-012#2183@base",
+          "cardId": "EX3-012",
+          "cardIndex": 2183,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_012.asset"
+        },
+        {
+          "definitionStableId": "EX3-012#2184@P1",
+          "cardId": "EX3-012",
+          "cardIndex": 2184,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_012_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_013@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+      "sourceEffectClassName": "EX3_013",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_013.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "WhenPermanentWouldBeDeleted",
+        "WhenReturntoHandAnyone",
+        "WhenReturntoLibraryAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true,
+        "trigger_on_play": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectOrder",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenRemoveField",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-013#2185@base",
+          "cardId": "EX3-013",
+          "cardIndex": 2185,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_013.asset"
+        },
+        {
+          "definitionStableId": "EX3-013#2186@P1",
+          "cardId": "EX3-013",
+          "cardIndex": 2186,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_013_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_014@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_014.cs",
+      "sourceEffectClassName": "EX3_014",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_014.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_014.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress",
+        "SelectDigiXros"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "RushSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddDigiXrosConditionClass"
+      ],
+      "setMethods": [
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddDigiXrosConditionClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-014#2187@base",
+          "cardId": "EX3-014",
+          "cardIndex": 2187,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_014.asset"
+        },
+        {
+          "definitionStableId": "EX3-014#2188@P1",
+          "cardId": "EX3-014",
+          "cardIndex": 2188,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Digimon/EX3_014_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_015@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_015.cs",
+      "sourceEffectClassName": "EX3_015",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_015.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_015.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "GainJamming",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsFromDigimonDigivolutionCards",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-015#2189@base",
+          "cardId": "EX3-015",
+          "cardIndex": 2189,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_015.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_016@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_016.cs",
+      "sourceEffectClassName": "EX3_016",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_016.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_016.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDigivolutionCostStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-016#2190@base",
+          "cardId": "EX3-016",
+          "cardIndex": 2190,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_016.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_017@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_017.cs",
+      "sourceEffectClassName": "EX3_017",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_017.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_017.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "GainBlocker",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsFromDigimonDigivolutionCards",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-017#2191@base",
+          "cardId": "EX3-017",
+          "cardIndex": 2191,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_017.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_018@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_018.cs",
+      "sourceEffectClassName": "EX3_018",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_018.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_018.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "EvadeSelfEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-018#2192@base",
+          "cardId": "EX3-018",
+          "cardIndex": 2192,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_018.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_019@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_019.cs",
+      "sourceEffectClassName": "EX3_019",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_019.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_019.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeDigivolutionCostStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-019#2193@base",
+          "cardId": "EX3-019",
+          "cardIndex": 2193,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_019.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_020@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_020.cs",
+      "sourceEffectClassName": "EX3_020",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_020.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_020.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEndTurn",
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "EvadeSelfEffect"
+      ],
+      "commonsApi": [
+        "DNADigivolvePermanentsIntoHandOrTrashCard",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressLevelsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpAddJogressLevelsClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-020#2194@base",
+          "cardId": "EX3-020",
+          "cardIndex": 2194,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_020.asset"
+        },
+        {
+          "definitionStableId": "EX3-020#2195@P1",
+          "cardId": "EX3-020",
+          "cardIndex": 2195,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_020_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_021@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_021.cs",
+      "sourceEffectClassName": "EX3_021",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_021.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_021.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "GainCanNotAttack",
+        "GainCanNotBlock",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "SelectTrashDigivolutionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-021#2196@base",
+          "cardId": "EX3-021",
+          "cardIndex": 2196,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_021.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_022@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_022.cs",
+      "sourceEffectClassName": "EX3_022",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_022.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_022.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnAttack",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-022#2197@base",
+          "cardId": "EX3-022",
+          "cardIndex": 2197,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_022.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_023@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_023.cs",
+      "sourceEffectClassName": "EX3_023",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_023.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_023.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-023#2198@base",
+          "cardId": "EX3-023",
+          "cardIndex": 2198,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_023.asset"
+        },
+        {
+          "definitionStableId": "EX3-023#6824@P1",
+          "cardId": "EX3-023",
+          "cardIndex": 6824,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_023_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_024@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_024.cs",
+      "sourceEffectClassName": "EX3_024",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_024.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_024.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnStartMainPhase",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectAttackTarget",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetCanNotSelectNotAttack",
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-024#2199@base",
+          "cardId": "EX3-024",
+          "cardIndex": 2199,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_024.asset"
+        },
+        {
+          "definitionStableId": "EX3-024#2200@P1",
+          "cardId": "EX3-024",
+          "cardIndex": 2200,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_024_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_025@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_025.cs",
+      "sourceEffectClassName": "EX3_025",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_025.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_025.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "PlaceDelayOptionCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-025#2201@base",
+          "cardId": "EX3-025",
+          "cardIndex": 2201,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_025.asset"
+        },
+        {
+          "definitionStableId": "EX3-025#2202@P1",
+          "cardId": "EX3-025",
+          "cardIndex": 2202,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_025_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_026@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_026.cs",
+      "sourceEffectClassName": "EX3_026",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_026.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_026.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards",
+        "WhenDigivolvingCheckHashtableOfCard"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAfterSelectIndexCoroutine",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpSkillInfos"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-026#2203@base",
+          "cardId": "EX3-026",
+          "cardIndex": 2203,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_026.asset"
+        },
+        {
+          "definitionStableId": "EX3-026#2204@P1",
+          "cardId": "EX3-026",
+          "cardIndex": 2204,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Digimon/EX3_026_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_027@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_027.cs",
+      "sourceEffectClassName": "EX3_027",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_027.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_027.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-027#2205@base",
+          "cardId": "EX3-027",
+          "cardIndex": 2205,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_027.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_028@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_028.cs",
+      "sourceEffectClassName": "EX3_028",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_028.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_028.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-028#2206@base",
+          "cardId": "EX3-028",
+          "cardIndex": 2206,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_028.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_029@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_029.cs",
+      "sourceEffectClassName": "EX3_029",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_029.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_029.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "Deck",
+        "Security",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-029#2207@base",
+          "cardId": "EX3-029",
+          "cardIndex": 2207,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_029.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_030@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_030.cs",
+      "sourceEffectClassName": "EX3_030",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_030.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_030.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerOnPlay",
+        "GainRush",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-030#2208@base",
+          "cardId": "EX3-030",
+          "cardIndex": 2208,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_030.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_031@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_031.cs",
+      "sourceEffectClassName": "EX3_031",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_031.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_031.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "GainRush",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-031#2209@base",
+          "cardId": "EX3-031",
+          "cardIndex": 2209,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_031.asset"
+        },
+        {
+          "definitionStableId": "EX3-031#6825@P1",
+          "cardId": "EX3-031",
+          "cardIndex": 6825,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_031_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_032@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_032.cs",
+      "sourceEffectClassName": "EX3_032",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_032.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_032.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "ChangeDigimonSAttack",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-032#2210@base",
+          "cardId": "EX3-032",
+          "cardIndex": 2210,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_032.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_033@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_033.cs",
+      "sourceEffectClassName": "EX3_033",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_033.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_033.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "BlockerStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlaceDelayOptionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-033#2211@base",
+          "cardId": "EX3-033",
+          "cardIndex": 2211,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_033.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_034@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_034.cs",
+      "sourceEffectClassName": "EX3_034",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_034.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_034.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-034#2212@base",
+          "cardId": "EX3-034",
+          "cardIndex": 2212,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_034.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_035@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_035.cs",
+      "sourceEffectClassName": "EX3_035",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_035.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_035.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectOrder",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonDP",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetNotAddLog",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-035#2213@base",
+          "cardId": "EX3-035",
+          "cardIndex": 2213,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_035.asset"
+        },
+        {
+          "definitionStableId": "EX3-035#2214@P1",
+          "cardId": "EX3-035",
+          "cardIndex": 2214,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_035_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_036@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_036.cs",
+      "sourceEffectClassName": "EX3_036",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_036.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_036.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "ChangeDigimonSAttackPlayerEffect",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlaceDelayOptionCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-036#2215@base",
+          "cardId": "EX3-036",
+          "cardIndex": 2215,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_036.asset"
+        },
+        {
+          "definitionStableId": "EX3-036#2216@P1",
+          "cardId": "EX3-036",
+          "cardIndex": 2216,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Digimon/EX3_036_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_037@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_037.cs",
+      "sourceEffectClassName": "EX3_037",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_037.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_037.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "CanTriggerWhenPermanentSuspends",
+        "ChangeDigimonDP",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-037#2217@base",
+          "cardId": "EX3-037",
+          "cardIndex": 2217,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_037.asset"
+        },
+        {
+          "definitionStableId": "EX3-037#2218@P1",
+          "cardId": "EX3-037",
+          "cardIndex": 2218,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_037_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_038@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_038.cs",
+      "sourceEffectClassName": "EX3_038",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_038.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_038.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-038#2219@base",
+          "cardId": "EX3-038",
+          "cardIndex": 2219,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_038.asset"
+        },
+        {
+          "definitionStableId": "EX3-038#9127@P1",
+          "cardId": "EX3-038",
+          "cardIndex": 9127,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_038_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_039@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_039.cs",
+      "sourceEffectClassName": "EX3_039",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_039.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_039.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-039#2220@base",
+          "cardId": "EX3-039",
+          "cardIndex": 2220,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_039.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_040@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_040.cs",
+      "sourceEffectClassName": "EX3_040",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_040.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_040.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "None",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentSuspends",
+        "CardEffectHashtable",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-040#2221@base",
+          "cardId": "EX3-040",
+          "cardIndex": 2221,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_040.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_041@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_041.cs",
+      "sourceEffectClassName": "EX3_041",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_041.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_041.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEndTurn"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "BlockerSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "DNADigivolvePermanentsIntoHandOrTrashCard",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressLevelsClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpAddJogressLevelsClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-041#2222@base",
+          "cardId": "EX3-041",
+          "cardIndex": 2222,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_041.asset"
+        },
+        {
+          "definitionStableId": "EX3-041#2223@P1",
+          "cardId": "EX3-041",
+          "cardIndex": 2223,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_041_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_042@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_042.cs",
+      "sourceEffectClassName": "EX3_042",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_042.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_042.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-042#2224@base",
+          "cardId": "EX3-042",
+          "cardIndex": 2224,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_042.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_043@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_043.cs",
+      "sourceEffectClassName": "EX3_043",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_043.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_043.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "OnEnterFieldAnyone",
+        "WhenDigisorption"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_priority": true,
+        "replacement_or_cut_in": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanUnsuspend",
+        "IsExistOnBattleArea",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-043#2225@base",
+          "cardId": "EX3-043",
+          "cardIndex": 2225,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_043.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_044@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_044.cs",
+      "sourceEffectClassName": "EX3_044",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_044.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_044.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEndBattle",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerWhenDeleteOpponentDigimonByBattle",
+        "CanTriggerWhenPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-044#2226@base",
+          "cardId": "EX3-044",
+          "cardIndex": 2226,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_044.asset"
+        },
+        {
+          "definitionStableId": "EX3-044#2227@P1",
+          "cardId": "EX3-044",
+          "cardIndex": 2227,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_044_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_045@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_045.cs",
+      "sourceEffectClassName": "EX3_045",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_045.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_045.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndTurn",
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-045#2228@base",
+          "cardId": "EX3-045",
+          "cardIndex": 2228,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_045.asset"
+        },
+        {
+          "definitionStableId": "EX3-045#2229@P1",
+          "cardId": "EX3-045",
+          "cardIndex": 2229,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_045_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_046@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_046.cs",
+      "sourceEffectClassName": "EX3_046",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_046.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_046.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "WhenPermanentWouldBeDeleted"
+      ],
+      "flags": {
+        "inherited": true,
+        "replacement_or_cut_in": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "DecoySelfEffect"
+      ],
+      "commonsApi": [
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-046#2230@base",
+          "cardId": "EX3-046",
+          "cardIndex": 2230,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_046.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_047@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_047.cs",
+      "sourceEffectClassName": "EX3_047",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_047.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_047.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleArea"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-047#2231@base",
+          "cardId": "EX3-047",
+          "cardIndex": 2231,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_047.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_048@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_048.cs",
+      "sourceEffectClassName": "EX3_048",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_048.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_048.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-048#2232@base",
+          "cardId": "EX3-048",
+          "cardIndex": 2232,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_048.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_049@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_049.cs",
+      "sourceEffectClassName": "EX3_049",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_049.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_049.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "JammingSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "GainRush",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-049#2233@base",
+          "cardId": "EX3-049",
+          "cardIndex": 2233,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_049.asset"
+        },
+        {
+          "definitionStableId": "EX3-049#2234@P1",
+          "cardId": "EX3-049",
+          "cardIndex": 2234,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_049_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_050@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_050.cs",
+      "sourceEffectClassName": "EX3_050",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_050.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_050.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfDPStaticEffect"
+      ],
+      "commonsApi": [
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-050#2235@base",
+          "cardId": "EX3-050",
+          "cardIndex": 2235,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_050.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_051@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_051.cs",
+      "sourceEffectClassName": "EX3_051",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_051.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_051.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPermanentAttack",
+        "CanTriggerWhenDigivolving",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "PlayPermanentCards",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-051#2236@base",
+          "cardId": "EX3-051",
+          "cardIndex": 2236,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_051.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_052@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_052.cs",
+      "sourceEffectClassName": "EX3_052",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_052.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_052.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "ChangeSelfSAttackStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-052#2237@base",
+          "cardId": "EX3-052",
+          "cardIndex": 2237,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_052.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_053@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_053.cs",
+      "sourceEffectClassName": "EX3_053",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_053.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_053.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "RebootSelfStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotDigivolveClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotEvolveClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-053#2238@base",
+          "cardId": "EX3-053",
+          "cardIndex": 2238,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_053.asset"
+        },
+        {
+          "definitionStableId": "EX3-053#2239@P1",
+          "cardId": "EX3-053",
+          "cardIndex": 2239,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_053_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_054@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_054.cs",
+      "sourceEffectClassName": "EX3_054",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_054.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_054.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "BeforePayCost",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOnPermanentPlay",
+        "CanTriggerWhenPermanentWouldDigivolve",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "HasNoElement",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleArea",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "ShowReducedCost"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCostClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotAddLog",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCostClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-054#2240@base",
+          "cardId": "EX3-054",
+          "cardIndex": 2240,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_054.asset"
+        },
+        {
+          "definitionStableId": "EX3-054#2241@P1",
+          "cardId": "EX3-054",
+          "cardIndex": 2241,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Digimon/EX3_054_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_055@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_055.cs",
+      "sourceEffectClassName": "EX3_055",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_055.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_055.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Deck",
+        "BattleArea",
+        "Revealed"
+      ],
+      "factoryApi": [
+        "RetaliationSelfEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnPlay",
+        "HasMatchConditionOwnersPermanent",
+        "IsExistOnBattleArea",
+        "SimplifiedRevealDeckTopCardsAndSelect"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SimplifiedSelectCardConditionClass"
+      ],
+      "setMethods": [
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-055#2242@base",
+          "cardId": "EX3-055",
+          "cardIndex": 2242,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_055.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_056@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_056.cs",
+      "sourceEffectClassName": "EX3_056",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_056.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_056.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetNotShowCards",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-056#2243@base",
+          "cardId": "EX3-056",
+          "cardIndex": 2243,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_056.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_057@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_057.cs",
+      "sourceEffectClassName": "EX3_057",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_057.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_057.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "ChangeDigimonSAttack",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetIsInheritedEffect",
+        "SetNotShowCards",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-057#2244@base",
+          "cardId": "EX3-057",
+          "cardIndex": 2244,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_057.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_058@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_058.cs",
+      "sourceEffectClassName": "EX3_058",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_058.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_058.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnEndTurn",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerWhenDigivolving",
+        "DNADigivolvePermanentsIntoHandOrTrashCard",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetBoolSelection",
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-058#2245@base",
+          "cardId": "EX3-058",
+          "cardIndex": 2245,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_058.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_059@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_059.cs",
+      "sourceEffectClassName": "EX3_059",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_059.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_059.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDestroyedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanActivateOnDeletion",
+        "CanTriggerOnDeletion",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-059#2246@base",
+          "cardId": "EX3-059",
+          "cardIndex": 2246,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_059.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_060@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_060.cs",
+      "sourceEffectClassName": "EX3_060",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_060.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_060.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "BlockerSelfStaticEffect",
+        "CanNotAttackSelfStaticEffect",
+        "CanNotBlockStaticSelfEffect"
+      ],
+      "commonsApi": [
+        "IsExistOnBattleArea"
+      ],
+      "classApi": [],
+      "setMethods": [],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-060#2247@base",
+          "cardId": "EX3-060",
+          "cardIndex": 2247,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_060.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_061@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_061.cs",
+      "sourceEffectClassName": "EX3_061",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_061.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_061.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectAttackTarget",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsJogress",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressConditionClass",
+        "CanAttackTargetDefendingPermanentClass"
+      ],
+      "setMethods": [
+        "SetIsInheritedEffect",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddJogressConditionClass",
+        "SetUpCanAttackTargetDefendingPermanentClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-061#2248@base",
+          "cardId": "EX3-061",
+          "cardIndex": 2248,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_061.asset"
+        },
+        {
+          "definitionStableId": "EX3-061#2249@P1",
+          "cardId": "EX3-061",
+          "cardIndex": 2249,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_061_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_062@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_062.cs",
+      "sourceEffectClassName": "EX3_062",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_062.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_062.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectBoolean",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect"
+      ],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "HasMatchConditionOwnersCardInTrash",
+        "IsExistOnBattleArea",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetNotShowCards",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-062#2250@base",
+          "cardId": "EX3-062",
+          "cardIndex": 2250,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_062.asset"
+        },
+        {
+          "definitionStableId": "EX3-062#9128@P1",
+          "cardId": "EX3-062",
+          "cardIndex": 9128,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_062_P1.asset"
+        },
+        {
+          "definitionStableId": "EX3-062#9129@P2",
+          "cardId": "EX3-062",
+          "cardIndex": 9129,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_062_P2.asset"
+        },
+        {
+          "definitionStableId": "EX3-062#9130@P3",
+          "cardId": "EX3-062",
+          "cardIndex": 9130,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_062_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    },
+    {
+      "sourceScaffoldId": "EX3_063@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_063.cs",
+      "sourceEffectClassName": "EX3_063",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_063.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_063.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnAllyAttack",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "BlitzProcess",
+        "CanActivateBlitz",
+        "CanTriggerOnAttack",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "ChangeDigimonDP",
+        "DigivolveIntoHandOrTrashCard",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsJogress",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressConditionClass",
+        "DestroyPermanentsClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddJogressConditionClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-063#2251@base",
+          "cardId": "EX3-063",
+          "cardIndex": 2251,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_063.asset"
+        },
+        {
+          "definitionStableId": "EX3-063#2252@P1",
+          "cardId": "EX3-063",
+          "cardIndex": 2252,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_063_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_064@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_064.cs",
+      "sourceEffectClassName": "EX3_064",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_064.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_064.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerOnPlay",
+        "HasMatchConditionPermanent",
+        "IsByEffect",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlaceDelayOptionCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "ChangeCardNamesClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpChangeCardNamesClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-064#2253@base",
+          "cardId": "EX3-064",
+          "cardIndex": 2253,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_064.asset"
+        },
+        {
+          "definitionStableId": "EX3-064#2254@P1",
+          "cardId": "EX3-064",
+          "cardIndex": 2254,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_064_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_065@DCGO/Assets/Scripts/CardEffect/EX3/White/EX3_065.cs",
+      "sourceEffectClassName": "EX3_065",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/White/EX3_065.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/White/EX3_065.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "OnStartTurn",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "optional": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_on_play": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaySelfTamerSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanActivateSuspendCostEffect",
+        "CanTriggerWhenPermanentDigivolving",
+        "CardEffectHashtable",
+        "GetPlayedPermanentsFromEnterFieldHashtable",
+        "IsExistOnBattleArea",
+        "IsOwnerTurn",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "OnPlayCheckHashtableOfCard"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "SuspendPermanentsClass"
+      ],
+      "setMethods": [
+        "SetIsDigimonEffect",
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAfterSelectIndexCoroutine",
+        "SetUpICardEffect",
+        "SetUpSkillInfos"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-065#2255@base",
+          "cardId": "EX3-065",
+          "cardIndex": 2255,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/White/Tamer/EX3_065.asset"
+        },
+        {
+          "definitionStableId": "EX3-065#2256@P1",
+          "cardId": "EX3-065",
+          "cardIndex": 2256,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/White/Tamer/EX3_065_P1.asset"
+        },
+        {
+          "definitionStableId": "EX3-065#9131@P2",
+          "cardId": "EX3-065",
+          "cardIndex": 9131,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/White/Tamer/EX3_065_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "EX3_066@DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_066.cs",
+      "sourceEffectClassName": "EX3_066",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_066.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Red/EX3_066.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectBoolean",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "IgnoreColorConditionClass"
+      ],
+      "setMethods": [
+        "SetBool",
+        "SetBoolSelection",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect",
+        "SetUpIgnoreColorConditionClass"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-066#2257@base",
+          "cardId": "EX3-066",
+          "cardIndex": 2257,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Red/Option/EX3_066.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_067@DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_067.cs",
+      "sourceEffectClassName": "EX3_067",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Blue/EX3_067.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Blue/EX3_067.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "GainCanNotAttackPlayerEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "TrashDigivolutionCardsFromTopOrBottom"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-067#2258@base",
+          "cardId": "EX3-067",
+          "cardIndex": 2258,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Option/EX3_067.asset"
+        },
+        {
+          "definitionStableId": "EX3-067#9132@P1",
+          "cardId": "EX3-067",
+          "cardIndex": 9132,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Option/EX3_067_P1.asset"
+        },
+        {
+          "definitionStableId": "EX3-067#9133@P2",
+          "cardId": "EX3-067",
+          "cardIndex": 9133,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Blue/Option/EX3_067_P2.asset"
+        }
+      ],
+      "affectedCardCount": 3
+    },
+    {
+      "sourceScaffoldId": "EX3_068@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_068.cs",
+      "sourceEffectClassName": "EX3_068",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_068.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_068.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "ChangeDigimonDP",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-068#2259@base",
+          "cardId": "EX3-068",
+          "cardIndex": 2259,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Option/EX3_068.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_069@DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_069.cs",
+      "sourceEffectClassName": "EX3_069",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Yellow/EX3_069.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Yellow/EX3_069.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OnDeclaration",
+        "OnEndTurn",
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "modifier_duration": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "PlaceSelfDelayOptionSecurityEffect"
+      ],
+      "commonsApi": [
+        "CanDeclareOptionDelayEffect",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CardEffectHashtable",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "IsOpponentTurn",
+        "IsPermanentExistsOnBattleArea",
+        "PlaceDelayOptionCards",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "CanNotDigivolveClass",
+        "DestroyPermanentsClass",
+        "DrawClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCanNotEvolveClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-069#2260@base",
+          "cardId": "EX3-069",
+          "cardIndex": 2260,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Yellow/Option/EX3_069.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_070@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_070.cs",
+      "sourceEffectClassName": "EX3_070",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_070.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_070.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectInteger",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "GainPierce",
+        "HasMatchConditionOwnersPermanent",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetInt",
+        "SetIntSelection",
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-070#2261@base",
+          "cardId": "EX3-070",
+          "cardIndex": 2261,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Option/EX3_070.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_071@DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_071.cs",
+      "sourceEffectClassName": "EX3_071",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Black/EX3_071.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Black/EX3_071.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "AddActivateMainOptionSecurityEffect",
+        "CanTriggerOptionMainEffect",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-071#2262@base",
+          "cardId": "EX3-071",
+          "cardIndex": 2262,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Black/Option/EX3_071.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_072@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_072.cs",
+      "sourceEffectClassName": "EX3_072",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_072.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_072.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "OptionSkill",
+        "SecuritySkill"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "security": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectPermanent",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerOptionMainEffect",
+        "CanTriggerSecurityEffect",
+        "DeletePeremanentAndProcessAccordingToResult",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasMatchConditionPermanent",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "IsPermanentExistsOnOwnerBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass"
+      ],
+      "setMethods": [
+        "SetIsSecurityEffect",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-072#2263@base",
+          "cardId": "EX3-072",
+          "cardIndex": 2263,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Option/EX3_072.asset"
+        }
+      ],
+      "affectedCardCount": 1
+    },
+    {
+      "sourceScaffoldId": "EX3_073@DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_073.cs",
+      "sourceEffectClassName": "EX3_073",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Purple/EX3_073.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Purple/EX3_073.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnDestroyedAnyone",
+        "OnDetermineDoSecurityCheck",
+        "OnEnterFieldAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "inherited": true,
+        "optional": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectSecurity",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Trash",
+        "Deck",
+        "BattleArea"
+      ],
+      "factoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "PierceSelfEffect"
+      ],
+      "commonsApi": [
+        "AddEffectToPlayer",
+        "CanPlayAsNewPermanent",
+        "CanTriggerOnDeletion",
+        "CanTriggerWhenDigivolving",
+        "CardEffectHashtable",
+        "HasMatchConditionOwnersCardInTrash",
+        "HasNoElement",
+        "IsExistOnBattleArea",
+        "IsExistOnTrash",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "DisableEffectClass",
+        "ReturnToLibraryBottomDigivolutionCardsClass"
+      ],
+      "setMethods": [
+        "SetNotShowCard",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpDisableEffectClass",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-073#2264@base",
+          "cardId": "EX3-073",
+          "cardIndex": 2264,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_073.asset"
+        },
+        {
+          "definitionStableId": "EX3-073#2265@P1",
+          "cardId": "EX3-073",
+          "cardIndex": 2265,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Purple/Digimon/EX3_073_P1.asset"
+        }
+      ],
+      "affectedCardCount": 2
+    },
+    {
+      "sourceScaffoldId": "EX3_074@DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_074.cs",
+      "sourceEffectClassName": "EX3_074",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_074.cs",
+      "sourceSetId": "EX3",
+      "sourceScaffoldFile": "docs/generated/full-card-source-scaffold/sources/EX3.json",
+      "plannedRlSourceFile": "src/DCGO.RL.Engine/CardEffects/FullCardPool/SourceEffects/EX3/Green/EX3_074.cs",
+      "scaffoldStatus": "Unsupported",
+      "statusReason": "Source body exists, but queue 64 creates a marker scaffold only.",
+      "timings": [
+        "None",
+        "OnEnterFieldAnyone",
+        "OnTappedAnyone"
+      ],
+      "flags": {
+        "static_or_continuous": true,
+        "skippable": true,
+        "max_count_per_turn": true,
+        "zone_movement": true,
+        "trigger_when_digivolving": true
+      },
+      "selectionKinds": [
+        "SelectCard",
+        "SelectHand",
+        "SelectPermanent",
+        "SelectJogress"
+      ],
+      "rootZones": [
+        "Hand",
+        "BattleArea"
+      ],
+      "factoryApi": [],
+      "commonsApi": [
+        "CanPlayAsNewPermanent",
+        "CanTriggerWhenDigivolving",
+        "CanTriggerWhenSelfPermanentSuspends",
+        "HasMatchConditionPermanent",
+        "IsExistOnBattleArea",
+        "IsPermanentExistsOnOpponentBattleAreaDigimon",
+        "MatchConditionPermanentCount",
+        "PlayPermanentCards"
+      ],
+      "classApi": [
+        "ActivateClass",
+        "AddJogressConditionClass"
+      ],
+      "setMethods": [
+        "SetHashString",
+        "SetNotShowUI",
+        "SetUp",
+        "SetUpActivateClass",
+        "SetUpAddJogressConditionClass",
+        "SetUpCustomMessage",
+        "SetUpCustomMessage_ShowCard",
+        "SetUpICardEffect"
+      ],
+      "affectedCards": [
+        {
+          "definitionStableId": "EX3-074#2266@base",
+          "cardId": "EX3-074",
+          "cardIndex": 2266,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_074.asset"
+        },
+        {
+          "definitionStableId": "EX3-074#2267@P1",
+          "cardId": "EX3-074",
+          "cardIndex": 2267,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_074_P1.asset"
+        },
+        {
+          "definitionStableId": "EX3-074#9134@P2",
+          "cardId": "EX3-074",
+          "cardIndex": 9134,
+          "variantKey": "P2",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_074_P2.asset"
+        },
+        {
+          "definitionStableId": "EX3-074#9135@P3",
+          "cardId": "EX3-074",
+          "cardIndex": 9135,
+          "variantKey": "P3",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX3/Green/Digimon/EX3_074_P3.asset"
+        }
+      ],
+      "affectedCardCount": 4
+    }
+  ]
+}

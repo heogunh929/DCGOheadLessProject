@@ -23,6 +23,8 @@ public enum AttackExecutionContinuationKind
     ContinueAfterCounterCounter,
     ResolveBlockerSelection,
     ContinueAfterBlockTrigger,
+    ContinueAfterAttackTargetChangedToCounterNonCounter,
+    ContinueAfterAttackTargetChangedToCounterCounter,
     ContinueAfterAttackTargetChangedToBlockDesignation,
     ContinueAfterAttackTargetChangedToBattle,
     ContinueAfterSecurityCheck,
@@ -246,6 +248,20 @@ public sealed class AttackService
                     continuation.Action,
                     trace),
 
+            AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterNonCounter =>
+                ContinueAfterAttackTargetChangedWithResult(
+                    state,
+                    continuation.Action,
+                    AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterNonCounter,
+                    trace),
+
+            AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterCounter =>
+                ContinueAfterAttackTargetChangedWithResult(
+                    state,
+                    continuation.Action,
+                    AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterCounter,
+                    trace),
+
             AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBlockDesignation =>
                 ContinueAfterAttackTargetChangedWithResult(
                     state,
@@ -331,7 +347,7 @@ public sealed class AttackService
             RunPendingSwitchThenNext(
                 state,
                 action,
-                AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBlockDesignation,
+                AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterNonCounter,
                 trace,
                 () => RunCounterNonCounterWithResult(state, action, context.WithState(AttackRuntimeState.CounterNonCounter), trace)));
 
@@ -380,7 +396,7 @@ public sealed class AttackService
             RunPendingSwitchThenNext(
                 state,
                 action,
-                AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBlockDesignation,
+                AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterCounter,
                 trace,
                 () => RunCounterCounterWithResult(state, action, context.WithState(AttackRuntimeState.CounterCounter), trace)));
 
@@ -524,6 +540,7 @@ public sealed class AttackService
             Array.Empty<EffectResolution>(),
             prepared?.Options ?? CounterTimingOptions);
         var counterTrigger = _triggerPipelineService!.RunPrepared(state, selectedPrepared, trace);
+        PersistCounterExecutionIfAny(state, counterTrigger);
         if (counterTrigger.HasPendingSelection)
         {
             return PendingTrigger(
@@ -549,15 +566,14 @@ public sealed class AttackService
         TriggerPipelineResult? completedPipelineResult,
         GameTrace? trace)
     {
-        if (completedPipelineResult is not null
-            && completedPipelineResult.ExecutedEffects.Any(effect => effect.IsCounterEffect))
+        var counterUsed = PersistCounterExecutionIfAny(state, completedPipelineResult)
+            || state.RuntimeRules.RequireAttack().CounterUsed;
+        if (counterUsed)
         {
-            var used = state.RuntimeRules.RequireAttack().MarkCounterUsed();
-            state.RuntimeRules.SetAttack(used);
             return ContinueAfterCounterCounterWithResult(
                 state,
                 action,
-                used.WithState(AttackRuntimeState.BlockDesignation),
+                state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.BlockDesignation),
                 trace);
         }
 
@@ -771,12 +787,32 @@ public sealed class AttackService
         var context = state.RuntimeRules.RequireAttack();
         return nextKind switch
         {
+            AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterNonCounter =>
+                RunCounterNonCounterWithResult(state, action, context.WithState(AttackRuntimeState.CounterNonCounter), trace),
+            AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToCounterCounter =>
+                RunCounterCounterWithResult(state, action, context.WithState(AttackRuntimeState.CounterCounter), trace),
             AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBlockDesignation =>
                 RunBlockDesignationWithResult(state, action, context.WithState(AttackRuntimeState.BlockDesignation), trace),
             AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBattle =>
                 ResolveBattleWithResult(state, action, context.WithState(AttackRuntimeState.Battle), trace),
             _ => throw new DomainException($"Unsupported attack target changed continuation '{nextKind}'."),
         };
+    }
+
+    private static bool PersistCounterExecutionIfAny(GameState state, TriggerPipelineResult? result)
+    {
+        if (result?.ExecutedEffects.Any(effect => effect.IsCounterEffect) != true)
+        {
+            return false;
+        }
+
+        var context = state.RuntimeRules.RequireAttack();
+        if (!context.CounterUsed)
+        {
+            state.RuntimeRules.SetAttack(context.MarkCounterUsed());
+        }
+
+        return true;
     }
 
     private AttackExecutionResult ResolveBattleWithResult(

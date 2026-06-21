@@ -94,7 +94,10 @@ public sealed class GameTrace
             DecisionPoint: DecisionPoint,
             SelectionResult: SelectionResult,
             DecisionResult: DecisionResult,
-            Details: Details);
+            Details: Details,
+            Seed: after.Config.Seed,
+            RuleVisibleStateBefore: RuleVisibleSnapshot.Capture(before),
+            RuleVisibleStateAfter: RuleVisibleSnapshot.Capture(after));
 
         _events.Add(traceEvent);
         return traceEvent;

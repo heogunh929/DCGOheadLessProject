@@ -1,5 +1,37 @@
 # Golden Scenarios
 
+최신 기준: 2026-06-21
+
+## Queue 56 Golden Scenario Batch 1 - 2026-06-21
+
+이번 단계에서 기존 `CreateValidationHarnessV1Scenarios()` 7개는 그대로 유지하고, ST1~ST3 대표 효과를 실제 `GameAction`/`SelectionResult`/`GameTrace`/`ReplayRunner` 경로로 묶은 별도 batch 5개를 추가했다. 이 batch는 학습 데이터가 아니라 검증 데이터이며, Unity 원본 trace comparer가 붙기 전까지 카드별 `Verified` 승격 근거로 과대 해석하지 않는다.
+
+테스트 엔트리:
+
+- `GoldenScenarios batch1 replay scenarios pass`
+- 구현 helper: `CreateGoldenScenarioBatch1Reports()`
+- 기존 7개 validation harness scenario count는 `7`로 유지
+- 56 batch는 action event, selection event, rule-visible checkpoint snapshot, final state hash replay compare를 기록
+
+| Scenario | 주요 카드 | 실행 경계 | Checkpoint | Replay 상태 | 비고 |
+| --- | --- | --- | --- | --- | --- |
+| ST1 security tamer aura battle | ST1-12 | `AttackAction` -> `PassAction` -> `RunToMainPhase` -> `AttackAction` | setup, security tamer play, owner main phase, aura battle resolved | 통과 | security에서 tamer가 battle area로 play된 뒤 다음 owner turn 실제 DP battle 결과가 변한다. |
+| ST1 dynamic SecurityAttack replay | ST1-11 | 2회 `AttackAction` | setup, one-source check, four-source check | 통과 | source 1장 attacker는 1장, source 4장 attacker는 3장을 check한다. |
+| Blue source trash attack replay | ST2-03/ST2-06/ST2-09 | `DigivolveAction` + selection, `AttackAction` + ordering/target selection | setup, WhenDigivolving source trash, inherited attack source trash | 통과 | ST2-09는 실제 digivolve action으로 발동하고, attack 중 inherited ST2-03/ST2-06 selection이 bottom source를 trash한다. |
+| Blue bounce/security option replay | ST2-16 | `PlayCardAction` + selection, `AttackAction` security option + selection | setup, main option bounce, security option bounce | 통과 | top card는 hand, source는 trash, security option card는 final trash zone으로 고정된다. |
+| Yellow recovery/security hand replay | ST3-09/ST3-13/ST3-14 | `DigivolveAction`, 2회 `AttackAction` | setup, recovery +1, Holy Flame to hand, Heaven's Charm to hand | 통과 | ST3-09 recovery는 deck top을 security로 이동하고, ST3-13/ST3-14 checked card는 final hand zone으로 고정된다. |
+
+Snapshot-only 항목:
+
+- 56 batch의 5개 scenario는 모두 headless replay 가능하다.
+- Unity 원본 trace와의 구조 비교는 아직 queue 58 범위이므로, 현재 문서의 "통과"는 RL.Engine 내부 replay deterministic baseline을 뜻한다.
+
+Rule-visible checkpoint 정책:
+
+- 각 scenario는 `golden:{scenario}:checkpoint:{label}` state snapshot을 trace에 남긴다.
+- replay 비교는 action/selection/phase event를 재실행하고 final state hash를 비교한다.
+- checkpoint snapshot은 사람이 검수할 수 있는 검증 anchor이며, replay runner는 이를 action으로 재실행하지 않는다.
+
 최신 기준일: 2026-06-18
 
 Golden scenario는 학습 데이터가 아니라 엔진 검증 데이터다. 현재 ST1 target deck validation은 통과하지만, 더 넓은 DCGO 룰 검증을 위해 scripted/golden scenario를 계속 확장해야 한다.

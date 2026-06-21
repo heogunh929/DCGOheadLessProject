@@ -1,5 +1,13 @@
 # Effect System Foundation
 
+## Queue 54C AfterEffects Fingerprint/Background State
+
+`AfterEffectsActivate` self-loop guard는 candidate stable id만으로 반복을 판단하지 않는다. 현재 state hash, trigger context timing/player/source, context payload, 각 candidate의 source card instance/source permanent/controller를 함께 fingerprint에 포함한다. 이 때문에 state가 바뀐 동일 candidate의 합법적인 재활성은 허용되고, 같은 state에서 같은 candidate set이 반복될 때만 loop guard가 발동한다.
+
+background frame 전환은 foreground batch의 `HadResolutionAttempt`를 보존한다. foreground effect가 실행된 뒤 background effect가 stale/`CanActivate` 실패로 skip되어도 batch 종료 의미는 사라지지 않으며, `AfterEffectsActivate`는 한 번만 예약된다.
+
+`RuleProcessor.StabilizeStateOnly`가 trigger pipeline으로 넘기는 rule event coverage는 현재 DP 0 destruction의 `OnDestroyedAnyone` payload다. invalid/face-down 정리, linked trim, stale modifier cleanup은 현재 state-only cleanup으로 문서화되어 있으며, source evidence 없이 trigger event로 확장하지 않는다.
+
 ## Queue 55B Counter Descriptor Metadata
 
 `EffectDescriptor`/`EffectResolution`의 counter 관련 metadata는 다음 의미로 사용한다.
