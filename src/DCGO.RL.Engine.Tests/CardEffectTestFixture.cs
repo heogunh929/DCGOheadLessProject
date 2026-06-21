@@ -345,6 +345,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
     private readonly bool _isCounterEffect;
     private readonly bool _isSkippable;
     private readonly bool _counterSelectionConsumesOptional;
+    private readonly bool _isOptional;
 
     public TimingMemoryCardScript(
         string cardId,
@@ -357,7 +358,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
         TriggerSourcePersistencePolicy sourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole,
         bool isCounterEffect = false,
         bool isSkippable = false,
-        bool counterSelectionConsumesOptional = false)
+        bool counterSelectionConsumesOptional = false,
+        bool isOptional = false)
     {
         _timing = timing;
         _amount = amount;
@@ -368,6 +370,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
         _isCounterEffect = isCounterEffect;
         _isSkippable = isSkippable;
         _counterSelectionConsumesOptional = counterSelectionConsumesOptional;
+        _isOptional = isOptional;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -387,6 +390,7 @@ internal sealed class TimingMemoryCardScript : ICardScript
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
                 IsBackground: _isBackground,
+                IsOptional: _isOptional,
                 IsOncePerTurn: _isOncePerTurn,
                 OncePerTurnKey: $"{Porting.CardId}:{_timing}",
                 SourcePersistencePolicy: _sourcePersistencePolicy,
@@ -938,7 +942,18 @@ internal sealed class AttackTargetSwitchProbeScript : ICardScript
             && nextValue is PermanentId nextId
                 ? nextId.Value.ToString()
                 : "-";
-        _records.Add($"{previous}->{next}");
+        var defender = values.TryGetValue("Defender", out var defenderValue)
+            && defenderValue is PermanentId defenderId
+                ? defenderId.Value.ToString()
+                : "-";
+        var blocker = values.TryGetValue("Blocker", out var blockerValue)
+            && blockerValue is PermanentId blockerId
+                ? blockerId.Value.ToString()
+                : "-";
+        var isBlocking = values.TryGetValue("IsBlocking", out var blockingValue)
+            && blockingValue is bool blocking
+            && blocking;
+        _records.Add($"{previous}->{next};defender:{defender};blocker:{blocker};blocking:{isBlocking}");
     }
 }
 

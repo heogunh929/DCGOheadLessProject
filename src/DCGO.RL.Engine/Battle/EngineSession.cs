@@ -256,7 +256,8 @@ public sealed class EngineSession
             var attackTailResult = _services.AttackService.CompleteAttackContinuationWithResult(
                 State,
                 pending.AttackContinuation,
-                Trace);
+                Trace,
+                pipelineResult);
             if (attackTailResult.HasPendingSelection)
             {
                 _pending = pending.NextAttack(State, attackTailResult, NextDecisionToken());

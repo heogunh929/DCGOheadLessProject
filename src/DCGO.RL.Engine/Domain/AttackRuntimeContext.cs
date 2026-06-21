@@ -23,7 +23,7 @@ public enum CounterWindowGroup
 public sealed record AttackTargetSwitch(
     PermanentId? OldDefender,
     PermanentId? NewDefender,
-    bool IsBlock,
+    bool IsBlocking,
     PermanentId? Blocker,
     string? SourceEffectStableId);
 
@@ -38,13 +38,17 @@ public sealed record AttackRuntimeContext(
     IReadOnlyList<CardInstanceId>? CounterSourceSnapshot = null,
     IReadOnlyList<AttackTargetSwitch>? PendingTargetSwitches = null,
     CounterWindowGroup CounterGroup = CounterWindowGroup.TurnPlayer,
-    bool CounterUsed = false)
+    bool CounterUsed = false,
+    IReadOnlyList<string>? AttemptedCounterCandidateIds = null)
 {
     public IReadOnlyList<CardInstanceId> CounterSources =>
         CounterSourceSnapshot?.ToArray() ?? Array.Empty<CardInstanceId>();
 
     public IReadOnlyList<AttackTargetSwitch> TargetSwitchQueue =>
         PendingTargetSwitches?.ToArray() ?? Array.Empty<AttackTargetSwitch>();
+
+    public IReadOnlyList<string> AttemptedCounterCandidates =>
+        AttemptedCounterCandidateIds?.ToArray() ?? Array.Empty<string>();
 
     public AttackRuntimeContext WithState(AttackRuntimeState state) =>
         this with { State = state };
@@ -66,7 +70,12 @@ public sealed record AttackRuntimeContext(
         var switchQueue = TargetSwitchQueue.ToList();
         if (changed)
         {
-            switchQueue.Add(new AttackTargetSwitch(Defender, newDefender, isBlock, blocker ?? newDefender, sourceEffectStableId));
+            switchQueue.Add(new AttackTargetSwitch(
+                Defender,
+                newDefender,
+                isBlock,
+                isBlock ? blocker ?? newDefender : null,
+                sourceEffectStableId));
         }
 
         return this with
@@ -97,6 +106,20 @@ public sealed record AttackRuntimeContext(
             CounterUsed = true,
             CounterGroup = CounterWindowGroup.Done,
         };
+
+    public AttackRuntimeContext MarkCounterCandidateAttempted(string candidateId)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(candidateId);
+        if (AttemptedCounterCandidates.Contains(candidateId, StringComparer.Ordinal))
+        {
+            return this;
+        }
+
+        return this with
+        {
+            AttemptedCounterCandidateIds = AttemptedCounterCandidates.Concat(new[] { candidateId }).ToArray(),
+        };
+    }
 
     public AttackRuntimeContext AdvanceCounterGroup() =>
         this with

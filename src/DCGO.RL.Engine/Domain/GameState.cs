@@ -208,7 +208,8 @@ public sealed class GameState
                 .Append(attack.AttackerTopCardWhenDeclared?.Value.ToString() ?? "-").Append('|')
                 .AppendJoin(",", attack.CounterSources.Select(card => card.Value)).Append('|')
                 .Append(attack.CounterGroup).Append('|')
-                .Append(attack.CounterUsed ? "1" : "0").Append('|');
+                .Append(attack.CounterUsed ? "1" : "0").Append('|')
+                .AppendJoin(",", attack.AttemptedCounterCandidates.OrderBy(candidate => candidate, StringComparer.Ordinal)).Append('|');
 
             if (attack.TargetSwitchQueue.Count > 0)
             {
@@ -219,7 +220,7 @@ public sealed class GameState
                             "/",
                             pendingSwitch.OldDefender?.Value.ToString() ?? "-",
                             pendingSwitch.NewDefender?.Value.ToString() ?? "-",
-                            pendingSwitch.IsBlock ? "1" : "0",
+                            pendingSwitch.IsBlocking ? "1" : "0",
                             pendingSwitch.Blocker?.Value.ToString() ?? "-",
                             pendingSwitch.SourceEffectStableId ?? "-")));
             }
