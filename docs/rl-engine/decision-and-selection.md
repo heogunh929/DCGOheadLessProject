@@ -30,7 +30,7 @@ RL.Engine은 Unity UI를 구현하지 않는다. 선택이 필요한 rule/effect
 - ST1 selection wiring은 `SelectionRequest`/`SelectionResult` boundary를 유지한다.
 - ST2/ST3 source-aligned registry snapshot에서도 selection이 필요한 효과는 카드별 파일과 support helper를 통해 같은 boundary를 사용해야 한다.
 - UI 직접 구현은 여전히 금지다.
-- full `MultipleSkills` simultaneous trigger priority와 block/counter 세부 selection ordering은 아직 전체 엔진 TODO다.
+- full `MultipleSkills` simultaneous trigger priority는 queue 54B에서 처리했고, block/counter 세부 selection ordering 중 blocker decision boundary는 queue 55에서 `EngineSession` resume 경계에 연결했다. 실제 counter card body와 cut-in/replacement priority 전체는 후속 범위다.
 
 ## 핵심 원칙
 
@@ -74,7 +74,7 @@ Queue 52B에서 token 우회를 제거했다.
 - selection trace event는 `SelectionResult`뿐 아니라 `DecisionResult` payload를 함께 저장한다.
 - `ReplayRunner`는 현재 pending token을 자동 주입하지 않고 trace에 기록된 token을 그대로 제출한다. stale token, wrong player, wrong request id는 replay에서도 실패한다.
 
-현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, optional yes/no + explicit target selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`/`RunToMainPhase()`의 `OnStartMainPhase`/`OnStartTurn`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail 또는 security-check loop를 이어서 drain한다.
+현재 구현 범위는 `ActionExecutor`가 실제 pending을 반환하는 hand option `OptionSkill`, chained option selection, optional yes/no + explicit target selection, normal play `OnPlay`, normal digivolve `WhenDigivolving`, `AttackAction`의 `OnAllyAttack`/`OnCounterTiming`/blocker selection/`OnBlockAnyone`/`OnAttackTargetChanged`/`OnEndBlockDesignation`/`OnEndAttack`, attack security check 중 `SecuritySkill`/Activate Main selection, rules timing, `EngineSession.RunMainPhase()`/`RunToMainPhase()`의 `OnStartMainPhase`/`OnStartTurn`, `PassAction`의 `OnEndTurn`/`OnStartTurn`이다. `PlayCardService`, `DigivolveService`, `AttackService`, `SecurityCheckService`, `SecurityEffectExecutionService`, `RuleProcessor`, `PhaseRunner`는 pending continuation을 반환하고, `EngineSession`은 selection 이후 남은 queue/background tail, attack tail 또는 security-check loop를 이어서 drain한다.
 
 SecuritySkill selection은 공통 boundary로 재개되지만, `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate` 등 원본 security timing 전체 순서는 queue 53의 source-aligned 정렬 범위로 남긴다. `EngineSession.RunMainPhase()`는 `TraceEventKind.Phase`/`RunMainPhase` event로 replay할 수 있고, `ScriptedScenarioRunner`와 `RandomLegalActionRunner`는 services 기반 실행에서 pending selection을 `ScenarioRunStatus.PausedForDecision`로 노출한다.
 
@@ -150,6 +150,6 @@ ST1-12 security effect는 원본 `PlaySelfTamerSecurityEffect`처럼 `Executing`
 ## 남은 범위
 
 - full `MultipleSkills` simultaneous trigger priority와 선택 순서
-- block/counter 세부 timing의 end-to-end selection result application
+- 실제 counter card body와 cut-in/replacement priority 전체
 - `BeforePayCost` / `AfterPayCost` timing에서의 optional/selection boundary
 - full security timing sequence: `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`

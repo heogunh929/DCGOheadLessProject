@@ -15,10 +15,11 @@
 | 54 | done | prompts/54_after_effects_multiple_skills_priority.md | AfterEffectsActivate/MultipleSkills priority |
 | 54A | done | prompts/54A_source_aligned_trigger_stack_frame_correction.md | source-aligned trigger stack frame, nested trigger, RuleProcess, AfterEffectsActivate 보정 |
 | 54B | done | prompts/54B_trigger_stack_semantic_hardening.md | trigger stack semantic hardening: empty batch AfterEffects 금지, ordering/own decision 분리, RuleProcessor event frame 보존 |
-| 55 | todo | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
+| 55 | done | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |
 | 57 | todo | prompts/57_parity_trace_contract_and_exporter.md | rule-visible parity trace 계약 |
 | 58 | todo | prompts/58_parity_fixture_comparer.md | Unity/RL fixture comparer |
+| 54C | todo | prompts/54C_aftereffects_fingerprint_background_state_hardening.md | AfterEffects fingerprint/background state hardening |
 | 59A | todo | prompts/59A_engine_core_milestone_gate.md | ST1~ST3 engine-core milestone gate |
 | 60A | todo | prompts/60A_engine_core_expansion_readiness.md | 전체 카드풀 inventory 진입 readiness |
 | 61 | todo | prompts/61_dcgo_source_snapshot_pin.md | DCGO2/DCGO 원본 revision 고정 및 사용자 승인 |

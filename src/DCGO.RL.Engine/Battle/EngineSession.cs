@@ -175,7 +175,7 @@ public sealed class EngineSession
         var beforeSelection = State.Clone();
         if (pending.Continuation is null)
         {
-            if (pending.AttackContinuation?.Kind != AttackExecutionContinuationKind.ContinueAfterSecurityCheck)
+            if (pending.AttackContinuation is null)
             {
                 throw new DomainException("Pending engine interaction has no resumable effect continuation.");
             }
@@ -513,6 +513,7 @@ public sealed class EngineSession
         public string StableContinuationId =>
             Continuation?.StableContinuationId
             ?? AttackContinuation?.SecurityCheckContinuation?.StableContinuationId
+            ?? AttackContinuation?.Frame?.State.ToString()
             ?? Resolution.StableId;
 
         public static PendingEngineInteraction FromActionResult(
@@ -526,9 +527,9 @@ public sealed class EngineSession
             }
 
             if (result.PendingContinuation is null
-                && result.AttackExecution?.Continuation?.SecurityCheckContinuation is null)
+                && result.AttackExecution?.Continuation is null)
             {
-                throw new DomainException("Pending action result requires a trigger or security continuation.");
+                throw new DomainException("Pending action result requires a trigger or attack continuation.");
             }
 
             return new PendingEngineInteraction(
@@ -652,9 +653,9 @@ public sealed class EngineSession
             }
 
             if (result.PendingContinuation is null
-                && result.Continuation?.SecurityCheckContinuation is null)
+                && result.Continuation is null)
             {
-                throw new DomainException("Pending attack tail result requires a trigger or security continuation.");
+                throw new DomainException("Pending attack tail result requires a trigger or attack continuation.");
             }
 
             return new PendingEngineInteraction(

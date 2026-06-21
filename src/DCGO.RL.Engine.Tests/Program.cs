@@ -202,6 +202,15 @@ var tests = new (string Name, Action Test)[]
     ("EngineSession Pass OnStartTurn selection pause/resume", EngineSessionPassOnStartTurnSelectionPauseResume),
     ("EngineSession OnAllyAttack selection pause/resume", EngineSessionOnAllyAttackSelectionPauseResume),
     ("EngineSession OnEndAttack selection pause/resume", EngineSessionOnEndAttackSelectionPauseResume),
+    ("Attack timing no counter no block resolves", AttackTimingNoCounterNoBlockResolves),
+    ("Attack timing counter decision boundary", AttackTimingCounterDecisionBoundary),
+    ("Attack timing counter effect partition", AttackTimingCounterEffectPartition),
+    ("Attack timing blocker selection switches defender", AttackTimingBlockerSelectionSwitchesDefender),
+    ("Attack timing stale blocker selection fails", AttackTimingStaleBlockerSelectionFails),
+    ("Attack timing target changed end block end attack order", AttackTimingTargetChangedEndBlockEndAttackOrder),
+    ("Attack timing cannot block restriction skips block window", AttackTimingCannotBlockRestrictionSkipsBlockWindow),
+    ("Attack timing ST1 blocker inherited effect", AttackTimingSt1BlockerInheritedEffect),
+    ("Attack timing blocker replay deterministic", AttackTimingBlockerReplayDeterministic),
     ("EngineSession RulesTiming selection pause/resume", EngineSessionRulesTimingSelectionPauseResume),
     ("EngineSession SecuritySkill selection pause/resume", EngineSessionSecuritySkillSelectionPauseResume),
     ("EngineSession optional yes then target selection resolves", EngineSessionOptionalYesThenTargetSelectionResolves),
@@ -4679,6 +4688,234 @@ static void EngineSessionOnEndAttackSelectionPauseResume()
     AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
 }
 
+static void AttackTimingNoCounterNoBlockResolves()
+{
+    var services = CreateTestNoEffectServices();
+    var state = CreateMinimalBattleState();
+    var attacker = AddBattlePermanent(state, 6380, 980, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var security = AddCardToZone(state, 6381, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    var session = services.CreateSession(state);
+
+    var result = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertFalse(result.IsPaused);
+    AssertTrue(result.RulesProcessed);
+    AssertEqual(0, state.GetPlayer(PlayerId.Player1).Security.Count);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+    AssertEqual(GameResultKind.Ongoing, state.Result.Kind);
+}
+
+static void AttackTimingCounterDecisionBoundary()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-COUNTER",
+            "FX_Counter",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnCounterTiming),
+        new NoEffectCardScript("BT1-STRONG", notes: "Attack timing counter attacker."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Attack timing counter target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-COUNTER"] = CardEffectTestFixture.EffectDefinition("FX-COUNTER", "FX_Counter") with
+    {
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+    };
+    var attacker = AddBattlePermanent(state, 6382, 982, "FX-COUNTER", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6383, 983, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertTrue(paused.IsPaused);
+    AssertEqual(EffectTiming.OnCounterTiming, paused.CompletedTiming);
+    AssertEqual("test-selection:FX-COUNTER", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertTrue(attacker.IsSuspended);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
+
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        "test-selection:FX-COUNTER",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+}
+
+static void AttackTimingCounterEffectPartition()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript("FX-NONCOUNTER", "FX_NonCounter", EffectTiming.OnCounterTiming, amount: 1),
+        new TimingMemoryCardScript("FX-COUNTER", "FX_Counter", EffectTiming.OnCounterTiming, amount: 2, isCounterEffect: true),
+        new NoEffectCardScript("BT1-STRONG", notes: "Attack timing counter partition attacker.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-NONCOUNTER"] = CardEffectTestFixture.EffectDefinition("FX-NONCOUNTER", "FX_NonCounter");
+    state.CardDefinitions["FX-COUNTER"] = CardEffectTestFixture.EffectDefinition("FX-COUNTER", "FX_Counter");
+    var attacker = AddBattlePermanent(state, 6384, 984, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6385, 985, "FX-NONCOUNTER", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 6386, 986, "FX-COUNTER", PlayerId.Player0, 2, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var result = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertFalse(result.IsPaused);
+    AssertEqual(8, state.Memory);
+}
+
+static void AttackTimingBlockerSelectionSwitchesDefender()
+{
+    var services = CreateTestNoEffectServices();
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 6387, 987, "KW-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 6388, 988, "KW-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6389, 989, "KW-BLOCKER", PlayerId.Player1, 1, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertEqual("blocker:987", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertTrue(paused.PendingDecisionPoint.SelectionRequest.Candidates.Any(candidate => candidate.Permanent == blocker.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == defender.Id));
+
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        paused.PendingDecisionPoint.SelectionRequest.Id,
+        new[] { paused.PendingDecisionPoint.SelectionRequest.Candidates.Single(candidate => candidate.Permanent == blocker.Id) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == defender.Id));
+    AssertFalse(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == blocker.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(blocker.TopCardId));
+}
+
+static void AttackTimingStaleBlockerSelectionFails()
+{
+    var services = CreateTestNoEffectServices();
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 6390, 990, "KW-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6391, 991, "KW-BLOCKER", PlayerId.Player1, 0, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+    var target = paused.PendingDecisionPoint!.SelectionRequest!.Candidates.Single(candidate => candidate.Permanent == blocker.Id);
+    blocker.IsSuspended = true;
+
+    AssertThrows<DomainException>(() => ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        paused.PendingDecisionPoint.SelectionRequest.Id,
+        new[] { target })));
+}
+
+static void AttackTimingTargetChangedEndBlockEndAttackOrder()
+{
+    var order = new List<string>();
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new RecordingTimingCardScript("FX-BLOCK", "FX_Block", EffectTiming.OnBlockAnyone, "block", order),
+        new RecordingTimingCardScript("FX-TARGET", "FX_Target", EffectTiming.OnAttackTargetChanged, "target", order),
+        new RecordingTimingCardScript("FX-END-BLOCK", "FX_EndBlock", EffectTiming.OnEndBlockDesignation, "end-block", order),
+        new RecordingTimingCardScript("FX-END-ATTACK", "FX_EndAttackOrder", EffectTiming.OnEndAttack, "end-attack", order),
+        new NoEffectCardScript("KW-STRONG", notes: "Attack timing order attacker."),
+        new NoEffectCardScript("KW-WEAK", notes: "Attack timing order defender."),
+        new NoEffectCardScript("KW-BLOCKER", notes: "Attack timing order blocker.")));
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["FX-BLOCK"] = CardEffectTestFixture.EffectDefinition("FX-BLOCK", "FX_Block");
+    state.CardDefinitions["FX-TARGET"] = CardEffectTestFixture.EffectDefinition("FX-TARGET", "FX_Target");
+    state.CardDefinitions["FX-END-BLOCK"] = CardEffectTestFixture.EffectDefinition("FX-END-BLOCK", "FX_EndBlock");
+    state.CardDefinitions["FX-END-ATTACK"] = CardEffectTestFixture.EffectDefinition("FX-END-ATTACK", "FX_EndAttackOrder");
+    var attacker = AddBattlePermanent(state, 6392, 992, "KW-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 6393, 993, "KW-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6394, 994, "KW-BLOCKER", PlayerId.Player1, 1, enterTurn: 1);
+    AddBattlePermanent(state, 6395, 995, "FX-BLOCK", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 6396, 996, "FX-TARGET", PlayerId.Player0, 2, enterTurn: 1);
+    AddBattlePermanent(state, 6397, 997, "FX-END-BLOCK", PlayerId.Player0, 3, enterTurn: 1);
+    AddBattlePermanent(state, 6398, 998, "FX-END-ATTACK", PlayerId.Player1, 2, enterTurn: 1);
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+    var request = paused.PendingDecisionPoint!.SelectionRequest!;
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        request.Id,
+        new[] { request.Candidates.Single(candidate => candidate.Permanent == blocker.Id) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertSequence(new[] { "block", "target", "end-block", "end-attack" }, order);
+}
+
+static void AttackTimingCannotBlockRestrictionSkipsBlockWindow()
+{
+    var services = CreateTestNoEffectServices();
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 6399, 999, "KW-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6400, 1000, "KW-BLOCKER", PlayerId.Player1, 0, enterTurn: 1);
+    state.TemporaryModifiers.Add(new TemporaryModifier(
+        "test:cannot-block",
+        SourceCardId: null,
+        SourcePermanentId: null,
+        ControllerPlayerId: PlayerId.Player0,
+        TargetPermanentId: blocker.Id,
+        TargetPlayerId: null,
+        TemporaryModifierKind.CannotBlock,
+        Amount: 0,
+        DurationScope.UntilTurnEnd,
+        CreatedTurnCount: state.TurnCount,
+        CreatedPhase: state.Phase,
+        ExpiresAtTurnPlayerId: PlayerId.Player0,
+        DebugLabel: "Test cannot block restriction."));
+    var session = services.CreateSession(state);
+
+    var result = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertFalse(result.IsPaused);
+    AssertEqual(GameResultKind.Win, state.Result.Kind);
+    AssertEqual<PlayerId?>(PlayerId.Player0, state.Result.Winner);
+}
+
+static void AttackTimingSt1BlockerInheritedEffect()
+{
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry());
+    var state = CreateSt1ScenarioState();
+    var attacker = AddBattlePermanent(state, 6401, 1001, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6402, 1002, "ST1-06", PlayerId.Player1, 0, enterTurn: 1);
+    AddEvolutionSource(state, 6404, "ST1-09", PlayerId.Player0, attacker.Id);
+    state.Memory = 0;
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+    var request = paused.PendingDecisionPoint!.SelectionRequest!;
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        request.Id,
+        new[] { request.Candidates.Single(candidate => candidate.Permanent == blocker.Id) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertEqual(3, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == blocker.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(attacker.TopCardId));
+}
+
+static void AttackTimingBlockerReplayDeterministic()
+{
+    var services = CreateTestNoEffectServices();
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 6405, 1005, "KW-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6406, 1006, "KW-BLOCKER", PlayerId.Player1, 0, enterTurn: 1);
+    var initial = state.Clone();
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, null));
+    var request = paused.PendingDecisionPoint!.SelectionRequest!;
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        request.Id,
+        new[] { request.Candidates.Single(candidate => candidate.Permanent == blocker.Id) }));
+
+    AssertFalse(completed.IsPaused);
+    var replay = new ReplayRunner(services: services).Replay(initial, session.Trace);
+
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(replay.InvariantReport.IsValid);
+}
+
 static void EngineSessionRulesTimingSelectionPauseResume()
 {
     var services = CreateRulesTimingSelectionServices();
@@ -5834,9 +6071,10 @@ static void OptionLifecycleSt2St3HandOptionRegression()
 static void TriggerPipelineSt1OnBlockAnyoneHook()
 {
     var state = CreateSt1ScenarioState();
+    state.TurnPlayerId = PlayerId.Player1;
     var attacker = AddBattlePermanent(state, 6131, 731, "ST1-04", PlayerId.Player1, 0, enterTurn: 1);
     var blocker = AddBattlePermanent(state, 6132, 732, "ST1-10", PlayerId.Player0, 0, enterTurn: 1);
-    AddEvolutionSource(state, 6133, "ST1-09", PlayerId.Player0, blocker.Id);
+    AddEvolutionSource(state, 6133, "ST1-09", PlayerId.Player1, attacker.Id);
     var pipeline = new TriggerPipelineService(St1CardScriptCatalog.CreateRegistry());
 
     var result = new AttackService(triggerPipelineService: pipeline).RunBlockTrigger(state, blocker.Id, attacker.Id);
@@ -6719,7 +6957,11 @@ static void St2St3SharedSt106MappingUsesCardIdScripts()
             EffectTiming.OnAllyAttack,
             PlayerId.Player0,
             source.TopCardId,
-            source.Id);
+            source.Id,
+            values: new Dictionary<string, object?>
+            {
+                ["Attacker"] = source.Id,
+            });
 
         AssertEqual(-2, state.Memory);
         AssertEqual(1, result.ExecutedEffects.Count);

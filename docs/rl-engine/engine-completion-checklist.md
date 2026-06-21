@@ -43,10 +43,9 @@
 
 ST1 target deck의 현재 card effect와 관련 gate는 통과한다. 그러나 아래 항목은 전체 DCGO 엔진 완성을 위해 여전히 검토해야 한다.
 
-- full `MultipleSkills` simultaneous trigger priority와 UI 선택 순서
+- full card pool에서 검증할 추가 `MultipleSkills` 카드군과 UI 표시 parity
 - `BeforePayCost` / `AfterPayCost`
-- `OnCounterTiming`, `OnAttackTargetChanged`, `OnEndBlockDesignation`
-- blocker/counter 세부 흐름의 end-to-end integration
+- actual counter card body and ACE/Blast Evolution style counter handling
 - 더 넓은 카드풀의 continuous/replacement/cut-in 효과
 - Unity 원본 trace와 RL.Engine trace 비교 harness
 

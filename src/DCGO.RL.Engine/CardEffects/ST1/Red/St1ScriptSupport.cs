@@ -243,10 +243,13 @@ internal abstract class SharedSt1_06BlockerMemoryLossScript : ICardScript
                 SourceCard: context.SourceCard,
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
-                CanTrigger: effectContext => St1ScriptSupport.IsSourcePermanentInBattleArea(
-                    effectContext.State,
-                    context.SourceCard,
-                    context.SourcePermanent)),
+                CanTrigger: effectContext =>
+                    effectContext.GetValueOrDefault("Attacker") is PermanentId attacker
+                    && attacker == context.SourcePermanent
+                    && St1ScriptSupport.IsSourcePermanentInBattleArea(
+                        effectContext.State,
+                        context.SourceCard,
+                        context.SourcePermanent)),
         };
 
     public void Resolve(CardScriptExecutionContext context) =>

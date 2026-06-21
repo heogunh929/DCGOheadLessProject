@@ -31,7 +31,7 @@ effect body 하나가 완료되면 production graph의 `RuleProcessor.StabilizeS
 - ST1 card effect body는 카드별 파일 구조로 정렬되어 있고 `St1CardScriptCatalog`는 registry 등록만 담당한다.
 - ST2/ST3도 source-aligned 로컬 작업트리에서 카드별 파일/marker 구조와 registry snapshot을 가진다.
 - 공통 service mapping 감사는 `docs/rl-engine/common-layer-source-mapping.md`에 분리했다.
-- full `MultipleSkills` priority, counter/pay-cost 세부 timing, Unity trace parity는 아직 전체 엔진 범위 TODO다.
+- full `MultipleSkills` priority는 queue 54B에서 처리했고, counter/block/attack target timing의 common attack lifecycle은 queue 55에서 처리했다. 실제 counter card body, pay-cost 세부 timing, replacement/cut-in, Unity trace parity는 아직 전체 엔진 범위 TODO다.
 - RL 학습 구성은 아직 구현하지 않는다.
 
 ## 핵심 원칙
@@ -347,9 +347,8 @@ ST2-01 원본 구현은 `battle.enemyPermanent(...)`를 통해 battle 상대를 
 
 ## 아직 Partial인 전체 엔진 범위
 
-- full `MultipleSkills` simultaneous trigger priority/UI 선택 순서
-- `BeforePayCost`, `AfterPayCost`, `OnCounterTiming`
-- block selection result application and full end-to-end integration
+- actual counter card body and ACE/Blast Evolution style counter handling
+- `BeforePayCost`, `AfterPayCost`
 - future cards that require replacement/cut-in effects
 
 ## ST1-ST3 inventory and gap-analysis stage
@@ -414,9 +413,8 @@ Source mapping:
 
 Still out of current target-pool scope:
 
-- full `MultipleSkills` simultaneous trigger priority/UI choice,
-- `BeforePayCost`, `AfterPayCost`, `OnCounterTiming`,
-- `OnAttackTargetChanged`, `OnEndBlockDesignation`,
+- actual counter card body and ACE/Blast Evolution style counter handling,
+- `BeforePayCost`, `AfterPayCost`,
 - wider replacement/cut-in effects,
 - Unity trace parity harness.
 
@@ -469,8 +467,8 @@ New or reviewed common layer candidates:
 
 The fixed implementation pass sections are defined in `docs/rl-engine/st1-st3-porting-plan.md`.
 
-- `OnAttackTargetChanged`, `OnEndBlockDesignation`
-- block selection result application의 full end-to-end integration
+- actual counter card body and ACE/Blast Evolution style counter handling
+- `BeforePayCost`, `AfterPayCost`
 - 더 넓은 카드풀의 replacement/cut-in effect
 
 ## Queue 50 - option 실행 lifecycle

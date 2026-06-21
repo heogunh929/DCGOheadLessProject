@@ -256,6 +256,10 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 - `PassAction` tail의 `OnStartTurn` pending selection은 turn player 전환과 active phase 진입 후 pause하고, selection resume 후 rules timing을 실행한다.
 - `AttackAction`의 `OnAllyAttack` pending selection은 attacker suspend 후 battle/security 처리 전에 pause하고, selection resume 후 attack tail과 rules timing을 이어간다.
 - `AttackAction`의 `OnEndAttack` pending selection은 battle/security 처리 후 battle-end cleanup 전에 pause하고, selection resume 후 cleanup과 rules timing을 이어간다.
+- `AttackAction`의 blocker selection은 `EngineSession.Resume(DecisionResult)`로만 재개하며, resume 시 현재 blocker 후보를 다시 만들어 stale blocker와 `CannotBlock` 제한을 검증한다.
+- `OnCounterTiming`은 비-counter 후보와 counter 후보를 분리해 실행하며, counter timing selection은 block/battle 전에 pause한다.
+- block 선택 후 `OnBlockAnyone`, `OnAttackTargetChanged`, `OnEndBlockDesignation`, battle/security, `OnEndAttack` 순서를 검증한다.
+- `ST1_06`/`ST2-07`/`ST3-07` shared attack memory loss와 `ST1_09` inherited block hook은 원본 `CanTriggerOnAttack` 의미대로 실제 attacker source에서만 발동하는지 검증한다.
 - action 후 `RulesTiming` pending selection은 action state change를 유지한 채 pause하고, selection resume 후 rule stabilization을 이어간다.
 - selection resume 후 `RulesTiming`이 다시 selection을 반환하면 새 pending interaction으로 pause한다.
 - attack security check 중 `SecuritySkill`/Activate Main pending selection은 security card를 `Executing`으로 이동한 상태에서 pause하고, selection resume 후 security card final zone, attack tail, rules timing을 이어간다.
@@ -276,7 +280,7 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 .\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
 ```
 
-결과: `All 278 tests passed.`
+결과: queue 55 기준 `All 346 tests passed.`
 
 남은 범위:
 

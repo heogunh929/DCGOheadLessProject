@@ -46,7 +46,7 @@ Battle keyword는 개별 `CardEffect` 포팅이 아니라 attack, battle, securi
 
 ## 원본과 다르게 처리한 점
 
-원본 `AttackProcess`는 attack 선언, counter timing, block timing, battle, security check, end attack을 coroutine 상태 머신으로 순차 실행한다. 현재 RL.Engine은 아직 full attack stack을 만들지 않았기 때문에 Blocker/Collision은 즉시 자동 처리하지 않고 selection request 생성 API로 노출한다. 추후 CLI/UnityAdapter/Agent가 `SelectionResult`를 주입하는 attack pipeline 단계에서 defender switch와 blocker suspend를 연결한다.
+원본 `AttackProcess`는 attack 선언, counter timing, block timing, battle, security check, end attack을 coroutine 상태 머신으로 순차 실행한다. queue 55 기준 RL.Engine은 `AttackFrame` 기반 state-machine으로 blocker selection, defender switch, blocker suspend, attack target changed, end block designation, battle/security, end attack을 `EngineSession` resume 경계까지 연결한다.
 
 원본의 keyword는 `ICardEffect` interface와 face-up security/player effect까지 조회한다. 현재 구현은 card definition, permanent state, stack/source/link card definition의 선언형 capability만 읽는다. face-up security와 player continuous effect는 CardEffect foundation 이후 같은 `BattleKeywordService`에 provider를 붙여 확장한다.
 
@@ -77,10 +77,13 @@ Complex Mechanics는 play/digivolve action 자체를 확장한다. 예를 들어
 - Collision은 block target 후보 확장을 검증한다.
 - Decoy는 원본 사용 예시 확인 전까지 unsupported validation을 검증한다.
 
-## 14 단계 남은 TODO
+## 55 단계 갱신과 남은 TODO
 
-- `SelectionResult`를 받아 blocker suspend와 defender switch를 실행하는 full attack pipeline
-- counter timing, cut-in, attack target changed, on block trigger 연결
+- blocker selection result application, defender switch, blocker suspend, `OnBlockAnyone`, `OnAttackTargetChanged`, `OnEndBlockDesignation`, `OnEndAttack` end-to-end 연결은 queue 55에서 완료했다.
+- `OnCounterTiming`은 `EffectDescriptor.IsCounterEffect` metadata로 비-counter 후보와 counter 후보를 분리한다.
+- blocker 선택은 `EngineSession.Resume(DecisionResult)`에서 player, request id, `DecisionToken` 검증을 거치며, resume 시 현재 state로 stale blocker와 `CannotBlock` 제한을 재검증한다.
+- `ST1_06`/`ST2-07`/`ST3-07` shared body와 `ST1_09` inherited `OnBlockAnyone` hook은 원본 `CardEffectCommons.CanTriggerOnAttack` 의미에 맞춰 `Attacker` payload가 source permanent와 같을 때만 발동한다.
+- 실제 counter card body, ACE/Blast Evolution, cut-in/replacement priority 전체는 후속 범위다.
 - face-up security/player continuous keyword provider
 - `Security Attack -N`, invert security attack, constant set ordering
 - Decoy replacement selection과 effect-origin 조건

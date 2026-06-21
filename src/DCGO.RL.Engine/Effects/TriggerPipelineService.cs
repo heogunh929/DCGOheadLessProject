@@ -207,6 +207,7 @@ public sealed class TriggerPipelineService
         PermanentId? sourcePermanent = null,
         IReadOnlyDictionary<string, object?>? values = null,
         TriggerPipelineOptions? options = null,
+        Func<EffectDescriptor, bool>? descriptorFilter = null,
         GameTrace? trace = null)
     {
         ArgumentNullException.ThrowIfNull(state);
@@ -214,6 +215,11 @@ public sealed class TriggerPipelineService
         var resolvedOptions = options ?? _defaultOptions;
         var context = new EffectContext(state, timing, player, sourceCard, sourcePermanent, values);
         var descriptors = CollectSourceDescriptors(state, context, resolvedOptions);
+        if (descriptorFilter is not null)
+        {
+            descriptors = descriptors.Where(descriptorFilter).ToArray();
+        }
+
         var collected = _triggerCollector.Collect(context, descriptors);
         return RunPrepared(
             state,
@@ -232,13 +238,19 @@ public sealed class TriggerPipelineService
         CardInstanceId? sourceCard = null,
         PermanentId? sourcePermanent = null,
         IReadOnlyDictionary<string, object?>? values = null,
-        TriggerPipelineOptions? options = null)
+        TriggerPipelineOptions? options = null,
+        Func<EffectDescriptor, bool>? descriptorFilter = null)
     {
         ArgumentNullException.ThrowIfNull(state);
 
         var resolvedOptions = options ?? _defaultOptions;
         var context = new EffectContext(state, timing, player, sourceCard, sourcePermanent, values);
         var descriptors = CollectSourceDescriptors(state, context, resolvedOptions);
+        if (descriptorFilter is not null)
+        {
+            descriptors = descriptors.Where(descriptorFilter).ToArray();
+        }
+
         var collected = _triggerCollector.Collect(context, descriptors);
         return new PreparedTriggerGroup(
             context,

@@ -30,7 +30,8 @@ internal sealed class St1MetalGreymonScript : ICardScript
                             effectContext.State,
                             context.SourceCard,
                             context.SourcePermanent)
-                        && (effectContext.SourcePermanent is null || effectContext.SourcePermanent == context.SourcePermanent);
+                        && effectContext.GetValueOrDefault("Attacker") is PermanentId attacker
+                        && attacker == context.SourcePermanent;
                 }),
         };
 
