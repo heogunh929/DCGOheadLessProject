@@ -280,7 +280,23 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 .\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
 ```
 
-결과: queue 55 기준 `All 346 tests passed.`
+결과: queue 55B 기준 `All 369 tests passed.`
+
+55B 추가 검증:
+
+- non-turn player hand counter 후보를 수집한다.
+- field/trash/face-up-security counter 후보를 수집한다.
+- `CounterEffectHashtable` 대응 snapshot은 payload로 유지하지만 source whitelist로 쓰지 않는다.
+- turn player skip 후 non-turn player counter 선택으로 진행한다.
+- turn player가 counter를 사용하면 non-turn player counter는 실행하지 않는다.
+- mandatory counter group은 skip할 수 없다.
+- 같은 counter 카드 인스턴스 2장이 서로 다른 selection id를 가진다.
+- counter 선택 뒤 optional yes/no를 중복 질문하지 않고 target selection으로 이어진다.
+- counter 중 defender가 삭제되어도 blocker selection까지 진행한다.
+- `OnBlockAnyone` 중 blocker가 삭제되면 target-change가 발생하지 않는다.
+- 한 effect body의 target switch 2개가 순서대로 처리된다.
+- `OnEndAttack`에서 `IsBlocking`/`Blocker` context를 조회할 수 있다.
+- counter selection replay가 deterministic final hash를 만든다.
 
 남은 범위:
 

@@ -17,6 +17,7 @@
 | 54B | done | prompts/54B_trigger_stack_semantic_hardening.md | trigger stack semantic hardening: empty batch AfterEffects 금지, ordering/own decision 분리, RuleProcessor event frame 보존 |
 | 55 | done | prompts/55_counter_block_attack_target_timing.md | counter/block/attack target timing |
 | 55A | done | prompts/55A_source_aligned_attack_lifecycle_correction.md | source-aligned attack lifecycle: single-counter policy, runtime context, switch/block/suspend, duration cleanup |
+| 55B | done | prompts/55B_counter_source_collection_attack_stage_ordering_correction.md | counter source collection and attack stage ordering correction |
 | 56 | todo | prompts/56_golden_scenarios_batch1.md | engine-core golden scenario 1차 |
 | 57 | todo | prompts/57_parity_trace_contract_and_exporter.md | rule-visible parity trace 계약 |
 | 58 | todo | prompts/58_parity_fixture_comparer.md | Unity/RL fixture comparer |

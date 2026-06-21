@@ -71,6 +71,16 @@ public sealed class AttackService
         | TriggerSourceZone.Linked
         | TriggerSourceZone.Hand
         | TriggerSourceZone.Trash
+        | TriggerSourceZone.FaceUpSecurity
+        | TriggerSourceZone.Executing,
+        ResolveAfterEffectsActivate: true);
+
+    private static readonly TriggerPipelineOptions CounterCutInSourceOptions = new(
+        TriggerSourceZone.FieldTop
+        | TriggerSourceZone.Inherited
+        | TriggerSourceZone.Linked
+        | TriggerSourceZone.Hand
+        | TriggerSourceZone.Trash
         | TriggerSourceZone.Executing
         | TriggerSourceZone.FaceUpSecurity,
         ResolveAfterEffectsActivate: true);
@@ -165,11 +175,6 @@ public sealed class AttackService
             RequireValidAttackTarget(state, action, action.Defender.Value);
         }
 
-        if (!_primitives.Suspend(state, action.Attacker))
-        {
-            throw new DomainException($"Permanent '{action.Attacker}' could not be suspended for attack declaration.");
-        }
-
         var context = new AttackRuntimeContext(
             action.Attacker,
             action.Defender,
@@ -177,6 +182,12 @@ public sealed class AttackService
             AttackerTopCardWhenDeclared: attacker.TopCardId,
             CounterSourceSnapshot: PermanentCards(attacker));
         state.RuntimeRules.StartAttack(context);
+
+        if (!SuspendForAttackDeclaration(state, action.Attacker))
+        {
+            state.RuntimeRules.ClearAttack();
+            throw new DomainException($"Permanent '{action.Attacker}' could not be suspended for attack declaration.");
+        }
 
         var allyAttackTrigger = RunTriggerPipelineWithResult(
             state,
@@ -224,10 +235,9 @@ public sealed class AttackService
                 throw new DomainException("Blocker selection attack continuation requires a SelectionResult."),
 
             AttackExecutionContinuationKind.ContinueAfterBlockTrigger =>
-                RunAttackTargetChangedIfNeededWithResult(
+                ContinueAfterBlockTriggerWithResult(
                     state,
                     continuation.Action,
-                    AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBattle,
                     trace),
 
             AttackExecutionContinuationKind.ContinueAfterAttackTargetChangedToBlockDesignation =>
@@ -335,7 +345,8 @@ public sealed class AttackService
                 context.Attacker,
                 AttackValues(state.RuntimeRules.RequireAttack()),
                 trace,
-                descriptor => !descriptor.IsCounterEffect);
+                descriptor => !descriptor.IsCounterEffect,
+                CounterCutInSourceOptions);
             if (counterTrigger?.HasPendingSelection == true)
             {
                 return PendingTrigger(
@@ -373,35 +384,56 @@ public sealed class AttackService
         AttackRuntimeContext context,
         GameTrace? trace)
     {
-        state.RuntimeRules.SetAttack(context.WithState(AttackRuntimeState.CounterCounter));
-        return ValidateStageThen(state, action, AttackRuntimeState.CounterCounter, trace, () =>
+        state.RuntimeRules.SetAttack(context with
         {
-            var prepared = PrepareCounterEffects(state, action, state.RuntimeRules.RequireAttack());
-            var candidates = SelectCounterChoiceGroup(state, prepared);
-            if (candidates.Count == 0)
-            {
-                return ContinueAfterCounterCounterWithResult(
-                    state,
-                    action,
-                    state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.BlockDesignation),
-                    trace);
-            }
-
-            var request = CreateCounterSelectionRequest(state, state.RuntimeRules.RequireAttack(), candidates);
-            var resolution = CreateAttackDecisionResolution(
-                state,
-                state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.CounterSelection),
-                EffectTiming.OnCounterTiming,
-                "counter-selection");
-            return new AttackExecutionResult(
-                Attack: null,
-                Continuation: new AttackExecutionContinuation(
-                    AttackExecutionContinuationKind.ResolveCounterSelection,
-                    action,
-                    state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.CounterSelection)),
-                DirectSelectionRequest: request,
-                DirectPendingResolution: resolution);
+            State = AttackRuntimeState.CounterCounter,
+            CounterGroup = CounterWindowGroup.TurnPlayer,
+            CounterUsed = false,
         });
+        return ValidateStageThen(state, action, AttackRuntimeState.CounterCounter, trace, () =>
+            RunNextCounterGroupWithResult(state, action, state.RuntimeRules.RequireAttack(), trace));
+    }
+
+    private AttackExecutionResult RunNextCounterGroupWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        GameTrace? trace)
+    {
+        if (context.CounterUsed || context.CounterGroup == CounterWindowGroup.Done)
+        {
+            return ContinueAfterCounterCounterWithResult(
+                state,
+                action,
+                context.WithState(AttackRuntimeState.BlockDesignation),
+                trace);
+        }
+
+        var prepared = PrepareCounterEffects(state, action, context);
+        var candidates = SelectCounterChoiceGroup(state, prepared, context.CounterGroup);
+        if (candidates.Count == 0)
+        {
+            var advanced = context.AdvanceCounterGroup();
+            state.RuntimeRules.SetAttack(advanced);
+            return RunNextCounterGroupWithResult(state, action, advanced, trace);
+        }
+
+        var selectionContext = context.WithState(AttackRuntimeState.CounterSelection);
+        state.RuntimeRules.SetAttack(selectionContext);
+        var request = CreateCounterSelectionRequest(state, selectionContext, candidates);
+        var resolution = CreateAttackDecisionResolution(
+            state,
+            selectionContext,
+            EffectTiming.OnCounterTiming,
+            $"counter-selection:{selectionContext.CounterGroup}");
+        return new AttackExecutionResult(
+            Attack: null,
+            Continuation: new AttackExecutionContinuation(
+                AttackExecutionContinuationKind.ResolveCounterSelection,
+                action,
+                selectionContext),
+            DirectSelectionRequest: request,
+            DirectPendingResolution: resolution);
     }
 
     private AttackExecutionResult ResumeCounterSelectionWithResult(
@@ -417,30 +449,36 @@ public sealed class AttackService
         }
 
         var prepared = PrepareCounterEffects(state, continuation.Action, context);
-        var candidates = SelectCounterChoiceGroup(state, prepared);
+        var candidates = SelectCounterChoiceGroup(state, prepared, context.CounterGroup);
         var request = CreateCounterSelectionRequest(state, context, candidates);
         SelectionValidator.Validate(request, selectionResult);
         if (selectionResult.SelectedTargets.Count == 0 && string.IsNullOrWhiteSpace(selectionResult.SelectedOption))
         {
-            return ContinueAfterCounterCounterWithResult(
-                state,
-                continuation.Action,
-                context.WithState(AttackRuntimeState.BlockDesignation),
-                trace);
+            var advanced = context.AdvanceCounterGroup();
+            state.RuntimeRules.SetAttack(advanced);
+            return RunNextCounterGroupWithResult(state, continuation.Action, advanced, trace);
         }
 
         var selectedId = selectionResult.SelectedOption
             ?? selectionResult.SelectedTargets.SingleOrDefault()?.StableId
             ?? throw new DomainException("Counter selection requires a selected effect.");
-        var selected = candidates.FirstOrDefault(candidate =>
-                string.Equals(candidate.StableId, selectedId, StringComparison.Ordinal))
+        var selected = FindCounterCandidateBySelectionId(candidates, selectedId)
             ?? throw new DomainException($"Counter effect '{selectedId}' is no longer a legal candidate.");
+        if (selected.CounterSelectionConsumesOptional)
+        {
+            selected = selected with
+            {
+                IsOptional = false,
+                OptionalSelectionRequest = null,
+            };
+        }
 
         var selectedPrepared = new PreparedTriggerGroup(
             prepared?.Context ?? selected.Context,
             new[] { selected },
             Array.Empty<EffectResolution>(),
             prepared?.Options ?? CounterTimingOptions);
+        state.RuntimeRules.SetAttack(context.MarkCounterUsed());
         var counterTrigger = _triggerPipelineService!.RunPrepared(state, selectedPrepared, trace);
         if (counterTrigger.HasPendingSelection)
         {
@@ -582,6 +620,31 @@ public sealed class AttackService
                     blockContext.WithState(AttackRuntimeState.AttackTargetChanged)));
         }
 
+        return ContinueAfterBlockTriggerWithResult(
+            state,
+            action,
+            trace);
+    }
+
+    private AttackExecutionResult ContinueAfterBlockTriggerWithResult(
+        GameState state,
+        AttackAction action,
+        GameTrace? trace)
+    {
+        var context = state.RuntimeRules.RequireAttack();
+        if (!AttackerExists(state, context.Attacker))
+        {
+            return RunEndAttackWithResult(state, action, context, null, null, false, trace);
+        }
+
+        if (context.Blocker is { } blocker && !IsValidBattleDefender(state, action, blocker))
+        {
+            var cleared = context.SetBlocking(false).WithState(AttackRuntimeState.Battle);
+            state.RuntimeRules.SetAttack(cleared);
+            _ = state.RuntimeRules.ConsumePendingAttackTargetSwitch();
+            return ResolveBattleWithResult(state, action, state.RuntimeRules.RequireAttack(), trace);
+        }
+
         return RunAttackTargetChangedIfNeededWithResult(
             state,
             action,
@@ -629,7 +692,7 @@ public sealed class AttackService
         AttackExecutionContinuationKind nextKind,
         GameTrace? trace)
     {
-        if (state.RuntimeRules.Attack?.PendingTargetSwitch is not null)
+        if (HasPendingTargetSwitches(state))
         {
             return RunAttackTargetChangedIfNeededWithResult(state, action, nextKind, trace);
         }
@@ -858,7 +921,8 @@ public sealed class AttackService
         PermanentId sourcePermanent,
         IReadOnlyDictionary<string, object?> values,
         GameTrace? trace,
-        Func<EffectDescriptor, bool>? descriptorFilter = null)
+        Func<EffectDescriptor, bool>? descriptorFilter = null,
+        TriggerPipelineOptions? options = null)
     {
         if (_triggerPipelineService is null)
         {
@@ -871,6 +935,7 @@ public sealed class AttackService
             player,
             sourcePermanent: sourcePermanent,
             values: values,
+            options: options,
             descriptorFilter: descriptorFilter,
             trace: trace);
     }
@@ -885,61 +950,49 @@ public sealed class AttackService
             return null;
         }
 
-        var queued = new List<EffectResolution>();
-        var background = new List<EffectResolution>();
         var values = AttackValues(context);
         values["AttackerTopCardWhenDeclared"] = context.AttackerTopCardWhenDeclared;
         values["CounterSourceSnapshot"] = context.CounterSources.ToArray();
-        foreach (var source in context.CounterSources)
-        {
-            if (!state.Cards.ContainsKey(source))
-            {
-                continue;
-            }
 
-            var prepared = _triggerPipelineService.Prepare(
-                state,
-                EffectTiming.OnCounterTiming,
-                action.Actor,
-                sourceCard: source,
-                values: values,
-                options: CounterTimingOptions,
-                descriptorFilter: descriptor => descriptor.IsCounterEffect);
-            queued.AddRange(prepared.QueuedEffects);
-            background.AddRange(prepared.BackgroundEffects);
-        }
-
-        var effectContext = new EffectContext(
+        return _triggerPipelineService.Prepare(
             state,
             EffectTiming.OnCounterTiming,
             action.Actor,
-            SourcePermanent: context.Attacker,
-            Values: values);
-        return new PreparedTriggerGroup(effectContext, queued, background, CounterTimingOptions);
+            sourcePermanent: context.Attacker,
+            values: values,
+            options: CounterCutInSourceOptions,
+            descriptorFilter: descriptor => descriptor.IsCounterEffect);
     }
 
     private static IReadOnlyList<EffectResolution> SelectCounterChoiceGroup(
         GameState state,
-        PreparedTriggerGroup? prepared)
+        PreparedTriggerGroup? prepared,
+        CounterWindowGroup group)
     {
         if (prepared is null)
         {
             return Array.Empty<EffectResolution>();
         }
 
-        var candidates = prepared.QueuedEffects.Concat(prepared.BackgroundEffects).ToArray();
+        var candidates = prepared.QueuedEffects
+            .Concat(prepared.BackgroundEffects)
+            .Where(candidate => candidate.CanActivate?.Invoke(candidate.Context) ?? true)
+            .ToArray();
         if (candidates.Length == 0)
         {
             return candidates;
         }
 
-        var turnPlayerGroup = candidates
-            .Where(candidate => (candidate.Controller ?? candidate.Context.Player) == state.TurnPlayerId)
-            .ToArray();
-        return turnPlayerGroup.Length > 0
-            ? turnPlayerGroup
+        var player = group switch
+        {
+            CounterWindowGroup.TurnPlayer => state.TurnPlayerId,
+            CounterWindowGroup.NonTurnPlayer => state.NonTurnPlayerId,
+            _ => (PlayerId?)null,
+        };
+        return player is null
+            ? Array.Empty<EffectResolution>()
             : candidates
-                .Where(candidate => (candidate.Controller ?? candidate.Context.Player) == state.NonTurnPlayerId)
+                .Where(candidate => (candidate.Controller ?? candidate.Context.Player) == player)
                 .ToArray();
     }
 
@@ -948,31 +1001,59 @@ public sealed class AttackService
         AttackRuntimeContext context,
         IReadOnlyList<EffectResolution> candidates)
     {
-        var player = candidates
-            .Select(candidate => candidate.Controller ?? candidate.Context.Player)
-            .FirstOrDefault(player => player is not null)
-            ?? state.NonTurnPlayerId;
+        var player = candidates.Count > 0
+            ? CounterController(candidates[0]) ?? state.NonTurnPlayerId
+            : state.NonTurnPlayerId;
+        var canSkip = candidates.Count > 0 && candidates.All(candidate => candidate.IsSkippable);
         var targets = candidates
             .Select((candidate, index) => new SelectableTarget(
                 SelectionTargetKind.Option,
-                candidate.StableId,
-                candidate.Controller,
+                CreateCounterCandidateSelectionId(candidate, index),
+                CounterController(candidate),
                 candidate.SourceCard,
                 candidate.SourcePermanent,
                 Label: candidate.StableId,
-                OptionValue: candidate.StableId))
+                OptionValue: CreateCounterCandidateSelectionId(candidate, index)))
             .ToArray();
         return new SelectionRequest(
-            $"attack:{context.Attacker.Value}:counter-selection",
+            $"attack:{context.Attacker.Value}:counter-selection:{context.CounterGroup}",
             player,
             SelectionKind.ChooseAction,
             SelectionTargetKind.Option,
-            minCount: 0,
+            minCount: 1,
             maxCount: 1,
-            canSkip: true,
-            canEndNotMax: true,
+            canSkip,
+            canEndNotMax: canSkip,
             targets,
             "Select one Counter effect to use.");
+    }
+
+    private static PlayerId? CounterController(EffectResolution candidate) =>
+        candidate.Controller ?? candidate.Context.Player;
+
+    private static string CreateCounterCandidateSelectionId(EffectResolution candidate, int candidateIndex)
+    {
+        var sourceCard = candidate.SourceCard?.Value.ToString() ?? "-";
+        var sourcePermanent = candidate.SourcePermanent?.Value.ToString() ?? "-";
+        return $"counter:{candidateIndex}:card:{sourceCard}:perm:{sourcePermanent}:effect:{candidate.StableId}";
+    }
+
+    private static EffectResolution? FindCounterCandidateBySelectionId(
+        IReadOnlyList<EffectResolution> candidates,
+        string selectedId)
+    {
+        for (var index = 0; index < candidates.Count; index++)
+        {
+            if (string.Equals(
+                    CreateCounterCandidateSelectionId(candidates[index], index),
+                    selectedId,
+                    StringComparison.Ordinal))
+            {
+                return candidates[index];
+            }
+        }
+
+        return null;
     }
 
     private AttackExecutionResult ValidateStageThen(
@@ -995,12 +1076,16 @@ public sealed class AttackService
             return RunEndAttackWithResult(state, action, context, null, null, false, trace);
         }
 
-        if (context.Defender is { } defender && !IsValidBattleDefender(state, action, defender))
+        if (RequiresLiveDefender(stage)
+            && context.Defender is { } defender
+            && !IsValidBattleDefender(state, action, defender))
         {
             return RunEndAttackWithResult(state, action, context.EndAttack(), null, null, false, trace);
         }
 
-        if (context.Blocker is { } blocker && !IsValidBattleDefender(state, action, blocker))
+        if (RequiresLiveBlocker(stage)
+            && context.Blocker is { } blocker
+            && !IsValidBattleDefender(state, action, blocker))
         {
             state.RuntimeRules.SetAttack(context.SetBlocking(false).EndAttack());
             return RunEndAttackWithResult(state, action, state.RuntimeRules.RequireAttack(), null, null, false, trace);
@@ -1009,6 +1094,16 @@ public sealed class AttackService
         return next();
     }
 
+    private static bool RequiresLiveDefender(AttackRuntimeState stage) =>
+        stage == AttackRuntimeState.Battle;
+
+    private static bool RequiresLiveBlocker(AttackRuntimeState stage) =>
+        stage == AttackRuntimeState.AttackTargetChanged
+        || stage == AttackRuntimeState.Battle;
+
+    private static bool HasPendingTargetSwitches(GameState state) =>
+        state.RuntimeRules.Attack?.TargetSwitchQueue.Count > 0;
+
     private AttackExecutionResult RunPendingSwitchThenNext(
         GameState state,
         AttackAction action,
@@ -1016,7 +1111,7 @@ public sealed class AttackService
         GameTrace? trace,
         Func<AttackExecutionResult> next)
     {
-        if (state.RuntimeRules.Attack?.PendingTargetSwitch is null)
+        if (!HasPendingTargetSwitches(state))
         {
             return next();
         }
@@ -1029,6 +1124,9 @@ public sealed class AttackService
         _durationCleanupService.CleanupAttackEnd(state);
         state.RuntimeRules.ClearAttack();
     }
+
+    private bool SuspendForAttackDeclaration(GameState state, PermanentId attacker) =>
+        _primitives.Suspend(state, attacker);
 
     private static EffectResolution CreateAttackDecisionResolution(
         GameState state,

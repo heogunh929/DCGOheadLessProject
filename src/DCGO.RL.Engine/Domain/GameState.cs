@@ -206,19 +206,26 @@ public sealed class GameState
                 .Append(attack.Blocker?.Value.ToString() ?? "-").Append('|')
                 .Append(attack.IsEndAttack ? "1" : "0").Append('|')
                 .Append(attack.AttackerTopCardWhenDeclared?.Value.ToString() ?? "-").Append('|')
-                .AppendJoin(",", attack.CounterSources.Select(card => card.Value)).Append('|');
+                .AppendJoin(",", attack.CounterSources.Select(card => card.Value)).Append('|')
+                .Append(attack.CounterGroup).Append('|')
+                .Append(attack.CounterUsed ? "1" : "0").Append('|');
 
-            if (attack.PendingTargetSwitch is { } pendingSwitch)
+            if (attack.TargetSwitchQueue.Count > 0)
             {
-                builder.Append(pendingSwitch.OldDefender?.Value.ToString() ?? "-").Append('|')
-                    .Append(pendingSwitch.NewDefender?.Value.ToString() ?? "-").Append('|')
-                    .Append(pendingSwitch.IsBlock ? "1" : "0").Append('|')
-                    .Append(pendingSwitch.Blocker?.Value.ToString() ?? "-").Append('|')
-                    .Append(pendingSwitch.SourceEffectStableId ?? "-");
+                builder.AppendJoin(
+                    ";",
+                    attack.TargetSwitchQueue.Select(pendingSwitch =>
+                        string.Join(
+                            "/",
+                            pendingSwitch.OldDefender?.Value.ToString() ?? "-",
+                            pendingSwitch.NewDefender?.Value.ToString() ?? "-",
+                            pendingSwitch.IsBlock ? "1" : "0",
+                            pendingSwitch.Blocker?.Value.ToString() ?? "-",
+                            pendingSwitch.SourceEffectStableId ?? "-")));
             }
             else
             {
-                builder.Append("-|-|0|-|-");
+                builder.Append("-");
             }
 
             builder.AppendLine();

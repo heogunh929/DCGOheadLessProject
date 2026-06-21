@@ -99,12 +99,12 @@ public sealed class RuntimeRuleState
 
     public AttackTargetSwitch? ConsumePendingAttackTargetSwitch()
     {
-        if (_attack is null)
+        if (_attack is null || _attack.TargetSwitchQueue.Count == 0)
         {
             return null;
         }
 
-        var pending = _attack.PendingTargetSwitch;
+        var pending = _attack.TargetSwitchQueue[0];
         _attack = _attack.ConsumePendingTargetSwitch();
         return pending;
     }

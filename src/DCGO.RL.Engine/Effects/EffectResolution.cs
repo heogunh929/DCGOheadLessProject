@@ -28,7 +28,9 @@ public sealed record EffectResolution(
     Func<EffectContext, bool>? CanActivate = null,
     TriggerSourceSnapshot? SourceSnapshot = null,
     TriggerSourcePersistencePolicy SourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole,
-    bool IsCounterEffect = false)
+    bool IsCounterEffect = false,
+    bool IsSkippable = false,
+    bool CounterSelectionConsumesOptional = false)
 {
     public SelectionRequest? PendingSelectionRequest => OptionalSelectionRequest ?? SelectionRequest;
 }

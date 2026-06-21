@@ -1,5 +1,15 @@
 # Effect System Foundation
 
+## Queue 55B Counter Descriptor Metadata
+
+`EffectDescriptor`/`EffectResolution`의 counter 관련 metadata는 다음 의미로 사용한다.
+
+- `IsCounterEffect`: `OnCounterTiming` 중 실제 counter window에서 최대 1개만 선택될 수 있는 후보임을 표시한다.
+- `IsSkippable`: 같은 player group의 모든 counter 후보가 이 값을 가질 때만 group 전체 skip을 허용한다.
+- `CounterSelectionConsumesOptional`: counter selection 자체가 activation 동의인 효과를 표시한다. 이 경우 선택된 effect가 `IsOptional`이어도 optional yes/no를 다시 묻지 않고 target selection 또는 effect body로 이어진다.
+
+`CounterEffectHashtable` 대응 snapshot은 source whitelist가 아니라 `EffectContext.Values`의 조건 payload로만 보존한다. 실제 후보 수집은 `AttackService`가 counter cut-in source 범위 전체에서 수행하고, 카드별 counter body는 각 카드 script 파일에 남긴다.
+
 ## Queue 54B Trigger Stack Semantic Hardening
 
 `TriggerPipelineService`는 frame별 batch 상태를 `HadCandidate`, `HadResolutionAttempt`, `AfterEffectsActivate` candidate signature 이력으로 보존한다. 실제 해소된 effect가 없는 empty/stale-only batch는 `AfterEffectsActivate`를 예약하지 않는다.

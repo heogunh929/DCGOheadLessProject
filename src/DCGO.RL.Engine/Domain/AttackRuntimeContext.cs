@@ -13,6 +13,13 @@ public enum AttackRuntimeState
     Cleanup,
 }
 
+public enum CounterWindowGroup
+{
+    TurnPlayer,
+    NonTurnPlayer,
+    Done,
+}
+
 public sealed record AttackTargetSwitch(
     PermanentId? OldDefender,
     PermanentId? NewDefender,
@@ -29,10 +36,15 @@ public sealed record AttackRuntimeContext(
     bool IsEndAttack = false,
     CardInstanceId? AttackerTopCardWhenDeclared = null,
     IReadOnlyList<CardInstanceId>? CounterSourceSnapshot = null,
-    AttackTargetSwitch? PendingTargetSwitch = null)
+    IReadOnlyList<AttackTargetSwitch>? PendingTargetSwitches = null,
+    CounterWindowGroup CounterGroup = CounterWindowGroup.TurnPlayer,
+    bool CounterUsed = false)
 {
-    public IReadOnlyList<CardInstanceId> CounterSources { get; } =
+    public IReadOnlyList<CardInstanceId> CounterSources =>
         CounterSourceSnapshot?.ToArray() ?? Array.Empty<CardInstanceId>();
+
+    public IReadOnlyList<AttackTargetSwitch> TargetSwitchQueue =>
+        PendingTargetSwitches?.ToArray() ?? Array.Empty<AttackTargetSwitch>();
 
     public AttackRuntimeContext WithState(AttackRuntimeState state) =>
         this with { State = state };
@@ -42,8 +54,6 @@ public sealed record AttackRuntimeContext(
         {
             State = AttackRuntimeState.EndAttack,
             IsEndAttack = true,
-            IsBlocking = false,
-            Blocker = null,
         };
 
     public AttackRuntimeContext SwitchDefender(
@@ -53,14 +63,18 @@ public sealed record AttackRuntimeContext(
         string? sourceEffectStableId = null)
     {
         var changed = Defender != newDefender;
+        var switchQueue = TargetSwitchQueue.ToList();
+        if (changed)
+        {
+            switchQueue.Add(new AttackTargetSwitch(Defender, newDefender, isBlock, blocker ?? newDefender, sourceEffectStableId));
+        }
+
         return this with
         {
             Defender = newDefender,
             IsBlocking = isBlock,
             Blocker = isBlock ? blocker ?? newDefender : null,
-            PendingTargetSwitch = changed
-                ? new AttackTargetSwitch(Defender, newDefender, isBlock, blocker ?? newDefender, sourceEffectStableId)
-                : PendingTargetSwitch,
+            PendingTargetSwitches = switchQueue,
         };
     }
 
@@ -74,6 +88,33 @@ public sealed record AttackRuntimeContext(
             Blocker = isBlocking ? blocker ?? Blocker : null,
         };
 
-    public AttackRuntimeContext ConsumePendingTargetSwitch() =>
-        this with { PendingTargetSwitch = null };
+    public AttackRuntimeContext WithCounterGroup(CounterWindowGroup group) =>
+        this with { CounterGroup = group };
+
+    public AttackRuntimeContext MarkCounterUsed() =>
+        this with
+        {
+            CounterUsed = true,
+            CounterGroup = CounterWindowGroup.Done,
+        };
+
+    public AttackRuntimeContext AdvanceCounterGroup() =>
+        this with
+        {
+            CounterGroup = CounterGroup switch
+            {
+                CounterWindowGroup.TurnPlayer => CounterWindowGroup.NonTurnPlayer,
+                _ => CounterWindowGroup.Done,
+            },
+        };
+
+    public AttackRuntimeContext ConsumePendingTargetSwitch()
+    {
+        if (TargetSwitchQueue.Count == 0)
+        {
+            return this;
+        }
+
+        return this with { PendingTargetSwitches = TargetSwitchQueue.Skip(1).ToArray() };
+    }
 }

@@ -59,7 +59,9 @@ public sealed class TriggerCollector
                 descriptor.CanActivate,
                 descriptor.SourceSnapshot,
                 descriptor.SourcePersistencePolicy,
-                descriptor.IsCounterEffect);
+                descriptor.IsCounterEffect,
+                descriptor.IsSkippable,
+                descriptor.CounterSelectionConsumesOptional);
 
             if (descriptor.IsBackground)
             {

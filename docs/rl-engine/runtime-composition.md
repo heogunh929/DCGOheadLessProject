@@ -1,5 +1,11 @@
 # Runtime Composition
 
+## Queue 55B Attack Runtime 보정
+
+`AttackRuntimeContext`는 counter group 진행 상태(`CounterGroup`, `CounterUsed`)와 ordered target switch queue를 포함한다. `CounterEffectHashtable` 대응 snapshot은 source whitelist가 아니라 effect context payload이며, 실제 counter 후보는 cut-in source 전체에서 수집된다. candidate selection id는 source card instance/source permanent/candidate index/effect stable id를 포함해 replay와 동일 카드 복수 인스턴스를 구분한다.
+
+공격 선언에서는 runtime context와 attacker snapshot을 suspend 전에 만들고, suspend 실패 시 context를 clear한다. `OnEndAttack` 전에는 `IsBlocking`/`Blocker`/`Defender`를 유지하고, `CleanupAttackRuntime()`에서만 attack runtime state를 제거한다.
+
 Queue 51 기준 production runtime 조립 entry point는 `BattleEngineServices.Create(ICardScriptRegistry, IDecisionProvider?)`다.
 
 ## 필수 서비스

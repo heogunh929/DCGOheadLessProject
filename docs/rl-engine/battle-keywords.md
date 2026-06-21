@@ -1,90 +1,71 @@
-# Battle Keywords 이식 계획
+# Battle Keywords
 
-## 범위
+이 문서는 battle keyword와 attack lifecycle의 현재 대응 범위를 기록한다. RL.Engine은 카드별 effect body를 각 카드 script에 유지하고, keyword/core service에 특정 CardId 분기를 두지 않는다.
 
-Battle keyword는 개별 `CardEffect` 포팅이 아니라 attack, battle, security check, active phase에 걸리는 공통 rule hook이다. Complex Play/Evolution Mechanics와도 분리한다. Jogress, Burst Digivolution, App Fusion, DigiXros, Assembly, Link는 play/digivolve pipeline의 문제이고, 이 문서는 전투 중 판정되는 keyword를 다룬다.
-
-## 원본 근거
-
-- `Permanent.CanAttack()`, `Permanent.CanAttackTargetDigimon()`, `Permanent.CanBlock()`은 공격 가능 여부와 blocker 조건을 계산한다.
-- `Permanent.HasBlocker`, `HasJamming`, `HasPierce`, `HasReboot`, `HasRush`, `HasRetaliation`, `HasBlitz`, `HasEvade`, `HasBarrier`, `HasAlliance`, `HasCollision`은 battle keyword query 역할을 한다.
-- `Permanent.Strike`, `Strike_AllowMinus`, `SecurityAttackChanges`, `InvertSecutiryValue`는 Security Attack 증감 계산을 담당한다.
-- `AttackProcess.Attack()`과 blocker selection 구간은 attack 선언, counter timing, block timing, battle/security check 진입을 담당한다.
-- `IBattle.Battle()`은 DP battle 결과와 battle destruction을 처리한다.
-- `ISecurityCheck.SecurityCheck()`는 security reveal, security effect, security Digimon battle, trash 이동을 처리한다.
-- `CardEffectInterfaces.cs`에는 `IBlockerEffect`, `IChangeSAttackEffect`, `IInvertSAttackEffect`, `IRushEffect`, `IRebootEffect`, `ICollisionEffect`, `ICanNotBeDestroyedByBattleEffect`, `ICannotBlockEffect` 등 keyword와 battle hook에 필요한 interface가 있다.
-
-## 우선 keyword
-
-- Blocker: block timing에서 non-turn-player의 blocker 후보를 `SelectionRequest.Permanent`로 노출한다.
-- Security Attack +N: `Permanent.Strike`에 대응하는 security check 횟수를 계산한다.
-- Piercing: battle 승리 후 security check 여부를 결정하는 hook으로 다룬다.
-- Jamming: security Digimon과의 battle destruction 방지를 battle resolver에서 처리한다.
-- Rush: 등장 턴 공격 제한 예외를 attack legality에 반영한다.
-- Reboot: opponent active phase에도 unsuspend되는 규칙을 active phase에 반영한다.
-- Retaliation: battle destruction 결과에 상대 permanent destruction을 추가한다.
-- Decoy: 원본 keyword 사용 예시를 확인한 뒤 replacement/selection이 필요하면 별도 `SelectionRequest`로 분리한다. 확인 전에는 deck validation에서 미지원으로 실패시킨다.
-- Collision: counter/block timing에서 상대 전체가 blocker처럼 취급될 수 있는 규칙을 attack process hook으로 다룬다.
-
-## 14 단계 구현 범위
-
-이번 단계에서는 `BattleKeyword` capability를 `CardDefinition`과 `PermanentState`에 추가했다. 정적 keyword는 card definition에 선언하고, 이후 CardEffect 단계에서 임시 부여 effect는 permanent state의 keyword/modifier로 연결할 수 있게 했다.
-
-추가한 공통 hook은 다음과 같다.
+## 구현된 keyword
 
 | Keyword | RL.Engine 처리 |
 | --- | --- |
-| Blocker | `BattleKeywordService.CreateBlockerSelectionRequest()`가 non-turn player의 blocker 후보를 `SelectionRequest`로 만든다. 후보는 battle area Digimon, unsuspended, 공격자와 다른 controller, blocker 가능 permanent로 제한한다. |
-| Security Attack +N | `SecurityAttackModifier`를 합산해 security check 수를 계산한다. `SecurityCheckService`는 같은 공격에서 여러 security를 순서대로 체크하고, 공격자가 사라지면 중단한다. |
-| Piercing | `AttackService`가 DP battle 후 공격자가 살아 있고 상대 Digimon이 battle로 삭제된 경우 security check를 이어서 수행한다. |
-| Jamming | `BattleResolver.ResolveSecurityBattle()`에서 security Digimon battle로 공격자가 삭제되는 것을 막는다. permanent 대 permanent battle에는 적용하지 않는다. |
-| Rush | `BattleRules.CanAttack()`에서 등장 턴 공격 제한 예외로 처리한다. |
-| Reboot | `PhaseRunner.RunActivePhase()`가 turn player를 unsuspend한 뒤 non-turn player의 Reboot permanent도 unsuspend한다. |
-| Retaliation | DP battle에서 Retaliation을 가진 loser가 battle로 삭제되면 상대 permanent도 삭제 목록에 추가한다. tie에서는 이미 양쪽이 삭제된다. |
-| Collision | Blocker request에서 공격자가 Collision을 가지면 상대 battle area Digimon 전체를 blocker 후보로 취급하고 `CanSkip = false`로 만든다. |
-| Decoy | replacement/선택 처리 구조가 아직 없으므로 `UnsupportedMechanicException`으로 명시 실패한다. |
+| Blocker | `BattleKeywordService.CreateBlockerSelectionRequest()`가 block window에서 후보를 만들고 `AttackService`가 resume 시 현재 state로 재검증한다. |
+| Collision | attacker가 Collision을 가지면 상대 battle area Digimon 전체를 block 후보처럼 취급하고 skip을 금지한다. |
+| Security Attack | `BattleKeywordService.SecurityAttackCount()`가 card definition, temporary modifier, continuous effect를 합산한다. |
+| Piercing | permanent battle에서 defender가 파괴되고 attacker가 남으면 security check로 이어진다. |
+| Jamming | security Digimon battle에서 attacker 파괴를 방지한다. |
+| Retaliation | DP battle에서 Retaliation을 가진 loser가 battle로 파괴되면 상대 permanent도 파괴 목록에 추가한다. |
+| Reboot | active phase에서 non-turn player의 Reboot permanent도 unsuspend한다. |
+| Rush | 등장 턴 공격 제한의 예외로 처리한다. |
+| Decoy | replacement 선택 구조가 아직 없으므로 명시적으로 unsupported 처리한다. |
 
-## 원본과 다르게 처리한 점
+## Attack Lifecycle 연결
 
-원본 `AttackProcess`는 attack 선언, counter timing, block timing, battle, security check, end attack을 coroutine 상태 머신으로 순차 실행한다. queue 55A 기준 RL.Engine은 `GameState.RuntimeRules.Attack`의 `AttackRuntimeContext` 기반 state-machine으로 blocker selection, defender switch, blocker suspend, attack target changed, battle/security, end attack을 `EngineSession` resume 경계까지 연결한다. `OnEndBlockDesignation`은 로컬 DCGO 원본 호출 근거가 없어 attack lifecycle에서 생성하지 않는다.
+queue 55/55A/55B 기준 `AttackService`는 원본 `AttackProcess`의 공격 선언, counter timing, block timing, target switch, battle/security, end attack, cleanup 흐름을 `GameState.RuntimeRules.Attack`의 `AttackRuntimeContext`로 보존한다.
 
-원본의 keyword는 `ICardEffect` interface와 face-up security/player effect까지 조회한다. 현재 구현은 card definition, permanent state, stack/source/link card definition의 선언형 capability만 읽는다. face-up security와 player continuous effect는 CardEffect foundation 이후 같은 `BattleKeywordService`에 provider를 붙여 확장한다.
+- attack context와 attacker snapshot은 suspend 전에 생성한다.
+- attacker suspend는 공유 `Tier1PrimitiveService.Suspend()` 경계를 사용한다.
+- `OnAllyAttack`, non-counter `OnCounterTiming`, counter 선택, blocker selection, `OnBlockAnyone`, `OnAttackTargetChanged`, battle/security, `OnEndAttack`은 `EngineSession.Resume(DecisionResult)` boundary로 이어진다.
+- `OnEndBlockDesignation`은 로컬 DCGO 원본 호출 근거가 없어 attack lifecycle에서 생성하지 않는다.
 
-Security Attack은 원본의 `Strike`, `Strike_AllowMinus`, invert ordering 전체를 재현하지 않고 additive `SecurityAttackModifier`부터 지원한다. `Security Attack -N`, invert security attack, up-to/down-to constant ordering은 후속 CardEffect 포팅에서 별도 검증한다.
+## Counter Window
 
-## 구현 원칙
+원본 `CounterEffectHashtable`은 counter source whitelist가 아니라 공격 선언 당시 attacker 정보를 보존하는 trigger-condition payload다. RL.Engine은 이 snapshot을 `AttackRuntimeContext.CounterSourceSnapshot`과 effect context values에 보존하되, 후보 source 제한으로 사용하지 않는다.
 
-- keyword는 `CardDefinition`, `CardEffect`, 또는 continuous effect가 부여할 수 있는 공통 capability로 모델링한다.
-- `AttackService`, `BattleResolver`, `SecurityCheckService`, `EffectQueue` hook을 통해 처리한다.
-- keyword 처리 중 zone 이동은 직접 list 조작이 아니라 `ZoneMover`/primitive를 사용한다.
-- 선택이 필요한 keyword는 반드시 `SelectionRequest`와 `SelectionResult`를 사용한다.
-- 구현되지 않은 keyword 또는 조합은 silent no-op 없이 `UnsupportedMechanicException` 또는 deck validation failure로 실패한다.
+counter 후보 수집 범위:
 
-## Complex Mechanics와의 경계
+- 양 플레이어 field top
+- inherited sources
+- linked cards
+- hand
+- trash
+- executing
+- face-up security
 
-Complex Mechanics는 play/digivolve action 자체를 확장한다. 예를 들어 DigiXros material 선택이나 Link card 상태는 card play pipeline에 속한다. Battle Keywords는 이미 field에 존재하는 permanent/card가 공격, 방어, battle, security check 중 받는 공통 규칙이다. 두 범위가 만나는 경우에는 play/digivolve 구조를 먼저 확정하고, 그 결과 생성된 permanent에 keyword capability를 적용한다.
+진행 정책:
 
-## CardEffect와의 경계
+- non-counter `OnCounterTiming`도 같은 cut-in source 범위를 사용한다.
+- turn player group을 먼저 처리한다.
+- turn player가 counter를 선택하면 non-turn player group은 실행하지 않는다.
+- turn player group 전체가 skippable이고 skip되었으며 아직 counter가 사용되지 않았을 때만 non-turn player group으로 넘어간다.
+- 양쪽을 합쳐 실제 counter effect는 최대 1개만 실행한다.
+- candidate id에는 candidate index, source card instance, source permanent, effect stable id를 포함한다.
+- counter 선택 자체가 activation 동의인 효과는 `CounterSelectionConsumesOptional` metadata로 optional yes/no를 중복 질문하지 않는다.
 
-원본에서는 많은 keyword가 `ICardEffect`와 interface로 표현되지만 RL.Engine 포팅 순서에서는 card-specific effect보다 앞선다. keyword가 없으면 Minimal Playable Battle 이후 공격/전투 검증이 card pool 확장과 동시에 흔들리므로, keyword hook은 먼저 만들고 개별 카드효과는 그 hook에 capability를 부여하는 방식으로 포팅한다.
+## Block And Target
 
-## 테스트 방향
+- blocker 선택은 resume 시 현재 state로 `CanBlock`을 다시 검사한다.
+- blocker suspend가 실패하면 block은 성립하지 않는다.
+- counter 중 기존 defender가 사라져도 block designation 전에는 attack을 끝내지 않는다.
+- `OnBlockAnyone` 후 blocker가 사라지면 `IsBlocking`을 해제하고 invalid blocker switch에 대한 `OnAttackTargetChanged`를 만들지 않는다.
+- 한 effect batch에서 defender switch가 여러 번 발생하면 `AttackRuntimeContext.TargetSwitchQueue`가 old/new target change를 순서대로 보존한다.
+- block window 종료 후 valid defender가 없으면 attack end로 이동한다. 기존 defender 삭제를 security target 전환으로 자동 해석하지 않는다.
 
-- keyword가 없는 Minimal Playable Battle이 계속 통과해야 한다.
-- Blocker 후보 생성과 block 선택 request를 검증한다.
-- Piercing, Jamming, Retaliation은 battle 결과와 security check 결과를 scripted scenario로 검증한다.
-- Reboot와 Rush는 active phase/attack legality에서 검증한다.
-- Collision은 block target 후보 확장을 검증한다.
-- Decoy는 원본 사용 예시 확인 전까지 unsupported validation을 검증한다.
+## End Attack
 
-## 55 단계 갱신과 남은 TODO
+`OnEndAttack`은 direct win/game over가 아니고 attacker와 top card가 남아 있을 때만 수집한다. EndAttack 상태로 전환할 때 `IsBlocking`/`Blocker`/`Defender`를 즉시 지우지 않으므로, `OnEndAttack` effect는 공격 종료 직전 context payload를 볼 수 있다. runtime state는 `CleanupAttackRuntime()`에서만 제거한다.
 
-- blocker selection result application, defender switch, blocker suspend, `OnBlockAnyone`, `OnAttackTargetChanged`, `OnEndAttack` end-to-end 연결은 queue 55A에서 완료했다. `OnEndBlockDesignation`은 `NotReferenced`로 문서화했다.
-- `OnCounterTiming`은 `EffectDescriptor.IsCounterEffect` metadata로 비-counter 후보와 counter 후보를 분리한다.
-- blocker 선택은 `EngineSession.Resume(DecisionResult)`에서 player, request id, `DecisionToken` 검증을 거치며, resume 시 현재 state로 stale blocker와 `CannotBlock` 제한을 재검증한다.
-- `ST1_06`/`ST2-07`/`ST3-07` shared body와 `ST1_09` inherited `OnBlockAnyone` hook은 원본 `CardEffectCommons.CanTriggerOnAttack` 의미에 맞춰 `Attacker` payload가 source permanent와 같을 때만 발동한다.
-- 실제 counter card body, ACE/Blast Evolution, cut-in/replacement priority 전체는 후속 범위다.
-- face-up security/player continuous keyword provider
-- `Security Attack -N`, invert security attack, constant set ordering
-- Decoy replacement selection과 effect-origin 조건
-- battle deletion immunity, barrier/evade/armor purge 같은 replacement keyword와의 우선순위
+## 남은 범위
+
+- 실제 ACE/Blast Evolution counter body
+- replacement/cut-in priority 전체
+- face-up security/player continuous keyword provider 확장
+- Security Attack 음수/반전/상수화 ordering
+- Decoy, barrier, evade, armor purge 같은 replacement keyword

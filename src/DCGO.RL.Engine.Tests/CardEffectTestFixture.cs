@@ -108,6 +108,10 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
     private readonly bool _canSkip;
     private readonly bool _canEndNotMax;
     private readonly EffectTiming _timing;
+    private readonly bool _isOptional;
+    private readonly bool _isCounterEffect;
+    private readonly bool _isSkippable;
+    private readonly bool _counterSelectionConsumesOptional;
 
     public SelectionPrimitiveCardScript(
         string cardId,
@@ -118,7 +122,11 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         int maxCount = 1,
         bool canSkip = false,
         bool canEndNotMax = false,
-        EffectTiming timing = EffectTiming.OptionSkill)
+        EffectTiming timing = EffectTiming.OptionSkill,
+        bool isOptional = false,
+        bool isCounterEffect = false,
+        bool isSkippable = false,
+        bool counterSelectionConsumesOptional = false)
     {
         _mode = mode;
         _targetController = targetController;
@@ -127,6 +135,10 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
         _canSkip = canSkip;
         _canEndNotMax = canEndNotMax;
         _timing = timing;
+        _isOptional = isOptional;
+        _isCounterEffect = isCounterEffect;
+        _isSkippable = isSkippable;
+        _counterSelectionConsumesOptional = counterSelectionConsumesOptional;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -145,10 +157,14 @@ internal sealed class SelectionPrimitiveCardScript : ICardScript
                 SourceCard: context.SourceCard,
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
+                IsOptional: _isOptional,
                 CreateSelectionRequest: effectContext => CreateSelectionRequest(
                     effectContext.State,
                     context.Controller ?? effectContext.Player ?? PlayerId.Player0),
-                SelectionContinuation: ApplySelection),
+                SelectionContinuation: ApplySelection,
+                IsCounterEffect: _isCounterEffect,
+                IsSkippable: _isSkippable,
+                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional),
         };
 
     public void Resolve(CardScriptExecutionContext context) =>
@@ -327,6 +343,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
     private readonly bool _throwsUnsupported;
     private readonly TriggerSourcePersistencePolicy _sourcePersistencePolicy;
     private readonly bool _isCounterEffect;
+    private readonly bool _isSkippable;
+    private readonly bool _counterSelectionConsumesOptional;
 
     public TimingMemoryCardScript(
         string cardId,
@@ -337,7 +355,9 @@ internal sealed class TimingMemoryCardScript : ICardScript
         bool isOncePerTurn = false,
         bool throwsUnsupported = false,
         TriggerSourcePersistencePolicy sourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole,
-        bool isCounterEffect = false)
+        bool isCounterEffect = false,
+        bool isSkippable = false,
+        bool counterSelectionConsumesOptional = false)
     {
         _timing = timing;
         _amount = amount;
@@ -346,6 +366,8 @@ internal sealed class TimingMemoryCardScript : ICardScript
         _throwsUnsupported = throwsUnsupported;
         _sourcePersistencePolicy = sourcePersistencePolicy;
         _isCounterEffect = isCounterEffect;
+        _isSkippable = isSkippable;
+        _counterSelectionConsumesOptional = counterSelectionConsumesOptional;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -368,7 +390,9 @@ internal sealed class TimingMemoryCardScript : ICardScript
                 IsOncePerTurn: _isOncePerTurn,
                 OncePerTurnKey: $"{Porting.CardId}:{_timing}",
                 SourcePersistencePolicy: _sourcePersistencePolicy,
-                IsCounterEffect: _isCounterEffect),
+                IsCounterEffect: _isCounterEffect,
+                IsSkippable: _isSkippable,
+                CounterSelectionConsumesOptional: _counterSelectionConsumesOptional),
         };
 
     public void Resolve(CardScriptExecutionContext context)
@@ -491,6 +515,7 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
     private readonly IList<string> _order;
     private readonly Func<EffectContext, bool> _canTrigger;
     private readonly bool _isCounterEffect;
+    private readonly bool _isSkippable;
 
     public ConditionalRecordingTimingCardScript(
         string cardId,
@@ -499,13 +524,15 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
         string label,
         IList<string> order,
         Func<EffectContext, bool> canTrigger,
-        bool isCounterEffect = false)
+        bool isCounterEffect = false,
+        bool isSkippable = false)
     {
         _timing = timing;
         _label = label;
         _order = order;
         _canTrigger = canTrigger;
         _isCounterEffect = isCounterEffect;
+        _isSkippable = isSkippable;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -525,7 +552,8 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
                 CanTrigger: _canTrigger,
-                IsCounterEffect: _isCounterEffect),
+                IsCounterEffect: _isCounterEffect,
+                IsSkippable: _isSkippable),
         };
 
     public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
@@ -750,6 +778,167 @@ internal sealed class SwitchAttackDefenderCardScript : ICardScript
                 sourceEffectStableId: context.Resolution.StableId);
             _outcomes?.Add(switched ? "switched" : "blocked");
         });
+    }
+}
+
+internal sealed class DoubleSwitchAttackDefenderCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _firstTargetDefinitionId;
+    private readonly string _secondTargetDefinitionId;
+
+    public DoubleSwitchAttackDefenderCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string firstTargetDefinitionId,
+        string secondTargetDefinitionId)
+    {
+        _timing = timing;
+        _firstTargetDefinitionId = firstTargetDefinitionId;
+        _secondTargetDefinitionId = secondTargetDefinitionId;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that switches attack defender twice in one effect body.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:double-switch:{_firstTargetDefinitionId}:{_secondTargetDefinitionId}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, _) =>
+        {
+            SwitchTo(state, _firstTargetDefinitionId, context.Resolution.StableId);
+            SwitchTo(state, _secondTargetDefinitionId, context.Resolution.StableId);
+        });
+    }
+
+    private static void SwitchTo(GameState state, string definitionId, string stableId)
+    {
+        var target = state.Players
+            .SelectMany(player => player.FieldPermanents)
+            .FirstOrDefault(permanent => state.Cards[permanent.TopCardId].DefinitionId == definitionId);
+        if (target is null)
+        {
+            throw new DomainException($"Could not find switch target '{definitionId}'.");
+        }
+
+        AttackRuntimeOperations.SwitchDefender(
+            state,
+            target.Id,
+            isBlock: false,
+            blocker: null,
+            sourceEffectStableId: stableId);
+    }
+}
+
+internal sealed class AttackContextProbeScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly IList<string> _records;
+
+    public AttackContextProbeScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        IList<string> records)
+    {
+        _timing = timing;
+        _records = records;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records attack runtime context payload.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:attack-context-probe",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        var values = context.Resolution.Context.Payload;
+        var isBlocking = values.TryGetValue("IsBlocking", out var blockingValue)
+            && blockingValue is bool blocking
+            && blocking;
+        var blocker = values.TryGetValue("Blocker", out var blockerValue)
+            && blockerValue is PermanentId blockerId
+                ? blockerId.Value.ToString()
+                : "-";
+        var defender = values.TryGetValue("Defender", out var defenderValue)
+            && defenderValue is PermanentId defenderId
+                ? defenderId.Value.ToString()
+                : "-";
+
+        _records.Add($"blocking:{isBlocking};blocker:{blocker};defender:{defender}");
+    }
+}
+
+internal sealed class AttackTargetSwitchProbeScript : ICardScript
+{
+    private readonly IList<string> _records;
+
+    public AttackTargetSwitchProbeScript(
+        string cardId,
+        string effectClassName,
+        IList<string> records)
+    {
+        _records = records;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records OnAttackTargetChanged payload order.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:on-attack-target-changed:probe",
+                EffectTiming.OnAttackTargetChanged,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        var values = context.Resolution.Context.Payload;
+        var previous = values.TryGetValue("PreviousDefender", out var previousValue)
+            && previousValue is PermanentId previousId
+                ? previousId.Value.ToString()
+                : "-";
+        var next = values.TryGetValue("NewDefender", out var nextValue)
+            && nextValue is PermanentId nextId
+                ? nextId.Value.ToString()
+                : "-";
+        _records.Add($"{previous}->{next}");
     }
 }
 
