@@ -4,7 +4,7 @@
 
 `C0012_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개와 17개 asset identity는 모두 로컬 DCGO 원본에서 확인되지만, runnable card body로 옮기려면 `L0006_zone_security_recovery`와 draw/reveal/search, hand discard, play-from-source, permanent-to-source, source-add/source-trash, De-Digivolve, Save, alternate digivolution requirement, inherited Blocker, and descriptor-aware same-timing ordering common layer가 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않았다.
 
@@ -27,27 +27,27 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT12-004#2402@base` | `BT12_004` | `DCGO/Assets/CardBaseEntity/BT12/Green/DigiEgg/BT12_004.asset` | `needs-review` |
-| `BT12-004#4453@P0` | `BT12_004` | `DCGO/Assets/CardBaseEntity/BT12/Green/DigiEgg/BT12_004_P0.asset` | `needs-review` |
-| `BT12-005#2403@base` | `BT12_005` | `DCGO/Assets/CardBaseEntity/BT12/Black/DigiEgg/BT12_005.asset` | `needs-review` |
-| `BT12-005#4454@P0` | `BT12_005` | `DCGO/Assets/CardBaseEntity/BT12/Black/DigiEgg/BT12_005_P0.asset` | `needs-review` |
-| `BT12-006#2404@base` | `BT12_006` | `DCGO/Assets/CardBaseEntity/BT12/Purple/DigiEgg/BT12_006.asset` | `needs-review` |
-| `BT12-006#4455@P0` | `BT12_006` | `DCGO/Assets/CardBaseEntity/BT12/Purple/DigiEgg/BT12_006_P0.asset` | `needs-review` |
-| `BT12-009#2408@base` | `BT12_009` | `DCGO/Assets/CardBaseEntity/BT12/Red/Digimon/BT12_009.asset` | `needs-review` |
-| `BT12-009#4456@P1` | `BT12_009` | `DCGO/Assets/CardBaseEntity/BT12/Red/Digimon/BT12_009_P1.asset` | `needs-review` |
-| `BT12-026#2434@base` | `BT12_026` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_026.asset` | `needs-review` |
-| `BT12-026#4483@P0` | `BT12_026` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_026_P0.asset` | `needs-review` |
-| `BT12-027#2435@base` | `BT12_027` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_027.asset` | `needs-review` |
-| `BT12-032#2442@base` | `BT12_032` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_032.asset` | `needs-review` |
-| `BT12-032#4491@P0` | `BT12_032` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_032_P0.asset` | `needs-review` |
-| `BT12-045#2457@base` | `BT12_045` | `DCGO/Assets/CardBaseEntity/BT12/Green/Digimon/BT12_045.asset` | `needs-review` |
-| `BT12-064#2478@base` | `BT12_064` | `DCGO/Assets/CardBaseEntity/BT12/Black/Digimon/BT12_064.asset` | `needs-review` |
-| `BT12-064#2479@P1` | `BT12_064` | `DCGO/Assets/CardBaseEntity/BT12/Black/Digimon/BT12_064_P1.asset` | `needs-review` |
-| `BT12-080#2497@base` | `BT12_080` | `DCGO/Assets/CardBaseEntity/BT12/Purple/Digimon/BT12_080.asset` | `needs-review` |
+| `BT12-004#2402@base` | `BT12_004` | `DCGO/Assets/CardBaseEntity/BT12/Green/DigiEgg/BT12_004.asset` | `blocked` |
+| `BT12-004#4453@P0` | `BT12_004` | `DCGO/Assets/CardBaseEntity/BT12/Green/DigiEgg/BT12_004_P0.asset` | `blocked` |
+| `BT12-005#2403@base` | `BT12_005` | `DCGO/Assets/CardBaseEntity/BT12/Black/DigiEgg/BT12_005.asset` | `blocked` |
+| `BT12-005#4454@P0` | `BT12_005` | `DCGO/Assets/CardBaseEntity/BT12/Black/DigiEgg/BT12_005_P0.asset` | `blocked` |
+| `BT12-006#2404@base` | `BT12_006` | `DCGO/Assets/CardBaseEntity/BT12/Purple/DigiEgg/BT12_006.asset` | `blocked` |
+| `BT12-006#4455@P0` | `BT12_006` | `DCGO/Assets/CardBaseEntity/BT12/Purple/DigiEgg/BT12_006_P0.asset` | `blocked` |
+| `BT12-009#2408@base` | `BT12_009` | `DCGO/Assets/CardBaseEntity/BT12/Red/Digimon/BT12_009.asset` | `blocked` |
+| `BT12-009#4456@P1` | `BT12_009` | `DCGO/Assets/CardBaseEntity/BT12/Red/Digimon/BT12_009_P1.asset` | `blocked` |
+| `BT12-026#2434@base` | `BT12_026` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_026.asset` | `blocked` |
+| `BT12-026#4483@P0` | `BT12_026` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_026_P0.asset` | `blocked` |
+| `BT12-027#2435@base` | `BT12_027` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_027.asset` | `blocked` |
+| `BT12-032#2442@base` | `BT12_032` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_032.asset` | `blocked` |
+| `BT12-032#4491@P0` | `BT12_032` | `DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_032_P0.asset` | `blocked` |
+| `BT12-045#2457@base` | `BT12_045` | `DCGO/Assets/CardBaseEntity/BT12/Green/Digimon/BT12_045.asset` | `blocked` |
+| `BT12-064#2478@base` | `BT12_064` | `DCGO/Assets/CardBaseEntity/BT12/Black/Digimon/BT12_064.asset` | `blocked` |
+| `BT12-064#2479@P1` | `BT12_064` | `DCGO/Assets/CardBaseEntity/BT12/Black/Digimon/BT12_064_P1.asset` | `blocked` |
+| `BT12-080#2497@base` | `BT12_080` | `DCGO/Assets/CardBaseEntity/BT12/Purple/Digimon/BT12_080.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0012 uses hand-to-source, permanent-to-source, trash-to-source, source trash, source add, and zone movement after deletion.
+- `L0006_zone_security_recovery` remains `blocked`; C0012 uses hand-to-source, permanent-to-source, trash-to-source, source trash, source add, and zone movement after deletion.
 - `L0005_draw_search_reveal_hidden` remains relevant for draw, reveal-and-process-all, and deck top-or-bottom ordering.
 - `BT12_026`, `BT12_027`, `BT12_032`, and `BT12_064` require source movement payloads that cannot be emulated by direct zone-list mutation.
 - `BT12_064` needs alternate digivolution requirement and De-Digivolve common layers before runnable implementation.

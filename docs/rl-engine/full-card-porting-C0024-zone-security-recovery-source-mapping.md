@@ -4,7 +4,7 @@
 
 `C0024_zone_security_recovery`는 source body 10개와 asset identity 16개를 확인했다. 다만 현재 공통 layer만으로 runnable card body를 구현하면 원본 의미를 보존하기 어렵다. 이 batch는 `L0006_zone_security_recovery` 위에 dual reveal search, on-deletion free Tamer play, DP-delete max modifier, hand-to-source cost, delete-failure fallback, battle-deletion unsuspend, conditional security play, inherited Tamer/security keyword, face-up bottom security, top security to hand, security reduction, and library-top trash by opponent color count가 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 같은 source effect를 여러 asset variant가 참조해도 `DefinitionStableId`, `CardIndex`, `variantKey`를 각각 보존한다. Catalog나 core service에 특정 `CardId` 분기를 추가하지 않는다.
 
@@ -27,26 +27,26 @@ No CardId branch. 같은 source effect를 여러 asset variant가 참조해도 `
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT17-009#3549@base` | `BT17_009` | `DCGO/Assets/CardBaseEntity/BT17/Red/Digimon/BT17_009.asset` | `needs-review` |
-| `BT17-010#3550@base` | `BT17_010` | `DCGO/Assets/CardBaseEntity/BT17/Red/Digimon/BT17_010.asset` | `needs-review` |
-| `BT17-024#3567@base` | `BT17_024` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Digimon/BT17_024.asset` | `needs-review` |
-| `BT17-047#3595@base` | `BT17_047` | `DCGO/Assets/CardBaseEntity/BT17/Green/Digimon/BT17_047.asset` | `needs-review` |
-| `BT17-047#4856@P0` | `BT17_047` | `DCGO/Assets/CardBaseEntity/BT17/Green/Digimon/BT17_047_P0.asset` | `needs-review` |
-| `BT17-061#3611@base` | `BT17_061` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_061.asset` | `needs-review` |
-| `BT17-072#3622@base` | `BT17_072` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_072.asset` | `needs-review` |
-| `BT17-072#4861@P0` | `BT17_072` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_072_P0.asset` | `needs-review` |
-| `BT17-079#3635@base` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079.asset` | `needs-review` |
-| `BT17-079#3636@P1` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079_P1.asset` | `needs-review` |
-| `BT17-079#4863@P0` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079_P0.asset` | `needs-review` |
-| `BT17-083#3643@base` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083.asset` | `needs-review` |
-| `BT17-083#3644@P1` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083_P1.asset` | `needs-review` |
-| `BT17-083#4868@P0` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083_P0.asset` | `needs-review` |
-| `BT18-004#3850@base` | `BT18_004` | `DCGO/Assets/CardBaseEntity/BT18/Green/DigiEgg/BT18_004.asset` | `needs-review` |
-| `BT18-006#3851@base` | `BT18_006` | `DCGO/Assets/CardBaseEntity/BT18/Purple/DigiEgg/BT18_006.asset` | `needs-review` |
+| `BT17-009#3549@base` | `BT17_009` | `DCGO/Assets/CardBaseEntity/BT17/Red/Digimon/BT17_009.asset` | `blocked` |
+| `BT17-010#3550@base` | `BT17_010` | `DCGO/Assets/CardBaseEntity/BT17/Red/Digimon/BT17_010.asset` | `blocked` |
+| `BT17-024#3567@base` | `BT17_024` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Digimon/BT17_024.asset` | `blocked` |
+| `BT17-047#3595@base` | `BT17_047` | `DCGO/Assets/CardBaseEntity/BT17/Green/Digimon/BT17_047.asset` | `blocked` |
+| `BT17-047#4856@P0` | `BT17_047` | `DCGO/Assets/CardBaseEntity/BT17/Green/Digimon/BT17_047_P0.asset` | `blocked` |
+| `BT17-061#3611@base` | `BT17_061` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_061.asset` | `blocked` |
+| `BT17-072#3622@base` | `BT17_072` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_072.asset` | `blocked` |
+| `BT17-072#4861@P0` | `BT17_072` | `DCGO/Assets/CardBaseEntity/BT17/Purple/Digimon/BT17_072_P0.asset` | `blocked` |
+| `BT17-079#3635@base` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079.asset` | `blocked` |
+| `BT17-079#3636@P1` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079_P1.asset` | `blocked` |
+| `BT17-079#4863@P0` | `BT17_079` | `DCGO/Assets/CardBaseEntity/BT17/Red/Tamer/BT17_079_P0.asset` | `blocked` |
+| `BT17-083#3643@base` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083.asset` | `blocked` |
+| `BT17-083#3644@P1` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083_P1.asset` | `blocked` |
+| `BT17-083#4868@P0` | `BT17_083` | `DCGO/Assets/CardBaseEntity/BT17/Blue/Tamer/BT17_083_P0.asset` | `blocked` |
+| `BT18-004#3850@base` | `BT18_004` | `DCGO/Assets/CardBaseEntity/BT18/Green/DigiEgg/BT18_004.asset` | `blocked` |
+| `BT18-006#3851@base` | `BT18_006` | `DCGO/Assets/CardBaseEntity/BT18/Purple/DigiEgg/BT18_006.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0024 depends on deck, hand, field, security, trash, source, and library-top movement payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0024 depends on deck, hand, field, security, trash, source, and library-top movement payloads.
 - `BT17_009` requires dual reveal search and inherited on-deletion free Tamer play with ETB.
 - `BT17_010` requires source-scoped DP-delete max modifiers and failure continuation after attempted deletion.
 - `BT17_024` and `BT18_004` require hand-to-source/security movement with follow-up effects only after successful placement.

@@ -196,6 +196,25 @@ public sealed class GameState
                 .Append(use.SourceCard?.Value.ToString() ?? "-").AppendLine();
         }
 
+        for (var index = 0; index < RuntimeRules.PendingRuleEvents.Count; index++)
+        {
+            var ruleEvent = RuntimeRules.PendingRuleEvents[index];
+            builder.Append("runtime-pending-rule-event:")
+                .Append(index).Append('|')
+                .Append(ruleEvent.Timing).Append('|')
+                .Append(ruleEvent.Player.Value).Append('|');
+
+            foreach (var pair in ruleEvent.Values.OrderBy(pair => pair.Key, StringComparer.Ordinal))
+            {
+                builder.Append(pair.Key)
+                    .Append('=')
+                    .Append(FormatRuntimeRuleValue(pair.Value))
+                    .Append(';');
+            }
+
+            builder.AppendLine();
+        }
+
         if (RuntimeRules.Attack is { } attack)
         {
             builder.Append("runtime-attack:")
@@ -320,6 +339,23 @@ public sealed class GameState
 
     private static string FormatPlayRequirement(PlayRequirement requirement) =>
         $"{requirement.Mode}:{requirement.FixedCost?.ToString() ?? "-"}:{requirement.ReduceCost}:{requirement.ReduceCostPerMaterial}:{requirement.LinkCost}:{requirement.MaxMaterials}:{string.Join(",", requirement.Materials.Select(FormatMaterialRequirement))}:{FormatMaterialRequirement(requirement.LinkTargetRequirement)}";
+
+    private static string FormatRuntimeRuleValue(object? value) =>
+        value switch
+        {
+            null => "-",
+            CardInstanceId card => $"card:{card.Value}",
+            PermanentId permanent => $"permanent:{permanent.Value}",
+            PlayerId player => $"player:{player.Value}",
+            Zone zone => $"zone:{zone}",
+            bool boolean => boolean ? "true" : "false",
+            string text => text,
+            IEnumerable<CardInstanceId> cards => $"cards:{string.Join(",", cards.Select(card => card.Value))}",
+            IEnumerable<PermanentId> permanents => $"permanents:{string.Join(",", permanents.Select(permanent => permanent.Value))}",
+            IEnumerable<PlayerId> players => $"players:{string.Join(",", players.Select(player => player.Value))}",
+            IEnumerable<Zone> zones => $"zones:{string.Join(",", zones)}",
+            _ => value.ToString() ?? string.Empty,
+        };
 
     private static string FormatMaterialRequirement(MaterialRequirement? requirement)
     {

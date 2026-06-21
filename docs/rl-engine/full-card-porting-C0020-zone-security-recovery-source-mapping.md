@@ -4,7 +4,7 @@
 
 `C0020_zone_security_recovery`는 `done`으로 승격할 수 없는 카드 포팅 batch다. DCGO 원본 source body 10개와 asset identity 18개는 모두 확인했다. 그러나 runnable card body로 옮기려면 `L0006_zone_security_recovery`와 함께 digivolution-source trash, library-bottom removal, security top/bottom trash selection, suspend-cost success continuation, battle-deletion payload, static/inherited keyword, immunity/restriction duration, and free play layers가 먼저 source-aligned로 정리되어야 한다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,28 +27,28 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT15-028#3153@base` | `BT15_028` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_028.asset` | `needs-review` |
-| `BT15-030#3155@base` | `BT15_030` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_030.asset` | `needs-review` |
-| `BT15-030#4725@P0` | `BT15_030` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_030_P0.asset` | `needs-review` |
-| `BT15-036#3161@base` | `BT15_036` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Digimon/BT15_036.asset` | `needs-review` |
-| `BT15-043#3171@base` | `BT15_043` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_043.asset` | `needs-review` |
-| `BT15-043#3172@P1` | `BT15_043` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_043_P1.asset` | `needs-review` |
-| `BT15-044#3173@base` | `BT15_044` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_044.asset` | `needs-review` |
-| `BT15-050#3181@base` | `BT15_050` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_050.asset` | `needs-review` |
-| `BT15-053#3184@base` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053.asset` | `needs-review` |
-| `BT15-053#4735@P0` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P0.asset` | `needs-review` |
-| `BT15-053#4736@P1` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P1.asset` | `needs-review` |
-| `BT15-053#4737@P2` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P2.asset` | `needs-review` |
-| `BT15-053#4738@P3` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P3.asset` | `needs-review` |
-| `BT15-055#3186@base` | `BT15_055` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_055.asset` | `needs-review` |
-| `BT15-055#4740@P0` | `BT15_055` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_055_P0.asset` | `needs-review` |
-| `BT15-058#3190@base` | `BT15_058` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_058.asset` | `needs-review` |
-| `BT15-061#3193@base` | `BT15_061` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_061.asset` | `needs-review` |
-| `BT15-061#4743@P0` | `BT15_061` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_061_P0.asset` | `needs-review` |
+| `BT15-028#3153@base` | `BT15_028` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_028.asset` | `blocked` |
+| `BT15-030#3155@base` | `BT15_030` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_030.asset` | `blocked` |
+| `BT15-030#4725@P0` | `BT15_030` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_030_P0.asset` | `blocked` |
+| `BT15-036#3161@base` | `BT15_036` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Digimon/BT15_036.asset` | `blocked` |
+| `BT15-043#3171@base` | `BT15_043` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_043.asset` | `blocked` |
+| `BT15-043#3172@P1` | `BT15_043` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_043_P1.asset` | `blocked` |
+| `BT15-044#3173@base` | `BT15_044` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_044.asset` | `blocked` |
+| `BT15-050#3181@base` | `BT15_050` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_050.asset` | `blocked` |
+| `BT15-053#3184@base` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053.asset` | `blocked` |
+| `BT15-053#4735@P0` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P0.asset` | `blocked` |
+| `BT15-053#4736@P1` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P1.asset` | `blocked` |
+| `BT15-053#4737@P2` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P2.asset` | `blocked` |
+| `BT15-053#4738@P3` | `BT15_053` | `DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_053_P3.asset` | `blocked` |
+| `BT15-055#3186@base` | `BT15_055` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_055.asset` | `blocked` |
+| `BT15-055#4740@P0` | `BT15_055` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_055_P0.asset` | `blocked` |
+| `BT15-058#3190@base` | `BT15_058` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_058.asset` | `blocked` |
+| `BT15-061#3193@base` | `BT15_061` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_061.asset` | `blocked` |
+| `BT15-061#4743@P0` | `BT15_061` | `DCGO/Assets/CardBaseEntity/BT15/Black/Digimon/BT15_061_P0.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0020 depends on hand, source, security, and library-bottom movement payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0020 depends on hand, source, security, and library-bottom movement payloads.
 - `BT15_028`, `BT15_030`, and `BT15_058` require source-trash and protection rules that cannot be approximated by direct source list mutation.
 - `BT15_036` requires top/bottom security selection and `IDestroySecurity` semantics, including `OnLoseSecurity` interleaving.
 - `BT15_043` and `BT15_061` depend on cost/success continuations: suspend succeeded before DP grant, and discard succeeded before immunity grant.

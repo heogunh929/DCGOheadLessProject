@@ -4,7 +4,7 @@
 
 `C0017_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개와 18개 asset identity는 로컬 DCGO 원본에서 확인했다. 다만 runnable card body로 옮기려면 `L0006_zone_security_recovery`와 함께 hand-to-security, play-from-hand, recovery, suspend-cost, reveal/search, top/bottom deck placement, cannot-unsuspend duration, trash-to-deck-top, De-Digivolve, cost-sum deletion selection 공통 계층이 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,28 +27,28 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT14-040#2963@base` | `BT14_040` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_040.asset` | `needs-review` |
-| `BT14-040#4656@P0` | `BT14_040` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_040_P0.asset` | `needs-review` |
-| `BT14-041#2964@base` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041.asset` | `needs-review` |
-| `BT14-041#4657@P0` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P0.asset` | `needs-review` |
-| `BT14-041#4658@P1` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P1.asset` | `needs-review` |
-| `BT14-041#4659@P2` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P2.asset` | `needs-review` |
-| `BT14-041#4660@P3` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P3.asset` | `needs-review` |
-| `BT14-041#8174@P4` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P4.asset` | `needs-review` |
-| `BT14-041#8175@P5` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P5.asset` | `needs-review` |
-| `BT14-042#2965@base` | `BT14_042` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_042.asset` | `needs-review` |
-| `BT14-043#2966@base` | `BT14_043` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_043.asset` | `needs-review` |
-| `BT14-047#2971@base` | `BT14_047` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_047.asset` | `needs-review` |
-| `BT14-050#2975@base` | `BT14_050` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_050.asset` | `needs-review` |
-| `BT14-051#2976@base` | `BT14_051` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_051.asset` | `needs-review` |
-| `BT14-061#2987@base` | `BT14_061` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_061.asset` | `needs-review` |
-| `BT14-065#2991@base` | `BT14_065` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_065.asset` | `needs-review` |
-| `BT14-067#2993@base` | `BT14_067` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_067.asset` | `needs-review` |
-| `BT14-067#4679@P0` | `BT14_067` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_067_P0.asset` | `needs-review` |
+| `BT14-040#2963@base` | `BT14_040` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_040.asset` | `blocked` |
+| `BT14-040#4656@P0` | `BT14_040` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_040_P0.asset` | `blocked` |
+| `BT14-041#2964@base` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041.asset` | `blocked` |
+| `BT14-041#4657@P0` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P0.asset` | `blocked` |
+| `BT14-041#4658@P1` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P1.asset` | `blocked` |
+| `BT14-041#4659@P2` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P2.asset` | `blocked` |
+| `BT14-041#4660@P3` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P3.asset` | `blocked` |
+| `BT14-041#8174@P4` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P4.asset` | `blocked` |
+| `BT14-041#8175@P5` | `BT14_041` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P5.asset` | `blocked` |
+| `BT14-042#2965@base` | `BT14_042` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_042.asset` | `blocked` |
+| `BT14-043#2966@base` | `BT14_043` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_043.asset` | `blocked` |
+| `BT14-047#2971@base` | `BT14_047` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_047.asset` | `blocked` |
+| `BT14-050#2975@base` | `BT14_050` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_050.asset` | `blocked` |
+| `BT14-051#2976@base` | `BT14_051` | `DCGO/Assets/CardBaseEntity/BT14/Green/Digimon/BT14_051.asset` | `blocked` |
+| `BT14-061#2987@base` | `BT14_061` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_061.asset` | `blocked` |
+| `BT14-065#2991@base` | `BT14_065` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_065.asset` | `blocked` |
+| `BT14-067#2993@base` | `BT14_067` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_067.asset` | `blocked` |
+| `BT14-067#4679@P0` | `BT14_067` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_067_P0.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0017 needs hand-to-security, security add triggers, reveal/search, trash-to-deck-top, and top/bottom deck placement semantics.
+- `L0006_zone_security_recovery` remains `blocked`; C0017 needs hand-to-security, security add triggers, reveal/search, trash-to-deck-top, and top/bottom deck placement semantics.
 - `BT14_040`, `BT14_061`, `BT14_065`, and `BT14_067` each have duplicated On Play/When Digivolving descriptors. Descriptor identity must be stable for ordering, once-per-turn, replay, and source mapping.
 - `BT14_041` and `BT14_051` use once-per-turn hash strings and triggered continuations after security add or suspend success; rollback and replay must include those runtime states.
 - `BT14_042`, `BT14_043`, and `BT14_051` depend on suspend-cost success. They must not proceed if suspend is blocked or the selected source leaves the field.

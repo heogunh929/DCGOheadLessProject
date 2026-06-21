@@ -4,7 +4,7 @@
 
 `L0003_existing_layer`는 `done`으로 승격하지 않는다. 이 batch는 이름상 기존 layer로 즉시 구현 가능한 후보처럼 보이지만, DCGO 원본을 대조하면 카드별 body를 안전하게 포팅하기 전에 공통 movement/action timing layer가 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 이 항목의 affected card는 core service, catalog, validator의 `CardId` 분기나 임시 workaround로 처리하지 않는다. 카드별 effect body는 원본 `CardEffect` 경로에 대응되는 파일에서만 구현한다.
 
@@ -12,14 +12,14 @@ Queue status: needs-review
 
 | Timing | Batch status | Source evidence | RL.Engine status | Decision |
 | --- | --- | --- | --- | --- |
-| `OnMove` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnMove.cs`, `CardEffectFactory.cs`, 다수 card effect body | enum은 있으나 moved permanent payload와 battle-area 생존 재검증을 만드는 공통 move primitive가 검증되지 않았다. | `needs-review` |
-| `OnRemovedField` | `NeedsSourceReview` | `DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs` 등 실제 card body가 `WhenRemoveField` 조건과 결합해 사용 | field removal 완료 후 timing인지, would-remove cut-in 후 후속 timing인지 source body 단위 검증이 더 필요하다. | `needs-review` |
-| `OnStartBattle` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` battle flow가 attacking/defending permanent snapshot과 defending card payload로 stack | attack/battle layer는 일부 보정됐지만 원본 battle start payload와 source snapshot fixture가 아직 없다. | `needs-review` |
-| `OnTappedAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` suspend flow가 `Permanents`, `IsBlock`, optional `CardEffect` payload로 stack | suspend primitive는 존재하나 원본 cut-in/restriction/replacement와 block suspend payload parity가 batch 전체에 대해 증명되지 않았다. | `needs-review` |
-| `OnUnTappedAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` unsuspend flow가 `WhenUntapAnyone` cut-in 후 actual unsuspend와 `OnUnTappedAnyone` stack을 실행 | unsuspend would/actual 2단계, `CanUnsuspend`, source effect immunity, trace/replay payload가 공통 layer로 고정되지 않았다. | `needs-review` |
-| `OnUseOption` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` option execution이 executing zone 이동, cost/root payload, `OnUseOption`, background effects, `OptionSkill` 순서로 실행 | option play boundary와 executing source, background timing, option body resolution을 source-aligned로 연결하는 공통 layer가 아직 없다. | `needs-review` |
-| `WhenDigisorption` | `NeedsSourceReview` | `DCGO/Assets/Scripts/CardEffect/P/Green/P_056.cs`, `BT10_052.cs`, `BT8_054.cs` 등 cost-reduction body가 cut-in `WhenDigisorption`을 직접 stack | `BeforePayCost`/cost payment state machine과 digisorption source selection, reduction, subsequent `WhenDigisorption` trigger가 분리되어 검증되어야 한다. | `needs-review` |
-| `WhenRemoveField` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenRemoveField.cs`, replacement keyword effects | would-remove cut-in timing이며 return-to-deck/hand, delete, security-like field removal 등 여러 flow에서 `willBeRemoveField`와 target list를 공유한다. 현재 단순 leave-field timing으로 평탄화할 수 없다. | `needs-review` |
+| `OnMove` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnMove.cs`, `CardEffectFactory.cs`, 다수 card effect body | enum은 있으나 moved permanent payload와 battle-area 생존 재검증을 만드는 공통 move primitive가 검증되지 않았다. | `blocked` |
+| `OnRemovedField` | `NeedsSourceReview` | `DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs` 등 실제 card body가 `WhenRemoveField` 조건과 결합해 사용 | field removal 완료 후 timing인지, would-remove cut-in 후 후속 timing인지 source body 단위 검증이 더 필요하다. | `blocked` |
+| `OnStartBattle` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` battle flow가 attacking/defending permanent snapshot과 defending card payload로 stack | attack/battle layer는 일부 보정됐지만 원본 battle start payload와 source snapshot fixture가 아직 없다. | `blocked` |
+| `OnTappedAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` suspend flow가 `Permanents`, `IsBlock`, optional `CardEffect` payload로 stack | suspend primitive는 존재하나 원본 cut-in/restriction/replacement와 block suspend payload parity가 batch 전체에 대해 증명되지 않았다. | `blocked` |
+| `OnUnTappedAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` unsuspend flow가 `WhenUntapAnyone` cut-in 후 actual unsuspend와 `OnUnTappedAnyone` stack을 실행 | unsuspend would/actual 2단계, `CanUnsuspend`, source effect immunity, trace/replay payload가 공통 layer로 고정되지 않았다. | `blocked` |
+| `OnUseOption` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` option execution이 executing zone 이동, cost/root payload, `OnUseOption`, background effects, `OptionSkill` 순서로 실행 | option play boundary와 executing source, background timing, option body resolution을 source-aligned로 연결하는 공통 layer가 아직 없다. | `blocked` |
+| `WhenDigisorption` | `NeedsSourceReview` | `DCGO/Assets/Scripts/CardEffect/P/Green/P_056.cs`, `BT10_052.cs`, `BT8_054.cs` 등 cost-reduction body가 cut-in `WhenDigisorption`을 직접 stack | `BeforePayCost`/cost payment state machine과 digisorption source selection, reduction, subsequent `WhenDigisorption` trigger가 분리되어 검증되어야 한다. | `blocked` |
+| `WhenRemoveField` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenRemoveField.cs`, replacement keyword effects | would-remove cut-in timing이며 return-to-deck/hand, delete, security-like field removal 등 여러 flow에서 `willBeRemoveField`와 target list를 공유한다. 현재 단순 leave-field timing으로 평탄화할 수 없다. | `blocked` |
 
 ## Source Mapping Notes
 

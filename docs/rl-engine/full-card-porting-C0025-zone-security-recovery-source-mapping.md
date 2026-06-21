@@ -4,7 +4,7 @@
 
 `C0025_zone_security_recovery`는 source body 10개와 asset identity 12개를 확인했다. 현재 공통 layer만으로 runnable card body를 만들면 원본의 비용 변경, 선언 timing, security 조작, security-zone static aura, memory prevention 의미가 쉽게 왜곡된다. 이 batch는 `L0006_zone_security_recovery` 위에 DP-delete max modifier, cannot-add-memory continuous rule, Hybrid/Ten Warriors dual reveal, digivolution trigger payload, BeforePayCost cost-reduction frame, declaration action from hand, trash-to-deck-bottom cost, breeding-area play, face-up bottom security, top security to hand, recovery, security-zone aura, and attack-player restriction layers가 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 같은 source effect를 여러 variant가 참조해도 `DefinitionStableId`, `CardIndex`, `variantKey`를 각각 보존한다. Catalog나 core service에 특정 `CardId` 분기를 추가하지 않는다.
 
@@ -27,22 +27,22 @@ No CardId branch. 같은 source effect를 여러 variant가 참조해도 `Defini
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT18-008#3854@base` | `BT18_008` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_008.asset` | `needs-review` |
-| `BT18-009#3855@base` | `BT18_009` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_009.asset` | `needs-review` |
-| `BT18-009#8250@P1` | `BT18_009` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_009_P1.asset` | `needs-review` |
-| `BT18-010#3859@base` | `BT18_010` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_010.asset` | `needs-review` |
-| `BT18-021#3879@base` | `BT18_021` | `DCGO/Assets/CardBaseEntity/BT18/Blue/Digimon/BT18_021.asset` | `needs-review` |
-| `BT18-031#3888@base` | `BT18_031` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_031.asset` | `needs-review` |
-| `BT18-033#3889@base` | `BT18_033` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_033.asset` | `needs-review` |
-| `BT18-033#8256@P1` | `BT18_033` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_033_P1.asset` | `needs-review` |
-| `BT18-038#3881@base` | `BT18_038` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_038.asset` | `needs-review` |
-| `BT18-043#3897@base` | `BT18_043` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_043.asset` | `needs-review` |
-| `BT18-044#3893@base` | `BT18_044` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_044.asset` | `needs-review` |
-| `BT18-046#3898@base` | `BT18_046` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_046.asset` | `needs-review` |
+| `BT18-008#3854@base` | `BT18_008` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_008.asset` | `blocked` |
+| `BT18-009#3855@base` | `BT18_009` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_009.asset` | `blocked` |
+| `BT18-009#8250@P1` | `BT18_009` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_009_P1.asset` | `blocked` |
+| `BT18-010#3859@base` | `BT18_010` | `DCGO/Assets/CardBaseEntity/BT18/Red/Digimon/BT18_010.asset` | `blocked` |
+| `BT18-021#3879@base` | `BT18_021` | `DCGO/Assets/CardBaseEntity/BT18/Blue/Digimon/BT18_021.asset` | `blocked` |
+| `BT18-031#3888@base` | `BT18_031` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_031.asset` | `blocked` |
+| `BT18-033#3889@base` | `BT18_033` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_033.asset` | `blocked` |
+| `BT18-033#8256@P1` | `BT18_033` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_033_P1.asset` | `blocked` |
+| `BT18-038#3881@base` | `BT18_038` | `DCGO/Assets/CardBaseEntity/BT18/Yellow/Digimon/BT18_038.asset` | `blocked` |
+| `BT18-043#3897@base` | `BT18_043` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_043.asset` | `blocked` |
+| `BT18-044#3893@base` | `BT18_044` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_044.asset` | `blocked` |
+| `BT18-046#3898@base` | `BT18_046` | `DCGO/Assets/CardBaseEntity/BT18/Green/Digimon/BT18_046.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0025 depends on deck, hand, field, security, trash, source, breeding, and cost-calculation payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0025 depends on deck, hand, field, security, trash, source, breeding, and cost-calculation payloads.
 - `BT18_021` and `BT18_043` require source-aligned `BeforePayCost` continuation and temporary `ChangeCostClass` handling before cost reducers can be runnable.
 - `BT18_033` requires OnDeclaration legal action from hand, trash-to-deck-bottom cost, breeding-area play, and fallback trash handling.
 - `BT18_038` and `BT18_044` require hand-to-bottom-security, face-up security, top-security-to-hand, and `IReduceSecurity` sequencing.
@@ -51,4 +51,4 @@ No CardId branch. 같은 source effect를 여러 variant가 참조해도 `Defini
 
 ## Follow-Up
 
-The next generated queue item is `C0026_zone_security_recovery`. C0025 remains source-reviewed but blocked until shared BeforePayCost, OnDeclaration hand action, breeding play, face-up security, security-zone aura, top-security-to-hand, memory-prevention, and security reduction layers are completed. After those layers exist, port each source body under the planned full-card-pool source path and add deterministic selection/replay tests before changing any C0025 identity to runnable.
+The next generated card-porting row is `C0026_zone_security_recovery`, but 66A scheduler policy does not allow executing it while `L0006_zone_security_recovery` is blocked. C0025 remains source-reviewed but blocked until shared BeforePayCost, OnDeclaration hand action, breeding play, face-up security, security-zone aura, top-security-to-hand, memory-prevention, and security reduction layers are completed. After those layers exist, port each source body under the planned full-card-pool source path and add deterministic selection/replay tests before changing any C0025 identity to runnable.

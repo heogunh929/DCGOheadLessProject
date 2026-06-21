@@ -4,7 +4,7 @@
 
 `C0010_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개와 16개 asset identity는 모두 로컬 DCGO 원본에서 확인되지만, runnable card body로 옮기려면 `L0006_zone_security_recovery`와 draw/reveal/search, recovery/security movement, return-to-hand/deck replacement, suspend/can't-unsuspend, hand discard, battle-deletion, piercing common layer가 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않았다.
 
@@ -27,26 +27,26 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT11-033#2304@base` | `BT11_033` | `DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_033.asset` | `needs-review` |
-| `BT11-033#2305@P1` | `BT11_033` | `DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_033_P1.asset` | `needs-review` |
-| `BT11-039#2311@base` | `BT11_039` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_039.asset` | `needs-review` |
-| `BT11-045#2318@base` | `BT11_045` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_045.asset` | `needs-review` |
-| `BT11-045#4405@P0` | `BT11_045` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_045_P0.asset` | `needs-review` |
-| `BT11-046#2319@base` | `BT11_046` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_046.asset` | `needs-review` |
-| `BT11-046#4406@P0` | `BT11_046` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_046_P0.asset` | `needs-review` |
-| `BT11-047#2320@base` | `BT11_047` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_047.asset` | `needs-review` |
-| `BT11-050#2323@base` | `BT11_050` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_050.asset` | `needs-review` |
-| `BT11-052#2325@base` | `BT11_052` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_052.asset` | `needs-review` |
-| `BT11-052#4407@P0` | `BT11_052` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_052_P0.asset` | `needs-review` |
-| `BT11-055#2328@base` | `BT11_055` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_055.asset` | `needs-review` |
-| `BT11-055#4410@P0` | `BT11_055` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_055_P0.asset` | `needs-review` |
-| `BT11-057#2331@base` | `BT11_057` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_057.asset` | `needs-review` |
-| `BT11-057#4411@P0` | `BT11_057` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_057_P0.asset` | `needs-review` |
-| `BT11-060#2334@base` | `BT11_060` | `DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_060.asset` | `needs-review` |
+| `BT11-033#2304@base` | `BT11_033` | `DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_033.asset` | `blocked` |
+| `BT11-033#2305@P1` | `BT11_033` | `DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_033_P1.asset` | `blocked` |
+| `BT11-039#2311@base` | `BT11_039` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_039.asset` | `blocked` |
+| `BT11-045#2318@base` | `BT11_045` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_045.asset` | `blocked` |
+| `BT11-045#4405@P0` | `BT11_045` | `DCGO/Assets/CardBaseEntity/BT11/Yellow/Digimon/BT11_045_P0.asset` | `blocked` |
+| `BT11-046#2319@base` | `BT11_046` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_046.asset` | `blocked` |
+| `BT11-046#4406@P0` | `BT11_046` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_046_P0.asset` | `blocked` |
+| `BT11-047#2320@base` | `BT11_047` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_047.asset` | `blocked` |
+| `BT11-050#2323@base` | `BT11_050` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_050.asset` | `blocked` |
+| `BT11-052#2325@base` | `BT11_052` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_052.asset` | `blocked` |
+| `BT11-052#4407@P0` | `BT11_052` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_052_P0.asset` | `blocked` |
+| `BT11-055#2328@base` | `BT11_055` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_055.asset` | `blocked` |
+| `BT11-055#4410@P0` | `BT11_055` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_055_P0.asset` | `blocked` |
+| `BT11-057#2331@base` | `BT11_057` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_057.asset` | `blocked` |
+| `BT11-057#4411@P0` | `BT11_057` | `DCGO/Assets/CardBaseEntity/BT11/Green/Digimon/BT11_057_P0.asset` | `blocked` |
+| `BT11-060#2334@base` | `BT11_060` | `DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_060.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0010 uses add-hand from security, security loss, security recovery, security trash, permanent-to-security, hand discard, and bounce-to-hand/deck restrictions.
+- `L0006_zone_security_recovery` remains `blocked`; C0010 uses add-hand from security, security loss, security recovery, security trash, permanent-to-security, hand discard, and bounce-to-hand/deck restrictions.
 - `L0005_draw_search_reveal_hidden` remains relevant for `BT11_046` and `BT11_047`, because reveal/bottom ordering and draw-trigger sequencing are not source-aligned enough for runnable card bodies.
 - Suspend and can't-unsuspend flows must use shared primitive/replacement boundaries, not direct `IsSuspended` mutation.
 - `BT11_052` has two script-authored descriptors in the same timing. They must remain descriptor-aware for ordering, optional handling, replay, and state hash.

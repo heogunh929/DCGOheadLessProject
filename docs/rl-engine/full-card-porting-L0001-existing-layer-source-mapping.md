@@ -4,20 +4,20 @@
 
 `L0001_existing_layer`는 `done`으로 승격하지 않는다. 이 batch는 "기존 layer로 즉시 구현 후보"로 분류되었지만, DCGO 원본과 현재 RL.Engine을 대조하면 카드별 body를 안전하게 포팅하기 전에 공통 layer가 더 필요하다.
 
-Queue 상태는 `needs-review`로 둔다. affected card를 카드별 workaround나 core `CardId` 분기로 처리하지 않는다.
+Queue 상태는 `blocked`로 둔다. affected card를 카드별 workaround나 core `CardId` 분기로 처리하지 않는다.
 
 ## Batch 범위
 
 | Section | Name | Batch status | Source evidence | RL.Engine status | Decision |
 | --- | --- | --- | --- | --- | --- |
-| `features` | `declarative` | `Unsupported` | `DCGO/Assets/Scripts/Script/ICardEffect.cs`, `AutoProcessing.cs`, `SelectPermanentEffect.cs`, `TurnStateMachine.cs` | declarative activation boundary 없음 | `needs-review` |
-| `keywords` | `Scapegoat` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Scapegoat.cs` | `BattleKeyword` enum에 없음, replacement/delete prevention layer 없음 | `needs-review` |
-| `keywords` | `Training` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Training.cs` | suspend cost + face-down source add 공통 keyword layer 없음 | `needs-review` |
-| `keywords` | `Vortex` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Vortex.cs`, `CardEffectFactory/VortexCanAttackPlayers.cs` | attack target permission, suspend, optional/cost 경계가 공통 keyword로 없음 | `needs-review` |
-| `selections` | `SelectCount` | `PartiallyImplemented` | `DCGO/Assets/Scripts/Script/CardController.cs`, `SelectCountEffect` 호출 card sources | `SelectionKind.SelectCount`는 있으나 source-aligned coroutine/resume 적용 범위 미완성 | `needs-review` |
-| `specialMechanics` | `Digisorption` | `PartiallyImplemented` | `BeforePayCost` card effect files, `WhenDigisorption` stack calls | `EffectTiming.WhenDigisorption` enum만 있고 pay-cost reduction layer 미완성 | `needs-review` |
-| `timings` | `BeforePayCost` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, 141 card effect files | timing enum은 있으나 play/digivolve cost payment에 cut-in stack이 source-aligned로 연결되어 있지 않음 | `needs-review` |
-| `timings` | `AfterPayCost` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, 7 card effect files | timing enum은 있으나 cost payment 이후 cut-in stack boundary 미검증 | `needs-review` |
+| `features` | `declarative` | `Unsupported` | `DCGO/Assets/Scripts/Script/ICardEffect.cs`, `AutoProcessing.cs`, `SelectPermanentEffect.cs`, `TurnStateMachine.cs` | declarative activation boundary 없음 | `blocked` |
+| `keywords` | `Scapegoat` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Scapegoat.cs` | `BattleKeyword` enum에 없음, replacement/delete prevention layer 없음 | `blocked` |
+| `keywords` | `Training` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Training.cs` | suspend cost + face-down source add 공통 keyword layer 없음 | `blocked` |
+| `keywords` | `Vortex` | `Unsupported` | `DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Vortex.cs`, `CardEffectFactory/VortexCanAttackPlayers.cs` | attack target permission, suspend, optional/cost 경계가 공통 keyword로 없음 | `blocked` |
+| `selections` | `SelectCount` | `PartiallyImplemented` | `DCGO/Assets/Scripts/Script/CardController.cs`, `SelectCountEffect` 호출 card sources | `SelectionKind.SelectCount`는 있으나 source-aligned coroutine/resume 적용 범위 미완성 | `blocked` |
+| `specialMechanics` | `Digisorption` | `PartiallyImplemented` | `BeforePayCost` card effect files, `WhenDigisorption` stack calls | `EffectTiming.WhenDigisorption` enum만 있고 pay-cost reduction layer 미완성 | `blocked` |
+| `timings` | `BeforePayCost` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, 141 card effect files | timing enum은 있으나 play/digivolve cost payment에 cut-in stack이 source-aligned로 연결되어 있지 않음 | `blocked` |
+| `timings` | `AfterPayCost` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, 7 card effect files | timing enum은 있으나 cost payment 이후 cut-in stack boundary 미검증 | `blocked` |
 
 ## Source Mapping Notes
 

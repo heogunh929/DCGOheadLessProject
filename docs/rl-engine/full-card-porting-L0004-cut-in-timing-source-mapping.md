@@ -4,7 +4,7 @@
 
 `L0004_existing_layer`는 `done`으로 승격하지 않는다. 이 batch의 두 timing은 모두 이름만 enum에 있는 수준으로는 포팅할 수 없다. DCGO 원본에서는 actual zone/suspend mutation 전에 cut-in stack을 만들고, cut-in 해결 후 대상 목록을 다시 고정한 뒤 실제 mutation을 진행한다.
 
-Queue status: needs-review
+Queue status: blocked
 
 이 항목의 affected card는 core service, catalog, validator의 `CardId` 분기나 임시 workaround로 처리하지 않는다. 카드별 effect body는 원본 `CardEffect` 경로에 대응되는 파일에서만 구현한다.
 
@@ -12,8 +12,8 @@ Queue status: needs-review
 
 | Timing | Batch status | Source evidence | RL.Engine status | Decision |
 | --- | --- | --- | --- | --- |
-| `WhenReturntoLibraryAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs`, `DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs`, `DCGO/Assets/Scripts/CardEffect/P/Red/P_072.cs` | enum은 있으나 return-to-library would-remove cut-in, replacement target refix, `willBeRemoveField` state, leave-field follow-up을 만드는 공통 layer가 없다. | `needs-review` |
-| `WhenUntapAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs` | enum은 있으나 actual unsuspend 전 cut-in, `AutoProcessing.HasExecutedSameEffect`, `CanUnsuspend`, post-cut-in target refix, no-unsuspend duration 처리 fixture가 없다. | `needs-review` |
+| `WhenReturntoLibraryAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs`, `DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs`, `DCGO/Assets/Scripts/CardEffect/P/Red/P_072.cs` | enum은 있으나 return-to-library would-remove cut-in, replacement target refix, `willBeRemoveField` state, leave-field follow-up을 만드는 공통 layer가 없다. | `blocked` |
+| `WhenUntapAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs` | enum은 있으나 actual unsuspend 전 cut-in, `AutoProcessing.HasExecutedSameEffect`, `CanUnsuspend`, post-cut-in target refix, no-unsuspend duration 처리 fixture가 없다. | `blocked` |
 
 ## Source Mapping Notes
 

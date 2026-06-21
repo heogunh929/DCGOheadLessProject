@@ -467,6 +467,55 @@ internal sealed class RecordingTimingCardScript : ICardScript
     public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
 }
 
+internal sealed record ObservedEffectPayload(
+    string StableId,
+    EffectTiming Timing,
+    IReadOnlyDictionary<string, object?> Values,
+    CardInstanceId? SourceCard,
+    PermanentId? SourcePermanent);
+
+internal sealed class PayloadProbeCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly List<ObservedEffectPayload> _observed = new();
+
+    public PayloadProbeCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing)
+    {
+        _timing = timing;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records effect context payload.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<ObservedEffectPayload> Observed => _observed;
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:payload-probe",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        _observed.Add(new ObservedEffectPayload(
+            context.Resolution.StableId,
+            context.Resolution.Timing,
+            new Dictionary<string, object?>(context.Resolution.Context.Payload, StringComparer.Ordinal),
+            context.Resolution.SourceCard,
+            context.Resolution.SourcePermanent));
+}
+
 internal sealed class DoubleDescriptorRecordingCardScript : ICardScript
 {
     private readonly EffectTiming _timing;

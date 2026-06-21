@@ -13,6 +13,7 @@ public enum RuleProcessorContinuationKind
 {
     ContinueAfterRulesTiming,
     ContinueAfterOnDestroyedAnyone,
+    ContinueAfterPendingRuleEvent,
 }
 
 public sealed record RuleProcessorContinuation(RuleProcessorContinuationKind Kind);
@@ -100,7 +101,8 @@ public sealed class RuleProcessor
         return continuation.Kind switch
         {
             RuleProcessorContinuationKind.ContinueAfterRulesTiming
-                or RuleProcessorContinuationKind.ContinueAfterOnDestroyedAnyone =>
+                or RuleProcessorContinuationKind.ContinueAfterOnDestroyedAnyone
+                or RuleProcessorContinuationKind.ContinueAfterPendingRuleEvent =>
                 ProcessAfterActionWithResult(state, trace, skipInitialRulesTiming: true),
 
             _ => throw new UnsupportedMechanicException($"RuleProcessor continuation '{continuation.Kind}'"),
@@ -152,6 +154,7 @@ public sealed class RuleProcessor
 
         var totalChanges = 0;
         var events = new List<RuleStabilizationEvent>();
+        events.AddRange(ConsumePendingRuleEventsForStabilization(state));
         for (var iteration = 1; iteration <= _options.MaxIterations; iteration++)
         {
             var staleCleanupChanges = _durationCleanupService.CleanupStaleTargets(state).RemovedModifierStableIds.Count;
@@ -234,6 +237,21 @@ public sealed class RuleProcessor
         bool runDestroyedTriggers,
         List<RuleStabilizationEvent>? stateOnlyEvents = null)
     {
+        if (runDestroyedTriggers)
+        {
+            var pendingRuleEvent = RunPendingRuleEventsWithResult(state, trace);
+            if (pendingRuleEvent?.HasPendingSelection == true)
+            {
+                return RuleProcessorSinglePassResult.Pending(
+                    pendingRuleEvent,
+                    new RuleProcessorContinuation(RuleProcessorContinuationKind.ContinueAfterPendingRuleEvent));
+            }
+        }
+        else
+        {
+            stateOnlyEvents?.AddRange(ConsumePendingRuleEventsForStabilization(state));
+        }
+
         if (!skipRulesTiming)
         {
             var rulesTiming = RunRulesTimingWithResult(state, trace);
@@ -325,6 +343,36 @@ public sealed class RuleProcessor
 
         return _triggerPipelineService.Run(state, EffectTiming.RulesTiming, state.TurnPlayerId, trace: trace);
     }
+
+    private TriggerPipelineResult? RunPendingRuleEventsWithResult(GameState state, GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        while (state.RuntimeRules.TryDequeuePendingRuleEvent(out var ruleEvent))
+        {
+            var result = _triggerPipelineService.Run(
+                state,
+                ruleEvent.Timing,
+                ruleEvent.Player,
+                values: ruleEvent.Values,
+                trace: trace);
+            if (result.HasPendingSelection)
+            {
+                return result;
+            }
+        }
+
+        return null;
+    }
+
+    private static IReadOnlyList<RuleStabilizationEvent> ConsumePendingRuleEventsForStabilization(GameState state) =>
+        state.RuntimeRules
+            .ConsumePendingRuleEvents()
+            .Select(ruleEvent => new RuleStabilizationEvent(ruleEvent.Timing, ruleEvent.Player, ruleEvent.Values))
+            .ToArray();
 
     private TriggerPipelineResult? RunOnDestroyedAnyoneWithResult(
         GameState state,

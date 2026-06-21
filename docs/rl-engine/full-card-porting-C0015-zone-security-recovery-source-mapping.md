@@ -4,7 +4,7 @@
 
 `C0015_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개와 16개 asset identity는 로컬 DCGO 원본에서 확인됐지만, runnable card body로 옮기려면 `L0006_zone_security_recovery`와 suspend/unsuspend event payload, security trash, reveal-to-source, hand-to-source, play-from-source, played-permanent payload, draw-discard continuation, non-battle deletion snapshot, BecomeDigimon duration, security Tamer play common layer가 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,26 +27,26 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT13-057#2710@base` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057.asset` | `needs-review` |
-| `BT13-057#4593@P0` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057_P0.asset` | `needs-review` |
-| `BT13-057#8148@P1` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057_P1.asset` | `needs-review` |
-| `BT13-061#2718@base` | `BT13_061` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_061.asset` | `needs-review` |
-| `BT13-071#2728@base` | `BT13_071` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_071.asset` | `needs-review` |
-| `BT13-071#4596@P0` | `BT13_071` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_071_P0.asset` | `needs-review` |
-| `BT13-072#2729@base` | `BT13_072` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_072.asset` | `needs-review` |
-| `BT13-078#2737@base` | `BT13_078` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_078.asset` | `needs-review` |
-| `BT13-078#4602@P1` | `BT13_078` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_078_P1.asset` | `needs-review` |
-| `BT13-079#2738@base` | `BT13_079` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_079.asset` | `needs-review` |
-| `BT13-081#2740@base` | `BT13_081` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_081.asset` | `needs-review` |
-| `BT13-082#2741@base` | `BT13_082` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_082.asset` | `needs-review` |
-| `BT13-096#2761@base` | `BT13_096` | `DCGO/Assets/CardBaseEntity/BT13/Blue/Tamer/BT13_096.asset` | `needs-review` |
-| `BT13-096#4615@P0` | `BT13_096` | `DCGO/Assets/CardBaseEntity/BT13/Blue/Tamer/BT13_096_P0.asset` | `needs-review` |
-| `BT13-099#2766@base` | `BT13_099` | `DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_099.asset` | `needs-review` |
-| `BT13-099#4618@P0` | `BT13_099` | `DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_099_P0.asset` | `needs-review` |
+| `BT13-057#2710@base` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057.asset` | `blocked` |
+| `BT13-057#4593@P0` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057_P0.asset` | `blocked` |
+| `BT13-057#8148@P1` | `BT13_057` | `DCGO/Assets/CardBaseEntity/BT13/Green/Digimon/BT13_057_P1.asset` | `blocked` |
+| `BT13-061#2718@base` | `BT13_061` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_061.asset` | `blocked` |
+| `BT13-071#2728@base` | `BT13_071` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_071.asset` | `blocked` |
+| `BT13-071#4596@P0` | `BT13_071` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_071_P0.asset` | `blocked` |
+| `BT13-072#2729@base` | `BT13_072` | `DCGO/Assets/CardBaseEntity/BT13/Black/Digimon/BT13_072.asset` | `blocked` |
+| `BT13-078#2737@base` | `BT13_078` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_078.asset` | `blocked` |
+| `BT13-078#4602@P1` | `BT13_078` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_078_P1.asset` | `blocked` |
+| `BT13-079#2738@base` | `BT13_079` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_079.asset` | `blocked` |
+| `BT13-081#2740@base` | `BT13_081` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_081.asset` | `blocked` |
+| `BT13-082#2741@base` | `BT13_082` | `DCGO/Assets/CardBaseEntity/BT13/Purple/Digimon/BT13_082.asset` | `blocked` |
+| `BT13-096#2761@base` | `BT13_096` | `DCGO/Assets/CardBaseEntity/BT13/Blue/Tamer/BT13_096.asset` | `blocked` |
+| `BT13-096#4615@P0` | `BT13_096` | `DCGO/Assets/CardBaseEntity/BT13/Blue/Tamer/BT13_096_P0.asset` | `blocked` |
+| `BT13-099#2766@base` | `BT13_099` | `DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_099.asset` | `blocked` |
+| `BT13-099#4618@P0` | `BT13_099` | `DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_099_P0.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0015 uses source movement, security trash, hand discard, play-from-source, and security play.
+- `L0006_zone_security_recovery` remains `blocked`; C0015 uses source movement, security trash, hand discard, play-from-source, and security play.
 - `BT13_057`, `BT13_071`, and `BT13_099` depend on source-aligned `OnTappedAnyone` payloads. Suspended target identity and successful suspend result must be preserved before nested triggers run.
 - `BT13_072` and `BT13_096` require source-add/source-remove/play-from-source operations through common primitives, not direct list mutation.
 - `BT13_079` and `BT13_082` expose a source body quirk around opponent discard count. This needs source review before implementing, not silent correction.

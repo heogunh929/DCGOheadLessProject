@@ -4,20 +4,20 @@
 
 `L0002_existing_layer`는 `done`으로 승격하지 않는다. 이 batch의 모든 항목은 원본 `EffectTiming` enum과 RL.Engine enum에 이름은 존재하지만, source-aligned full-card porting에 필요한 event payload, source-zone collection, declaration boundary, battle/zone-move orchestration이 아직 충분히 증명되지 않았다.
 
-Queue 상태는 `needs-review`로 둔다. affected card를 카드별 workaround나 core `CardId` 분기로 처리하지 않는다.
+Queue 상태는 `blocked`로 둔다. affected card를 카드별 workaround나 core `CardId` 분기로 처리하지 않는다.
 
 ## Batch 범위
 
 | Timing | Batch status | Source evidence | RL.Engine status | Decision |
 | --- | --- | --- | --- | --- |
-| `None` | `NeedsSourceReview` | `AutoProcessing.EndTurnProcess`, `CardController.UseOptionClass`, `CardSource.CanNotBeAffected`, 다수 `EffectList(EffectTiming.None)` | continuous descriptor는 field/inherited 중심으로 부분 구현. player/hand/trash/executing/option-resolution source 범위 미완성 | `needs-review` |
-| `OnAddDigivolutionCards` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/Permanent.cs`에서 source 추가 후 `Permanent`, `CardEffect`, `CardSources`, `isFromSameDigimon`, `isFromDigimon` payload로 stack | enum만 존재. source 추가 primitive가 해당 payload/timing을 일반화하지 않음 | `needs-review` |
-| `OnDeclaration` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/TurnStateMachine.cs`, `Permanent.cs`, `CardSource.cs`의 declarable skill list와 command 선택 | enum만 존재. 선언형 효과 legal action/decision boundary와 once-per-turn 사용 등록이 일반화되지 않음 | `needs-review` |
-| `OnDigivolutionCardDiscarded` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `TrashDigivolutionCards`가 `WhenWouldDigivolutionCardDiscarded` cut-in 후 실제 trash 대상 snapshot을 `DiscardedCards` payload로 stack | enum만 존재. source trash primitive가 would/actual timing과 rollback/resume을 일반화하지 않음 | `needs-review` |
-| `OnDiscardLibrary` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 library trash flow가 `DiscardedCards`, `CardEffect` payload로 stack | enum만 존재. deck trash primitive와 mill event timing 연결 미완성 | `needs-review` |
-| `OnEndBattle` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `BattleClass`가 winner/loser snapshot, loser card, tie 여부, battle object payload로 stack | 일부 attack cleanup은 있으나 full original battle payload와 end-battle trigger stack은 일반화되지 않음 | `needs-review` |
-| `OnEnterFieldAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `PlayCardClass`가 `OnEnterFieldHashtable`로 permanent, evo roots, old levels, root, DigiXros/Assembly count, source effect를 보존 | ST2/ST3 일부는 `WhenDigivolving` compatibility로 매핑했지만 full on-play/on-enter/on-digivolve source payload는 미완성 | `needs-review` |
-| `OnLeaveFieldAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` destroy/bounce/return/remove-field flows와 `CardObjectController`가 leave-field timing을 stack | 일부 deletion flow는 있으나 모든 leave-field reason/top/source/payload를 포괄하지 않음 | `needs-review` |
+| `None` | `NeedsSourceReview` | `AutoProcessing.EndTurnProcess`, `CardController.UseOptionClass`, `CardSource.CanNotBeAffected`, 다수 `EffectList(EffectTiming.None)` | continuous descriptor는 field/inherited 중심으로 부분 구현. player/hand/trash/executing/option-resolution source 범위 미완성 | `blocked` |
+| `OnAddDigivolutionCards` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/Permanent.cs`에서 source 추가 후 `Permanent`, `CardEffect`, `CardSources`, `isFromSameDigimon`, `isFromDigimon` payload로 stack | enum만 존재. source 추가 primitive가 해당 payload/timing을 일반화하지 않음 | `blocked` |
+| `OnDeclaration` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/TurnStateMachine.cs`, `Permanent.cs`, `CardSource.cs`의 declarable skill list와 command 선택 | enum만 존재. 선언형 효과 legal action/decision boundary와 once-per-turn 사용 등록이 일반화되지 않음 | `blocked` |
+| `OnDigivolutionCardDiscarded` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `TrashDigivolutionCards`가 `WhenWouldDigivolutionCardDiscarded` cut-in 후 실제 trash 대상 snapshot을 `DiscardedCards` payload로 stack | enum만 존재. source trash primitive가 would/actual timing과 rollback/resume을 일반화하지 않음 | `blocked` |
+| `OnDiscardLibrary` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 library trash flow가 `DiscardedCards`, `CardEffect` payload로 stack | enum만 존재. deck trash primitive와 mill event timing 연결 미완성 | `blocked` |
+| `OnEndBattle` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `BattleClass`가 winner/loser snapshot, loser card, tie 여부, battle object payload로 stack | 일부 attack cleanup은 있으나 full original battle payload와 end-battle trigger stack은 일반화되지 않음 | `blocked` |
+| `OnEnterFieldAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`의 `PlayCardClass`가 `OnEnterFieldHashtable`로 permanent, evo roots, old levels, root, DigiXros/Assembly count, source effect를 보존 | ST2/ST3 일부는 `WhenDigivolving` compatibility로 매핑했지만 full on-play/on-enter/on-digivolve source payload는 미완성 | `blocked` |
+| `OnLeaveFieldAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` destroy/bounce/return/remove-field flows와 `CardObjectController`가 leave-field timing을 stack | 일부 deletion flow는 있으나 모든 leave-field reason/top/source/payload를 포괄하지 않음 | `blocked` |
 
 ## Source Mapping Notes
 

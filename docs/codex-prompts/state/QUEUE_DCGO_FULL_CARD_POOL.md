@@ -1,4 +1,4 @@
-# DCGO Full Card Pool Queue
+﻿# DCGO Full Card Pool Queue
 
 상태 값: `todo`, `in-progress`, `done`, `blocked`, `needs-review`, `support`.
 
@@ -20,6 +20,7 @@
 | 55B | done | prompts/55B_counter_source_collection_attack_stage_ordering_correction.md | counter source collection and attack stage ordering correction |
 | 55C | done | prompts/55C_counter_resolution_target_switch_event_semantic_correction.md | counter resolution 시점, optional decline 진행, source coverage, target-switch event payload 보정 |
 | 55D | done | prompts/55D_counter_execution_persistence_target_switch_stage_resume_correction.md | counter 실행 persistence와 target-switch stage resume 보정 |
+| 55E | done | prompts/55E_attack_counter_corrective_audit.md | 55D attack/counter persistence와 target-switch stage-resume coverage 고정 |
 | 61 | done | prompts/61_dcgo_source_snapshot_pin.md | DCGO2/DCGO 원본 revision 고정. 현재 로컬 manifest snapshot 사용자 승인 완료 |
 | 62 | done | prompts/62_full_card_asset_manifest.md | 전체 CardBaseEntity asset manifest 생성 완료. 8,186 gameplay records, manifest SHA-256 `a254765908d21d436dece44216858cd0e70ec14776a4107f9532a4df969ad269` |
 | 63 | done | prompts/63_full_mechanic_effect_inventory.md | 전체 mechanic/effect timing inventory 생성 완료. inventory SHA-256 `e8fd1723d947f14e49cdc1250e0e146092a1e7010cce2833b5dde4f28e836c27`, missing/partial candidates 64 |
@@ -32,6 +33,7 @@
 | 64 | done | prompts/64_full_per_card_source_scaffold.md | 전체 카드/source-effect 파일 scaffold |
 | 65 | done | prompts/65_full_card_pool_validation_baseline.md | 전체 카드풀 explicit Unsupported baseline |
 | 66 | done | prompts/66_generate_full_card_porting_batches.md | 실제 카드 포팅 subqueue 자동 생성 |
+| 66A | done | prompts/66A_dependency_aware_goal_scheduler.md | generated full-card-porting subqueue dependency-aware scheduler와 blocked/needs-review 정책 보정 |
 | 67 | todo | prompts/67_full_card_porting_batch_completion_audit.md | 생성된 batch queue 완료 감사 |
 | 68 | todo | prompts/68_full_card_pool_source_alignment_audit.md | 전체 source/asset/registry/status 정합성 |
 | 69 | todo | prompts/69_full_card_pool_golden_parity_coverage.md | 전체 mechanic family golden/parity coverage |

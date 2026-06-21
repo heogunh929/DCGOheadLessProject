@@ -72,8 +72,19 @@ public sealed class Tier1PrimitiveService
     public MoveCardResult MoveCard(GameState state, MoveCardCommand command) =>
         _zoneMover.MoveCard(state, command);
 
-    public DrawResult Draw(GameState state, PlayerId player, int count, GameTrace? trace = null) =>
-        _drawService.DrawCards(state, player, count, trace);
+    public DrawResult Draw(GameState state, PlayerId player, int count, GameTrace? trace = null)
+    {
+        var result = _drawService.DrawCards(state, player, count, trace);
+        QueueCardsAddedToHandEvents(
+            state,
+            player,
+            result.DrawnCards,
+            sourceZone: Zone.Deck,
+            sourceCard: null,
+            sourcePermanent: null,
+            isDraw: true);
+        return result;
+    }
 
     public void Shuffle(GameState state, PlayerId player, Zone zone, IDeterministicRng rng)
     {
@@ -148,6 +159,174 @@ public sealed class Tier1PrimitiveService
         }
 
         return results;
+    }
+
+    public IReadOnlyList<MoveCardResult> AddCardsToHandWithEvents(
+        GameState state,
+        PlayerId player,
+        IEnumerable<CardInstanceId> cards,
+        Zone sourceZone,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        bool isDraw = false,
+        GameTrace? trace = null)
+    {
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        _ = state.GetPlayer(player);
+        foreach (var card in cardArray)
+        {
+            if (state.Cards[card].Owner != player)
+            {
+                throw new DomainException($"Card '{card}' is owned by '{state.Cards[card].Owner}', not '{player}'.");
+            }
+        }
+
+        if (sourceZone == Zone.Trash)
+        {
+            QueueRuleEvent(
+                state,
+                EffectTiming.OnReturnCardsToHandFromTrash,
+                player,
+                ZoneEventPayload(
+                    cardArray,
+                    sourceZone,
+                    Zone.Hand,
+                    sourceCard,
+                    sourcePermanent,
+                    extra: new Dictionary<string, object?>
+                    {
+                        ["CardSources"] = cardArray,
+                    }));
+        }
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in cardArray)
+        {
+            var command = new MoveCardCommand(card, sourceZone, Zone.Hand, MoveReason.Effect, FaceUp: true);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"add-hand:{player.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        QueueCardsAddedToHandEvents(
+            state,
+            player,
+            cardArray,
+            sourceZone,
+            sourceCard,
+            sourcePermanent,
+            isDraw);
+        return moves;
+    }
+
+    public IReadOnlyList<MoveCardResult> DiscardHandWithEvents(
+        GameState state,
+        PlayerId player,
+        IEnumerable<CardInstanceId> cards,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
+    {
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        var playerState = state.GetPlayer(player);
+        foreach (var card in cardArray)
+        {
+            if (!playerState.Hand.Contains(card))
+            {
+                throw new DomainException($"Card '{card}' is not in player '{player}' hand.");
+            }
+        }
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in cardArray)
+        {
+            var command = new MoveCardCommand(card, Zone.Hand, Zone.Trash, MoveReason.Effect, FaceUp: true);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"discard-hand:{player.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnDiscardHand,
+            player,
+            ZoneEventPayload(
+                cardArray,
+                Zone.Hand,
+                Zone.Trash,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["DiscardedCards"] = cardArray,
+                    ["CardSources"] = cardArray,
+                }));
+        return moves;
+    }
+
+    public IReadOnlyList<MoveCardResult> ReturnTrashCardsToLibraryWithEvents(
+        GameState state,
+        PlayerId player,
+        IEnumerable<CardInstanceId> cards,
+        bool toTop,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
+    {
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        var playerState = state.GetPlayer(player);
+        foreach (var card in cardArray)
+        {
+            if (!playerState.Trash.Contains(card))
+            {
+                throw new DomainException($"Card '{card}' is not in player '{player}' trash.");
+            }
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnReturnCardsToLibraryFromTrash,
+            player,
+            ZoneEventPayload(
+                cardArray,
+                Zone.Trash,
+                Zone.Deck,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["CardSources"] = cardArray,
+                    ["ToTop"] = toTop,
+                }));
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in cardArray)
+        {
+            var command = new MoveCardCommand(card, Zone.Trash, Zone.Deck, MoveReason.Effect, ToTop: toTop, FaceUp: false);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"return-trash-library:{player.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        return moves;
     }
 
     public MoveCardResult TrashCard(
@@ -311,6 +490,65 @@ public sealed class Tier1PrimitiveService
         return results;
     }
 
+    public IReadOnlyList<MoveCardResult> ReturnDigivolutionSourcesToDeckBottomWithEvents(
+        GameState state,
+        PermanentId permanentId,
+        IEnumerable<CardInstanceId> cards,
+        CardInstanceId? sourceCard = null,
+        GameTrace? trace = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        foreach (var card in cardArray)
+        {
+            if (!permanent.SourceCardIds.Contains(card))
+            {
+                throw new DomainException($"Card '{card}' is not a digivolution source under permanent '{permanentId}'.");
+            }
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnDigivolutionCardReturnToDeckBottom,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                cardArray,
+                Zone.EvolutionSources,
+                Zone.Deck,
+                sourceCard,
+                permanentId,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanentId,
+                    ["DeckBottomCards"] = cardArray,
+                    ["CardSources"] = cardArray,
+                }));
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in cardArray)
+        {
+            var command = new MoveCardCommand(
+                card,
+                Zone.EvolutionSources,
+                Zone.Deck,
+                MoveReason.Effect,
+                SourcePermanent: permanentId,
+                ToTop: false,
+                FaceUp: false);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"return-source-deck-bottom:{permanentId.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        return moves;
+    }
+
     public DeletePermanentResult DeletePermanent(GameState state, PermanentId permanent, GameTrace? trace = null) =>
         DestroyPermanent(state, permanent, trace);
 
@@ -362,6 +600,96 @@ public sealed class Tier1PrimitiveService
         trace?.AddMove($"return-top-to-hand:{permanentId.Value}:{topCard.Value}", topBefore!, state, topCommand, topResult);
 
         return new ReturnPermanentToHandResult(permanentId, topCard, sourceCards, topResult, sourceMoves);
+    }
+
+    public ReturnPermanentToHandResult ReturnPermanentToHandWithEvents(
+        GameState state,
+        PermanentId permanentId,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        var topCard = permanent.TopCardId;
+        var sourceCards = permanent.SourceCardIds.ToArray();
+        var controller = permanent.ControllerPlayerId;
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.WhenReturntoHandAnyone,
+            controller,
+            ZoneEventPayload(
+                new[] { topCard },
+                permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea,
+                Zone.Hand,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanentId,
+                    ["ReturnedTopCard"] = topCard,
+                    ["CardSources"] = new[] { topCard },
+                    ["WouldReturn"] = true,
+                }));
+
+        var result = ReturnPermanentToHand(state, permanentId, trace);
+
+        var postPayload = ZoneEventPayload(
+            new[] { result.ReturnedTopCard },
+            permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea,
+            Zone.Hand,
+            sourceCard,
+            sourcePermanent,
+            extra: new Dictionary<string, object?>
+            {
+                ["Permanent"] = permanentId,
+                ["ReturnedTopCard"] = result.ReturnedTopCard,
+                ["TrashedSourceCards"] = sourceCards,
+                ["CardSources"] = new[] { result.ReturnedTopCard },
+            });
+        QueueRuleEvent(state, EffectTiming.OnPermamemtReturnedToHand, controller, postPayload);
+        QueueRuleEvent(state, EffectTiming.OnLeaveFieldAnyone, controller, postPayload);
+        return result;
+    }
+
+    public MoveCardResult TrashTopCardWithEvents(
+        GameState state,
+        PermanentId permanentId,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        var topCard = permanent.TopCardId;
+        var zone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        QueueRuleEvent(
+            state,
+            EffectTiming.WhenTopCardTrashed,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                new[] { topCard },
+                zone,
+                Zone.Trash,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanentId,
+                    ["CardSources"] = new[] { topCard },
+                    ["TopCard"] = topCard,
+                }));
+
+        var command = new MoveCardCommand(
+            topCard,
+            zone,
+            Zone.Trash,
+            MoveReason.Effect,
+            SourcePermanent: permanentId,
+            FaceUp: true);
+        var before = trace is null ? null : state.Clone();
+        var result = _zoneMover.MoveCard(state, command);
+        trace?.AddMove($"trash-top-card:{permanentId.Value}:{topCard.Value}", before!, state, command, result);
+        return result;
     }
 
     public DeletePermanentResult DestroyPermanent(GameState state, PermanentId permanentId, GameTrace? trace = null)
@@ -974,6 +1302,96 @@ public sealed class Tier1PrimitiveService
         }
 
         throw new DomainException($"Player '{player}' has no opponent.");
+    }
+
+    private static void QueueCardsAddedToHandEvents(
+        GameState state,
+        PlayerId player,
+        IReadOnlyList<CardInstanceId> cards,
+        Zone sourceZone,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        bool isDraw)
+    {
+        if (cards.Count == 0)
+        {
+            return;
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnAddHand,
+            player,
+            ZoneEventPayload(
+                cards,
+                sourceZone,
+                Zone.Hand,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Players"] = new[] { player },
+                    ["CardSources"] = cards.ToArray(),
+                    ["IsDraw"] = isDraw,
+                }));
+
+        if (!isDraw)
+        {
+            return;
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnDraw,
+            player,
+            ZoneEventPayload(
+                cards,
+                sourceZone,
+                Zone.Hand,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["DrawnCards"] = cards.ToArray(),
+                    ["CardSources"] = cards.ToArray(),
+                }));
+    }
+
+    private static void QueueRuleEvent(
+        GameState state,
+        EffectTiming timing,
+        PlayerId player,
+        IReadOnlyDictionary<string, object?> payload) =>
+        state.RuntimeRules.EnqueueRuleEvent(timing, player, payload);
+
+    private static Dictionary<string, object?> ZoneEventPayload(
+        IReadOnlyList<CardInstanceId> cards,
+        Zone sourceZone,
+        Zone destinationZone,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        IReadOnlyDictionary<string, object?>? extra = null)
+    {
+        var payload = new Dictionary<string, object?>(StringComparer.Ordinal)
+        {
+            ["Cards"] = cards.ToArray(),
+            ["CardSources"] = cards.ToArray(),
+            ["SourceZone"] = sourceZone,
+            ["DestinationZone"] = destinationZone,
+            ["CardEffect"] = sourceCard,
+            ["SourceCard"] = sourceCard,
+            ["SourcePermanent"] = sourcePermanent,
+        };
+
+        if (extra is not null)
+        {
+            foreach (var pair in extra)
+            {
+                payload[pair.Key] = pair.Value;
+            }
+        }
+
+        return payload;
     }
 
     private static SelectableTarget CreateCardTarget(GameState state, CardInstanceId card)

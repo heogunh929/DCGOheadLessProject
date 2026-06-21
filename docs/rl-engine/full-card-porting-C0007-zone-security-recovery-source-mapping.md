@@ -4,7 +4,7 @@
 
 `C0007_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개는 모두 로컬 DCGO 원본에서 확인되지만, 안전한 runnable card body 포팅은 `L0006_zone_security_recovery`와 이전 common-layer blocker가 먼저 해결되어야 한다.
 
-Queue status: needs-review
+Queue status: blocked
 
 이번 작업에서는 카드 효과를 추측 구현하지 않는다. `CardId` 분기, Catalog 동작 삽입, legacy no-op wrapper, source body 통합 파일을 만들지 않는다. 각 source effect는 원본 경로와 variant-aware asset identity에 연결된 추적 가능한 blocker로 유지한다.
 
@@ -27,31 +27,31 @@ Queue status: needs-review
 
 | DefinitionStableId | SourceEffectClassName | Asset path | Decision |
 | --- | --- | --- | --- |
-| `AD1-019#7862@base` | `AD1_019` | `DCGO/Assets/CardBaseEntity/AD1/Blue/Tamer/AD1_019.asset` | `needs-review` |
-| `AD1-022#7864@base` | `AD1_022` | `DCGO/Assets/CardBaseEntity/AD1/Green/AD1_022.asset` | `needs-review` |
-| `BT10-006#2038@base` | `BT10_006` | `DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006.asset` | `needs-review` |
-| `BT10-006#4287@P0` | `BT10_006` | `DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006_P0.asset` | `needs-review` |
-| `BT10-014#2048@base` | `BT10_014` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_014.asset` | `needs-review` |
-| `BT10-014#4298@P0` | `BT10_014` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_014_P0.asset` | `needs-review` |
-| `BT10-018#2053@base` | `BT10_018` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_018.asset` | `needs-review` |
-| `BT10-018#4301@P1` | `BT10_018` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_018_P1.asset` | `needs-review` |
-| `BT10-020#2055@base` | `BT10_020` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_020.asset` | `needs-review` |
-| `BT10-020#4304@P0` | `BT10_020` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_020_P0.asset` | `needs-review` |
-| `BT10-025#2062@base` | `BT10_025` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_025.asset` | `needs-review` |
-| `BT10-028#2066@base` | `BT10_028` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028.asset` | `needs-review` |
-| `BT10-028#4308@P0` | `BT10_028` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028_P0.asset` | `needs-review` |
-| `BT10-030#2068@base` | `BT10_030` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_030.asset` | `needs-review` |
-| `BT10-042#2081@base` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042.asset` | `needs-review` |
-| `BT10-042#2082@P1` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P1.asset` | `needs-review` |
-| `BT10-042#4313@P2` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P2.asset` | `needs-review` |
-| `BT10-042#4314@P3` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P3.asset` | `needs-review` |
-| `BT10-042#4315@P4` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P4.asset` | `needs-review` |
-| `BT10-042#4316@P5` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P5.asset` | `needs-review` |
-| `BT10-042#8097@P6` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P6.asset` | `needs-review` |
+| `AD1-019#7862@base` | `AD1_019` | `DCGO/Assets/CardBaseEntity/AD1/Blue/Tamer/AD1_019.asset` | `blocked` |
+| `AD1-022#7864@base` | `AD1_022` | `DCGO/Assets/CardBaseEntity/AD1/Green/AD1_022.asset` | `blocked` |
+| `BT10-006#2038@base` | `BT10_006` | `DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006.asset` | `blocked` |
+| `BT10-006#4287@P0` | `BT10_006` | `DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006_P0.asset` | `blocked` |
+| `BT10-014#2048@base` | `BT10_014` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_014.asset` | `blocked` |
+| `BT10-014#4298@P0` | `BT10_014` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_014_P0.asset` | `blocked` |
+| `BT10-018#2053@base` | `BT10_018` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_018.asset` | `blocked` |
+| `BT10-018#4301@P1` | `BT10_018` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_018_P1.asset` | `blocked` |
+| `BT10-020#2055@base` | `BT10_020` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_020.asset` | `blocked` |
+| `BT10-020#4304@P0` | `BT10_020` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_020_P0.asset` | `blocked` |
+| `BT10-025#2062@base` | `BT10_025` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_025.asset` | `blocked` |
+| `BT10-028#2066@base` | `BT10_028` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028.asset` | `blocked` |
+| `BT10-028#4308@P0` | `BT10_028` | `DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028_P0.asset` | `blocked` |
+| `BT10-030#2068@base` | `BT10_030` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_030.asset` | `blocked` |
+| `BT10-042#2081@base` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042.asset` | `blocked` |
+| `BT10-042#2082@P1` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P1.asset` | `blocked` |
+| `BT10-042#4313@P2` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P2.asset` | `blocked` |
+| `BT10-042#4314@P3` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P3.asset` | `blocked` |
+| `BT10-042#4315@P4` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P4.asset` | `blocked` |
+| `BT10-042#4316@P5` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P5.asset` | `blocked` |
+| `BT10-042#8097@P6` | `BT10_042` | `DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_042_P6.asset` | `blocked` |
 
 ## Common-layer Blockers
 
-- `L0006_zone_security_recovery` is still `needs-review`; C0007 effects that move cards through hand, trash, security, or digivolution sources cannot be safely implemented yet.
+- `L0006_zone_security_recovery` is still `blocked`; C0007 effects that move cards through hand, trash, security, or digivolution sources cannot be safely implemented yet.
 - Earlier timing blockers still apply: `OnEnterFieldAnyone`, `OnDigivolutionCardDiscarded`, `OnDeclaration`, `OnEndBattle`, `OnDestroyedAnyone`, `OnAddDigivolutionCards`, and `WhenUntapAnyone` require source-aligned payloads and source-zone snapshots.
 - Draw effects must not call primitive draw and skip `OnAddHand`/`OnDraw` ordering.
 - Suspend/unsuspend, blocker, Blitz, Save, SecurityAttack modifiers, and disable-effect logic need common mechanics; do not hide them as partial no-op descriptors.

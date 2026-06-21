@@ -4,7 +4,7 @@
 
 `C0022_zone_security_recovery`는 `done`으로 처리할 수 있는 카드 구현 batch가 아니다. DCGO 원본 source body 10개와 asset identity 20개는 모두 확인했지만, 현재 RL engine의 공통 zone/security/recovery layer만으로는 효과 의미를 안전하게 실행할 수 없다. `L0006_zone_security_recovery`의 tamer security play, option security reuse, reveal/search bottom-deck ordering, hand discard cost continuation, temporary play-cost modifier, inherited/static source role, security stack mutation, duration cleanup, battle-deletion payload가 먼저 source-aligned로 정리되어야 한다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,30 +27,30 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT15-082#3217@base` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082.asset` | `needs-review` |
-| `BT15-082#3218@P1` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P1.asset` | `needs-review` |
-| `BT15-082#4756@P0` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P0.asset` | `needs-review` |
-| `BT15-082#4757@P2` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P2.asset` | `needs-review` |
-| `BT15-084#3221@base` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084.asset` | `needs-review` |
-| `BT15-084#3222@P1` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P1.asset` | `needs-review` |
-| `BT15-084#4759@P0` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P0.asset` | `needs-review` |
-| `BT15-084#4760@P2` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P2.asset` | `needs-review` |
-| `BT15-097#3238@base` | `BT15_097` | `DCGO/Assets/CardBaseEntity/BT15/Black/Option/BT15_097.asset` | `needs-review` |
-| `BT16-006#3310@base` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006.asset` | `needs-review` |
-| `BT16-006#3311@P1` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006_P1.asset` | `needs-review` |
-| `BT16-006#4778@P0` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006_P0.asset` | `needs-review` |
-| `BT16-020#3328@base` | `BT16_020` | `DCGO/Assets/CardBaseEntity/BT16/Blue/Digimon/BT16_020.asset` | `needs-review` |
-| `BT16-029#3342@base` | `BT16_029` | `DCGO/Assets/CardBaseEntity/BT16/Yellow/Digimon/BT16_029.asset` | `needs-review` |
-| `BT16-037#3351@base` | `BT16_037` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_037.asset` | `needs-review` |
-| `BT16-042#3356@base` | `BT16_042` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_042.asset` | `needs-review` |
-| `BT16-047#3362@base` | `BT16_047` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_047.asset` | `needs-review` |
-| `BT16-047#4800@P0` | `BT16_047` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_047_P0.asset` | `needs-review` |
-| `BT16-048#3363@base` | `BT16_048` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_048.asset` | `needs-review` |
-| `BT16-048#3364@P1` | `BT16_048` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_048_P1.asset` | `needs-review` |
+| `BT15-082#3217@base` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082.asset` | `blocked` |
+| `BT15-082#3218@P1` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P1.asset` | `blocked` |
+| `BT15-082#4756@P0` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P0.asset` | `blocked` |
+| `BT15-082#4757@P2` | `BT15_082` | `DCGO/Assets/CardBaseEntity/BT15/Red/Tamer/BT15_082_P2.asset` | `blocked` |
+| `BT15-084#3221@base` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084.asset` | `blocked` |
+| `BT15-084#3222@P1` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P1.asset` | `blocked` |
+| `BT15-084#4759@P0` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P0.asset` | `blocked` |
+| `BT15-084#4760@P2` | `BT15_084` | `DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P2.asset` | `blocked` |
+| `BT15-097#3238@base` | `BT15_097` | `DCGO/Assets/CardBaseEntity/BT15/Black/Option/BT15_097.asset` | `blocked` |
+| `BT16-006#3310@base` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006.asset` | `blocked` |
+| `BT16-006#3311@P1` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006_P1.asset` | `blocked` |
+| `BT16-006#4778@P0` | `BT16_006` | `DCGO/Assets/CardBaseEntity/BT16/Purple/DigiEgg/BT16_006_P0.asset` | `blocked` |
+| `BT16-020#3328@base` | `BT16_020` | `DCGO/Assets/CardBaseEntity/BT16/Blue/Digimon/BT16_020.asset` | `blocked` |
+| `BT16-029#3342@base` | `BT16_029` | `DCGO/Assets/CardBaseEntity/BT16/Yellow/Digimon/BT16_029.asset` | `blocked` |
+| `BT16-037#3351@base` | `BT16_037` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_037.asset` | `blocked` |
+| `BT16-042#3356@base` | `BT16_042` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_042.asset` | `blocked` |
+| `BT16-047#3362@base` | `BT16_047` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_047.asset` | `blocked` |
+| `BT16-047#4800@P0` | `BT16_047` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_047_P0.asset` | `blocked` |
+| `BT16-048#3363@base` | `BT16_048` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_048.asset` | `blocked` |
+| `BT16-048#3364@P1` | `BT16_048` | `DCGO/Assets/CardBaseEntity/BT16/Green/Digimon/BT16_048_P1.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0022 depends on hand, security, deck-bottom, field, trash, and bottom-deck movement payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0022 depends on hand, security, deck-bottom, field, trash, and bottom-deck movement payloads.
 - `BT15_082` and `BT15_084` require `PlaySelfTamerSecurityEffect`, Tamer start-turn memory, and security stack mutation triggers before they can be runnable.
 - `BT15_097` requires security option activation to reuse the main option body without duplicating or guessing `OptionSkill`.
 - `BT16_029`, `BT16_037`, and earlier reveal helpers require multi-condition reveal/search with source helper bottom-deck behavior.

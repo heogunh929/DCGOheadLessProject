@@ -4,7 +4,7 @@
 
 `C0018_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개와 27개 asset identity는 로컬 DCGO 원본에서 확인했다. 다만 runnable card body로 옮기려면 `L0006_zone_security_recovery`와 함께 cost-sum multi-selection, reveal/play-from-library, library discard events, security top-to-hand plus security reduction, digivolution-source trash, suspend-cost, hand discard cost, inherited deletion source validation, and security Tamer play 공통 계층이 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,37 +27,37 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT14-068#2994@base` | `BT14_068` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_068.asset` | `needs-review` |
-| `BT14-068#2995@P1` | `BT14_068` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_068_P1.asset` | `needs-review` |
-| `BT14-077#3005@base` | `BT14_077` | `DCGO/Assets/CardBaseEntity/BT14/Purple/Digimon/BT14_077.asset` | `needs-review` |
-| `BT14-082#3011@base` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082.asset` | `needs-review` |
-| `BT14-082#3012@P1` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082_P1.asset` | `needs-review` |
-| `BT14-082#4692@P0` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082_P0.asset` | `needs-review` |
-| `BT14-083#3013@base` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083.asset` | `needs-review` |
-| `BT14-083#3014@P1` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083_P1.asset` | `needs-review` |
-| `BT14-083#4693@P0` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083_P0.asset` | `needs-review` |
-| `BT14-084#3015@base` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084.asset` | `needs-review` |
-| `BT14-084#3016@P1` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P1.asset` | `needs-review` |
-| `BT14-084#4694@P0` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P0.asset` | `needs-review` |
-| `BT14-085#3017@base` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085.asset` | `needs-review` |
-| `BT14-085#3018@P1` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P1.asset` | `needs-review` |
-| `BT14-085#4695@P0` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P0.asset` | `needs-review` |
-| `BT14-085#4696@P2` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P2.asset` | `needs-review` |
-| `BT15-001#3114@base` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001.asset` | `needs-review` |
-| `BT15-001#3115@P1` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001_P1.asset` | `needs-review` |
-| `BT15-001#4708@P0` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001_P0.asset` | `needs-review` |
-| `BT15-002#3116@base` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002.asset` | `needs-review` |
-| `BT15-002#3117@P1` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002_P1.asset` | `needs-review` |
-| `BT15-002#4709@P0` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002_P0.asset` | `needs-review` |
-| `BT15-006#3124@base` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006.asset` | `needs-review` |
-| `BT15-006#3125@P1` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006_P1.asset` | `needs-review` |
-| `BT15-006#4713@P0` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006_P0.asset` | `needs-review` |
-| `BT15-007#3126@base` | `BT15_007` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_007.asset` | `needs-review` |
-| `BT15-007#3127@P1` | `BT15_007` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_007_P1.asset` | `needs-review` |
+| `BT14-068#2994@base` | `BT14_068` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_068.asset` | `blocked` |
+| `BT14-068#2995@P1` | `BT14_068` | `DCGO/Assets/CardBaseEntity/BT14/Black/Digimon/BT14_068_P1.asset` | `blocked` |
+| `BT14-077#3005@base` | `BT14_077` | `DCGO/Assets/CardBaseEntity/BT14/Purple/Digimon/BT14_077.asset` | `blocked` |
+| `BT14-082#3011@base` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082.asset` | `blocked` |
+| `BT14-082#3012@P1` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082_P1.asset` | `blocked` |
+| `BT14-082#4692@P0` | `BT14_082` | `DCGO/Assets/CardBaseEntity/BT14/Red/Tamer/BT14_082_P0.asset` | `blocked` |
+| `BT14-083#3013@base` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083.asset` | `blocked` |
+| `BT14-083#3014@P1` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083_P1.asset` | `blocked` |
+| `BT14-083#4693@P0` | `BT14_083` | `DCGO/Assets/CardBaseEntity/BT14/Blue/Tamer/BT14_083_P0.asset` | `blocked` |
+| `BT14-084#3015@base` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084.asset` | `blocked` |
+| `BT14-084#3016@P1` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P1.asset` | `blocked` |
+| `BT14-084#4694@P0` | `BT14_084` | `DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P0.asset` | `blocked` |
+| `BT14-085#3017@base` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085.asset` | `blocked` |
+| `BT14-085#3018@P1` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P1.asset` | `blocked` |
+| `BT14-085#4695@P0` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P0.asset` | `blocked` |
+| `BT14-085#4696@P2` | `BT14_085` | `DCGO/Assets/CardBaseEntity/BT14/Green/Tamer/BT14_085_P2.asset` | `blocked` |
+| `BT15-001#3114@base` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001.asset` | `blocked` |
+| `BT15-001#3115@P1` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001_P1.asset` | `blocked` |
+| `BT15-001#4708@P0` | `BT15_001` | `DCGO/Assets/CardBaseEntity/BT15/Red/DigiEgg/BT15_001_P0.asset` | `blocked` |
+| `BT15-002#3116@base` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002.asset` | `blocked` |
+| `BT15-002#3117@P1` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002_P1.asset` | `blocked` |
+| `BT15-002#4709@P0` | `BT15_002` | `DCGO/Assets/CardBaseEntity/BT15/Blue/DigiEgg/BT15_002_P0.asset` | `blocked` |
+| `BT15-006#3124@base` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006.asset` | `blocked` |
+| `BT15-006#3125@P1` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006_P1.asset` | `blocked` |
+| `BT15-006#4713@P0` | `BT15_006` | `DCGO/Assets/CardBaseEntity/BT15/Purple/DigiEgg/BT15_006_P0.asset` | `blocked` |
+| `BT15-007#3126@base` | `BT15_007` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_007.asset` | `blocked` |
+| `BT15-007#3127@P1` | `BT15_007` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_007_P1.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0018 uses library discard, security add/remove, trash-to-hand, digivolution-source trash, and hand discard movement events.
+- `L0006_zone_security_recovery` remains `blocked`; C0018 uses library discard, security add/remove, trash-to-hand, digivolution-source trash, and hand discard movement events.
 - `BT14_068` and `BT14_077` have duplicated On Play/When Digivolving or end-turn reveal descriptors whose identity must remain separate for ordering/replay.
 - `BT14_068` and `BT14_067`-like cost-sum logic require preselected-list legality, not a simple max-count target selection.
 - `BT14_084` moves the top security card to hand before `IReduceSecurity`; this order and the resulting `OnLoseSecurity`/`OnAddHand` interleaving must match source.

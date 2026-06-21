@@ -4,7 +4,7 @@
 
 `C0023_zone_security_recovery`는 source body 10개와 asset identity 22개를 확인했지만, 현재 공통 layer만으로 runnable card body를 만들면 원본 의미가 변형된다. 이 batch는 `L0006_zone_security_recovery` 위에 deck top/bottom ordering, security stack insertion/trash, source removal, dedigivolve, by-effect play payload, hatch, option security reuse, lowest-DP multi-card bottom-deck ordering, digivolution-card-origin play trigger, and trash digivolve continuation이 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. `BT16_082`처럼 한 source effect가 많은 variant를 갖더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 각각 보존한다. Catalog나 core service에 특정 `CardId` 분기를 넣지 않는다.
 
@@ -27,32 +27,32 @@ No CardId branch. `BT16_082`처럼 한 source effect가 많은 variant를 갖더
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT16-054#3371@base` | `BT16_054` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_054.asset` | `needs-review` |
-| `BT16-056#3373@base` | `BT16_056` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_056.asset` | `needs-review` |
-| `BT16-060#3377@base` | `BT16_060` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_060.asset` | `needs-review` |
-| `BT16-068#3386@base` | `BT16_068` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_068.asset` | `needs-review` |
-| `BT16-075#3393@base` | `BT16_075` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_075.asset` | `needs-review` |
-| `BT16-075#4807@P0` | `BT16_075` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_075_P0.asset` | `needs-review` |
-| `BT16-078#3397@base` | `BT16_078` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_078.asset` | `needs-review` |
-| `BT16-078#4810@P0` | `BT16_078` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_078_P0.asset` | `needs-review` |
-| `BT16-082#3403@base` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082.asset` | `needs-review` |
-| `BT16-082#3404@P1` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P1.asset` | `needs-review` |
-| `BT16-082#4812@P0` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P0.asset` | `needs-review` |
-| `BT16-082#4813@P2` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P2.asset` | `needs-review` |
-| `BT16-082#4814@P3` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P3.asset` | `needs-review` |
-| `BT16-082#4815@P4` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P4.asset` | `needs-review` |
-| `BT16-082#8209@P5` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P5.asset` | `needs-review` |
-| `BT16-082#8210@P6` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P6.asset` | `needs-review` |
-| `BT16-082#8211@P7` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P7.asset` | `needs-review` |
-| `BT16-095#3423@base` | `BT16_095` | `DCGO/Assets/CardBaseEntity/BT16/Green/Option/BT16_095.asset` | `needs-review` |
-| `BT17-002#3542@base` | `BT17_002` | `DCGO/Assets/CardBaseEntity/BT17/Blue/DigiEgg/BT17_002.asset` | `needs-review` |
-| `BT17-002#4834@P0` | `BT17_002` | `DCGO/Assets/CardBaseEntity/BT17/Blue/DigiEgg/BT17_002_P0.asset` | `needs-review` |
-| `BT17-006#3546@base` | `BT17_006` | `DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006.asset` | `needs-review` |
-| `BT17-006#4838@P0` | `BT17_006` | `DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006_P0.asset` | `needs-review` |
+| `BT16-054#3371@base` | `BT16_054` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_054.asset` | `blocked` |
+| `BT16-056#3373@base` | `BT16_056` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_056.asset` | `blocked` |
+| `BT16-060#3377@base` | `BT16_060` | `DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_060.asset` | `blocked` |
+| `BT16-068#3386@base` | `BT16_068` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_068.asset` | `blocked` |
+| `BT16-075#3393@base` | `BT16_075` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_075.asset` | `blocked` |
+| `BT16-075#4807@P0` | `BT16_075` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_075_P0.asset` | `blocked` |
+| `BT16-078#3397@base` | `BT16_078` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_078.asset` | `blocked` |
+| `BT16-078#4810@P0` | `BT16_078` | `DCGO/Assets/CardBaseEntity/BT16/Purple/Digimon/BT16_078_P0.asset` | `blocked` |
+| `BT16-082#3403@base` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082.asset` | `blocked` |
+| `BT16-082#3404@P1` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P1.asset` | `blocked` |
+| `BT16-082#4812@P0` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P0.asset` | `blocked` |
+| `BT16-082#4813@P2` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P2.asset` | `blocked` |
+| `BT16-082#4814@P3` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P3.asset` | `blocked` |
+| `BT16-082#4815@P4` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P4.asset` | `blocked` |
+| `BT16-082#8209@P5` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P5.asset` | `blocked` |
+| `BT16-082#8210@P6` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P6.asset` | `blocked` |
+| `BT16-082#8211@P7` | `BT16_082` | `DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P7.asset` | `blocked` |
+| `BT16-095#3423@base` | `BT16_095` | `DCGO/Assets/CardBaseEntity/BT16/Green/Option/BT16_095.asset` | `blocked` |
+| `BT17-002#3542@base` | `BT17_002` | `DCGO/Assets/CardBaseEntity/BT17/Blue/DigiEgg/BT17_002.asset` | `blocked` |
+| `BT17-002#4834@P0` | `BT17_002` | `DCGO/Assets/CardBaseEntity/BT17/Blue/DigiEgg/BT17_002_P0.asset` | `blocked` |
+| `BT17-006#3546@base` | `BT17_006` | `DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006.asset` | `blocked` |
+| `BT17-006#4838@P0` | `BT17_006` | `DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006_P0.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0023 depends on field, source, security, trash, deck top, deck bottom, and breeding movement payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0023 depends on field, source, security, trash, deck top, deck bottom, and breeding movement payloads.
 - `BT16_054`, `BT16_060`, `BT16_082`, and `BT16_095` need explicit top/bottom deck order decisions before they can be runnable.
 - `BT16_056` requires safe movement of a permanent top card to security while preserving/removing digivolution sources and emitting the right `OnAddSecurity` payload.
 - `BT16_060` and `BT17_006` require dedigivolve/trash-digivolve primitives and source/trigger payloads, not card-specific shortcuts.

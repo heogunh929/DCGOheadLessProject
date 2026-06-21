@@ -2,53 +2,53 @@
 
 ## 결정
 
-`L0006_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch는 hand/trash/library/digivolution-source/top-card movement에 걸친 8개 timing을 포함한다. DCGO 원본은 각 timing마다 actual zone 이동 전후 순서, payload, cut-in 여부가 다르며, 현재 RL.Engine은 enum과 기본 `ZoneMover` 이동만으로 이 의미를 증명하지 못한다.
+`L0006_zone_security_recovery`는 `done`으로 처리한다.
 
-Queue status: needs-review
+이번 구현은 카드별 effect body를 만들지 않고, DCGO 원본의 hand/trash/library/digivolution-source/top-card 이동 timing을 headless engine의 공통 zone event boundary로 연결했다. 카드별 효과는 이후 C-batch의 각 카드 파일에서 구현해야 하며, core service 또는 Catalog에 CardId 분기를 추가하지 않는다.
 
-이 항목의 affected card는 core service, catalog, validator의 `CardId` 분기나 임시 workaround로 처리하지 않는다. 카드별 effect body는 원본 `CardEffect` 경로에 대응되는 파일에서만 구현한다.
+Queue status: done
 
-## Batch 범위
+Source evidence paths:
 
-| Timing | Batch status | Source evidence | RL.Engine status | Decision |
-| --- | --- | --- | --- | --- |
-| `OnAddHand` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardObjectController.cs` `AddHandCards` | enum은 있으나 `Players`, `CardEffect`, `CardSources` payload와 draw/trash/return 구분을 만드는 shared hand-add boundary가 없다. | `needs-review` |
-| `OnDigivolutionCardReturnToDeckBottom` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` source-to-bottom flow | enum은 있으나 `Permanent`, `DeckBottomCards`, `CardEffect` payload와 actual bottom return 전 trigger 순서가 공통화되지 않았다. | `needs-review` |
-| `OnDiscardHand` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` `IDiscardHands` | enum은 있으나 discard aggregation, `DiscardedCards`, source `CardEffect`, post-discard log/order가 공통 discard primitive에 연결되지 않았다. | `needs-review` |
-| `OnPermamemtReturnedToHand` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` hand bounce flow | 원본 typo 그대로 enum은 있으나 would-return cut-in 후 fixed targets를 `OnDeletionHashtable`로 넘기는 actual returned-to-hand timing이 없다. | `needs-review` |
-| `OnReturnCardsToHandFromTrash` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardObjectController.cs` `AddHandCards` | enum은 있으나 source가 trash였던 card list만 먼저 감지해 `CardSources` payload로 stack하는 shared trash-to-hand boundary가 없다. | `needs-review` |
-| `OnReturnCardsToLibraryFromTrash` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardObjectController.cs` `AddLibraryTopCards`, `AddLibraryBottomCards` | enum은 있으나 trash-to-library top/bottom 양쪽에서 actual move 전 `CardSources` payload를 stack하는 shared boundary가 없다. | `needs-review` |
-| `WhenReturntoHandAnyone` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `CardEffectCommons/HashtableSetting.cs` | would-return-to-hand cut-in과 `WhenRemoveField` 동시 collection, `willBeRemoveField`, post-cut-in target refix가 없다. | `needs-review` |
-| `WhenTopCardTrashed` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs`, `CardEffectCommons/KeyWordEffects/ArmorPurge.cs`, `CardEffectCommons/CanUseEffects/WhenRemoveField.cs` | enum은 있으나 de-digivolve, mass de-digivolve, stack trash, armor purge가 공유하는 `Permanent`/`CardSources` payload와 top-card timestamp handling이 없다. | `needs-review` |
+- `DCGO/Assets/Scripts/Script/CardController.cs`
+- `DCGO/Assets/Scripts/Script/CardObjectController.cs`
+- No CardId branch.
 
-## Source Mapping Notes
+## Source Mapping
 
-`OnAddHand`은 단순 hand zone 진입 이벤트가 아니다. 원본 `CardObjectController.AddHandCards`는 token/egg를 분리하고, ACE overflow를 처리하고, 각 card를 `AddHandCard`로 넣은 뒤, start-game 이후에만 `Players`, `CardEffect`, `CardSources` payload로 `OnAddHand`을 stack한다. draw 여부는 `AddHandCards(cardSources, isDraw, cardEffect)` 인자로 전달되지만 `OnAddHand` payload 자체에는 draw 여부가 직접 들어가지 않는다.
+| Timing | DCGO source 근거 | RL.Engine 구현 |
+| --- | --- | --- |
+| `OnAddHand` | `DCGO/Assets/Scripts/Script/CardObjectController.cs`의 hand add flow | `Tier1PrimitiveService.Draw`와 `AddCardsToHandWithEvents`가 hand 진입 후 pending rule event로 enqueue한다. payload는 `Cards`, `CardSources`, `Players`, `SourceZone`, `DestinationZone`, `IsDraw`를 보존한다. |
+| `OnDraw` | `CardController.DrawClass` 이후 `OnDraw` stack | draw primitive가 `OnAddHand` 뒤에 `OnDraw`를 enqueue한다. payload는 `DrawnCards`, `CardSources`, `SourceZone=Deck`, `DestinationZone=Hand`를 보존한다. |
+| `OnDiscardHand` | `CardController`의 `IDiscardHands` 집계 flow | `DiscardHandWithEvents`가 여러 hand card 이동을 먼저 수행한 뒤 `DiscardedCards`/`CardSources`를 집계해 한 번 enqueue한다. |
+| `OnReturnCardsToHandFromTrash` | `CardObjectController.AddHandCards`의 trash source 감지 | `AddCardsToHandWithEvents(..., sourceZone: Trash)`가 실제 hand 이동 전에 trash source snapshot payload를 enqueue한다. 이후 `OnAddHand`가 같은 queue tail에 이어진다. |
+| `OnReturnCardsToLibraryFromTrash` | `AddLibraryTopCards`/`AddLibraryBottomCards`의 trash-to-library flow | `ReturnTrashCardsToLibraryWithEvents`가 `CardSources`, `ToTop`, `SourceZone=Trash`, `DestinationZone=Deck` payload를 enqueue한 뒤 deck top/bottom 이동을 수행한다. |
+| `WhenReturntoHandAnyone` | return-to-hand 전 cut-in 후보 수집 flow | `ReturnPermanentToHandWithEvents`가 실제 bounce 전에 `Permanent`, `ReturnedTopCard`, `WouldReturn` payload를 enqueue한다. |
+| `OnPermamemtReturnedToHand` | 원본 typo를 유지한 actual returned-to-hand timing | `ReturnPermanentToHandWithEvents`가 top card hand 이동과 source trash 이동 뒤 `OnPermamemtReturnedToHand`를 enqueue하고, 이어서 기존 `OnLeaveFieldAnyone` interop event를 enqueue한다. |
+| `OnDigivolutionCardReturnToDeckBottom` | digivolution source bottom-deck return flow | `ReturnDigivolutionSourcesToDeckBottomWithEvents`가 `Permanent`, `DeckBottomCards`, `CardSources` payload를 enqueue하고 source를 deck bottom으로 이동한다. |
+| `WhenTopCardTrashed` | top-card trash/de-digivolve/armor-purge 계열 cut-in | `TrashTopCardWithEvents`가 `Permanent`, `TopCard`, `CardSources` payload를 enqueue한 뒤 top card를 trash로 이동한다. |
 
-`OnReturnCardsToHandFromTrash`는 actual hand 이동 전에 발생한다. `AddHandCards`는 입력 card 중 trash에 있던 card가 하나라도 있으면 `CardSources` payload로 `OnReturnCardsToHandFromTrash`를 먼저 stack한 뒤 token/egg/ACE overflow/hand insert를 진행한다.
+## Runtime 구조
 
-`OnReturnCardsToLibraryFromTrash`는 library top과 bottom return 양쪽에서 발생한다. `CardObjectController.AddLibraryTopCards`와 `AddLibraryBottomCards`는 입력 card가 trash에서 왔는지 먼저 검사하고, actual remove/add 전에 `CardSources` payload로 `OnReturnCardsToLibraryFromTrash`를 stack한다.
+`RuntimeRuleState`가 `PendingRuleEvent` queue를 소유한다. 이 queue는 `GameState.Clone`, `GameState.RestoreFrom`, `GameState.ComputeStateHash`에 포함된다. 따라서 pause/resume, rollback, replay, 병렬 session에서 pending zone timing이 누락되거나 공유되지 않는다.
 
-`OnDiscardHand`은 여러 `IDiscardHand`를 먼저 모두 실행한 뒤 실제 discarded flag가 선 card들을 모아 `DiscardedCards`, `CardEffect` payload로 한 번 stack한다. 카드별 discard 중간에 하나씩 trigger하지 않는다.
+`RuleProcessor.StabilizeStateOnly`는 pending rule event를 `RuleStabilizationEvent`로 반환한다. `TriggerPipelineService.RunAutoProcess`는 이벤트들을 원래 timing의 `PreparedTriggerGroup`으로 변환해 기존 trigger stack frame에서 drain한다. effect body 중 primitive가 새 event를 enqueue하면, effect 1개 해소 후 auto-process boundary에서 state-only stabilization을 거쳐 nested frame으로 처리한다.
 
-`WhenReturntoHandAnyone`은 actual return 후 trigger가 아니라 would-return cut-in이다. hand bounce flow는 target permanent에 `willBeRemoveField = true`를 표시하고 `WhenReturntoHandAnyone`과 `WhenRemoveField`를 cut-in stack에 넣은 뒤, cut-in 처리 후 `TopCard`와 `willBeRemoveField`가 유지된 target만 다시 고정한다.
+`RuleProcessor.ProcessUntilStableWithResult`는 main rule pass 시작 전에 pending rule event를 trigger pipeline으로 drain한다. selection이 발생하면 `ContinueAfterPendingRuleEvent` continuation으로 pause하고, 남은 pending event는 queue에 보존된다.
 
-`OnPermamemtReturnedToHand`은 원본 enum typo를 그대로 가진 actual returned-to-hand timing이다. hand bounce target이 post-cut-in refix된 뒤 `OnDeletionHashtable` payload로 `OnPermamemtReturnedToHand`가 먼저 stack되고, 이어서 `OnLeaveFieldAnyone`이 stack된다. 따라서 이 timing을 `OnLeaveFieldAnyone`이나 `WhenReturntoHandAnyone`으로 평탄화하면 안 된다.
+## 검증
 
-`OnDigivolutionCardReturnToDeckBottom`은 digivolution source card를 deck bottom으로 보내기 전에 `Permanent`, `DeckBottomCards`, `CardEffect` payload로 stack한다. 그 뒤 `CardObjectController.AddLibraryBottomCards`가 실제 zone 이동을 맡는다.
+추가 테스트:
 
-`WhenTopCardTrashed`는 de-digivolve, mass de-digivolve, stack trash, armor purge 등 여러 flow에서 사용된다. 공통 payload는 `Permanent`, `CardSources`이며, 원본은 새 top card의 timestamp 갱신과 root removal visual/effect를 함께 수행한 뒤 timing을 stack한다. `CardEffectCommons.CanTriggerWhenTopCardTrashed`는 hashtable의 `CardSources` 목록을 기준으로 조건을 검사한다.
+- `Runtime rule pending events clone restore hash`
+- `Zone events OnAddHand and OnDraw drain through auto process`
+- `Zone events discard hand aggregates payload`
+- `Zone events trash return fire before hand and library moves`
+- `Zone events return permanent and top trash timings`
+- `Zone events source return deck bottom timing`
 
-## Blocker Policy
+전체 회귀 결과: `All 454 tests passed.`
 
-- No CardId branch in core service, catalog, or validator.
-- zone list를 직접 수정해서 이 timing들을 우회하지 않는다.
-- `WhenReturntoHandAnyone`, `OnPermamemtReturnedToHand`, `OnLeaveFieldAnyone`을 하나의 leave-field timing으로 평탄화하지 않는다.
-- trash-to-hand/library return timing은 actual move 전 source zone snapshot을 보존해야 한다.
-- `OnDiscardHand`은 multi-discard aggregation 단위로 처리해야 한다.
-- `WhenTopCardTrashed`는 top-card role 변화, removed top card list, new top timestamp를 함께 검증해야 한다.
-- selection이 발생하는 affected card를 구현하기 전에 각 shared zone event boundary가 pause/resume-safe여야 한다.
+## 남은 범위
 
-## Follow-up
-
-다음 작업은 generated queue의 다음 todo batch인 `C0007_zone_security_recovery`다. 이 card-porting batch를 진행하기 전, affected cards가 위 timing에 의존하면 해당 card body를 추측 구현하지 말고 이 L0006 blocker와 연결해 `needs-review`로 유지한다.
+L0006은 shared timing boundary만 완료한다. C0007 이후 card-porting batch는 실제 source effect body, registry/status 갱신, 카드별 테스트, baseline blocker 감소가 모두 있어야 `done`으로 처리할 수 있다. L0006 완료만으로 카드별 effect를 silent no-op 또는 추측 구현으로 처리하지 않는다.

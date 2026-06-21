@@ -4,7 +4,7 @@
 
 `L0005_draw_search_reveal_hidden`는 `done`으로 승격하지 않는다. 이 batch의 mechanic item은 `OnDraw` 하나뿐이고 affected card count는 0이지만, DCGO 원본의 draw primitive 순서와 현재 RL.Engine의 draw service를 대조하면 trigger boundary가 아직 source-aligned로 구현되어 있지 않다.
 
-Queue status: needs-review
+Queue status: blocked
 
 이 항목은 카드별 body 구현 대상이 아니다. 공통 draw primitive, `OnAddHand`, `OnDraw`, selection-aware phase continuation이 정렬되기 전에는 full-card completion gate에서 숨기지 않는다.
 
@@ -12,7 +12,7 @@ Queue status: needs-review
 
 | Timing | Batch status | Source evidence | RL.Engine status | Decision |
 | --- | --- | --- | --- | --- |
-| `OnDraw` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` `DrawClass`, `DCGO/Assets/Scripts/Script/CardObjectController.cs` `AddHandCards` | `EffectTiming.OnDraw` enum과 fixture-level collector tests는 있으나 `src/DCGO.RL.Engine/Setup/DrawService.cs` `DrawService.DrawCards`/draw phase/digivolve draw/effect draw가 source-aligned trigger stack으로 연결되지 않았다. | `needs-review` |
+| `OnDraw` | `NeedsSourceReview` | `DCGO/Assets/Scripts/Script/CardController.cs` `DrawClass`, `DCGO/Assets/Scripts/Script/CardObjectController.cs` `AddHandCards` | `EffectTiming.OnDraw` enum과 fixture-level collector tests는 있으나 `src/DCGO.RL.Engine/Setup/DrawService.cs` `DrawService.DrawCards`/draw phase/digivolve draw/effect draw가 source-aligned trigger stack으로 연결되지 않았다. | `blocked` |
 
 ## Source Mapping Notes
 

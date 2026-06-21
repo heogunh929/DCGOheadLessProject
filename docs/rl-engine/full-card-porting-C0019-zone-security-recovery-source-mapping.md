@@ -4,7 +4,7 @@
 
 `C0019_zone_security_recovery`는 `done`으로 승격할 수 없는 카드 포팅 batch다. DCGO 원본 source body 10개와 asset identity 17개는 모두 확인했지만, runnable card body로 옮기려면 `L0006_zone_security_recovery`와 함께 declaration cost, reveal/search, trash-to-hand, security-loss payload, digivolution-source trash, cannot-attack duration, free hand/breeding play, delete-success continuation, and static/inherited keyword layers가 먼저 source-aligned로 정리되어야 한다.
 
-Queue status: needs-review
+Queue status: blocked
 
 No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core service 분기, silent no-op 구현을 추가하지 않는다. 같은 source effect를 여러 variant가 참조하더라도 `DefinitionStableId`, `CardIndex`, `variantKey`를 보존한다.
 
@@ -27,27 +27,27 @@ No CardId branch. 이 batch에서는 `CardId` 분기, Catalog 분기, core servi
 
 | DefinitionStableId | SourceEffectClassName | 원본 asset | Status |
 | --- | --- | --- | --- |
-| `BT15-009#3129@base` | `BT15_009` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_009.asset` | `needs-review` |
-| `BT15-011#3131@base` | `BT15_011` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_011.asset` | `needs-review` |
-| `BT15-013#3133@base` | `BT15_013` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_013.asset` | `needs-review` |
-| `BT15-013#4715@P0` | `BT15_013` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_013_P0.asset` | `needs-review` |
-| `BT15-016#3138@base` | `BT15_016` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_016.asset` | `needs-review` |
-| `BT15-016#4716@P0` | `BT15_016` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_016_P0.asset` | `needs-review` |
-| `BT15-017#3139@base` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017.asset` | `needs-review` |
-| `BT15-017#4717@P0` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P0.asset` | `needs-review` |
-| `BT15-017#4718@P1` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P1.asset` | `needs-review` |
-| `BT15-017#4719@P2` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P2.asset` | `needs-review` |
-| `BT15-017#4720@P3` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P3.asset` | `needs-review` |
-| `BT15-018#3140@base` | `BT15_018` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_018.asset` | `needs-review` |
-| `BT15-018#4721@P0` | `BT15_018` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_018_P0.asset` | `needs-review` |
-| `BT15-019#3141@base` | `BT15_019` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_019.asset` | `needs-review` |
-| `BT15-022#3145@base` | `BT15_022` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_022.asset` | `needs-review` |
-| `BT15-023#3146@base` | `BT15_023` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_023.asset` | `needs-review` |
-| `BT15-027#3152@base` | `BT15_027` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_027.asset` | `needs-review` |
+| `BT15-009#3129@base` | `BT15_009` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_009.asset` | `blocked` |
+| `BT15-011#3131@base` | `BT15_011` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_011.asset` | `blocked` |
+| `BT15-013#3133@base` | `BT15_013` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_013.asset` | `blocked` |
+| `BT15-013#4715@P0` | `BT15_013` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_013_P0.asset` | `blocked` |
+| `BT15-016#3138@base` | `BT15_016` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_016.asset` | `blocked` |
+| `BT15-016#4716@P0` | `BT15_016` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_016_P0.asset` | `blocked` |
+| `BT15-017#3139@base` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017.asset` | `blocked` |
+| `BT15-017#4717@P0` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P0.asset` | `blocked` |
+| `BT15-017#4718@P1` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P1.asset` | `blocked` |
+| `BT15-017#4719@P2` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P2.asset` | `blocked` |
+| `BT15-017#4720@P3` | `BT15_017` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_017_P3.asset` | `blocked` |
+| `BT15-018#3140@base` | `BT15_018` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_018.asset` | `blocked` |
+| `BT15-018#4721@P0` | `BT15_018` | `DCGO/Assets/CardBaseEntity/BT15/Red/Digimon/BT15_018_P0.asset` | `blocked` |
+| `BT15-019#3141@base` | `BT15_019` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_019.asset` | `blocked` |
+| `BT15-022#3145@base` | `BT15_022` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_022.asset` | `blocked` |
+| `BT15-023#3146@base` | `BT15_023` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_023.asset` | `blocked` |
+| `BT15-027#3152@base` | `BT15_027` | `DCGO/Assets/CardBaseEntity/BT15/Blue/Digimon/BT15_027.asset` | `blocked` |
 
 ## Common Layer Blockers
 
-- `L0006_zone_security_recovery` remains `needs-review`; C0019 depends on hand/trash/security/source movements and their trigger payloads.
+- `L0006_zone_security_recovery` remains `blocked`; C0019 depends on hand/trash/security/source movements and their trigger payloads.
 - `BT15_009` requires a declaration/manual activated effect boundary with memory cost payment and rollback before target selection.
 - `BT15_011` and `BT15_027` use reveal/search helpers whose selected cards, remaining bottom-deck order, and follow-up hand discard/play continuations must be modeled as deterministic, selection-aware stages.
 - `BT15_013`, `BT15_016`, `BT15_017`, and `BT15_018` need inherited/deletion/end-turn source snapshots and once-per-turn hash handling to survive ordering, rollback, and replay.

@@ -4,7 +4,7 @@
 
 `C0008_zone_security_recovery`는 `done`으로 승격하지 않는다. 이 batch의 source body 10개는 모두 로컬 DCGO 원본에서 확인되지만, runnable card body로 옮기려면 `L0006_zone_security_recovery`와 suspend/reveal/source-add/security-check/copy-effect common layer가 먼저 필요하다.
 
-Queue status: needs-review
+Queue status: blocked
 
 이번 작업에서는 카드 효과를 추측 구현하지 않는다. No CardId branch. Catalog 동작 삽입, partial no-op wrapper, source body 통합 파일을 만들지 않는다. 각 source effect와 asset variant는 원본 경로와 variant-aware identity를 유지한 blocker로 남긴다.
 
@@ -27,33 +27,33 @@ Queue status: needs-review
 
 | DefinitionStableId | SourceEffectClassName | Asset path | Decision |
 | --- | --- | --- | --- |
-| `BT10-044#2084@base` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044.asset` | `needs-review` |
-| `BT10-044#2085@P1` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044_P1.asset` | `needs-review` |
-| `BT10-044#4317@P0` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044_P0.asset` | `needs-review` |
-| `BT10-046#2087@base` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046.asset` | `needs-review` |
-| `BT10-046#4318@P0` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P0.asset` | `needs-review` |
-| `BT10-046#4319@P1` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P1.asset` | `needs-review` |
-| `BT10-046#8098@P2` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P2.asset` | `needs-review` |
-| `BT10-048#2089@base` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048.asset` | `needs-review` |
-| `BT10-048#4320@P1` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048_P1.asset` | `needs-review` |
-| `BT10-048#4321@P2` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048_P2.asset` | `needs-review` |
-| `BT10-053#2094@base` | `BT10_053` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053.asset` | `needs-review` |
-| `BT10-053#4324@P0` | `BT10_053` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053_P0.asset` | `needs-review` |
-| `BT10-057#2099@base` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057.asset` | `needs-review` |
-| `BT10-057#2100@P1` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057_P1.asset` | `needs-review` |
-| `BT10-057#8099@P2` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057_P2.asset` | `needs-review` |
-| `BT10-071#2117@base` | `BT10_071` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_071.asset` | `needs-review` |
-| `BT10-076#2122@base` | `BT10_076` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_076.asset` | `needs-review` |
-| `BT10-080#2126@base` | `BT10_080` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_080.asset` | `needs-review` |
-| `BT10-080#4338@P0` | `BT10_080` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_080_P0.asset` | `needs-review` |
-| `BT10-112#2169@base` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112.asset` | `needs-review` |
-| `BT10-112#2170@P1` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112_P1.asset` | `needs-review` |
-| `BT10-112#8104@base` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112_P2_J.asset` | `needs-review` |
-| `BT11-001#2268@base` | `BT11_001` | `DCGO/Assets/CardBaseEntity/BT11/Red/DigiEgg/BT11_001.asset` | `needs-review` |
+| `BT10-044#2084@base` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044.asset` | `blocked` |
+| `BT10-044#2085@P1` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044_P1.asset` | `blocked` |
+| `BT10-044#4317@P0` | `BT10_044` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_044_P0.asset` | `blocked` |
+| `BT10-046#2087@base` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046.asset` | `blocked` |
+| `BT10-046#4318@P0` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P0.asset` | `blocked` |
+| `BT10-046#4319@P1` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P1.asset` | `blocked` |
+| `BT10-046#8098@P2` | `BT10_046` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_046_P2.asset` | `blocked` |
+| `BT10-048#2089@base` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048.asset` | `blocked` |
+| `BT10-048#4320@P1` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048_P1.asset` | `blocked` |
+| `BT10-048#4321@P2` | `BT10_048` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_048_P2.asset` | `blocked` |
+| `BT10-053#2094@base` | `BT10_053` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053.asset` | `blocked` |
+| `BT10-053#4324@P0` | `BT10_053` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053_P0.asset` | `blocked` |
+| `BT10-057#2099@base` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057.asset` | `blocked` |
+| `BT10-057#2100@P1` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057_P1.asset` | `blocked` |
+| `BT10-057#8099@P2` | `BT10_057` | `DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_057_P2.asset` | `blocked` |
+| `BT10-071#2117@base` | `BT10_071` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_071.asset` | `blocked` |
+| `BT10-076#2122@base` | `BT10_076` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_076.asset` | `blocked` |
+| `BT10-080#2126@base` | `BT10_080` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_080.asset` | `blocked` |
+| `BT10-080#4338@P0` | `BT10_080` | `DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_080_P0.asset` | `blocked` |
+| `BT10-112#2169@base` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112.asset` | `blocked` |
+| `BT10-112#2170@P1` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112_P1.asset` | `blocked` |
+| `BT10-112#8104@base` | `BT10_112` | `DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_112_P2_J.asset` | `blocked` |
+| `BT11-001#2268@base` | `BT11_001` | `DCGO/Assets/CardBaseEntity/BT11/Red/DigiEgg/BT11_001.asset` | `blocked` |
 
 ## Common-layer Blockers
 
-- `L0006_zone_security_recovery` is still `needs-review`; C0008 uses hand/trash/digivolution-source moves that cannot be flattened to primitive zone moves.
+- `L0006_zone_security_recovery` is still `blocked`; C0008 uses hand/trash/digivolution-source moves that cannot be flattened to primitive zone moves.
 - `OnTappedAnyone` must preserve actual suspended permanent, by-effect state, duplicate-effect filtering, and post-cut-in semantics before BT10 green inherited effects are runnable.
 - Reveal/search needs a source-aligned revealed-card zone, multi-condition selection, bottom-deck ordering, and hidden information trace.
 - `OnDiscardHand` must aggregate discarded cards and source `CardEffect`; BT10_080 must not be implemented as a generic hand-discard shortcut.

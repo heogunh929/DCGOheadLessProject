@@ -1,5 +1,34 @@
 # 검증 전략
 
+## Queue 66A 검증 - 2026-06-22
+
+`select_next_full_card_porting_batch.py`는 66번 generated subqueue를 직접 수행하기 전에 dependency 상태를 검증한다. `dependencyBatchIds`가 모두 `done`인 `todo` batch만 실행 가능하며, dependency가 `blocked` 또는 `needs-review`이면 dependent card batch를 건너뛴다.
+
+정책:
+
+- 공통 layer 미구현은 `needs-review`가 아니라 `blocked`로 분류한다.
+- `needs-review`는 실제 사용자 판단 또는 source body/source 의미 불명확성에만 사용한다.
+- blocker 문서화만으로 card-porting batch를 완료 처리하지 않는다.
+- card-porting 완료 조건은 실제 effect body 구현, registry/status 갱신, 테스트, baseline blocker 감소를 모두 포함한다.
+- `L0006_zone_security_recovery`는 2026-06-22에 shared zone/security/recovery timing boundary 구현과 전체 회귀 통과로 `done` 처리되었다.
+
+검증 항목:
+
+- `QUEUE_FULL_CARD_PORTING_BATCHES.md`에서 공통 layer 미구현 상태가 `blocked`로 정규화됨
+- generated manifest의 C0026 `dependencyBatchIds`가 L0006을 포함함
+- L0006 완료 전에는 scheduler가 C0026을 실행하지 않고 L0006을 가장 앞의 unresolved mechanic dependency로 보고했으며, L0006 완료 후에는 다음 실행 가능 batch를 selector 결과로 판단함
+- active runner가 scheduler decision 없이 카드 batch를 직접 실행하지 않음
+- goal/validation 문서가 `blocked`/`needs-review` 분류와 card-porting 완료 조건을 명시함
+
+실행 명령:
+
+```powershell
+python .\scripts\select_next_full_card_porting_batch.py --workspace .
+$env:TEMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+$env:TMP='E:\headlessDCGO\.tmp\MSBuildTemp'
+.\.dotnet\dotnet.exe run --no-restore --project .\src\DCGO.RL.Engine.Tests\DCGO.RL.Engine.Tests.csproj
+```
+
 ## Queue 66 검증 - 2026-06-21
 
 `generate_full_card_porting_batches.py`는 62~65 산출물을 읽어 full-card porting generated subqueue를 만든다. 이 단계는 효과 구현 없이 dependency-aware batch prompt와 control files만 생성한다.
