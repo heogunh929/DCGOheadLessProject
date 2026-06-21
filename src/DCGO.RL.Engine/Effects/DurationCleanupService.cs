@@ -10,6 +10,7 @@ public enum DurationCleanupEvent
 {
     TurnEnd,
     BattleEnd,
+    AttackEnd,
     SecurityCheckEnd,
     OwnerActivePhaseEnd,
     StaleTarget,
@@ -43,6 +44,19 @@ public sealed class DurationCleanupService
                 || modifier.DurationScope == DurationScope.UntilBattleEnd);
 
         return new DurationCleanupResult(DurationCleanupEvent.BattleEnd, removed);
+    }
+
+    public DurationCleanupResult CleanupAttackEnd(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var removed = RemoveWhere(
+            state,
+            modifier =>
+                IsStaleTarget(state, modifier)
+                || modifier.DurationScope == DurationScope.UntilAttackEnd);
+
+        return new DurationCleanupResult(DurationCleanupEvent.AttackEnd, removed);
     }
 
     public DurationCleanupResult CleanupSecurityCheckEnd(GameState state)

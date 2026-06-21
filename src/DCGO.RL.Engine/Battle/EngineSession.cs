@@ -513,7 +513,7 @@ public sealed class EngineSession
         public string StableContinuationId =>
             Continuation?.StableContinuationId
             ?? AttackContinuation?.SecurityCheckContinuation?.StableContinuationId
-            ?? AttackContinuation?.Frame?.State.ToString()
+            ?? AttackContinuation?.Context?.State.ToString()
             ?? Resolution.StableId;
 
         public static PendingEngineInteraction FromActionResult(

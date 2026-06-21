@@ -255,6 +255,12 @@ public sealed class BattleEngineServices
             nameof(SecurityCheckService),
             services.SecurityCheckService,
             services.AttackService.RuntimeSecurityCheckService);
+        AddMismatch(
+            issues,
+            nameof(AttackService),
+            nameof(Tier1PrimitiveService),
+            services.PrimitiveService,
+            services.AttackService.RuntimePrimitiveService);
         AddMissing(
             issues,
             nameof(SecurityCheckService),
@@ -372,7 +378,8 @@ public sealed class BattleEngineServices
             keywordService,
             durationCleanupService,
             triggerPipelineService,
-            effectiveStats);
+            effectiveStats,
+            primitiveService);
         var complexMechanicService = new ComplexMechanicService(zoneMover, drawService);
         var phaseRunner = new PhaseRunner(
             drawService,

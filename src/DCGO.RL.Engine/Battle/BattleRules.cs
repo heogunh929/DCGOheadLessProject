@@ -164,7 +164,10 @@ internal static class BattleRules
         PermanentState permanent,
         TemporaryModifierKind restrictionKind)
     {
-        if (restrictionKind is not (TemporaryModifierKind.CannotAttack or TemporaryModifierKind.CannotBlock))
+        if (restrictionKind is not (
+            TemporaryModifierKind.CannotAttack
+            or TemporaryModifierKind.CannotBlock
+            or TemporaryModifierKind.CannotSwitchAttackTarget))
         {
             throw new DomainException($"Temporary modifier kind '{restrictionKind}' is not a restriction.");
         }

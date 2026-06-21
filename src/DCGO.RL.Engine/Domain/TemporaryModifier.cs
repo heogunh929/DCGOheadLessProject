@@ -6,6 +6,7 @@ public enum DurationScope
     UntilOwnerTurnEnd,
     UntilOpponentTurnEnd,
     UntilBattleEnd,
+    UntilAttackEnd,
     UntilSecurityCheckEnd,
     UntilOwnerActivePhaseEnd,
 }
@@ -17,6 +18,7 @@ public enum TemporaryModifierKind
     SecurityDigimonDP,
     CannotAttack,
     CannotBlock,
+    CannotSwitchAttackTarget,
 }
 
 public sealed record TemporaryModifier(

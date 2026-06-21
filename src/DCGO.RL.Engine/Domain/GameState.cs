@@ -196,6 +196,34 @@ public sealed class GameState
                 .Append(use.SourceCard?.Value.ToString() ?? "-").AppendLine();
         }
 
+        if (RuntimeRules.Attack is { } attack)
+        {
+            builder.Append("runtime-attack:")
+                .Append(attack.Attacker.Value).Append('|')
+                .Append(attack.Defender?.Value.ToString() ?? "-").Append('|')
+                .Append(attack.State).Append('|')
+                .Append(attack.IsBlocking ? "1" : "0").Append('|')
+                .Append(attack.Blocker?.Value.ToString() ?? "-").Append('|')
+                .Append(attack.IsEndAttack ? "1" : "0").Append('|')
+                .Append(attack.AttackerTopCardWhenDeclared?.Value.ToString() ?? "-").Append('|')
+                .AppendJoin(",", attack.CounterSources.Select(card => card.Value)).Append('|');
+
+            if (attack.PendingTargetSwitch is { } pendingSwitch)
+            {
+                builder.Append(pendingSwitch.OldDefender?.Value.ToString() ?? "-").Append('|')
+                    .Append(pendingSwitch.NewDefender?.Value.ToString() ?? "-").Append('|')
+                    .Append(pendingSwitch.IsBlock ? "1" : "0").Append('|')
+                    .Append(pendingSwitch.Blocker?.Value.ToString() ?? "-").Append('|')
+                    .Append(pendingSwitch.SourceEffectStableId ?? "-");
+            }
+            else
+            {
+                builder.Append("-|-|0|-|-");
+            }
+
+            builder.AppendLine();
+        }
+
         foreach (var definition in CardDefinitions.OrderBy(pair => pair.Key, StringComparer.Ordinal))
         {
             builder.Append("definition:")

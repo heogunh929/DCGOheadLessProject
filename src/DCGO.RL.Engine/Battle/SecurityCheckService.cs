@@ -660,6 +660,7 @@ public sealed class SecurityCheckService
         if (battle is not null)
         {
             battleResults.Add(battle);
+            _durationCleanupService.CleanupBattleEnd(state);
         }
 
         _durationCleanupService.CleanupSecurityCheckEnd(state);

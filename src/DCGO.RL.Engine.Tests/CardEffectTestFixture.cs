@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.CardEffects;
+using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 using DCGO.RL.Engine.Effects;
@@ -489,6 +490,7 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
     private readonly string _label;
     private readonly IList<string> _order;
     private readonly Func<EffectContext, bool> _canTrigger;
+    private readonly bool _isCounterEffect;
 
     public ConditionalRecordingTimingCardScript(
         string cardId,
@@ -496,12 +498,14 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
         EffectTiming timing,
         string label,
         IList<string> order,
-        Func<EffectContext, bool> canTrigger)
+        Func<EffectContext, bool> canTrigger,
+        bool isCounterEffect = false)
     {
         _timing = timing;
         _label = label;
         _order = order;
         _canTrigger = canTrigger;
+        _isCounterEffect = isCounterEffect;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -520,7 +524,8 @@ internal sealed class ConditionalRecordingTimingCardScript : ICardScript
                 SourceCard: context.SourceCard,
                 SourcePermanent: context.SourcePermanent,
                 Controller: context.Controller,
-                CanTrigger: _canTrigger),
+                CanTrigger: _canTrigger,
+                IsCounterEffect: _isCounterEffect),
         };
 
     public void Resolve(CardScriptExecutionContext context) => _order.Add(_label);
@@ -630,6 +635,164 @@ internal sealed class PermanentPresenceProbeScript : ICardScript
                 .SelectMany(player => player.FieldPermanents)
                 .Any(permanent => state.Cards[permanent.TopCardId].DefinitionId == _targetDefinitionId);
             _order.Add($"{_label}:{(exists ? "present" : "absent")}");
+        });
+    }
+}
+
+internal sealed class DestroyAttackContextPermanentCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _contextKey;
+    private readonly bool _isCounterEffect;
+
+    public DestroyAttackContextPermanentCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string contextKey,
+        bool isCounterEffect = false)
+    {
+        _timing = timing;
+        _contextKey = contextKey;
+        _isCounterEffect = isCounterEffect;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that destroys a permanent referenced by attack context payload.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:destroy-context:{_contextKey}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller,
+                IsCounterEffect: _isCounterEffect),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, primitives) =>
+        {
+            if (context.Resolution.Context.GetValueOrDefault(_contextKey) is not PermanentId permanent)
+            {
+                return;
+            }
+
+            if (state.Players.SelectMany(player => player.FieldPermanents).Any(candidate => candidate.Id == permanent))
+            {
+                primitives.DestroyPermanent(state, permanent, context.Trace);
+            }
+        });
+    }
+}
+
+internal sealed class SwitchAttackDefenderCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly string _targetDefinitionId;
+    private readonly IList<string>? _outcomes;
+
+    public SwitchAttackDefenderCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        string targetDefinitionId,
+        IList<string>? outcomes = null)
+    {
+        _timing = timing;
+        _targetDefinitionId = targetDefinitionId;
+        _outcomes = outcomes;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that switches attack defender through AttackRuntimeOperations.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:switch-defender:{_targetDefinitionId}",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, _) =>
+        {
+            var target = state.Players
+                .SelectMany(player => player.FieldPermanents)
+                .FirstOrDefault(permanent => state.Cards[permanent.TopCardId].DefinitionId == _targetDefinitionId);
+            if (target is null)
+            {
+                _outcomes?.Add("missing-target");
+                return;
+            }
+
+            var switched = AttackRuntimeOperations.SwitchDefender(
+                state,
+                target.Id,
+                isBlock: false,
+                blocker: null,
+                sourceEffectStableId: context.Resolution.StableId);
+            _outcomes?.Add(switched ? "switched" : "blocked");
+        });
+    }
+}
+
+internal sealed class DurationScopeProbeCardScript : ICardScript
+{
+    private readonly EffectTiming _timing;
+    private readonly IList<string> _records;
+
+    public DurationScopeProbeCardScript(
+        string cardId,
+        string effectClassName,
+        EffectTiming timing,
+        IList<string> records)
+    {
+        _timing = timing;
+        _records = records;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture script that records battle/attack duration scope visibility.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        new[]
+        {
+            new EffectDescriptor(
+                $"{Porting.CardId}:{_timing}:duration-probe",
+                _timing,
+                SourceCard: context.SourceCard,
+                SourcePermanent: context.SourcePermanent,
+                Controller: context.Controller),
+        };
+
+    public void Resolve(CardScriptExecutionContext context)
+    {
+        context.WithState((state, _) =>
+        {
+            var hasBattle = state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilBattleEnd);
+            var hasAttack = state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilAttackEnd);
+            _records.Add($"battle:{hasBattle};attack:{hasAttack}");
         });
     }
 }

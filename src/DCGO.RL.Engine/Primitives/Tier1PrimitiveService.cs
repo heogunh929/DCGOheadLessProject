@@ -626,6 +626,26 @@ public sealed class Tier1PrimitiveService
             stableId,
             debugLabel ?? $"Cannot block until {durationScope}");
 
+    public TemporaryModifier AddTemporarySwitchAttackTargetRestriction(
+        GameState state,
+        PermanentId targetPermanent,
+        DurationScope durationScope,
+        PlayerId controller,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        string? stableId = null,
+        string? debugLabel = null) =>
+        AddTemporaryPermanentRestriction(
+            state,
+            targetPermanent,
+            TemporaryModifierKind.CannotSwitchAttackTarget,
+            durationScope,
+            controller,
+            sourceCard,
+            sourcePermanent,
+            stableId,
+            debugLabel ?? $"Cannot switch attack target until {durationScope}");
+
     private TemporaryModifier AddTemporaryPermanentRestriction(
         GameState state,
         PermanentId targetPermanent,
@@ -637,7 +657,10 @@ public sealed class Tier1PrimitiveService
         string? stableId,
         string debugLabel)
     {
-        if (restrictionKind is not (TemporaryModifierKind.CannotAttack or TemporaryModifierKind.CannotBlock))
+        if (restrictionKind is not (
+            TemporaryModifierKind.CannotAttack
+            or TemporaryModifierKind.CannotBlock
+            or TemporaryModifierKind.CannotSwitchAttackTarget))
         {
             throw new DomainException($"Temporary modifier kind '{restrictionKind}' is not a restriction.");
         }
