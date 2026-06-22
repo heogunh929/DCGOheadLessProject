@@ -517,3 +517,13 @@ Security option은 기존처럼 `SecurityCheckService`가 `Zone.Security -> Zone
 - `Option lifecycle action trace replay deterministic`
 - `Option lifecycle ST1 hand option regression`
 - `Option lifecycle ST2/ST3 hand option regression`
+
+## Queue 66J static requirement descriptors
+
+원본 `AddDigivolutionRequirement`와 `AddLinkRequirement` 계열은 active trigger body가 아니라 source card가 제공하는 static requirement이다. RL.Engine은 66J부터 이 범위를 `StaticRequirementService`로 분리한다.
+
+- `StaticEvolutionRequirementDescriptor`는 source card/permanent/controller, color/level/range, cost, source card condition, target permanent condition을 가진다.
+- `StaticLinkRequirementDescriptor`는 source card/permanent/controller, link cost, source card condition, target permanent condition을 가진다.
+- 두 descriptor는 `ContinuousEffectSourceCollector`의 source scope를 공유한다.
+- `BattleRules.CanDigivolve`, `LegalActionGenerator`, `DigivolveService`, `ComplexMechanicService`가 같은 `StaticRequirementService` 평가 결과를 사용한다.
+- `IgnoreDigivolutionRequirement` permission, trait/name/text metadata, cost/restriction/immunity static interface는 아직 `ContinuousOrStaticEffect` blocker로 남긴다.

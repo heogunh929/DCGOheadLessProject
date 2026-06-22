@@ -2,6 +2,7 @@ using DCGO.RL.Engine.Actions;
 using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Effects;
 using DCGO.RL.Engine.Setup;
 using DCGO.RL.Engine.Validation;
 
@@ -13,18 +14,23 @@ public sealed class ComplexMechanicService
     private readonly DrawService _drawService;
     private readonly ComplexMechanicMatcher _matcher;
     private readonly CostResolver _costResolver;
+    private readonly StaticRequirementService? _staticRequirements;
 
     public ComplexMechanicService(
         IZoneMover? zoneMover = null,
         DrawService? drawService = null,
         ComplexMechanicMatcher? matcher = null,
-        CostResolver? costResolver = null)
+        CostResolver? costResolver = null,
+        StaticRequirementService? staticRequirementService = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
         _matcher = matcher ?? new ComplexMechanicMatcher();
         _costResolver = costResolver ?? new CostResolver();
+        _staticRequirements = staticRequirementService;
     }
+
+    internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
 
     public IReadOnlyList<LegalAction> GenerateActions(GameState state, PlayerId playerId)
     {
@@ -213,14 +219,17 @@ public sealed class ComplexMechanicService
 
     public void ExecuteLink(GameState state, LinkAction action)
     {
-        var requirement = RequirePlayRequirement(state, action.LinkCard, PlayMode.Normal, Mechanic.Link);
+        var requirement = FindLinkPlayRequirement(state, action.LinkCard);
         var target = BattleRules.Permanent(state, action.TargetPermanent);
         if (target.ControllerPlayerId != action.Actor || !BattleRules.IsDigimon(state, target.TopCardId))
         {
             throw new DomainException("Link target must be an actor-controlled Digimon.");
         }
 
-        if (!_matcher.MatchesPermanent(state, target, requirement.LinkTargetRequirement))
+        var staticRequirement = _staticRequirements?.FirstLinkRequirement(state, action.LinkCard, target);
+        var definitionRequirementMatches = requirement is not null
+            && _matcher.MatchesPermanent(state, target, requirement.LinkTargetRequirement);
+        if (!definitionRequirementMatches && staticRequirement is null)
         {
             throw new DomainException("Link target requirement is not satisfied.");
         }
@@ -230,7 +239,10 @@ public sealed class ComplexMechanicService
             throw new DomainException($"Permanent '{target.Id}' has no open linked card slots.");
         }
 
-        PayCost(state, action.Actor, _costResolver.ResolveLink(requirement).FinalCost);
+        var cost = definitionRequirementMatches
+            ? _costResolver.ResolveLink(requirement!).FinalCost
+            : staticRequirement!.Cost;
+        PayCost(state, action.Actor, cost);
         MoveFromCurrentZone(state, action.LinkCard, Zone.LinkedCards, MoveReason.Link, target.Id);
     }
 
@@ -388,6 +400,11 @@ public sealed class ComplexMechanicService
                 }
             }
         }
+
+        foreach (var action in GenerateStaticLinkActions(state, player, card, sourcePermanent: null))
+        {
+            yield return action;
+        }
     }
 
     private IEnumerable<LegalAction> GenerateLinkActionsFromBattleArea(GameState state, PlayerState player)
@@ -410,6 +427,54 @@ public sealed class ComplexMechanicService
                             new[] { CardTarget(state, card), PermanentTarget(state, target) });
                     }
                 }
+            }
+
+            foreach (var action in GenerateStaticLinkActions(state, player, card, sourcePermanent))
+            {
+                yield return action;
+            }
+        }
+    }
+
+    private IEnumerable<LegalAction> GenerateStaticLinkActions(
+        GameState state,
+        PlayerState player,
+        CardInstanceId card,
+        PermanentState? sourcePermanent)
+    {
+        if (_staticRequirements is null)
+        {
+            yield break;
+        }
+
+        foreach (var target in player.BattleAreaPermanents
+            .Where(permanent => sourcePermanent is null || permanent.Id != sourcePermanent.Id)
+            .Where(permanent => BattleRules.IsDigimon(state, permanent.TopCardId))
+            .Where(permanent => permanent.LinkedCards.Count < LinkMax(state, permanent)))
+        {
+            foreach (var evaluation in _staticRequirements.EvaluateLinkRequirements(state, card, target))
+            {
+                var definition = BattleRules.Definition(state, card);
+                var stableId = StableActionId(evaluation.Descriptor.StableId);
+                yield return new LegalAction(
+                    sourcePermanent is null
+                        ? $"link-static:{card.Value}:{target.Id.Value}:{stableId}"
+                        : $"link-static-field:{card.Value}:{target.Id.Value}:{stableId}",
+                    LegalActionKind.Link,
+                    new LinkAction(player.Id, card, target.Id)
+                    {
+                        Metadata = new GameActionMetadata
+                        {
+                            StableId = evaluation.Descriptor.StableId,
+                            DebugLabel = evaluation.Descriptor.DebugLabel,
+                            Tags = new Dictionary<string, string>(StringComparer.Ordinal)
+                            {
+                                ["staticRequirement"] = "link",
+                            },
+                        },
+                    },
+                    $"Link {definition.CardId}",
+                    new[] { CardTarget(state, card), PermanentTarget(state, target) });
             }
         }
     }
@@ -567,6 +632,15 @@ public sealed class ComplexMechanicService
         return requirement ?? throw new UnsupportedMechanicException($"{mechanic?.ToString() ?? mode.ToString()} requirement for card '{card}'");
     }
 
+    private static PlayRequirement? FindLinkPlayRequirement(GameState state, CardInstanceId card)
+    {
+        var definition = BattleRules.Definition(state, card);
+        return definition.PlayRequirements.FirstOrDefault(requirement =>
+            requirement.Mode == PlayMode.Normal
+            && (definition.Mechanics.Contains(Mechanic.Link) || requirement.LinkTargetRequirement is not null)
+            && requirement.LinkTargetRequirement is not null);
+    }
+
     private static void PayCost(GameState state, PlayerId actor, int cost) =>
         BattleRules.PayMemory(state, actor, cost);
 
@@ -599,4 +673,9 @@ public sealed class ComplexMechanicService
             permanent.ControllerPlayerId,
             Permanent: permanent.Id,
             Label: BattleRules.Definition(state, permanent.TopCardId).CardId);
+
+    private static string StableActionId(string stableId) =>
+        string.Join(
+            "_",
+            stableId.Select(character => char.IsLetterOrDigit(character) ? character : '_'));
 }

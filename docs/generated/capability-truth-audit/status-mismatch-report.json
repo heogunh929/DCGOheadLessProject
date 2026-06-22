@@ -1,0 +1,568 @@
+{
+  "schemaVersion": "dcgo.status-mismatch-report.66B.v1",
+  "inputs": {
+    "generatedStatusRegistry": "docs/generated/full-card-source-scaffold/status-registry.json",
+    "cardEffectPortingRecords": "src/DCGO.RL.Engine/CardEffects/**/*.cs"
+  },
+  "summary": {
+    "generatedImplementedOrVerifiedCount": 0,
+    "codePortingRecordCount": 148,
+    "statusMismatchCount": 92,
+    "blockerIssueCount": 0
+  },
+  "mismatches": [
+    {
+      "effectClassName": "BT1_029",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs"
+    },
+    {
+      "effectClassName": "BT1_036",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_036.cs"
+    },
+    {
+      "effectClassName": "BT1_086",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs"
+    },
+    {
+      "effectClassName": "BT1_070",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs"
+    },
+    {
+      "effectClassName": "BT1_088",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_088.cs"
+    },
+    {
+      "effectClassName": "BT1_089",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_089.cs"
+    },
+    {
+      "effectClassName": "BT1_017",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_017.cs"
+    },
+    {
+      "effectClassName": "BT1_018",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_018.cs"
+    },
+    {
+      "effectClassName": "BT1_023",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_023.cs"
+    },
+    {
+      "effectClassName": "BT1_025",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_025.cs"
+    },
+    {
+      "effectClassName": "BT1_085",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_085.cs"
+    },
+    {
+      "effectClassName": "BT1_005",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_005.cs"
+    },
+    {
+      "effectClassName": "BT1_049",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_049.cs"
+    },
+    {
+      "effectClassName": "BT1_055",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_055.cs"
+    },
+    {
+      "effectClassName": "BT1_060",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_060.cs"
+    },
+    {
+      "effectClassName": "BT1_061",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_061.cs"
+    },
+    {
+      "effectClassName": "BT1_062",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_062.cs"
+    },
+    {
+      "effectClassName": "BT1_063",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_063.cs"
+    },
+    {
+      "effectClassName": "BT1_087",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_087.cs"
+    },
+    {
+      "effectClassName": "BT18_057",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs"
+    },
+    {
+      "effectClassName": "BT18_068",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_068.cs"
+    },
+    {
+      "effectClassName": "BT18_056",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_056.cs"
+    },
+    {
+      "effectClassName": "BT18_075",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs"
+    },
+    {
+      "effectClassName": "BT18_080",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_080.cs"
+    },
+    {
+      "effectClassName": "BT18_085",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs"
+    },
+    {
+      "effectClassName": "BT18_098",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs"
+    },
+    {
+      "effectClassName": "BT19_055",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Black/BT19_055.cs"
+    },
+    {
+      "effectClassName": "BT19_021",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_021.cs"
+    },
+    {
+      "effectClassName": "BT19_022",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_022.cs"
+    },
+    {
+      "effectClassName": "BT19_026",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_026.cs"
+    },
+    {
+      "effectClassName": "BT19_028",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_028.cs"
+    },
+    {
+      "effectClassName": "BT19_045",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs"
+    },
+    {
+      "effectClassName": "BT19_052",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs"
+    },
+    {
+      "effectClassName": "BT19_084",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_084.cs"
+    },
+    {
+      "effectClassName": "BT19_067",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_067.cs"
+    },
+    {
+      "effectClassName": "BT19_015",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_015.cs"
+    },
+    {
+      "effectClassName": "BT19_089",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_089.cs"
+    },
+    {
+      "effectClassName": "BT19_039",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_039.cs"
+    },
+    {
+      "effectClassName": "BT20_048",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_048.cs"
+    },
+    {
+      "effectClassName": "BT20_049",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_049.cs"
+    },
+    {
+      "effectClassName": "BT20_086",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_086.cs"
+    },
+    {
+      "effectClassName": "BT20_039",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Green/BT20_039.cs"
+    },
+    {
+      "effectClassName": "BT20_062",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_062.cs"
+    },
+    {
+      "effectClassName": "BT20_065",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_065.cs"
+    },
+    {
+      "effectClassName": "BT20_069",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_069.cs"
+    },
+    {
+      "effectClassName": "BT20_079",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_079.cs"
+    },
+    {
+      "effectClassName": "BT20_088",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_088.cs"
+    },
+    {
+      "effectClassName": "BT20_096",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs"
+    },
+    {
+      "effectClassName": "BT20_001",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_001.cs"
+    },
+    {
+      "effectClassName": "BT20_009",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_009.cs"
+    },
+    {
+      "effectClassName": "BT20_092",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT20/White/BT20_092.cs"
+    },
+    {
+      "effectClassName": "BT21_033",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_033.cs"
+    },
+    {
+      "effectClassName": "BT21_085",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_085.cs"
+    },
+    {
+      "effectClassName": "BT21_048",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Green/BT21_048.cs"
+    },
+    {
+      "effectClassName": "BT21_049",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Green/BT21_049.cs"
+    },
+    {
+      "effectClassName": "BT21_063",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_063.cs"
+    },
+    {
+      "effectClassName": "BT21_088",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_088.cs"
+    },
+    {
+      "effectClassName": "BT21_007",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_007.cs"
+    },
+    {
+      "effectClassName": "BT21_008",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_008.cs"
+    },
+    {
+      "effectClassName": "BT21_012",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_012.cs"
+    },
+    {
+      "effectClassName": "BT21_015",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_015.cs"
+    },
+    {
+      "effectClassName": "BT21_024",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_024.cs"
+    },
+    {
+      "effectClassName": "BT21_080",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_080.cs"
+    },
+    {
+      "effectClassName": "BT21_082",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_082.cs"
+    },
+    {
+      "effectClassName": "BT21_093",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_093.cs"
+    },
+    {
+      "effectClassName": "BT22_056",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_056.cs"
+    },
+    {
+      "effectClassName": "BT22_065",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_065.cs"
+    },
+    {
+      "effectClassName": "BT22_046",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_046.cs"
+    },
+    {
+      "effectClassName": "BT22_048",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_048.cs"
+    },
+    {
+      "effectClassName": "BT22_077",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_077.cs"
+    },
+    {
+      "effectClassName": "BT22_092",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_092.cs"
+    },
+    {
+      "effectClassName": "BT22_079",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs"
+    },
+    {
+      "effectClassName": "BT22_093",
+      "cardEffectPortingRecordStatus": "PartiallyImplemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_093.cs"
+    },
+    {
+      "effectClassName": "ST1_08",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_08.cs"
+    },
+    {
+      "effectClassName": "ST1_09",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_09.cs"
+    },
+    {
+      "effectClassName": "ST1_11",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_11.cs"
+    },
+    {
+      "effectClassName": "ST1_12",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_12.cs"
+    },
+    {
+      "effectClassName": "ST1_13",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_13.cs"
+    },
+    {
+      "effectClassName": "ST1_14",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_14.cs"
+    },
+    {
+      "effectClassName": "ST2_11",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_11.cs"
+    },
+    {
+      "effectClassName": "ST2_12",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_12.cs"
+    },
+    {
+      "effectClassName": "ST2_13",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_13.cs"
+    },
+    {
+      "effectClassName": "ST2_14",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_14.cs"
+    },
+    {
+      "effectClassName": "ST2_15",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_15.cs"
+    },
+    {
+      "effectClassName": "ST2_16",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_16.cs"
+    },
+    {
+      "effectClassName": "ST3_05",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_05.cs"
+    },
+    {
+      "effectClassName": "ST3_09",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_09.cs"
+    },
+    {
+      "effectClassName": "ST3_12",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_12.cs"
+    },
+    {
+      "effectClassName": "ST3_13",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_13.cs"
+    },
+    {
+      "effectClassName": "ST3_14",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_14.cs"
+    },
+    {
+      "effectClassName": "ST3_15",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_15.cs"
+    },
+    {
+      "effectClassName": "ST3_16",
+      "cardEffectPortingRecordStatus": "Implemented",
+      "generatedSourceScaffoldStatus": "Unsupported",
+      "path": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_16.cs"
+    }
+  ],
+  "issues": []
+}

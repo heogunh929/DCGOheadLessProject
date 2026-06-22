@@ -5,6 +5,7 @@ public sealed record CardDefinition
     private string _cardId = string.Empty;
     private string _cardNameEnglish = string.Empty;
     private string _cardEffectClassName = string.Empty;
+    private string _variantKey = string.Empty;
     private int _dp;
     private IReadOnlyList<CardColor> _cardColors = Array.Empty<CardColor>();
     private IReadOnlyList<EvoCostDefinition> _evoCosts = Array.Empty<EvoCostDefinition>();
@@ -28,6 +29,17 @@ public sealed record CardDefinition
     }
 
     public int CardIndex { get; init; }
+
+    public string VariantKey
+    {
+        get => _variantKey;
+        init => _variantKey = value ?? string.Empty;
+    }
+
+    public string DefinitionStableId =>
+        CardDefinitionIdentity.StableIdOrCardId(CardId, CardIndex, VariantKey);
+
+    public bool HasDefinitionIdentity => CardIndex > 0;
 
     public string CardNameEnglish
     {

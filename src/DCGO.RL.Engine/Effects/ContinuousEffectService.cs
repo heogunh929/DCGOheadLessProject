@@ -9,6 +9,23 @@ public interface IContinuousCardScript
     IReadOnlyList<ContinuousEffectDescriptor> CreateContinuousEffectDescriptors(ContinuousEffectScriptContext context);
 }
 
+public interface IContinuousKeywordCardScript
+{
+    IReadOnlyList<ContinuousKeywordDescriptor> CreateContinuousKeywordDescriptors(ContinuousEffectScriptContext context);
+}
+
+public interface IStaticEvolutionRequirementCardScript
+{
+    IReadOnlyList<StaticEvolutionRequirementDescriptor> CreateStaticEvolutionRequirementDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticLinkRequirementCardScript
+{
+    IReadOnlyList<StaticLinkRequirementDescriptor> CreateStaticLinkRequirementDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
 public sealed class ContinuousEffectSourceCollector
 {
     private readonly ICardScriptRegistry _cardScriptRegistry;
@@ -40,8 +57,104 @@ public sealed class ContinuousEffectSourceCollector
                 new ContinuousEffectScriptContext(
                     state,
                     source.Card,
-                    source.Permanent.Id,
-                    source.Permanent.ControllerPlayerId,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<ContinuousKeywordDescriptor> CollectKeywords(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<ContinuousKeywordDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IContinuousKeywordCardScript keywordScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(keywordScript.CreateContinuousKeywordDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticEvolutionRequirementDescriptor> CollectStaticEvolutionRequirements(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticEvolutionRequirementDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticEvolutionRequirementCardScript requirementScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(requirementScript.CreateStaticEvolutionRequirementDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticLinkRequirementDescriptor> CollectStaticLinkRequirements(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticLinkRequirementDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticLinkRequirementCardScript requirementScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(requirementScript.CreateStaticLinkRequirementDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
                     source.Kind)));
         }
 
@@ -64,6 +177,31 @@ public sealed class ContinuousEffectSourceCollector
                 {
                     yield return CreateSource(state, sourceCard, permanent, ContinuousEffectSourceKind.InheritedSource);
                 }
+
+                foreach (var linkedCard in permanent.LinkedCards)
+                {
+                    yield return CreateSource(state, linkedCard, permanent, ContinuousEffectSourceKind.LinkedCard);
+                }
+            }
+
+            foreach (var securityCard in player.Security.Where(card => state.Cards[card].IsFaceUp))
+            {
+                yield return CreatePlayerZoneSource(state, securityCard, ContinuousEffectSourceKind.FaceUpSecurity);
+            }
+
+            foreach (var handCard in player.Hand)
+            {
+                yield return CreatePlayerZoneSource(state, handCard, ContinuousEffectSourceKind.Hand);
+            }
+
+            foreach (var trashCard in player.Trash)
+            {
+                yield return CreatePlayerZoneSource(state, trashCard, ContinuousEffectSourceKind.Trash);
+            }
+
+            foreach (var executingCard in player.Executing)
+            {
+                yield return CreatePlayerZoneSource(state, executingCard, ContinuousEffectSourceKind.Executing);
             }
         }
     }
@@ -88,11 +226,33 @@ public sealed class ContinuousEffectSourceCollector
         return new ContinuousSource(card, instance, permanent, kind);
     }
 
+    private static ContinuousSource CreatePlayerZoneSource(
+        GameState state,
+        CardInstanceId card,
+        ContinuousEffectSourceKind kind)
+    {
+        if (!state.Cards.TryGetValue(card, out var instance))
+        {
+            throw new DomainException($"Continuous effect source card '{card}' does not exist.");
+        }
+
+        if (instance.PermanentId is not null)
+        {
+            throw new DomainException(
+                $"Continuous effect player-zone source card '{card}' should not belong to permanent '{instance.PermanentId}'.");
+        }
+
+        return new ContinuousSource(card, instance, Permanent: null, kind);
+    }
+
     private sealed record ContinuousSource(
         CardInstanceId Card,
         CardInstance Instance,
-        PermanentState Permanent,
-        ContinuousEffectSourceKind Kind);
+        PermanentState? Permanent,
+        ContinuousEffectSourceKind Kind)
+    {
+        public PlayerId ControllerPlayerId => Permanent?.ControllerPlayerId ?? Instance.Owner;
+    }
 }
 
 public sealed class ContinuousEffectService
@@ -151,6 +311,42 @@ public sealed class ContinuousEffectService
             .ToArray();
     }
 
+    public IReadOnlyList<ContinuousKeywordEvaluation> EvaluateKeywordsForPermanent(
+        GameState state,
+        PermanentState target,
+        BattleKeyword keyword)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(target);
+
+        return _sourceCollector.CollectKeywords(state)
+            .Where(descriptor => descriptor.Keyword == keyword)
+            .Where(descriptor => AppliesToPermanent(state, descriptor, target))
+            .Select(descriptor => EvaluateKeyword(state, descriptor, target))
+            .Where(evaluation => evaluation is not null)
+            .Select(evaluation => evaluation!)
+            .DistinctBy(evaluation => evaluation.Descriptor.StableId)
+            .OrderBy(evaluation => evaluation.Descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<ContinuousKeywordEvaluation> EvaluateKeywordsForPermanent(
+        GameState state,
+        PermanentState target)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(target);
+
+        return _sourceCollector.CollectKeywords(state)
+            .Where(descriptor => AppliesToPermanent(state, descriptor, target))
+            .Select(descriptor => EvaluateKeyword(state, descriptor, target))
+            .Where(evaluation => evaluation is not null)
+            .Select(evaluation => evaluation!)
+            .DistinctBy(evaluation => evaluation.Descriptor.StableId)
+            .OrderBy(evaluation => evaluation.Descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
     private static ContinuousEffectEvaluation Evaluate(
         GameState state,
         ContinuousEffectDescriptor descriptor,
@@ -170,9 +366,40 @@ public sealed class ContinuousEffectService
             descriptor.Amount(context));
     }
 
+    private static ContinuousKeywordEvaluation? EvaluateKeyword(
+        GameState state,
+        ContinuousKeywordDescriptor descriptor,
+        PermanentState targetPermanent)
+    {
+        var context = new ContinuousKeywordEvaluationContext(state, descriptor, targetPermanent);
+        if (descriptor.Condition is not null && !descriptor.Condition(context))
+        {
+            return null;
+        }
+
+        return new ContinuousKeywordEvaluation(descriptor, targetPermanent.Id);
+    }
+
     private static bool AppliesToPermanent(
         GameState state,
         ContinuousEffectDescriptor descriptor,
+        PermanentState target)
+    {
+        return descriptor.AppliesTo switch
+        {
+            ContinuousEffectTargetKind.SelfPermanent =>
+                descriptor.SourcePermanentId == target.Id,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon =>
+                target.ControllerPlayerId == descriptor.ControllerPlayerId
+                && !target.IsBreedingArea
+                && BattleRules.IsDigimon(state, target.TopCardId),
+            _ => false,
+        };
+    }
+
+    private static bool AppliesToPermanent(
+        GameState state,
+        ContinuousKeywordDescriptor descriptor,
         PermanentState target)
     {
         return descriptor.AppliesTo switch
@@ -273,4 +500,15 @@ public sealed class EffectiveStatService
         PlayerId player,
         ContinuousModifierKind modifierKind) =>
         _continuousEffectService?.PlayerModifierAmount(state, player, modifierKind) ?? 0;
+
+    public bool HasContinuousKeyword(GameState state, PermanentState permanent, BattleKeyword keyword) =>
+        _continuousEffectService?.EvaluateKeywordsForPermanent(state, permanent, keyword).Count > 0;
+
+    public IReadOnlyList<BattleKeyword> ContinuousKeywords(GameState state, PermanentState permanent) =>
+        _continuousEffectService?.EvaluateKeywordsForPermanent(state, permanent)
+            .Select(evaluation => evaluation.Descriptor.Keyword)
+            .Distinct()
+            .OrderBy(keyword => keyword)
+            .ToArray()
+        ?? Array.Empty<BattleKeyword>();
 }

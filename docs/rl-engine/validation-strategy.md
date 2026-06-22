@@ -1,5 +1,42 @@
 # 검증 전략
 
+## Queue 66G 검증 - 2026-06-22
+
+`66G_player_runtime_static_modifier_scope`는 원본 `Player.EffectList(EffectTiming.None)` 중 현재 RL.Engine의 `TemporaryModifier` 상태 모델로 대응하는 player-level runtime stat modifier 범위를 검증한 항목이다.
+
+검증 항목:
+
+- player-target DP modifier는 owner battle area Digimon에 적용되고 breeding area와 opponent Digimon에는 적용되지 않는다.
+- player-target SecurityAttack modifier는 owner Digimon 전체에 적용되고 opponent Digimon에는 적용되지 않는다.
+- player-level DP/SecurityAttack/SecurityDigimonDP modifier는 `Clone`, `RestoreFrom`, `ComputeStateHash`에 포함된다.
+- player-level runtime modifier는 `ReplayRunner`로 재생해도 final state hash와 invariant가 보존된다.
+- `ContinuousOrStaticEffect` 전체를 `Verified`로 승격하지 않는다.
+
+## Queue 66F 검증 - 2026-06-22
+
+`66F_continuous_static_source_scope`는 `ContinuousOrStaticEffect`의 source scope 일부를 구현한 항목이다.
+
+검증 항목:
+
+- linked card가 `ContinuousEffectSourceKind.LinkedCard`로 수집된다.
+- linked card가 linked zone을 떠나면 continuous descriptor가 더 이상 적용되지 않는다.
+- face-up security card가 `ContinuousEffectSourceKind.FaceUpSecurity`로 수집된다.
+- face-down security card는 continuous source로 수집되지 않는다.
+- `ContinuousOrStaticEffect` 전체는 아직 `Verified`로 승격하지 않는다.
+
+## Queue 66E 검증 - 2026-06-22
+
+`66E_mechanic_first_goal_scheduler`는 card-porting batch를 계속 실행하지 않고 unresolved mechanic을 먼저 고르는 gate를 검증한다.
+
+검증 항목:
+
+- `mechanic-first-scheduler-66E.json`이 `capability-dependency-graph-66D.json`과 queue 상태를 함께 사용한다.
+- unresolved capability 중 affected card count가 가장 큰 항목을 다음 mechanic 구현 대상으로 선택한다.
+- `C0039_zone_security_recovery`를 실행 가능 batch로 선택하지 않는다.
+- selector는 66E 완료 후 `mechanic-remediation` decision을 반환한다.
+- card-porting batch `done` 조건은 actual effect body, registry/status 갱신, tests, replay, baseline blocker 감소를 모두 요구한다.
+- blocked card batch를 건너뛰어 다음 card batch로 진행하지 않는다.
+
 ## Queue 66A 검증 - 2026-06-22
 
 `select_next_full_card_porting_batch.py`는 66번 generated subqueue를 직접 수행하기 전에 dependency 상태를 검증한다. `dependencyBatchIds`가 모두 `done`인 `todo` batch만 실행 가능하며, dependency가 `blocked` 또는 `needs-review`이면 dependent card batch를 건너뛴다.
@@ -589,3 +626,15 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 남은 범위:
 
 - full security timing sequence인 `OnSecurityCheck`, `OnLoseSecurity`, security 감소 확정, `AfterEffectsActivate`는 queue 53에서 source-aligned 순서로 정렬한다.
+## Queue 66J static requirement validation
+
+66J validation은 문서 문자열이나 enum 존재가 아니라 action generation, execution, invariant, replay evidence를 요구한다.
+
+- `Static evolution requirement hand source generates and executes`
+- `Static evolution requirement stops after source move`
+- `Static evolution requirement condition gates target`
+- `Static link requirement hand source generates and executes`
+- `Static requirement replay deterministic`
+- targeted `Static`, `Continuous`, `ComplexMechanics`, `Capability`, `FullCardPortingScheduler`
+
+`ContinuousOrStaticEffect`는 trait/name/text metadata, unsupported static effect interfaces, ignore-digivolution-permission semantics, full-card parity evidence가 남아 있어 `PartiallyImplemented`로 유지한다.

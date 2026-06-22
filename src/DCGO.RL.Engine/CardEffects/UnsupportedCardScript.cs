@@ -5,13 +5,22 @@ namespace DCGO.RL.Engine.CardEffects;
 
 public sealed class UnsupportedCardScript : ICardScript
 {
-    public UnsupportedCardScript(string cardId, string effectClassName, string reason)
+    public UnsupportedCardScript(
+        string cardId,
+        string effectClassName,
+        string reason,
+        int cardIndex = 0,
+        string variantKey = "",
+        string sourceEffectClassName = "")
     {
         Porting = new CardEffectPortingRecord(
             string.IsNullOrWhiteSpace(cardId) ? "<unknown>" : cardId,
             effectClassName ?? string.Empty,
             CardEffectPortingStatus.Unsupported,
-            string.IsNullOrWhiteSpace(reason) ? "Card script is not ported." : reason);
+            string.IsNullOrWhiteSpace(reason) ? "Card script is not ported." : reason,
+            sourceEffectClassName,
+            cardIndex,
+            variantKey);
     }
 
     public CardEffectPortingRecord Porting { get; }

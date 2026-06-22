@@ -11,16 +11,24 @@ public sealed class LegalActionGenerator
     private readonly ComplexMechanicService _complexMechanicService;
     private readonly BattleKeywordService _keywordService;
     private readonly EffectiveStatService _effectiveStats;
+    private readonly StaticRequirementService? _staticRequirements;
 
     public LegalActionGenerator(
         ComplexMechanicService? complexMechanicService = null,
         BattleKeywordService? keywordService = null,
-        EffectiveStatService? effectiveStats = null)
+        EffectiveStatService? effectiveStats = null,
+        StaticRequirementService? staticRequirements = null)
     {
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
         _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats);
-        _complexMechanicService = complexMechanicService ?? new ComplexMechanicService();
+        _staticRequirements = staticRequirements;
+        _complexMechanicService = complexMechanicService
+            ?? new ComplexMechanicService(staticRequirementService: staticRequirements);
     }
+
+    internal ComplexMechanicService RuntimeComplexMechanicService => _complexMechanicService;
+
+    internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
 
     public IReadOnlyList<LegalAction> Generate(GameState state, PlayerId playerId)
     {
@@ -103,7 +111,7 @@ public sealed class LegalActionGenerator
             {
                 foreach (var permanent in player.FieldPermanents)
                 {
-                    if (BattleRules.CanDigivolve(state, card, permanent, out _))
+                    if (BattleRules.CanDigivolve(state, card, permanent, out _, _staticRequirements))
                     {
                         actions.Add(new LegalAction(
                             $"digivolve:{card.Value}:{permanent.Id.Value}",

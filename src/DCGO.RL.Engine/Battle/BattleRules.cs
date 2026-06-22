@@ -186,7 +186,12 @@ internal static class BattleRules
             && player.BattleAreaPermanents.Count() < state.Config.FieldSlotCount;
     }
 
-    public static bool CanDigivolve(GameState state, CardInstanceId card, PermanentState targetPermanent, out int cost)
+    public static bool CanDigivolve(
+        GameState state,
+        CardInstanceId card,
+        PermanentState targetPermanent,
+        out int cost,
+        StaticRequirementService? staticRequirements = null)
     {
         cost = -1;
         if (!IsDigimon(state, card))
@@ -205,6 +210,13 @@ internal static class BattleRules
                 cost = Math.Max(0, evoCost.MemoryCost);
                 return true;
             }
+        }
+
+        var staticRequirement = staticRequirements?.FirstEvolutionRequirement(state, card, targetPermanent);
+        if (staticRequirement is not null)
+        {
+            cost = staticRequirement.Cost;
+            return true;
         }
 
         return false;

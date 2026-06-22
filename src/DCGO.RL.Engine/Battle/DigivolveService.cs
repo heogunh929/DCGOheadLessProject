@@ -23,20 +23,25 @@ public sealed class DigivolveService
     private readonly IZoneMover _zoneMover;
     private readonly DrawService _drawService;
     private readonly TriggerPipelineService? _triggerPipelineService;
+    private readonly StaticRequirementService? _staticRequirements;
 
     public DigivolveService(
         IZoneMover? zoneMover = null,
         DrawService? drawService = null,
-        TriggerPipelineService? triggerPipelineService = null)
+        TriggerPipelineService? triggerPipelineService = null,
+        StaticRequirementService? staticRequirements = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
         _triggerPipelineService = triggerPipelineService;
+        _staticRequirements = staticRequirements;
     }
 
     internal IZoneMover RuntimeZoneMover => _zoneMover;
 
     internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
+
+    internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
 
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null)
     {
@@ -72,7 +77,7 @@ public sealed class DigivolveService
             throw new DomainException($"Permanent '{action.TargetPermanent}' is not controlled by player '{action.Actor}'.");
         }
 
-        if (!BattleRules.CanDigivolve(state, action.Card, permanent, out var cost))
+        if (!BattleRules.CanDigivolve(state, action.Card, permanent, out var cost, _staticRequirements))
         {
             throw new DomainException($"Card '{action.Card}' cannot digivolve onto permanent '{action.TargetPermanent}'.");
         }

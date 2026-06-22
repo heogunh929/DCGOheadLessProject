@@ -257,6 +257,8 @@ public sealed class GameState
                 .Append(definition.Key).Append('|')
                 .Append(definition.Value.CardId).Append('|')
                 .Append(definition.Value.CardIndex).Append('|')
+                .Append(definition.Value.VariantKey).Append('|')
+                .Append(definition.Value.DefinitionStableId).Append('|')
                 .Append(definition.Value.CardNameEnglish).Append('|')
                 .Append(definition.Value.CardNameJapanese).Append('|')
                 .Append(string.Join(",", definition.Value.CardKinds)).Append('|')

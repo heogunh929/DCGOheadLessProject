@@ -122,6 +122,16 @@ var tests = new (string Name, Action Test)[]
     ("FullCardPortingBatches control files exist", FullCardPortingBatchesControlFilesExist),
     ("FullCardPortingScheduler skips blocked dependencies", FullCardPortingSchedulerSkipsBlockedDependencies),
     ("FullCardPortingScheduler documents card completion policy", FullCardPortingSchedulerDocumentsCardCompletionPolicy),
+    ("CapabilityTruthAudit registry is conservative", CapabilityTruthAuditRegistryIsConservative),
+    ("CapabilityTruthAudit source and batch blockers", CapabilityTruthAuditSourceAndBatchBlockers),
+    ("CapabilityTruthAudit status mismatch and variant registry integrated", CapabilityTruthAuditStatusMismatchAndVariantRegistryIntegrated),
+    ("CapabilityDependencyGraph links sources and batches", CapabilityDependencyGraphLinksSourcesAndBatches),
+    ("CapabilityDependencyGraph blocks coarse card batches", CapabilityDependencyGraphBlocksCoarseCardBatches),
+    ("CapabilityDependencyGraph scheduler policy", CapabilityDependencyGraphSchedulerPolicy),
+    ("MechanicFirstScheduler selects top unresolved capability", MechanicFirstSchedulerSelectsTopUnresolvedCapability),
+    ("MechanicFirstScheduler blocks card batch advancement", MechanicFirstSchedulerBlocksCardBatchAdvancement),
+    ("MechanicFirstScheduler selector policy", MechanicFirstSchedulerSelectorPolicy),
+    ("FullCardPortingScheduler selects remediation before C0039", FullCardPortingSchedulerSelectsRemediationBeforeC0039),
     ("FullCardPortingBatch L0001 existing layer blockers documented", FullCardPortingBatchL0001ExistingLayerBlockersDocumented),
     ("FullCardPortingBatch L0002 timing layer blockers documented", FullCardPortingBatchL0002TimingLayerBlockersDocumented),
     ("FullCardPortingBatch L0003 movement action timing blockers documented", FullCardPortingBatchL0003MovementActionTimingBlockersDocumented),
@@ -218,6 +228,10 @@ var tests = new (string Name, Action Test)[]
     ("Duration modifiers stack deterministically", DurationModifiersStackDeterministically),
     ("Duration modifier state hash changes", DurationModifierStateHashChanges),
     ("Duration replay determinism includes modifiers", DurationReplayDeterminismIncludesModifiers),
+    ("Duration player DP modifier affects owner battle area", DurationPlayerDpModifierAffectsOwnerBattleArea),
+    ("Duration player SecurityAttack modifier affects owner Digimon", DurationPlayerSecurityAttackModifierAffectsOwnerDigimon),
+    ("Duration player runtime modifiers clone restore hash", DurationPlayerRuntimeModifiersCloneRestoreHash),
+    ("Duration player runtime modifiers replay deterministic", DurationPlayerRuntimeModifiersReplayDeterministic),
     ("Duration cleanup UntilBattleEnd removes modifier", DurationCleanupUntilBattleEndRemovesModifier),
     ("Duration security Digimon DP affects security battle", DurationSecurityDigimonDpAffectsSecurityBattle),
     ("Continuous DP modifier affects effective DP", ContinuousDpModifierAffectsEffectiveDp),
@@ -228,6 +242,21 @@ var tests = new (string Name, Action Test)[]
     ("Continuous source count condition", ContinuousSourceCountCondition),
     ("Continuous tamer aura applies owner battle area", ContinuousTamerAuraAppliesOwnerBattleArea),
     ("Continuous dynamic SecurityAttack from source count", ContinuousDynamicSecurityAttackFromSourceCount),
+    ("Continuous linked source applies from linked zone", ContinuousLinkedSourceAppliesFromLinkedZone),
+    ("Continuous face-up security source applies", ContinuousFaceUpSecuritySourceApplies),
+    ("Continuous face-down security source is ignored", ContinuousFaceDownSecuritySourceIsIgnored),
+    ("Continuous hand source applies only from hand", ContinuousHandSourceAppliesOnlyFromHand),
+    ("Continuous trash source applies from trash", ContinuousTrashSourceAppliesFromTrash),
+    ("Continuous executing source applies during execution", ContinuousExecutingSourceAppliesDuringExecution),
+    ("Continuous static keyword field source grants Blocker", ContinuousStaticKeywordFieldSourceGrantsBlocker),
+    ("Continuous static keyword inherited source stops after move", ContinuousStaticKeywordInheritedSourceStopsAfterMove),
+    ("Continuous static keyword condition gates keyword", ContinuousStaticKeywordConditionGatesKeyword),
+    ("Continuous static keyword replay deterministic", ContinuousStaticKeywordReplayDeterministic),
+    ("Static evolution requirement hand source generates and executes", StaticEvolutionRequirementHandSourceGeneratesAndExecutes),
+    ("Static evolution requirement stops after source move", StaticEvolutionRequirementStopsAfterSourceMove),
+    ("Static evolution requirement condition gates target", StaticEvolutionRequirementConditionGatesTarget),
+    ("Static link requirement hand source generates and executes", StaticLinkRequirementHandSourceGeneratesAndExecutes),
+    ("Static requirement replay deterministic", StaticRequirementReplayDeterministic),
     ("Continuous and duration modifiers stack deterministically", ContinuousAndDurationModifiersStackDeterministically),
     ("Continuous effects are derived for state hash", ContinuousEffectsAreDerivedForStateHash),
     ("ST1 continuous layer validation report", St1ContinuousLayerValidationReport),
@@ -424,6 +453,8 @@ var tests = new (string Name, Action Test)[]
     ("Tier1 OncePerTurnTracker prevents duplicate use", Tier1OncePerTurnTrackerPreventsDuplicateUse),
     ("Tier1 unsupported primitive fails explicitly", Tier1UnsupportedPrimitiveFailsExplicitly),
     ("CardEffectFoundation registry lookup", CardEffectFoundationRegistryLookup),
+    ("CardEffectFoundation variant-aware registry lookup", CardEffectFoundationVariantAwareRegistryLookup),
+    ("CardEffectFoundation state hash includes variant identity", CardEffectFoundationStateHashIncludesVariantIdentity),
     ("CardEffectFoundation unsupported script fails", CardEffectFoundationUnsupportedScriptFails),
     ("CardEffectFoundation deck validation catches unsupported", CardEffectFoundationDeckValidationCatchesUnsupported),
     ("CardEffectFoundation no effect must be explicit", CardEffectFoundationNoEffectMustBeExplicit),
@@ -2923,14 +2954,17 @@ static void FullCardPortingSchedulerSkipsBlockedDependencies()
     var active = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/codex-prompts/ACTIVE/RUN_NEXT_FULL_CARD_PORTING_BATCHES.md"));
     AssertTrue(active.Contains("scripts/select_next_full_card_porting_batch.py --workspace .", StringComparison.Ordinal));
     AssertTrue(active.Contains("dependencyBatchIds", StringComparison.Ordinal));
-    AssertTrue(active.Contains("`L0006_zone_security_recovery`는 `done`", StringComparison.Ordinal));
-    AssertTrue(active.Contains("card-porting batch를 `executable`", StringComparison.Ordinal));
-    AssertTrue(active.Contains("자동으로 다음 card-porting batch를 시작하지 않는다", StringComparison.Ordinal));
+    AssertTrue(active.Contains("66E Mechanic-First Scheduler", StringComparison.Ordinal));
+    AssertTrue(active.Contains("C0039_zone_security_recovery", StringComparison.Ordinal));
+    AssertTrue(active.Contains("mechanic-remediation", StringComparison.Ordinal));
+    AssertTrue(active.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
 
     var script = File.ReadAllText(Path.Combine(WorkspaceRoot(), "scripts/select_next_full_card_porting_batch.py"));
     AssertTrue(script.Contains("\"requiresAllDependencyBatchIdsDone\": True", StringComparison.Ordinal));
     AssertTrue(script.Contains("\"commonLayerUnimplementedStatus\": \"blocked\"", StringComparison.Ordinal));
     AssertTrue(script.Contains("\"baseline-blocker-reduction\"", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"replay\"", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"cardBatchRequiresVerifiedRequiredCapabilities\": True", StringComparison.Ordinal));
 }
 
 static void FullCardPortingSchedulerDocumentsCardCompletionPolicy()
@@ -2945,17 +2979,326 @@ static void FullCardPortingSchedulerDocumentsCardCompletionPolicy()
 
     var summary = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/rl-engine/full-card-porting-batches-66.md"));
     AssertTrue(summary.Contains("Queue 66A", StringComparison.Ordinal));
+    AssertTrue(summary.Contains("Queue 66E", StringComparison.Ordinal));
     AssertTrue(summary.Contains("dependencyBatchIds", StringComparison.Ordinal));
     AssertTrue(summary.Contains("C0026_zone_security_recovery", StringComparison.Ordinal));
     AssertTrue(summary.Contains("L0006_zone_security_recovery", StringComparison.Ordinal));
+    AssertTrue(summary.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
 
     var validation = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/rl-engine/validation-strategy.md"));
+    AssertTrue(validation.Contains("Queue 66E", StringComparison.Ordinal));
     AssertTrue(validation.Contains("Queue 66A", StringComparison.Ordinal));
     AssertTrue(validation.Contains("`needs-review`", StringComparison.Ordinal));
     AssertTrue(validation.Contains("`blocked`", StringComparison.Ordinal));
     AssertTrue(validation.Contains("effect body", StringComparison.Ordinal));
     AssertTrue(validation.Contains("registry/status", StringComparison.Ordinal));
+    AssertTrue(validation.Contains("replay", StringComparison.Ordinal));
     AssertTrue(validation.Contains("baseline blocker", StringComparison.Ordinal));
+}
+
+static void CapabilityTruthAuditRegistryIsConservative()
+{
+    using var document = Load66BCapabilityRegistryDocument();
+    var root = document.RootElement;
+
+    AssertEqual("dcgo.capability-truth-audit.66B.v1", root.GetProperty("schemaVersion").GetString());
+    var allowedStatuses = root.GetProperty("statusPolicy").GetProperty("allowedStatuses")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(allowedStatuses.SetEquals(new[] { "PartiallyImplemented", "Unsupported", "Verified" }));
+    AssertFalse(root.GetProperty("statusPolicy").GetProperty("documentationOrEnumOnlyMayVerify").GetBoolean());
+    AssertTrue(root.GetProperty("summary").GetProperty("documentationConflictCount").GetInt32() > 0);
+
+    var capabilities = root.GetProperty("capabilities").EnumerateArray().ToArray();
+    AssertTrue(capabilities.Length > 100);
+    AssertTrue(capabilities.All(capability => allowedStatuses.Contains(capability.GetProperty("status").GetString())));
+
+    foreach (var verified in capabilities.Where(capability => capability.GetProperty("status").GetString() == "Verified"))
+    {
+        AssertTrue(verified.GetProperty("implementationEvidence").GetArrayLength() > 0);
+        AssertTrue(verified.GetProperty("testEvidence").GetArrayLength() > 0);
+        AssertTrue(verified.GetProperty("replayOrInvariantEvidence").GetArrayLength() > 0);
+    }
+
+    var onDraw = capabilities.Single(capability => capability.GetProperty("capabilityId").GetString() == "OnDraw");
+    AssertEqual("PartiallyImplemented", onDraw.GetProperty("status").GetString());
+    AssertTrue(onDraw.GetProperty("hasDocumentationConflict").GetBoolean());
+    var claimStatuses = onDraw.GetProperty("documentClaims")
+        .EnumerateArray()
+        .Select(claim => claim.GetProperty("queueStatus").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(claimStatuses.Contains("blocked"));
+    AssertTrue(claimStatuses.Contains("done"));
+
+    var continuous = capabilities.Single(capability => capability.GetProperty("capabilityId").GetString() == "ContinuousOrStaticEffect");
+    AssertEqual("PartiallyImplemented", continuous.GetProperty("status").GetString());
+    var continuousTests = continuous.GetProperty("testEvidence")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(continuousTests.Contains("Continuous hand source applies only from hand"));
+    AssertTrue(continuousTests.Contains("Continuous trash source applies from trash"));
+    AssertTrue(continuousTests.Contains("Continuous executing source applies during execution"));
+    AssertTrue(continuousTests.Contains("Continuous static keyword field source grants Blocker"));
+    AssertTrue(continuousTests.Contains("Continuous static keyword inherited source stops after move"));
+    AssertTrue(continuousTests.Contains("Continuous static keyword condition gates keyword"));
+    AssertTrue(continuousTests.Contains("Continuous static keyword replay deterministic"));
+    var continuousReplay = continuous.GetProperty("replayOrInvariantEvidence")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(continuousReplay.Contains("Duration player runtime modifiers replay deterministic"));
+    AssertTrue(continuousReplay.Contains("Continuous static keyword replay deterministic"));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("TemporaryModifier", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static keyword descriptors", StringComparison.Ordinal));
+
+    var report = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/rl-engine/capability-truth-audit-66B.md"));
+    AssertTrue(report.Contains("OnDraw", StringComparison.Ordinal));
+    AssertTrue(report.Contains("PartiallyImplemented", StringComparison.Ordinal));
+    AssertTrue(report.Contains("C0039", StringComparison.Ordinal));
+}
+
+static void CapabilityTruthAuditSourceAndBatchBlockers()
+{
+    using var requiredDocument = Load66BSourceRequiredCapabilitiesDocument();
+    var requiredRoot = requiredDocument.RootElement;
+    AssertEqual("dcgo.source-required-capabilities.66B.v1", requiredRoot.GetProperty("schemaVersion").GetString());
+    AssertEqual(3918, requiredRoot.GetProperty("summary").GetProperty("sourceEffectCount").GetInt32());
+    AssertEqual(3918, requiredRoot.GetProperty("summary").GetProperty("sourceEffectsWithNonVerifiedCapabilities").GetInt32());
+
+    var bt22094 = requiredRoot.GetProperty("sourceEffects").EnumerateArray()
+        .Single(effect => effect.GetProperty("sourceEffectClassName").GetString() == "BT22_094");
+    var required = bt22094.GetProperty("requiredCapabilities")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(required.Contains("BeforePayCost"));
+    AssertTrue(required.Contains("SecuritySkill"));
+    AssertTrue(required.Contains("Selection.SelectCard"));
+    AssertTrue(required.Contains("Selection.SelectSecurity"));
+
+    using var blockerDocument = Load66BBatchBlockersDocument();
+    var blockerRoot = blockerDocument.RootElement;
+    AssertEqual("dcgo.batch-capability-blockers.66B.v1", blockerRoot.GetProperty("schemaVersion").GetString());
+    AssertTrue(blockerRoot.GetProperty("policy").GetProperty("cardBatchExecutableOnlyWhenAllRequiredCapabilitiesVerified").GetBoolean());
+    AssertTrue(blockerRoot.GetProperty("policy").GetProperty("doNotSelectC0039").GetBoolean());
+    AssertFalse(blockerRoot.GetProperty("summary").GetProperty("c0039Executable").GetBoolean());
+
+    var c0039 = blockerRoot.GetProperty("batches").EnumerateArray()
+        .Single(batch => batch.GetProperty("batchId").GetString() == "C0039_zone_security_recovery");
+    AssertFalse(c0039.GetProperty("isExecutable").GetBoolean());
+    var blockers = c0039.GetProperty("blockingCapabilities").EnumerateArray()
+        .Select(item => item.GetProperty("capabilityId").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(blockers.Contains("BeforePayCost"));
+    AssertTrue(blockers.Contains("Selection.SelectCard"));
+    AssertTrue(blockers.Contains("ZoneMovement"));
+}
+
+static void CapabilityTruthAuditStatusMismatchAndVariantRegistryIntegrated()
+{
+    using var document = Load66BStatusMismatchDocument();
+    var root = document.RootElement;
+    AssertEqual("dcgo.status-mismatch-report.66B.v1", root.GetProperty("schemaVersion").GetString());
+    AssertEqual(0, root.GetProperty("summary").GetProperty("generatedImplementedOrVerifiedCount").GetInt32());
+    AssertTrue(root.GetProperty("summary").GetProperty("statusMismatchCount").GetInt32() > 0);
+    AssertEqual(0, root.GetProperty("summary").GetProperty("blockerIssueCount").GetInt32());
+
+    var mismatches = root.GetProperty("mismatches").EnumerateArray().ToArray();
+    AssertTrue(mismatches.Any(mismatch => mismatch.GetProperty("effectClassName").GetString() == "BT22_079"));
+
+    var issues = root.GetProperty("issues").EnumerateArray().ToArray();
+    AssertFalse(issues.Any(item => item.GetProperty("code").GetString() == "CardIdOnlyRuntimeRegistry"));
+}
+
+static void CapabilityDependencyGraphLinksSourcesAndBatches()
+{
+    using var document = Load66DCapabilityDependencyGraphDocument();
+    var root = document.RootElement;
+
+    AssertEqual("dcgo.capability-dependency-graph.66D.v1", root.GetProperty("schemaVersion").GetString());
+    AssertTrue(root.GetProperty("policy").GetProperty("cardBatchExecutableOnlyWhenAllRequiredCapabilitiesVerified").GetBoolean());
+    AssertFalse(root.GetProperty("policy").GetProperty("coarseCategoryDependencyMayExecuteCardBatch").GetBoolean());
+    AssertFalse(root.GetProperty("policy").GetProperty("blockerDocumentationCompletesCardPortingBatch").GetBoolean());
+    AssertEqual(3918, root.GetProperty("summary").GetProperty("sourceEffectCount").GetInt32());
+    AssertEqual(397, root.GetProperty("summary").GetProperty("cardBatchCount").GetInt32());
+    AssertEqual(397, root.GetProperty("summary").GetProperty("blockedCardBatchCount").GetInt32());
+    AssertEqual(0, root.GetProperty("summary").GetProperty("executableCardBatchCount").GetInt32());
+
+    var beforePayCost = root.GetProperty("capabilities").EnumerateArray()
+        .Single(capability => capability.GetProperty("capabilityId").GetString() == "BeforePayCost");
+    AssertEqual("Unsupported", beforePayCost.GetProperty("status").GetString());
+    AssertTrue(beforePayCost.GetProperty("sourceEffectCount").GetInt32() > 0);
+    AssertTrue(beforePayCost.GetProperty("cardBatchCount").GetInt32() > 0);
+}
+
+static void CapabilityDependencyGraphBlocksCoarseCardBatches()
+{
+    using var document = Load66DCapabilityDependencyGraphDocument();
+    var root = document.RootElement;
+    AssertFalse(root.GetProperty("summary").GetProperty("c0039Executable").GetBoolean());
+
+    var c0039 = root.GetProperty("batches").EnumerateArray()
+        .Single(batch => batch.GetProperty("batchId").GetString() == "C0039_zone_security_recovery");
+    AssertTrue(c0039.GetProperty("coarseCategoryDependencySatisfied").GetBoolean());
+    AssertFalse(c0039.GetProperty("requiredCapabilityGateSatisfied").GetBoolean());
+    AssertFalse(c0039.GetProperty("isExecutable").GetBoolean());
+
+    var bt22094 = c0039.GetProperty("sourceEffects").EnumerateArray()
+        .Single(source => source.GetProperty("sourceEffectClassName").GetString() == "BT22_094");
+    var required = bt22094.GetProperty("requiredCapabilities")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(required.Contains("BeforePayCost"));
+    AssertTrue(required.Contains("Selection.SelectCard"));
+    AssertTrue(required.Contains("Selection.SelectSecurity"));
+
+    var blockers = c0039.GetProperty("blockingCapabilities")
+        .EnumerateArray()
+        .Select(item => item.GetProperty("capabilityId").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(blockers.Contains("BeforePayCost"));
+    AssertTrue(blockers.Contains("ZoneMovement"));
+}
+
+static void CapabilityDependencyGraphSchedulerPolicy()
+{
+    var script = File.ReadAllText(Path.Combine(WorkspaceRoot(), "scripts/select_next_full_card_porting_batch.py"));
+    AssertTrue(script.Contains("CAPABILITY_GRAPH_PATH", StringComparison.Ordinal));
+    AssertTrue(script.Contains("capability-blocked", StringComparison.Ordinal));
+    AssertTrue(script.Contains("coarse category dependency is insufficient", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"cardBatchRequiresVerifiedRequiredCapabilities\": True", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"coarseCategoryDependencyMayExecuteCardBatch\": False", StringComparison.Ordinal));
+    AssertTrue(script.Contains("MECHANIC_SCHEDULER_PATH", StringComparison.Ordinal));
+    AssertTrue(script.Contains("mechanic-remediation", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"blockedCardBatchDoesNotAdvanceToNextCardBatch\": True", StringComparison.Ordinal));
+    AssertTrue(script.Contains("\"selectMostAffectedUnresolvedCapability\": True", StringComparison.Ordinal));
+}
+
+static void MechanicFirstSchedulerSelectsTopUnresolvedCapability()
+{
+    using var document = Load66EMechanicFirstSchedulerDocument();
+    var root = document.RootElement;
+
+    AssertEqual("dcgo.mechanic-first-scheduler.66E.v1", root.GetProperty("schemaVersion").GetString());
+    AssertTrue(root.GetProperty("policy").GetProperty("blockedCardBatchDoesNotAdvanceToNextCardBatch").GetBoolean());
+    AssertTrue(root.GetProperty("policy").GetProperty("selectMostAffectedUnresolvedCapability").GetBoolean());
+    AssertTrue(root.GetProperty("policy").GetProperty("mechanicImplementationReopensAffectedCardBatches").GetBoolean());
+
+    var blockers = root.GetProperty("capabilityBlockers").EnumerateArray().ToArray();
+    AssertTrue(blockers.Length > 0);
+    var selected = root.GetProperty("selectedMechanic");
+    var selectedCapabilityId = selected.GetProperty("capabilityId").GetString();
+    var selectedAffectedCount = selected.GetProperty("affectedCardCount").GetInt32();
+    var maxAffectedCount = blockers.Max(blocker => blocker.GetProperty("affectedCardCount").GetInt32());
+
+    AssertEqual(root.GetProperty("summary").GetProperty("selectedCapabilityId").GetString(), selectedCapabilityId);
+    AssertEqual(maxAffectedCount, selectedAffectedCount);
+    AssertNotEqual("Verified", selected.GetProperty("status").GetString());
+    AssertEqual("ContinuousOrStaticEffect", selectedCapabilityId);
+    AssertTrue(selected.GetProperty("reopenCardBatchIdsAfterVerification").GetArrayLength() > 0);
+}
+
+static void MechanicFirstSchedulerBlocksCardBatchAdvancement()
+{
+    using var document = Load66EMechanicFirstSchedulerDocument();
+    var root = document.RootElement;
+    var cursor = root.GetProperty("blockedCardBatchCursor");
+
+    AssertEqual("C0039_zone_security_recovery", cursor.GetProperty("batchId").GetString());
+    AssertFalse(cursor.GetProperty("isExecutable").GetBoolean());
+    AssertFalse(cursor.GetProperty("requiredCapabilityGateSatisfied").GetBoolean());
+    AssertTrue(cursor.GetProperty("coarseCategoryDependencySatisfied").GetBoolean());
+    AssertTrue(cursor.GetProperty("blockingCapabilities").GetArrayLength() > 0);
+
+    var nextAction = root.GetProperty("nextAction");
+    AssertEqual("implement-mechanic", nextAction.GetProperty("type").GetString());
+    AssertEqual("C0039_zone_security_recovery", nextAction.GetProperty("doNotExecuteCardBatchId").GetString());
+}
+
+static void MechanicFirstSchedulerSelectorPolicy()
+{
+    var statuses = ReadFullCardPortingQueueStatuses();
+    AssertEqual("done", statuses["66E_mechanic_first_goal_scheduler"]);
+    AssertEqual("todo", statuses["C0039_zone_security_recovery"]);
+
+    using var document = Load66EMechanicFirstSchedulerDocument();
+    var selected = document.RootElement.GetProperty("selectedMechanic");
+    AssertEqual("ContinuousOrStaticEffect", selected.GetProperty("capabilityId").GetString());
+
+    var active = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/codex-prompts/ACTIVE/RUN_NEXT_FULL_CARD_PORTING_BATCHES.md"));
+    AssertTrue(active.Contains("mechanic-remediation", StringComparison.Ordinal));
+    AssertTrue(active.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
+    AssertTrue(active.Contains("C0039_zone_security_recovery", StringComparison.Ordinal));
+
+    var schedulerDoc = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/rl-engine/mechanic-first-scheduler-66E.md"));
+    AssertTrue(schedulerDoc.Contains("mechanic-remediation", StringComparison.Ordinal));
+    AssertTrue(schedulerDoc.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
+    AssertTrue(schedulerDoc.Contains("actual effect body", StringComparison.Ordinal));
+    AssertTrue(schedulerDoc.Contains("replay", StringComparison.Ordinal));
+}
+
+static void FullCardPortingSchedulerSelectsRemediationBeforeC0039()
+{
+    var statuses = ReadFullCardPortingQueueStatuses();
+    AssertEqual("done", statuses["66B_capability_truth_audit"]);
+    AssertEqual("done", statuses["66C_runtime_status_variant_registry_integration"]);
+    AssertEqual("done", statuses["66D_card_effect_capability_dependency_graph"]);
+    AssertEqual("done", statuses["66E_mechanic_first_goal_scheduler"]);
+    AssertEqual("done", statuses["66F_continuous_static_source_scope"]);
+    AssertEqual("done", statuses["66G_player_runtime_static_modifier_scope"]);
+    AssertEqual("done", statuses["66H_hand_trash_executing_static_source_scope"]);
+    AssertEqual("done", statuses["66I_continuous_static_keyword_descriptor_scope"]);
+    AssertEqual("done", statuses["66J_static_requirement_descriptor_scope"]);
+    AssertEqual("todo", statuses["C0039_zone_security_recovery"]);
+
+    var queue = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/codex-prompts/state/QUEUE_FULL_CARD_PORTING_BATCHES.md"));
+    AssertTrue(queue.IndexOf("66J_static_requirement_descriptor_scope", StringComparison.Ordinal)
+        < queue.IndexOf("C0039_zone_security_recovery", StringComparison.Ordinal));
+
+    using var manifest = Load66FullCardPortingBatchesDocument();
+    var batches = manifest.RootElement.GetProperty("batches").EnumerateArray().ToArray();
+    AssertEqual(manifest.RootElement.GetProperty("summary").GetProperty("batchCount").GetInt32(), batches.Length);
+    AssertEqual(9, manifest.RootElement.GetProperty("summary").GetProperty("mechanicRemediationBatchCount").GetInt32());
+    var c66d = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66D_card_effect_capability_dependency_graph");
+    AssertEqual("mechanic-remediation", c66d.GetProperty("kind").GetString());
+    AssertEqual("done", c66d.GetProperty("status").GetString());
+    AssertEqual("66C_runtime_status_variant_registry_integration", c66d.GetProperty("dependencyBatchIds")[0].GetString());
+    var c66e = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66E_mechanic_first_goal_scheduler");
+    AssertEqual("mechanic-remediation", c66e.GetProperty("kind").GetString());
+    AssertEqual("done", c66e.GetProperty("status").GetString());
+    AssertEqual("66D_card_effect_capability_dependency_graph", c66e.GetProperty("dependencyBatchIds")[0].GetString());
+    var c66g = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66G_player_runtime_static_modifier_scope");
+    AssertEqual("mechanic-remediation", c66g.GetProperty("kind").GetString());
+    AssertEqual("done", c66g.GetProperty("status").GetString());
+    AssertEqual("66F_continuous_static_source_scope", c66g.GetProperty("dependencyBatchIds")[0].GetString());
+    var c66h = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66H_hand_trash_executing_static_source_scope");
+    AssertEqual("mechanic-remediation", c66h.GetProperty("kind").GetString());
+    AssertEqual("done", c66h.GetProperty("status").GetString());
+    AssertEqual("66G_player_runtime_static_modifier_scope", c66h.GetProperty("dependencyBatchIds")[0].GetString());
+    var c66i = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66I_continuous_static_keyword_descriptor_scope");
+    AssertEqual("mechanic-remediation", c66i.GetProperty("kind").GetString());
+    AssertEqual("done", c66i.GetProperty("status").GetString());
+    AssertEqual("66H_hand_trash_executing_static_source_scope", c66i.GetProperty("dependencyBatchIds")[0].GetString());
+    var c66j = batches.Single(batch => batch.GetProperty("batchId").GetString() == "66J_static_requirement_descriptor_scope");
+    AssertEqual("mechanic-remediation", c66j.GetProperty("kind").GetString());
+    AssertEqual("done", c66j.GetProperty("status").GetString());
+    AssertEqual("66I_continuous_static_keyword_descriptor_scope", c66j.GetProperty("dependencyBatchIds")[0].GetString());
+
+    var active = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/codex-prompts/ACTIVE/RUN_NEXT_FULL_CARD_PORTING_BATCHES.md"));
+    AssertTrue(active.Contains("66E Mechanic-First Scheduler", StringComparison.Ordinal));
+    AssertTrue(active.Contains("66J", StringComparison.Ordinal));
+    AssertTrue(active.Contains("C0039_zone_security_recovery", StringComparison.Ordinal));
+    AssertTrue(active.Contains("mechanic-remediation", StringComparison.Ordinal));
+    AssertTrue(active.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
+
+    using var scheduler = Load66EMechanicFirstSchedulerDocument();
+    var root = scheduler.RootElement;
+    AssertEqual("ContinuousOrStaticEffect", root.GetProperty("summary").GetProperty("selectedCapabilityId").GetString());
+    AssertFalse(root.GetProperty("summary").GetProperty("c0039Executable").GetBoolean());
+    AssertEqual("C0039_zone_security_recovery", root.GetProperty("blockedCardBatchCursor").GetProperty("batchId").GetString());
 }
 
 static Dictionary<string, string> ReadFullCardPortingQueueStatuses()
@@ -2970,7 +3313,7 @@ static Dictionary<string, string> ReadFullCardPortingQueueStatuses()
         }
 
         var cells = rawLine.Trim().Trim('|').Split('|', StringSplitOptions.TrimEntries);
-        if (cells.Length < 4 || !int.TryParse(cells[0], out _))
+        if (cells.Length < 4 || cells[0] is "Order" or "---")
         {
             continue;
         }
@@ -7666,6 +8009,122 @@ static void DurationReplayDeterminismIncludesModifiers()
     AssertEqual(1, replay.FinalState.TemporaryModifiers.Count);
 }
 
+static void DurationPlayerDpModifierAffectsOwnerBattleArea()
+{
+    var state = CreateMinimalBattleState();
+    var ownerBattle = AddBattlePermanent(state, 2172, 372, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var ownerBreeding = AddBattlePermanent(state, 2173, 373, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    ownerBreeding.IsBreedingArea = true;
+    var opponentBattle = AddBattlePermanent(state, 2174, 374, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+
+    new Tier1PrimitiveService().AddTemporaryPlayerDPModifier(
+        state,
+        PlayerId.Player0,
+        amount: 2000,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-dp");
+
+    AssertEqual(5000, EffectiveStatService.NoContinuous.Dp(state, ownerBattle));
+    AssertEqual(3000, EffectiveStatService.NoContinuous.Dp(state, ownerBreeding));
+    AssertEqual(3000, EffectiveStatService.NoContinuous.Dp(state, opponentBattle));
+}
+
+static void DurationPlayerSecurityAttackModifierAffectsOwnerDigimon()
+{
+    var state = CreateMinimalBattleState();
+    var firstAttacker = AddBattlePermanent(state, 2175, 375, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var secondAttacker = AddBattlePermanent(state, 2176, 376, "BT1-ROOKIE", PlayerId.Player0, 1, enterTurn: 1);
+    var opponentAttacker = AddBattlePermanent(state, 2177, 377, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var keywords = new BattleKeywordService();
+
+    new Tier1PrimitiveService().AddTemporarySecurityAttackModifier(
+        state,
+        PlayerId.Player0,
+        amount: 1,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-security-attack");
+
+    AssertEqual(2, keywords.SecurityAttackCount(state, firstAttacker));
+    AssertEqual(2, keywords.SecurityAttackCount(state, secondAttacker));
+    AssertEqual(1, keywords.SecurityAttackCount(state, opponentAttacker));
+}
+
+static void DurationPlayerRuntimeModifiersCloneRestoreHash()
+{
+    var state = CreateMinimalBattleState();
+    var permanent = AddBattlePermanent(state, 2178, 378, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var service = new Tier1PrimitiveService();
+
+    service.AddTemporaryPlayerDPModifier(
+        state,
+        PlayerId.Player0,
+        amount: 1000,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-dp-hash");
+    service.AddTemporarySecurityAttackModifier(
+        state,
+        PlayerId.Player0,
+        amount: 1,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-security-attack-hash");
+    service.AddTemporarySecurityDigimonDPModifier(
+        state,
+        PlayerId.Player0,
+        amount: 3000,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-security-dp-hash");
+
+    var snapshot = state.Clone();
+    var expectedHash = snapshot.ComputeStateHash();
+    state.Memory = 9;
+    state.TemporaryModifiers.RemoveAt(0);
+    state.RestoreFrom(snapshot);
+
+    AssertEqual(expectedHash, state.ComputeStateHash());
+    AssertEqual(3, state.TemporaryModifiers.Count);
+    AssertEqual(4000, EffectiveStatService.NoContinuous.Dp(state, permanent));
+}
+
+static void DurationPlayerRuntimeModifiersReplayDeterministic()
+{
+    var state = CreateMinimalBattleState();
+    AddBattlePermanent(state, 2179, 379, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var service = new Tier1PrimitiveService();
+
+    service.AddTemporaryPlayerDPModifier(
+        state,
+        PlayerId.Player0,
+        amount: 1000,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-dp-replay");
+    service.AddTemporarySecurityAttackModifier(
+        state,
+        PlayerId.Player0,
+        amount: 1,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-security-attack-replay");
+    service.AddTemporarySecurityDigimonDPModifier(
+        state,
+        PlayerId.Player0,
+        amount: 3000,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:player-security-dp-replay");
+
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertEqual(3, replay.FinalState.TemporaryModifiers.Count);
+}
+
 static void DurationCleanupUntilBattleEndRemovesModifier()
 {
     var state = CreateMinimalBattleState();
@@ -7822,6 +8281,366 @@ static void ContinuousDynamicSecurityAttackFromSourceCount()
     state.TurnPlayerId = PlayerId.Player1;
 
     AssertEqual(1, keywordService.SecurityAttackCount(state, attacker));
+}
+
+static void ContinuousLinkedSourceAppliesFromLinkedZone()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 3000 };
+    state.CardDefinitions["FX-LINK"] = CardEffectTestFixture.EffectDefinition("FX-LINK", "FX_LINK") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6276, 756, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var linked = AddLinkedCard(state, 6277, "FX-LINK", PlayerId.Player0, host.Id);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-LINK",
+            "FX_LINK",
+            ContinuousEffectSourceKind.LinkedCard,
+            ContinuousEffectTargetKind.SelfPermanent,
+            amount: 2000)));
+
+    AssertEqual(5000, stats.Dp(state, host));
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(linked, Zone.LinkedCards, Zone.Trash, MoveReason.Trash, SourcePermanent: host.Id));
+
+    AssertEqual(3000, stats.Dp(state, host));
+}
+
+static void ContinuousFaceUpSecuritySourceApplies()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 4000 };
+    state.CardDefinitions["FX-FACEUP-SEC"] = CardEffectTestFixture.EffectDefinition("FX-FACEUP-SEC", "FX_FACEUP_SEC") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6278, 757, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    AddCardToZone(state, 6279, "FX-FACEUP-SEC", PlayerId.Player0, Zone.Security, isFaceUp: true);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-FACEUP-SEC",
+            "FX_FACEUP_SEC",
+            ContinuousEffectSourceKind.FaceUpSecurity,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon,
+            amount: 3000)));
+
+    AssertEqual(7000, stats.Dp(state, host));
+}
+
+static void ContinuousFaceDownSecuritySourceIsIgnored()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 4000 };
+    state.CardDefinitions["FX-FACEDOWN-SEC"] = CardEffectTestFixture.EffectDefinition("FX-FACEDOWN-SEC", "FX_FACEDOWN_SEC") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6280, 758, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    AddCardToZone(state, 6283, "FX-FACEDOWN-SEC", PlayerId.Player0, Zone.Security, isFaceUp: false);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-FACEDOWN-SEC",
+            "FX_FACEDOWN_SEC",
+            ContinuousEffectSourceKind.FaceUpSecurity,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon,
+            amount: 3000)));
+
+    AssertEqual(4000, stats.Dp(state, host));
+}
+
+static void ContinuousHandSourceAppliesOnlyFromHand()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 4000 };
+    state.CardDefinitions["FX-HAND-AURA"] = CardEffectTestFixture.EffectDefinition("FX-HAND-AURA", "FX_HAND_AURA") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6284, 759, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var handSource = AddCardToZone(state, 6285, "FX-HAND-AURA", PlayerId.Player0, Zone.Hand);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-HAND-AURA",
+            "FX_HAND_AURA",
+            ContinuousEffectSourceKind.Hand,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon,
+            amount: 2000)));
+
+    AssertEqual(6000, stats.Dp(state, host));
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(handSource, Zone.Hand, Zone.Trash, MoveReason.Effect, FaceUp: true));
+
+    AssertEqual(4000, stats.Dp(state, host));
+}
+
+static void ContinuousTrashSourceAppliesFromTrash()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SEC"] = CardEffectTestFixture.NoEffectDefinition("FX-SEC") with { Dp = 3000 };
+    state.CardDefinitions["FX-TRASH-AURA"] = CardEffectTestFixture.EffectDefinition("FX-TRASH-AURA", "FX_TRASH_AURA") with { Dp = 1000 };
+    var securityCard = AddCardToZone(state, 6286, "FX-SEC", PlayerId.Player0, Zone.Security, isFaceUp: false);
+    AddCardToZone(state, 6287, "FX-TRASH-AURA", PlayerId.Player0, Zone.Trash);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-TRASH-AURA",
+            "FX_TRASH_AURA",
+            ContinuousEffectSourceKind.Trash,
+            ContinuousEffectTargetKind.OwnerPlayer,
+            ContinuousModifierKind.SecurityDigimonDP,
+            amount: 3000)));
+
+    AssertEqual(6000, stats.SecurityDp(state, securityCard));
+}
+
+static void ContinuousExecutingSourceAppliesDuringExecution()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 4000 };
+    state.CardDefinitions["FX-EXEC-AURA"] = CardEffectTestFixture.OptionEffectDefinition("FX-EXEC-AURA", "FX_EXEC_AURA");
+    var host = AddBattlePermanent(state, 6288, 760, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var executingSource = AddCardToZone(state, 6289, "FX-EXEC-AURA", PlayerId.Player0, Zone.Executing);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-EXEC-AURA",
+            "FX_EXEC_AURA",
+            ContinuousEffectSourceKind.Executing,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon,
+            amount: 1000)));
+
+    AssertEqual(5000, stats.Dp(state, host));
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(executingSource, Zone.Executing, Zone.Trash, MoveReason.Effect, FaceUp: true));
+
+    AssertEqual(4000, stats.Dp(state, host));
+}
+
+static void ContinuousStaticKeywordFieldSourceGrantsBlocker()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-BLOCKER-AURA"] = CardEffectTestFixture.EffectDefinition("FX-BLOCKER-AURA", "FX_BLOCKER_AURA") with { Dp = 4000 };
+    state.CardDefinitions["FX-ATTACKER"] = CardEffectTestFixture.NoEffectDefinition("FX-ATTACKER") with { Dp = 3000 };
+    var blocker = AddBattlePermanent(state, 6293, 761, "FX-BLOCKER-AURA", PlayerId.Player1, 0, enterTurn: 1);
+    var attacker = AddBattlePermanent(state, 6294, 762, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousKeywordFixtureScript(
+            "FX-BLOCKER-AURA",
+            "FX_BLOCKER_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            ContinuousEffectTargetKind.SelfPermanent,
+            BattleKeyword.Blocker)));
+    var keywords = new BattleKeywordService(stats);
+
+    AssertTrue(keywords.HasKeyword(state, blocker, BattleKeyword.Blocker));
+    var request = keywords.CreateBlockerSelectionRequest(state, attacker.Id);
+
+    AssertTrue(request is not null);
+    AssertEqual(PlayerId.Player1, request!.Player);
+    AssertSequence(new[] { blocker.Id }, request.Candidates.Select(candidate => candidate.Permanent!.Value).ToArray());
+}
+
+static void ContinuousStaticKeywordInheritedSourceStopsAfterMove()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 3000 };
+    state.CardDefinitions["FX-RUSH-SOURCE"] = CardEffectTestFixture.EffectDefinition("FX-RUSH-SOURCE", "FX_RUSH_SOURCE") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6295, 763, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddEvolutionSource(state, 6296, "FX-RUSH-SOURCE", PlayerId.Player0, host.Id);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousKeywordFixtureScript(
+            "FX-RUSH-SOURCE",
+            "FX_RUSH_SOURCE",
+            ContinuousEffectSourceKind.InheritedSource,
+            ContinuousEffectTargetKind.SelfPermanent,
+            BattleKeyword.Rush)));
+    var keywords = new BattleKeywordService(stats);
+
+    AssertTrue(keywords.HasKeyword(state, host, BattleKeyword.Rush));
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(source, Zone.EvolutionSources, Zone.Trash, MoveReason.Trash, SourcePermanent: host.Id));
+
+    AssertFalse(keywords.HasKeyword(state, host, BattleKeyword.Rush));
+}
+
+static void ContinuousStaticKeywordConditionGatesKeyword()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-CONDITION"] = CardEffectTestFixture.EffectDefinition("FX-CONDITION", "FX_CONDITION") with { Dp = 3000 };
+    var source = AddBattlePermanent(state, 6297, 764, "FX-CONDITION", PlayerId.Player0, 0, enterTurn: 1);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousKeywordFixtureScript(
+            "FX-CONDITION",
+            "FX_CONDITION",
+            ContinuousEffectSourceKind.FieldTop,
+            ContinuousEffectTargetKind.SelfPermanent,
+            BattleKeyword.Collision,
+            context => context.State.Memory > 0)));
+    var keywords = new BattleKeywordService(stats);
+
+    state.Memory = 0;
+    AssertFalse(keywords.HasKeyword(state, source, BattleKeyword.Collision));
+
+    state.Memory = 1;
+    AssertTrue(keywords.HasKeyword(state, source, BattleKeyword.Collision));
+}
+
+static void ContinuousStaticKeywordReplayDeterministic()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-HOST") with { Dp = 3000 };
+    state.CardDefinitions["FX-JAMMING-SOURCE"] = CardEffectTestFixture.EffectDefinition("FX-JAMMING-SOURCE", "FX_JAMMING_SOURCE") with { Dp = 1000 };
+    var host = AddBattlePermanent(state, 6298, 765, "FX-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    AddEvolutionSource(state, 6299, "FX-JAMMING-SOURCE", PlayerId.Player0, host.Id);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousKeywordFixtureScript(
+            "FX-JAMMING-SOURCE",
+            "FX_JAMMING_SOURCE",
+            ContinuousEffectSourceKind.InheritedSource,
+            ContinuousEffectTargetKind.SelfPermanent,
+            BattleKeyword.Jamming)));
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
+    var replayHost = replay.FinalState.GetPlayer(PlayerId.Player0).FieldPermanents
+        .Single(permanent => permanent.Id == host.Id);
+    var keywords = new BattleKeywordService(stats);
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertTrue(keywords.HasKeyword(replay.FinalState, replayHost, BattleKeyword.Jamming));
+}
+
+static void StaticEvolutionRequirementHandSourceGeneratesAndExecutes()
+{
+    var state = CreateStaticRequirementState();
+    var target = AddBattlePermanent(state, 6301, 766, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6302, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6303, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3));
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(4, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
+static void StaticEvolutionRequirementStopsAfterSourceMove()
+{
+    var state = CreateStaticRequirementState();
+    AddBattlePermanent(state, 6304, 767, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6305, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3));
+
+    AssertTrue(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve));
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(evoCard, Zone.Hand, Zone.Trash, MoveReason.Effect, FaceUp: true));
+
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve));
+}
+
+static void StaticEvolutionRequirementConditionGatesTarget()
+{
+    var state = CreateStaticRequirementState();
+    AddBattlePermanent(state, 6306, 768, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var valid = AddBattlePermanent(state, 6307, 769, "FX-BLUE-L3-BIG", PlayerId.Player0, 1, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6308, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 2,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3,
+            targetCondition: context =>
+                context.State.CardDefinitions[
+                    context.State.Cards[context.TargetPermanent.TopCardId].DefinitionId].DP >= 4000));
+
+    var targets = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Where(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Select(legal => ((DigivolveAction)legal.Action).TargetPermanent)
+        .ToArray();
+
+    AssertSequence(new[] { valid.Id }, targets);
+}
+
+static void StaticLinkRequirementHandSourceGeneratesAndExecutes()
+{
+    var state = CreateStaticRequirementState();
+    var target = AddBattlePermanent(state, 6309, 770, "FX-LINK-TARGET", PlayerId.Player0, 0, enterTurn: 1);
+    var linkCard = AddCardToZone(state, 6310, "FX-STATIC-LINK", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticLinkRequirementFixtureScript(
+            "FX-STATIC-LINK",
+            "FX_STATIC_LINK",
+            ContinuousEffectSourceKind.Hand,
+            cost: 2,
+            targetCondition: context => context.TargetPermanent.LinkedCards.Count == 0));
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Link
+            && legal.Action is LinkAction link
+            && link.LinkCard == linkCard)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertSequence(new[] { linkCard }, target.LinkedCards);
+    AssertEqual(3, state.Memory);
+    AssertEqual(Zone.LinkedCards, state.Cards[linkCard].CurrentZone);
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
+static void StaticRequirementReplayDeterministic()
+{
+    var state = CreateStaticRequirementState();
+    AddBattlePermanent(state, 6311, 771, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6312, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(state, 6313, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3));
+    var initial = state.Clone();
+    var trace = new GameTrace();
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, trace);
+    var replay = new ReplayRunner(services: services).Replay(initial, trace);
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
 }
 
 static void ContinuousAndDurationModifiersStackDeterministically()
@@ -13350,6 +14169,76 @@ static void CardEffectFoundationRegistryLookup()
     AssertEqual("FX_Class", foundByClass.Porting.EffectClassName);
 }
 
+static void CardEffectFoundationVariantAwareRegistryLookup()
+{
+    var legacy = new NoEffectCardScript("FX-VAR", notes: "Legacy single-definition fallback.");
+    var baseVariant = new NoEffectCardScript(
+        "FX-VAR",
+        notes: "Variant base no-effect.",
+        cardIndex: 101,
+        variantKey: "base");
+    var p1Variant = new NoEffectCardScript(
+        "FX-VAR",
+        "FX_Var_P1",
+        "Variant P1 effect-class alias.",
+        cardIndex: 102,
+        variantKey: "P1");
+    var registry = CardEffectTestFixture.Registry(legacy, baseVariant, p1Variant);
+
+    AssertTrue(registry.TryGetScript(
+        CardEffectTestFixture.NoEffectDefinition("FX-VAR") with
+        {
+            CardIndex = 101,
+            VariantKey = "base",
+        },
+        out var foundBase));
+    AssertEqual("FX-VAR#101@base", foundBase.Porting.DefinitionStableId);
+    AssertEqual(101, foundBase.Porting.CardIndex);
+
+    AssertTrue(registry.TryGetScript(
+        CardEffectTestFixture.EffectDefinition("FX-VAR", "FX_Var_P1") with
+        {
+            CardIndex = 102,
+            VariantKey = "P1",
+        },
+        out var foundP1));
+    AssertEqual("FX-VAR#102@P1", foundP1.Porting.DefinitionStableId);
+    AssertEqual("FX_Var_P1", foundP1.Porting.EffectClassName);
+
+    AssertFalse(registry.TryGetScript(
+        CardEffectTestFixture.NoEffectDefinition("FX-VAR") with
+        {
+            CardIndex = 103,
+            VariantKey = "P2",
+        },
+        out _));
+
+    AssertTrue(registry.TryGetScript(CardEffectTestFixture.NoEffectDefinition("FX-VAR"), out var foundLegacy));
+    AssertFalse(foundLegacy.Porting.HasDefinitionIdentity);
+    AssertEqual("FX-VAR", foundLegacy.Porting.DefinitionStableId);
+}
+
+static void CardEffectFoundationStateHashIncludesVariantIdentity()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-VAR"] = CardEffectTestFixture.NoEffectDefinition("FX-VAR") with
+    {
+        CardIndex = 101,
+        VariantKey = "base",
+    };
+    var before = state.ComputeStateHash();
+    var clone = state.Clone();
+
+    AssertEqual(before, clone.ComputeStateHash());
+
+    state.CardDefinitions["FX-VAR"] = state.CardDefinitions["FX-VAR"] with
+    {
+        VariantKey = "P1",
+    };
+
+    AssertNotEqual(before, state.ComputeStateHash());
+}
+
 static void CardEffectFoundationUnsupportedScriptFails()
 {
     var state = CreateMinimalBattleState();
@@ -13624,14 +14513,13 @@ static void PortingStructureSt1ToSt3StatusSnapshotMatchesRegistry()
         .Concat(St2St3CardScriptCatalog.CreateRegistry().PortingRecords)
         .ToArray();
 
-    AssertEqual(St1TargetCardIds().Length + St2TargetCardIds().Length + St3TargetCardIds().Length, table.Count);
-    AssertEqual(St1TargetCardIds().Length + St2TargetCardIds().Length + St3TargetCardIds().Length, records.Length);
+    AssertEqual(records.Length, table.Count);
 
     foreach (var record in records)
     {
-        if (!table.TryGetValue(record.CardId, out var status))
+        if (!table.TryGetValue(record.DefinitionStableId, out var status))
         {
-            throw new InvalidOperationException($"Current registry snapshot is missing {record.CardId}.");
+            throw new InvalidOperationException($"Current registry snapshot is missing {record.DefinitionStableId}.");
         }
 
         AssertEqual(record.Status, status);
@@ -13661,17 +14549,18 @@ static void PortingStructureSt1ToSt3StatusSnapshotMatchesFiles()
 {
     var table = LoadCurrentRegistryStatusSnapshot();
 
-    foreach (var (cardId, status) in table)
+    foreach (var (registryKey, status) in table)
     {
         if (status is not (CardEffectPortingStatus.Implemented or CardEffectPortingStatus.NoEffect))
         {
             continue;
         }
 
+        var cardId = CardIdFromRegistryKey(registryKey);
         var rlPath = RlCardEffectPath(cardId);
         if (!File.Exists(rlPath))
         {
-            throw new InvalidOperationException($"Current registry snapshot marks {cardId} as {status}, but RL.Engine file is missing: {rlPath}");
+            throw new InvalidOperationException($"Current registry snapshot marks {registryKey} as {status}, but RL.Engine file is missing: {rlPath}");
         }
     }
 }
@@ -13874,7 +14763,9 @@ static void AssetRegistryMappingVariantSplitReportsSt3Two()
         St2St3CardScriptCatalog.CreateCombinedWithSt1Registry(),
         StatusSnapshot: new Dictionary<string, CardEffectPortingStatus>(StringComparer.Ordinal)
         {
-            ["ST3-02"] = CardEffectPortingStatus.NoEffect,
+            ["ST3-02#76@base"] = CardEffectPortingStatus.NoEffect,
+            ["ST3-02#77@P1"] = CardEffectPortingStatus.NoEffect,
+            ["ST3-02#4977@P2"] = CardEffectPortingStatus.Unsupported,
         },
         CardFileContentsByCardId: new Dictionary<string, string>(StringComparer.Ordinal)
         {
@@ -13885,8 +14776,9 @@ static void AssetRegistryMappingVariantSplitReportsSt3Two()
     AssertFalse(report.IsValid);
     AssertEqual(3, report.Cards.Count);
     AssertIssue(report, "VariantEffectClassSplit", "ST3-02");
-    AssertIssue(report, "FalseNoEffect", "ST3-02", 4977);
+    AssertFalse(report.Issues.Any(issue => issue.Code == "FalseNoEffect"));
     AssertIssue(report, "MissingSourceEffectBody", "ST3-02", 4977);
+    AssertFalse(report.Issues.Any(issue => issue.Code == "MissingStatusSnapshot"));
     AssertTrue(report.Cards.Any(card =>
         card.DefinitionId.CardId == "ST3-02"
         && card.DefinitionId.CardIndex == 76
@@ -13904,6 +14796,7 @@ static void AssetRegistryMappingVariantSplitReportsSt3Two()
         && card.DefinitionId.CardIndex == 4977
         && card.DefinitionId.VariantKey == "P2"
         && card.AssetEffectClassName == "ST3_02"
+        && card.PortingStatus == CardEffectPortingStatus.Unsupported
         && !card.HasSourceEffectBody));
 }
 
@@ -14009,7 +14902,7 @@ static void AssetRegistryMappingActualLocalDcgoAudit()
     AssertEqual(AssetRegistrySourceStatus.Available, report.SourceStatus);
     AssertTrue(report.Cards.Count >= 48);
     AssertIssue(report, "VariantEffectClassSplit", "ST3-02");
-    AssertIssue(report, "FalseNoEffect", "ST3-02", 4977);
+    AssertFalse(report.Issues.Any(issue => issue.Code == "FalseNoEffect"));
     AssertIssue(report, "MissingSourceEffectBody", "ST3-02", 4977);
     AssertFalse(report.Issues.Any(issue => issue.Severity == AssetRegistryMappingSeverity.Error));
     AssertTrue(report.Cards.Any(card =>
@@ -14029,6 +14922,7 @@ static void AssetRegistryMappingActualLocalDcgoAudit()
         && card.DefinitionId.CardIndex == 4977
         && card.DefinitionId.VariantKey == "P2"
         && card.AssetEffectClassName == "ST3_02"
+        && card.PortingStatus == CardEffectPortingStatus.Unsupported
         && !card.HasSourceEffectBody));
     AssertTrue(report.Cards.Any(card =>
         card.DefinitionId.CardId == "ST2-07"
@@ -14050,17 +14944,28 @@ static void St2St3CardEffectCatalogSkeletonCoversTargetPool()
     var targetIds = St2TargetCardIds().Concat(St3TargetCardIds()).ToArray();
 
     AssertEqual(32, targetIds.Length);
-    AssertEqual(32, records.Length);
+    AssertEqual(35, records.Length);
+    AssertEqual(targetIds.Length, records.Select(record => record.CardId).Distinct(StringComparer.Ordinal).Count());
 
     foreach (var cardId in targetIds)
     {
         AssertTrue(records.Any(record => record.CardId == cardId));
     }
 
-    foreach (var cardId in St2St3NoEffectCardIds())
+    foreach (var cardId in St2St3NoEffectCardIds().Where(cardId => cardId != "ST3-02"))
     {
         AssertEqual(CardEffectPortingStatus.NoEffect, records.Single(record => record.CardId == cardId).Status);
     }
+
+    var st3TwoRecords = records.Where(record => record.CardId == "ST3-02").ToArray();
+    AssertEqual(4, st3TwoRecords.Length);
+    AssertTrue(st3TwoRecords.Any(record => !record.HasDefinitionIdentity && record.Status == CardEffectPortingStatus.NoEffect));
+    AssertTrue(st3TwoRecords.Any(record => record.DefinitionStableId == "ST3-02#76@base" && record.Status == CardEffectPortingStatus.NoEffect));
+    AssertTrue(st3TwoRecords.Any(record => record.DefinitionStableId == "ST3-02#77@P1" && record.Status == CardEffectPortingStatus.NoEffect));
+    AssertTrue(st3TwoRecords.Any(record =>
+        record.DefinitionStableId == "ST3-02#4977@P2"
+        && record.Status == CardEffectPortingStatus.Unsupported
+        && record.EffectiveSourceEffectClassName == "ST3_02"));
 
     foreach (var cardId in St2St3UnsupportedCardIds())
     {
@@ -16211,6 +17116,9 @@ static Dictionary<string, CardEffectPortingStatus> LoadCurrentRegistryStatusSnap
     return statuses;
 }
 
+static string CardIdFromRegistryKey(string registryKey) =>
+    registryKey.Split('#', 2, StringSplitOptions.TrimEntries)[0];
+
 static void AssertCardEffectSetPath(string root, string set)
 {
     var files = Directory.GetFiles(root, $"{set}_*.cs", SearchOption.AllDirectories);
@@ -16794,6 +17702,24 @@ static FullCardPoolValidationReport Create65FullCardPoolValidationReport() =>
 
 static JsonDocument Load66FullCardPortingBatchesDocument() =>
     JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/full-card-porting-batches-66.json")));
+
+static JsonDocument Load66BCapabilityRegistryDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/capability-registry.json")));
+
+static JsonDocument Load66BSourceRequiredCapabilitiesDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/source-required-capabilities.json")));
+
+static JsonDocument Load66BBatchBlockersDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/batch-capability-blockers.json")));
+
+static JsonDocument Load66BStatusMismatchDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/status-mismatch-report.json")));
+
+static JsonDocument Load66DCapabilityDependencyGraphDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/capability-dependency-graph-66D.json")));
+
+static JsonDocument Load66EMechanicFirstSchedulerDocument() =>
+    JsonDocument.Parse(File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/generated/capability-truth-audit/mechanic-first-scheduler-66E.json")));
 
 static IReadOnlyList<CardDefinition> CreateSt1CardDefinitions() =>
     new[]
@@ -17861,6 +18787,67 @@ static GameState CreateComplexMechanicState()
 
     return state;
 }
+
+static GameState CreateStaticRequirementState()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-BLUE-L3"] = new CardDefinition
+    {
+        CardId = "FX-BLUE-L3",
+        Name = "Blue level 3",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Blue },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-BLUE-L3-BIG"] = state.CardDefinitions["FX-BLUE-L3"] with
+    {
+        CardId = "FX-BLUE-L3-BIG",
+        Name = "Blue level 3 big",
+        Dp = 5000,
+    };
+    state.CardDefinitions["FX-ALT-EVO"] = CardEffectTestFixture.EffectDefinition(
+        "FX-ALT-EVO",
+        "FX_ALT_EVO") with
+    {
+        Colors = new[] { CardColor.Red },
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+        EvoCosts = Array.Empty<EvoCostDefinition>(),
+    };
+    state.CardDefinitions["FX-LINK-TARGET"] = CardEffectTestFixture.NoEffectDefinition("FX-LINK-TARGET") with
+    {
+        Colors = new[] { CardColor.Green },
+        LinkedMax = 1,
+    };
+    state.CardDefinitions["FX-STATIC-LINK"] = CardEffectTestFixture.EffectDefinition(
+        "FX-STATIC-LINK",
+        "FX_STATIC_LINK",
+        mechanics: new[] { Mechanic.Link }) with
+    {
+        Colors = new[] { CardColor.Green },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 2000,
+        PlayRequirements = Array.Empty<PlayRequirement>(),
+    };
+
+    return state;
+}
+
+static BattleEngineServices CreateStaticRequirementServices(params ICardScript[] scripts) =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        scripts
+            .Concat(new ICardScript[]
+            {
+                new NoEffectCardScript("FX-BLUE-L3", notes: "Test-only static requirement target."),
+                new NoEffectCardScript("FX-BLUE-L3-BIG", notes: "Test-only static requirement target."),
+                new NoEffectCardScript("FX-LINK-TARGET", notes: "Test-only static link target."),
+                new NoEffectCardScript("BT1-OPTION", notes: "Test-only static requirement draw filler."),
+            })
+            .ToArray()));
 
 static void AddComplexDefinition(
     GameState state,

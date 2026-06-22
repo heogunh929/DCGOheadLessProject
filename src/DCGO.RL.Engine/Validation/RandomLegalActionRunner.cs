@@ -85,7 +85,7 @@ public sealed class RandomLegalActionRunner
         EngineInvariantChecker? invariantChecker = null)
     {
         _services = services;
-        _legalActionGenerator = legalActionGenerator ?? new LegalActionGenerator();
+        _legalActionGenerator = legalActionGenerator ?? services?.LegalActionGenerator ?? new LegalActionGenerator();
         _actionExecutor = actionExecutor
             ?? services?.ActionExecutor
             ?? throw new DomainException("RandomLegalActionRunner requires an ActionExecutor from BattleEngineServices.");

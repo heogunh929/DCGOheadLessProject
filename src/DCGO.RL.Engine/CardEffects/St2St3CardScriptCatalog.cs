@@ -24,6 +24,15 @@ public static class St2St3CardScriptCatalog
 
             new St3PoyomonScript(),
             new NoEffectCardScript("ST3-02", notes: "No ST3_02 CardEffect source file exists in DCGO/Assets/Scripts/CardEffect/ST3."),
+            new NoEffectCardScript("ST3-02", notes: "ST3_02 base asset has no CardEffectClassName and is an explicit NoEffect candidate.", cardIndex: 76, variantKey: "base"),
+            new NoEffectCardScript("ST3-02", notes: "ST3_02_P1 asset has no CardEffectClassName and is an explicit NoEffect candidate.", cardIndex: 77, variantKey: "P1"),
+            new UnsupportedCardScript(
+                "ST3-02",
+                "ST3_02",
+                "ST3_02_P2 asset references CardEffectClassName ST3_02, but the source body is unconfirmed; do not infer or no-op this variant.",
+                cardIndex: 4977,
+                variantKey: "P2",
+                sourceEffectClassName: "ST3_02"),
             new NoEffectCardScript("ST3-03", notes: "No ST3_03 CardEffect source file exists in DCGO/Assets/Scripts/CardEffect/ST3."),
             new St3TokomonScript(),
             new St3PatamonScript(),

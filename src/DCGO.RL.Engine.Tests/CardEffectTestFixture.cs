@@ -93,6 +93,232 @@ internal sealed class PrimitiveDrawCardScript : ICardScript
         });
 }
 
+internal sealed class ContinuousSourceKindFixtureScript : ICardScript, IContinuousCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly ContinuousEffectTargetKind _targetKind;
+    private readonly ContinuousModifierKind _modifierKind;
+    private readonly int _amount;
+
+    public ContinuousSourceKindFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        ContinuousEffectTargetKind targetKind,
+        ContinuousModifierKind modifierKind = ContinuousModifierKind.DP,
+        int amount = 1000)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _modifierKind = modifierKind;
+        _amount = amount;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture continuous descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<ContinuousEffectDescriptor> CreateContinuousEffectDescriptors(ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<ContinuousEffectDescriptor>();
+        }
+
+        return new[]
+        {
+            new ContinuousEffectDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _modifierKind,
+                _ => _amount,
+                DebugLabel: $"{Porting.CardId} {_sourceKind} {_modifierKind} {_amount:+#;-#;0}"),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Continuous fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class ContinuousKeywordFixtureScript : ICardScript, IContinuousKeywordCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly ContinuousEffectTargetKind _targetKind;
+    private readonly BattleKeyword _keyword;
+    private readonly Func<ContinuousKeywordEvaluationContext, bool>? _condition;
+
+    public ContinuousKeywordFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        ContinuousEffectTargetKind targetKind,
+        BattleKeyword keyword,
+        Func<ContinuousKeywordEvaluationContext, bool>? condition = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _keyword = keyword;
+        _condition = condition;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture continuous keyword descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<ContinuousKeywordDescriptor> CreateContinuousKeywordDescriptors(ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<ContinuousKeywordDescriptor>();
+        }
+
+        return new[]
+        {
+            new ContinuousKeywordDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_keyword}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _keyword,
+                _targetKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} {_keyword}"),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Continuous keyword fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticEvolutionRequirementFixtureScript : ICardScript, IStaticEvolutionRequirementCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly int _cost;
+    private readonly CardColor _requiredColor;
+    private readonly int _requiredLevel;
+    private readonly Func<StaticEvolutionRequirementEvaluationContext, bool>? _targetCondition;
+
+    public StaticEvolutionRequirementFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        int cost,
+        CardColor requiredColor = CardColor.None,
+        int requiredLevel = -1,
+        Func<StaticEvolutionRequirementEvaluationContext, bool>? targetCondition = null)
+    {
+        _sourceKind = sourceKind;
+        _cost = cost;
+        _requiredColor = requiredColor;
+        _requiredLevel = requiredLevel;
+        _targetCondition = targetCondition;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static evolution requirement for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticEvolutionRequirementDescriptor> CreateStaticEvolutionRequirementDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticEvolutionRequirementDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticEvolutionRequirementDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:evo:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _cost,
+                _requiredColor,
+                _requiredLevel,
+                TargetPermanentCondition: _targetCondition,
+                DebugLabel: $"{Porting.CardId} {_sourceKind} evo cost {_cost}"),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static evolution requirement fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticLinkRequirementFixtureScript : ICardScript, IStaticLinkRequirementCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly int _cost;
+    private readonly Func<StaticLinkRequirementEvaluationContext, bool>? _targetCondition;
+
+    public StaticLinkRequirementFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        int cost,
+        Func<StaticLinkRequirementEvaluationContext, bool>? targetCondition = null)
+    {
+        _sourceKind = sourceKind;
+        _cost = cost;
+        _targetCondition = targetCondition;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static link requirement for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticLinkRequirementDescriptor> CreateStaticLinkRequirementDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticLinkRequirementDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticLinkRequirementDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:link:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _cost,
+                TargetPermanentCondition: _targetCondition,
+                DebugLabel: $"{Porting.CardId} {_sourceKind} link cost {_cost}"),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static link requirement fixture scripts do not resolve active effect bodies.");
+}
+
 internal enum SelectionPrimitiveMode
 {
     ModifyDp,

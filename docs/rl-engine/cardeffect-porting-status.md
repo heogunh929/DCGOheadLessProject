@@ -143,6 +143,9 @@ Batch A에서 ST2-13, ST3-05, ST3-08, ST3-11, ST3-16은 원본 의미가 기존 
 | ST2-16 | `Implemented` | `CardEffects/ST2/Blue/ST2_16.cs` | set-local source mapping |
 | ST3-01 | `Implemented` | `CardEffects/ST3/Yellow/ST3_01.cs` | set-local source mapping |
 | ST3-02 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_02.cs` | base/P1 NoEffect candidate; P2 `ST3_02` source body unconfirmed |
+| ST3-02#76@base | `NoEffect` | `CardEffects/ST3/Yellow/ST3_02.cs` | base asset has no `CardEffectClassName`; explicit NoEffect candidate |
+| ST3-02#77@P1 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_02.cs` | P1 asset has no `CardEffectClassName`; explicit NoEffect candidate |
+| ST3-02#4977@P2 | `Unsupported` | `CardEffects/ST3/Yellow/ST3_02.cs` | P2 references `ST3_02`; source body unconfirmed and must not be inferred |
 | ST3-03 | `NoEffect` | `CardEffects/ST3/Yellow/ST3_03.cs` | missing-source marker |
 | ST3-04 | `Implemented` | `CardEffects/ST3/Yellow/ST3_04.cs` | set-local source mapping |
 | ST3-05 | `Implemented` | `CardEffects/ST3/Yellow/ST3_05.cs` | set-local source mapping |

@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.CardEffects;
+using DCGO.RL.Engine.Domain;
 
 namespace DCGO.RL.Engine.Validation;
 
@@ -18,10 +19,7 @@ public enum AssetRegistryMappingSeverity
 
 public sealed record AssetCardDefinitionId(string CardId, int CardIndex, string VariantKey)
 {
-    public string StableId =>
-        string.IsNullOrWhiteSpace(VariantKey)
-            ? $"{CardId}#{CardIndex}"
-            : $"{CardId}#{CardIndex}:{VariantKey}";
+    public string StableId => CardDefinitionIdentity.StableIdForIndexed(CardId, CardIndex, VariantKey);
 }
 
 public sealed record AssetCardMetadata(
@@ -108,9 +106,6 @@ public sealed class AssetRegistryMappingValidator
 
         var issues = new List<AssetRegistryMappingIssue>();
         var cardReports = new List<AssetRegistryMappingCardReport>();
-        var recordsByCardId = request.CardScriptRegistry.PortingRecords
-            .GroupBy(record => record.CardId, StringComparer.Ordinal)
-            .ToDictionary(group => group.Key, group => group.Single(), StringComparer.Ordinal);
         var cardFileContents = request.CardFileContentsByCardId ?? new Dictionary<string, string>(StringComparer.Ordinal);
         var sourceEffectPaths = request.SourceEffectRelativePathsByClass ?? new Dictionary<string, string>(StringComparer.Ordinal);
         var statusSnapshot = request.StatusSnapshot;
@@ -143,7 +138,7 @@ public sealed class AssetRegistryMappingValidator
 
         foreach (var asset in request.Assets.OrderBy(asset => asset.CardId, StringComparer.Ordinal).ThenBy(asset => asset.CardIndex))
         {
-            recordsByCardId.TryGetValue(asset.CardId, out var record);
+            var record = ResolveRegistryRecord(asset, request.CardScriptRegistry);
             var hasCardFile = cardFileContents.ContainsKey(asset.CardId);
             var assetEffectClass = NormalizeEffectClass(asset.CardEffectClassName);
             var sourceEffectClass = record?.EffectiveSourceEffectClassName ?? string.Empty;
@@ -324,12 +319,13 @@ public sealed class AssetRegistryMappingValidator
             return;
         }
 
-        if (!statusSnapshot.TryGetValue(asset.CardId, out var status))
+        var statusKey = record.HasDefinitionIdentity ? record.DefinitionStableId : asset.CardId;
+        if (!statusSnapshot.TryGetValue(statusKey, out var status))
         {
             issues.Add(new AssetRegistryMappingIssue(
                 AssetRegistryMappingSeverity.Error,
                 "MissingStatusSnapshot",
-                $"Status snapshot does not contain '{asset.CardId}'.",
+                $"Status snapshot does not contain '{statusKey}'.",
                 new[] { asset.DefinitionId }));
         }
         else if (status != record.Status)
@@ -337,7 +333,7 @@ public sealed class AssetRegistryMappingValidator
             issues.Add(new AssetRegistryMappingIssue(
                 AssetRegistryMappingSeverity.Error,
                 "StaleStatusSnapshot",
-                $"Status snapshot for '{asset.CardId}' is '{status}' but registry is '{record.Status}'.",
+                $"Status snapshot for '{statusKey}' is '{status}' but registry is '{record.Status}'.",
                 new[] { asset.DefinitionId }));
         }
     }
@@ -411,14 +407,32 @@ public sealed class AssetRegistryMappingValidator
 
         if (!sourceEffectPaths.ContainsKey(asset.CardEffectClassName))
         {
+            var severity = record?.Status is CardEffectPortingStatus.NoEffect or CardEffectPortingStatus.Unsupported
+                ? AssetRegistryMappingSeverity.NeedsReview
+                : AssetRegistryMappingSeverity.Error;
             issues.Add(new AssetRegistryMappingIssue(
-                record?.Status == CardEffectPortingStatus.NoEffect
-                    ? AssetRegistryMappingSeverity.NeedsReview
-                    : AssetRegistryMappingSeverity.Error,
+                severity,
                 "MissingSourceEffectBody",
                 $"Asset '{asset.DefinitionId.StableId}' references source effect class '{asset.CardEffectClassName}', but no source body was found.",
                 new[] { asset.DefinitionId }));
         }
+    }
+
+    private static CardEffectPortingRecord? ResolveRegistryRecord(
+        AssetCardMetadata asset,
+        ICardScriptRegistry registry)
+    {
+        var definition = new CardDefinition
+        {
+            CardId = asset.CardId,
+            CardIndex = asset.CardIndex,
+            VariantKey = asset.VariantKey,
+            CardEffectClassName = asset.CardEffectClassName,
+        };
+
+        return registry.TryGetScript(definition, out var script)
+            ? script.Porting
+            : null;
     }
 
     private static AssetCardMetadata? TryLoadAssetMetadata(string dcgoRoot, string path)

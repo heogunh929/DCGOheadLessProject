@@ -25,7 +25,8 @@ public sealed class BattleKeywordService
         return permanent.BattleKeywords.Contains(keyword)
             || PermanentKeywordCards(state, permanent)
                 .Select(card => BattleRules.Definition(state, card))
-                .Any(definition => definition.BattleKeywords.Contains(keyword));
+                .Any(definition => definition.BattleKeywords.Contains(keyword))
+            || _effectiveStats.HasContinuousKeyword(state, permanent, keyword);
     }
 
     public int SecurityAttackCount(GameState state, PermanentState permanent)
@@ -124,6 +125,11 @@ public sealed class BattleKeywordService
             {
                 EnsureSupportedKeyword(keyword);
             }
+        }
+
+        foreach (var keyword in _effectiveStats.ContinuousKeywords(state, permanent))
+        {
+            EnsureSupportedKeyword(keyword);
         }
     }
 

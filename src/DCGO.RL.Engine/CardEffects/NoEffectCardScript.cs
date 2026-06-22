@@ -5,7 +5,13 @@ namespace DCGO.RL.Engine.CardEffects;
 
 public sealed class NoEffectCardScript : ICardScript
 {
-    public NoEffectCardScript(string cardId, string effectClassName = "", string notes = "Explicit no-effect card.")
+    public NoEffectCardScript(
+        string cardId,
+        string effectClassName = "",
+        string notes = "Explicit no-effect card.",
+        int cardIndex = 0,
+        string variantKey = "",
+        string sourceEffectClassName = "")
     {
         if (string.IsNullOrWhiteSpace(cardId))
         {
@@ -16,7 +22,10 @@ public sealed class NoEffectCardScript : ICardScript
             cardId,
             effectClassName,
             CardEffectPortingStatus.NoEffect,
-            notes);
+            notes,
+            sourceEffectClassName,
+            cardIndex,
+            variantKey);
     }
 
     public CardEffectPortingRecord Porting { get; }
