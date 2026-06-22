@@ -30,7 +30,8 @@ public sealed record EffectResolution(
     TriggerSourcePersistencePolicy SourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole,
     bool IsCounterEffect = false,
     bool IsSkippable = false,
-    bool CounterSelectionConsumesOptional = false)
+    bool CounterSelectionConsumesOptional = false,
+    TemporaryGrantedEffect? TemporaryGrantedEffect = null)
 {
     public SelectionRequest? PendingSelectionRequest => OptionalSelectionRequest ?? SelectionRequest;
 }

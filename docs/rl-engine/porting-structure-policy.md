@@ -90,7 +90,7 @@ RL.Engine은 신규 카드게임 엔진이 아니라 `DCGO/` Unity battle 로직
 - 원본 의미가 불확실한 효과를 `Implemented`로 올리지 않는다.
 - `NoEffect`를 파일 부재만으로 자동 확정하지 않는다.
 - zone list를 직접 수정하지 않는다. `ZoneMover` 또는 primitive를 사용한다.
-- RL 학습용 `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API를 엔진 완성 전 구현하지 않는다.
+- RL 학습용 `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment 인터페이스를 엔진 완성 전 구현하지 않는다.
 
 ## ST2/ST3 구현 전 체크리스트
 

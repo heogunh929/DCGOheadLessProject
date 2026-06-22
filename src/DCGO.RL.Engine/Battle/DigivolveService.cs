@@ -24,17 +24,20 @@ public sealed class DigivolveService
     private readonly DrawService _drawService;
     private readonly TriggerPipelineService? _triggerPipelineService;
     private readonly StaticRequirementService? _staticRequirements;
+    private readonly StaticEffectService? _staticEffects;
 
     public DigivolveService(
         IZoneMover? zoneMover = null,
         DrawService? drawService = null,
         TriggerPipelineService? triggerPipelineService = null,
-        StaticRequirementService? staticRequirements = null)
+        StaticRequirementService? staticRequirements = null,
+        StaticEffectService? staticEffects = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
         _triggerPipelineService = triggerPipelineService;
         _staticRequirements = staticRequirements;
+        _staticEffects = staticEffects;
     }
 
     internal IZoneMover RuntimeZoneMover => _zoneMover;
@@ -42,6 +45,8 @@ public sealed class DigivolveService
     internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
 
     internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
+
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
 
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null)
     {
@@ -77,7 +82,7 @@ public sealed class DigivolveService
             throw new DomainException($"Permanent '{action.TargetPermanent}' is not controlled by player '{action.Actor}'.");
         }
 
-        if (!BattleRules.CanDigivolve(state, action.Card, permanent, out var cost, _staticRequirements))
+        if (!BattleRules.CanDigivolve(state, action.Card, permanent, out var cost, _staticRequirements, _staticEffects))
         {
             throw new DomainException($"Card '{action.Card}' cannot digivolve onto permanent '{action.TargetPermanent}'.");
         }
@@ -101,7 +106,7 @@ public sealed class DigivolveService
             return null;
         }
 
-        return _triggerPipelineService.Run(
+        var selfTiming = _triggerPipelineService.Prepare(
             state,
             EffectTiming.WhenDigivolving,
             player,
@@ -111,8 +116,21 @@ public sealed class DigivolveService
             {
                 ["Card"] = sourceCard,
                 ["Permanent"] = sourcePermanent,
-            },
-            trace: trace);
+                ["Digivolved"] = true,
+            });
+        var enterFieldTiming = _triggerPipelineService.Prepare(
+            state,
+            EffectTiming.OnEnterFieldAnyone,
+            player,
+            values: EnterFieldEventPayload.ForSinglePermanent(
+                sourceCard,
+                sourcePermanent,
+                isEvolution: true));
+
+        return _triggerPipelineService.RunPreparedSequence(
+            state,
+            new[] { selfTiming, enterFieldTiming },
+            trace);
     }
 
     private static void RestoreAfterPendingSynchronousCall(

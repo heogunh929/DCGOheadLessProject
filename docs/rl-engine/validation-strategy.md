@@ -1,5 +1,18 @@
 # 검증 전략
 
+## Queue 66V 검증 - 2026-06-22
+
+`66V_effect_timing_none_continuous_static_alias`는 원본 `EffectTiming.None`을 별도 unsupported capability가 아니라 `ContinuousOrStaticEffect` alias로 집계하는 foundation audit 정리 항목이다.
+
+검증 항목:
+
+- `generate_full_mechanic_inventory.py`가 worktree 내부 `DCGO/Assets`가 없어도 `E:\headlessDCGO\DCGO\Assets`를 읽고 source lock manifest fingerprint를 검증한다.
+- full mechanic inventory의 `None` timing은 `PartiallyImplemented`이며 `ContinuousOrStaticEffect` coverage note를 가진다.
+- `capability-registry.json`에는 raw `None` capability가 없고, `ContinuousOrStaticEffect.inventoryAliases`에 `None`이 기록된다.
+- `source-required-capabilities.json`의 `requiredCapabilities`와 `nonVerifiedCapabilities`에는 raw `None`이 없다.
+- Foundation Gate는 `OpenCodeReady=false`로 유지되며, C0039 이후 card-porting은 실행되지 않는다.
+- 개별 `CardEffect` body나 generated status 승격 없이 audit 산출물만 갱신한다.
+
 ## Queue 66G 검증 - 2026-06-22
 
 `66G_player_runtime_static_modifier_scope`는 원본 `Player.EffectList(EffectTiming.None)` 중 현재 RL.Engine의 `TemporaryModifier` 상태 모델로 대응하는 player-level runtime stat modifier 범위를 검증한 항목이다.
@@ -637,4 +650,55 @@ Option hand play lifecycle은 원본 `UseOptionClass` 기준으로 `Hand -> Exec
 - `Static requirement replay deterministic`
 - targeted `Static`, `Continuous`, `ComplexMechanics`, `Capability`, `FullCardPortingScheduler`
 
-`ContinuousOrStaticEffect`는 trait/name/text metadata, unsupported static effect interfaces, ignore-digivolution-permission semantics, full-card parity evidence가 남아 있어 `PartiallyImplemented`로 유지한다.
+`ContinuousOrStaticEffect`는 target permanent temporary keyword grant까지 66N에서 보강했고, 66P에서 full-card parity evidence를 보수적 `NotRun` evidence로 생성했으며, 66Q에서 generated/runtime status mismatch를 legacy pilot divergence로 분리해 닫았다. 66R에서는 `ICannotIgnoreDigivolutionConditionEffect` 대응 restriction layer를 static requirement permission 경로에 연결했고, 66S에서는 player-wide temporary keyword grant를 metadata-gated battle-area Digimon target으로 연결했다. 66T에서는 duration-bound granted trigger source/timing flow를 `TemporaryGrantedEffect`와 `TemporaryGrantedEffectRegistry`로 검증했다. 66U에서는 continuous/static 전용 legacy partial script의 empty active descriptor를 `legacyContinuousOnlyEmptyDescriptorCount`로 분리해 `blockedEmptyDescriptorCount=0`을 검증했다. 66X에서는 `StaticCardColorDescriptor`와 `IgnoreColorRequirementDescriptor`를 option play color gate 및 digivolution color requirement validation에 연결했다. 66Y에서는 `StaticCardNameDescriptor`, `StaticCardTraitDescriptor`, `CardMetadataSnapshot`을 static metadata criteria 경로에 연결했다. 66Z에서는 `StaticCardLevelDescriptor`, `StaticPermanentLevelDescriptor`를 normal digivolution 및 static evolution requirement level gate에 연결했다. 66AA에서는 static link requirement가 `StaticEffectService` effective metadata/level query를 공유하도록 연결했다. 66AB에서는 `StaticCostKind.Link` modifier가 link execution cost에 적용되는지 검증했다. 66AC에서는 static cannot-play option restriction이 legal action과 direct execution을 모두 막는지 검증했다. 66AD에서는 static cannot-put-field restriction이 hand permanent play와 effect-caused field entry를 모두 막는지 검증했다. 66AE에서는 static cannot-move restriction이 return-to-hand permanent movement를 막는지 검증했다. full-card source parity evidence가 아직 `NotRun`이므로 `PartiallyImplemented`로 유지한다.
+
+66X 검증은 다음을 고정한다.
+
+- option play legal action은 owner field permanent의 effective card colors와 option effective color requirements를 비교한다.
+- `IgnoreColorRequirementDescriptor`가 true인 option은 field color requirement 없이 play 가능하다.
+- digivolution color requirement는 static color descriptor가 반영된 target top card color를 사용한다.
+- base `CardDefinition` color list는 static/continuous evaluation 중 직접 수정하지 않는다.
+
+66Y 검증은 다음을 고정한다.
+
+- static card name/trait descriptor는 effective metadata snapshot으로만 반영된다.
+- static cost/restriction/immunity/color/ignore-color criteria는 `StaticEffectService`가 있을 때 effective name/trait metadata를 사용한다.
+- static evolution requirement criteria는 주입된 `StaticEffectService` 경로에서 effective metadata를 사용한다.
+- base `CardDefinition` name/trait list는 static/continuous evaluation 중 직접 수정하지 않는다.
+
+66Z 검증은 다음을 고정한다.
+
+- static card level descriptor는 effective card level로 반영된다.
+- static permanent level descriptor는 effective permanent level로 반영된다.
+- normal digivolution과 static evolution requirement level gate는 `StaticEffectService`가 있을 때 같은 effective permanent level query를 사용한다.
+- base `CardDefinition.Level` 값은 static/continuous evaluation 중 직접 수정하지 않는다.
+
+66AA 검증은 다음을 고정한다.
+
+- static link requirement source/target metadata criteria는 `StaticEffectService`가 있을 때 effective metadata를 사용한다.
+- static link requirement target condition은 shared `StaticEffectService`로 effective permanent level을 조회할 수 있다.
+- `ComplexMechanicService` legal action generation과 execution은 production graph의 같은 static effect service를 공유한다.
+
+66AB 검증은 다음을 고정한다.
+
+- `CostResolver.ResolveLink(...)`는 `StaticCostKind.Link` modifier를 link card와 target permanent 기준으로 적용한다.
+- static link requirement execution은 modifier 적용 후 비용을 지급한다.
+- link card metadata와 target permanent metadata 조건이 모두 static link cost modifier gate에 반영된다.
+
+66AC 검증은 다음을 고정한다.
+
+- `StaticCardRestrictionDescriptor`는 source scope, source metadata, target card metadata, condition을 갖는다.
+- option play legal action generation은 `StaticCardRestrictionKind.CannotPlay` restriction이 있으면 action을 생성하지 않는다.
+- `PlayCardService` direct option execution도 같은 static cannot-play restriction으로 실패한다.
+
+66AD 검증은 다음을 고정한다.
+
+- `StaticCardRestrictionKind.CannotPutField`는 hand Digimon/Tamer play legal action과 direct execution을 모두 차단한다.
+- `StaticCardRestrictionCause`는 effect-caused field entry의 source card/permanent와 move reason을 condition에 전달한다.
+- `Tier1PrimitiveService.PlayWithoutPayingCost`는 effect source가 전달된 field entry를 같은 static restriction gate로 차단한다.
+
+66AE 검증은 다음을 고정한다.
+
+- `StaticCardRestrictionKind.CannotMove`는 return-to-hand permanent movement를 차단한다.
+- `ReturnPermanentToHandWithEvents`는 would-return rule event를 큐잉하기 전에 static cannot-move gate를 확인한다.
+- `StaticCardRestrictionCause`는 effect source card/permanent와 `MoveReason.Effect`를 condition에 전달한다.

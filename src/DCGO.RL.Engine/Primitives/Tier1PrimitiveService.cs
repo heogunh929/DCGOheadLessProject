@@ -34,6 +34,7 @@ public sealed class Tier1PrimitiveService
     private SecurityCheckService _securityCheckService;
     private PlayCardService? _playCardService;
     private DigivolveService _digivolveService;
+    private StaticEffectService? _staticEffects;
 
     public Tier1PrimitiveService(
         IZoneMover? zoneMover = null,
@@ -41,7 +42,8 @@ public sealed class Tier1PrimitiveService
         BattleResolver? battleResolver = null,
         SecurityCheckService? securityCheckService = null,
         PlayCardService? playCardService = null,
-        DigivolveService? digivolveService = null)
+        DigivolveService? digivolveService = null,
+        StaticEffectService? staticEffectService = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
@@ -49,6 +51,7 @@ public sealed class Tier1PrimitiveService
         _securityCheckService = securityCheckService ?? new SecurityCheckService(_zoneMover, _battleResolver);
         _playCardService = playCardService;
         _digivolveService = digivolveService ?? new DigivolveService(_zoneMover, _drawService);
+        _staticEffects = staticEffectService;
     }
 
     internal IZoneMover RuntimeZoneMover => _zoneMover;
@@ -59,14 +62,18 @@ public sealed class Tier1PrimitiveService
 
     internal DigivolveService RuntimeDigivolveService => _digivolveService;
 
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
+
     internal void AttachRuntimeServices(
         SecurityCheckService securityCheckService,
         PlayCardService playCardService,
-        DigivolveService digivolveService)
+        DigivolveService digivolveService,
+        StaticEffectService? staticEffectService = null)
     {
         _securityCheckService = securityCheckService ?? throw new ArgumentNullException(nameof(securityCheckService));
         _playCardService = playCardService ?? throw new ArgumentNullException(nameof(playCardService));
         _digivolveService = digivolveService ?? throw new ArgumentNullException(nameof(digivolveService));
+        _staticEffects = staticEffectService ?? _staticEffects;
     }
 
     public MoveCardResult MoveCard(GameState state, MoveCardCommand command) =>
@@ -552,7 +559,12 @@ public sealed class Tier1PrimitiveService
     public DeletePermanentResult DeletePermanent(GameState state, PermanentId permanent, GameTrace? trace = null) =>
         DestroyPermanent(state, permanent, trace);
 
-    public ReturnPermanentToHandResult ReturnPermanentToHand(GameState state, PermanentId permanentId, GameTrace? trace = null)
+    public ReturnPermanentToHandResult ReturnPermanentToHand(
+        GameState state,
+        PermanentId permanentId,
+        GameTrace? trace = null,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
     {
         var permanent = BattleRules.Permanent(state, permanentId);
         if (permanent.IsBreedingArea)
@@ -571,6 +583,7 @@ public sealed class Tier1PrimitiveService
         }
 
         var topCard = permanent.TopCardId;
+        ThrowIfCannotMoveByEffect(state, permanent, topCard, sourceCard, sourcePermanent);
         var sourceCards = permanent.SourceCardIds.ToArray();
         var sourceMoves = new List<MoveCardResult>();
         foreach (var source in sourceCards)
@@ -613,6 +626,7 @@ public sealed class Tier1PrimitiveService
         var topCard = permanent.TopCardId;
         var sourceCards = permanent.SourceCardIds.ToArray();
         var controller = permanent.ControllerPlayerId;
+        ThrowIfCannotMoveByEffect(state, permanent, topCard, sourceCard, sourcePermanent);
 
         QueueRuleEvent(
             state,
@@ -632,7 +646,7 @@ public sealed class Tier1PrimitiveService
                     ["WouldReturn"] = true,
                 }));
 
-        var result = ReturnPermanentToHand(state, permanentId, trace);
+        var result = ReturnPermanentToHand(state, permanentId, trace, sourceCard, sourcePermanent);
 
         var postPayload = ZoneEventPayload(
             new[] { result.ReturnedTopCard },
@@ -650,6 +664,26 @@ public sealed class Tier1PrimitiveService
         QueueRuleEvent(state, EffectTiming.OnPermamemtReturnedToHand, controller, postPayload);
         QueueRuleEvent(state, EffectTiming.OnLeaveFieldAnyone, controller, postPayload);
         return result;
+    }
+
+    private void ThrowIfCannotMoveByEffect(
+        GameState state,
+        PermanentState permanent,
+        CardInstanceId topCard,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent)
+    {
+        var controller = sourceCard is { } source && state.Cards.TryGetValue(source, out var sourceInstance)
+            ? sourceInstance.Owner
+            : permanent.ControllerPlayerId;
+        if (_staticEffects?.HasCardRestriction(
+            state,
+            topCard,
+            StaticCardRestrictionKind.CannotMove,
+            new StaticCardRestrictionCause(sourceCard, sourcePermanent, controller, MoveReason.Effect)) == true)
+        {
+            throw new DomainException($"Permanent '{permanent.Id}' cannot be moved by a static effect.");
+        }
     }
 
     public MoveCardResult TrashTopCardWithEvents(
@@ -914,6 +948,161 @@ public sealed class Tier1PrimitiveService
             debugLabel ?? $"Security Digimon DP {amount:+#;-#;0} until {durationScope}");
     }
 
+    public TemporaryModifier AddTemporaryKeyword(
+        GameState state,
+        PermanentId targetPermanent,
+        BattleKeyword keyword,
+        DurationScope durationScope,
+        PlayerId controller,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        string? stableId = null,
+        string? debugLabel = null)
+    {
+        EnsureTemporaryKeywordGrantSupported(keyword);
+
+        var permanent = BattleRules.Permanent(state, targetPermanent);
+        if (permanent.IsBreedingArea)
+        {
+            throw new DomainException($"Temporary keyword target permanent '{targetPermanent}' is not in battle area.");
+        }
+
+        if (!BattleRules.IsDigimon(state, permanent.TopCardId))
+        {
+            throw new DomainException($"Temporary keyword target permanent '{targetPermanent}' is not a Digimon.");
+        }
+
+        return AddTemporaryModifier(
+            state,
+            TemporaryModifierKind.Keyword,
+            amount: 1,
+            durationScope,
+            controller,
+            targetPermanent,
+            targetPlayer: null,
+            sourceCard,
+            sourcePermanent,
+            stableId,
+            debugLabel ?? $"{keyword} until {durationScope}",
+            keyword);
+    }
+
+    public TemporaryModifier AddTemporaryPlayerKeyword(
+        GameState state,
+        PlayerId targetPlayer,
+        BattleKeyword keyword,
+        DurationScope durationScope,
+        PlayerId controller,
+        CardMetadataCriteria? targetMetadataCriteria = null,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        string? stableId = null,
+        string? debugLabel = null)
+    {
+        EnsureTemporaryKeywordGrantSupported(keyword);
+
+        _ = state.GetPlayer(targetPlayer);
+        return AddTemporaryModifier(
+            state,
+            TemporaryModifierKind.Keyword,
+            amount: 1,
+            durationScope,
+            controller,
+            targetPermanent: null,
+            targetPlayer,
+            sourceCard,
+            sourcePermanent,
+            stableId,
+            debugLabel ?? $"{keyword} player aura until {durationScope}",
+            keyword,
+            targetMetadataCriteria);
+    }
+
+    public TemporaryGrantedEffect AddTemporaryGrantedTriggerEffect(
+        GameState state,
+        EffectTiming timing,
+        string grantedEffectKey,
+        DurationScope durationScope,
+        PlayerId controller,
+        PermanentId? targetPermanent = null,
+        PlayerId? targetPlayer = null,
+        CardMetadataCriteria? targetMetadataCriteria = null,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        string? stableId = null,
+        string? debugLabel = null)
+    {
+        if (timing == EffectTiming.None)
+        {
+            throw new DomainException("Temporary granted trigger effect requires a non-None timing.");
+        }
+
+        if (string.IsNullOrWhiteSpace(grantedEffectKey))
+        {
+            throw new DomainException("Temporary granted trigger effect requires a granted effect key.");
+        }
+
+        _ = state.GetPlayer(controller);
+        if (targetPermanent is null && targetPlayer is null)
+        {
+            throw new DomainException("Temporary granted trigger effect requires a permanent or player target.");
+        }
+
+        if (targetPermanent is not null && targetPlayer is not null)
+        {
+            throw new DomainException("Temporary granted trigger effect cannot target both permanent and player.");
+        }
+
+        if (targetPermanent is not null)
+        {
+            var permanent = BattleRules.Permanent(state, targetPermanent.Value);
+            if (permanent.IsBreedingArea)
+            {
+                throw new DomainException($"Temporary granted trigger target permanent '{targetPermanent}' is not in battle area.");
+            }
+        }
+
+        if (targetPlayer is not null)
+        {
+            _ = state.GetPlayer(targetPlayer.Value);
+        }
+
+        if (sourceCard is not null && !state.Cards.ContainsKey(sourceCard.Value))
+        {
+            throw new DomainException($"Temporary granted trigger source card '{sourceCard}' does not exist.");
+        }
+
+        if (sourcePermanent is not null)
+        {
+            _ = BattleRules.Permanent(state, sourcePermanent.Value);
+        }
+
+        var id = stableId ?? NextTemporaryGrantedEffectStableId(state, timing, grantedEffectKey, targetPermanent, targetPlayer);
+        if (state.TemporaryGrantedEffects.Any(effect => string.Equals(effect.StableId, id, StringComparison.Ordinal)))
+        {
+            throw new DomainException($"Temporary granted trigger effect stable id '{id}' already exists.");
+        }
+
+        var effect = new TemporaryGrantedEffect(
+            id,
+            sourceCard,
+            sourcePermanent,
+            controller,
+            targetPermanent,
+            targetPlayer,
+            timing,
+            grantedEffectKey,
+            durationScope,
+            state.TurnCount,
+            state.Phase,
+            ResolveExpiresAtTurnPlayer(state, controller, durationScope),
+            debugLabel ?? $"{grantedEffectKey} {timing} until {durationScope}",
+            targetMetadataCriteria);
+
+        state.TemporaryGrantedEffects.Add(effect);
+        return effect;
+    }
+
     public TemporaryModifier AddTemporaryAttackRestriction(
         GameState state,
         PermanentId targetPermanent,
@@ -1029,7 +1218,9 @@ public sealed class Tier1PrimitiveService
         CardInstanceId card,
         Zone sourceZone,
         int targetFrameIndex,
-        bool suspended = false)
+        bool suspended = false,
+        CardInstanceId? effectSourceCard = null,
+        PermanentId? effectSourcePermanent = null)
     {
         _ = state.GetPlayer(player);
         if (state.Cards[card].Owner != player)
@@ -1042,6 +1233,8 @@ public sealed class Tier1PrimitiveService
         {
             throw new UnsupportedMechanicException($"PlayWithoutPayingCost for card kind '{string.Join(",", definition.CardKinds)}'");
         }
+
+        ThrowIfCannotPutFieldByEffect(state, player, card, effectSourceCard, effectSourcePermanent);
 
         var playerState = state.GetPlayer(player);
         if (!BattleRules.IsEmptyBattleFrame(playerState, targetFrameIndex))
@@ -1066,13 +1259,36 @@ public sealed class Tier1PrimitiveService
         return permanent;
     }
 
+    private void ThrowIfCannotPutFieldByEffect(
+        GameState state,
+        PlayerId player,
+        CardInstanceId card,
+        CardInstanceId? effectSourceCard,
+        PermanentId? effectSourcePermanent)
+    {
+        if (_staticEffects?.HasCardRestriction(
+            state,
+            card,
+            StaticCardRestrictionKind.CannotPutField,
+            new StaticCardRestrictionCause(
+                effectSourceCard,
+                effectSourcePermanent,
+                player,
+                MoveReason.Effect)) == true)
+        {
+            throw new DomainException($"Card '{card}' cannot enter the field by a static effect.");
+        }
+    }
+
     public PermanentState PlayEvolutionSourceAsNewPermanent(
         GameState state,
         PlayerId player,
         CardInstanceId card,
         PermanentId sourcePermanent,
         int targetFrameIndex,
-        bool suspended = false)
+        bool suspended = false,
+        CardInstanceId? effectSourceCard = null,
+        PermanentId? effectSourcePermanent = null)
     {
         var playerState = state.GetPlayer(player);
         var host = BattleRules.Permanent(state, sourcePermanent);
@@ -1134,7 +1350,9 @@ public sealed class Tier1PrimitiveService
             card,
             Zone.EvolutionSources,
             targetFrameIndex,
-            suspended);
+            suspended,
+            effectSourceCard,
+            effectSourcePermanent);
     }
 
     public PermanentState Digivolve(GameState state, DigivolveAction action, GameTrace? trace = null) =>
@@ -1222,7 +1440,9 @@ public sealed class Tier1PrimitiveService
         CardInstanceId? sourceCard,
         PermanentId? sourcePermanent,
         string? stableId,
-        string debugLabel)
+        string debugLabel,
+        BattleKeyword? keyword = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
     {
         _ = state.GetPlayer(controller);
         if (sourceCard is not null && !state.Cards.ContainsKey(sourceCard.Value))
@@ -1245,6 +1465,35 @@ public sealed class Tier1PrimitiveService
             throw new DomainException("Temporary modifier cannot target both permanent and player.");
         }
 
+        if (kind == TemporaryModifierKind.Keyword)
+        {
+            if (targetPermanent is null && targetPlayer is null)
+            {
+                throw new DomainException("Temporary keyword modifier requires a permanent or player target.");
+            }
+
+            if (keyword is null)
+            {
+                throw new DomainException("Temporary keyword modifier requires a keyword payload.");
+            }
+
+            EnsureTemporaryKeywordGrantSupported(keyword.Value);
+
+            if (amount != 1)
+            {
+                throw new DomainException("Temporary keyword modifier amount must be 1.");
+            }
+        }
+        else if (keyword is not null)
+        {
+            throw new DomainException($"Temporary modifier kind '{kind}' cannot carry a keyword payload.");
+        }
+        else if (targetMetadataCriteria is not null)
+        {
+            throw new DomainException(
+                $"Temporary modifier kind '{kind}' cannot carry target metadata criteria.");
+        }
+
         var id = stableId ?? NextTemporaryModifierStableId(state, kind, targetPermanent, targetPlayer);
         if (state.TemporaryModifiers.Any(modifier => string.Equals(modifier.StableId, id, StringComparison.Ordinal)))
         {
@@ -1264,10 +1513,25 @@ public sealed class Tier1PrimitiveService
             state.TurnCount,
             state.Phase,
             ResolveExpiresAtTurnPlayer(state, controller, durationScope),
-            debugLabel);
+            debugLabel,
+            keyword,
+            targetMetadataCriteria);
 
         state.TemporaryModifiers.Add(modifier);
         return modifier;
+    }
+
+    private static void EnsureTemporaryKeywordGrantSupported(BattleKeyword keyword)
+    {
+        if (keyword == BattleKeyword.Decoy)
+        {
+            throw new UnsupportedMechanicException("Temporary Decoy keyword grants are not supported yet.");
+        }
+
+        if (keyword == BattleKeyword.SecurityAttack)
+        {
+            throw new DomainException("Temporary SecurityAttack grants must use AddTemporarySecurityAttackModifier.");
+        }
     }
 
     private static string NextTemporaryModifierStableId(
@@ -1280,6 +1544,19 @@ public sealed class Tier1PrimitiveService
             ? $"permanent:{targetPermanent.Value.Value}"
             : $"player:{targetPlayer!.Value.Value}";
         return $"duration:{state.TurnCount}:{state.Phase}:{kind}:{target}:{state.TemporaryModifiers.Count + 1}";
+    }
+
+    private static string NextTemporaryGrantedEffectStableId(
+        GameState state,
+        EffectTiming timing,
+        string grantedEffectKey,
+        PermanentId? targetPermanent,
+        PlayerId? targetPlayer)
+    {
+        var target = targetPermanent is not null
+            ? $"permanent:{targetPermanent.Value.Value}"
+            : $"player:{targetPlayer!.Value.Value}";
+        return $"duration:{state.TurnCount}:{state.Phase}:GrantedEffect:{timing}:{grantedEffectKey}:{target}:{state.TemporaryGrantedEffects.Count + 1}";
     }
 
     private static PlayerId? ResolveExpiresAtTurnPlayer(GameState state, PlayerId controller, DurationScope durationScope) =>

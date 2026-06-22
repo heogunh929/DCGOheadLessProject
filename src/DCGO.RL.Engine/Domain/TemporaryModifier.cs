@@ -16,6 +16,7 @@ public enum TemporaryModifierKind
     DP,
     SecurityAttack,
     SecurityDigimonDP,
+    Keyword,
     CannotAttack,
     CannotBlock,
     CannotSwitchAttackTarget,
@@ -34,4 +35,6 @@ public sealed record TemporaryModifier(
     int CreatedTurnCount,
     Phase CreatedPhase,
     PlayerId? ExpiresAtTurnPlayerId,
-    string DebugLabel);
+    string DebugLabel,
+    BattleKeyword? Keyword = null,
+    CardMetadataCriteria? TargetMetadataCriteria = null);

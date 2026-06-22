@@ -32,6 +32,7 @@ public sealed class GameState
     public List<PlayerState> Players { get; } = new();
     public List<CardInstanceId> ActiveCardIds { get; } = new();
     public List<TemporaryModifier> TemporaryModifiers { get; } = new();
+    public List<TemporaryGrantedEffect> TemporaryGrantedEffects { get; } = new();
     public Dictionary<string, CardDefinition> CardDefinitions { get; } = new(StringComparer.Ordinal);
     public Dictionary<CardInstanceId, CardInstance> Cards { get; } = new();
 
@@ -78,6 +79,7 @@ public sealed class GameState
 
         clone.ActiveCardIds.AddRange(ActiveCardIds);
         clone.TemporaryModifiers.AddRange(TemporaryModifiers);
+        clone.TemporaryGrantedEffects.AddRange(TemporaryGrantedEffects);
         clone.RuntimeRules.RestoreFrom(RuntimeRules);
 
         foreach (var player in Players)
@@ -118,6 +120,9 @@ public sealed class GameState
 
         TemporaryModifiers.Clear();
         TemporaryModifiers.AddRange(snapshot.TemporaryModifiers);
+
+        TemporaryGrantedEffects.Clear();
+        TemporaryGrantedEffects.AddRange(snapshot.TemporaryGrantedEffects);
 
         RuntimeRules.RestoreFrom(snapshot.RuntimeRules);
 
@@ -180,7 +185,28 @@ public sealed class GameState
                 .Append(modifier.CreatedTurnCount).Append('|')
                 .Append(modifier.CreatedPhase).Append('|')
                 .Append(modifier.ExpiresAtTurnPlayerId?.Value.ToString() ?? "-").Append('|')
+                .Append(modifier.Keyword?.ToString() ?? "-").Append('|')
+                .Append(FormatMetadataCriteria(modifier.TargetMetadataCriteria)).Append('|')
                 .Append(modifier.DebugLabel).AppendLine();
+        }
+
+        foreach (var grantedEffect in TemporaryGrantedEffects.OrderBy(effect => effect.StableId, StringComparer.Ordinal))
+        {
+            builder.Append("temporary-granted-effect:")
+                .Append(grantedEffect.StableId).Append('|')
+                .Append(grantedEffect.SourceCardId?.Value.ToString() ?? "-").Append('|')
+                .Append(grantedEffect.SourcePermanentId?.Value.ToString() ?? "-").Append('|')
+                .Append(grantedEffect.ControllerPlayerId.Value).Append('|')
+                .Append(grantedEffect.TargetPermanentId?.Value.ToString() ?? "-").Append('|')
+                .Append(grantedEffect.TargetPlayerId?.Value.ToString() ?? "-").Append('|')
+                .Append(grantedEffect.Timing).Append('|')
+                .Append(grantedEffect.GrantedEffectKey).Append('|')
+                .Append(grantedEffect.DurationScope).Append('|')
+                .Append(grantedEffect.CreatedTurnCount).Append('|')
+                .Append(grantedEffect.CreatedPhase).Append('|')
+                .Append(grantedEffect.ExpiresAtTurnPlayerId?.Value.ToString() ?? "-").Append('|')
+                .Append(FormatMetadataCriteria(grantedEffect.TargetMetadataCriteria)).Append('|')
+                .Append(grantedEffect.DebugLabel).AppendLine();
         }
 
         foreach (var use in RuntimeRules.OncePerTurnUses
@@ -261,8 +287,11 @@ public sealed class GameState
                 .Append(definition.Value.DefinitionStableId).Append('|')
                 .Append(definition.Value.CardNameEnglish).Append('|')
                 .Append(definition.Value.CardNameJapanese).Append('|')
+                .Append(definition.Value.CardTextEnglish).Append('|')
+                .Append(definition.Value.CardTextJapanese).Append('|')
                 .Append(string.Join(",", definition.Value.CardKinds)).Append('|')
                 .Append(string.Join(",", definition.Value.CardColors)).Append('|')
+                .Append(string.Join(",", definition.Value.Traits)).Append('|')
                 .Append(string.Join(",", definition.Value.EvoCosts.Select(evoCost =>
                     $"{evoCost.CardColor}:{evoCost.Level}:{evoCost.MemoryCost}"))).Append('|')
                 .Append(definition.Value.Level).Append('|')
@@ -341,6 +370,24 @@ public sealed class GameState
 
     private static string FormatPlayRequirement(PlayRequirement requirement) =>
         $"{requirement.Mode}:{requirement.FixedCost?.ToString() ?? "-"}:{requirement.ReduceCost}:{requirement.ReduceCostPerMaterial}:{requirement.LinkCost}:{requirement.MaxMaterials}:{string.Join(",", requirement.Materials.Select(FormatMaterialRequirement))}:{FormatMaterialRequirement(requirement.LinkTargetRequirement)}";
+
+    private static string FormatMetadataCriteria(CardMetadataCriteria? criteria)
+    {
+        if (criteria is null)
+        {
+            return "-";
+        }
+
+        return string.Join(
+            "|",
+            FormatCriteriaList("traits-all", criteria.RequiredTraits),
+            FormatCriteriaList("traits-any", criteria.AnyTraits),
+            FormatCriteriaList("name", criteria.RequiredNameSubstrings),
+            FormatCriteriaList("text", criteria.RequiredTextSubstrings));
+    }
+
+    private static string FormatCriteriaList(string label, IReadOnlyList<string> values) =>
+        $"{label}={string.Join(",", values.OrderBy(value => value, StringComparer.OrdinalIgnoreCase))}";
 
     private static string FormatRuntimeRuleValue(object? value) =>
         value switch

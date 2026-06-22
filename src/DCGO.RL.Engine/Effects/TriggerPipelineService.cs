@@ -127,6 +127,7 @@ public sealed class TriggerPipelineService
     private readonly SelectionResultApplicator _selectionApplicator;
     private readonly Tier1PrimitiveService _primitives;
     private readonly EngineInvariantChecker _invariantChecker;
+    private readonly TemporaryGrantedEffectRegistry _temporaryGrantedEffectRegistry;
     private readonly TriggerPipelineOptions _defaultOptions;
     private readonly bool _pauseForOrderingWithoutProvider;
     private Func<GameState, GameTrace?, RuleStabilizationResult>? _stateOnlyStabilizer;
@@ -139,6 +140,7 @@ public sealed class TriggerPipelineService
         SelectionResultApplicator? selectionApplicator = null,
         Tier1PrimitiveService? primitives = null,
         EngineInvariantChecker? invariantChecker = null,
+        TemporaryGrantedEffectRegistry? temporaryGrantedEffectRegistry = null,
         bool resolveAfterEffectsByDefault = false,
         bool pauseForOrderingWithoutProvider = false)
     {
@@ -149,6 +151,7 @@ public sealed class TriggerPipelineService
         _selectionApplicator = selectionApplicator ?? new SelectionResultApplicator();
         _primitives = primitives ?? new Tier1PrimitiveService();
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
+        _temporaryGrantedEffectRegistry = temporaryGrantedEffectRegistry ?? TemporaryGrantedEffectRegistry.Empty;
         _defaultOptions = new TriggerPipelineOptions(ResolveAfterEffectsActivate: resolveAfterEffectsByDefault);
         _pauseForOrderingWithoutProvider = pauseForOrderingWithoutProvider;
     }
@@ -295,6 +298,31 @@ public sealed class TriggerPipelineService
             outcome.Pending?.Continuation.PendingResolution,
             outcome.Pending?.Continuation.PendingSelectionRequest,
             outcome.Pending?.Continuation);
+    }
+
+    public TriggerPipelineResult RunPreparedSequence(
+        GameState state,
+        IReadOnlyList<PreparedTriggerGroup> preparedGroups,
+        GameTrace? trace = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(preparedGroups);
+
+        var groups = preparedGroups.ToArray();
+        if (groups.Length == 0)
+        {
+            throw new DomainException("Prepared trigger sequence must contain at least one group.");
+        }
+
+        foreach (var prepared in groups)
+        {
+            if (!ReferenceEquals(state, prepared.Context.State))
+            {
+                throw new DomainException("Prepared trigger sequence must run against the same GameState instance used to prepare it.");
+            }
+        }
+
+        return RunPreparedSequence(state, groups[0].Context, groups, trace);
     }
 
     private TriggerPipelineResult RunPreparedSequence(
@@ -954,6 +982,14 @@ public sealed class TriggerPipelineService
 
     private void ResolveBody(GameState state, EffectResolution resolution, GameTrace? trace)
     {
+        if (resolution.TemporaryGrantedEffect is { } grantedEffect)
+        {
+            _temporaryGrantedEffectRegistry.Resolve(
+                new CardScriptExecutionContext(state, resolution, _primitives, trace),
+                grantedEffect);
+            return;
+        }
+
         var sourceCard = resolution.SourceCard
             ?? throw new DomainException($"Effect resolution '{resolution.StableId}' requires a source card.");
         if (!state.Cards.TryGetValue(sourceCard, out var instance))
@@ -978,16 +1014,21 @@ public sealed class TriggerPipelineService
         var descriptors = new List<EffectDescriptor>();
         foreach (var source in EnumerateSources(state, context, options.SourceZones))
         {
-            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            var instance = source.Instance
+                ?? throw new DomainException("Card trigger source is missing a card instance.");
+            var sourceCard = source.Card
+                ?? throw new DomainException("Card trigger source is missing a source card.");
+
+            if (!state.CardDefinitions.TryGetValue(instance.DefinitionId, out var definition))
             {
-                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+                throw new DomainException($"Card definition '{instance.DefinitionId}' does not exist.");
             }
 
             var script = _cardScriptRegistry.GetScript(definition);
             descriptors.AddRange(script
                 .CreateEffectDescriptors(new CardScriptContext(
                     state,
-                    source.Card,
+                    sourceCard,
                     source.Permanent,
                     source.Controller))
                 .Select(descriptor => descriptor with
@@ -996,7 +1037,93 @@ public sealed class TriggerPipelineService
                 }));
         }
 
+        descriptors.AddRange(CollectTemporaryGrantedEffectDescriptors(state, context, options.SourceZones));
+
         return descriptors;
+    }
+
+    private IReadOnlyList<EffectDescriptor> CollectTemporaryGrantedEffectDescriptors(
+        GameState state,
+        EffectContext context,
+        TriggerSourceZone sourceZones)
+    {
+        var descriptors = new List<EffectDescriptor>();
+        foreach (var grantedEffect in state.TemporaryGrantedEffects
+            .Where(effect => effect.Timing == context.Timing)
+            .OrderBy(effect => effect.StableId, StringComparer.Ordinal))
+        {
+            var source = ResolveTemporaryGrantedEffectSource(state, grantedEffect, sourceZones);
+            if (source is null)
+            {
+                continue;
+            }
+
+            var descriptorContext = new TemporaryGrantedEffectDescriptorContext(
+                state,
+                grantedEffect,
+                source.Card,
+                source.Permanent,
+                source.Controller,
+                source.Snapshot);
+
+            if (!_temporaryGrantedEffectRegistry.TryCreateDescriptor(
+                grantedEffect,
+                descriptorContext,
+                out var descriptor))
+            {
+                throw TemporaryGrantedEffectRegistry.Unsupported(grantedEffect);
+            }
+
+            descriptors.Add(descriptor with
+            {
+                SourceCard = descriptor.SourceCard ?? source.Card,
+                SourcePermanent = descriptor.SourcePermanent ?? source.Permanent,
+                Controller = descriptor.Controller ?? source.Controller,
+                SourceSnapshot = descriptor.SourceSnapshot ?? source.Snapshot,
+                TemporaryGrantedEffect = grantedEffect,
+            });
+        }
+
+        return descriptors;
+    }
+
+    private static TriggerSource? ResolveTemporaryGrantedEffectSource(
+        GameState state,
+        TemporaryGrantedEffect grantedEffect,
+        TriggerSourceZone sourceZones)
+    {
+        if (grantedEffect.TargetPermanentId is { } targetPermanentId)
+        {
+            if (!sourceZones.HasFlag(TriggerSourceZone.FieldTop))
+            {
+                return null;
+            }
+
+            var permanent = FindPermanent(state, targetPermanentId);
+            if (permanent is null)
+            {
+                return null;
+            }
+
+            return CreatePermanentSource(state, permanent.TopCardId, permanent, TriggerSourceRole.FieldTop);
+        }
+
+        if (grantedEffect.TargetPlayerId is { } targetPlayerId)
+        {
+            if (state.Players.All(player => player.Id != targetPlayerId))
+            {
+                return null;
+            }
+
+            return new TriggerSource(
+                grantedEffect.SourceCardId,
+                Instance: null,
+                Permanent: null,
+                grantedEffect.ControllerPlayerId,
+                Snapshot: null);
+        }
+
+        return null;
     }
 
     private static IEnumerable<TriggerSource> EnumerateSources(
@@ -1427,11 +1554,11 @@ public sealed class TriggerPipelineService
     }
 
     private sealed record TriggerSource(
-        CardInstanceId Card,
-        CardInstance Instance,
+        CardInstanceId? Card,
+        CardInstance? Instance,
         PermanentId? Permanent,
         PlayerId Controller,
-        TriggerSourceSnapshot Snapshot);
+        TriggerSourceSnapshot? Snapshot);
 
     private sealed record FrameDrainOutcome(PendingSelection? Pending)
     {

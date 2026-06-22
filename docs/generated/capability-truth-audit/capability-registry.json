@@ -19,10 +19,10 @@
     "commonLayerUnimplementedStatus": "Unsupported"
   },
   "summary": {
-    "capabilityCount": 161,
+    "capabilityCount": 160,
     "statusCounts": {
-      "PartiallyImplemented": 83,
-      "Unsupported": 69,
+      "PartiallyImplemented": 100,
+      "Unsupported": 51,
       "Verified": 9
     },
     "documentationConflictCount": 12
@@ -290,7 +290,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     },
     {
@@ -309,7 +309,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     },
     {
@@ -383,7 +383,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     },
     {
@@ -402,7 +402,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     },
     {
@@ -417,7 +417,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     },
     {
@@ -777,7 +777,7 @@
           "queueStatus": "done"
         }
       ],
-      "finalStatus": "Unsupported",
+      "finalStatus": "PartiallyImplemented",
       "resolution": "Documentation conflict is not allowed to auto-promote the capability. Final status follows implementation/test/replay evidence."
     }
   ],
@@ -789,6 +789,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 76,
       "sourceFileCount": 31,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Domain/Enums.cs",
@@ -806,6 +807,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 4,
       "sourceFileCount": 2,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -828,6 +830,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 15,
       "sourceFileCount": 7,
+      "inventoryAliases": [],
       "reason": "After-pay-cost layer remains a common blocker.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -849,6 +852,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 88,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -863,9 +867,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 12,
       "sourceFileCount": 10,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/AppFusionService.cs"
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
       ],
       "testEvidence": [
         "ComplexMechanics App Fusion link card selection",
@@ -884,6 +889,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 48,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -898,6 +904,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 8,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -912,9 +919,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 26,
       "sourceFileCount": 15,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/AssemblyService.cs"
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
       ],
       "testEvidence": [
         "ComplexMechanics Assembly material selection"
@@ -937,6 +945,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 57,
       "sourceFileCount": 24,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/TriggerCollector.cs",
@@ -968,6 +977,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 61,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -982,6 +992,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 4071,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
@@ -999,6 +1010,7 @@
       ],
       "testEvidence": [
         "Duration player DP modifier affects owner battle area",
+        "Duration player keyword grants Rush to matching battle area Digimon",
         "Continuous tamer aura applies owner battle area"
       ],
       "replayOrInvariantEvidence": [],
@@ -1012,6 +1024,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 284,
       "sourceFileCount": 141,
+      "inventoryAliases": [],
       "reason": "Cost modifier/replacement layer is documented as a common blocker and is not executable for full-card batches.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
@@ -1081,10 +1094,11 @@
     {
       "capabilityId": "BlastDigivolution",
       "status": "Unsupported",
-      "inventorySection": "keywords",
+      "inventorySection": "specialMechanics",
       "inventoryStatus": "NotReferenced",
-      "affectedCardCount": 0,
-      "sourceFileCount": 0,
+      "affectedCardCount": 136,
+      "sourceFileCount": 52,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1099,6 +1113,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1113,6 +1128,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 38,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1140,10 +1156,11 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 425,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
-        "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
       ],
       "testEvidence": [
         "BattleKeywords Blocker selection request",
@@ -1295,6 +1312,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 101,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Actions/GameAction.cs",
@@ -1329,6 +1347,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 104,
       "sourceFileCount": 45,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Domain/Enums.cs",
@@ -1347,6 +1366,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1361,6 +1381,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 45,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
@@ -1376,15 +1397,34 @@
     {
       "capabilityId": "ContinuousOrStaticEffect",
       "status": "PartiallyImplemented",
-      "inventorySection": "source-required",
-      "inventoryStatus": "Derived",
-      "affectedCardCount": 0,
-      "sourceFileCount": 0,
-      "reason": "Continuous descriptors support field top, inherited, linked, face-up security, hand, trash, and executing source scopes; continuous static keyword descriptors cover source/condition-aware supported BattleKeyword grants; StaticRequirementService covers source/condition-aware static digivolution and link requirement descriptors for generated action/execution/replay paths; and TemporaryModifier covers supported player-level DP/SecurityAttack/SecurityDigimonDP runtime stat effects with clone/hash/replay evidence. Trait/name/text metadata, unsupported static effect interfaces, ignore-digivolution-permission semantics, and full-card parity evidence remain unresolved.",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "affectedCardCount": 4326,
+      "sourceFileCount": 2220,
+      "inventoryAliases": [
+        "None"
+      ],
+      "reason": "Continuous descriptors support field top, inherited, linked, face-up security, hand, trash, and executing source scopes; metadata criteria cover trait/name/text source and target gates; continuous static keyword descriptors cover source/condition-aware supported BattleKeyword grants; StaticRequirementService covers source/condition-aware static digivolution/link requirements, ignore-digivolution permission semantics, cannot-ignore digivolution restriction descriptors, effective card colors and effective permanent levels for digivolution requirements, effective link requirement metadata/level gates through ComplexMechanicService, static link cost modifiers through CostResolver, and effective metadata criteria where a StaticEffectService is available; StaticEffectService covers static cost/restriction/immunity descriptor evaluation, static card play restriction descriptors for option play gates, static card put-field restriction descriptors for permanent field-entry gates, static card move restriction descriptors for return-to-hand gates, effective card/base/current color descriptors, effective card name/trait metadata descriptors, effective card/permanent level descriptors, and ignore color requirements for option play. TemporaryModifier covers supported player-level DP/SecurityAttack/SecurityDigimonDP runtime stat effects, target permanent temporary keyword grants, and player-wide temporary keyword grants with metadata-gated battle-area Digimon targets. TemporaryGrantedEffect covers duration-bound granted trigger source/timing descriptors through the trigger pipeline. Full-card parity evidence is generated conservatively as NotRun, and generated/runtime status mismatch is closed by separating legacy pilot divergence from generated source truth. The capability remains partial until remaining full-card continuous/static variants have source-locked parity evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+        "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+        "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+        "src/DCGO.RL.Engine/Domain/CardMetadataCriteria.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
         "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
         "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
-        "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs"
+        "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+        "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs",
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs",
+        "src/DCGO.RL.Engine/Mechanics/CostResolver.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
+        "src/DCGO.RL.Engine/Validation/EngineInvariantChecker.cs",
+        "src/DCGO.RL.Engine/Validation/RuleVisibleSnapshot.cs"
       ],
       "testEvidence": [
         "Continuous executing source applies during execution",
@@ -1392,19 +1432,60 @@
         "Continuous face-up security source applies",
         "Continuous hand source applies only from hand",
         "Continuous linked source applies from linked zone",
+        "Continuous metadata criteria gates target trait and text",
         "Continuous static keyword condition gates keyword",
         "Continuous static keyword field source grants Blocker",
         "Continuous static keyword inherited source stops after move",
         "Continuous static keyword replay deterministic",
         "Continuous trash source applies from trash",
+        "Duration invariant detects invalid granted trigger",
+        "Duration invariant detects invalid keyword modifier",
         "Duration player DP modifier affects owner battle area",
-        "Duration player SecurityAttack modifier affects owner Digimon"
+        "Duration player SecurityAttack modifier affects owner Digimon",
+        "Duration player keyword grants Rush to matching battle area Digimon",
+        "Duration player keyword hash and replay deterministic",
+        "Duration player runtime modifiers clone restore hash",
+        "Duration player runtime modifiers replay deterministic",
+        "Duration temporary granted trigger hash and replay deterministic",
+        "Duration temporary granted trigger runs from target permanent timing",
+        "Duration temporary keyword grants Blocker until cleanup",
+        "Duration temporary keyword grants Rush attack legality",
+        "Duration temporary keyword hash and replay deterministic",
+        "Static card color modifier affects digivolution color requirement",
+        "Static card color modifier affects option color requirement",
+        "Static card level modifier feeds permanent level requirement",
+        "Static card metadata modifier affects cost criteria",
+        "Static card restriction blocks option play",
+        "Static card restriction blocks permanent field play",
+        "Static card restriction blocks return to hand",
+        "Static cost modifier adjusts play and digivolution cost",
+        "Static evolution requirement cannot-ignore restriction blocks permission",
+        "Static evolution requirement cannot-ignore restriction condition gates",
+        "Static evolution requirement condition gates target",
+        "Static evolution requirement hand source generates and executes",
+        "Static evolution requirement ignore permission generates and executes",
+        "Static evolution requirement ignore permission requires target gate",
+        "Static evolution requirement stops after source move",
+        "Static ignore color requirement permits option",
+        "Static immunity descriptor evaluates metadata",
+        "Static link cost modifier adjusts link cost",
+        "Static link requirement hand source generates and executes",
+        "Static link requirement uses effective metadata and level",
+        "Static permanent level modifier affects normal digivolution requirement",
+        "Static requirement metadata criteria gates source and target",
+        "Static requirement replay deterministic",
+        "Static restriction blocks attack and block"
       ],
       "replayOrInvariantEvidence": [
         "Continuous and duration modifiers stack deterministically",
         "Continuous effects are derived for state hash",
         "Continuous static keyword replay deterministic",
+        "Duration invariant detects invalid granted trigger",
+        "Duration invariant detects invalid keyword modifier",
+        "Duration player keyword hash and replay deterministic",
         "Duration player runtime modifiers replay deterministic",
+        "Duration temporary granted trigger hash and replay deterministic",
+        "Duration temporary keyword hash and replay deterministic",
         "Static requirement replay deterministic"
       ],
       "documentClaims": [],
@@ -1417,6 +1498,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 279,
       "sourceFileCount": 111,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs"
@@ -1451,6 +1533,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 1194,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/HatchService.cs",
@@ -1565,6 +1648,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1583,11 +1667,12 @@
     },
     {
       "capabilityId": "Decode",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 19,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_027.cs",
@@ -1619,10 +1704,12 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 18,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
         "src/DCGO.RL.Engine/Validation/DeckMechanicValidator.cs"
       ],
       "testEvidence": [
@@ -1639,6 +1726,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 281,
       "sourceFileCount": 132,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Actions/GameAction.cs",
@@ -1662,6 +1750,7 @@
       "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 84,
       "sourceFileCount": 39,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1676,6 +1765,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 66,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/HatchService.cs",
@@ -1700,9 +1790,10 @@
       "capabilityId": "Digisorption",
       "status": "PartiallyImplemented",
       "inventorySection": "specialMechanics",
-      "inventoryStatus": "PartiallyImplemented",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 40,
       "sourceFileCount": 19,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -1728,9 +1819,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 199,
       "sourceFileCount": 101,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/DigiXrosService.cs"
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
       ],
       "testEvidence": [
         "ComplexMechanics DigiXros materials and cost"
@@ -1753,6 +1845,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Duration modifiers are implemented for core scopes, but full-card duration variants remain incomplete.",
       "implementationEvidence": [],
       "testEvidence": [
@@ -1773,6 +1866,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 26,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -1787,6 +1881,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 73,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/ActionExecutor.cs",
@@ -1805,6 +1900,7 @@
       "testEvidence": [
         "LegalActionGenerator generated actions execute",
         "Static evolution requirement hand source generates and executes",
+        "Static evolution requirement ignore permission generates and executes",
         "Static link requirement hand source generates and executes",
         "Attack timing single mandatory counter auto executes"
       ],
@@ -1828,6 +1924,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 118,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/ActionExecutor.cs",
@@ -1861,11 +1958,12 @@
     },
     {
       "capabilityId": "Fortitude",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 35,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_034.cs",
@@ -1892,6 +1990,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 9,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/obj/Debug/net8.0/DCGO.RL.Engine.AssemblyInfo.cs"
@@ -1908,6 +2007,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 1290,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -1930,12 +2030,12 @@
         "CapabilityTruthAudit status mismatch and variant registry integrated",
         "BT19-021 returns level 3 Digimon to hand",
         "BT19-089 security adds itself to hand",
+        "Duration temporary keyword hash and replay deterministic",
+        "Duration player keyword hash and replay deterministic",
+        "Duration temporary granted trigger hash and replay deterministic",
         "Continuous hand source applies only from hand",
         "Static evolution requirement hand source generates and executes",
-        "Static link requirement hand source generates and executes",
-        "Zone events OnAddHand and OnDraw drain through auto process",
-        "Zone events discard hand aggregates payload",
-        "Zone events trash return fire before hand and library moves"
+        "Static card restriction blocks return to hand"
       ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
@@ -2048,11 +2148,12 @@
     },
     {
       "capabilityId": "Iceclad",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 18,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_077.cs"
@@ -2071,9 +2172,10 @@
       "capabilityId": "inherited",
       "status": "PartiallyImplemented",
       "inventorySection": "features",
-      "inventoryStatus": "PartiallyImplemented",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 4491,
       "sourceFileCount": 2309,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_005.cs",
@@ -2243,6 +2345,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Inherited descriptors exist, but source role and moved-source revalidation remain capability-specific.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
@@ -2277,9 +2380,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 102,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
       ],
       "testEvidence": [
         "BattleKeywords Jamming security battle"
@@ -2334,9 +2438,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 3719,
       "sourceFileCount": 1856,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/JogressService.cs"
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
       ],
       "testEvidence": [
         "ComplexMechanics Jogress legal action",
@@ -2351,10 +2456,11 @@
     {
       "capabilityId": "Link",
       "status": "PartiallyImplemented",
-      "inventorySection": "keywords",
+      "inventorySection": "specialMechanics",
       "inventoryStatus": "Verified",
-      "affectedCardCount": 0,
+      "affectedCardCount": 116,
       "sourceFileCount": 177,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Actions/GameAction.cs",
@@ -2373,7 +2479,9 @@
       "testEvidence": [
         "CapabilityDependencyGraph links sources and batches",
         "Continuous linked source applies from linked zone",
+        "Static link cost modifier adjusts link cost",
         "Static link requirement hand source generates and executes",
+        "Static link requirement uses effective metadata and level",
         "Tier1 RuleProcessor trims excess link cards",
         "Tier1 RuleProcessor uses injected ZoneMover for link trim",
         "ComplexMechanics App Fusion link card selection",
@@ -2395,6 +2503,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 110,
       "sourceFileCount": 87,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
@@ -2431,6 +2540,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 15,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -2445,6 +2555,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 7323,
       "sourceFileCount": 3628,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -2459,6 +2570,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 15,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -2473,126 +2585,12 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1219,
       "sourceFileCount": 648,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
       "documentClaims": [],
-      "hasDocumentationConflict": false
-    },
-    {
-      "capabilityId": "None",
-      "status": "Unsupported",
-      "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
-      "affectedCardCount": 4326,
-      "sourceFileCount": 2220,
-      "reason": "Conservative audit status derived from inventory and local evidence.",
-      "implementationEvidence": [
-        "src/DCGO.RL.Engine/Battle/BattleRules.cs",
-        "src/DCGO.RL.Engine/Battle/EngineSession.cs",
-        "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT18/Bt18ScriptSupport.cs",
-        "src/DCGO.RL.Engine/Domain/CardDefinition.cs",
-        "src/DCGO.RL.Engine/Domain/CardInstance.cs",
-        "src/DCGO.RL.Engine/Domain/CardInstanceFactory.cs",
-        "src/DCGO.RL.Engine/Domain/Enums.cs",
-        "src/DCGO.RL.Engine/Domain/GameState.cs",
-        "src/DCGO.RL.Engine/Domain/RuntimeRuleState.cs",
-        "src/DCGO.RL.Engine/Domain/ZoneMover.cs",
-        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs"
-      ],
-      "testEvidence": [
-        "EngineSession OnEndAttack selection pause/resume",
-        "Provider-driven one-shot Run regression"
-      ],
-      "replayOrInvariantEvidence": [],
-      "documentClaims": [
-        {
-          "path": "docs/rl-engine/full-card-porting-C0010-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0011-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0012-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0013-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0014-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0015-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0016-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0018-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0019-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0020-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0021-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0022-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0023-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0024-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0025-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0026-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0027-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0028-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0029-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-C0030-zone-security-recovery-source-mapping.md",
-          "queueStatus": "blocked"
-        },
-        {
-          "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
-          "queueStatus": "blocked"
-        }
-      ],
       "hasDocumentationConflict": false
     },
     {
@@ -2602,6 +2600,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 102,
       "sourceFileCount": 50,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_034.cs",
@@ -2664,11 +2663,12 @@
     },
     {
       "capabilityId": "OnAddHand",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 49,
       "sourceFileCount": 21,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
@@ -2754,6 +2754,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 38,
       "sourceFileCount": 14,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -2787,6 +2788,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1936,
       "sourceFileCount": 945,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -2822,6 +2824,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 55,
       "sourceFileCount": 31,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -2839,6 +2842,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 13,
       "sourceFileCount": 6,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -2861,6 +2865,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "RuntimeRuleState owns once-per-turn state, but generated effect identity binding remains incomplete.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_015.cs",
@@ -2895,6 +2900,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 279,
       "sourceFileCount": 111,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -2912,6 +2918,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 578,
       "sourceFileCount": 298,
+      "inventoryAliases": [],
       "reason": "Declaration/cost continuation is still unresolved for generated full-card batches.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
@@ -2954,6 +2961,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1158,
       "sourceFileCount": 623,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/RuleProcessor.cs",
@@ -3052,6 +3060,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 228,
       "sourceFileCount": 119,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3093,6 +3102,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 121,
       "sourceFileCount": 53,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT21/Black/BT21_055.cs",
@@ -3134,11 +3144,12 @@
     },
     {
       "capabilityId": "OnDigivolutionCardReturnToDeckBottom",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 4,
       "sourceFileCount": 3,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -3156,11 +3167,12 @@
     },
     {
       "capabilityId": "OnDiscardHand",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 59,
       "sourceFileCount": 34,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -3191,6 +3203,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 51,
       "sourceFileCount": 20,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_071.cs",
@@ -3221,6 +3234,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 23,
       "sourceFileCount": 14,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
@@ -3244,9 +3258,10 @@
       "capabilityId": "OnDraw",
       "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "L0005 keeps OnDraw blocked while L0006 documents partial pending-rule coverage; draw primitive selection/replay boundary still needs a focused mechanic gate.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
@@ -3314,6 +3329,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 164,
       "sourceFileCount": 80,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -3336,6 +3352,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3352,6 +3369,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 160,
       "sourceFileCount": 84,
+      "inventoryAliases": [],
       "reason": "Battle-end payload and lifecycle boundary remain unresolved for generated full-card batches.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
@@ -3408,6 +3426,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3426,6 +3445,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3442,6 +3462,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3458,6 +3479,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 549,
       "sourceFileCount": 249,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
@@ -3502,13 +3524,16 @@
     },
     {
       "capabilityId": "OnEnterFieldAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 4141,
       "sourceFileCount": 2042,
-      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "inventoryAliases": [],
+      "reason": "PlayCardService and DigivolveService now chain a source-wide OnEnterFieldAnyone payload after existing self OnPlay/WhenDigivolving groups. Source ordering parity, multi-permanent payloads, and all enter-field variants remain incomplete.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_053.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_009.cs",
@@ -3517,9 +3542,15 @@
         "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_092.cs",
         "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_09.cs",
         "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_09.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Effects/EnterFieldEventPayload.cs",
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "TriggerPipeline OnEnterFieldAnyone digivolve payload invokes global descriptor",
+        "TriggerPipeline OnEnterFieldAnyone play payload invokes global descriptor",
+        "TriggerPipeline OnEnterFieldAnyone tail resumes after OnPlay selection"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3636,6 +3667,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 2,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3652,6 +3684,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3668,6 +3701,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3679,11 +3713,12 @@
     },
     {
       "capabilityId": "OnLeaveFieldAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 2,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -3718,6 +3753,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 14,
       "sourceFileCount": 7,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3734,6 +3770,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 170,
       "sourceFileCount": 73,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
@@ -3820,6 +3857,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 79,
       "sourceFileCount": 30,
+      "inventoryAliases": [],
       "reason": "Move timing payload and source-zone semantics remain unresolved.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -3840,11 +3878,12 @@
     },
     {
       "capabilityId": "OnPermamemtReturnedToHand",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 5,
       "sourceFileCount": 2,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -3875,6 +3914,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
@@ -3900,8 +3940,9 @@
         "Duration player SecurityAttack modifier affects owner Digimon",
         "Duration player runtime modifiers clone restore hash",
         "Duration player runtime modifiers replay deterministic",
-        "Runtime composition PlayCardService requires TriggerPipeline",
-        "EngineSession OnPlay selection pause/resume"
+        "Duration player keyword grants Rush to matching battle area Digimon",
+        "Duration player keyword hash and replay deterministic",
+        "Static card restriction blocks option play"
       ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
@@ -3971,7 +4012,8 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
-      "reason": "OnPlay-compatible descriptors exist in fixtures, but global OnEnterFieldAnyone payload coverage is incomplete.",
+      "inventoryAliases": [],
+      "reason": "OnPlay-compatible descriptors exist in fixtures and global OnEnterFieldAnyone play payload coverage is partial, but full source ordering and all generated variants remain incomplete.",
       "implementationEvidence": [],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -3985,6 +4027,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 4,
       "sourceFileCount": 2,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4001,11 +4044,12 @@
     },
     {
       "capabilityId": "OnReturnCardsToHandFromTrash",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 6,
       "sourceFileCount": 2,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -4027,11 +4071,12 @@
     },
     {
       "capabilityId": "OnReturnCardsToLibraryFromTrash",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 2,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -4054,6 +4099,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 20,
       "sourceFileCount": 9,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
@@ -4079,6 +4125,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4100,6 +4147,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 483,
       "sourceFileCount": 222,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/EngineSession.cs",
@@ -4161,6 +4209,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 322,
       "sourceFileCount": 120,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
@@ -4232,6 +4281,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 306,
       "sourceFileCount": 139,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
@@ -4282,6 +4332,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 70,
       "sourceFileCount": 29,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4311,6 +4362,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4327,6 +4379,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4343,6 +4396,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 65,
       "sourceFileCount": 30,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -4364,6 +4418,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 3207,
       "sourceFileCount": 1582,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs",
@@ -4529,6 +4584,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "DecisionToken pause/resume exists, but generated card effect coverage is not complete.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -4543,6 +4599,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 939,
       "sourceFileCount": 522,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
@@ -4596,11 +4653,12 @@
     },
     {
       "capabilityId": "Overclock",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 15,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT22/Yellow/BT22_040.cs"
@@ -4622,6 +4680,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 18,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [
@@ -4638,6 +4697,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 168,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -4665,9 +4725,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 171,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
       ],
       "testEvidence": [
         "BattleKeywords Piercing security check"
@@ -4730,6 +4791,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 13,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -4739,11 +4801,12 @@
     },
     {
       "capabilityId": "Raid",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 92,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_075.cs",
@@ -4770,9 +4833,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 135,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
       ],
       "testEvidence": [
         "BattleKeywords Reboot active phase"
@@ -4811,6 +4875,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 993,
       "sourceFileCount": 472,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -4825,6 +4890,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 100,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
@@ -4884,6 +4950,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 447,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
@@ -4907,6 +4974,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/EngineSession.cs",
@@ -4935,9 +5003,10 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 107,
+      "inventoryAliases": [],
       "reason": "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
       ],
       "testEvidence": [
         "BattleKeywords Rush attack legality"
@@ -4968,6 +5037,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 136,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_022.cs",
@@ -5031,6 +5101,7 @@
       "inventoryStatus": "Unsupported",
       "affectedCardCount": 0,
       "sourceFileCount": 23,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5050,6 +5121,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1880,
       "sourceFileCount": 894,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -5231,6 +5303,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 332,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackRuntimeOperations.cs",
@@ -5400,6 +5473,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 26,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -5489,6 +5563,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1880,
       "sourceFileCount": 894,
+      "inventoryAliases": [],
       "reason": "SecuritySkill execution exists for covered fixtures, but full-card security skill bodies remain per-source.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
@@ -5586,6 +5661,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 12,
       "sourceFileCount": 10,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5600,6 +5676,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 26,
       "sourceFileCount": 15,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5614,6 +5691,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 367,
       "sourceFileCount": 201,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5628,6 +5706,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 604,
       "sourceFileCount": 294,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5642,6 +5721,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 104,
       "sourceFileCount": 45,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5656,6 +5736,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 3541,
       "sourceFileCount": 1749,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
@@ -5700,9 +5781,10 @@
       "capabilityId": "SelectCount",
       "status": "PartiallyImplemented",
       "inventorySection": "selections",
-      "inventoryStatus": "PartiallyImplemented",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 26,
       "sourceFileCount": 11,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -5727,6 +5809,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5741,6 +5824,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 199,
       "sourceFileCount": 101,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5755,6 +5839,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
@@ -5772,6 +5857,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 1835,
       "sourceFileCount": 943,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5827,6 +5913,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 139,
       "sourceFileCount": 82,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5841,6 +5928,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Generic selection requests exist, but source-specific selection semantics and replay evidence are not complete for all generated sources.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5855,6 +5943,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Hand selection exists in fixtures, but hidden-info and full-card source semantics are not fully verified.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5869,6 +5958,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Permanent selection exists, but generated-card semantics still need capability-specific verification.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5883,6 +5973,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Security selection exists, but face-up/security-stack variants and full-card replay evidence remain incomplete.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5897,6 +5988,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 3719,
       "sourceFileCount": 1856,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -5911,6 +6003,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 160,
       "sourceFileCount": 61,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Domain/Enums.cs"
@@ -5927,6 +6020,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 4101,
       "sourceFileCount": 2128,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
@@ -5986,6 +6080,7 @@
       "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 2588,
       "sourceFileCount": 1282,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
@@ -6003,6 +6098,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 3079,
       "sourceFileCount": 1577,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6017,6 +6113,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Skip decisions exist, but original MultipleSkills/optional semantics need per-capability verification.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6031,6 +6128,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 7867,
       "sourceFileCount": 3897,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6040,11 +6138,12 @@
     },
     {
       "capabilityId": "Training",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 32,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6064,6 +6163,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 760,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
@@ -6157,6 +6257,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 2114,
       "sourceFileCount": 1085,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6171,6 +6272,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 21,
       "sourceFileCount": 13,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6185,6 +6287,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 2505,
       "sourceFileCount": 1190,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6194,11 +6297,12 @@
     },
     {
       "capabilityId": "Vortex",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "keywords",
-      "inventoryStatus": "Unsupported",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 0,
       "sourceFileCount": 30,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_095.cs"
@@ -6224,6 +6328,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 15,
       "sourceFileCount": 10,
+      "inventoryAliases": [],
       "reason": "Digisorption timing remains a documented common-layer blocker.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6249,6 +6354,7 @@
       "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
@@ -6353,7 +6459,8 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
-      "reason": "WhenDigivolving descriptors exist in fixtures, but full event payload/source eligibility remains incomplete.",
+      "inventoryAliases": [],
+      "reason": "WhenDigivolving descriptors exist in fixtures and global OnEnterFieldAnyone digivolve payload coverage is partial, but full event payload/source eligibility remains incomplete.",
       "implementationEvidence": [],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6367,6 +6474,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 87,
       "sourceFileCount": 64,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6383,6 +6491,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 405,
       "sourceFileCount": 206,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6404,6 +6513,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 304,
       "sourceFileCount": 164,
+      "inventoryAliases": [],
       "reason": "Would-remove replacement/cut-in semantics remain unresolved for generated batches.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
@@ -6433,11 +6543,12 @@
     },
     {
       "capabilityId": "WhenReturntoHandAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 25,
       "sourceFileCount": 9,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -6468,6 +6579,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 25,
       "sourceFileCount": 9,
+      "inventoryAliases": [],
       "reason": "Return-to-library cut-in shares unresolved would-remove replacement semantics.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6488,11 +6600,12 @@
     },
     {
       "capabilityId": "WhenTopCardTrashed",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 6,
       "sourceFileCount": 3,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
@@ -6515,6 +6628,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Untap cut-in pre/post refix semantics remain unresolved.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6544,6 +6658,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6565,6 +6680,7 @@
       "inventoryStatus": "NeedsSourceReview",
       "affectedCardCount": 2,
       "sourceFileCount": 2,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
@@ -6581,6 +6697,7 @@
       "inventoryStatus": "Verified",
       "affectedCardCount": 7024,
       "sourceFileCount": 3505,
+      "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [],
       "testEvidence": [],
@@ -6595,6 +6712,7 @@
       "inventoryStatus": "Derived",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
+      "inventoryAliases": [],
       "reason": "ZoneMover and pending rule events exist, but many card-specific source movement variants remain blocked.",
       "implementationEvidence": [],
       "testEvidence": [],

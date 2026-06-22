@@ -1,0 +1,928 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-23T05:37:16+09:00",
+  "sourceRoot": "E:\\headlessDCGO\\DCGO",
+  "sourceFile": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+  "scope": {
+    "cardEffectBodyImplementation": "forbidden",
+    "purpose": "Map original CardEffectInterfaces contracts to deterministic headless descriptors, services, and primitives."
+  },
+  "interfaceCount": 74,
+  "interfaces": [
+    {
+      "interface": "IAddDetailEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetDetail",
+        "PermanentCondition",
+        "TriggerEffect"
+      ],
+      "category": "AdditionalSkillGrant",
+      "headlessMapping": "TemporaryGrantedEffect, EffectDescriptor.TemporaryGrantedEffect, TriggerPipelineService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "Unity interface라는 이유로 Exclude하지 않고, CardEffects list를 임의로 직접 변형하지 않는다.",
+      "verificationCandidate": "timing별 추가 effect가 deterministic descriptor 또는 temporary granted trigger로 수집되는지 검증한다."
+    },
+    {
+      "interface": "IAddSkillEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetCardEffect",
+        "ShouldAddEffect"
+      ],
+      "category": "AdditionalSkillGrant",
+      "headlessMapping": "TemporaryGrantedEffect, EffectDescriptor.TemporaryGrantedEffect, TriggerPipelineService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "Unity interface라는 이유로 Exclude하지 않고, CardEffects list를 임의로 직접 변형하지 않는다.",
+      "verificationCandidate": "timing별 추가 effect가 deterministic descriptor 또는 temporary granted trigger로 수집되는지 검증한다."
+    },
+    {
+      "interface": "IOptionResolutionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanResolve",
+        "Resolve"
+      ],
+      "category": "CoroutineOptionResolution",
+      "headlessMapping": "EffectResolution step, pending SelectionRequest, deterministic resume flow",
+      "status": "UnityFlowReplacementRequired",
+      "forbiddenShortcut": "IEnumerator/Coroutine을 RL.Engine으로 들여오거나 silent no-op으로 대체하지 않는다.",
+      "verificationCandidate": "option resolution이 즉시 step과 pending selection step으로 분리되어 replay 가능한지 검증한다."
+    },
+    {
+      "interface": "IAddAppFusionConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetAppFusionCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddAssemblyConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetAssemblyCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddBurstDigivolutionConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetBurstDigivolutionCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddDNANamesEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetDNANames"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddDigiXrosConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetDigiXrosCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddDigivolutionRequirementEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetEvoCost"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddJogressConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetJogressCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddJogressLevelsEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetJogressLevels"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddLinkConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetLinkCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddMaxTrashCountDigiXrosEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetMaxTrashCount"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IAddMaxUnderTamerCountDigiXrosEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "getMaxUnderTamerCount"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IChangeCostEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CardCondition",
+        "GetCost",
+        "IsChangePayingCost",
+        "IsCheckAvailability",
+        "IsUpDown"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IChangeLinkCostEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CardCondition",
+        "GetCost",
+        "IsUpDown",
+        "PermanentCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IIgnoreColorConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "IgnoreColorCondition"
+      ],
+      "category": "CostOrRequirement",
+      "headlessMapping": "StaticRequirementService, CostResolver, ComplexMechanicService",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "cost/requirement 변경을 play service 내부의 임시 예외로 숨기지 않는다.",
+      "verificationCandidate": "play/digivolve/link/digixros requirement 계산이 interface mapping을 통해 일관되게 바뀌는지 검증한다."
+    },
+    {
+      "interface": "IBlockerEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "IsBlocker"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "ICollisionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "HasCollision"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "IIcecladEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "HasIceclad"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "IRebootEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "HasReboot"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "IRushEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "HasRush"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "IScapegoatEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "HasScapegoat"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "IVortexCanAttackPlayersEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "VortexCanAttackPlayersPermanent"
+      ],
+      "category": "KeywordGrant",
+      "headlessMapping": "BattleKeywordService, ContinuousEffectDescriptor, TemporaryModifier",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "keyword를 UI label이나 card body-local boolean으로만 처리하지 않는다.",
+      "verificationCandidate": "keyword query가 BattleKeywordService를 통해 battle/action legality와 state hash에 반영되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotAffectedEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotAffect"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotAttackTargetDefendingPermanentEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotAttackTargetDefendingPermanent"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotBeDestroyedByBattleEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotBeDestroyedByBattle",
+        "PermanentCondition"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotBeDestroyedBySkillEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotBeDestroyedBySkill"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotBeDestroyedEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotBeDestroyed"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotBeRemovedEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotBeRemoved"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotDigivolveEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotEvolve"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotMoveEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotMove"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotPlayCardEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotPlay"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotPutFieldEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotPutField"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotSelectBySkillEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotSelectBySkill"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotSuspendEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotSuspend"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotSwitchAttackTargetEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotBeSwitchAttackTarget"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotTrashFromDigivolutionCardsEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotTrashFromDigivolutionCards"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanNotUnsuspendEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanNotUnsuspend"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotAddMemoryEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "cannotAddMemory"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotAddSecurityEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "cannotAddSecurity"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotBlockEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CannotBlock"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotIgnoreDigivolutionConditionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "cannotIgnoreDigivolutionCondition"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotReduceCostEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CannotReduceCost"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotReturnToHandEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CannotReturnToHand"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICannotReturnToLibraryEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CannotReturnToLibrary"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "IDisableCardEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "IsDisabled"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "IDontBattleSecurityDigimonEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "DontBattleSecurityDigimon"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "IImmuneFromDPMinusEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ImmuneFromDPMinus"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "IImmuneFromDeDigivolveEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ImmuneDeDigivolve"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "IImmuneFromStackTrashingEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ImmuneStackTrashing"
+      ],
+      "category": "RestrictionOrImmunity",
+      "headlessMapping": "StaticRequirementService, StaticEffectService, legal-action filtering, target filtering",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "play/move/select 제한을 카드별 if문으로 흩뜨리거나 무시하지 않는다.",
+      "verificationCandidate": "restriction interface가 legal action과 target 후보에서 deterministic하게 제외되는지 검증한다."
+    },
+    {
+      "interface": "ICanAttackTargetDefendingPermanentEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanAttackTargetDefendingPermanent"
+      ],
+      "category": "ReviewRequired",
+      "headlessMapping": "EffectDescriptor, primitive, or service mapping must be reviewed before card body porting",
+      "status": "ReviewRequired",
+      "forbiddenShortcut": "Exclude로 확정하거나 silent no-op 처리하지 않는다.",
+      "verificationCandidate": "원본 사용처를 확인해 descriptor/service/primitive 중 하나로 분류되는지 검증한다."
+    },
+    {
+      "interface": "ITreatAsDigimonEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "IsDigimon"
+      ],
+      "category": "ReviewRequired",
+      "headlessMapping": "EffectDescriptor, primitive, or service mapping must be reviewed before card body porting",
+      "status": "ReviewRequired",
+      "forbiddenShortcut": "Exclude로 확정하거나 silent no-op 처리하지 않는다.",
+      "verificationCandidate": "원본 사용처를 확인해 descriptor/service/primitive 중 하나로 분류되는지 검증한다."
+    },
+    {
+      "interface": "ICanSelectAssemblyEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanSelect"
+      ],
+      "category": "SelectionOrTargeting",
+      "headlessMapping": "SelectionRequest, SelectionValidator, ComplexMechanicService target filters",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "Unity Select*Effect 호출로 되돌리거나 UI 클릭 가능 여부에 의존하지 않는다.",
+      "verificationCandidate": "selection 후보 생성과 validator가 같은 interface 조건을 공유하는지 검증한다."
+    },
+    {
+      "interface": "ICanSelectDigiXrosEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CanSelect"
+      ],
+      "category": "SelectionOrTargeting",
+      "headlessMapping": "SelectionRequest, SelectionValidator, ComplexMechanicService target filters",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "Unity Select*Effect 호출로 되돌리거나 UI 클릭 가능 여부에 의존하지 않는다.",
+      "verificationCandidate": "selection 후보 생성과 validator가 같은 interface 조건을 공유하는지 검증한다."
+    },
+    {
+      "interface": "ICanSuspendByDigisorptionEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "canSuspendDigisorption",
+        "isCheckAvailability"
+      ],
+      "category": "SelectionOrTargeting",
+      "headlessMapping": "SelectionRequest, SelectionValidator, ComplexMechanicService target filters",
+      "status": "MappingRequired",
+      "forbiddenShortcut": "Unity Select*Effect 호출로 되돌리거나 UI 클릭 가능 여부에 의존하지 않는다.",
+      "verificationCandidate": "selection 후보 생성과 validator가 같은 interface 조건을 공유하는지 검증한다."
+    },
+    {
+      "interface": "IChangeBaseCardColorEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetBaseCardColors"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeBaseCardNameEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ChangeBaseCardNames"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeBaseDPEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetDP",
+        "IsMinusDP",
+        "IsUpDown",
+        "PermanentCondition"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardColorEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetCardColors"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardDPEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "CardCondition",
+        "GetDP",
+        "IsMinusDP",
+        "IsUpDown"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardLevelEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetCardLevel"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardLevelForAssemblyEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ChangeCardLevelForAssembly"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardNamesEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ChangeCardNames"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeCardNamesForDigiXrosEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ChangeCardNamesForDigiXros"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeDPDeleteEffectMaxDPEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetMaxDP"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeDPEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetDP",
+        "IsMinusDP",
+        "IsUpDown",
+        "PermanentCondition"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeEndTurnMinMemoryEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetMinMemory"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeLinkMaxEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetLinkMax",
+        "PermanentCondition",
+        "isUpDown"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangePermanentLevelEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetPermanentLevel"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeSAttackEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "GetSAttack",
+        "PermanentCondition",
+        "isUpDown"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IChangeTraitsEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "ChangTraits"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IDontHaveDPEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "DontHaveDP"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    },
+    {
+      "interface": "IInvertSAttackEffect",
+      "originalSource": "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs",
+      "methodNames": [
+        "InversionValue",
+        "PermanentCondition"
+      ],
+      "category": "StatOrMetadataModifier",
+      "headlessMapping": "StaticEffectService, ContinuousEffectDescriptor, TemporaryModifier, CardDefinition runtime view",
+      "status": "PartiallyCovered",
+      "forbiddenShortcut": "CardDefinition 원본 metadata를 직접 수정하거나 modifier duration을 잃어버리지 않는다.",
+      "verificationCandidate": "DP/level/name/trait/security attack 변경이 effective view와 cleanup 규칙에만 반영되는지 검증한다."
+    }
+  ]
+}

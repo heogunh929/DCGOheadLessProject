@@ -12,15 +12,18 @@ public sealed class LegalActionGenerator
     private readonly BattleKeywordService _keywordService;
     private readonly EffectiveStatService _effectiveStats;
     private readonly StaticRequirementService? _staticRequirements;
+    private readonly StaticEffectService? _staticEffects;
 
     public LegalActionGenerator(
         ComplexMechanicService? complexMechanicService = null,
         BattleKeywordService? keywordService = null,
         EffectiveStatService? effectiveStats = null,
-        StaticRequirementService? staticRequirements = null)
+        StaticRequirementService? staticRequirements = null,
+        StaticEffectService? staticEffects = null)
     {
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
-        _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats);
+        _staticEffects = staticEffects;
+        _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats, _staticEffects);
         _staticRequirements = staticRequirements;
         _complexMechanicService = complexMechanicService
             ?? new ComplexMechanicService(staticRequirementService: staticRequirements);
@@ -29,6 +32,8 @@ public sealed class LegalActionGenerator
     internal ComplexMechanicService RuntimeComplexMechanicService => _complexMechanicService;
 
     internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
+
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
 
     public IReadOnlyList<LegalAction> Generate(GameState state, PlayerId playerId)
     {
@@ -86,23 +91,38 @@ public sealed class LegalActionGenerator
             {
                 if (definition.CardKinds.Contains(CardKind.Option))
                 {
-                    actions.Add(new LegalAction(
-                        $"play-option:{card.Value}",
-                        LegalActionKind.PlayCard,
-                        new PlayCardAction(playerId, card, -1),
-                        $"Use {definition.CardId}",
-                        new[] { CardTarget(card, playerId, definition.CardId) }));
+                    if (BattleRules.MatchesOptionColorRequirement(state, playerId, card, _staticEffects)
+                        && _staticEffects?.HasCardRestriction(state, card, StaticCardRestrictionKind.CannotPlay) != true)
+                    {
+                        actions.Add(new LegalAction(
+                            $"play-option:{card.Value}",
+                            LegalActionKind.PlayCard,
+                            new PlayCardAction(playerId, card, -1),
+                            $"Use {definition.CardId}",
+                            new[] { CardTarget(card, playerId, definition.CardId) }));
+                    }
                 }
                 else if (definition.CardKinds.Contains(CardKind.Digimon) || definition.CardKinds.Contains(CardKind.Tamer))
                 {
-                    foreach (var frame in EmptyFrames(player, state.Config.FieldSlotCount))
+                    if (_staticEffects?.HasCardRestriction(
+                        state,
+                        card,
+                        StaticCardRestrictionKind.CannotPutField,
+                        new StaticCardRestrictionCause(
+                            EffectSourceCardId: null,
+                            EffectSourcePermanentId: null,
+                            ControllerPlayerId: playerId,
+                            MoveReason: MoveReason.Play)) != true)
                     {
-                        actions.Add(new LegalAction(
-                            $"play:{card.Value}:{frame}",
-                            LegalActionKind.PlayCard,
-                            new PlayCardAction(playerId, card, frame),
-                            $"Play {definition.CardId}",
-                            new[] { CardTarget(card, playerId, definition.CardId) }));
+                        foreach (var frame in EmptyFrames(player, state.Config.FieldSlotCount))
+                        {
+                            actions.Add(new LegalAction(
+                                $"play:{card.Value}:{frame}",
+                                LegalActionKind.PlayCard,
+                                new PlayCardAction(playerId, card, frame),
+                                $"Play {definition.CardId}",
+                                new[] { CardTarget(card, playerId, definition.CardId) }));
+                        }
                     }
                 }
             }
@@ -111,7 +131,7 @@ public sealed class LegalActionGenerator
             {
                 foreach (var permanent in player.FieldPermanents)
                 {
-                    if (BattleRules.CanDigivolve(state, card, permanent, out _, _staticRequirements))
+                    if (BattleRules.CanDigivolve(state, card, permanent, out _, _staticRequirements, _staticEffects))
                     {
                         actions.Add(new LegalAction(
                             $"digivolve:{card.Value}:{permanent.Id.Value}",
@@ -126,7 +146,7 @@ public sealed class LegalActionGenerator
 
         actions.AddRange(_complexMechanicService.GenerateActions(state, playerId));
 
-        foreach (var attacker in player.BattleAreaPermanents.Where(permanent => BattleRules.CanAttack(state, permanent, _keywordService, _effectiveStats)))
+        foreach (var attacker in player.BattleAreaPermanents.Where(permanent => BattleRules.CanAttack(state, permanent, _keywordService, _effectiveStats, _staticEffects)))
         {
             actions.Add(new LegalAction(
                 $"attack-security:{attacker.Id.Value}",

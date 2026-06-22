@@ -32,6 +32,7 @@ Foundation Completion Gate가 `OpenCodeReady=true`가 되기 전까지:
 강화학습에 사용할 수 있는 headless RL battle engine으로 이식하는 것이다.
 
 - 원본 Unity source: `DCGO/`
+- 이 worktree에 `DCGO/`가 없으면 로컬 read-only 원본 `E:\headlessDCGO\DCGO`를 Source of Truth로 사용한다.
 - 신규 headless engine: `src/DCGO.RL.Engine/`
 - 테스트: `src/DCGO.RL.Engine.Tests/`
 - CLI 검증 도구: `src/DCGO.RL.Cli/`

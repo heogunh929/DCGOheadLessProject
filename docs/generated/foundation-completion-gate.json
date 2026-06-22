@@ -1,0 +1,591 @@
+{
+  "schemaVersion": "dcgo.foundation-completion-gate.v1",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+    "statusMismatchReport": "docs/generated/capability-truth-audit/status-mismatch-report.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardPoolBaseline": "docs/generated/full-card-pool-validation-baseline-65.json",
+    "statusRegistry": "docs/generated/full-card-source-scaffold/status-registry.json",
+    "mechanicFirstScheduler": "docs/generated/capability-truth-audit/mechanic-first-scheduler-66E.json"
+  },
+  "policy": {
+    "cardPortingAllowedBeforeOpenCodeReady": false,
+    "rlComponentsAllowedBeforeOpenCodeReady": false,
+    "emptyDescriptorMayHideUnsupported": false,
+    "manualGeneratedRegistryPromotionAllowed": false,
+    "coreCardIdBranchAllowed": false,
+    "directZoneMutationAllowedOnlyIn": [
+      "src/DCGO.RL.Engine/Domain/GameState.cs",
+      "src/DCGO.RL.Engine/Domain/PlayerState.cs",
+      "src/DCGO.RL.Engine/Domain/ZoneMover.cs",
+      "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
+      "src/DCGO.RL.Engine/Setup/DeckInstantiationService.cs"
+    ]
+  },
+  "summary": {
+    "openCodeReady": false,
+    "passedGateCount": 11,
+    "failedGateCount": 3,
+    "unknownCommonApiCount": 27,
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37,
+    "runtimeGeneratedStatusMismatchCount": 0,
+    "legacyPilotRuntimeDivergenceCount": 92,
+    "silentNoOpCount": 0,
+    "blockedEmptyDescriptorCount": 0,
+    "legacyContinuousOnlyEmptyDescriptorCount": 13,
+    "falseNoEffectCount": 0,
+    "variantIdentityConflictCount": 0,
+    "coreCardIdBranchCount": 0,
+    "directZoneMutationCount": 0,
+    "sourceLockChangedCount": 0,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "sourceEffectCount": 3918,
+    "sourceEffectsWithNonVerifiedCapabilities": 3918,
+    "generatedStatusCounts": {
+      "Unsupported": 3918
+    },
+    "cardMappingStatusCounts": {
+      "NeedsSourceReview": 40,
+      "NoEffect": 225,
+      "Unsupported": 7921
+    },
+    "localSourceRootAvailable": true,
+    "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"
+  },
+  "gates": [
+    {
+      "id": "script-cardeffects-inventory",
+      "name": "원본 Script/CardEffects inventory",
+      "status": "passed",
+      "value": {
+        "generatedScriptSourceFileCount": 436,
+        "effectSetMethodUsageCount": 102,
+        "localSourceRootAvailable": true,
+        "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"
+      },
+      "expected": "> 0",
+      "details": "원본 공통 Script source와 Effect.Set* 사용 목록이 generated inventory에 있어야 한다."
+    },
+    {
+      "id": "cardeffectfactory-inventory",
+      "name": "원본 CardEffectFactory inventory",
+      "status": "passed",
+      "value": {
+        "factoryApiUsageCount": 95,
+        "localSourceRootAvailable": true,
+        "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"
+      },
+      "expected": "> 0",
+      "details": "원본 CardEffectFactory API usage가 generated inventory에 있어야 한다."
+    },
+    {
+      "id": "cardeffectcommons-inventory",
+      "name": "원본 CardEffectCommons inventory",
+      "status": "passed",
+      "value": {
+        "commonsApiUsageCount": 263,
+        "localSourceRootAvailable": true,
+        "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"
+      },
+      "expected": "> 0",
+      "details": "원본 CardEffectCommons API usage가 generated inventory에 있어야 한다."
+    },
+    {
+      "id": "common-api-mapping-known",
+      "name": "referenced common API unknown count",
+      "status": "failed",
+      "value": 27,
+      "expected": "0",
+      "details": "missingLayerCandidates mappingStatus 분포: {'NeedsSourceReview': 27, 'PartiallyImplemented': 4, 'Unsupported': 13}"
+    },
+    {
+      "id": "unsupported-capabilities-zero",
+      "name": "referenced Unsupported capability count",
+      "status": "failed",
+      "value": 26,
+      "expected": "0",
+      "details": "source-required-capabilities에 등장한 capability 중 Unsupported 상태 수."
+    },
+    {
+      "id": "partial-capabilities-zero",
+      "name": "referenced PartiallyImplemented capability count",
+      "status": "failed",
+      "value": 37,
+      "expected": "0",
+      "details": "source-required-capabilities에 등장한 capability 중 PartiallyImplemented 상태 수."
+    },
+    {
+      "id": "runtime-generated-status-match",
+      "name": "runtime/generated status mismatch count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "status-mismatch-report의 generated registry와 runtime CardEffectPortingRecord 불일치 수."
+    },
+    {
+      "id": "silent-noop-zero",
+      "name": "silent no-op count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "NoEffect가 아닌 ICardScript의 빈 Resolve 후보를 정적 검색한다."
+    },
+    {
+      "id": "blocked-empty-descriptor-zero",
+      "name": "blocked empty descriptor count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "Unsupported/PartiallyImplemented 기록 근처의 빈 descriptor 후보를 정적 검색한다."
+    },
+    {
+      "id": "false-noeffect-zero",
+      "name": "false NoEffect count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "full-card-pool validation baseline의 FalseNoEffect issue 수."
+    },
+    {
+      "id": "variant-identity-conflict-zero",
+      "name": "variant identity conflict count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "variant identity 관련 baseline issue 수."
+    },
+    {
+      "id": "core-cardid-branch-zero",
+      "name": "core CardId branch count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "CardEffects 밖 core/foundation code의 특정 CardId 조건 분기 후보 수."
+    },
+    {
+      "id": "direct-zone-mutation-zero",
+      "name": "direct zone mutation count",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "ZoneMover/GameState clone/setup 등 허용 경계를 제외한 zone list 직접 mutation 후보 수."
+    },
+    {
+      "id": "source-lock-clean",
+      "name": "source lock 변경 없음",
+      "status": "passed",
+      "value": 0,
+      "expected": "0",
+      "details": "DCGO/Assets git status 변경 수."
+    }
+  ],
+  "samples": {
+    "directZoneMutations": [],
+    "coreCardIdBranches": [],
+    "blockedEmptyDescriptors": [],
+    "legacyContinuousOnlyEmptyDescriptors": [
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
+        "offset": 385
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_026.cs",
+        "offset": 354
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs",
+        "offset": 355
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_048.cs",
+        "offset": 355
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_069.cs",
+        "offset": 356
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_009.cs",
+        "offset": 353
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_063.cs",
+        "offset": 356
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_007.cs",
+        "offset": 353
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_012.cs",
+        "offset": 353
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_024.cs",
+        "offset": 353
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_056.cs",
+        "offset": 355
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_046.cs",
+        "offset": 355
+      },
+      {
+        "path": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_048.cs",
+        "offset": 355
+      }
+    ],
+    "silentNoOps": [],
+    "missingCommonApiCandidates": [
+      {
+        "category": "timing",
+        "name": "OnDeclaration",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 578,
+        "sourceFileCount": 302
+      },
+      {
+        "category": "timing",
+        "name": "WhenPermanentWouldBeDeleted",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 405,
+        "sourceFileCount": 210
+      },
+      {
+        "category": "timing",
+        "name": "OnTappedAnyone",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 306,
+        "sourceFileCount": 140
+      },
+      {
+        "category": "timing",
+        "name": "WhenRemoveField",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 304,
+        "sourceFileCount": 167
+      },
+      {
+        "category": "timing",
+        "name": "BeforePayCost",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 284,
+        "sourceFileCount": 143
+      },
+      {
+        "category": "timing",
+        "name": "OnDetermineDoSecurityCheck",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 228,
+        "sourceFileCount": 122
+      },
+      {
+        "category": "timing",
+        "name": "OnEndBattle",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 160,
+        "sourceFileCount": 86
+      },
+      {
+        "category": "timing",
+        "name": "OnDigivolutionCardDiscarded",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 121,
+        "sourceFileCount": 54
+      },
+      {
+        "category": "timing",
+        "name": "OnAddDigivolutionCards",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 102,
+        "sourceFileCount": 51
+      },
+      {
+        "category": "timing",
+        "name": "WhenLinked",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 87,
+        "sourceFileCount": 67
+      },
+      {
+        "category": "timing",
+        "name": "OnMove",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 79,
+        "sourceFileCount": 32
+      },
+      {
+        "category": "timing",
+        "name": "OnUnTappedAnyone",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 70,
+        "sourceFileCount": 30
+      },
+      {
+        "category": "timing",
+        "name": "OnUseOption",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 65,
+        "sourceFileCount": 31
+      },
+      {
+        "category": "timing",
+        "name": "OnDiscardLibrary",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 51,
+        "sourceFileCount": 21
+      },
+      {
+        "category": "timing",
+        "name": "OnAddSecurity",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 38,
+        "sourceFileCount": 15
+      },
+      {
+        "category": "timing",
+        "name": "WhenReturntoLibraryAnyone",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 25,
+        "sourceFileCount": 10
+      },
+      {
+        "category": "timing",
+        "name": "OnDiscardSecurity",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 23,
+        "sourceFileCount": 15
+      },
+      {
+        "category": "timing",
+        "name": "WhenDigisorption",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 15,
+        "sourceFileCount": 10
+      },
+      {
+        "category": "timing",
+        "name": "AfterPayCost",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 15,
+        "sourceFileCount": 8
+      },
+      {
+        "category": "timing",
+        "name": "OnLinkCardDiscarded",
+        "mappingStatus": "NeedsSourceReview",
+        "affectedCardCount": 14,
+        "sourceFileCount": 8
+      }
+    ],
+    "unsupportedCapabilities": [
+      {
+        "capabilityId": "AfterPayCost",
+        "affectedCardCount": 15,
+        "sourceFileCount": 7
+      },
+      {
+        "capabilityId": "BeforePayCost",
+        "affectedCardCount": 284,
+        "sourceFileCount": 141
+      },
+      {
+        "capabilityId": "OnAddDigivolutionCards",
+        "affectedCardCount": 102,
+        "sourceFileCount": 50
+      },
+      {
+        "capabilityId": "OnAddSecurity",
+        "affectedCardCount": 38,
+        "sourceFileCount": 14
+      },
+      {
+        "capabilityId": "OnDeclaration",
+        "affectedCardCount": 578,
+        "sourceFileCount": 298
+      },
+      {
+        "capabilityId": "OnDetermineDoSecurityCheck",
+        "affectedCardCount": 228,
+        "sourceFileCount": 119
+      },
+      {
+        "capabilityId": "OnDigivolutionCardDiscarded",
+        "affectedCardCount": 121,
+        "sourceFileCount": 53
+      },
+      {
+        "capabilityId": "OnDiscardLibrary",
+        "affectedCardCount": 51,
+        "sourceFileCount": 20
+      },
+      {
+        "capabilityId": "OnDiscardSecurity",
+        "affectedCardCount": 23,
+        "sourceFileCount": 14
+      },
+      {
+        "capabilityId": "OnEndBattle",
+        "affectedCardCount": 160,
+        "sourceFileCount": 84
+      },
+      {
+        "capabilityId": "OnFaceUpSecurityIncreased",
+        "affectedCardCount": 2,
+        "sourceFileCount": 1
+      },
+      {
+        "capabilityId": "OnLinkCardDiscarded",
+        "affectedCardCount": 14,
+        "sourceFileCount": 7
+      },
+      {
+        "capabilityId": "OnMove",
+        "affectedCardCount": 79,
+        "sourceFileCount": 30
+      },
+      {
+        "capabilityId": "OnRemovedField",
+        "affectedCardCount": 4,
+        "sourceFileCount": 2
+      },
+      {
+        "capabilityId": "OnTappedAnyone",
+        "affectedCardCount": 306,
+        "sourceFileCount": 139
+      },
+      {
+        "capabilityId": "OnUnTappedAnyone",
+        "affectedCardCount": 70,
+        "sourceFileCount": 29
+      },
+      {
+        "capabilityId": "OnUseDigiburst",
+        "affectedCardCount": 1,
+        "sourceFileCount": 1
+      },
+      {
+        "capabilityId": "OnUseOption",
+        "affectedCardCount": 65,
+        "sourceFileCount": 30
+      },
+      {
+        "capabilityId": "WhenDigisorption",
+        "affectedCardCount": 15,
+        "sourceFileCount": 10
+      },
+      {
+        "capabilityId": "WhenLinked",
+        "affectedCardCount": 87,
+        "sourceFileCount": 64
+      }
+    ],
+    "partiallyImplementedCapabilities": [
+      {
+        "capabilityId": "AfterEffectsActivate",
+        "affectedCardCount": 4,
+        "sourceFileCount": 2
+      },
+      {
+        "capabilityId": "ContinuousOrStaticEffect",
+        "affectedCardCount": 4326,
+        "sourceFileCount": 2220
+      },
+      {
+        "capabilityId": "DurationModifier",
+        "affectedCardCount": 0,
+        "sourceFileCount": 0
+      },
+      {
+        "capabilityId": "InheritedSource",
+        "affectedCardCount": 0,
+        "sourceFileCount": 0
+      },
+      {
+        "capabilityId": "OnAddHand",
+        "affectedCardCount": 49,
+        "sourceFileCount": 21
+      },
+      {
+        "capabilityId": "OnAllyAttack",
+        "affectedCardCount": 1936,
+        "sourceFileCount": 945
+      },
+      {
+        "capabilityId": "OnAttackTargetChanged",
+        "affectedCardCount": 55,
+        "sourceFileCount": 31
+      },
+      {
+        "capabilityId": "OnBlockAnyone",
+        "affectedCardCount": 13,
+        "sourceFileCount": 6
+      },
+      {
+        "capabilityId": "OncePerTurn",
+        "affectedCardCount": 0,
+        "sourceFileCount": 0
+      },
+      {
+        "capabilityId": "OnCounterTiming",
+        "affectedCardCount": 279,
+        "sourceFileCount": 111
+      },
+      {
+        "capabilityId": "OnDestroyedAnyone",
+        "affectedCardCount": 1158,
+        "sourceFileCount": 623
+      },
+      {
+        "capabilityId": "OnDigivolutionCardReturnToDeckBottom",
+        "affectedCardCount": 4,
+        "sourceFileCount": 3
+      },
+      {
+        "capabilityId": "OnDiscardHand",
+        "affectedCardCount": 59,
+        "sourceFileCount": 34
+      },
+      {
+        "capabilityId": "OnEndAttack",
+        "affectedCardCount": 164,
+        "sourceFileCount": 80
+      },
+      {
+        "capabilityId": "OnEndTurn",
+        "affectedCardCount": 549,
+        "sourceFileCount": 249
+      },
+      {
+        "capabilityId": "OnEnterFieldAnyone",
+        "affectedCardCount": 4141,
+        "sourceFileCount": 2042
+      },
+      {
+        "capabilityId": "OnLeaveFieldAnyone",
+        "affectedCardCount": 2,
+        "sourceFileCount": 1
+      },
+      {
+        "capabilityId": "OnLoseSecurity",
+        "affectedCardCount": 170,
+        "sourceFileCount": 73
+      },
+      {
+        "capabilityId": "OnPermamemtReturnedToHand",
+        "affectedCardCount": 5,
+        "sourceFileCount": 2
+      },
+      {
+        "capabilityId": "OnPlayTrigger",
+        "affectedCardCount": 0,
+        "sourceFileCount": 0
+      }
+    ]
+  }
+}

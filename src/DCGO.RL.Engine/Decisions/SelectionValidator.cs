@@ -63,6 +63,20 @@ public static class SelectionValidator
             throw new DomainException(
                 $"Selected count '{result.SelectedCount}' is outside '{request.MinCount}-{request.MaxCount}'.");
         }
+
+        var countCandidates = request.Candidates
+            .Where(candidate => candidate.Kind == SelectionTargetKind.Count)
+            .Select(candidate => candidate.OptionValue)
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Select(value => int.TryParse(value, out var count) ? count : (int?)null)
+            .Where(value => value is not null)
+            .Select(value => value!.Value)
+            .ToArray();
+        if (countCandidates.Length > 0 && !countCandidates.Contains(result.SelectedCount.Value))
+        {
+            throw new DomainException(
+                $"Selected count '{result.SelectedCount}' is not a candidate for request '{request.Id}'.");
+        }
     }
 
     private static void ValidateBoolean(SelectionRequest request, SelectionResult result)

@@ -1,4 +1,5 @@
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Effects;
 
 namespace DCGO.RL.Engine.Validation;
 
@@ -11,6 +12,7 @@ public sealed class EngineInvariantChecker
         CheckCardMemberships(state, memberships, violations);
         CheckPermanents(state, memberships, violations);
         CheckTemporaryModifiers(state, violations);
+        CheckTemporaryGrantedEffects(state, violations);
         return new EngineInvariantReport(violations);
     }
 
@@ -268,6 +270,122 @@ public sealed class EngineInvariantChecker
                     "temporary-modifier-target-invalid",
                     $"Security Digimon DP modifier '{modifier.StableId}' must target a player.",
                     Permanent: modifier.TargetPermanentId));
+            }
+
+            if (modifier.ModifierKind == TemporaryModifierKind.Keyword)
+            {
+                if (!hasPermanentTarget && !hasPlayerTarget)
+                {
+                    violations.Add(new EngineInvariantViolation(
+                        "temporary-modifier-target-invalid",
+                        $"Keyword modifier '{modifier.StableId}' must target a permanent or player.",
+                        Permanent: modifier.TargetPermanentId));
+                }
+
+                if (modifier.Keyword is null)
+                {
+                    violations.Add(new EngineInvariantViolation(
+                        "temporary-modifier-keyword-missing",
+                        $"Keyword modifier '{modifier.StableId}' must carry a keyword payload.",
+                        Permanent: modifier.TargetPermanentId));
+                }
+            }
+            else if (modifier.Keyword is not null)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-modifier-keyword-unexpected",
+                    $"Temporary modifier '{modifier.StableId}' kind '{modifier.ModifierKind}' cannot carry keyword '{modifier.Keyword}'.",
+                    Permanent: modifier.TargetPermanentId));
+            }
+
+            if (modifier.ModifierKind != TemporaryModifierKind.Keyword
+                && modifier.TargetMetadataCriteria is not null)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-modifier-target-metadata-unexpected",
+                    $"Temporary modifier '{modifier.StableId}' kind '{modifier.ModifierKind}' cannot carry target metadata criteria.",
+                    Permanent: modifier.TargetPermanentId));
+            }
+        }
+    }
+
+    private static void CheckTemporaryGrantedEffects(GameState state, List<EngineInvariantViolation> violations)
+    {
+        foreach (var duplicateGroup in state.TemporaryGrantedEffects
+            .GroupBy(effect => effect.StableId, StringComparer.Ordinal)
+            .Where(group => group.Count() > 1))
+        {
+            violations.Add(new EngineInvariantViolation(
+                "temporary-granted-effect-duplicate",
+                $"Temporary granted effect stable id '{duplicateGroup.Key}' appears more than once."));
+        }
+
+        foreach (var effect in state.TemporaryGrantedEffects)
+        {
+            if (string.IsNullOrWhiteSpace(effect.StableId))
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-id-missing",
+                    "Temporary granted effect stable id must not be empty."));
+            }
+
+            if (string.IsNullOrWhiteSpace(effect.GrantedEffectKey))
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-key-missing",
+                    $"Temporary granted effect '{effect.StableId}' must carry a granted effect key.",
+                    Permanent: effect.TargetPermanentId));
+            }
+
+            if (effect.Timing == EffectTiming.None)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-timing-invalid",
+                    $"Temporary granted effect '{effect.StableId}' must use a trigger timing.",
+                    Permanent: effect.TargetPermanentId));
+            }
+
+            var hasPermanentTarget = effect.TargetPermanentId is not null;
+            var hasPlayerTarget = effect.TargetPlayerId is not null;
+            if (hasPermanentTarget == hasPlayerTarget)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-target-invalid",
+                    $"Temporary granted effect '{effect.StableId}' must target exactly one permanent or player.",
+                    Permanent: effect.TargetPermanentId));
+                continue;
+            }
+
+            if (effect.SourceCardId is not null && !state.Cards.ContainsKey(effect.SourceCardId.Value))
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-source-card-missing",
+                    $"Temporary granted effect '{effect.StableId}' source card '{effect.SourceCardId}' does not exist.",
+                    effect.SourceCardId.Value,
+                    effect.TargetPermanentId));
+            }
+
+            if (effect.SourcePermanentId is not null && FindPermanent(state, effect.SourcePermanentId.Value) is null)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-source-permanent-missing",
+                    $"Temporary granted effect '{effect.StableId}' source permanent '{effect.SourcePermanentId}' does not exist.",
+                    Permanent: effect.SourcePermanentId));
+            }
+
+            if (hasPermanentTarget && FindPermanent(state, effect.TargetPermanentId!.Value) is null)
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-target-stale",
+                    $"Temporary granted effect '{effect.StableId}' target permanent '{effect.TargetPermanentId}' does not exist.",
+                    Permanent: effect.TargetPermanentId));
+            }
+
+            if (hasPlayerTarget && state.Players.All(player => player.Id != effect.TargetPlayerId!.Value))
+            {
+                violations.Add(new EngineInvariantViolation(
+                    "temporary-granted-effect-player-missing",
+                    $"Temporary granted effect '{effect.StableId}' target player '{effect.TargetPlayerId}' does not exist."));
             }
         }
     }

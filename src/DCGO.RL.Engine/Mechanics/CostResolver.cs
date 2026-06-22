@@ -1,18 +1,36 @@
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Effects;
 
 namespace DCGO.RL.Engine.Mechanics;
 
 public sealed class CostResolver
 {
+    private readonly StaticEffectService? _staticEffects;
+    private readonly StaticRequirementService? _staticRequirements;
+
+    public CostResolver(
+        StaticEffectService? staticEffects = null,
+        StaticRequirementService? staticRequirements = null)
+    {
+        _staticEffects = staticEffects;
+        _staticRequirements = staticRequirements;
+    }
+
     public CostCandidate ResolveNormalPlay(GameState state, CardInstanceId card)
     {
         var definition = Battle.BattleRules.Definition(state, card);
-        return new CostCandidate(Mechanic.Normal, Math.Max(0, definition.PlayCost), 0);
+        var cost = _staticEffects?.ApplyCostModifiers(
+            state,
+            card,
+            Math.Max(0, definition.PlayCost),
+            StaticCostKind.Play)
+            ?? Math.Max(0, definition.PlayCost);
+        return new CostCandidate(Mechanic.Normal, cost, 0);
     }
 
     public CostCandidate ResolveNormalDigivolve(GameState state, CardInstanceId card, PermanentState target)
     {
-        if (!Battle.BattleRules.CanDigivolve(state, card, target, out var cost))
+        if (!Battle.BattleRules.CanDigivolve(state, card, target, out var cost, _staticRequirements, _staticEffects))
         {
             throw new DomainException($"Card '{card}' cannot digivolve onto permanent '{target.Id}'.");
         }
@@ -46,6 +64,20 @@ public sealed class CostResolver
         return new CostCandidate(Mechanic.Assembly, baseCost, reduction, requirement.FixedCost);
     }
 
-    public CostCandidate ResolveLink(PlayRequirement requirement) =>
-        new(Mechanic.Link, requirement.LinkCost, 0);
+    public CostCandidate ResolveLink(GameState state, CardInstanceId card, PermanentState target, PlayRequirement requirement) =>
+        ResolveLink(state, card, target, requirement.LinkCost);
+
+    public CostCandidate ResolveLink(GameState state, CardInstanceId card, PermanentState target, int baseCost)
+    {
+        var normalizedBaseCost = Math.Max(0, baseCost);
+        var cost = _staticEffects?.ApplyCostModifiers(
+            state,
+            card,
+            normalizedBaseCost,
+            StaticCostKind.Link,
+            target,
+            Mechanic.Link)
+            ?? normalizedBaseCost;
+        return new CostCandidate(Mechanic.Link, cost, 0);
+    }
 }

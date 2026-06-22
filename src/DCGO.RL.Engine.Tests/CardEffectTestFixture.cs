@@ -35,6 +35,8 @@ internal static class CardEffectTestFixture
         EffectDefinition(cardId, effectClassName) with
         {
             CardKinds = new[] { CardKind.Option },
+            Colors = Array.Empty<CardColor>(),
+            OptionCardColorRequirements = Array.Empty<CardColor>(),
             Level = 0,
             PlayCost = playCost,
             Dp = 0,
@@ -99,6 +101,8 @@ internal sealed class ContinuousSourceKindFixtureScript : ICardScript, IContinuo
     private readonly ContinuousEffectTargetKind _targetKind;
     private readonly ContinuousModifierKind _modifierKind;
     private readonly int _amount;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
 
     public ContinuousSourceKindFixtureScript(
         string cardId,
@@ -106,12 +110,16 @@ internal sealed class ContinuousSourceKindFixtureScript : ICardScript, IContinuo
         ContinuousEffectSourceKind sourceKind,
         ContinuousEffectTargetKind targetKind,
         ContinuousModifierKind modifierKind = ContinuousModifierKind.DP,
-        int amount = 1000)
+        int amount = 1000,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
     {
         _sourceKind = sourceKind;
         _targetKind = targetKind;
         _modifierKind = modifierKind;
         _amount = amount;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -141,7 +149,9 @@ internal sealed class ContinuousSourceKindFixtureScript : ICardScript, IContinuo
                 _targetKind,
                 _modifierKind,
                 _ => _amount,
-                DebugLabel: $"{Porting.CardId} {_sourceKind} {_modifierKind} {_amount:+#;-#;0}"),
+                DebugLabel: $"{Porting.CardId} {_sourceKind} {_modifierKind} {_amount:+#;-#;0}",
+                SourceMetadataCriteria: _sourceMetadataCriteria,
+                TargetMetadataCriteria: _targetMetadataCriteria),
         };
     }
 
@@ -205,13 +215,217 @@ internal sealed class ContinuousKeywordFixtureScript : ICardScript, IContinuousK
         throw new UnsupportedMechanicException("Continuous keyword fixture scripts do not resolve active effect bodies.");
 }
 
+internal sealed class CardEffectFactoryKeywordFixtureScript : ICardScript, IContinuousKeywordCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly ContinuousEffectTargetKind _targetKind;
+    private readonly BattleKeyword _keyword;
+    private readonly Func<ContinuousKeywordEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public CardEffectFactoryKeywordFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        ContinuousEffectTargetKind targetKind,
+        BattleKeyword keyword,
+        Func<ContinuousKeywordEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _keyword = keyword;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture CardEffectFactory {_keyword} descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<ContinuousKeywordDescriptor> CreateContinuousKeywordDescriptors(ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<ContinuousKeywordDescriptor>();
+        }
+
+        return new[]
+        {
+            CreateKeywordDescriptor(context),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("CardEffectFactory fixture scripts do not resolve active effect bodies.");
+
+    private ContinuousKeywordDescriptor CreateKeywordDescriptor(ContinuousEffectScriptContext context) =>
+        _targetKind == ContinuousEffectTargetKind.SelfPermanent
+            ? _keyword switch
+            {
+                BattleKeyword.Blocker => CardEffectFactory.BlockerSelfStaticEffect(
+                    context,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Rush => CardEffectFactory.RushSelfStaticEffect(
+                    context,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Reboot => CardEffectFactory.RebootSelfStaticEffect(
+                    context,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Collision => CardEffectFactory.CollisionSelfStaticEffect(
+                    context,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Jamming => CardEffectFactory.JammingSelfStaticEffect(
+                    context,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                _ => throw new UnsupportedMechanicException(
+                    $"CardEffectFactory keyword fixture does not support '{_keyword}'."),
+            }
+            : _keyword switch
+            {
+                BattleKeyword.Blocker => CardEffectFactory.BlockerStaticEffect(
+                    context,
+                    _targetKind,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Rush => CardEffectFactory.RushStaticEffect(
+                    context,
+                    _targetKind,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Reboot => CardEffectFactory.RebootStaticEffect(
+                    context,
+                    _targetKind,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Collision => CardEffectFactory.CollisionStaticEffect(
+                    context,
+                    _targetKind,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                BattleKeyword.Jamming => CardEffectFactory.JammingStaticEffect(
+                    context,
+                    _targetKind,
+                    _condition,
+                    $"Factory {_keyword}",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+                _ => throw new UnsupportedMechanicException(
+                    $"CardEffectFactory keyword fixture does not support '{_keyword}'."),
+            };
+}
+
+internal sealed class CardEffectFactoryDpFixtureScript : ICardScript, IContinuousCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly ContinuousEffectTargetKind _targetKind;
+    private readonly int _amount;
+    private readonly Func<ContinuousEffectEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public CardEffectFactoryDpFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        ContinuousEffectTargetKind targetKind,
+        int amount,
+        Func<ContinuousEffectEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _amount = amount;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture CardEffectFactory DP descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<ContinuousEffectDescriptor> CreateContinuousEffectDescriptors(ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<ContinuousEffectDescriptor>();
+        }
+
+        return new[]
+        {
+            _targetKind == ContinuousEffectTargetKind.SelfPermanent
+                ? CardEffectFactory.ChangeSelfDPStaticEffect(
+                    context,
+                    _amount,
+                    _condition,
+                    "Factory DP",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria)
+                : CardEffectFactory.ChangeDPStaticEffect(
+                    context,
+                    _targetKind,
+                    _amount,
+                    _condition,
+                    "Factory DP",
+                    _sourceMetadataCriteria,
+                    _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("CardEffectFactory fixture scripts do not resolve active effect bodies.");
+}
+
 internal sealed class StaticEvolutionRequirementFixtureScript : ICardScript, IStaticEvolutionRequirementCardScript
 {
     private readonly ContinuousEffectSourceKind _sourceKind;
     private readonly int _cost;
     private readonly CardColor _requiredColor;
     private readonly int _requiredLevel;
+    private readonly bool _ignoreDigivolutionRequirement;
     private readonly Func<StaticEvolutionRequirementEvaluationContext, bool>? _targetCondition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
 
     public StaticEvolutionRequirementFixtureScript(
         string cardId,
@@ -220,13 +434,19 @@ internal sealed class StaticEvolutionRequirementFixtureScript : ICardScript, ISt
         int cost,
         CardColor requiredColor = CardColor.None,
         int requiredLevel = -1,
-        Func<StaticEvolutionRequirementEvaluationContext, bool>? targetCondition = null)
+        bool ignoreDigivolutionRequirement = false,
+        Func<StaticEvolutionRequirementEvaluationContext, bool>? targetCondition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
     {
         _sourceKind = sourceKind;
         _cost = cost;
         _requiredColor = requiredColor;
         _requiredLevel = requiredLevel;
+        _ignoreDigivolutionRequirement = ignoreDigivolutionRequirement;
         _targetCondition = targetCondition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -257,8 +477,11 @@ internal sealed class StaticEvolutionRequirementFixtureScript : ICardScript, ISt
                 _cost,
                 _requiredColor,
                 _requiredLevel,
+                IgnoreDigivolutionRequirement: _ignoreDigivolutionRequirement,
                 TargetPermanentCondition: _targetCondition,
-                DebugLabel: $"{Porting.CardId} {_sourceKind} evo cost {_cost}"),
+                DebugLabel: $"{Porting.CardId} {_sourceKind} evo cost {_cost}",
+                SourceMetadataCriteria: _sourceMetadataCriteria,
+                TargetMetadataCriteria: _targetMetadataCriteria),
         };
     }
 
@@ -266,22 +489,164 @@ internal sealed class StaticEvolutionRequirementFixtureScript : ICardScript, ISt
         throw new UnsupportedMechanicException("Static evolution requirement fixture scripts do not resolve active effect bodies.");
 }
 
+internal sealed class CardEffectFactorySelfEvolutionRequirementFixtureScript :
+    ICardScript,
+    IStaticEvolutionRequirementCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly int _cost;
+    private readonly CardColor _requiredColor;
+    private readonly int _level;
+    private readonly int _minLevel;
+    private readonly int _maxLevel;
+    private readonly Func<StaticEvolutionRequirementEvaluationContext, bool>? _targetCondition;
+
+    public CardEffectFactorySelfEvolutionRequirementFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        int cost,
+        CardColor requiredColor = CardColor.None,
+        int level = -1,
+        int minLevel = -1,
+        int maxLevel = -1,
+        Func<StaticEvolutionRequirementEvaluationContext, bool>? targetCondition = null)
+    {
+        _sourceKind = sourceKind;
+        _cost = cost;
+        _requiredColor = requiredColor;
+        _level = level;
+        _minLevel = minLevel;
+        _maxLevel = maxLevel;
+        _targetCondition = targetCondition;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture CardEffectFactory self evolution requirement for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticEvolutionRequirementDescriptor> CreateStaticEvolutionRequirementDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticEvolutionRequirementDescriptor>();
+        }
+
+        return new[]
+        {
+            CardEffectFactory.AddSelfDigivolutionRequirementStaticEffect(
+                context,
+                _targetCondition,
+                _cost,
+                ignoreDigivolutionRequirement: false,
+                effectName: "Factory self alternative evolution",
+                cardColor: _requiredColor,
+                level: _level,
+                minLevel: _minLevel,
+                maxLevel: _maxLevel),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("CardEffectFactory fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class CannotIgnoreDigivolutionRequirementFixtureScript :
+    ICardScript,
+    ICannotIgnoreDigivolutionRequirementCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticEffectPlayerTargetKind _targetKind;
+    private readonly Func<CannotIgnoreDigivolutionRequirementEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+    private readonly CardMetadataCriteria? _evolvingCardMetadataCriteria;
+
+    public CannotIgnoreDigivolutionRequirementFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticEffectPlayerTargetKind targetKind,
+        Func<CannotIgnoreDigivolutionRequirementEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null,
+        CardMetadataCriteria? evolvingCardMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        _evolvingCardMetadataCriteria = evolvingCardMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture cannot-ignore digivolution requirement for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<CannotIgnoreDigivolutionRequirementDescriptor> CreateCannotIgnoreDigivolutionRequirementDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<CannotIgnoreDigivolutionRequirementDescriptor>();
+        }
+
+        return new[]
+        {
+            new CannotIgnoreDigivolutionRequirementDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:cannot-ignore-digivolution:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} cannot ignore digivolution requirements",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria,
+                _evolvingCardMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Cannot-ignore digivolution requirement fixture scripts do not resolve active effect bodies.");
+}
+
 internal sealed class StaticLinkRequirementFixtureScript : ICardScript, IStaticLinkRequirementCardScript
 {
     private readonly ContinuousEffectSourceKind _sourceKind;
     private readonly int _cost;
     private readonly Func<StaticLinkRequirementEvaluationContext, bool>? _targetCondition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
 
     public StaticLinkRequirementFixtureScript(
         string cardId,
         string effectClassName,
         ContinuousEffectSourceKind sourceKind,
         int cost,
-        Func<StaticLinkRequirementEvaluationContext, bool>? targetCondition = null)
+        Func<StaticLinkRequirementEvaluationContext, bool>? targetCondition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
     {
         _sourceKind = sourceKind;
         _cost = cost;
         _targetCondition = targetCondition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
         Porting = new CardEffectPortingRecord(
             cardId,
             effectClassName,
@@ -311,12 +676,676 @@ internal sealed class StaticLinkRequirementFixtureScript : ICardScript, IStaticL
                 context.Controller,
                 _cost,
                 TargetPermanentCondition: _targetCondition,
-                DebugLabel: $"{Porting.CardId} {_sourceKind} link cost {_cost}"),
+                DebugLabel: $"{Porting.CardId} {_sourceKind} link cost {_cost}",
+                SourceMetadataCriteria: _sourceMetadataCriteria,
+                TargetMetadataCriteria: _targetMetadataCriteria),
         };
     }
 
     public void Resolve(CardScriptExecutionContext context) =>
         throw new UnsupportedMechanicException("Static link requirement fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCostModifierFixtureScript : ICardScript, IStaticCostModifierCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCostKind _costKind;
+    private readonly StaticCostTargetKind _targetKind;
+    private readonly int _amount;
+    private readonly Func<StaticCostModifierEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetCardMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetPermanentMetadataCriteria;
+
+    public StaticCostModifierFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCostKind costKind,
+        int amount,
+        StaticCostTargetKind targetKind = StaticCostTargetKind.OwnerCards,
+        Func<StaticCostModifierEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetCardMetadataCriteria = null,
+        CardMetadataCriteria? targetPermanentMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _costKind = costKind;
+        _targetKind = targetKind;
+        _amount = amount;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetCardMetadataCriteria = targetCardMetadataCriteria;
+        _targetPermanentMetadataCriteria = targetPermanentMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static cost modifier for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCostModifierDescriptor> CreateStaticCostModifierDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCostModifierDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCostModifierDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_costKind}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _costKind,
+                _targetKind,
+                _ => _amount,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} {_costKind} {_amount:+#;-#;0}",
+                _sourceMetadataCriteria,
+                _targetCardMetadataCriteria,
+                _targetPermanentMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static cost modifier fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticRestrictionFixtureScript : ICardScript, IStaticRestrictionCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticEffectPermanentTargetKind _targetKind;
+    private readonly StaticRestrictionKind _restrictionKind;
+    private readonly Func<StaticRestrictionEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticRestrictionFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticEffectPermanentTargetKind targetKind,
+        StaticRestrictionKind restrictionKind,
+        Func<StaticRestrictionEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _restrictionKind = restrictionKind;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static restriction for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticRestrictionDescriptor> CreateStaticRestrictionDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticRestrictionDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticRestrictionDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_restrictionKind}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _restrictionKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} {_restrictionKind}",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static restriction fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCardRestrictionFixtureScript : ICardScript, IStaticCardRestrictionCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly StaticCardRestrictionKind _restrictionKind;
+    private readonly Func<StaticCardRestrictionEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetCardMetadataCriteria;
+
+    public StaticCardRestrictionFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        StaticCardRestrictionKind restrictionKind,
+        Func<StaticCardRestrictionEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetCardMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _restrictionKind = restrictionKind;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetCardMetadataCriteria = targetCardMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static card restriction for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCardRestrictionDescriptor> CreateStaticCardRestrictionDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCardRestrictionDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCardRestrictionDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_restrictionKind}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _restrictionKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} {_restrictionKind}",
+                _sourceMetadataCriteria,
+                _targetCardMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static card restriction fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticImmunityFixtureScript : ICardScript, IStaticImmunityCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticEffectPermanentTargetKind _targetKind;
+    private readonly StaticImmunityKind _immunityKind;
+    private readonly Func<StaticImmunityEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticImmunityFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticEffectPermanentTargetKind targetKind,
+        StaticImmunityKind immunityKind,
+        Func<StaticImmunityEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _immunityKind = immunityKind;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static immunity for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticImmunityDescriptor> CreateStaticImmunityDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticImmunityDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticImmunityDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_immunityKind}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _immunityKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} {_immunityKind}",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static immunity fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCardColorFixtureScript : ICardScript, IStaticCardColorCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly StaticCardColorLayer _colorLayer;
+    private readonly CardColor _addedColor;
+    private readonly Func<StaticCardColorEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticCardColorFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        StaticCardColorLayer colorLayer,
+        CardColor addedColor,
+        Func<StaticCardColorEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _colorLayer = colorLayer;
+        _addedColor = addedColor;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static card color descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCardColorDescriptor> CreateStaticCardColorDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCardColorDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCardColorDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_colorLayer}:color:{_addedColor}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _colorLayer,
+                evaluation => evaluation.CurrentColors.Concat(new[] { _addedColor }).ToArray(),
+                _condition,
+                $"{Porting.CardId} {_sourceKind} adds {_addedColor} {_colorLayer} color",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static card color fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class IgnoreColorRequirementFixtureScript : ICardScript, IIgnoreColorRequirementCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly Func<IgnoreColorRequirementEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public IgnoreColorRequirementFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        Func<IgnoreColorRequirementEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture ignore color requirement descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<IgnoreColorRequirementDescriptor> CreateIgnoreColorRequirementDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<IgnoreColorRequirementDescriptor>();
+        }
+
+        return new[]
+        {
+            new IgnoreColorRequirementDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:ignore-color:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} ignores color requirements",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Ignore color requirement fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCardNameFixtureScript : ICardScript, IStaticCardNameCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly StaticCardNameLayer _nameLayer;
+    private readonly string _addedName;
+    private readonly Func<StaticCardNameEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticCardNameFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        StaticCardNameLayer nameLayer,
+        string addedName,
+        Func<StaticCardNameEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _nameLayer = nameLayer;
+        _addedName = addedName;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static card name descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCardNameDescriptor> CreateStaticCardNameDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCardNameDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCardNameDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:{_nameLayer}:name:{_addedName}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _nameLayer,
+                evaluation => evaluation.CurrentNames.Concat(new[] { _addedName }).ToArray(),
+                _condition,
+                $"{Porting.CardId} {_sourceKind} adds {_addedName} {_nameLayer} name",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static card name fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCardTraitFixtureScript : ICardScript, IStaticCardTraitCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly string _addedTrait;
+    private readonly Func<StaticCardTraitEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticCardTraitFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        string addedTrait,
+        Func<StaticCardTraitEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _addedTrait = addedTrait;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static card trait descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCardTraitDescriptor> CreateStaticCardTraitDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCardTraitDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCardTraitDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:trait:{_addedTrait}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                evaluation => evaluation.CurrentTraits.Concat(new[] { _addedTrait }).ToArray(),
+                _condition,
+                $"{Porting.CardId} {_sourceKind} adds {_addedTrait} trait",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static card trait fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticCardLevelFixtureScript : ICardScript, IStaticCardLevelCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticCardTargetKind _targetKind;
+    private readonly int _level;
+    private readonly Func<StaticCardLevelEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticCardLevelFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticCardTargetKind targetKind,
+        int level,
+        Func<StaticCardLevelEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _level = level;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static card level descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticCardLevelDescriptor> CreateStaticCardLevelDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticCardLevelDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticCardLevelDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:card-level:{_level}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _ => _level,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} treats card level as {_level}",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static card level fixture scripts do not resolve active effect bodies.");
+}
+
+internal sealed class StaticPermanentLevelFixtureScript : ICardScript, IStaticPermanentLevelCardScript
+{
+    private readonly ContinuousEffectSourceKind _sourceKind;
+    private readonly StaticEffectPermanentTargetKind _targetKind;
+    private readonly int _level;
+    private readonly Func<StaticPermanentLevelEvaluationContext, bool>? _condition;
+    private readonly CardMetadataCriteria? _sourceMetadataCriteria;
+    private readonly CardMetadataCriteria? _targetMetadataCriteria;
+
+    public StaticPermanentLevelFixtureScript(
+        string cardId,
+        string effectClassName,
+        ContinuousEffectSourceKind sourceKind,
+        StaticEffectPermanentTargetKind targetKind,
+        int level,
+        Func<StaticPermanentLevelEvaluationContext, bool>? condition = null,
+        CardMetadataCriteria? sourceMetadataCriteria = null,
+        CardMetadataCriteria? targetMetadataCriteria = null)
+    {
+        _sourceKind = sourceKind;
+        _targetKind = targetKind;
+        _level = level;
+        _condition = condition;
+        _sourceMetadataCriteria = sourceMetadataCriteria;
+        _targetMetadataCriteria = targetMetadataCriteria;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            $"Test fixture static permanent level descriptor for {sourceKind}.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        Array.Empty<EffectDescriptor>();
+
+    public IReadOnlyList<StaticPermanentLevelDescriptor> CreateStaticPermanentLevelDescriptors(
+        ContinuousEffectScriptContext context)
+    {
+        if (context.SourceKind != _sourceKind)
+        {
+            return Array.Empty<StaticPermanentLevelDescriptor>();
+        }
+
+        return new[]
+        {
+            new StaticPermanentLevelDescriptor(
+                $"{Porting.CardId}:{_sourceKind}:permanent-level:{_level}:{context.SourceCard.Value}",
+                context.SourceCard,
+                context.SourcePermanent,
+                context.Controller,
+                _targetKind,
+                _ => _level,
+                _condition,
+                $"{Porting.CardId} {_sourceKind} treats permanent level as {_level}",
+                _sourceMetadataCriteria,
+                _targetMetadataCriteria),
+        };
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new UnsupportedMechanicException("Static permanent level fixture scripts do not resolve active effect bodies.");
 }
 
 internal enum SelectionPrimitiveMode

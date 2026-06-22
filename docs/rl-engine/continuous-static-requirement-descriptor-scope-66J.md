@@ -15,7 +15,7 @@
 - `StaticEvolutionRequirementDescriptor`
   - `SourceCardId`, `SourcePermanentId`, `ControllerPlayerId`를 보존한다.
   - `RequiredColor`, `RequiredLevel`, `MinLevel`, `MaxLevel`, `Cost`, `CostEquation`, source/target condition delegate를 가진다.
-  - 현재 `IgnoreDigivolutionRequirement`는 player permission layer가 없으므로 명시 `UnsupportedMechanicException`으로 막는다.
+  - 66J 시점의 `IgnoreDigivolutionRequirement`는 player permission layer가 없으므로 명시 `UnsupportedMechanicException`으로 막았다. 66M에서 descriptor 기반 permission semantics를 별도 연결했다.
 - `StaticLinkRequirementDescriptor`
   - `SourceCardId`, `SourcePermanentId`, `ControllerPlayerId`, `LinkCost`, source/target condition delegate를 가진다.
 - 두 descriptor 모두 `ContinuousEffectSourceCollector`의 field top, inherited source, linked card, face-up security, hand, trash, executing source enumeration을 공유한다.
@@ -44,6 +44,5 @@
 
 - trait/name/text metadata 기반 condition
 - unsupported static effect interfaces
-- ignore-digivolution-permission semantics
 - static cost/restriction/immunity interfaces
 - generated full-card parity evidence

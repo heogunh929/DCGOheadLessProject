@@ -36,18 +36,21 @@ public sealed class PlayCardService
     private readonly IZoneMover _zoneMover;
     private readonly TriggerPipelineService _triggerPipelineService;
     private readonly EngineInvariantChecker _invariantChecker;
+    private readonly StaticEffectService? _staticEffects;
     private Tier1PrimitiveService? _primitives;
 
     public PlayCardService(
         TriggerPipelineService triggerPipelineService,
         IZoneMover? zoneMover = null,
         Tier1PrimitiveService? primitives = null,
-        EngineInvariantChecker? invariantChecker = null)
+        EngineInvariantChecker? invariantChecker = null,
+        StaticEffectService? staticEffects = null)
     {
         _triggerPipelineService = triggerPipelineService ?? throw new ArgumentNullException(nameof(triggerPipelineService));
         _zoneMover = zoneMover ?? new ZoneMover();
         _primitives = primitives;
         _invariantChecker = invariantChecker ?? new EngineInvariantChecker();
+        _staticEffects = staticEffects;
     }
 
     internal IZoneMover RuntimeZoneMover => _zoneMover;
@@ -55,6 +58,8 @@ public sealed class PlayCardService
     internal TriggerPipelineService RuntimeTriggerPipelineService => _triggerPipelineService;
 
     internal Tier1PrimitiveService? RuntimePrimitiveService => _primitives;
+
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
 
     public PermanentState? Play(GameState state, PlayCardAction action, GameTrace? trace = null)
     {
@@ -87,12 +92,25 @@ public sealed class PlayCardService
             throw new UnsupportedMechanicException($"Playing card kind '{string.Join(",", definition.CardKinds)}'");
         }
 
+        if (_staticEffects?.HasCardRestriction(
+            state,
+            action.Card,
+            StaticCardRestrictionKind.CannotPutField,
+            new StaticCardRestrictionCause(
+                EffectSourceCardId: null,
+                EffectSourcePermanentId: null,
+                ControllerPlayerId: action.Actor,
+                MoveReason: MoveReason.Play)) == true)
+        {
+            throw new DomainException($"Permanent card '{action.Card}' cannot be played by a static effect.");
+        }
+
         if (!BattleRules.IsEmptyBattleFrame(player, action.TargetFrameIndex))
         {
             throw new DomainException($"Battle frame '{action.TargetFrameIndex}' is not empty.");
         }
 
-        var cost = Math.Max(0, definition.PlayCost);
+        var cost = ResolvePlayCost(state, action.Card, definition);
         BattleRules.PayMemory(state, action.Actor, cost);
 
         var permanentId = new PermanentId(BattleRules.NextPermanentId(state));
@@ -119,7 +137,8 @@ public sealed class PlayCardService
                 ["Card"] = action.Card,
                 ["Permanent"] = permanent.Id,
                 ["Played"] = true,
-            });
+            },
+            trace);
         return new PlayCardResult(permanent, OptionPlay: null, triggerResult);
     }
 
@@ -141,7 +160,17 @@ public sealed class PlayCardService
         CardDefinition definition,
         GameTrace? trace)
     {
-        var cost = Math.Max(0, definition.PlayCost);
+        if (_staticEffects?.HasCardRestriction(state, action.Card, StaticCardRestrictionKind.CannotPlay) == true)
+        {
+            throw new DomainException($"Option card '{action.Card}' cannot be played by a static effect.");
+        }
+
+        if (!BattleRules.MatchesOptionColorRequirement(state, action.Actor, action.Card, _staticEffects))
+        {
+            throw new DomainException($"Option card '{action.Card}' color requirements are not met.");
+        }
+
+        var cost = ResolvePlayCost(state, action.Card, definition);
         BattleRules.PayMemory(state, action.Actor, cost);
 
         MoveHandOptionToExecuting(state, action.Actor, action.Card, trace);
@@ -184,6 +213,17 @@ public sealed class PlayCardService
         }
 
         return player;
+    }
+
+    private int ResolvePlayCost(GameState state, CardInstanceId card, CardDefinition definition)
+    {
+        var baseCost = Math.Max(0, definition.PlayCost);
+        return _staticEffects?.ApplyCostModifiers(
+            state,
+            card,
+            baseCost,
+            StaticCostKind.Play)
+            ?? baseCost;
     }
 
     private void MoveHandOptionToExecuting(
@@ -285,14 +325,40 @@ public sealed class PlayCardService
         PlayerId player,
         CardInstanceId sourceCard,
         PermanentId? sourcePermanent,
-        IReadOnlyDictionary<string, object?> values)
+        IReadOnlyDictionary<string, object?> values,
+        GameTrace? trace)
     {
-        return _triggerPipelineService.Run(
+        if (sourcePermanent is null || timing != EffectTiming.OnPlay)
+        {
+            return _triggerPipelineService.Run(
+                state,
+                timing,
+                player,
+                sourceCard,
+                sourcePermanent,
+                values,
+                trace: trace);
+        }
+
+        var selfTiming = _triggerPipelineService.Prepare(
             state,
             timing,
             player,
             sourceCard,
             sourcePermanent,
             values);
+        var enterFieldTiming = _triggerPipelineService.Prepare(
+            state,
+            EffectTiming.OnEnterFieldAnyone,
+            player,
+            values: EnterFieldEventPayload.ForSinglePermanent(
+                sourceCard,
+                sourcePermanent.Value,
+                isEvolution: false));
+
+        return _triggerPipelineService.RunPreparedSequence(
+            state,
+            new[] { selfTiming, enterFieldTiming },
+            trace);
     }
 }

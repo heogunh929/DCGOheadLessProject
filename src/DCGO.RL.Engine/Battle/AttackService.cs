@@ -95,6 +95,7 @@ public sealed class AttackService
     private readonly TriggerPipelineService? _triggerPipelineService;
     private readonly EffectiveStatService _effectiveStats;
     private readonly Tier1PrimitiveService _primitives;
+    private readonly StaticEffectService? _staticEffects;
 
     public AttackService(
         BattleResolver? battleResolver = null,
@@ -104,10 +105,12 @@ public sealed class AttackService
         DurationCleanupService? durationCleanupService = null,
         TriggerPipelineService? triggerPipelineService = null,
         EffectiveStatService? effectiveStats = null,
-        Tier1PrimitiveService? primitiveService = null)
+        Tier1PrimitiveService? primitiveService = null,
+        StaticEffectService? staticEffects = null)
     {
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
-        _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats);
+        _staticEffects = staticEffects;
+        _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats, _staticEffects);
         _battleResolver = battleResolver ?? new BattleResolver(null, _keywordService, _effectiveStats);
         _securityCheckService = securityCheckService ?? new SecurityCheckService(null, _battleResolver, _keywordService, effectiveStats: _effectiveStats);
         _winConditionChecker = winConditionChecker ?? new WinConditionChecker();
@@ -122,6 +125,8 @@ public sealed class AttackService
 
     internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
 
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
+
     public SelectionRequest? CreateBlockerSelectionRequest(GameState state, AttackAction action)
     {
         if (action.Actor != state.TurnPlayerId)
@@ -130,7 +135,7 @@ public sealed class AttackService
         }
 
         var attacker = BattleRules.Permanent(state, action.Attacker);
-        if (!BattleRules.CanAttack(state, attacker, _keywordService, _effectiveStats))
+        if (!BattleRules.CanAttack(state, attacker, _keywordService, _effectiveStats, _staticEffects))
         {
             throw new DomainException($"Permanent '{action.Attacker}' cannot attack.");
         }
@@ -167,7 +172,7 @@ public sealed class AttackService
             throw new DomainException($"Permanent '{action.Attacker}' is not controlled by player '{action.Actor}'.");
         }
 
-        if (!BattleRules.CanAttack(state, attacker, _keywordService, _effectiveStats))
+        if (!BattleRules.CanAttack(state, attacker, _keywordService, _effectiveStats, _staticEffects))
         {
             throw new DomainException($"Permanent '{action.Attacker}' cannot attack.");
         }

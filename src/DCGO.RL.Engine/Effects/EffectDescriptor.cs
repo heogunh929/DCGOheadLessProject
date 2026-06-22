@@ -28,7 +28,8 @@ public sealed record EffectDescriptor(
     TriggerSourcePersistencePolicy SourcePersistencePolicy = TriggerSourcePersistencePolicy.RequireSameRole,
     bool IsCounterEffect = false,
     bool IsSkippable = false,
-    bool CounterSelectionConsumesOptional = false)
+    bool CounterSelectionConsumesOptional = false,
+    TemporaryGrantedEffect? TemporaryGrantedEffect = null)
 {
     public bool Matches(EffectContext context) =>
         Timing == context.Timing && (CanTrigger?.Invoke(context) ?? true);

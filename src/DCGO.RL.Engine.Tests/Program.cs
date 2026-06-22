@@ -17,8 +17,18 @@ var tests = new (string Name, Action Test)[]
     ("PlayerState zone list 초기화", PlayerStateZoneInitialization),
     ("PlayerState zone list 비공유", PlayerStateZoneListsAreIndependent),
     ("PermanentState top/source 구분", PermanentStateSeparatesTopAndSources),
+    ("Script runtime state facade exposes original contracts", ScriptRuntimeStateFacadeExposesOriginalContracts),
+    ("CardEffectCommons query facade matches original contracts", CardEffectCommonsQueryFacadeMatchesOriginalContracts),
+    ("Script runtime effect model creates descriptors", ScriptRuntimeEffectModelCreatesDescriptors),
+    ("Script runtime selection descriptor uses hash identity", ScriptRuntimeSelectionDescriptorUsesHashIdentity),
+    ("Script runtime effect controller resolves class names", ScriptRuntimeEffectControllerResolvesClassNames),
+    ("Script runtime effect controller applies added skill effects", ScriptRuntimeEffectControllerAppliesAddedSkillEffects),
+    ("Script runtime effect controller respects cannot affected providers", ScriptRuntimeEffectControllerRespectsCannotAffectedProviders),
+    ("CardEffect interface mapping classifies core contracts", CardEffectInterfaceMappingClassifiesCoreContracts),
     ("TurnPlayer/NonTurnPlayer helper", TurnPlayerHelpers),
     ("CardDefinition 생성", CardDefinitionCreation),
+    ("CardDefinition trait text metadata", CardDefinitionTraitTextMetadata),
+    ("CardDefinition metadata changes state hash", CardDefinitionMetadataChangesStateHash),
     ("CardInstanceFactory instance id 분리", CardInstanceFactoryCreatesDistinctInstances),
     ("CardDatabase CardId 조회", CardDatabaseLookupByCardId),
     ("CardDatabase duplicate CardId fails", CardDatabaseDuplicateCardIdFails),
@@ -36,6 +46,10 @@ var tests = new (string Name, Action Test)[]
     ("Clone 후 원본 수정 격리", OriginalMutationDoesNotAffectClone),
     ("StateHash 안정성과 변화", StateHashIsStableAndChangesAfterZoneMove),
     ("SelectionRequest 생성", SelectionRequestCreation),
+    ("SelectEffect facades create selection requests", SelectEffectFacadesCreateSelectionRequests),
+    ("SelectCardEffect mode continuation uses primitives", SelectCardEffectModeContinuationUsesPrimitives),
+    ("SelectCardEffect play-for-free primitive continuation uses frame resolver", SelectCardEffectPlayForFreePrimitiveContinuationUsesFrameResolver),
+    ("SelectPermanentEffect mode continuation uses primitives", SelectPermanentEffectModeContinuationUsesPrimitives),
     ("SelectionValidator 후보 수 검증", SelectionValidatorValidatesMinMax),
     ("SelectionValidator skip 허용", SelectionValidatorAllowsSkip),
     ("SelectionValidator invalid target 실패", SelectionValidatorRejectsInvalidTarget),
@@ -74,6 +88,7 @@ var tests = new (string Name, Action Test)[]
     ("ParityFixtureComparer schema mismatch", ParityFixtureComparerSchemaMismatch),
     ("ParityFixtureComparer missing fixture is NotRun", ParityFixtureComparerMissingFixtureNotRun),
     ("ParityFixtureComparer synthetic fixture round trip", ParityFixtureComparerSyntheticFixtureRoundTrip),
+    ("FullCardParityEvidence generated coverage is conservative", FullCardParityEvidenceGeneratedCoverageIsConservative),
     ("GameSetup same seed same state", GameSetupSameSeedSameState),
     ("GameSetup different seed changes shuffle", GameSetupDifferentSeedChangesShuffle),
     ("GameSetup opening hand count", GameSetupOpeningHandCount),
@@ -104,9 +119,9 @@ var tests = new (string Name, Action Test)[]
     ("ValidationHarnessV2 completion gate reports ST1 complete", ValidationHarnessV2CompletionGateReportsSt1Complete),
     ("ValidationHarnessV2 ST1 unsupported report", ValidationHarnessV2St1UnsupportedReport),
     ("ValidationHarnessV2 invariant fuzz captures failures", ValidationHarnessV2InvariantFuzzCapturesFailures),
-    ("EngineCoreMilestoneGate reports ST3-02 needs review", EngineCoreMilestoneGateReportsSt3TwoNeedsReview),
+    ("EngineCoreMilestoneGate blocks missing local source", EngineCoreMilestoneGateBlocksMissingLocalSource),
     ("EngineCoreMilestoneGate scope is not RL approval", EngineCoreMilestoneGateScopeIsNotRlApproval),
-    ("EngineCoreExpansionReadiness allows inventory but not RL", EngineCoreExpansionReadinessAllowsInventoryButNotRl),
+    ("EngineCoreExpansionReadiness blocks missing local source", EngineCoreExpansionReadinessBlocksMissingLocalSource),
     ("EngineCoreExpansionReadiness blocks source mutation", EngineCoreExpansionReadinessBlocksSourceMutation),
     ("FullCardSourceScaffold covers manifest identities", FullCardSourceScaffoldCoversManifestIdentities),
     ("FullCardSourceScaffold covers source classes", FullCardSourceScaffoldCoversSourceClasses),
@@ -131,6 +146,7 @@ var tests = new (string Name, Action Test)[]
     ("MechanicFirstScheduler selects top unresolved capability", MechanicFirstSchedulerSelectsTopUnresolvedCapability),
     ("MechanicFirstScheduler blocks card batch advancement", MechanicFirstSchedulerBlocksCardBatchAdvancement),
     ("MechanicFirstScheduler selector policy", MechanicFirstSchedulerSelectorPolicy),
+    ("FoundationCompletionGate baseline blocks OpenCode", FoundationCompletionGateBaselineBlocksOpenCode),
     ("FullCardPortingScheduler selects remediation before C0039", FullCardPortingSchedulerSelectsRemediationBeforeC0039),
     ("FullCardPortingBatch L0001 existing layer blockers documented", FullCardPortingBatchL0001ExistingLayerBlockersDocumented),
     ("FullCardPortingBatch L0002 timing layer blockers documented", FullCardPortingBatchL0002TimingLayerBlockersDocumented),
@@ -234,6 +250,16 @@ var tests = new (string Name, Action Test)[]
     ("Duration player runtime modifiers replay deterministic", DurationPlayerRuntimeModifiersReplayDeterministic),
     ("Duration cleanup UntilBattleEnd removes modifier", DurationCleanupUntilBattleEndRemovesModifier),
     ("Duration security Digimon DP affects security battle", DurationSecurityDigimonDpAffectsSecurityBattle),
+    ("Duration temporary keyword grants Blocker until cleanup", DurationTemporaryKeywordGrantsBlockerUntilCleanup),
+    ("Duration temporary keyword grants Rush attack legality", DurationTemporaryKeywordGrantsRushAttackLegality),
+    ("Duration player keyword grants Rush to matching battle area Digimon", DurationPlayerKeywordGrantsRushToMatchingBattleAreaDigimon),
+    ("Duration temporary keyword hash and replay deterministic", DurationTemporaryKeywordHashAndReplayDeterministic),
+    ("Duration player keyword hash and replay deterministic", DurationPlayerKeywordHashAndReplayDeterministic),
+    ("Duration temporary granted trigger runs from target permanent timing", DurationTemporaryGrantedTriggerRunsFromTargetPermanentTiming),
+    ("Duration temporary granted trigger hash and replay deterministic", DurationTemporaryGrantedTriggerHashAndReplayDeterministic),
+    ("Duration temporary keyword rejects unsupported payloads", DurationTemporaryKeywordRejectsUnsupportedPayloads),
+    ("Duration invariant detects invalid keyword modifier", DurationInvariantDetectsInvalidKeywordModifier),
+    ("Duration invariant detects invalid granted trigger", DurationInvariantDetectsInvalidGrantedTrigger),
     ("Continuous DP modifier affects effective DP", ContinuousDpModifierAffectsEffectiveDp),
     ("Continuous DP modifier preserves base definition DP", ContinuousDpModifierDoesNotMutateBaseDefinitionDp),
     ("Continuous inherited source applies only from source zone", ContinuousInheritedSourceAppliesOnlyFromSourceZone),
@@ -249,13 +275,39 @@ var tests = new (string Name, Action Test)[]
     ("Continuous trash source applies from trash", ContinuousTrashSourceAppliesFromTrash),
     ("Continuous executing source applies during execution", ContinuousExecutingSourceAppliesDuringExecution),
     ("Continuous static keyword field source grants Blocker", ContinuousStaticKeywordFieldSourceGrantsBlocker),
+    ("CardEffectFactory Blocker static effect maps to keyword descriptor", CardEffectFactoryBlockerStaticEffectMapsToKeywordDescriptor),
+    ("CardEffectFactory static keyword wrappers map supported keywords", CardEffectFactoryStaticKeywordWrappersMapSupportedKeywords),
+    ("CardEffectFactory keyword static effect rejects unsupported keyword shape", CardEffectFactoryKeywordStaticEffectRejectsUnsupportedKeywordShape),
+    ("CardEffectFactory DP static effect maps to continuous descriptor", CardEffectFactoryDpStaticEffectMapsToContinuousDescriptor),
+    ("CardEffectFactory DP static effect rejects zero amount", CardEffectFactoryDpStaticEffectRejectsZeroAmount),
     ("Continuous static keyword inherited source stops after move", ContinuousStaticKeywordInheritedSourceStopsAfterMove),
     ("Continuous static keyword condition gates keyword", ContinuousStaticKeywordConditionGatesKeyword),
+    ("Continuous metadata criteria gates target trait and text", ContinuousMetadataCriteriaGatesTargetTraitAndText),
     ("Continuous static keyword replay deterministic", ContinuousStaticKeywordReplayDeterministic),
     ("Static evolution requirement hand source generates and executes", StaticEvolutionRequirementHandSourceGeneratesAndExecutes),
+    ("CardEffectFactory self evolution requirement maps to static descriptor", CardEffectFactorySelfEvolutionRequirementMapsToStaticDescriptor),
     ("Static evolution requirement stops after source move", StaticEvolutionRequirementStopsAfterSourceMove),
     ("Static evolution requirement condition gates target", StaticEvolutionRequirementConditionGatesTarget),
+    ("Static evolution requirement ignore permission generates and executes", StaticEvolutionRequirementIgnorePermissionGeneratesAndExecutes),
+    ("Static evolution requirement cannot-ignore restriction blocks permission", StaticEvolutionRequirementCannotIgnoreRestrictionBlocksPermission),
+    ("Static evolution requirement cannot-ignore restriction condition gates", StaticEvolutionRequirementCannotIgnoreRestrictionConditionGates),
+    ("Static evolution requirement ignore permission requires target gate", StaticEvolutionRequirementIgnorePermissionRequiresTargetGate),
+    ("Static requirement metadata criteria gates source and target", StaticRequirementMetadataCriteriaGatesSourceAndTarget),
+    ("Static cost modifier adjusts play and digivolution cost", StaticCostModifierAdjustsPlayAndDigivolutionCost),
+    ("Static link cost modifier adjusts link cost", StaticLinkCostModifierAdjustsLinkCost),
+    ("Static restriction blocks attack and block", StaticRestrictionBlocksAttackAndBlock),
+    ("Static card restriction blocks option play", StaticCardRestrictionBlocksOptionPlay),
+    ("Static card restriction blocks permanent field play", StaticCardRestrictionBlocksPermanentFieldPlay),
+    ("Static card restriction blocks return to hand", StaticCardRestrictionBlocksReturnToHand),
+    ("Static immunity descriptor evaluates metadata", StaticImmunityDescriptorEvaluatesMetadata),
+    ("Static card metadata modifier affects cost criteria", StaticCardMetadataModifierAffectsCostCriteria),
+    ("Static card level modifier feeds permanent level requirement", StaticCardLevelModifierFeedsPermanentLevelRequirement),
+    ("Static permanent level modifier affects normal digivolution requirement", StaticPermanentLevelModifierAffectsNormalDigivolutionRequirement),
+    ("Static card color modifier affects option color requirement", StaticCardColorModifierAffectsOptionColorRequirement),
+    ("Static ignore color requirement permits option", StaticIgnoreColorRequirementPermitsOption),
+    ("Static card color modifier affects digivolution color requirement", StaticCardColorModifierAffectsDigivolutionColorRequirement),
     ("Static link requirement hand source generates and executes", StaticLinkRequirementHandSourceGeneratesAndExecutes),
+    ("Static link requirement uses effective metadata and level", StaticLinkRequirementUsesEffectiveMetadataAndLevel),
     ("Static requirement replay deterministic", StaticRequirementReplayDeterministic),
     ("Continuous and duration modifiers stack deterministically", ContinuousAndDurationModifiersStackDeterministically),
     ("Continuous effects are derived for state hash", ContinuousEffectsAreDerivedForStateHash),
@@ -273,6 +325,7 @@ var tests = new (string Name, Action Test)[]
     ("TriggerPipeline enqueues and drains non-background effect", TriggerPipelineEnqueuesAndDrainsNonBackgroundEffect),
     ("TriggerPipeline separates background effect", TriggerPipelineSeparatesBackgroundEffect),
     ("TriggerPipeline selection boundary returns pending request", TriggerPipelineSelectionBoundaryReturnsPendingRequest),
+    ("TriggerPipeline pending resume skips stale source", TriggerPipelinePendingResumeSkipsStaleSource),
     ("TriggerPipeline optional provider pauses explicit selection", TriggerPipelineOptionalProviderPausesExplicitSelection),
     ("TriggerPipeline unsupported body fails explicitly", TriggerPipelineUnsupportedBodyFailsExplicitly),
     ("TriggerPipeline once-per-turn prevents duplicate execution", TriggerPipelineOncePerTurnPreventsDuplicateExecution),
@@ -307,6 +360,9 @@ var tests = new (string Name, Action Test)[]
     ("TriggerPipeline ordering optional target replay deterministic", TriggerPipelineOrderingOptionalTargetReplayDeterministic),
     ("TriggerPipeline OnStartMainPhase hook invokes descriptor", TriggerPipelineOnStartMainPhaseHookInvokesDescriptor),
     ("TriggerPipeline WhenDigivolving hook invokes descriptor", TriggerPipelineWhenDigivolvingHookInvokesDescriptor),
+    ("TriggerPipeline OnEnterFieldAnyone play payload invokes global descriptor", TriggerPipelineOnEnterFieldAnyonePlayPayloadInvokesGlobalDescriptor),
+    ("TriggerPipeline OnEnterFieldAnyone digivolve payload invokes global descriptor", TriggerPipelineOnEnterFieldAnyoneDigivolvePayloadInvokesGlobalDescriptor),
+    ("TriggerPipeline OnEnterFieldAnyone tail resumes after OnPlay selection", TriggerPipelineOnEnterFieldAnyoneTailResumesAfterOnPlaySelection),
     ("TriggerPipeline OnAllyAttack hook invokes descriptor", TriggerPipelineOnAllyAttackHookInvokesDescriptor),
     ("TriggerPipeline OnEndAttack deterministic", TriggerPipelineOnEndAttackDeterministic),
     ("TriggerPipeline OptionSkill remains compatible with ST1-15", TriggerPipelineOptionSkillCompatibleWithSt1Option),
@@ -683,6 +739,906 @@ static void PermanentStateSeparatesTopAndSources()
     AssertFalse(permanent.IsTamer(definitions, cards));
 }
 
+static void ScriptRuntimeStateFacadeExposesOriginalContracts()
+{
+    var state = GameState.CreateDefault();
+    state.Memory = 3;
+    state.Phase = Phase.Main;
+    state.TurnPlayerId = PlayerId.Player1;
+
+    state.CardDefinitions["AGU"] = new CardDefinition
+    {
+        CardId = "AGU",
+        CardNameEnglish = "Agumon",
+        CardKinds = new[] { CardKind.Digimon },
+        CardColors = new[] { CardColor.Red, CardColor.Red, CardColor.Blue },
+        Traits = new[] { "Dinosaur", "Vaccine" },
+        Level = 3,
+        DP = 2000,
+        CardEffectClassName = "AGU_EFFECT",
+    };
+    state.CardDefinitions["SRC"] = new CardDefinition
+    {
+        CardId = "SRC",
+        CardNameEnglish = "Source",
+        CardKinds = new[] { CardKind.Digimon },
+        Level = 2,
+    };
+    state.CardDefinitions["HAND"] = new CardDefinition
+    {
+        CardId = "HAND",
+        CardNameEnglish = "Hand Tamer",
+        CardKinds = new[] { CardKind.Tamer },
+        Level = 0,
+    };
+
+    var topCard = new CardInstance(new CardInstanceId(1), "AGU", PlayerId.Player0)
+    {
+        CurrentZone = Zone.BattleArea,
+        PermanentId = new PermanentId(10),
+    };
+    var sourceCard = new CardInstance(new CardInstanceId(2), "SRC", PlayerId.Player0)
+    {
+        CurrentZone = Zone.EvolutionSources,
+        PermanentId = new PermanentId(10),
+    };
+    var handCard = new CardInstance(new CardInstanceId(3), "HAND", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Hand,
+    };
+
+    state.Cards[topCard.Id] = topCard;
+    state.Cards[sourceCard.Id] = sourceCard;
+    state.Cards[handCard.Id] = handCard;
+    state.GetPlayer(PlayerId.Player0).Hand.Add(handCard.Id);
+
+    var permanentState = new PermanentState(new PermanentId(10), PlayerId.Player0, topCard.Id);
+    permanentState.SourceCardIds.Add(sourceCard.Id);
+    state.GetPlayer(PlayerId.Player0).FieldPermanents.Add(permanentState);
+
+    var context = new GameContext(state);
+
+    AssertEqual(3, context.Memory);
+    AssertEqual(Phase.Main, context.TurnPhase);
+    AssertEqual(PlayerId.Player1, context.TurnPlayer.Id);
+    AssertEqual(PlayerId.Player0, context.NonTurnPlayer.Id);
+
+    var owner = context.PlayerFromID(0);
+    AssertEqual(PlayerId.Player0, owner.Id);
+    AssertEqual(PlayerId.Player1, owner.Enemy.Id);
+    AssertEqual(handCard.Id, owner.HandCards[0].Id);
+
+    var cardSource = context.CardSourceFromId(topCard.Id);
+    AssertEqual(PlayerId.Player0, cardSource.Owner.Id);
+    AssertTrue(cardSource.IsDigimon);
+    AssertFalse(cardSource.IsTamer);
+    AssertEqual(3, cardSource.Level);
+    AssertSequence(new[] { CardColor.Red, CardColor.Blue }, cardSource.CardColors.ToArray());
+    AssertSequence(new[] { "AGU", "Agumon" }, cardSource.CardNames.ToArray());
+    AssertSequence(new[] { "Dinosaur", "Vaccine" }, cardSource.CardTraits.ToArray());
+    AssertEqual("AGU_EFFECT", cardSource.Entity.CardEffectClassName);
+
+    var permanent = cardSource.PermanentOfThisCard()
+        ?? throw new InvalidOperationException("Top card should resolve its permanent.");
+    AssertEqual(permanentState.Id, permanent.Id);
+    AssertEqual(topCard.Id, permanent.TopCard.Id);
+    AssertEqual(sourceCard.Id, permanent.DigivolutionCards[0].Id);
+    AssertTrue(permanent.IsDigimon);
+
+    var sourcePermanent = context.CardSourceFromId(sourceCard.Id).PermanentOfThisCard()
+        ?? throw new InvalidOperationException("Source card should resolve its permanent.");
+    AssertEqual(permanentState.Id, sourcePermanent.Id);
+
+    AssertEqual<Permanent?>(null, context.CardSourceFromId(handCard.Id).PermanentOfThisCard());
+}
+
+static void CardEffectCommonsQueryFacadeMatchesOriginalContracts()
+{
+    var state = CreateMinimalBattleState();
+    AddBattleDefinition(state, "BT1-TAMER", CardKind.Tamer, level: 0, playCost: 3, dp: 0);
+    AddBattleDefinition(state, "BT1-BLUE", CardKind.Digimon, level: 3, playCost: 3, dp: 3000);
+    AddBattleDefinition(state, "BT1-DUAL", CardKind.Digimon, level: 4, playCost: 5, dp: 5000);
+    AddBattleDefinition(state, "BT1-GREEN", CardKind.Digimon, level: 3, playCost: 3, dp: 3000);
+    state.CardDefinitions["BT1-BLUE"] = state.CardDefinitions["BT1-BLUE"] with { Colors = new[] { CardColor.Blue } };
+    state.CardDefinitions["BT1-DUAL"] = state.CardDefinitions["BT1-DUAL"] with { Colors = new[] { CardColor.Red, CardColor.Yellow } };
+    state.CardDefinitions["BT1-GREEN"] = state.CardDefinitions["BT1-GREEN"] with { Colors = new[] { CardColor.Green } };
+
+    var ownerDigimon = AddBattlePermanent(state, 38, 38, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var ownerSource = AddEvolutionSource(state, 39, "BT1-WEAK", PlayerId.Player0, ownerDigimon.Id);
+    var ownerLinked = AddLinkedCard(state, 40, "BT1-WEAK", PlayerId.Player0, ownerDigimon.Id);
+    var ownerBreeding = AddBattlePermanent(state, 41, 41, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1, isBreeding: true);
+    var ownerTamer = AddBattlePermanent(state, 42, 42, "BT1-TAMER", PlayerId.Player0, 1, enterTurn: 1);
+    var opponentDigimon = AddBattlePermanent(state, 43, 43, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var opponentBreeding = AddBattlePermanent(state, 49, 49, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1, isBreeding: true);
+    var ownerBlue = AddBattlePermanent(state, 50, 50, "BT1-BLUE", PlayerId.Player0, 2, enterTurn: 1);
+    var ownerDual = AddBattlePermanent(state, 51, 51, "BT1-DUAL", PlayerId.Player0, 3, enterTurn: 1);
+    AddBattlePermanent(state, 52, 52, "BT1-GREEN", PlayerId.Player1, 1, enterTurn: 1);
+    var opponentTamer = AddBattlePermanent(state, 53, 53, "BT1-TAMER", PlayerId.Player1, 2, enterTurn: 1);
+    AddCardToZone(state, 44, "BT1-OPTION", PlayerId.Player0, Zone.Security, isFaceUp: false);
+    AddCardToZone(state, 45, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(state, 46, "BT1-WEAK", PlayerId.Player0, Zone.Trash);
+    AddCardToZone(state, 47, "BT1-WEAK", PlayerId.Player1, Zone.Trash);
+    AddCardToZone(state, 48, "BT1-ROOKIE", PlayerId.Player0, Zone.Security, isFaceUp: true);
+
+    var context = new GameContext(state);
+    var sourceCard = context.CardSourceFromId(ownerDigimon.TopCardId);
+    var tamerCard = context.CardSourceFromId(ownerTamer.TopCardId);
+    var sourceStackCard = context.CardSourceFromId(ownerSource);
+    var linkedCard = context.CardSourceFromId(ownerLinked);
+    var breedingCard = context.CardSourceFromId(ownerBreeding.TopCardId);
+    var securityCard = context.CardSourceFromId(new CardInstanceId(44));
+    var handCard = context.CardSourceFromId(new CardInstanceId(45));
+    var ownerTrashCard = context.CardSourceFromId(new CardInstanceId(46));
+    var opponentTrashCard = context.CardSourceFromId(new CardInstanceId(47));
+    var faceUpSecurityCard = context.CardSourceFromId(new CardInstanceId(48));
+
+    AssertSequence(
+        new[] { ownerDigimon.Id, ownerTamer.Id, ownerBlue.Id, ownerDual.Id },
+        sourceCard.Owner.GetBattleAreaPermanents().Select(permanent => permanent.Id).ToArray());
+    AssertSequence(new[] { ownerBreeding.Id }, sourceCard.Owner.GetBreedingAreaPermanents().Select(permanent => permanent.Id).ToArray());
+    AssertSequence(
+        new[] { ownerDigimon.Id, ownerBlue.Id, ownerDual.Id },
+        sourceCard.Owner.GetBattleAreaDigimons().Select(permanent => permanent.Id).ToArray());
+
+    AssertTrue(CardEffectCommons.IsExistOnBattleArea(sourceCard));
+    AssertTrue(CardEffectCommons.IsExistOnBattleAreaDigimon(sourceCard));
+    AssertTrue(CardEffectCommons.IsExistOnBattleArea(tamerCard));
+    AssertFalse(CardEffectCommons.IsExistOnBattleAreaDigimon(tamerCard));
+    AssertFalse(CardEffectCommons.IsExistOnBattleArea(breedingCard));
+    AssertTrue(CardEffectCommons.IsExistOnBreedingAreaDigimon(breedingCard));
+    AssertTrue(CardEffectCommons.IsExistDigivolutionCards(sourceStackCard));
+    AssertTrue(CardEffectCommons.IsExistLinked(linkedCard));
+    AssertTrue(CardEffectCommons.IsExistOnSecurity(securityCard));
+    AssertFalse(securityCard.IsFlipped);
+    AssertTrue(faceUpSecurityCard.IsFlipped);
+    AssertTrue(CardEffectCommons.IsExistInSecurity(securityCard));
+    AssertFalse(CardEffectCommons.IsExistInSecurity(faceUpSecurityCard));
+    AssertTrue(CardEffectCommons.IsExistInSecurity(faceUpSecurityCard, isFlipped: true));
+    AssertTrue(CardEffectCommons.IsExistInAnyTrash(ownerTrashCard));
+    AssertTrue(CardEffectCommons.IsExistInAnyTrash(opponentTrashCard));
+    AssertFalse(CardEffectCommons.IsExistInAnyTrash(handCard));
+
+    AssertTrue(CardEffectCommons.IsOwnerTurn(sourceCard));
+    state.TurnPlayerId = PlayerId.Player1;
+    AssertFalse(CardEffectCommons.IsOwnerTurn(sourceCard));
+    AssertTrue(CardEffectCommons.IsOpponentTurn(sourceCard));
+    state.TurnPlayerId = PlayerId.Player0;
+
+    var ownerPermanent = sourceCard.Owner.GetBattleAreaPermanents().Single(permanent => permanent.Id == ownerDigimon.Id);
+    var ownerBreedingPermanent = sourceCard.Owner.GetBreedingAreaPermanents().Single(permanent => permanent.Id == ownerBreeding.Id);
+    var ownerTamerPermanent = sourceCard.Owner.GetBattleAreaPermanents().Single(permanent => permanent.Id == ownerTamer.Id);
+    var opponentPermanent = sourceCard.Owner.Enemy.GetBattleAreaPermanents().Single(permanent => permanent.Id == opponentDigimon.Id);
+    var opponentBreedingPermanent = sourceCard.Owner.Enemy.GetBreedingAreaPermanents().Single(permanent => permanent.Id == opponentBreeding.Id);
+    var opponentTamerPermanent = sourceCard.Owner.Enemy.GetBattleAreaPermanents().Single(permanent => permanent.Id == opponentTamer.Id);
+    AssertTrue(CardEffectCommons.IsOwnerPermanent(ownerPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsOwnerPermanent(opponentPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsOpponentPermanent(opponentPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnField(ownerPermanent));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnField(ownerBreedingPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnField(null));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnBattleArea(ownerPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnBattleArea(ownerBreedingPermanent));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnBreedingArea(ownerBreedingPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnBreedingArea(ownerPermanent));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOwnerBattleArea(ownerPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOwnerBattleArea(opponentPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOpponentBattleArea(opponentPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOpponentBattleArea(ownerPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOwnerBreedingArea(ownerBreedingPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOwnerBreedingArea(opponentBreedingPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOpponentBreedingArea(opponentBreedingPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOpponentBreedingArea(ownerBreedingPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnBattleAreaDigimon(ownerPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnBattleAreaDigimon(ownerTamerPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnBattleAreaDigimon(ownerBreedingPermanent));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOwnerBattleAreaDigimon(ownerPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOwnerBattleAreaDigimon(opponentPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOpponentBattleAreaDigimon(opponentPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOpponentBattleAreaDigimon(ownerPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnBattleAreaTamer(ownerTamerPermanent));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnBattleAreaTamer(ownerPermanent));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOwnerBattleAreaTamer(ownerTamerPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOwnerBattleAreaTamer(opponentTamerPermanent, sourceCard));
+    AssertTrue(CardEffectCommons.IsPermanentExistsOnOpponentBattleAreaTamer(opponentTamerPermanent, sourceCard));
+    AssertFalse(CardEffectCommons.IsPermanentExistsOnOpponentBattleAreaTamer(ownerTamerPermanent, sourceCard));
+
+    var triggerEffect = new FixtureActivateEffect();
+    AssertTrue(CardEffectCommons.IsExistOnBattleAreaTrigger(sourceCard, triggerEffect));
+    AssertEqual(ownerPermanent.Id, triggerEffect.EffectSourcePermanent!.Id);
+    AssertEqual(ownerPermanent.Id, triggerEffect.PermanentWhenTriggered!.Id);
+    AssertEqual(sourceCard.Id, triggerEffect.TopCardWhenTriggered!.Id);
+    AssertTrue(CardEffectCommons.IsExistOnBattleAreaActivate(sourceCard, triggerEffect));
+    AssertTrue(CardEffectCommons.IsExistOnFieldActivate(sourceCard, triggerEffect));
+    AssertFalse(CardEffectCommons.IsExistOnBreedingAreaActivate(sourceCard, triggerEffect));
+
+    triggerEffect.PermanentWhenTriggered = opponentPermanent;
+    AssertFalse(CardEffectCommons.IsExistOnBattleAreaActivate(sourceCard, triggerEffect));
+
+    var sourceTriggerEffect = new FixtureActivateEffect();
+    AssertTrue(CardEffectCommons.IsExistDigivolutionCardsTrigger(sourceStackCard, sourceTriggerEffect));
+    AssertEqual(ownerPermanent.Id, sourceTriggerEffect.PermanentWhenTriggered!.Id);
+    AssertTrue(CardEffectCommons.IsExistDigivolutionCardsActivate(sourceStackCard, sourceTriggerEffect));
+
+    var linkedTriggerEffect = new FixtureActivateEffect();
+    AssertTrue(CardEffectCommons.IsExistLinkedTrigger(linkedCard, linkedTriggerEffect));
+    AssertEqual(ownerPermanent.Id, linkedTriggerEffect.PermanentWhenTriggered!.Id);
+    AssertTrue(CardEffectCommons.IsExistLinkedActivate(linkedCard, linkedTriggerEffect));
+
+    var tamerTriggerEffect = new FixtureActivateEffect();
+    AssertFalse(CardEffectCommons.IsExistOnBattleAreaDigimonTrigger(tamerCard, tamerTriggerEffect));
+    AssertTrue(tamerTriggerEffect.PermanentWhenTriggered is null);
+
+    var playState = CreateMinimalBattleState();
+    playState.CardDefinitions["BT1-HIGHCOST"] = playState.CardDefinitions["BT1-ROOKIE"] with
+    {
+        CardId = "BT1-HIGHCOST",
+        PlayCost = 16,
+    };
+    playState.CardDefinitions["BT1-COST-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "BT1-COST-AURA",
+        "BT1_COST_AURA");
+    var resident = AddBattlePermanent(playState, 300, 300, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var residentSource = AddEvolutionSource(playState, 301, "BT1-WEAK", PlayerId.Player0, resident.Id);
+    var residentLinked = AddLinkedCard(playState, 302, "BT1-WEAK", PlayerId.Player0, resident.Id);
+    var playableHand = AddCardToZone(playState, 303, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    var playableOption = AddCardToZone(playState, 304, "BT1-OPTION", PlayerId.Player0, Zone.Hand);
+    var playableTrash = AddCardToZone(playState, 305, "BT1-ROOKIE", PlayerId.Player0, Zone.Trash);
+    var playableExecuting = AddCardToZone(playState, 306, "BT1-ROOKIE", PlayerId.Player0, Zone.Executing);
+    var highCostHand = AddCardToZone(playState, 307, "BT1-HIGHCOST", PlayerId.Player0, Zone.Hand);
+    var playContext = new GameContext(playState);
+    var playEffect = new FixtureActivateEffect();
+    var playableHandSource = playContext.CardSourceFromId(playableHand);
+    var playableOptionSource = playContext.CardSourceFromId(playableOption);
+    var playableTrashSource = playContext.CardSourceFromId(playableTrash);
+    var playableExecutingSource = playContext.CardSourceFromId(playableExecuting);
+    var highCostSource = playContext.CardSourceFromId(highCostHand);
+    var residentSourceCard = playContext.CardSourceFromId(residentSource);
+    var residentLinkedCard = playContext.CardSourceFromId(residentLinked);
+
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(playableHandSource, payCost: false, playEffect));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(playableHandSource, payCost: true, playEffect));
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(highCostSource, payCost: true, playEffect));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(highCostSource, payCost: true, playEffect, fixedCost: 15));
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(highCostSource, payCost: true, playEffect, fixedCost: 16));
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(null, payCost: false, playEffect));
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(playableOptionSource, payCost: false, playEffect));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(playableOptionSource, payCost: false, playEffect, isPlayOption: true));
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(playableTrashSource, payCost: false, playEffect));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        playableTrashSource,
+        payCost: false,
+        playEffect,
+        SelectCardEffect.Root.Trash));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        playableExecutingSource,
+        payCost: false,
+        playEffect,
+        SelectCardEffect.Root.Execution));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        residentSourceCard,
+        payCost: false,
+        playEffect,
+        SelectCardEffect.Root.DigivolutionCards));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        residentLinkedCard,
+        payCost: false,
+        playEffect,
+        SelectCardEffect.Root.LinkedCards));
+    AddBattlePermanent(playState, 308, 308, "BT1-COST-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    var staticCostServices = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCostModifierFixtureScript(
+            "BT1-COST-AURA",
+            "BT1_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Play,
+            amount: -2),
+        new NoEffectCardScript("BT1-HIGHCOST")));
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        highCostSource,
+        payCost: true,
+        playEffect,
+        staticEffects: staticCostServices.StaticEffectService));
+
+    AddBattlePermanent(playState, 309, 309, "BT1-ROOKIE", PlayerId.Player0, 3, enterTurn: 1);
+    AddBattlePermanent(playState, 310, 310, "BT1-ROOKIE", PlayerId.Player0, 2, enterTurn: 1);
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(playableHandSource, payCost: false, playEffect));
+    AssertThrows<DomainException>(() =>
+        CardEffectCommons.CanPlayAsNewPermanent(
+            playableHandSource,
+            payCost: false,
+            playEffect,
+            SelectCardEffect.Root.Custom));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        CardEffectCommons.CanPlayAsNewPermanent(
+            playableHandSource,
+            payCost: false,
+            playEffect,
+            SelectCardEffect.Root.Clock));
+
+    var breedingPlayState = CreateMinimalBattleState();
+    var breedingPlayable = AddCardToZone(breedingPlayState, 320, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    var breedingContext = new GameContext(breedingPlayState);
+    var breedingPlayableSource = breedingContext.CardSourceFromId(breedingPlayable);
+    AssertTrue(CardEffectCommons.CanPlayAsNewPermanent(
+        breedingPlayableSource,
+        payCost: false,
+        playEffect,
+        isBreedingArea: true));
+    AddBattlePermanent(breedingPlayState, 321, 321, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1, isBreeding: true);
+    AssertFalse(CardEffectCommons.CanPlayAsNewPermanent(
+        breedingPlayableSource,
+        payCost: false,
+        playEffect,
+        isBreedingArea: true));
+
+    AssertEqual(
+        5,
+        CardEffectCommons.MatchConditionPermanentCount(
+            state,
+            permanent => permanent.IsDigimon));
+    AssertEqual(
+        7,
+        CardEffectCommons.MatchConditionPermanentCount(
+            state,
+            permanent => permanent.IsDigimon,
+            isContainBreedingArea: true));
+    AssertTrue(CardEffectCommons.HasMatchConditionPermanent(state, permanent => permanent.IsTamer));
+    AssertFalse(CardEffectCommons.HasMatchConditionPermanent(state, permanent => permanent.IsOption));
+
+    AssertEqual(
+        3,
+        CardEffectCommons.MatchConditionOwnersPermanentCount(
+            sourceCard,
+            permanent => permanent.IsDigimon && !permanent.IsBreedingArea));
+    AssertEqual(
+        2,
+        CardEffectCommons.MatchConditionOpponentsPermanentCount(
+            sourceCard,
+            permanent => permanent.IsDigimon));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersPermanent(sourceCard, permanent => permanent.IsTamer));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersBreedingPermanent(sourceCard, permanent => permanent.IsDigimon));
+    AssertFalse(CardEffectCommons.HasMatchConditionOwnersBreedingPermanent(sourceCard, permanent => permanent.Id == opponentBreeding.Id));
+    AssertTrue(CardEffectCommons.HasMatchConditionOpponentsPermanent(sourceCard, permanent => permanent.HasNoDigivolutionCards));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersHand(sourceCard, card => card.Id == handCard.Id));
+    AssertEqual(1, CardEffectCommons.MatchConditionOwnersCardCountInHand(sourceCard, card => card.IsDigimon));
+    AssertTrue(CardEffectCommons.HasMatchConditionPermanentDigivolutionCards(sourceCard, card => card.Id == sourceStackCard.Id));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id));
+    AssertFalse(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id, flipped: false));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.IsOption, flipped: false));
+    AssertEqual(1, CardEffectCommons.MatchConditionOwnersCardCountInTrash(sourceCard, card => card.IsDigimon));
+    AssertEqual(1, CardEffectCommons.MatchConditionOpponentsCardCountInTrash(sourceCard, card => card.IsDigimon));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersCardInTrash(sourceCard, card => card.Id == ownerTrashCard.Id));
+    AssertTrue(CardEffectCommons.HasMatchConditionOpponentsCardInTrash(sourceCard, card => card.Id == opponentTrashCard.Id));
+    AssertEqual(3, CardEffectCommons.GetUniqueColourCountOnOwnerBattleArea(sourceCard, permanent => permanent.IsDigimon));
+    AssertEqual(2, CardEffectCommons.GetUniqueColourCountOnOpponentsBattleArea(sourceCard, permanent => permanent.IsDigimon));
+    AssertEqual(1, CardEffectCommons.GetUniqueColourCountOnOwnerBattleArea(sourceCard, permanent => permanent.IsTamer));
+    AssertEqual(0, CardEffectCommons.GetUniqueColourCountOnOwnerBattleArea(null, permanent => permanent.IsDigimon));
+    AssertFalse(CardEffectCommons.HasMatchConditionOwnersHand(null, card => card.IsDigimon));
+    AssertEqual(0, CardEffectCommons.MatchConditionOwnersCardCountInHand(null, card => card.IsDigimon));
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        CardEffectCommons.HasMatchConditionPermanent(permanent => permanent.IsDigimon));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        CardEffectCommons.MatchConditionPermanentCount(permanent => permanent.IsDigimon));
+}
+
+static void ScriptRuntimeEffectModelCreatesDescriptors()
+{
+    var state = GameState.CreateDefault();
+    state.CardDefinitions["FX-EFFECT"] = new CardDefinition
+    {
+        CardId = "FX-EFFECT",
+        CardNameEnglish = "Fixture Effect",
+        CardKinds = new[] { CardKind.Digimon },
+        Level = 3,
+        DP = 2000,
+    };
+
+    var topCard = new CardInstance(new CardInstanceId(20), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.BattleArea,
+        PermanentId = new PermanentId(30),
+    };
+    var sourceCard = new CardInstance(new CardInstanceId(21), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.EvolutionSources,
+        PermanentId = new PermanentId(30),
+    };
+    var linkedCard = new CardInstance(new CardInstanceId(22), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.LinkedCards,
+        PermanentId = new PermanentId(30),
+    };
+    var faceUpSecurityCard = new CardInstance(new CardInstanceId(23), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Security,
+        IsFaceUp = true,
+    };
+    var faceDownSecurityCard = new CardInstance(new CardInstanceId(24), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Security,
+        IsFaceUp = false,
+    };
+    var handSecurityCard = new CardInstance(new CardInstanceId(25), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Hand,
+    };
+    var handCard = new CardInstance(new CardInstanceId(26), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Hand,
+    };
+    var trashCard = new CardInstance(new CardInstanceId(27), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Trash,
+    };
+    var executingCard = new CardInstance(new CardInstanceId(28), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Executing,
+    };
+    var orphanHandCard = new CardInstance(new CardInstanceId(29), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Hand,
+    };
+    var orphanTrashCard = new CardInstance(new CardInstanceId(31), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Trash,
+    };
+    var orphanExecutingCard = new CardInstance(new CardInstanceId(32), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Executing,
+    };
+    var orphanSecurityCard = new CardInstance(new CardInstanceId(33), "FX-EFFECT", PlayerId.Player0)
+    {
+        CurrentZone = Zone.Security,
+        IsFaceUp = true,
+    };
+    state.Cards[topCard.Id] = topCard;
+    state.Cards[sourceCard.Id] = sourceCard;
+    state.Cards[linkedCard.Id] = linkedCard;
+    state.Cards[faceUpSecurityCard.Id] = faceUpSecurityCard;
+    state.Cards[faceDownSecurityCard.Id] = faceDownSecurityCard;
+    state.Cards[handSecurityCard.Id] = handSecurityCard;
+    state.Cards[handCard.Id] = handCard;
+    state.Cards[trashCard.Id] = trashCard;
+    state.Cards[executingCard.Id] = executingCard;
+    state.Cards[orphanHandCard.Id] = orphanHandCard;
+    state.Cards[orphanTrashCard.Id] = orphanTrashCard;
+    state.Cards[orphanExecutingCard.Id] = orphanExecutingCard;
+    state.Cards[orphanSecurityCard.Id] = orphanSecurityCard;
+
+    var permanent = new PermanentState(new PermanentId(30), PlayerId.Player0, topCard.Id);
+    permanent.SourceCardIds.Add(sourceCard.Id);
+    permanent.LinkedCards.Add(linkedCard.Id);
+    state.GetPlayer(PlayerId.Player0).FieldPermanents.Add(permanent);
+    state.GetPlayer(PlayerId.Player0).Security.Add(faceUpSecurityCard.Id);
+    state.GetPlayer(PlayerId.Player0).Security.Add(faceDownSecurityCard.Id);
+    state.GetPlayer(PlayerId.Player0).Hand.Add(handSecurityCard.Id);
+    state.GetPlayer(PlayerId.Player0).Hand.Add(handCard.Id);
+    state.GetPlayer(PlayerId.Player0).Trash.Add(trashCard.Id);
+    state.GetPlayer(PlayerId.Player0).Executing.Add(executingCard.Id);
+
+    var entity = new FixtureCEntityEffect();
+    var descriptors = entity.CreateEffectDescriptors(
+        state,
+        EffectTiming.OnPlay,
+        topCard.Id,
+        permanent.Id,
+        PlayerId.Player0);
+
+    AssertEqual(1, descriptors.Count);
+
+    var descriptor = descriptors[0];
+    AssertEqual("fixture:stable", descriptor.StableId);
+    AssertEqual(EffectTiming.OnPlay, descriptor.Timing);
+    AssertEqual<CardInstanceId?>(topCard.Id, descriptor.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, descriptor.SourcePermanent);
+    AssertEqual<PlayerId?>(PlayerId.Player0, descriptor.Controller);
+    AssertTrue(descriptor.IsOptional);
+    AssertTrue(descriptor.IsBackground);
+    AssertTrue(descriptor.IsOncePerTurn);
+    AssertEqual("fixture:stable", descriptor.OncePerTurnKey);
+    var topSnapshot = descriptor.SourceSnapshot
+        ?? throw new InvalidOperationException("Top effect should create a source snapshot.");
+    AssertEqual(TriggerSourceRole.FieldTop, topSnapshot.Role);
+    AssertEqual(Zone.BattleArea, topSnapshot.SourceZone);
+    AssertEqual(topCard.Id, topSnapshot.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, topSnapshot.SourcePermanent);
+    AssertEqual<CardInstanceId?>(topCard.Id, topSnapshot.TopCardWhenTriggered);
+    AssertEqual(PlayerId.Player0, topSnapshot.Owner);
+    AssertEqual(PlayerId.Player0, topSnapshot.Controller);
+    AssertTrue(descriptor.CanTrigger is not null);
+    AssertTrue(descriptor.CanTrigger!(new EffectContext(
+        state,
+        EffectTiming.OnPlay,
+        PlayerId.Player0,
+        topCard.Id,
+        permanent.Id)));
+
+    var context = new GameContext(state);
+    AssertTrue(CEntity_Effect.isExistOnField(context.CardSourceFromId(topCard.Id)));
+
+    var controller = new CEntity_EffectController(entity);
+    AssertEqual(1, controller.GetCardEffects(
+        EffectTiming.OnPlay,
+        context.CardSourceFromId(topCard.Id)).Count);
+
+    var inheritedDescriptor = new FixtureInheritedCEntityEffect()
+        .CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            sourceCard.Id,
+            permanent.Id,
+            PlayerId.Player0)
+        .Single();
+    AssertEqual("fixture:inherited", inheritedDescriptor.StableId);
+    AssertEqual<CardInstanceId?>(sourceCard.Id, inheritedDescriptor.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, inheritedDescriptor.SourcePermanent);
+    var inheritedSnapshot = inheritedDescriptor.SourceSnapshot
+        ?? throw new InvalidOperationException("Inherited effect should create a source snapshot.");
+    AssertEqual(TriggerSourceRole.Inherited, inheritedSnapshot.Role);
+    AssertEqual(Zone.EvolutionSources, inheritedSnapshot.SourceZone);
+    AssertEqual(sourceCard.Id, inheritedSnapshot.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, inheritedSnapshot.SourcePermanent);
+    AssertEqual<CardInstanceId?>(topCard.Id, inheritedSnapshot.TopCardWhenTriggered);
+    AssertEqual(PlayerId.Player0, inheritedSnapshot.Owner);
+    AssertEqual(PlayerId.Player0, inheritedSnapshot.Controller);
+
+    var linkedDescriptor = new FixtureLinkedCEntityEffect()
+        .CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            linkedCard.Id,
+            permanent.Id,
+            PlayerId.Player0)
+        .Single();
+    AssertEqual("fixture:linked", linkedDescriptor.StableId);
+    AssertEqual<CardInstanceId?>(linkedCard.Id, linkedDescriptor.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, linkedDescriptor.SourcePermanent);
+    var linkedSnapshot = linkedDescriptor.SourceSnapshot
+        ?? throw new InvalidOperationException("Linked effect should create a source snapshot.");
+    AssertEqual(TriggerSourceRole.Linked, linkedSnapshot.Role);
+    AssertEqual(Zone.LinkedCards, linkedSnapshot.SourceZone);
+    AssertEqual(linkedCard.Id, linkedSnapshot.SourceCard);
+    AssertEqual<PermanentId?>(permanent.Id, linkedSnapshot.SourcePermanent);
+    AssertEqual<CardInstanceId?>(topCard.Id, linkedSnapshot.TopCardWhenTriggered);
+    AssertEqual(PlayerId.Player0, linkedSnapshot.Owner);
+    AssertEqual(PlayerId.Player0, linkedSnapshot.Controller);
+
+    var securityDescriptor = new FixtureSecurityCEntityEffect()
+        .CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            faceUpSecurityCard.Id,
+            controller: PlayerId.Player0)
+        .Single();
+    AssertEqual("fixture:security", securityDescriptor.StableId);
+    AssertEqual<CardInstanceId?>(faceUpSecurityCard.Id, securityDescriptor.SourceCard);
+    AssertEqual<PermanentId?>(null, securityDescriptor.SourcePermanent);
+    var securitySnapshot = securityDescriptor.SourceSnapshot
+        ?? throw new InvalidOperationException("Security effect should create a source snapshot.");
+    AssertEqual(TriggerSourceRole.FaceUpSecurity, securitySnapshot.Role);
+    AssertEqual(Zone.Security, securitySnapshot.SourceZone);
+    AssertEqual(faceUpSecurityCard.Id, securitySnapshot.SourceCard);
+    AssertEqual<PermanentId?>(null, securitySnapshot.SourcePermanent);
+    AssertEqual<CardInstanceId?>(null, securitySnapshot.TopCardWhenTriggered);
+    AssertEqual(PlayerId.Player0, securitySnapshot.Owner);
+    AssertEqual(PlayerId.Player0, securitySnapshot.Controller);
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSecurityCEntityEffect().CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            faceDownSecurityCard.Id,
+            controller: PlayerId.Player0));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSecurityCEntityEffect().CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            handSecurityCard.Id,
+            controller: PlayerId.Player0));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSecurityCEntityEffect().CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            orphanSecurityCard.Id,
+            controller: PlayerId.Player0));
+
+    AssertPlayerZoneDescriptor(
+        state,
+        handCard,
+        TriggerSourceRole.Hand,
+        Zone.Hand,
+        "fixture:hand");
+    AssertPlayerZoneDescriptor(
+        state,
+        trashCard,
+        TriggerSourceRole.Trash,
+        Zone.Trash,
+        "fixture:trash");
+    AssertPlayerZoneDescriptor(
+        state,
+        executingCard,
+        TriggerSourceRole.Executing,
+        Zone.Executing,
+        "fixture:executing");
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSourceZoneCEntityEffect("fixture:orphan-hand").CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            orphanHandCard.Id,
+            controller: PlayerId.Player0));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSourceZoneCEntityEffect("fixture:orphan-trash").CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            orphanTrashCard.Id,
+            controller: PlayerId.Player0));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureSourceZoneCEntityEffect("fixture:orphan-executing").CreateEffectDescriptors(
+            state,
+            EffectTiming.OnPlay,
+            orphanExecutingCard.Id,
+            controller: PlayerId.Player0));
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new FixtureLimitedEffect().CreateDescriptorWithUnsupportedCount(context.CardSourceFromId(topCard.Id)));
+
+    static void AssertPlayerZoneDescriptor(
+        GameState state,
+        CardInstance card,
+        TriggerSourceRole role,
+        Zone zone,
+        string stableId)
+    {
+        var descriptor = new FixtureSourceZoneCEntityEffect(stableId)
+            .CreateEffectDescriptors(
+                state,
+                EffectTiming.OnPlay,
+                card.Id,
+                controller: PlayerId.Player0)
+            .Single();
+        AssertEqual(stableId, descriptor.StableId);
+        AssertEqual<CardInstanceId?>(card.Id, descriptor.SourceCard);
+        AssertEqual<PermanentId?>(null, descriptor.SourcePermanent);
+
+        var snapshot = descriptor.SourceSnapshot
+            ?? throw new InvalidOperationException("Player-zone effect should create a source snapshot.");
+        AssertEqual(role, snapshot.Role);
+        AssertEqual(zone, snapshot.SourceZone);
+        AssertEqual(card.Id, snapshot.SourceCard);
+        AssertEqual<PermanentId?>(null, snapshot.SourcePermanent);
+        AssertEqual<CardInstanceId?>(null, snapshot.TopCardWhenTriggered);
+        AssertEqual(PlayerId.Player0, snapshot.Owner);
+        AssertEqual(PlayerId.Player0, snapshot.Controller);
+    }
+}
+
+static void ScriptRuntimeSelectionDescriptorUsesHashIdentity()
+{
+    var first = RunScriptRuntimeSelectionDescriptorScenario();
+    var second = RunScriptRuntimeSelectionDescriptorScenario();
+
+    AssertEqual("fixture:select", first.StableId);
+    AssertEqual("fixture:select:target", first.RequestId);
+    AssertEqual(first.StableId, first.ContinuationId);
+    AssertEqual(first.StableId, second.StableId);
+    AssertEqual(first.RequestId, second.RequestId);
+    AssertEqual(first.ContinuationId, second.ContinuationId);
+    AssertEqual(first.FinalStateHash, second.FinalStateHash);
+}
+
+static (string StableId, string RequestId, string ContinuationId, string FinalStateHash) RunScriptRuntimeSelectionDescriptorScenario()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-RUNTIME-SELECT"] = CardEffectTestFixture.EffectDefinition(
+        "FX-RUNTIME-SELECT",
+        "Fixture_RuntimeSelect");
+    var source = AddCardToZone(state, 34, "FX-RUNTIME-SELECT", PlayerId.Player0, Zone.Executing);
+    var target = AddBattlePermanent(state, 35, 35, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new FixtureCEntityCardScript(
+            "FX-RUNTIME-SELECT",
+            "Fixture_RuntimeSelect",
+            new FixtureSelectionCEntityEffect(),
+            EffectTiming.OptionSkill)));
+
+    var pending = pipeline.Run(state, EffectTiming.OptionSkill, PlayerId.Player0, source);
+
+    AssertTrue(pending.HasPendingSelection);
+    AssertEqual("fixture:select", pending.PendingResolution!.StableId);
+    AssertEqual("fixture:select:target", pending.PendingSelectionRequest!.Id);
+    AssertEqual("fixture:select", pending.PendingContinuation!.StableContinuationId);
+
+    var completed = pipeline.Resume(
+        state,
+        pending.PendingContinuation,
+        SelectionResult.ForTargets(
+            pending.PendingSelectionRequest.Id,
+            new[] { pending.PendingSelectionRequest.Candidates[0] }));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertEqual(1, completed.ExecutedEffects.Count);
+    AssertEqual("fixture:select", completed.ExecutedEffects[0].StableId);
+    AssertEqual(1, completed.SelectionApplications.Count);
+    AssertEqual("fixture:select:target", completed.SelectionApplications[0].RequestId);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertFalse(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+
+    return (
+        pending.PendingResolution.StableId,
+        pending.PendingSelectionRequest.Id,
+        pending.PendingContinuation.StableContinuationId,
+        state.ComputeStateHash());
+}
+
+static void ScriptRuntimeEffectControllerResolvesClassNames()
+{
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureDirect"] = () => new FixtureCEntityEffect(),
+        ["DCGO.CardEffects.BT1.FixtureNamespaced"] = () => new FixtureInheritedCEntityEffect(),
+        ["DCGO.CardEffects.Tokens.fixture_token"] = () => new FixtureCEntityEffect(),
+    };
+
+    AssertSequence(
+        new[] { "FixtureNamespaced", "DCGO.CardEffects.BT1.FixtureNamespaced" },
+        CEntity_EffectController.EffectLookupKeys("BT1-001", "FixtureNamespaced").ToArray());
+    AssertSequence(
+        new[] { "fixture_token", "DCGO.CardEffects.Tokens.fixture_token" },
+        CEntity_EffectController.EffectLookupKeys("BT1-001", "fixture_token").ToArray());
+
+    var controller = new CEntity_EffectController(effectFactories: factories);
+    controller.AddCardEffect("BT1-001", "FixtureDirect");
+    AssertTrue(controller.cEntity_Effect is FixtureCEntityEffect);
+
+    controller.AddCardEffect("BT1-001", "FixtureNamespaced");
+    AssertTrue(controller.cEntity_Effect is FixtureInheritedCEntityEffect);
+
+    controller.AddCardEffect("BT1-001", "fixture_token");
+    AssertTrue(controller.cEntity_Effect is FixtureCEntityEffect);
+
+    controller.AddCardEffect("BT1-001", string.Empty);
+    AssertTrue(controller.cEntity_Effect is EmptyEffectClass);
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        controller.AddCardEffect("BT1-001", "MissingEffect"));
+}
+
+static void ScriptRuntimeEffectControllerAppliesAddedSkillEffects()
+{
+    var state = GameState.CreateDefault(new GameConfig { FieldSlotCount = 4 });
+    state.TurnPlayerId = PlayerId.Player0;
+    state.FirstPlayerId = PlayerId.Player0;
+    state.Phase = Phase.Main;
+    state.CardDefinitions["FX-TARGET"] = new CardDefinition
+    {
+        CardId = "FX-TARGET",
+        Name = "Fixture Target",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 2000,
+    };
+    state.CardDefinitions["FX-AURA"] = new CardDefinition
+    {
+        CardId = "FX-AURA",
+        Name = "Fixture Aura",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 1000,
+        CardEffectClassName = "FixtureAddSkill",
+    };
+    state.CardDefinitions["FX-SECURITY"] = new CardDefinition
+    {
+        CardId = "FX-SECURITY",
+        Name = "Fixture Security",
+        CardKinds = new[] { CardKind.Option },
+        Colors = new[] { CardColor.Red },
+        PlayCost = 1,
+        CardEffectClassName = "FixtureAddSkill",
+    };
+
+    var targetPermanent = AddBattlePermanent(state, 3101, 9101, "FX-TARGET", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 3102, 9102, "FX-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    AddCardToZone(state, 3103, "FX-SECURITY", PlayerId.Player1, Zone.Security, isFaceUp: true);
+    AddCardToZone(state, 3104, "FX-SECURITY", PlayerId.Player1, Zone.Security, isFaceUp: false);
+
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureAddSkill"] = () => new FixtureAddSkillEntityEffect(),
+    };
+    var controller = new CEntity_EffectController(new FixtureTargetBaseEffect(), factories);
+    var targetCard = new GameContext(state).CardSourceFromId(targetPermanent.TopCardId);
+
+    AssertSequence(
+        new[] { "fixture:target-base" },
+        controller.GetCardEffects_ExceptAddedEffects(EffectTiming.OnPlay, targetCard)
+            .Select(effect => effect.HashString)
+            .ToArray());
+
+    AssertSequence(
+        new[] { "fixture:target-base", "fixture:added:3102", "fixture:added:3103" },
+        controller.GetCardEffects(EffectTiming.OnPlay, targetCard)
+            .Select(effect => effect.HashString)
+            .ToArray());
+
+    AssertSequence(
+        new[] { "fixture:target-base", "fixture:added:3102", "fixture:added:3103" },
+        controller.CreateEffectDescriptors(
+                state,
+                EffectTiming.OnPlay,
+                targetPermanent.TopCardId,
+                targetPermanent.Id,
+                PlayerId.Player0)
+            .Select(descriptor => descriptor.StableId)
+            .ToArray());
+}
+
+static void ScriptRuntimeEffectControllerRespectsCannotAffectedProviders()
+{
+    var state = GameState.CreateDefault(new GameConfig { FieldSlotCount = 4 });
+    state.TurnPlayerId = PlayerId.Player0;
+    state.FirstPlayerId = PlayerId.Player0;
+    state.Phase = Phase.Main;
+    state.CardDefinitions["FX-TARGET"] = new CardDefinition
+    {
+        CardId = "FX-TARGET",
+        Name = "Fixture Target",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 2000,
+    };
+    state.CardDefinitions["FX-AURA"] = new CardDefinition
+    {
+        CardId = "FX-AURA",
+        Name = "Fixture Aura",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 1000,
+        CardEffectClassName = "FixtureAddSkill",
+    };
+    state.CardDefinitions["FX-IMMUNITY"] = new CardDefinition
+    {
+        CardId = "FX-IMMUNITY",
+        Name = "Fixture Immunity",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 1000,
+        CardEffectClassName = "FixtureCannotAffect",
+    };
+
+    var targetPermanent = AddBattlePermanent(state, 3111, 9111, "FX-TARGET", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 3112, 9112, "FX-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 3113, 9113, "FX-IMMUNITY", PlayerId.Player0, 2, enterTurn: 1);
+
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureAddSkill"] = () => new FixtureAddSkillEntityEffect(),
+        ["FixtureCannotAffect"] = () => new FixtureCannotAffectEntityEffect(targetPermanent.TopCardId),
+    };
+    var controller = new CEntity_EffectController(new FixtureTargetBaseEffect(), factories);
+    var targetCard = new GameContext(state).CardSourceFromId(targetPermanent.TopCardId);
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        targetCard.CanNotBeAffected(new FixtureActivateEffect()));
+
+    AssertSequence(
+        new[] { "fixture:target-base" },
+        controller.GetCardEffects(EffectTiming.OnPlay, targetCard)
+            .Select(effect => effect.HashString)
+            .ToArray());
+}
+
 static void TurnPlayerHelpers()
 {
     var state = GameState.CreateDefault();
@@ -716,6 +1672,9 @@ static void CardDefinitionCreation()
         OverflowMemory = 1,
         LinkDP = 1000,
         OptionCardColorRequirements = new[] { CardColor.Red, CardColor.Blue },
+        Traits = new[] { "Dinosaur", "Vaccine" },
+        CardTextEnglish = "Search your deck for an Agumon card.",
+        CardTextJapanese = "Agumon text fixture.",
     };
 
     AssertEqual("BT1-001", definition.CardId);
@@ -734,9 +1693,57 @@ static void CardDefinitionCreation()
     AssertEqual(1, definition.OverflowMemory);
     AssertEqual(1000, definition.LinkDP);
     AssertSequence(new[] { CardColor.Red, CardColor.Blue }, definition.OptionCardColorRequirements);
+    AssertSequence(new[] { "Dinosaur", "Vaccine" }, definition.Traits);
+    AssertEqual("Search your deck for an Agumon card.", definition.CardTextEnglish);
+    AssertEqual("Agumon text fixture.", definition.CardTextJapanese);
+    AssertTrue(new CardMetadataCriteria
+    {
+        RequiredTraits = new[] { "dinosaur" },
+        RequiredNameSubstrings = new[] { "agu" },
+        RequiredTextSubstrings = new[] { "search your deck" },
+    }.Matches(definition));
     AssertTrue(definition.IsAce);
     AssertFalse(definition.IsDualCard);
     AssertTrue(definition.IsPermanent);
+}
+
+static void CardDefinitionTraitTextMetadata()
+{
+    var traits = new List<string> { "Blue Flare", "  Knightmon  ", "Blue Flare", string.Empty };
+    var definition = new CardDefinition
+    {
+        CardId = "FX-META",
+        Name = "Metal Knightmon",
+        Traits = traits,
+        Text = "This card is also treated as a Knightmon card.",
+    };
+
+    traits[0] = "Virus";
+    traits.Add("Data");
+
+    AssertSequence(new[] { "Blue Flare", "Knightmon" }, definition.Traits);
+    AssertEqual("This card is also treated as a Knightmon card.", definition.CardTextEnglish);
+    AssertTrue(CardMetadataCriteria.HasTrait(definition, "knightmon"));
+    AssertTrue(CardMetadataCriteria.ContainsName(definition, "metal"));
+    AssertTrue(CardMetadataCriteria.ContainsText(definition, "Knightmon card"));
+}
+
+static void CardDefinitionMetadataChangesStateHash()
+{
+    var first = CreateMinimalBattleState();
+    var second = first.Clone();
+    first.CardDefinitions["BT1-ROOKIE"] = first.CardDefinitions["BT1-ROOKIE"] with
+    {
+        Traits = new[] { "Dinosaur" },
+        CardTextEnglish = "Search your deck.",
+    };
+    second.CardDefinitions["BT1-ROOKIE"] = second.CardDefinitions["BT1-ROOKIE"] with
+    {
+        Traits = new[] { "Dragon" },
+        CardTextEnglish = "Draw one card.",
+    };
+
+    AssertNotEqual(first.ComputeStateHash(), second.ComputeStateHash());
 }
 
 static void CardInstanceFactoryCreatesDistinctInstances()
@@ -799,6 +1806,7 @@ static void CardDefinitionDefensivelyCopiesCollections()
     var kinds = new List<CardKind> { CardKind.Digimon };
     var evoCosts = new List<EvoCostDefinition> { new(CardColor.Red, 2, 0) };
     var optionRequirements = new List<CardColor> { CardColor.Yellow };
+    var traits = new List<string> { "Vaccine" };
 
     var definition = new CardDefinition
     {
@@ -807,6 +1815,7 @@ static void CardDefinitionDefensivelyCopiesCollections()
         CardKinds = kinds,
         EvoCosts = evoCosts,
         OptionCardColorRequirements = optionRequirements,
+        Traits = traits,
     };
 
     colors[0] = CardColor.Blue;
@@ -814,11 +1823,13 @@ static void CardDefinitionDefensivelyCopiesCollections()
     kinds[0] = CardKind.Tamer;
     evoCosts[0] = new EvoCostDefinition(CardColor.Blue, 3, 2);
     optionRequirements[0] = CardColor.Purple;
+    traits[0] = "Virus";
 
     AssertSequence(new[] { CardColor.Red }, definition.CardColors);
     AssertSequence(new[] { CardKind.Digimon }, definition.CardKinds);
     AssertSequence(new[] { new EvoCostDefinition(CardColor.Red, 2, 0) }, definition.EvoCosts);
     AssertSequence(new[] { CardColor.Yellow }, definition.OptionCardColorRequirements);
+    AssertSequence(new[] { "Vaccine" }, definition.Traits);
 }
 
 static void ZoneMoverDeckToHand()
@@ -1064,6 +2075,465 @@ static void SelectionRequestCreation()
     AssertEqual("select-card-1", result.RequestId);
     AssertEqual(1, result.SelectedTargets.Count);
     SelectionValidator.Validate(request, result);
+}
+
+static void SelectEffectFacadesCreateSelectionRequests()
+{
+    var state = CreateMinimalBattleState();
+    var hand = AddCardToZone(state, 7011, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    var trash = AddCardToZone(state, 7012, "BT1-ROOKIE", PlayerId.Player0, Zone.Trash);
+    AddCardToZone(state, 7013, "BT1-ROOKIE", PlayerId.Player1, Zone.Trash);
+    var security = AddCardToZone(state, 7014, "BT1-ROOKIE", PlayerId.Player0, Zone.Security, isFaceUp: false);
+    var host = AddBattlePermanent(state, 7015, 715, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddEvolutionSource(state, 7016, "BT1-CHAMPION", PlayerId.Player0, host.Id);
+    var linked = AddLinkedCard(state, 7017, "BT1-ROOKIE", PlayerId.Player0, host.Id);
+    var opponent = AddBattlePermanent(state, 7018, 718, "BT1-WEAK", PlayerId.Player1, 1, enterTurn: 1);
+
+    var handRequest = SelectCardEffect.CreateRequest(
+        state,
+        "select-hand",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Hand,
+        SelectCardEffect.Mode.AddHand,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    AssertEqual(SelectionKind.SelectCard, handRequest.Kind);
+    AssertEqual(SelectionTargetKind.Card, handRequest.TargetKind);
+    AssertSequence(new[] { hand }, handRequest.Candidates.Select(candidate => candidate.Card!.Value).ToArray());
+    AssertEqual(Zone.Hand, handRequest.Candidates[0].Zone);
+
+    var trashRequest = SelectCardEffect.CreateRequest(
+        state,
+        "select-trash",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Trash,
+        SelectCardEffect.Mode.Discard,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    AssertSequence(new[] { trash }, trashRequest.Candidates.Select(candidate => candidate.Card!.Value).ToArray());
+
+    var securityRequest = SelectCardEffect.CreateRequest(
+        state,
+        "select-security",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Security,
+        SelectCardEffect.Mode.Custom,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canLookReverseCard: true);
+    AssertEqual(SelectionKind.SelectSecurity, securityRequest.Kind);
+    AssertEqual(SelectionTargetKind.Security, securityRequest.TargetKind);
+    AssertSequence(new[] { security }, securityRequest.Candidates.Select(candidate => candidate.Card!.Value).ToArray());
+    AssertEqual(Zone.Security, securityRequest.Candidates[0].Zone);
+
+    var sourceRequest = SelectCardEffect.CreateRequest(
+        state,
+        "select-source",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.DigivolutionCards,
+        SelectCardEffect.Mode.Custom,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        sourcePermanent: host.Id);
+    AssertSequence(new[] { source }, sourceRequest.Candidates.Select(candidate => candidate.Card!.Value).ToArray());
+    AssertEqual(Zone.EvolutionSources, sourceRequest.Candidates[0].Zone);
+
+    var linkedRequest = SelectCardEffect.CreateRequest(
+        state,
+        "select-linked",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.LinkedCards,
+        SelectCardEffect.Mode.Custom,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        sourcePermanent: host.Id);
+    AssertSequence(new[] { linked }, linkedRequest.Candidates.Select(candidate => candidate.Card!.Value).ToArray());
+    AssertEqual(Zone.LinkedCards, linkedRequest.Candidates[0].Zone);
+    AssertThrows<UnsupportedMechanicException>(() => SelectCardEffect.CreateRequest(
+        state,
+        "select-clock",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Clock,
+        SelectCardEffect.Mode.Custom,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false));
+
+    var permanentRequest = SelectPermanentEffect.CreateRequest(
+        state,
+        "select-opponent",
+        PlayerId.Player0,
+        SelectPermanentEffect.Mode.Destroy,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canTargetCondition: permanent => permanent.Controller.Id == PlayerId.Player1);
+    AssertEqual(SelectionKind.SelectPermanent, permanentRequest.Kind);
+    AssertSequence(new[] { opponent.Id }, permanentRequest.Candidates.Select(candidate => candidate.Permanent!.Value).ToArray());
+    AssertEqual(Zone.BattleArea, permanentRequest.Candidates[0].Zone);
+
+    var countRequest = SelectCountEffect.CreateRequest(
+        "select-count",
+        PlayerId.Player0,
+        maxCount: 5,
+        canNoSelect: false,
+        candidates: new[] { 2, 4 },
+        preferMin: true,
+        isDigivolutionCost: true);
+    AssertEqual(SelectionKind.SelectCount, countRequest.Kind);
+    AssertEqual(SelectionTargetKind.Count, countRequest.TargetKind);
+    AssertSequence(new[] { "2", "4" }, countRequest.Candidates.Select(candidate => candidate.OptionValue!).ToArray());
+    SelectionValidator.Validate(countRequest, SelectionResult.ForCount(countRequest.Id, 2));
+    SelectionValidator.Validate(countRequest, SelectionResult.ForCount(countRequest.Id, 4));
+    AssertThrows<DomainException>(() =>
+        SelectionValidator.Validate(countRequest, SelectionResult.ForCount(countRequest.Id, 3)));
+}
+
+static void SelectCardEffectModeContinuationUsesPrimitives()
+{
+    var addState = CreateMinimalBattleState();
+    var addTarget = AddCardToZone(addState, 7031, "BT1-ROOKIE", PlayerId.Player0, Zone.Trash);
+    var addRequest = SelectCardEffect.CreateRequest(
+        addState,
+        "select-card-add-hand",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Trash,
+        SelectCardEffect.Mode.AddHand,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    new SelectionResultApplicator().Apply(
+        addState,
+        CreateCardModeResolution(addState, addRequest, SelectCardEffect.Mode.AddHand),
+        SelectionResult.ForTargets(addRequest.Id, new[] { addRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertTrue(addState.GetPlayer(PlayerId.Player0).Hand.Contains(addTarget));
+    AssertFalse(addState.GetPlayer(PlayerId.Player0).Trash.Contains(addTarget));
+    AssertEqual(Zone.Hand, addState.Cards[addTarget].CurrentZone);
+    AssertSequence(
+        new[] { EffectTiming.OnReturnCardsToHandFromTrash, EffectTiming.OnAddHand },
+        addState.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var discardState = CreateMinimalBattleState();
+    var handTarget = AddCardToZone(discardState, 7032, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    var discardRequest = SelectCardEffect.CreateRequest(
+        discardState,
+        "select-card-discard-hand",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Hand,
+        SelectCardEffect.Mode.Discard,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    new SelectionResultApplicator().Apply(
+        discardState,
+        CreateCardModeResolution(discardState, discardRequest, SelectCardEffect.Mode.Discard),
+        SelectionResult.ForTargets(discardRequest.Id, new[] { discardRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertTrue(discardState.GetPlayer(PlayerId.Player0).Trash.Contains(handTarget));
+    AssertFalse(discardState.GetPlayer(PlayerId.Player0).Hand.Contains(handTarget));
+    AssertEqual(Zone.Trash, discardState.Cards[handTarget].CurrentZone);
+    AssertSequence(
+        new[] { EffectTiming.OnDiscardHand },
+        discardState.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var sourceState = CreateMinimalBattleState();
+    var host = AddBattlePermanent(sourceState, 7033, 733, "BT1-CHAMPION", PlayerId.Player0, 0, enterTurn: 1);
+    var sourceTarget = AddEvolutionSource(sourceState, 7034, "BT1-ROOKIE", PlayerId.Player0, host.Id);
+    var sourceDiscardRequest = SelectCardEffect.CreateRequest(
+        sourceState,
+        "select-card-discard-source",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.DigivolutionCards,
+        SelectCardEffect.Mode.Discard,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        sourcePermanent: host.Id);
+    new SelectionResultApplicator().Apply(
+        sourceState,
+        CreateCardModeResolution(sourceState, sourceDiscardRequest, SelectCardEffect.Mode.Discard),
+        SelectionResult.ForTargets(sourceDiscardRequest.Id, new[] { sourceDiscardRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertTrue(sourceState.GetPlayer(PlayerId.Player0).Trash.Contains(sourceTarget));
+    AssertFalse(host.SourceCardIds.Contains(sourceTarget));
+    AssertEqual(Zone.Trash, sourceState.Cards[sourceTarget].CurrentZone);
+
+    AddEvolutionSource(sourceState, 7035, "BT1-ROOKIE", PlayerId.Player0, host.Id);
+    var unsupportedAddRequest = SelectCardEffect.CreateRequest(
+        sourceState,
+        "select-card-add-source",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.DigivolutionCards,
+        SelectCardEffect.Mode.AddHand,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        sourcePermanent: host.Id);
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new SelectionResultApplicator().Apply(
+            sourceState,
+            CreateCardModeResolution(sourceState, unsupportedAddRequest, SelectCardEffect.Mode.AddHand),
+            SelectionResult.ForTargets(unsupportedAddRequest.Id, new[] { unsupportedAddRequest.Candidates[0] }),
+            new Tier1PrimitiveService()));
+
+    var playRequest = SelectCardEffect.CreateRequest(
+        discardState,
+        "select-card-play",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Trash,
+        SelectCardEffect.Mode.PlayForFree,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new SelectionResultApplicator().Apply(
+            discardState,
+            CreateCardModeResolution(discardState, playRequest, SelectCardEffect.Mode.PlayForFree),
+            SelectionResult.ForTargets(playRequest.Id, new[] { playRequest.Candidates[0] }),
+            new Tier1PrimitiveService()));
+
+    static EffectResolution CreateCardModeResolution(
+        GameState state,
+        SelectionRequest request,
+        SelectCardEffect.Mode mode) =>
+        new(
+            $"test-select-card-mode:{mode}",
+            EffectTiming.OptionSkill,
+            SourceCard: null,
+            SourcePermanent: null,
+            Controller: PlayerId.Player0,
+            IsBackground: false,
+            IsOptional: false,
+            Context: new EffectContext(state, EffectTiming.OptionSkill, PlayerId.Player0),
+            SelectionRequest: request,
+            SelectionContinuation: SelectCardEffect.CreateModeContinuation(mode));
+}
+
+static void SelectCardEffectPlayForFreePrimitiveContinuationUsesFrameResolver()
+{
+    var handState = CreateMinimalBattleState();
+    AddBattlePermanent(handState, 7040, 740, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var handCard = AddCardToZone(handState, 7041, "BT1-CHAMPION", PlayerId.Player0, Zone.Hand);
+    var handRequest = SelectCardEffect.CreateRequest(
+        handState,
+        "select-card-play-hand-primitive",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Hand,
+        SelectCardEffect.Mode.PlayForFree,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    new SelectionResultApplicator().Apply(
+        handState,
+        CreatePlayForFreePrimitiveResolution(
+            handState,
+            handRequest,
+            (_, card) => card == handCard ? 1 : 0,
+            suspended: true),
+        SelectionResult.ForTargets(handRequest.Id, new[] { handRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    var played = handState.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Single(permanent => permanent.TopCardId == handCard);
+    AssertEqual(1, played.FrameIndex);
+    AssertTrue(played.IsSuspended);
+    AssertFalse(handState.GetPlayer(PlayerId.Player0).Hand.Contains(handCard));
+    AssertEqual(Zone.BattleArea, handState.Cards[handCard].CurrentZone);
+
+    var sourceState = CreateMinimalBattleState();
+    var host = AddBattlePermanent(sourceState, 7042, 742, "BT1-CHAMPION", PlayerId.Player0, 0, enterTurn: 1);
+    var sourceCard = AddEvolutionSource(sourceState, 7043, "BT1-ROOKIE", PlayerId.Player0, host.Id);
+    var sourceRequest = SelectCardEffect.CreateRequest(
+        sourceState,
+        "select-card-play-source-primitive",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.DigivolutionCards,
+        SelectCardEffect.Mode.PlayForFree,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        sourcePermanent: host.Id);
+    new SelectionResultApplicator().Apply(
+        sourceState,
+        CreatePlayForFreePrimitiveResolution(sourceState, sourceRequest, (_, _) => 1),
+        SelectionResult.ForTargets(sourceRequest.Id, new[] { sourceRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    var sourcePlayed = sourceState.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Single(permanent => permanent.TopCardId == sourceCard);
+    AssertEqual(1, sourcePlayed.FrameIndex);
+    AssertFalse(host.SourceCardIds.Contains(sourceCard));
+    AssertEqual(Zone.BattleArea, sourceState.Cards[sourceCard].CurrentZone);
+
+    var invalidFrameState = CreateMinimalBattleState();
+    AddCardToZone(invalidFrameState, 7044, "BT1-ROOKIE", PlayerId.Player0, Zone.Hand);
+    var invalidFrameRequest = SelectCardEffect.CreateRequest(
+        invalidFrameState,
+        "select-card-play-invalid-frame",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Hand,
+        SelectCardEffect.Mode.PlayForFree,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    AssertThrows<DomainException>(() =>
+        new SelectionResultApplicator().Apply(
+            invalidFrameState,
+            CreatePlayForFreePrimitiveResolution(
+                invalidFrameState,
+                invalidFrameRequest,
+                (context, _) => context.State.Config.FieldSlotCount),
+            SelectionResult.ForTargets(invalidFrameRequest.Id, new[] { invalidFrameRequest.Candidates[0] }),
+            new Tier1PrimitiveService()));
+
+    var optionState = CreateMinimalBattleState();
+    AddCardToZone(optionState, 7045, "BT1-OPTION", PlayerId.Player0, Zone.Hand);
+    var optionRequest = SelectCardEffect.CreateRequest(
+        optionState,
+        "select-card-play-option",
+        PlayerId.Player0,
+        PlayerId.Player0,
+        SelectCardEffect.Root.Hand,
+        SelectCardEffect.Mode.PlayForFree,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false);
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new SelectionResultApplicator().Apply(
+            optionState,
+            CreatePlayForFreePrimitiveResolution(optionState, optionRequest, (_, _) => 0),
+            SelectionResult.ForTargets(optionRequest.Id, new[] { optionRequest.Candidates[0] }),
+            new Tier1PrimitiveService()));
+
+    static EffectResolution CreatePlayForFreePrimitiveResolution(
+        GameState state,
+        SelectionRequest request,
+        Func<SelectionResultApplicationContext, CardInstanceId, int> frameResolver,
+        bool suspended = false) =>
+        new(
+            "test-select-card-play-for-free-primitive",
+            EffectTiming.OptionSkill,
+            SourceCard: null,
+            SourcePermanent: null,
+            Controller: PlayerId.Player0,
+            IsBackground: false,
+            IsOptional: false,
+            Context: new EffectContext(state, EffectTiming.OptionSkill, PlayerId.Player0),
+            SelectionRequest: request,
+            SelectionContinuation: SelectCardEffect.CreatePlayForFreePrimitiveContinuation(frameResolver, suspended));
+}
+
+static void SelectPermanentEffectModeContinuationUsesPrimitives()
+{
+    var state = CreateMinimalBattleState();
+    var destroyTarget = AddBattlePermanent(state, 7021, 721, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var tapTarget = AddBattlePermanent(state, 7022, 722, "BT1-ROOKIE", PlayerId.Player0, 1, enterTurn: 1);
+    var untapTarget = AddBattlePermanent(
+        state,
+        7023,
+        723,
+        "BT1-ROOKIE",
+        PlayerId.Player0,
+        2,
+        enterTurn: 1,
+        isSuspended: true);
+
+    var destroyRequest = SelectPermanentEffect.CreateRequest(
+        state,
+        "select-permanent-destroy",
+        PlayerId.Player0,
+        SelectPermanentEffect.Mode.Destroy,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canTargetCondition: permanent => permanent.Id == destroyTarget.Id);
+    new SelectionResultApplicator().Apply(
+        state,
+        CreateModeResolution(state, destroyRequest, SelectPermanentEffect.Mode.Destroy),
+        SelectionResult.ForTargets(destroyRequest.Id, new[] { destroyRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(destroyTarget.TopCardId));
+    AssertFalse(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == destroyTarget.Id));
+
+    var tapRequest = SelectPermanentEffect.CreateRequest(
+        state,
+        "select-permanent-tap",
+        PlayerId.Player0,
+        SelectPermanentEffect.Mode.Tap,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canTargetCondition: permanent => permanent.Id == tapTarget.Id);
+    new SelectionResultApplicator().Apply(
+        state,
+        CreateModeResolution(state, tapRequest, SelectPermanentEffect.Mode.Tap),
+        SelectionResult.ForTargets(tapRequest.Id, new[] { tapRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertTrue(tapTarget.IsSuspended);
+
+    var untapRequest = SelectPermanentEffect.CreateRequest(
+        state,
+        "select-permanent-untap",
+        PlayerId.Player0,
+        SelectPermanentEffect.Mode.UnTap,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canTargetCondition: permanent => permanent.Id == untapTarget.Id);
+    new SelectionResultApplicator().Apply(
+        state,
+        CreateModeResolution(state, untapRequest, SelectPermanentEffect.Mode.UnTap),
+        SelectionResult.ForTargets(untapRequest.Id, new[] { untapRequest.Candidates[0] }),
+        new Tier1PrimitiveService());
+    AssertFalse(untapTarget.IsSuspended);
+
+    var unsupportedRequest = SelectPermanentEffect.CreateRequest(
+        state,
+        "select-permanent-bounce",
+        PlayerId.Player0,
+        SelectPermanentEffect.Mode.Bounce,
+        maxCount: 1,
+        canNoSelect: false,
+        canEndNotMax: false,
+        canTargetCondition: permanent => permanent.Id == tapTarget.Id);
+    AssertThrows<UnsupportedMechanicException>(() =>
+        new SelectionResultApplicator().Apply(
+            state,
+            CreateModeResolution(state, unsupportedRequest, SelectPermanentEffect.Mode.Bounce),
+            SelectionResult.ForTargets(unsupportedRequest.Id, new[] { unsupportedRequest.Candidates[0] }),
+            new Tier1PrimitiveService()));
+
+    static EffectResolution CreateModeResolution(
+        GameState state,
+        SelectionRequest request,
+        SelectPermanentEffect.Mode mode) =>
+        new(
+            $"test-select-permanent-mode:{mode}",
+            EffectTiming.OptionSkill,
+            SourceCard: null,
+            SourcePermanent: null,
+            Controller: PlayerId.Player0,
+            IsBackground: false,
+            IsOptional: false,
+            Context: new EffectContext(state, EffectTiming.OptionSkill, PlayerId.Player0),
+            SelectionRequest: request,
+            SelectionContinuation: SelectPermanentEffect.CreateModeContinuation(mode));
 }
 
 static void SelectionValidatorValidatesMinMax()
@@ -1868,6 +3338,125 @@ static void ParityFixtureComparerSyntheticFixtureRoundTrip()
     AssertEqual(result.Differences.Count, loadedResult.Differences.Count);
 }
 
+static void CardEffectInterfaceMappingClassifiesCoreContracts()
+{
+    var root = WorkspaceRoot();
+    var jsonPath = Path.Combine(root, "docs/generated/as-is/cardeffect_interface_mapping.json");
+    var markdownPath = Path.Combine(root, "docs/as-is/cardeffect-interface-mapping.md");
+
+    AssertTrue(File.Exists(jsonPath));
+    AssertTrue(File.Exists(markdownPath));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(jsonPath));
+    var rootElement = document.RootElement;
+    AssertEqual(1, rootElement.GetProperty("schemaVersion").GetInt32());
+    AssertEqual("DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs", rootElement.GetProperty("sourceFile").GetString());
+    AssertTrue(rootElement.GetProperty("interfaceCount").GetInt32() > 20);
+
+    var mappings = rootElement
+        .GetProperty("interfaces")
+        .EnumerateArray()
+        .ToDictionary(row => row.GetProperty("interface").GetString()!);
+
+    AssertCardEffectInterfaceMapping(
+        mappings,
+        "IAddSkillEffect",
+        "AdditionalSkillGrant",
+        "TemporaryGrantedEffect");
+    AssertCardEffectInterfaceMapping(
+        mappings,
+        "IBlockerEffect",
+        "KeywordGrant",
+        "BattleKeywordService");
+    AssertCardEffectInterfaceMapping(
+        mappings,
+        "IChangeDPEffect",
+        "StatOrMetadataModifier",
+        "StaticEffectService");
+    AssertCardEffectInterfaceMapping(
+        mappings,
+        "ICanNotPlayCardEffect",
+        "RestrictionOrImmunity",
+        "StaticRequirementService");
+    AssertCardEffectInterfaceMapping(
+        mappings,
+        "IOptionResolutionEffect",
+        "CoroutineOptionResolution",
+        "SelectionRequest");
+
+    var markdown = File.ReadAllText(markdownPath);
+    AssertTrue(markdown.Contains("IAddSkillEffect", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("TemporaryGrantedEffect", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("IOptionResolutionEffect", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("EffectResolution", StringComparison.Ordinal));
+}
+
+static void AssertCardEffectInterfaceMapping(
+    IReadOnlyDictionary<string, JsonElement> mappings,
+    string interfaceName,
+    string expectedCategory,
+    string expectedMappingFragment)
+{
+    if (!mappings.TryGetValue(interfaceName, out var row))
+    {
+        throw new InvalidOperationException($"Missing CardEffect interface mapping: {interfaceName}");
+    }
+
+    AssertEqual(expectedCategory, row.GetProperty("category").GetString());
+    AssertNotEqual("Exclude", row.GetProperty("status").GetString());
+    AssertTrue(row.GetProperty("headlessMapping").GetString()!.Contains(expectedMappingFragment, StringComparison.Ordinal));
+}
+
+static void FullCardParityEvidenceGeneratedCoverageIsConservative()
+{
+    var root = WorkspaceRoot();
+    var evidencePath = Path.Combine(root, "docs/generated/full-card-parity-evidence.json");
+    var markdownPath = Path.Combine(root, "docs/rl-engine/full-card-parity-evidence-66P.md");
+    var scriptPath = Path.Combine(root, "scripts/generate_full_card_parity_evidence.py");
+
+    AssertTrue(File.Exists(evidencePath));
+    AssertTrue(File.Exists(markdownPath));
+    AssertTrue(File.Exists(scriptPath));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(evidencePath));
+    var rootElement = document.RootElement;
+    AssertEqual("dcgo.full-card-parity-evidence.66P.v1", rootElement.GetProperty("schemaVersion").GetString());
+
+    var policy = rootElement.GetProperty("policy");
+    AssertEqual("NotRun", policy.GetProperty("missingUnityFixtureStatus").GetString());
+    AssertFalse(policy.GetProperty("notRunCountsAsPass").GetBoolean());
+    AssertFalse(policy.GetProperty("syntheticFixturesCountAsUnityParity").GetBoolean());
+    AssertFalse(policy.GetProperty("cardPortingAllowedByThisReport").GetBoolean());
+    AssertFalse(policy.GetProperty("manualParityPromotionAllowed").GetBoolean());
+
+    var summary = rootElement.GetProperty("summary");
+    AssertEqual(3918, summary.GetProperty("sourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("passedSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("failedSourceEffectCount").GetInt32());
+    AssertEqual(3918, summary.GetProperty("notRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("comparedSourceEffectCount").GetInt32());
+    AssertFalse(summary.GetProperty("allGeneratedSourceEffectsHaveUnityParity").GetBoolean());
+    AssertEqual(0, summary.GetProperty("generatedImplementedOrVerifiedCount").GetInt32());
+
+    var counts = summary.GetProperty("coverageStatusCounts");
+    AssertEqual(3918, counts.GetProperty("NotRun").GetInt32());
+    AssertEqual(0, counts.GetProperty("Passed").GetInt32());
+    AssertEqual(0, counts.GetProperty("Failed").GetInt32());
+
+    var first = rootElement.GetProperty("records").EnumerateArray().First();
+    AssertEqual("NotRun", first.GetProperty("coverageStatus").GetString());
+    AssertTrue(first.GetProperty("missingUnityFixture").GetBoolean());
+    AssertTrue(first.GetProperty("missingRlFixture").GetBoolean());
+    AssertTrue(first.GetProperty("missingComparisonReport").GetBoolean());
+    AssertTrue(first.GetProperty("unityFixturePath").GetString()!.Contains(
+        "docs/generated/parity-fixtures/unity/full-card-source",
+        StringComparison.Ordinal));
+
+    var markdown = File.ReadAllText(markdownPath);
+    AssertTrue(markdown.Contains("NotRun", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("does not count as `Passed`", StringComparison.Ordinal));
+}
+
 static ParityTraceDocument CreatePublicZoneOrderTraceDocument(string scenarioId)
 {
     var state = CreateMinimalBattleState();
@@ -2424,6 +4013,7 @@ static (
     var state = CreateSt2St3ScenarioState();
     state.Memory = 20;
     var option = AddCardToZone(state, 8151, "ST2-16", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(state, 8158, 1858, "ST2-06", PlayerId.Player0, 1, enterTurn: 1);
     var mainTarget = AddBattlePermanent(state, 8152, 1852, "ST3-11", PlayerId.Player1, 0, enterTurn: 1);
     var mainTopSource = AddEvolutionSource(state, 8153, "ST3-03", PlayerId.Player1, mainTarget.Id);
     var mainBottomSource = AddEvolutionSource(state, 8154, "ST3-05", PlayerId.Player1, mainTarget.Id);
@@ -2692,24 +4282,25 @@ static void ValidationHarnessV2InvariantFuzzCapturesFailures()
     AssertTrue(report.Results[0].Details.Contains("Engine invariant violation", StringComparison.Ordinal));
 }
 
-static void EngineCoreMilestoneGateReportsSt3TwoNeedsReview()
+static void EngineCoreMilestoneGateBlocksMissingLocalSource()
 {
     var report = Create59AEngineCoreMilestoneGateReport();
 
-    AssertEqual(EngineCoreMilestoneDecision.NeedsReview, report.Decision);
+    AssertEqual(EngineCoreMilestoneDecision.BlockedBySourceData, report.Decision);
     AssertFalse(report.CoreParityBlocked);
-    AssertFalse(report.FullCardPoolInventoryBlocked);
+    AssertTrue(report.FullCardPoolInventoryBlocked);
     AssertFalse(report.ReadyForRlEnvironmentDesign);
     AssertTrue(report.Gates.Any(gate =>
         gate.Id == "runtime-composition-graph"
         && gate.Status == EngineCoreMilestoneGateStatus.Passed));
     AssertTrue(report.Gates.Any(gate =>
         gate.Id == "asset-registry-validator"
-        && gate.Status == EngineCoreMilestoneGateStatus.NeedsReview
-        && gate.Details.Contains("ST3-02", StringComparison.Ordinal)));
+        && gate.Status == EngineCoreMilestoneGateStatus.Failed
+        && gate.Details.Contains("SourceUnavailable", StringComparison.Ordinal)));
     AssertTrue(report.Findings.Any(finding =>
-        finding.Id == "ST3-02-P2-source-body-unconfirmed"
-        && !finding.BlocksFullCardPoolInventory
+        finding.Id == "SourceUnavailable"
+        && finding.Status == EngineCoreMilestoneGateStatus.Failed
+        && finding.BlocksFullCardPoolInventory
         && finding.BlocksVariantImplementation
         && finding.BlocksRlEnvironmentDesign));
 }
@@ -2720,23 +4311,23 @@ static void EngineCoreMilestoneGateScopeIsNotRlApproval()
     var serialized = JsonSerializer.Serialize(report);
 
     AssertTrue(serialized.Contains("dcgo.engine-core-milestone.59A.v1", StringComparison.Ordinal));
-    AssertTrue(serialized.Contains("ST3_02", StringComparison.Ordinal));
+    AssertTrue(serialized.Contains("SourceUnavailable", StringComparison.Ordinal));
     AssertTrue(report.Scope.Contains("not a full DCGO snapshot completion gate", StringComparison.Ordinal));
     AssertFalse(report.ReadyForRlEnvironmentDesign);
 }
 
-static void EngineCoreExpansionReadinessAllowsInventoryButNotRl()
+static void EngineCoreExpansionReadinessBlocksMissingLocalSource()
 {
     var report = Create60AExpansionReadinessReport(unitySourceUnchanged: true);
     var serialized = JsonSerializer.Serialize(report);
 
-    AssertEqual(EngineCoreExpansionReadinessDecision.ReadyForFullCardPoolInventory, report.Decision);
-    AssertTrue(report.ReadyForFullCardPoolInventory);
+    AssertEqual(EngineCoreExpansionReadinessDecision.BlockedBySourceAlignment, report.Decision);
+    AssertFalse(report.ReadyForFullCardPoolInventory);
     AssertFalse(report.ReadyForRlEnvironmentDesign);
     AssertTrue(serialized.Contains("dcgo.engine-core-expansion-readiness.60A.v1", StringComparison.Ordinal));
     AssertTrue(report.CarryForwardFindings.Any(finding =>
-        finding.Id == "ST3-02-P2-source-body-unconfirmed"
-        && !finding.BlocksFullCardPoolInventory
+        finding.Id == "SourceUnavailable"
+        && finding.BlocksFullCardPoolInventory
         && finding.BlocksRlEnvironmentDesign));
 }
 
@@ -3013,6 +4604,7 @@ static void CapabilityTruthAuditRegistryIsConservative()
     var capabilities = root.GetProperty("capabilities").EnumerateArray().ToArray();
     AssertTrue(capabilities.Length > 100);
     AssertTrue(capabilities.All(capability => allowedStatuses.Contains(capability.GetProperty("status").GetString())));
+    AssertFalse(capabilities.Any(capability => capability.GetProperty("capabilityId").GetString() == "None"));
 
     foreach (var verified in capabilities.Where(capability => capability.GetProperty("status").GetString() == "Verified"))
     {
@@ -3033,6 +4625,28 @@ static void CapabilityTruthAuditRegistryIsConservative()
 
     var continuous = capabilities.Single(capability => capability.GetProperty("capabilityId").GetString() == "ContinuousOrStaticEffect");
     AssertEqual("PartiallyImplemented", continuous.GetProperty("status").GetString());
+    AssertTrue(continuous.GetProperty("affectedCardCount").GetInt32() > 0);
+    var continuousAliases = continuous.GetProperty("inventoryAliases")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(continuousAliases.Contains("None"));
+    var continuousImplementation = continuous.GetProperty("implementationEvidence")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Battle/BattleRules.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Battle/PlayCardService.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Domain/CardMetadataCriteria.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Effects/StaticEffectService.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Effects/StaticRequirementService.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Mechanics/CostResolver.cs"));
+    AssertTrue(continuousImplementation.Contains("src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"));
     var continuousTests = continuous.GetProperty("testEvidence")
         .EnumerateArray()
         .Select(item => item.GetString())
@@ -3044,17 +4658,78 @@ static void CapabilityTruthAuditRegistryIsConservative()
     AssertTrue(continuousTests.Contains("Continuous static keyword inherited source stops after move"));
     AssertTrue(continuousTests.Contains("Continuous static keyword condition gates keyword"));
     AssertTrue(continuousTests.Contains("Continuous static keyword replay deterministic"));
+    AssertTrue(continuousTests.Contains("Continuous metadata criteria gates target trait and text"));
+    AssertTrue(continuousTests.Contains("Static evolution requirement ignore permission generates and executes"));
+    AssertTrue(continuousTests.Contains("Static cost modifier adjusts play and digivolution cost"));
+    AssertTrue(continuousTests.Contains("Static link cost modifier adjusts link cost"));
+    AssertTrue(continuousTests.Contains("Static immunity descriptor evaluates metadata"));
+    AssertTrue(continuousTests.Contains("Static card restriction blocks option play"));
+    AssertTrue(continuousTests.Contains("Static card restriction blocks permanent field play"));
+    AssertTrue(continuousTests.Contains("Static card restriction blocks return to hand"));
+    AssertTrue(continuousTests.Contains("Static card metadata modifier affects cost criteria"));
+    AssertTrue(continuousTests.Contains("Static card level modifier feeds permanent level requirement"));
+    AssertTrue(continuousTests.Contains("Static permanent level modifier affects normal digivolution requirement"));
+    AssertTrue(continuousTests.Contains("Static card color modifier affects option color requirement"));
+    AssertTrue(continuousTests.Contains("Static ignore color requirement permits option"));
+    AssertTrue(continuousTests.Contains("Static card color modifier affects digivolution color requirement"));
+    AssertTrue(continuousTests.Contains("Static link requirement uses effective metadata and level"));
+    AssertTrue(continuousTests.Contains("Duration temporary keyword grants Blocker until cleanup"));
+    AssertTrue(continuousTests.Contains("Duration temporary keyword hash and replay deterministic"));
+    AssertTrue(continuousTests.Contains("Duration player keyword grants Rush to matching battle area Digimon"));
+    AssertTrue(continuousTests.Contains("Duration player keyword hash and replay deterministic"));
+    AssertTrue(continuousTests.Contains("Duration temporary granted trigger runs from target permanent timing"));
+    AssertTrue(continuousTests.Contains("Duration temporary granted trigger hash and replay deterministic"));
+    AssertTrue(continuousTests.Contains("Duration invariant detects invalid granted trigger"));
     var continuousReplay = continuous.GetProperty("replayOrInvariantEvidence")
         .EnumerateArray()
         .Select(item => item.GetString())
         .ToHashSet(StringComparer.Ordinal);
     AssertTrue(continuousReplay.Contains("Duration player runtime modifiers replay deterministic"));
     AssertTrue(continuousReplay.Contains("Continuous static keyword replay deterministic"));
+    AssertTrue(continuousReplay.Contains("Duration temporary keyword hash and replay deterministic"));
+    AssertTrue(continuousReplay.Contains("Duration player keyword hash and replay deterministic"));
+    AssertTrue(continuousReplay.Contains("Duration temporary granted trigger hash and replay deterministic"));
+    AssertTrue(continuousReplay.Contains("Duration invariant detects invalid granted trigger"));
     AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("TemporaryModifier", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("TemporaryGrantedEffect", StringComparison.Ordinal));
     AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static keyword descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("metadata criteria", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective metadata criteria", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective card name/trait metadata descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective card/permanent level descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective permanent levels", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective link requirement metadata/level gates", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static link cost modifiers", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static card play restriction descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static card put-field restriction descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("static card move restriction descriptors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("ignore-digivolution permission", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("effective card colors", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("ignore color requirements", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("player-wide temporary keyword grants", StringComparison.Ordinal));
+    AssertTrue(continuous.GetProperty("reason").GetString()!.Contains("source-locked parity evidence", StringComparison.Ordinal));
+
+    var onEnterFieldAnyone = capabilities.Single(capability => capability.GetProperty("capabilityId").GetString() == "OnEnterFieldAnyone");
+    AssertEqual("PartiallyImplemented", onEnterFieldAnyone.GetProperty("status").GetString());
+    var onEnterFieldAnyoneImplementation = onEnterFieldAnyone.GetProperty("implementationEvidence")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(onEnterFieldAnyoneImplementation.Contains("src/DCGO.RL.Engine/Effects/EnterFieldEventPayload.cs"));
+    AssertTrue(onEnterFieldAnyoneImplementation.Contains("src/DCGO.RL.Engine/Battle/PlayCardService.cs"));
+    AssertTrue(onEnterFieldAnyoneImplementation.Contains("src/DCGO.RL.Engine/Battle/DigivolveService.cs"));
+    var onEnterFieldAnyoneTests = onEnterFieldAnyone.GetProperty("testEvidence")
+        .EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(onEnterFieldAnyoneTests.Contains("TriggerPipeline OnEnterFieldAnyone play payload invokes global descriptor"));
+    AssertTrue(onEnterFieldAnyoneTests.Contains("TriggerPipeline OnEnterFieldAnyone digivolve payload invokes global descriptor"));
+    AssertTrue(onEnterFieldAnyone.GetProperty("reason").GetString()!.Contains("source-wide OnEnterFieldAnyone payload", StringComparison.Ordinal));
 
     var report = File.ReadAllText(Path.Combine(WorkspaceRoot(), "docs/rl-engine/capability-truth-audit-66B.md"));
     AssertTrue(report.Contains("OnDraw", StringComparison.Ordinal));
+    AssertTrue(report.Contains("OnEnterFieldAnyone", StringComparison.Ordinal));
+    AssertTrue(report.Contains("ContinuousOrStaticEffect Evidence", StringComparison.Ordinal));
     AssertTrue(report.Contains("PartiallyImplemented", StringComparison.Ordinal));
     AssertTrue(report.Contains("C0039", StringComparison.Ordinal));
 }
@@ -3066,6 +4741,9 @@ static void CapabilityTruthAuditSourceAndBatchBlockers()
     AssertEqual("dcgo.source-required-capabilities.66B.v1", requiredRoot.GetProperty("schemaVersion").GetString());
     AssertEqual(3918, requiredRoot.GetProperty("summary").GetProperty("sourceEffectCount").GetInt32());
     AssertEqual(3918, requiredRoot.GetProperty("summary").GetProperty("sourceEffectsWithNonVerifiedCapabilities").GetInt32());
+    AssertFalse(requiredRoot.GetProperty("sourceEffects").EnumerateArray()
+        .Any(effect => effect.GetProperty("requiredCapabilities").EnumerateArray()
+            .Any(capability => capability.GetString() == "None")));
 
     var bt22094 = requiredRoot.GetProperty("sourceEffects").EnumerateArray()
         .Single(effect => effect.GetProperty("sourceEffectClassName").GetString() == "BT22_094");
@@ -3100,13 +4778,24 @@ static void CapabilityTruthAuditStatusMismatchAndVariantRegistryIntegrated()
 {
     using var document = Load66BStatusMismatchDocument();
     var root = document.RootElement;
-    AssertEqual("dcgo.status-mismatch-report.66B.v1", root.GetProperty("schemaVersion").GetString());
+    AssertEqual("dcgo.status-mismatch-report.66Q.v1", root.GetProperty("schemaVersion").GetString());
+    AssertTrue(root.GetProperty("policy").GetProperty("generatedStatusRegistryIsAuthoritativeForFullCardSourceScaffold").GetBoolean());
+    AssertTrue(root.GetProperty("policy").GetProperty("legacyPilotRuntimeRecordsDoNotPromoteGeneratedStatus").GetBoolean());
+    AssertTrue(root.GetProperty("policy").GetProperty("legacyPilotRuntimeDivergenceIsReportedSeparately").GetBoolean());
     AssertEqual(0, root.GetProperty("summary").GetProperty("generatedImplementedOrVerifiedCount").GetInt32());
-    AssertTrue(root.GetProperty("summary").GetProperty("statusMismatchCount").GetInt32() > 0);
+    AssertEqual(0, root.GetProperty("summary").GetProperty("statusMismatchCount").GetInt32());
+    AssertEqual(92, root.GetProperty("summary").GetProperty("legacyPilotDivergenceCount").GetInt32());
     AssertEqual(0, root.GetProperty("summary").GetProperty("blockerIssueCount").GetInt32());
 
     var mismatches = root.GetProperty("mismatches").EnumerateArray().ToArray();
-    AssertTrue(mismatches.Any(mismatch => mismatch.GetProperty("effectClassName").GetString() == "BT22_079"));
+    AssertEqual(0, mismatches.Length);
+    var legacyPilotDivergences = root.GetProperty("legacyPilotDivergences").EnumerateArray().ToArray();
+    var bt22079 = legacyPilotDivergences.Single(divergence => divergence.GetProperty("effectClassName").GetString() == "BT22_079");
+    AssertEqual("LegacyPilotRuntimeRecord", bt22079.GetProperty("classification").GetString());
+    AssertEqual("Unsupported", bt22079.GetProperty("generatedSourceScaffoldStatus").GetString());
+    AssertEqual("PartiallyImplemented", bt22079.GetProperty("cardEffectPortingRecordStatus").GetString());
+    AssertFalse(bt22079.GetProperty("blocksGeneratedStatusTruth").GetBoolean());
+    AssertFalse(bt22079.GetProperty("statusPromotionAllowed").GetBoolean());
 
     var issues = root.GetProperty("issues").EnumerateArray().ToArray();
     AssertFalse(issues.Any(item => item.GetProperty("code").GetString() == "CardIdOnlyRuntimeRegistry"));
@@ -3238,6 +4927,46 @@ static void MechanicFirstSchedulerSelectorPolicy()
     AssertTrue(schedulerDoc.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
     AssertTrue(schedulerDoc.Contains("actual effect body", StringComparison.Ordinal));
     AssertTrue(schedulerDoc.Contains("replay", StringComparison.Ordinal));
+}
+
+static void FoundationCompletionGateBaselineBlocksOpenCode()
+{
+    var root = WorkspaceRoot();
+    var goalPath = Path.Combine(root, "docs/codex-prompts/GOAL_FOUNDATION_COMPLETION.md");
+    var activePath = Path.Combine(root, "docs/codex-prompts/ACTIVE/RUN_NEXT_FOUNDATION_COMPLETION.md");
+    var scriptPath = Path.Combine(root, "scripts/calculate_foundation_completion_gate.py");
+    var reportPath = Path.Combine(root, "docs/generated/foundation-completion-gate.json");
+    var markdownPath = Path.Combine(root, "docs/rl-engine/foundation-completion-gate.md");
+
+    AssertTrue(File.Exists(goalPath));
+    AssertTrue(File.Exists(activePath));
+    AssertTrue(File.Exists(scriptPath));
+    AssertTrue(File.Exists(reportPath));
+    AssertTrue(File.Exists(markdownPath));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(reportPath));
+    var summary = document.RootElement.GetProperty("summary");
+    AssertFalse(summary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", summary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual(0, summary.GetProperty("silentNoOpCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("blockedEmptyDescriptorCount").GetInt32());
+    AssertEqual(13, summary.GetProperty("legacyContinuousOnlyEmptyDescriptorCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("coreCardIdBranchCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("directZoneMutationCount").GetInt32());
+    AssertTrue(summary.GetProperty("unknownCommonApiCount").GetInt32() > 0);
+    AssertTrue(summary.GetProperty("unsupportedCapabilityCount").GetInt32() > 0);
+    AssertTrue(summary.GetProperty("partiallyImplementedCapabilityCount").GetInt32() > 0);
+    AssertEqual(0, summary.GetProperty("runtimeGeneratedStatusMismatchCount").GetInt32());
+    AssertEqual(92, summary.GetProperty("legacyPilotRuntimeDivergenceCount").GetInt32());
+
+    var active = File.ReadAllText(activePath);
+    AssertTrue(active.Contains("개별 `CardEffect` body 신규 구현", StringComparison.Ordinal));
+    AssertTrue(active.Contains("ContinuousOrStaticEffect", StringComparison.Ordinal));
+
+    var markdown = File.ReadAllText(markdownPath);
+    AssertTrue(markdown.Contains("OpenCodeReady: `false`", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("runtime/generated status mismatch", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("legacy continuous-only empty descriptor count: 13", StringComparison.Ordinal));
 }
 
 static void FullCardPortingSchedulerSelectsRemediationBeforeC0039()
@@ -8169,6 +9898,382 @@ static void DurationSecurityDigimonDpAffectsSecurityBattle()
     AssertEmpty(state.TemporaryModifiers);
 }
 
+static void DurationTemporaryKeywordGrantsBlockerUntilCleanup()
+{
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 2201, 301, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 2202, 302, "KW-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var attack = new AttackAction(PlayerId.Player0, attacker.Id, null);
+    var attackService = new AttackService();
+
+    AssertTrue(attackService.CreateBlockerSelectionRequest(state, attack) is null);
+
+    var modifier = new Tier1PrimitiveService().AddTemporaryKeyword(
+        state,
+        blocker.Id,
+        BattleKeyword.Blocker,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player1,
+        stableId: "duration:test:keyword-blocker");
+
+    AssertEqual(TemporaryModifierKind.Keyword, modifier.ModifierKind);
+    AssertEqual(BattleKeyword.Blocker, modifier.Keyword);
+
+    var request = attackService.CreateBlockerSelectionRequest(state, attack);
+
+    AssertTrue(request is not null);
+    AssertEqual(PlayerId.Player1, request!.Player);
+    AssertEqual(1, request.Candidates.Count);
+    AssertEqual(blocker.Id, request.Candidates[0].Permanent);
+
+    new PhaseRunner().EndCurrentTurn(state, memoryForNextPlayer: 3);
+
+    AssertEmpty(state.TemporaryModifiers);
+    AssertFalse(BattleKeywordService.Default.HasKeyword(state, blocker, BattleKeyword.Blocker));
+}
+
+static void DurationTemporaryKeywordGrantsRushAttackLegality()
+{
+    var state = CreateBattleKeywordState();
+    var sameTurnDigimon = AddBattlePermanent(state, 2211, 311, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: state.TurnCount);
+    AddCardToZone(state, 2212, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+
+    var beforeActions = new LegalActionGenerator().Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.Attack)
+        .Select(action => (AttackAction)action.Action)
+        .ToArray();
+
+    AssertFalse(beforeActions.Any(action => action.Attacker == sameTurnDigimon.Id));
+
+    new Tier1PrimitiveService().AddTemporaryKeyword(
+        state,
+        sameTurnDigimon.Id,
+        BattleKeyword.Rush,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:keyword-rush");
+
+    var afterActions = new LegalActionGenerator().Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.Attack)
+        .Select(action => (AttackAction)action.Action)
+        .ToArray();
+
+    AssertTrue(afterActions.Any(action => action.Attacker == sameTurnDigimon.Id));
+}
+
+static void DurationPlayerKeywordGrantsRushToMatchingBattleAreaDigimon()
+{
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["KW-ROOKIE"] = state.CardDefinitions["KW-ROOKIE"] with
+    {
+        Traits = new[] { "Hybrid" },
+    };
+    state.CardDefinitions["KW-STRONG"] = state.CardDefinitions["KW-STRONG"] with
+    {
+        Traits = new[] { "Dragon" },
+    };
+
+    var matching = AddBattlePermanent(state, 2213, 313, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: state.TurnCount);
+    var nonMatching = AddBattlePermanent(state, 2214, 314, "KW-STRONG", PlayerId.Player0, 1, enterTurn: state.TurnCount);
+    var breeding = AddBattlePermanent(state, 2215, 315, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: state.TurnCount, isBreeding: true);
+    AddCardToZone(state, 2216, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+
+    var beforeActions = new LegalActionGenerator().Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.Attack)
+        .Select(action => (AttackAction)action.Action)
+        .ToArray();
+
+    AssertFalse(beforeActions.Any(action => action.Attacker == matching.Id));
+    AssertFalse(beforeActions.Any(action => action.Attacker == nonMatching.Id));
+
+    var modifier = new Tier1PrimitiveService().AddTemporaryPlayerKeyword(
+        state,
+        PlayerId.Player0,
+        BattleKeyword.Rush,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetMetadataCriteria: new CardMetadataCriteria
+        {
+            RequiredTraits = new[] { "Hybrid" },
+        },
+        stableId: "duration:test:player-keyword-rush");
+
+    AssertEqual(TemporaryModifierKind.Keyword, modifier.ModifierKind);
+    AssertEqual(PlayerId.Player0, modifier.TargetPlayerId!.Value);
+    AssertTrue(modifier.TargetMetadataCriteria is not null);
+    AssertTrue(BattleKeywordService.Default.HasKeyword(state, matching, BattleKeyword.Rush));
+    AssertFalse(BattleKeywordService.Default.HasKeyword(state, nonMatching, BattleKeyword.Rush));
+    AssertFalse(BattleKeywordService.Default.HasKeyword(state, breeding, BattleKeyword.Rush));
+
+    var afterActions = new LegalActionGenerator().Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.Attack)
+        .Select(action => (AttackAction)action.Action)
+        .ToArray();
+
+    AssertTrue(afterActions.Any(action => action.Attacker == matching.Id));
+    AssertFalse(afterActions.Any(action => action.Attacker == nonMatching.Id));
+
+    new PhaseRunner().EndCurrentTurn(state, memoryForNextPlayer: 3);
+
+    AssertEmpty(state.TemporaryModifiers);
+    AssertFalse(BattleKeywordService.Default.HasKeyword(state, matching, BattleKeyword.Rush));
+}
+
+static void DurationTemporaryKeywordHashAndReplayDeterministic()
+{
+    var state = CreateBattleKeywordState();
+    var attacker = AddBattlePermanent(state, 2221, 321, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var before = state.ComputeStateHash();
+
+    new Tier1PrimitiveService().AddTemporaryKeyword(
+        state,
+        attacker.Id,
+        BattleKeyword.Jamming,
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        stableId: "duration:test:keyword-jamming");
+
+    AssertNotEqual(before, state.ComputeStateHash());
+    AssertTrue(BattleKeywordService.Default.HasKeyword(state, attacker, BattleKeyword.Jamming));
+
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
+    var replayPermanent = replay.FinalState.GetPlayer(PlayerId.Player0).FieldPermanents.Single(permanent => permanent.Id == attacker.Id);
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertEqual(1, replay.FinalState.TemporaryModifiers.Count);
+    AssertTrue(BattleKeywordService.Default.HasKeyword(replay.FinalState, replayPermanent, BattleKeyword.Jamming));
+}
+
+static void DurationPlayerKeywordHashAndReplayDeterministic()
+{
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["KW-ROOKIE"] = state.CardDefinitions["KW-ROOKIE"] with
+    {
+        Traits = new[] { "Hybrid" },
+    };
+
+    var target = AddBattlePermanent(state, 2222, 322, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var before = state.ComputeStateHash();
+
+    new Tier1PrimitiveService().AddTemporaryPlayerKeyword(
+        state,
+        PlayerId.Player0,
+        BattleKeyword.Blocker,
+        DurationScope.UntilOwnerTurnEnd,
+        PlayerId.Player0,
+        targetMetadataCriteria: new CardMetadataCriteria
+        {
+            RequiredTraits = new[] { "Hybrid" },
+        },
+        stableId: "duration:test:player-keyword-blocker");
+
+    AssertNotEqual(before, state.ComputeStateHash());
+    AssertTrue(BattleKeywordService.Default.HasKeyword(state, target, BattleKeyword.Blocker));
+
+    var snapshot = RuleVisibleSnapshot.Capture(state);
+    AssertEqual(1, snapshot.TemporaryModifiers.Count);
+    AssertTrue(snapshot.TemporaryModifiers[0].TargetMetadataCriteria.Contains("traits-all=Hybrid", StringComparison.Ordinal));
+
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
+    var replayPermanent = replay.FinalState.GetPlayer(PlayerId.Player0).FieldPermanents.Single(permanent => permanent.Id == target.Id);
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertEqual(1, replay.FinalState.TemporaryModifiers.Count);
+    AssertTrue(BattleKeywordService.Default.HasKeyword(replay.FinalState, replayPermanent, BattleKeyword.Blocker));
+}
+
+static TemporaryGrantedEffectRegistry CreateMemoryGrantedEffectRegistry(string key = "fixture:memory", int amount = 1) =>
+    new(new TemporaryGrantedEffectHandler(
+        key,
+        descriptorContext => new EffectDescriptor(
+            $"{descriptorContext.GrantedEffect.StableId}:descriptor",
+            descriptorContext.GrantedEffect.Timing,
+            SourceCard: descriptorContext.SourceCard,
+            SourcePermanent: descriptorContext.SourcePermanent,
+            Controller: descriptorContext.Controller,
+            CanTrigger: effectContext =>
+                effectContext.GetValueOrDefault("Attacker") is PermanentId attackerId
+                && FindTestPermanent(effectContext.State, attackerId) is { } attacker
+                && descriptorContext.AppliesToPermanent(attacker),
+            SourceSnapshot: descriptorContext.SourceSnapshot),
+        (executionContext, grant) =>
+            executionContext.WithState((state, primitives) =>
+                primitives.ModifyMemory(state, grant.ControllerPlayerId, amount))));
+
+static PermanentState? FindTestPermanent(GameState state, PermanentId permanentId) =>
+    state.Players
+        .SelectMany(player => player.FieldPermanents)
+        .FirstOrDefault(permanent => permanent.Id == permanentId);
+
+static void DurationTemporaryGrantedTriggerRunsFromTargetPermanentTiming()
+{
+    var state = CreateMinimalBattleState();
+    var target = AddBattlePermanent(state, 2251, 351, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var other = AddBattlePermanent(state, 2252, 352, "BT1-STRONG", PlayerId.Player0, 1, enterTurn: 1);
+    var primitives = new Tier1PrimitiveService();
+
+    var grant = primitives.AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:memory",
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetPermanent: target.Id,
+        stableId: "duration:test:granted-on-attack");
+
+    AssertEqual("duration:test:granted-on-attack", grant.StableId);
+    AssertEqual(target.Id, grant.TargetPermanentId!.Value);
+    AssertEqual(EffectTiming.OnAllyAttack, grant.Timing);
+
+    var pipeline = new TriggerPipelineService(
+        CardEffectTestFixture.Registry(
+            new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only temporary granted trigger target."),
+            new NoEffectCardScript("BT1-STRONG", notes: "Test-only temporary granted trigger non-target.")),
+        temporaryGrantedEffectRegistry: CreateMemoryGrantedEffectRegistry());
+
+    var miss = pipeline.Run(
+        state,
+        EffectTiming.OnAllyAttack,
+        PlayerId.Player0,
+        values: new Dictionary<string, object?> { ["Attacker"] = other.Id },
+        options: new TriggerPipelineOptions(UseMultipleSkillsOrdering: false));
+
+    AssertEqual(0, miss.ExecutedEffects.Count);
+    AssertEqual(5, state.Memory);
+
+    var hit = pipeline.Run(
+        state,
+        EffectTiming.OnAllyAttack,
+        PlayerId.Player0,
+        values: new Dictionary<string, object?> { ["Attacker"] = target.Id },
+        options: new TriggerPipelineOptions(UseMultipleSkillsOrdering: false));
+
+    AssertEqual(1, hit.ExecutedEffects.Count);
+    AssertEqual(6, state.Memory);
+    AssertEqual(target.TopCardId, hit.ExecutedEffects[0].SourceCard!.Value);
+    AssertEqual(target.Id, hit.ExecutedEffects[0].SourcePermanent!.Value);
+    AssertEqual(grant, hit.ExecutedEffects[0].TemporaryGrantedEffect);
+
+    new PhaseRunner().EndCurrentTurn(state, memoryForNextPlayer: 3);
+
+    AssertEmpty(state.TemporaryGrantedEffects);
+}
+
+static void DurationTemporaryGrantedTriggerHashAndReplayDeterministic()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["BT1-ROOKIE"] = state.CardDefinitions["BT1-ROOKIE"] with
+    {
+        Traits = new[] { "Vaccine" },
+    };
+
+    var target = AddBattlePermanent(state, 2261, 361, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var before = state.ComputeStateHash();
+
+    new Tier1PrimitiveService().AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:memory",
+        DurationScope.UntilOwnerTurnEnd,
+        PlayerId.Player0,
+        targetPermanent: target.Id,
+        targetMetadataCriteria: new CardMetadataCriteria
+        {
+            RequiredTraits = new[] { "Vaccine" },
+        },
+        stableId: "duration:test:granted-hash");
+
+    AssertNotEqual(before, state.ComputeStateHash());
+
+    var snapshot = RuleVisibleSnapshot.Capture(state);
+    AssertEqual(1, snapshot.TemporaryGrantedEffects.Count);
+    AssertEqual("fixture:memory", snapshot.TemporaryGrantedEffects[0].GrantedEffectKey);
+    AssertTrue(snapshot.TemporaryGrantedEffects[0].TargetMetadataCriteria.Contains("traits-all=Vaccine", StringComparison.Ordinal));
+
+    var clone = state.Clone();
+    AssertEqual(state.ComputeStateHash(), clone.ComputeStateHash());
+
+    var replay = new ReplayRunner(actionExecutor: CreateTestActionExecutor()).Replay(state, new GameTrace());
+
+    AssertTrue(replay.InvariantReport.IsValid);
+    AssertEqual(state.ComputeStateHash(), replay.FinalState.ComputeStateHash());
+    AssertEqual(1, replay.FinalState.TemporaryGrantedEffects.Count);
+}
+
+static void DurationTemporaryKeywordRejectsUnsupportedPayloads()
+{
+    var state = CreateBattleKeywordState();
+    var permanent = AddBattlePermanent(state, 2231, 331, "KW-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var primitives = new Tier1PrimitiveService();
+
+    AssertThrows<DomainException>(() =>
+        primitives.AddTemporaryKeyword(
+            state,
+            permanent.Id,
+            BattleKeyword.SecurityAttack,
+            DurationScope.UntilTurnEnd,
+            PlayerId.Player0));
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        primitives.AddTemporaryKeyword(
+            state,
+            permanent.Id,
+            BattleKeyword.Decoy,
+            DurationScope.UntilTurnEnd,
+            PlayerId.Player0));
+}
+
+static void DurationInvariantDetectsInvalidKeywordModifier()
+{
+    var state = CreateMinimalBattleState();
+    var permanent = AddBattlePermanent(state, 2241, 341, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+
+    state.TemporaryModifiers.Add(new TemporaryModifier(
+        "duration:test:keyword-missing",
+        SourceCardId: null,
+        SourcePermanentId: null,
+        PlayerId.Player0,
+        permanent.Id,
+        TargetPlayerId: null,
+        TemporaryModifierKind.Keyword,
+        Amount: 1,
+        DurationScope.UntilTurnEnd,
+        CreatedTurnCount: state.TurnCount,
+        CreatedPhase: state.Phase,
+        ExpiresAtTurnPlayerId: null,
+        DebugLabel: "missing keyword"));
+
+    AssertViolation(new EngineInvariantChecker().Check(state), "temporary-modifier-keyword-missing");
+}
+
+static void DurationInvariantDetectsInvalidGrantedTrigger()
+{
+    var state = CreateMinimalBattleState();
+    var permanent = AddBattlePermanent(state, 2271, 371, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+
+    state.TemporaryGrantedEffects.Add(new TemporaryGrantedEffect(
+        "duration:test:granted-invalid",
+        SourceCardId: null,
+        SourcePermanentId: null,
+        PlayerId.Player0,
+        permanent.Id,
+        TargetPlayerId: null,
+        EffectTiming.None,
+        GrantedEffectKey: string.Empty,
+        DurationScope.UntilTurnEnd,
+        CreatedTurnCount: state.TurnCount,
+        CreatedPhase: state.Phase,
+        ExpiresAtTurnPlayerId: null,
+        DebugLabel: "invalid granted trigger"));
+
+    var report = new EngineInvariantChecker().Check(state);
+
+    AssertViolation(report, "temporary-granted-effect-key-missing");
+    AssertViolation(report, "temporary-granted-effect-timing-invalid");
+}
+
 static void ContinuousDpModifierAffectsEffectiveDp()
 {
     var state = CreateSt1ScenarioState();
@@ -8434,6 +10539,174 @@ static void ContinuousStaticKeywordFieldSourceGrantsBlocker()
     AssertSequence(new[] { blocker.Id }, request.Candidates.Select(candidate => candidate.Permanent!.Value).ToArray());
 }
 
+static void CardEffectFactoryBlockerStaticEffectMapsToKeywordDescriptor()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-FACTORY-BLOCKER"] = CardEffectTestFixture.EffectDefinition(
+        "FX-FACTORY-BLOCKER",
+        "FX_FACTORY_BLOCKER") with { Dp = 4000 };
+    state.CardDefinitions["FX-ATTACKER"] = CardEffectTestFixture.NoEffectDefinition("FX-ATTACKER") with { Dp = 3000 };
+    var blocker = AddBattlePermanent(state, 6344, 790, "FX-FACTORY-BLOCKER", PlayerId.Player1, 0, enterTurn: 1);
+    var attacker = AddBattlePermanent(state, 6345, 791, "FX-ATTACKER", PlayerId.Player0, 0, enterTurn: 1);
+    var registry = CardEffectTestFixture.Registry(
+        new CardEffectFactoryKeywordFixtureScript(
+            "FX-FACTORY-BLOCKER",
+            "FX_FACTORY_BLOCKER",
+            ContinuousEffectSourceKind.FieldTop,
+            ContinuousEffectTargetKind.SelfPermanent,
+            BattleKeyword.Blocker,
+            context => context.State.Memory > 0 && context.TargetPermanent.Id == blocker.Id));
+    var descriptor = new ContinuousEffectSourceCollector(registry).CollectKeywords(state).Single();
+
+    AssertEqual(blocker.TopCardId, descriptor.SourceCardId);
+    AssertEqual(blocker.Id, descriptor.SourcePermanentId);
+    AssertEqual(PlayerId.Player1, descriptor.ControllerPlayerId);
+    AssertEqual(BattleKeyword.Blocker, descriptor.Keyword);
+    AssertEqual(ContinuousEffectTargetKind.SelfPermanent, descriptor.AppliesTo);
+    AssertTrue(descriptor.StableId.Contains(":keyword:Blocker:SelfPermanent:", StringComparison.Ordinal));
+    AssertTrue(descriptor.DebugLabel.Contains("Factory Blocker", StringComparison.Ordinal));
+
+    var keywords = new BattleKeywordService(new EffectiveStatService(registry));
+    state.Memory = 0;
+    AssertFalse(keywords.HasKeyword(state, blocker, BattleKeyword.Blocker));
+    AssertTrue(keywords.CreateBlockerSelectionRequest(state, attacker.Id) is null);
+
+    state.Memory = 1;
+    AssertTrue(keywords.HasKeyword(state, blocker, BattleKeyword.Blocker));
+    var request = keywords.CreateBlockerSelectionRequest(state, attacker.Id);
+
+    AssertTrue(request is not null);
+    AssertEqual(PlayerId.Player1, request!.Player);
+    AssertSequence(new[] { blocker.Id }, request.Candidates.Select(candidate => candidate.Permanent!.Value).ToArray());
+}
+
+static void CardEffectFactoryStaticKeywordWrappersMapSupportedKeywords()
+{
+    var state = CreateMinimalBattleState();
+    var cases = new[]
+    {
+        (Keyword: BattleKeyword.Rush, CardId: "FX-FACTORY-RUSH", EffectClassName: "FX_FACTORY_RUSH", InstanceId: 6346, PermanentId: 792),
+        (Keyword: BattleKeyword.Reboot, CardId: "FX-FACTORY-REBOOT", EffectClassName: "FX_FACTORY_REBOOT", InstanceId: 6347, PermanentId: 793),
+        (Keyword: BattleKeyword.Collision, CardId: "FX-FACTORY-COLLISION", EffectClassName: "FX_FACTORY_COLLISION", InstanceId: 6348, PermanentId: 794),
+        (Keyword: BattleKeyword.Jamming, CardId: "FX-FACTORY-JAMMING", EffectClassName: "FX_FACTORY_JAMMING", InstanceId: 6349, PermanentId: 795),
+    };
+    var scripts = new List<ICardScript>();
+    var permanents = new Dictionary<BattleKeyword, PermanentState>();
+
+    foreach (var testCase in cases)
+    {
+        state.CardDefinitions[testCase.CardId] = CardEffectTestFixture.EffectDefinition(
+            testCase.CardId,
+            testCase.EffectClassName) with { Dp = 4000 };
+        permanents[testCase.Keyword] = AddBattlePermanent(
+            state,
+            testCase.InstanceId,
+            testCase.PermanentId,
+            testCase.CardId,
+            PlayerId.Player0,
+            frame: permanents.Count,
+            enterTurn: 1);
+        scripts.Add(new CardEffectFactoryKeywordFixtureScript(
+            testCase.CardId,
+            testCase.EffectClassName,
+            ContinuousEffectSourceKind.FieldTop,
+            ContinuousEffectTargetKind.SelfPermanent,
+            testCase.Keyword));
+    }
+
+    var registry = CardEffectTestFixture.Registry(scripts.ToArray());
+    var descriptors = new ContinuousEffectSourceCollector(registry).CollectKeywords(state);
+    var keywordService = new BattleKeywordService(new EffectiveStatService(registry));
+
+    AssertEqual(cases.Length, descriptors.Count);
+    foreach (var testCase in cases)
+    {
+        var permanent = permanents[testCase.Keyword];
+        var descriptor = descriptors.Single(candidate => candidate.Keyword == testCase.Keyword);
+
+        AssertEqual(permanent.TopCardId, descriptor.SourceCardId);
+        AssertEqual(permanent.Id, descriptor.SourcePermanentId);
+        AssertEqual(PlayerId.Player0, descriptor.ControllerPlayerId);
+        AssertEqual(ContinuousEffectTargetKind.SelfPermanent, descriptor.AppliesTo);
+        AssertTrue(descriptor.StableId.Contains($":keyword:{testCase.Keyword}:SelfPermanent:", StringComparison.Ordinal));
+        AssertTrue(descriptor.DebugLabel.Contains($"Factory {testCase.Keyword}", StringComparison.Ordinal));
+        AssertTrue(keywordService.HasKeyword(state, permanent, testCase.Keyword));
+    }
+}
+
+static void CardEffectFactoryKeywordStaticEffectRejectsUnsupportedKeywordShape()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-FACTORY-PIERCE"] = CardEffectTestFixture.EffectDefinition(
+        "FX-FACTORY-PIERCE",
+        "FX_FACTORY_PIERCE") with { Dp = 4000 };
+    var source = AddBattlePermanent(state, 6350, 796, "FX-FACTORY-PIERCE", PlayerId.Player0, 0, enterTurn: 1);
+    var context = new ContinuousEffectScriptContext(
+        state,
+        source.TopCardId,
+        source.Id,
+        PlayerId.Player0,
+        ContinuousEffectSourceKind.FieldTop);
+
+    AssertThrows<UnsupportedMechanicException>(() =>
+        CardEffectFactory.KeywordStaticEffect(
+            context,
+            BattleKeyword.Piercing,
+            ContinuousEffectTargetKind.SelfPermanent));
+}
+
+static void CardEffectFactoryDpStaticEffectMapsToContinuousDescriptor()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-FACTORY-DP"] = CardEffectTestFixture.EffectDefinition(
+        "FX-FACTORY-DP",
+        "FX_FACTORY_DP") with { Dp = 3000 };
+    var source = AddBattlePermanent(state, 6351, 797, "FX-FACTORY-DP", PlayerId.Player0, 0, enterTurn: 1);
+    var registry = CardEffectTestFixture.Registry(
+        new CardEffectFactoryDpFixtureScript(
+            "FX-FACTORY-DP",
+            "FX_FACTORY_DP",
+            ContinuousEffectSourceKind.FieldTop,
+            ContinuousEffectTargetKind.SelfPermanent,
+            2000,
+            context => context.State.Memory > 0 && context.TargetPermanent?.Id == source.Id));
+    var descriptor = new ContinuousEffectSourceCollector(registry).Collect(state).Single();
+
+    AssertEqual(source.TopCardId, descriptor.SourceCardId);
+    AssertEqual(source.Id, descriptor.SourcePermanentId);
+    AssertEqual(PlayerId.Player0, descriptor.ControllerPlayerId);
+    AssertEqual(ContinuousEffectTargetKind.SelfPermanent, descriptor.AppliesTo);
+    AssertEqual(ContinuousModifierKind.DP, descriptor.ModifierKind);
+    AssertTrue(descriptor.StableId.Contains(":continuous:DP:SelfPermanent:", StringComparison.Ordinal));
+    AssertTrue(descriptor.DebugLabel.Contains("Factory DP", StringComparison.Ordinal));
+
+    var stats = new EffectiveStatService(registry);
+    state.Memory = 0;
+    AssertEqual(3000, stats.Dp(state, source));
+
+    state.Memory = 1;
+    AssertEqual(5000, stats.Dp(state, source));
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
+static void CardEffectFactoryDpStaticEffectRejectsZeroAmount()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-FACTORY-DP-ZERO"] = CardEffectTestFixture.EffectDefinition(
+        "FX-FACTORY-DP-ZERO",
+        "FX_FACTORY_DP_ZERO") with { Dp = 3000 };
+    var source = AddBattlePermanent(state, 6352, 798, "FX-FACTORY-DP-ZERO", PlayerId.Player0, 0, enterTurn: 1);
+    var context = new ContinuousEffectScriptContext(
+        state,
+        source.TopCardId,
+        source.Id,
+        PlayerId.Player0,
+        ContinuousEffectSourceKind.FieldTop);
+
+    AssertThrows<DomainException>(() =>
+        CardEffectFactory.ChangeSelfDPStaticEffect(context, 0));
+}
+
 static void ContinuousStaticKeywordInheritedSourceStopsAfterMove()
 {
     var state = CreateMinimalBattleState();
@@ -8481,6 +10754,61 @@ static void ContinuousStaticKeywordConditionGatesKeyword()
     AssertTrue(keywords.HasKeyword(state, source, BattleKeyword.Collision));
 }
 
+static void ContinuousMetadataCriteriaGatesTargetTraitAndText()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-METADATA-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-METADATA-AURA",
+        "FX_METADATA_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Blue Flare" },
+        CardTextEnglish = "Your Machine Digimon get +2000 DP.",
+    };
+    state.CardDefinitions["FX-MACHINE"] = CardEffectTestFixture.NoEffectDefinition("FX-MACHINE") with
+    {
+        Dp = 3000,
+        Traits = new[] { "Machine", "Blue Flare" },
+        CardTextEnglish = "This card has Blue Flare in its text.",
+    };
+    state.CardDefinitions["FX-DINOSAUR"] = CardEffectTestFixture.NoEffectDefinition("FX-DINOSAUR") with
+    {
+        Dp = 3000,
+        Traits = new[] { "Dinosaur" },
+        CardTextEnglish = "This card has no matching metadata.",
+    };
+    var matchingTarget = AddBattlePermanent(state, 6320, 780, "FX-MACHINE", PlayerId.Player0, 0, enterTurn: 1);
+    var nonMatchingTarget = AddBattlePermanent(state, 6321, 781, "FX-DINOSAUR", PlayerId.Player0, 1, enterTurn: 1);
+    AddCardToZone(state, 6322, "FX-METADATA-AURA", PlayerId.Player0, Zone.Hand);
+    var stats = new EffectiveStatService(CardEffectTestFixture.Registry(
+        new ContinuousSourceKindFixtureScript(
+            "FX-METADATA-AURA",
+            "FX_METADATA_AURA",
+            ContinuousEffectSourceKind.Hand,
+            ContinuousEffectTargetKind.OwnerBattleAreaDigimon,
+            amount: 2000,
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "blue flare" },
+                RequiredTextSubstrings = new[] { "Machine Digimon" },
+            },
+            targetMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Machine" },
+                RequiredTextSubstrings = new[] { "Blue Flare" },
+            })));
+
+    AssertEqual(5000, stats.Dp(state, matchingTarget));
+    AssertEqual(3000, stats.Dp(state, nonMatchingTarget));
+
+    state.CardDefinitions["FX-METADATA-AURA"] = state.CardDefinitions["FX-METADATA-AURA"] with
+    {
+        CardTextEnglish = "Your Dinosaur Digimon get +2000 DP.",
+    };
+
+    AssertEqual(3000, stats.Dp(state, matchingTarget));
+}
+
 static void ContinuousStaticKeywordReplayDeterministic()
 {
     var state = CreateMinimalBattleState();
@@ -8519,6 +10847,48 @@ static void StaticEvolutionRequirementHandSourceGeneratesAndExecutes()
             cost: 1,
             requiredColor: CardColor.Blue,
             requiredLevel: 3));
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(4, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
+static void CardEffectFactorySelfEvolutionRequirementMapsToStaticDescriptor()
+{
+    var state = CreateStaticRequirementState();
+    var target = AddBattlePermanent(state, 6341, 786, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6342, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6343, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = CreateStaticRequirementServices(
+        new CardEffectFactorySelfEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            level: 3,
+            minLevel: 5));
+
+    var evaluation = services.StaticRequirementService
+        .EvaluateEvolutionRequirements(state, evoCard, target)
+        .Single();
+    AssertEqual(evoCard, evaluation.Descriptor.SourceCardId);
+    AssertEqual(PlayerId.Player0, evaluation.Descriptor.ControllerPlayerId);
+    AssertEqual(1, evaluation.Cost);
+    AssertEqual(CardColor.Blue, evaluation.Descriptor.RequiredColor);
+    AssertEqual(3, evaluation.Descriptor.RequiredLevel);
+    AssertEqual(-1, evaluation.Descriptor.MinLevel);
+    AssertEqual(-1, evaluation.Descriptor.MaxLevel);
+    AssertTrue(evaluation.Descriptor.DebugLabel.Contains("Factory self alternative evolution", StringComparison.Ordinal));
 
     var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
         .Single(legal => legal.Kind == LegalActionKind.Digivolve
@@ -8587,6 +10957,1145 @@ static void StaticEvolutionRequirementConditionGatesTarget()
     AssertSequence(new[] { valid.Id }, targets);
 }
 
+static void StaticEvolutionRequirementIgnorePermissionGeneratesAndExecutes()
+{
+    var state = CreateStaticRequirementState();
+    var target = AddBattlePermanent(state, 6317, 774, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6318, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6319, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3,
+            ignoreDigivolutionRequirement: true));
+
+    var evaluation = services.StaticRequirementService
+        .EvaluateEvolutionRequirements(state, evoCard, target)
+        .Single();
+    AssertTrue(evaluation.Descriptor.IgnoreDigivolutionRequirement);
+    AssertTrue(evaluation.IgnoresDigivolutionRequirement);
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(4, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
+static void StaticEvolutionRequirementCannotIgnoreRestrictionBlocksPermission()
+{
+    var state = CreateStaticRequirementState();
+    state.CardDefinitions["FX-CANNOT-IGNORE"] = CardEffectTestFixture.EffectDefinition(
+        "FX-CANNOT-IGNORE",
+        "FX_CANNOT_IGNORE") with
+    {
+        Dp = 1000,
+        CardTextEnglish = "Players can't ignore digivolution requirements.",
+    };
+    var blocker = AddBattlePermanent(state, 6322, 776, "FX-CANNOT-IGNORE", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6323, 777, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6324, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3,
+            ignoreDigivolutionRequirement: true),
+        new CannotIgnoreDigivolutionRequirementFixtureScript(
+            "FX-CANNOT-IGNORE",
+            "FX_CANNOT_IGNORE",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPlayerTargetKind.AnyPlayer));
+
+    var cannotIgnore = services.StaticRequirementService
+        .EvaluateCannotIgnoreDigivolutionRequirements(state, PlayerId.Player0, evoCard, target)
+        .Single();
+    AssertEqual(blocker.TopCardId, cannotIgnore.Descriptor.SourceCardId);
+    AssertEqual(blocker.Id, cannotIgnore.Descriptor.SourcePermanentId);
+    AssertEqual(PlayerId.Player0, cannotIgnore.Player);
+
+    AssertFalse(services.StaticRequirementService
+        .EvaluateEvolutionRequirements(state, evoCard, target)
+        .Any());
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+    AssertThrows<DomainException>(
+        () => services.DigivolveService.Digivolve(
+            state,
+            new DigivolveAction(PlayerId.Player0, evoCard, target.Id),
+            new GameTrace()),
+        "cannot digivolve");
+}
+
+static void StaticEvolutionRequirementCannotIgnoreRestrictionConditionGates()
+{
+    var state = CreateStaticRequirementState();
+    state.CardDefinitions["FX-CANNOT-IGNORE"] = CardEffectTestFixture.EffectDefinition(
+        "FX-CANNOT-IGNORE",
+        "FX_CANNOT_IGNORE") with
+    {
+        Dp = 1000,
+    };
+    AddBattlePermanent(state, 6325, 778, "FX-CANNOT-IGNORE", PlayerId.Player1, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6326, 779, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6327, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            requiredColor: CardColor.Blue,
+            requiredLevel: 3,
+            ignoreDigivolutionRequirement: true),
+        new CannotIgnoreDigivolutionRequirementFixtureScript(
+            "FX-CANNOT-IGNORE",
+            "FX_CANNOT_IGNORE",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPlayerTargetKind.AnyPlayer,
+            condition: context => context.TargetPermanent.ControllerPlayerId == PlayerId.Player1));
+
+    AssertFalse(services.StaticRequirementService
+        .EvaluateCannotIgnoreDigivolutionRequirements(state, PlayerId.Player0, evoCard, target)
+        .Any());
+    AssertTrue(services.StaticRequirementService
+        .EvaluateEvolutionRequirements(state, evoCard, target)
+        .Single()
+        .IgnoresDigivolutionRequirement);
+    AssertTrue(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+}
+
+static void StaticEvolutionRequirementIgnorePermissionRequiresTargetGate()
+{
+    var state = CreateStaticRequirementState();
+    var target = AddBattlePermanent(state, 6320, 775, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6321, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            ignoreDigivolutionRequirement: true));
+
+    AssertThrows<UnsupportedMechanicException>(
+        () => services.StaticRequirementService.EvaluateEvolutionRequirements(state, evoCard, target),
+        "without an explicit target gate");
+}
+
+static void StaticRequirementMetadataCriteriaGatesSourceAndTarget()
+{
+    var state = CreateStaticRequirementState();
+    state.CardDefinitions["FX-ALT-EVO"] = state.CardDefinitions["FX-ALT-EVO"] with
+    {
+        Traits = new[] { "Hybrid", "Blue Flare" },
+        CardTextEnglish = "May digivolve on a Blue Flare Digimon.",
+    };
+    state.CardDefinitions["FX-BLUE-L3"] = state.CardDefinitions["FX-BLUE-L3"] with
+    {
+        Traits = new[] { "Blue Flare" },
+        CardTextEnglish = "This is a Blue Flare target.",
+    };
+    state.CardDefinitions["FX-BLUE-L3-BIG"] = state.CardDefinitions["FX-BLUE-L3-BIG"] with
+    {
+        Traits = new[] { "Vaccine" },
+        CardTextEnglish = "This target does not match the metadata criteria.",
+    };
+    var validTarget = AddBattlePermanent(state, 6314, 772, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6315, 773, "FX-BLUE-L3-BIG", PlayerId.Player0, 1, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6316, "FX-ALT-EVO", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticEvolutionRequirementFixtureScript(
+            "FX-ALT-EVO",
+            "FX_ALT_EVO",
+            ContinuousEffectSourceKind.Hand,
+            cost: 1,
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Hybrid" },
+                RequiredTextSubstrings = new[] { "Blue Flare" },
+            },
+            targetMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Blue Flare" },
+                RequiredTextSubstrings = new[] { "target" },
+            }));
+
+    var targets = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Where(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard)
+        .Select(legal => ((DigivolveAction)legal.Action).TargetPermanent)
+        .ToArray();
+
+    AssertSequence(new[] { validTarget.Id }, targets);
+
+    state.CardDefinitions["FX-ALT-EVO"] = state.CardDefinitions["FX-ALT-EVO"] with
+    {
+        Traits = new[] { "Hybrid" },
+        CardTextEnglish = "May digivolve on a Dinosaur Digimon.",
+    };
+
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+}
+
+static void StaticCostModifierAdjustsPlayAndDigivolutionCost()
+{
+    var state = CreateStaticRequirementState();
+    state.CardDefinitions["FX-PLAY-COST-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-PLAY-COST-AURA",
+        "FX_PLAY_COST_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-EVO-COST-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-EVO-COST-AURA",
+        "FX_EVO_COST_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-PLAY-COST-TARGET"] = CardEffectTestFixture.NoEffectDefinition("FX-PLAY-COST-TARGET") with
+    {
+        PlayCost = 4,
+        Traits = new[] { "Cost Target" },
+        CardTextEnglish = "Play cost can be reduced by a static effect.",
+    };
+    state.CardDefinitions["FX-NORMAL-EVO"] = CardEffectTestFixture.NoEffectDefinition("FX-NORMAL-EVO") with
+    {
+        Colors = new[] { CardColor.Red },
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+        EvoCosts = new[] { new EvoCostDefinition(CardColor.Blue, 3, 3) },
+        Traits = new[] { "Cost Target" },
+        CardTextEnglish = "Digivolution cost can be reduced by a static effect.",
+    };
+    state.CardDefinitions["FX-BLUE-L3"] = state.CardDefinitions["FX-BLUE-L3"] with
+    {
+        Traits = new[] { "Blue Flare" },
+        CardTextEnglish = "This target enables the digivolution cost reduction.",
+    };
+
+    AddBattlePermanent(state, 6330, 790, "FX-PLAY-COST-AURA", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6331, 791, "FX-EVO-COST-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    var evoTarget = AddBattlePermanent(state, 6332, 792, "FX-BLUE-L3", PlayerId.Player0, 2, enterTurn: 1);
+    var playCard = AddCardToZone(state, 6333, "FX-PLAY-COST-TARGET", PlayerId.Player0, Zone.Hand);
+    var evoCard = AddCardToZone(state, 6334, "FX-NORMAL-EVO", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(state, 6335, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCostModifierFixtureScript(
+            "FX-PLAY-COST-AURA",
+            "FX_PLAY_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Play,
+            amount: -2,
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Cost Target" },
+                RequiredTextSubstrings = new[] { "Play cost" },
+            }),
+        new StaticCostModifierFixtureScript(
+            "FX-EVO-COST-AURA",
+            "FX_EVO_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Digivolution,
+            amount: -1,
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Cost Target" },
+                RequiredTextSubstrings = new[] { "Digivolution cost" },
+            },
+            targetPermanentMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Blue Flare" },
+                RequiredTextSubstrings = new[] { "digivolution cost reduction" },
+            }),
+        new NoEffectCardScript("FX-PLAY-COST-TARGET"),
+        new NoEffectCardScript("FX-NORMAL-EVO"),
+        new NoEffectCardScript("FX-BLUE-L3"),
+        new NoEffectCardScript("BT1-OPTION")));
+
+    services.PlayCardService.Play(state, new PlayCardAction(PlayerId.Player0, playCard, 3));
+    services.DigivolveService.Digivolve(state, new DigivolveAction(PlayerId.Player0, evoCard, evoTarget.Id));
+
+    AssertEqual(1, state.Memory);
+    AssertEqual(evoCard, evoTarget.TopCardId);
+    AssertEqual(Zone.BattleArea, state.Cards[playCard].CurrentZone);
+    AssertTrue(services.ValidationReport.IsValid);
+}
+
+static void StaticLinkCostModifierAdjustsLinkCost()
+{
+    var state = CreateStaticRequirementState();
+    state.Memory = 5;
+    state.CardDefinitions["FX-LINK-COST-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-LINK-COST-AURA",
+        "FX_LINK_COST_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Link Support" },
+    };
+    state.CardDefinitions["FX-STATIC-LINK"] = state.CardDefinitions["FX-STATIC-LINK"] with
+    {
+        Traits = new[] { "Linker" },
+        CardTextEnglish = "This card's link cost can be reduced.",
+    };
+    state.CardDefinitions["FX-LINK-TARGET"] = state.CardDefinitions["FX-LINK-TARGET"] with
+    {
+        Traits = new[] { "Link Host" },
+        CardTextEnglish = "This Digimon is a link cost target.",
+    };
+
+    AddBattlePermanent(state, 6385, 840, "FX-LINK-COST-AURA", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6386, 841, "FX-LINK-TARGET", PlayerId.Player0, 1, enterTurn: 1);
+    var linkCard = AddCardToZone(state, 6387, "FX-STATIC-LINK", PlayerId.Player0, Zone.Hand);
+    var services = CreateStaticRequirementServices(
+        new StaticLinkRequirementFixtureScript(
+            "FX-STATIC-LINK",
+            "FX_STATIC_LINK",
+            ContinuousEffectSourceKind.Hand,
+            cost: 3,
+            targetCondition: context => context.TargetPermanent.LinkedCards.Count == 0),
+        new StaticCostModifierFixtureScript(
+            "FX-LINK-COST-AURA",
+            "FX_LINK_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Link,
+            amount: -2,
+            condition: context => context.Mechanic == Mechanic.Link && context.TargetPermanent is not null,
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Linker" },
+                RequiredTextSubstrings = new[] { "link cost" },
+            },
+            targetPermanentMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Link Host" },
+                RequiredTextSubstrings = new[] { "link cost target" },
+            }));
+
+    AssertEqual(1, services.StaticEffectService.ApplyCostModifiers(
+        state,
+        linkCard,
+        baseCost: 3,
+        StaticCostKind.Link,
+        target,
+        Mechanic.Link));
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Link
+            && legal.Action is LinkAction link
+            && link.LinkCard == linkCard
+            && link.TargetPermanent == target.Id)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(4, state.Memory);
+    AssertSequence(new[] { linkCard }, target.LinkedCards);
+    AssertEqual(Zone.LinkedCards, state.Cards[linkCard].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void StaticRestrictionBlocksAttackAndBlock()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ATTACK-LOCK"] = CardEffectTestFixture.EffectDefinition(
+        "FX-ATTACK-LOCK",
+        "FX_ATTACK_LOCK") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-BLOCK-LOCK"] = CardEffectTestFixture.EffectDefinition(
+        "FX-BLOCK-LOCK",
+        "FX_BLOCK_LOCK") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-ATTACKER"] = CardEffectTestFixture.NoEffectDefinition("FX-ATTACKER") with
+    {
+        Dp = 5000,
+    };
+    state.CardDefinitions["FX-BLOCKER"] = CardEffectTestFixture.EffectDefinition(
+        "FX-BLOCKER",
+        "FX_BLOCKER",
+        battleKeywords: new[] { BattleKeyword.Blocker }) with
+    {
+        Dp = 5000,
+    };
+
+    AddBattlePermanent(state, 6340, 800, "FX-ATTACK-LOCK", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6341, 801, "FX-BLOCK-LOCK", PlayerId.Player0, 1, enterTurn: 1);
+    var attacker = AddBattlePermanent(state, 6342, 802, "FX-ATTACKER", PlayerId.Player0, 2, enterTurn: 1);
+    var blocker = AddBattlePermanent(state, 6343, 803, "FX-BLOCKER", PlayerId.Player1, 0, enterTurn: 1);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticRestrictionFixtureScript(
+            "FX-ATTACK-LOCK",
+            "FX_ATTACK_LOCK",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPermanentTargetKind.OpponentBattleAreaDigimon,
+            StaticRestrictionKind.CannotAttack),
+        new StaticRestrictionFixtureScript(
+            "FX-BLOCK-LOCK",
+            "FX_BLOCK_LOCK",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPermanentTargetKind.OpponentBattleAreaDigimon,
+            StaticRestrictionKind.CannotBlock),
+        new NoEffectCardScript("FX-ATTACKER"),
+        new NoEffectCardScript("FX-BLOCKER")));
+
+    state.TurnPlayerId = PlayerId.Player1;
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player1)
+        .Any(legal => legal.Kind == LegalActionKind.Attack
+            && legal.Action is AttackAction attack
+            && attack.Attacker == blocker.Id));
+
+    state.TurnPlayerId = PlayerId.Player0;
+    var request = services.AttackService.CreateBlockerSelectionRequest(
+        state,
+        new AttackAction(PlayerId.Player0, attacker.Id, null));
+
+    AssertTrue(request is null);
+}
+
+static void StaticCardRestrictionBlocksOptionPlay()
+{
+    var state = CreateMinimalBattleState();
+    state.Memory = 5;
+    state.CardDefinitions["FX-CANNOT-PLAY-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-CANNOT-PLAY-AURA",
+        "FX_CANNOT_PLAY_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Option Lock" },
+        CardTextEnglish = "Your opponent cannot use matching Option cards.",
+    };
+    state.CardDefinitions["FX-BLOCKED-OPTION"] = CardEffectTestFixture.NoEffectDefinition("FX-BLOCKED-OPTION") with
+    {
+        CardKinds = new[] { CardKind.Option },
+        Colors = Array.Empty<CardColor>(),
+        PlayCost = 2,
+        Dp = 0,
+        Traits = new[] { "Blocked Option" },
+        CardTextEnglish = "This Option is blocked by a static card restriction.",
+    };
+
+    AddBattlePermanent(state, 6388, 842, "FX-CANNOT-PLAY-AURA", PlayerId.Player1, 0, enterTurn: 1);
+    var option = AddCardToZone(state, 6389, "FX-BLOCKED-OPTION", PlayerId.Player0, Zone.Hand);
+    var servicesWithoutRestriction = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-CANNOT-PLAY-AURA"),
+        new NoEffectCardScript("FX-BLOCKED-OPTION")));
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardRestrictionFixtureScript(
+            "FX-CANNOT-PLAY-AURA",
+            "FX_CANNOT_PLAY_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OpponentCards,
+            StaticCardRestrictionKind.CannotPlay,
+            condition: context => context.State.CardDefinitions[
+                    context.State.Cards[context.TargetCard].DefinitionId]
+                .CardKinds.Contains(CardKind.Option),
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Option Lock" },
+                RequiredTextSubstrings = new[] { "opponent cannot use" },
+            },
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Blocked Option" },
+                RequiredTextSubstrings = new[] { "blocked" },
+            }),
+        new NoEffectCardScript("FX-BLOCKED-OPTION")));
+
+    AssertTrue(servicesWithoutRestriction.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == option));
+    AssertTrue(services.StaticEffectService.HasCardRestriction(state, option, StaticCardRestrictionKind.CannotPlay));
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == option));
+
+    AssertThrows<DomainException>(() =>
+        services.PlayCardService.Play(state, new PlayCardAction(PlayerId.Player0, option, -1)));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(option));
+    AssertEqual(5, state.Memory);
+    AssertTrue(services.ValidationReport.IsValid);
+}
+
+static void StaticCardRestrictionBlocksPermanentFieldPlay()
+{
+    var state = CreateMinimalBattleState();
+    state.Memory = 5;
+    state.CardDefinitions["FX-CANNOT-FIELD-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-CANNOT-FIELD-AURA",
+        "FX_CANNOT_FIELD_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Field Lock" },
+        CardTextEnglish = "Your opponent cannot play matching Digimon.",
+    };
+    state.CardDefinitions["FX-BLOCKED-DIGIMON"] = CardEffectTestFixture.NoEffectDefinition("FX-BLOCKED-DIGIMON") with
+    {
+        CardKinds = new[] { CardKind.Digimon },
+        PlayCost = 3,
+        Dp = 6000,
+        Traits = new[] { "Blocked Digimon" },
+        CardTextEnglish = "This Digimon is blocked from entering the field.",
+    };
+
+    AddBattlePermanent(state, 6390, 843, "FX-CANNOT-FIELD-AURA", PlayerId.Player1, 0, enterTurn: 1);
+    var digimon = AddCardToZone(state, 6391, "FX-BLOCKED-DIGIMON", PlayerId.Player0, Zone.Hand);
+    var servicesWithoutRestriction = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-CANNOT-FIELD-AURA"),
+        new NoEffectCardScript("FX-BLOCKED-DIGIMON")));
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardRestrictionFixtureScript(
+            "FX-CANNOT-FIELD-AURA",
+            "FX_CANNOT_FIELD_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OpponentCards,
+            StaticCardRestrictionKind.CannotPutField,
+            condition: context => context.State.CardDefinitions[
+                    context.State.Cards[context.TargetCard].DefinitionId]
+                .CardKinds.Contains(CardKind.Digimon),
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Field Lock" },
+                RequiredTextSubstrings = new[] { "opponent cannot play" },
+            },
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Blocked Digimon" },
+                RequiredTextSubstrings = new[] { "blocked from entering" },
+            }),
+        new NoEffectCardScript("FX-BLOCKED-DIGIMON")));
+
+    AssertTrue(servicesWithoutRestriction.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == digimon));
+    AssertTrue(services.StaticEffectService.HasCardRestriction(state, digimon, StaticCardRestrictionKind.CannotPutField));
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == digimon));
+    AssertThrows<DomainException>(() =>
+        services.PlayCardService.Play(state, new PlayCardAction(PlayerId.Player0, digimon, 1)));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(digimon));
+    AssertEqual(5, state.Memory);
+
+    var effectState = CreateMinimalBattleState();
+    effectState.CardDefinitions["FX-EFFECT-FIELD-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-EFFECT-FIELD-AURA",
+        "FX_EFFECT_FIELD_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Effect Field Lock" },
+        CardTextEnglish = "Your opponent cannot play Digimon or Tamers by effects.",
+    };
+    effectState.CardDefinitions["FX-EFFECT-SOURCE"] = CardEffectTestFixture.NoEffectDefinition("FX-EFFECT-SOURCE") with
+    {
+        CardKinds = new[] { CardKind.Digimon },
+        Dp = 3000,
+        Traits = new[] { "Effect Source" },
+    };
+    effectState.CardDefinitions["FX-EFFECT-BLOCKED-TAMER"] = CardEffectTestFixture.NoEffectDefinition("FX-EFFECT-BLOCKED-TAMER") with
+    {
+        CardKinds = new[] { CardKind.Tamer },
+        PlayCost = 4,
+        Dp = 0,
+        Traits = new[] { "Blocked Tamer" },
+    };
+
+    AddBattlePermanent(effectState, 6392, 844, "FX-EFFECT-FIELD-AURA", PlayerId.Player1, 0, enterTurn: 1);
+    var effectSource = AddBattlePermanent(effectState, 6393, 845, "FX-EFFECT-SOURCE", PlayerId.Player0, 0, enterTurn: 1);
+    var tamer = AddCardToZone(effectState, 6394, "FX-EFFECT-BLOCKED-TAMER", PlayerId.Player0, Zone.Hand);
+    var effectServices = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardRestrictionFixtureScript(
+            "FX-EFFECT-FIELD-AURA",
+            "FX_EFFECT_FIELD_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OpponentCards,
+            StaticCardRestrictionKind.CannotPutField,
+            condition: context =>
+            {
+                var definition = context.State.CardDefinitions[context.State.Cards[context.TargetCard].DefinitionId];
+                return (definition.CardKinds.Contains(CardKind.Digimon) || definition.CardKinds.Contains(CardKind.Tamer))
+                    && context.Cause?.MoveReason == MoveReason.Effect
+                    && context.Cause.EffectSourceCardId is { } sourceCard
+                    && context.State.Cards[sourceCard].Owner == context.State.Cards[context.TargetCard].Owner;
+            },
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Effect Field Lock" },
+                RequiredTextSubstrings = new[] { "by effects" },
+            }),
+        new NoEffectCardScript("FX-EFFECT-SOURCE"),
+        new NoEffectCardScript("FX-EFFECT-BLOCKED-TAMER")));
+
+    AssertFalse(effectServices.StaticEffectService.HasCardRestriction(
+        effectState,
+        tamer,
+        StaticCardRestrictionKind.CannotPutField));
+    AssertTrue(effectServices.StaticEffectService.HasCardRestriction(
+        effectState,
+        tamer,
+        StaticCardRestrictionKind.CannotPutField,
+        new StaticCardRestrictionCause(effectSource.TopCardId, effectSource.Id, PlayerId.Player0, MoveReason.Effect)));
+    AssertThrows<DomainException>(() =>
+        effectServices.PrimitiveService.PlayWithoutPayingCost(
+            effectState,
+            PlayerId.Player0,
+            tamer,
+            Zone.Hand,
+            1,
+            effectSourceCard: effectSource.TopCardId,
+            effectSourcePermanent: effectSource.Id));
+    AssertTrue(effectState.GetPlayer(PlayerId.Player0).Hand.Contains(tamer));
+    AssertTrue(effectServices.ValidationReport.IsValid);
+}
+
+static void StaticCardRestrictionBlocksReturnToHand()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-CANNOT-MOVE-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-CANNOT-MOVE-AURA",
+        "FX_CANNOT_MOVE_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Move Lock" },
+        CardTextEnglish = "Opponent Digimon with 6000 DP or less cannot move.",
+    };
+    state.CardDefinitions["FX-MOVE-SOURCE"] = CardEffectTestFixture.NoEffectDefinition("FX-MOVE-SOURCE") with
+    {
+        CardKinds = new[] { CardKind.Digimon },
+        Dp = 3000,
+        Traits = new[] { "Move Source" },
+    };
+    state.CardDefinitions["FX-BLOCKED-MOVE"] = CardEffectTestFixture.NoEffectDefinition("FX-BLOCKED-MOVE") with
+    {
+        CardKinds = new[] { CardKind.Digimon },
+        PlayCost = 3,
+        Dp = 6000,
+        Traits = new[] { "Move Blocked" },
+        CardTextEnglish = "This Digimon cannot be moved by matching effects.",
+    };
+    state.CardDefinitions["FX-FREE-MOVE"] = CardEffectTestFixture.NoEffectDefinition("FX-FREE-MOVE") with
+    {
+        CardKinds = new[] { CardKind.Digimon },
+        PlayCost = 5,
+        Dp = 7000,
+        Traits = new[] { "Free Move" },
+    };
+
+    AddBattlePermanent(state, 6395, 846, "FX-CANNOT-MOVE-AURA", PlayerId.Player1, 0, enterTurn: 1);
+    var source = AddBattlePermanent(state, 6396, 847, "FX-MOVE-SOURCE", PlayerId.Player0, 1, enterTurn: 1);
+    var blocked = AddBattlePermanent(state, 6397, 848, "FX-BLOCKED-MOVE", PlayerId.Player0, 2, enterTurn: 1);
+    var free = AddBattlePermanent(state, 6398, 849, "FX-FREE-MOVE", PlayerId.Player0, 3, enterTurn: 1);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardRestrictionFixtureScript(
+            "FX-CANNOT-MOVE-AURA",
+            "FX_CANNOT_MOVE_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OpponentCards,
+            StaticCardRestrictionKind.CannotMove,
+            condition: context =>
+            {
+                var definition = context.State.CardDefinitions[context.State.Cards[context.TargetCard].DefinitionId];
+                return definition.CardKinds.Contains(CardKind.Digimon)
+                    && definition.Dp <= 6000
+                    && context.Cause?.MoveReason == MoveReason.Effect;
+            },
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Move Lock" },
+                RequiredTextSubstrings = new[] { "cannot move" },
+            },
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Move Blocked" },
+                RequiredTextSubstrings = new[] { "cannot be moved" },
+            }),
+        new NoEffectCardScript("FX-MOVE-SOURCE"),
+        new NoEffectCardScript("FX-BLOCKED-MOVE"),
+        new NoEffectCardScript("FX-FREE-MOVE")));
+
+    var cause = new StaticCardRestrictionCause(source.TopCardId, source.Id, PlayerId.Player0, MoveReason.Effect);
+    AssertTrue(services.StaticEffectService.HasCardRestriction(
+        state,
+        blocked.TopCardId,
+        StaticCardRestrictionKind.CannotMove,
+        cause));
+    AssertFalse(services.StaticEffectService.HasCardRestriction(
+        state,
+        free.TopCardId,
+        StaticCardRestrictionKind.CannotMove,
+        cause));
+
+    AssertThrows<DomainException>(() =>
+        services.PrimitiveService.ReturnPermanentToHandWithEvents(
+            state,
+            blocked.Id,
+            source.TopCardId,
+            source.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == blocked.Id));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Hand.Contains(blocked.TopCardId));
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var result = services.PrimitiveService.ReturnPermanentToHandWithEvents(
+        state,
+        free.Id,
+        source.TopCardId,
+        source.Id);
+    AssertEqual(free.TopCardId, result.ReturnedTopCard);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(free.TopCardId));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == free.Id));
+    AssertSequence(
+        new[] { EffectTiming.WhenReturntoHandAnyone, EffectTiming.OnPermamemtReturnedToHand, EffectTiming.OnLeaveFieldAnyone },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+    AssertTrue(services.ValidationReport.IsValid);
+}
+
+static void StaticImmunityDescriptorEvaluatesMetadata()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-IMMUNITY-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-IMMUNITY-AURA",
+        "FX_IMMUNITY_AURA") with
+    {
+        Dp = 1000,
+        Traits = new[] { "Royal Base" },
+        CardTextEnglish = "Protects Armor Digimon from being deleted by effects.",
+    };
+    state.CardDefinitions["FX-ARMORED"] = CardEffectTestFixture.NoEffectDefinition("FX-ARMORED") with
+    {
+        Dp = 4000,
+        Traits = new[] { "Armor" },
+        CardTextEnglish = "This Digimon cannot be deleted by matching effects.",
+    };
+    state.CardDefinitions["FX-PLAIN"] = CardEffectTestFixture.NoEffectDefinition("FX-PLAIN") with
+    {
+        Dp = 4000,
+        Traits = new[] { "Plain" },
+        CardTextEnglish = "This Digimon has no static protection.",
+    };
+
+    AddBattlePermanent(state, 6350, 810, "FX-IMMUNITY-AURA", PlayerId.Player0, 0, enterTurn: 1);
+    var armored = AddBattlePermanent(state, 6351, 811, "FX-ARMORED", PlayerId.Player0, 1, enterTurn: 1);
+    var plain = AddBattlePermanent(state, 6352, 812, "FX-PLAIN", PlayerId.Player0, 2, enterTurn: 1);
+    var staticEffects = new StaticEffectService(CardEffectTestFixture.Registry(
+        new StaticImmunityFixtureScript(
+            "FX-IMMUNITY-AURA",
+            "FX_IMMUNITY_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPermanentTargetKind.OwnerBattleAreaDigimon,
+            StaticImmunityKind.EffectDeletion,
+            sourceMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Royal Base" },
+                RequiredTextSubstrings = new[] { "Protects Armor" },
+            },
+            targetMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Armor" },
+                RequiredTextSubstrings = new[] { "deleted" },
+            }),
+        new NoEffectCardScript("FX-ARMORED"),
+        new NoEffectCardScript("FX-PLAIN")));
+
+    AssertTrue(staticEffects.HasImmunity(state, armored, StaticImmunityKind.EffectDeletion));
+    AssertFalse(staticEffects.HasImmunity(state, plain, StaticImmunityKind.EffectDeletion));
+
+    state.CardDefinitions["FX-IMMUNITY-AURA"] = state.CardDefinitions["FX-IMMUNITY-AURA"] with
+    {
+        CardTextEnglish = "This source no longer matches the source metadata criteria.",
+    };
+
+    AssertFalse(staticEffects.HasImmunity(state, armored, StaticImmunityKind.EffectDeletion));
+}
+
+static void StaticCardMetadataModifierAffectsCostCriteria()
+{
+    var state = CreateStaticRequirementState();
+    state.Memory = 10;
+    state.CardDefinitions["FX-NAME-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-NAME-AURA",
+        "FX_NAME_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-TRAIT-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-TRAIT-AURA",
+        "FX_TRAIT_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-METADATA-COST-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-METADATA-COST-AURA",
+        "FX_METADATA_COST_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-METADATA-TARGET"] = CardEffectTestFixture.NoEffectDefinition("FX-METADATA-TARGET") with
+    {
+        CardNameEnglish = "Plainmon",
+        PlayCost = 5,
+        Dp = 4000,
+        Traits = Array.Empty<string>(),
+    };
+
+    var target = AddCardToZone(state, 6355, "FX-METADATA-TARGET", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(state, 6358, 818, "FX-METADATA-COST-AURA", PlayerId.Player0, 2, enterTurn: 1);
+    var staticEffectsWithoutMetadata = new StaticEffectService(CardEffectTestFixture.Registry(
+        new StaticCostModifierFixtureScript(
+            "FX-METADATA-COST-AURA",
+            "FX_METADATA_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Play,
+            amount: -2,
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Hybrid" },
+                RequiredNameSubstrings = new[] { "Greymon" },
+            }),
+        new NoEffectCardScript("FX-METADATA-TARGET")));
+
+    AssertEqual(5, staticEffectsWithoutMetadata.ApplyCostModifiers(
+        state,
+        target,
+        baseCost: 5,
+        StaticCostKind.Play));
+
+    AddBattlePermanent(state, 6356, 816, "FX-NAME-AURA", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 6357, 817, "FX-TRAIT-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    var staticEffects = new StaticEffectService(CardEffectTestFixture.Registry(
+        new StaticCardNameFixtureScript(
+            "FX-NAME-AURA",
+            "FX_NAME_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OwnerCards,
+            StaticCardNameLayer.Current,
+            "Greymon"),
+        new StaticCardTraitFixtureScript(
+            "FX-TRAIT-AURA",
+            "FX_TRAIT_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OwnerCards,
+            "Hybrid"),
+        new StaticCostModifierFixtureScript(
+            "FX-METADATA-COST-AURA",
+            "FX_METADATA_COST_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCostKind.Play,
+            amount: -2,
+            targetCardMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "Hybrid" },
+                RequiredNameSubstrings = new[] { "Greymon" },
+            }),
+        new NoEffectCardScript("FX-METADATA-TARGET")));
+
+    AssertSequence(new[] { "Plainmon", "Greymon" }, staticEffects.EffectiveCardNames(state, target));
+    AssertSequence(new[] { "Hybrid" }, staticEffects.EffectiveCardTraits(state, target));
+    AssertEqual(3, staticEffects.ApplyCostModifiers(state, target, baseCost: 5, StaticCostKind.Play));
+    AssertEqual("Plainmon", state.CardDefinitions["FX-METADATA-TARGET"].CardNameEnglish);
+    AssertEqual(0, state.CardDefinitions["FX-METADATA-TARGET"].Traits.Count);
+}
+
+static void StaticCardLevelModifierFeedsPermanentLevelRequirement()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELF-LEVEL-L3"] = CardEffectTestFixture.EffectDefinition(
+        "FX-SELF-LEVEL-L3",
+        "FX_SELF_LEVEL_L3") with
+    {
+        Colors = new[] { CardColor.Blue },
+        Level = 3,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-LEVEL-EVO"] = CardEffectTestFixture.NoEffectDefinition("FX-LEVEL-EVO") with
+    {
+        Colors = new[] { CardColor.Blue },
+        Level = 5,
+        PlayCost = 7,
+        Dp = 7000,
+        EvoCosts = new[] { new EvoCostDefinition(CardColor.Blue, 4, 2) },
+    };
+    var target = AddBattlePermanent(state, 6370, 824, "FX-SELF-LEVEL-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6371, "FX-LEVEL-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6372, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var servicesWithoutLevel = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-SELF-LEVEL-L3"),
+        new NoEffectCardScript("FX-LEVEL-EVO")));
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardLevelFixtureScript(
+            "FX-SELF-LEVEL-L3",
+            "FX_SELF_LEVEL_L3",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.SelfCard,
+            level: 4),
+        new NoEffectCardScript("FX-LEVEL-EVO")));
+
+    AssertFalse(servicesWithoutLevel.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+    AssertEqual(4, services.StaticEffectService.EffectiveCardLevel(state, target.TopCardId));
+    AssertEqual(4, services.StaticEffectService.EffectivePermanentLevel(state, target));
+    AssertEqual(3, state.CardDefinitions["FX-SELF-LEVEL-L3"].Level);
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard
+            && digivolve.TargetPermanent == target.Id)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(3, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void StaticPermanentLevelModifierAffectsNormalDigivolutionRequirement()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-BLUE-L3"] = CardEffectTestFixture.NoEffectDefinition("FX-BLUE-L3") with
+    {
+        Colors = new[] { CardColor.Blue },
+        Level = 3,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-LEVEL-EVO"] = CardEffectTestFixture.NoEffectDefinition("FX-LEVEL-EVO") with
+    {
+        Colors = new[] { CardColor.Blue },
+        Level = 5,
+        PlayCost = 7,
+        Dp = 7000,
+        EvoCosts = new[] { new EvoCostDefinition(CardColor.Blue, 4, 2) },
+    };
+    state.CardDefinitions["FX-PERMANENT-LEVEL-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-PERMANENT-LEVEL-AURA",
+        "FX_PERMANENT_LEVEL_AURA") with
+    {
+        CardKinds = new[] { CardKind.Tamer },
+        Level = 0,
+        Dp = 1000,
+    };
+    var target = AddBattlePermanent(state, 6373, 825, "FX-BLUE-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6374, "FX-LEVEL-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6375, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticPermanentLevelFixtureScript(
+            "FX-PERMANENT-LEVEL-AURA",
+            "FX_PERMANENT_LEVEL_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPermanentTargetKind.OwnerBattleAreaDigimon,
+            level: 4),
+        new NoEffectCardScript("FX-BLUE-L3"),
+        new NoEffectCardScript("FX-LEVEL-EVO")));
+
+    AssertEqual(3, services.StaticEffectService.EffectivePermanentLevel(state, target));
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+
+    AddBattlePermanent(state, 6376, 826, "FX-PERMANENT-LEVEL-AURA", PlayerId.Player0, 1, enterTurn: 1);
+
+    AssertEqual(4, services.StaticEffectService.EffectivePermanentLevel(state, target));
+    AssertEqual(3, state.CardDefinitions["FX-BLUE-L3"].Level);
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard
+            && digivolve.TargetPermanent == target.Id)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(3, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void StaticCardColorModifierAffectsOptionColorRequirement()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-GREEN-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-GREEN-HOST") with
+    {
+        Colors = new[] { CardColor.Green },
+    };
+    state.CardDefinitions["FX-COLOR-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-COLOR-AURA",
+        "FX_COLOR_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-RED-OPTION"] = CardEffectTestFixture.OptionEffectDefinition(
+        "FX-RED-OPTION",
+        "FX_RED_OPTION",
+        playCost: 0) with
+    {
+        Colors = new[] { CardColor.Red },
+        OptionCardColorRequirements = new[] { CardColor.Red },
+    };
+    var host = AddBattlePermanent(state, 6360, 820, "FX-GREEN-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var option = AddCardToZone(state, 6361, "FX-RED-OPTION", PlayerId.Player0, Zone.Hand);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardColorFixtureScript(
+            "FX-COLOR-AURA",
+            "FX_COLOR_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OwnerCards,
+            StaticCardColorLayer.Current,
+            CardColor.Red),
+        new NoEffectCardScript("FX-GREEN-HOST"),
+        new NoEffectCardScript("FX-RED-OPTION")));
+
+    AssertFalse(services.StaticEffectService.MatchesOptionColorRequirement(state, PlayerId.Player0, option));
+    AddBattlePermanent(state, 6362, 821, "FX-COLOR-AURA", PlayerId.Player0, 1, enterTurn: 1);
+
+    AssertSequence(new[] { CardColor.Green, CardColor.Red }, services.StaticEffectService.EffectiveCardColors(state, host.TopCardId));
+    AssertSequence(new[] { CardColor.Green }, state.CardDefinitions[state.Cards[host.TopCardId].DefinitionId].CardColors);
+    AssertTrue(services.StaticEffectService.MatchesOptionColorRequirement(state, PlayerId.Player0, option));
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == option)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void StaticIgnoreColorRequirementPermitsOption()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-IGNORE-OPTION"] = CardEffectTestFixture.OptionEffectDefinition(
+        "FX-IGNORE-OPTION",
+        "FX_IGNORE_OPTION",
+        playCost: 0) with
+    {
+        Colors = new[] { CardColor.Purple },
+        OptionCardColorRequirements = new[] { CardColor.Purple },
+    };
+    var option = AddCardToZone(state, 6363, "FX-IGNORE-OPTION", PlayerId.Player0, Zone.Hand);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new IgnoreColorRequirementFixtureScript(
+            "FX-IGNORE-OPTION",
+            "FX_IGNORE_OPTION",
+            ContinuousEffectSourceKind.Hand,
+            StaticCardTargetKind.SelfCard)));
+
+    AssertTrue(services.StaticEffectService.MatchesOptionColorRequirement(state, PlayerId.Player0, option));
+    AssertTrue(services.StaticEffectService.EvaluateIgnoreColorRequirements(state, option).Any());
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.PlayCard
+            && legal.Action is PlayCardAction play
+            && play.Card == option)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
+static void StaticCardColorModifierAffectsDigivolutionColorRequirement()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-GREEN-L3"] = CardEffectTestFixture.NoEffectDefinition("FX-GREEN-L3") with
+    {
+        Colors = new[] { CardColor.Green },
+        Level = 3,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-BLUE-EVO"] = CardEffectTestFixture.NoEffectDefinition("FX-BLUE-EVO") with
+    {
+        Colors = new[] { CardColor.Blue },
+        Level = 4,
+        PlayCost = 5,
+        Dp = 6000,
+        EvoCosts = new[] { new EvoCostDefinition(CardColor.Blue, 3, 2) },
+    };
+    state.CardDefinitions["FX-COLOR-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-COLOR-AURA",
+        "FX_COLOR_AURA") with
+    {
+        CardKinds = new[] { CardKind.Tamer },
+        Level = 0,
+        Dp = 1000,
+    };
+    var target = AddBattlePermanent(state, 6364, 822, "FX-GREEN-L3", PlayerId.Player0, 0, enterTurn: 1);
+    var evoCard = AddCardToZone(state, 6365, "FX-BLUE-EVO", PlayerId.Player0, Zone.Hand);
+    var drawCard = AddCardToZone(state, 6366, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new StaticCardColorFixtureScript(
+            "FX-COLOR-AURA",
+            "FX_COLOR_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OwnerCards,
+            StaticCardColorLayer.Current,
+            CardColor.Blue),
+        new NoEffectCardScript("FX-GREEN-L3"),
+        new NoEffectCardScript("FX-BLUE-EVO")));
+
+    AssertFalse(services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard));
+    AddBattlePermanent(state, 6367, 823, "FX-COLOR-AURA", PlayerId.Player0, 1, enterTurn: 1);
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Digivolve
+            && legal.Action is DigivolveAction digivolve
+            && digivolve.Card == evoCard
+            && digivolve.TargetPermanent == target.Id)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertEqual(evoCard, target.TopCardId);
+    AssertEqual(3, state.Memory);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Hand.Contains(drawCard));
+    new EngineInvariantChecker().ThrowIfInvalid(state);
+}
+
 static void StaticLinkRequirementHandSourceGeneratesAndExecutes()
 {
     var state = CreateStaticRequirementState();
@@ -8614,6 +12123,95 @@ static void StaticLinkRequirementHandSourceGeneratesAndExecutes()
     new EngineInvariantChecker().Check(state).ThrowIfInvalid();
 }
 
+static void StaticLinkRequirementUsesEffectiveMetadataAndLevel()
+{
+    var state = CreateStaticRequirementState();
+    state.CardDefinitions["FX-LINK-TARGET"] = state.CardDefinitions["FX-LINK-TARGET"] with
+    {
+        Traits = Array.Empty<string>(),
+        Level = 3,
+    };
+    state.CardDefinitions["FX-LINK-TRAIT-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-LINK-TRAIT-AURA",
+        "FX_LINK_TRAIT_AURA") with
+    {
+        Dp = 1000,
+    };
+    state.CardDefinitions["FX-LINK-LEVEL-AURA"] = CardEffectTestFixture.EffectDefinition(
+        "FX-LINK-LEVEL-AURA",
+        "FX_LINK_LEVEL_AURA") with
+    {
+        Dp = 1000,
+    };
+    var target = AddBattlePermanent(state, 6377, 827, "FX-LINK-TARGET", PlayerId.Player0, 0, enterTurn: 1);
+    var linkCard = AddCardToZone(state, 6378, "FX-STATIC-LINK", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(state, 6379, 828, "FX-LINK-TRAIT-AURA", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 6380, 829, "FX-LINK-LEVEL-AURA", PlayerId.Player0, 2, enterTurn: 1);
+    var servicesWithoutEffectiveLinkGate = CreateStaticRequirementServices(
+        new StaticLinkRequirementFixtureScript(
+            "FX-STATIC-LINK",
+            "FX_STATIC_LINK",
+            ContinuousEffectSourceKind.Hand,
+            cost: 2,
+            targetMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "LinkTarget" },
+            },
+            targetCondition: context => context.TargetPermanent.LinkedCards.Count == 0
+                && context.StaticEffects is not null
+                && context.StaticEffects.EffectivePermanentLevel(context.State, context.TargetPermanent) == 4),
+        new NoEffectCardScript("FX-LINK-TRAIT-AURA"),
+        new NoEffectCardScript("FX-LINK-LEVEL-AURA"));
+    var services = CreateStaticRequirementServices(
+        new StaticLinkRequirementFixtureScript(
+            "FX-STATIC-LINK",
+            "FX_STATIC_LINK",
+            ContinuousEffectSourceKind.Hand,
+            cost: 2,
+            targetMetadataCriteria: new CardMetadataCriteria
+            {
+                RequiredTraits = new[] { "LinkTarget" },
+            },
+            targetCondition: context => context.TargetPermanent.LinkedCards.Count == 0
+                && context.StaticEffects is not null
+                && context.StaticEffects.EffectivePermanentLevel(context.State, context.TargetPermanent) == 4),
+        new StaticCardTraitFixtureScript(
+            "FX-LINK-TRAIT-AURA",
+            "FX_LINK_TRAIT_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticCardTargetKind.OwnerCards,
+            "LinkTarget"),
+        new StaticPermanentLevelFixtureScript(
+            "FX-LINK-LEVEL-AURA",
+            "FX_LINK_LEVEL_AURA",
+            ContinuousEffectSourceKind.FieldTop,
+            StaticEffectPermanentTargetKind.OwnerBattleAreaDigimon,
+            level: 4));
+
+    AssertFalse(servicesWithoutEffectiveLinkGate.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Any(legal => legal.Kind == LegalActionKind.Link
+            && legal.Action is LinkAction link
+            && link.LinkCard == linkCard));
+    AssertSequence(new[] { "LinkTarget" }, services.StaticEffectService.EffectiveCardTraits(state, target.TopCardId));
+    AssertEqual(4, services.StaticEffectService.EffectivePermanentLevel(state, target));
+    AssertEqual(3, state.CardDefinitions["FX-LINK-TARGET"].Level);
+    AssertEqual(0, state.CardDefinitions["FX-LINK-TARGET"].Traits.Count);
+
+    var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
+        .Single(legal => legal.Kind == LegalActionKind.Link
+            && legal.Action is LinkAction link
+            && link.LinkCard == linkCard
+            && link.TargetPermanent == target.Id)
+        .Action;
+
+    services.ActionExecutor.Execute(state, action, new GameTrace());
+
+    AssertSequence(new[] { linkCard }, target.LinkedCards);
+    AssertEqual(3, state.Memory);
+    AssertEqual(Zone.LinkedCards, state.Cards[linkCard].CurrentZone);
+    new EngineInvariantChecker().Check(state).ThrowIfInvalid();
+}
+
 static void StaticRequirementReplayDeterministic()
 {
     var state = CreateStaticRequirementState();
@@ -8627,7 +12225,8 @@ static void StaticRequirementReplayDeterministic()
             ContinuousEffectSourceKind.Hand,
             cost: 1,
             requiredColor: CardColor.Blue,
-            requiredLevel: 3));
+            requiredLevel: 3,
+            ignoreDigivolutionRequirement: true));
     var initial = state.Clone();
     var trace = new GameTrace();
     var action = services.LegalActionGenerator.Generate(state, PlayerId.Player0)
@@ -8948,6 +12547,43 @@ static void TriggerPipelineSelectionBoundaryReturnsPendingRequest()
     AssertEqual("test-selection:FX-SELECT", result.PendingSelectionRequest!.Id);
     AssertEqual(target.Id, result.PendingSelectionRequest.Candidates[0].Permanent!.Value);
     AssertTrue(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+}
+
+static void TriggerPipelinePendingResumeSkipsStaleSource()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SELECT"] = CardEffectTestFixture.EffectDefinition("FX-SELECT", "FX_Select");
+    var source = AddCardToZone(state, 6043, "FX-SELECT", PlayerId.Player0, Zone.Executing);
+    var target = AddBattlePermanent(state, 6044, 644, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT",
+            "FX_Select",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1)));
+
+    var pending = pipeline.Run(state, EffectTiming.OptionSkill, PlayerId.Player0, source);
+
+    AssertTrue(pending.HasPendingSelection);
+    AssertEqual(EffectDecisionStage.Selection, pending.PendingContinuation!.PendingStage);
+    AssertEqual(TriggerSourceRole.Executing, pending.PendingResolution!.SourceSnapshot!.Role);
+    var request = pending.PendingSelectionRequest!;
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(source, Zone.Executing, Zone.Trash, MoveReason.Effect, FaceUp: true));
+
+    var completed = pipeline.Resume(
+        state,
+        pending.PendingContinuation,
+        SelectionResult.ForTargets(request.Id, new[] { request.Candidates[0] }));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertEqual(0, completed.ExecutedEffects.Count);
+    AssertEqual(0, completed.SelectionApplications.Count);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).FieldPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertFalse(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertEqual(Zone.Trash, state.Cards[source].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(source));
 }
 
 static void TriggerPipelineOptionalProviderPausesExplicitSelection()
@@ -10082,7 +13718,8 @@ static void TriggerPipelineWhenDigivolvingHookInvokesDescriptor()
     var evolveCard = AddCardToZone(state, 6082, "FX-CHAMPION", PlayerId.Player0, Zone.Hand);
     AddCardToZone(state, 6083, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
     var pipeline = new TriggerPipelineService(CardEffectTestFixture.Registry(
-        new TimingMemoryCardScript("FX-CHAMPION", "FX_Digivolve", EffectTiming.WhenDigivolving, amount: 1)));
+        new TimingMemoryCardScript("FX-CHAMPION", "FX_Digivolve", EffectTiming.WhenDigivolving, amount: 1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only digivolution source host.")));
 
     new DigivolveService(triggerPipelineService: pipeline).Digivolve(
         state,
@@ -10090,6 +13727,142 @@ static void TriggerPipelineWhenDigivolvingHookInvokesDescriptor()
 
     AssertEqual(evolveCard, target.TopCardId);
     AssertEqual(4, state.Memory);
+}
+
+static void TriggerPipelineOnEnterFieldAnyonePlayPayloadInvokesGlobalDescriptor()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.Memory = 10;
+    state.CardDefinitions["FX-PLAYED"] = CardEffectTestFixture.EffectDefinition("FX-PLAYED", "FX_Played") with
+    {
+        Level = 3,
+        PlayCost = 1,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-OBSERVER"] = CardEffectTestFixture.EffectDefinition("FX-OBSERVER", "FX_Observer");
+    CardInstanceId playedCard = default;
+    var observer = AddBattlePermanent(state, 6084, 684, "FX-OBSERVER", PlayerId.Player0, 0, enterTurn: 1);
+    playedCard = AddCardToZone(state, 6085, "FX-PLAYED", PlayerId.Player0, Zone.Hand);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-PLAYED", "FX_Played", notes: "Test-only played card."),
+        new ConditionalRecordingTimingCardScript(
+            "FX-OBSERVER",
+            "FX_Observer",
+            EffectTiming.OnEnterFieldAnyone,
+            "enter-play",
+            order,
+            effectContext => EnterFieldEventPayload.IsPlayedEvent(effectContext)
+                && EnterFieldEventPayload.ContainsEnteredCard(effectContext, playedCard))));
+
+    var result = services.PlayCardService.PlayWithResult(
+        state,
+        new PlayCardAction(PlayerId.Player0, playedCard, 1));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "enter-play" }, order);
+    var observed = result.TriggerResult!.ExecutedEffects.Single(effect => effect.Timing == EffectTiming.OnEnterFieldAnyone);
+    AssertEqual(observer.TopCardId, observed.SourceCard!.Value);
+    AssertEqual(observer.Id, observed.SourcePermanent!.Value);
+    AssertEqual(playedCard, (CardInstanceId)observed.Context.GetValueOrDefault(EnterFieldEventPayload.Card)!);
+    AssertTrue(EnterFieldEventPayload.ContainsEnteredPermanent(observed.Context, result.Permanent!.Id));
+    AssertFalse(EnterFieldEventPayload.IsEvolutionEvent(observed.Context));
+}
+
+static void TriggerPipelineOnEnterFieldAnyoneDigivolvePayloadInvokesGlobalDescriptor()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.Memory = 10;
+    state.CardDefinitions["FX-EVOLVE"] = state.CardDefinitions["BT1-CHAMPION"] with
+    {
+        CardId = "FX-EVOLVE",
+        Name = "FX-EVOLVE",
+        CardEffectClassName = "FX_Evolve",
+    };
+    state.CardDefinitions["FX-OBSERVER"] = CardEffectTestFixture.EffectDefinition("FX-OBSERVER", "FX_Observer");
+    CardInstanceId evolveCard = default;
+    var observer = AddBattlePermanent(state, 6086, 686, "FX-OBSERVER", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 6087, 687, "BT1-ROOKIE", PlayerId.Player0, 1, enterTurn: 1);
+    evolveCard = AddCardToZone(state, 6088, "FX-EVOLVE", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(state, 6089, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new NoEffectCardScript("FX-EVOLVE", "FX_Evolve", notes: "Test-only digivolved card."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only digivolution source host."),
+        new ConditionalRecordingTimingCardScript(
+            "FX-OBSERVER",
+            "FX_Observer",
+            EffectTiming.OnEnterFieldAnyone,
+            "enter-digivolve",
+            order,
+            effectContext => EnterFieldEventPayload.IsEvolutionEvent(effectContext)
+                && EnterFieldEventPayload.ContainsEnteredCard(effectContext, evolveCard))));
+
+    var result = services.DigivolveService.DigivolveWithResult(
+        state,
+        new DigivolveAction(PlayerId.Player0, evolveCard, target.Id));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertSequence(new[] { "enter-digivolve" }, order);
+    var observed = result.TriggerResult!.ExecutedEffects.Single(effect => effect.Timing == EffectTiming.OnEnterFieldAnyone);
+    AssertEqual(observer.TopCardId, observed.SourceCard!.Value);
+    AssertEqual(observer.Id, observed.SourcePermanent!.Value);
+    AssertEqual(evolveCard, (CardInstanceId)observed.Context.GetValueOrDefault(EnterFieldEventPayload.Card)!);
+    AssertTrue(EnterFieldEventPayload.ContainsEnteredPermanent(observed.Context, target.Id));
+    AssertTrue(EnterFieldEventPayload.IsEvolutionEvent(observed.Context));
+}
+
+static void TriggerPipelineOnEnterFieldAnyoneTailResumesAfterOnPlaySelection()
+{
+    var order = new List<string>();
+    var state = CreateMinimalBattleState();
+    state.Memory = 10;
+    state.CardDefinitions["FX-SELECT-PLAY"] = CardEffectTestFixture.EffectDefinition("FX-SELECT-PLAY", "FX_SelectPlay") with
+    {
+        Level = 3,
+        PlayCost = 1,
+        Dp = 3000,
+    };
+    state.CardDefinitions["FX-OBSERVER"] = CardEffectTestFixture.EffectDefinition("FX-OBSERVER", "FX_Observer");
+    var observer = AddBattlePermanent(state, 6090, 690, "FX-OBSERVER", PlayerId.Player0, 0, enterTurn: 1);
+    var selectedCard = AddCardToZone(state, 6093, "FX-SELECT-PLAY", PlayerId.Player0, Zone.Hand);
+    var target = AddBattlePermanent(state, 6094, 694, "BT1-ROOKIE", PlayerId.Player1, 0, enterTurn: 1);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-SELECT-PLAY",
+            "FX_SelectPlay",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnPlay),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only OnPlay selection target."),
+        new ConditionalRecordingTimingCardScript(
+            "FX-OBSERVER",
+            "FX_Observer",
+            EffectTiming.OnEnterFieldAnyone,
+            "enter-tail",
+            order,
+            EnterFieldEventPayload.IsPlayedEvent)));
+
+    var pending = services.PlayCardService.PlayWithResult(
+        state,
+        new PlayCardAction(PlayerId.Player0, selectedCard, 1));
+
+    AssertTrue(pending.HasPendingSelection);
+    AssertSequence(Array.Empty<string>(), order);
+
+    var completed = services.TriggerPipelineService.Resume(
+        state,
+        pending.PendingContinuation!,
+        SelectionResult.ForTargets(
+            pending.PendingSelectionRequest!.Id,
+            new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.HasPendingSelection);
+    AssertSequence(new[] { "enter-tail" }, order);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(completed.ExecutedEffects.Any(effect =>
+        effect.Timing == EffectTiming.OnEnterFieldAnyone
+        && effect.SourcePermanent == observer.Id));
 }
 
 static void TriggerPipelineOnAllyAttackHookInvokesDescriptor()
@@ -10815,6 +14588,7 @@ static void RuntimeCompositionProductionGraphValidatesRequiredServices()
     AssertTrue(services.PrimitiveService is not null);
     AssertTrue(services.ActionExecutor is not null);
     AssertTrue(services.TurnRunner is not null);
+    AssertTrue(services.StaticEffectService is not null);
 }
 
 static void RuntimeCompositionMissingTriggerPipelineFailsValidation()
@@ -11203,7 +14977,8 @@ static void EngineSessionOnPlaySelectionPauseResume()
             "FX_OnPlay",
             SelectionPrimitiveMode.Destroy,
             PlayerId.Player1,
-            timing: EffectTiming.OnPlay)));
+            timing: EffectTiming.OnPlay),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only OnPlay target host.")));
     var state = CreateMinimalBattleState();
     state.CardDefinitions["FX-ONPLAY"] = CardEffectTestFixture.EffectDefinition("FX-ONPLAY", "FX_OnPlay");
     var card = AddCardToZone(state, 6295, "FX-ONPLAY", PlayerId.Player0, Zone.Hand);
@@ -13982,6 +17757,7 @@ static void OptionLifecycleSt1HandOptionRegression()
     var starlightState = CreateSt1ScenarioState();
     starlightState.Memory = 10;
     var starlight = AddCardToZone(starlightState, 6273, "ST1-14", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(starlightState, 6278, 878, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
     var starlightResult = new PlayCardService(
         triggerPipelineService: new TriggerPipelineService(registry))
         .PlayOptionFromHand(starlightState, new PlayCardAction(PlayerId.Player0, starlight, -1));
@@ -13995,6 +17771,7 @@ static void OptionLifecycleSt1HandOptionRegression()
     var gigaState = CreateSt1ScenarioState();
     gigaState.Memory = 10;
     var giga = AddCardToZone(gigaState, 6274, "ST1-15", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(gigaState, 6279, 879, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
     var smallTarget = AddBattlePermanent(gigaState, 6275, 875, "ST1-04", PlayerId.Player1, 0, enterTurn: 1);
     var gigaProvider = new TestDecisionProvider();
     gigaProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
@@ -14010,6 +17787,7 @@ static void OptionLifecycleSt1HandOptionRegression()
     var gaiaState = CreateSt1ScenarioState();
     gaiaState.Memory = 10;
     var gaia = AddCardToZone(gaiaState, 6276, "ST1-16", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(gaiaState, 6280, 880, "ST1-04", PlayerId.Player0, 0, enterTurn: 1);
     var largeTarget = AddBattlePermanent(gaiaState, 6277, 877, "ST1-06", PlayerId.Player1, 0, enterTurn: 1);
     var gaiaProvider = new TestDecisionProvider();
     gaiaProvider.EnqueueSelectionResult(SelectionResult.ForTargets(
@@ -14030,6 +17808,7 @@ static void OptionLifecycleSt2St3HandOptionRegression()
     var hammerSparkState = CreateSt2St3ScenarioState();
     hammerSparkState.Memory = 5;
     var hammerSpark = AddCardToZone(hammerSparkState, 6281, "ST2-13", PlayerId.Player0, Zone.Hand);
+    AddBattlePermanent(hammerSparkState, 6287, 887, "ST2-02", PlayerId.Player0, 0, enterTurn: 1);
     var hammerResult = new PlayCardService(
         triggerPipelineService: new TriggerPipelineService(registry))
         .PlayOptionFromHand(hammerSparkState, new PlayCardAction(PlayerId.Player0, hammerSpark, -1));
@@ -14891,12 +18670,22 @@ static void AssetRegistryMappingSourceUnavailableReport()
 
 static void AssetRegistryMappingActualLocalDcgoAudit()
 {
+    var root = WorkspaceRoot();
+    var dcgoRoot = Path.Combine(root, "DCGO");
     var report = new AssetRegistryMappingValidator().ValidateLocalSource(new AssetRegistryLocalAuditRequest(
         "ST1-ST3 local DCGO asset audit",
-        WorkspaceRoot(),
-        Path.Combine(WorkspaceRoot(), "DCGO"),
+        root,
+        dcgoRoot,
         St2St3CardScriptCatalog.CreateCombinedWithSt1Registry(),
         LoadCurrentRegistryStatusSnapshot()));
+
+    if (!Directory.Exists(dcgoRoot))
+    {
+        AssertFalse(report.IsValid);
+        AssertEqual(AssetRegistrySourceStatus.SourceUnavailable, report.SourceStatus);
+        AssertTrue(report.Issues.Any(issue => issue.Code == "SourceUnavailable"));
+        return;
+    }
 
     AssertFalse(report.IsValid);
     AssertEqual(AssetRegistrySourceStatus.Available, report.SourceStatus);
@@ -16909,7 +20698,7 @@ static string WorkspaceRoot()
     {
         if (File.Exists(Path.Combine(directory.FullName, "AGENTS.md"))
             && Directory.Exists(Path.Combine(directory.FullName, "src"))
-            && Directory.Exists(Path.Combine(directory.FullName, "DCGO")))
+            && Directory.Exists(Path.Combine(directory.FullName, "docs")))
         {
             return directory.FullName;
         }
@@ -19033,6 +22822,289 @@ static CardInstanceId AddEvolutionSource(
         PermanentId = permanent.Id,
     });
     return card;
+}
+
+internal sealed class FixtureCEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect(
+            "FixtureEffect",
+            context => context.SourceCard == cardSource.Id,
+            cardSource);
+        effect.SetHashString("fixture:stable");
+        effect.SetIsOptional(true);
+        effect.SetIsBackgroundProcess(true);
+        effect.SetMaxCountPerTurn(1);
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureTargetBaseEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureTargetBaseEffect", _ => true, cardSource);
+        effect.SetHashString("fixture:target-base");
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureAddSkillEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.None)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureAddSkillEffect();
+        effect.SetUpICardEffect("FixtureAddSkillEffect", _ => true, cardSource);
+        effect.SetHashString($"fixture:add-provider:{cardSource.Id.Value}");
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureAddSkillEffect : ICardEffect, IAddSkillEffect
+{
+    public bool ShouldAddEffect(EffectTiming timing) => timing == EffectTiming.OnPlay;
+
+    public List<ICardEffect> GetCardEffect(
+        CardSource card,
+        List<ICardEffect> GetCardEffects,
+        EffectTiming timing)
+    {
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureAddedEffect", _ => true, card);
+        effect.SetHashString($"fixture:added:{EffectSourceCard?.Id.Value}");
+        GetCardEffects.Add(effect);
+        return GetCardEffects;
+    }
+}
+
+internal sealed class FixtureCannotAffectEntityEffect : CEntity_Effect
+{
+    private readonly CardInstanceId _blockedCard;
+
+    public FixtureCannotAffectEntityEffect(CardInstanceId blockedCard)
+    {
+        _blockedCard = blockedCard;
+    }
+
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.None)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureCannotAffectEffect(_blockedCard);
+        effect.SetUpICardEffect("FixtureCannotAffectEffect", _ => true, cardSource);
+        effect.SetHashString($"fixture:cannot-affect:{cardSource.Id.Value}");
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureCannotAffectEffect : ICardEffect, ICanNotAffectedEffect
+{
+    private readonly CardInstanceId _blockedCard;
+
+    public FixtureCannotAffectEffect(CardInstanceId blockedCard)
+    {
+        _blockedCard = blockedCard;
+    }
+
+    public bool CanNotAffect(CardSource cardSource, ICardEffect cardEffect) =>
+        cardSource.Id == _blockedCard && cardEffect is IAddSkillEffect;
+}
+
+internal sealed class FixtureActivateEffect : ActivateICardEffect;
+
+internal sealed class FixtureInheritedCEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureInheritedEffect", _ => true, cardSource);
+        effect.SetHashString("fixture:inherited");
+        effect.SetIsInheritedEffect(true);
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureLinkedCEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureLinkedEffect", _ => true, cardSource);
+        effect.SetHashString("fixture:linked");
+        effect.SetIsLinkedEffect(true);
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureSecurityCEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureSecurityEffect", _ => true, cardSource);
+        effect.SetHashString("fixture:security");
+        effect.SetIsSecurityEffect(true);
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureSourceZoneCEntityEffect : CEntity_Effect
+{
+    private readonly string _stableId;
+
+    public FixtureSourceZoneCEntityEffect(string stableId)
+    {
+        _stableId = stableId;
+    }
+
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OnPlay)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureSourceZoneEffect", _ => true, cardSource);
+        effect.SetHashString(_stableId);
+        return new ICardEffect[] { effect };
+    }
+}
+
+internal sealed class FixtureSelectionCEntityEffect : CEntity_Effect
+{
+    public override IReadOnlyList<ICardEffect> CardEffects(EffectTiming timing, CardSource cardSource)
+    {
+        if (timing != EffectTiming.OptionSkill)
+        {
+            return Array.Empty<ICardEffect>();
+        }
+
+        var effect = new FixtureActivateEffect();
+        effect.SetUpICardEffect("FixtureSelectionEffect", _ => true, cardSource);
+        effect.SetHashString("fixture:select");
+        effect.SetSelectionRequest(
+            CreateTargetRequest,
+            ApplySelection,
+            "target");
+        return new ICardEffect[] { effect };
+    }
+
+    private static SelectionRequest CreateTargetRequest(EffectContext context, string requestId)
+    {
+        var player = context.Player ?? PlayerId.Player0;
+        var candidates = context.State
+            .GetPlayer(PlayerId.Player1)
+            .BattleAreaPermanents
+            .Select(permanent => new SelectableTarget(
+                SelectionTargetKind.Permanent,
+                $"fixture:target:{permanent.Id.Value}",
+                permanent.ControllerPlayerId,
+                Permanent: permanent.Id,
+                Zone: Zone.BattleArea))
+            .ToArray();
+
+        return new SelectionRequest(
+            requestId,
+            player,
+            SelectionKind.SelectPermanent,
+            SelectionTargetKind.Permanent,
+            minCount: 1,
+            maxCount: 1,
+            canSkip: false,
+            canEndNotMax: false,
+            candidates,
+            "Select fixture target.");
+    }
+
+    private static void ApplySelection(SelectionResultApplicationContext context)
+    {
+        foreach (var permanent in context.SelectedPermanentIds)
+        {
+            context.Primitives.DestroyPermanent(context.State, permanent, context.Trace);
+        }
+    }
+}
+
+internal sealed class FixtureCEntityCardScript : ICardScript
+{
+    private readonly CEntity_Effect _entity;
+    private readonly EffectTiming _timing;
+
+    public FixtureCEntityCardScript(
+        string cardId,
+        string effectClassName,
+        CEntity_Effect entity,
+        EffectTiming timing)
+    {
+        _entity = entity;
+        _timing = timing;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture adapter that routes CEntity_Effect through the card script registry.");
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context) =>
+        _entity.CreateEffectDescriptors(
+            context.State,
+            _timing,
+            context.SourceCard,
+            context.SourcePermanent,
+            context.Controller);
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new DomainException(
+            $"Fixture CEntity script '{Porting.CardId}' should resolve through descriptor continuations.");
+}
+
+internal sealed class FixtureLimitedEffect : ICardEffect
+{
+    public EffectDescriptor CreateDescriptorWithUnsupportedCount(CardSource cardSource)
+    {
+        SetUpICardEffect("LimitedFixture", _ => true, cardSource);
+        SetMaxCountPerTurn(2);
+        return ToEffectDescriptor(EffectTiming.OnPlay);
+    }
 }
 
 internal sealed class MutatingSelectionDecisionProvider : IDecisionProvider

@@ -76,6 +76,48 @@ internal static class BattleRules
     public static bool IsDigimon(GameState state, CardInstanceId card) =>
         Definition(state, card).CardKinds.Contains(CardKind.Digimon);
 
+    public static IReadOnlyList<CardColor> CardColors(
+        GameState state,
+        CardInstanceId card,
+        StaticEffectService? staticEffects = null) =>
+        staticEffects?.EffectiveCardColors(state, card)
+        ?? Definition(state, card).CardColors;
+
+    public static bool MatchesOptionColorRequirement(
+        GameState state,
+        PlayerId player,
+        CardInstanceId optionCard,
+        StaticEffectService? staticEffects = null)
+    {
+        var definition = Definition(state, optionCard);
+        if (!definition.CardKinds.Contains(CardKind.Option))
+        {
+            return true;
+        }
+
+        if (staticEffects is not null)
+        {
+            return staticEffects.MatchesOptionColorRequirement(state, player, optionCard);
+        }
+
+        var requiredColors = (definition.OptionCardColorRequirements.Count > 0
+                ? definition.OptionCardColorRequirements
+                : definition.CardColors)
+            .Where(color => color != CardColor.None)
+            .Distinct()
+            .ToArray();
+        if (requiredColors.Length == 0)
+        {
+            return true;
+        }
+
+        var playerState = state.GetPlayer(player);
+        return requiredColors.All(requiredColor =>
+            playerState.FieldPermanents.Any(permanent =>
+                IsPermanentCard(state, permanent.TopCardId)
+                && Definition(state, permanent.TopCardId).CardColors.Contains(requiredColor)));
+    }
+
     public static int Dp(GameState state, CardInstanceId card)
     {
         var definition = Definition(state, card);
@@ -144,7 +186,8 @@ internal static class BattleRules
         GameState state,
         PermanentState permanent,
         BattleKeywordService? keywordService = null,
-        EffectiveStatService? effectiveStats = null)
+        EffectiveStatService? effectiveStats = null,
+        StaticEffectService? staticEffects = null)
     {
         keywordService ??= BattleKeywordService.Default;
         effectiveStats ??= EffectiveStatService.NoContinuous;
@@ -154,6 +197,7 @@ internal static class BattleRules
             && !permanent.IsBreedingArea
             && !permanent.IsSuspended
             && !HasTemporaryRestriction(state, permanent, TemporaryModifierKind.CannotAttack)
+            && (staticEffects?.HasRestriction(state, permanent, StaticRestrictionKind.CannotAttack) != true)
             && (permanent.EnterFieldTurnCount != state.TurnCount || keywordService.HasKeyword(state, permanent, BattleKeyword.Rush))
             && IsDigimon(state, permanent.TopCardId)
             && effectiveStats.Dp(state, permanent) > 0;
@@ -191,7 +235,8 @@ internal static class BattleRules
         CardInstanceId card,
         PermanentState targetPermanent,
         out int cost,
-        StaticRequirementService? staticRequirements = null)
+        StaticRequirementService? staticRequirements = null,
+        StaticEffectService? staticEffects = null)
     {
         cost = -1;
         if (!IsDigimon(state, card))
@@ -201,26 +246,53 @@ internal static class BattleRules
 
         var cardDefinition = Definition(state, card);
         var targetDefinition = Definition(state, targetPermanent.TopCardId);
+        var targetColors = CardColors(state, targetPermanent.TopCardId, staticEffects);
+        var targetLevel = staticEffects?.EffectivePermanentLevel(state, targetPermanent)
+            ?? targetDefinition.Level;
         foreach (var evoCost in cardDefinition.EvoCosts)
         {
-            var levelMatches = evoCost.Level == 0 || evoCost.Level == targetDefinition.Level;
-            var colorMatches = evoCost.CardColor == CardColor.None || targetDefinition.CardColors.Contains(evoCost.CardColor);
+            var levelMatches = evoCost.Level == 0 || evoCost.Level == targetLevel;
+            var colorMatches = evoCost.CardColor == CardColor.None || targetColors.Contains(evoCost.CardColor);
             if (levelMatches && colorMatches)
             {
-                cost = Math.Max(0, evoCost.MemoryCost);
+                cost = ApplyStaticDigivolutionCostModifiers(
+                    state,
+                    card,
+                    targetPermanent,
+                    Math.Max(0, evoCost.MemoryCost),
+                    staticEffects);
                 return true;
             }
         }
 
-        var staticRequirement = staticRequirements?.FirstEvolutionRequirement(state, card, targetPermanent);
+        var staticRequirement = staticRequirements?.FirstEvolutionRequirement(state, card, targetPermanent, staticEffects);
         if (staticRequirement is not null)
         {
-            cost = staticRequirement.Cost;
+            cost = ApplyStaticDigivolutionCostModifiers(
+                state,
+                card,
+                targetPermanent,
+                staticRequirement.Cost,
+                staticEffects);
             return true;
         }
 
         return false;
     }
+
+    private static int ApplyStaticDigivolutionCostModifiers(
+        GameState state,
+        CardInstanceId card,
+        PermanentState targetPermanent,
+        int baseCost,
+        StaticEffectService? staticEffects) =>
+        staticEffects?.ApplyCostModifiers(
+            state,
+            card,
+            baseCost,
+            StaticCostKind.Digivolution,
+            targetPermanent)
+        ?? baseCost;
 
     public static void PayMemory(GameState state, PlayerId actor, int cost)
     {

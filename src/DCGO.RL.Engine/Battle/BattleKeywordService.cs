@@ -9,11 +9,17 @@ public sealed class BattleKeywordService
     public static BattleKeywordService Default { get; } = new();
 
     private readonly EffectiveStatService _effectiveStats;
+    private readonly StaticEffectService? _staticEffects;
 
-    public BattleKeywordService(EffectiveStatService? effectiveStats = null)
+    public BattleKeywordService(
+        EffectiveStatService? effectiveStats = null,
+        StaticEffectService? staticEffects = null)
     {
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
+        _staticEffects = staticEffects;
     }
+
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
 
     public bool HasKeyword(GameState state, PermanentState permanent, BattleKeyword keyword)
     {
@@ -26,6 +32,7 @@ public sealed class BattleKeywordService
             || PermanentKeywordCards(state, permanent)
                 .Select(card => BattleRules.Definition(state, card))
                 .Any(definition => definition.BattleKeywords.Contains(keyword))
+            || HasTemporaryKeyword(state, permanent, keyword)
             || _effectiveStats.HasContinuousKeyword(state, permanent, keyword);
     }
 
@@ -54,6 +61,7 @@ public sealed class BattleKeywordService
             || blocker.IsBreedingArea
             || blocker.IsSuspended
             || BattleRules.HasTemporaryRestriction(state, blocker, TemporaryModifierKind.CannotBlock)
+            || _staticEffects?.HasRestriction(state, blocker, StaticRestrictionKind.CannotBlock) == true
             || !BattleRules.IsDigimon(state, blocker.TopCardId)
             || !BattleRules.IsDigimon(state, attacker.TopCardId)
             || _effectiveStats.Dp(state, blocker) <= 0)
@@ -131,6 +139,11 @@ public sealed class BattleKeywordService
         {
             EnsureSupportedKeyword(keyword);
         }
+
+        foreach (var keyword in TemporaryKeywords(state, permanent))
+        {
+            EnsureSupportedKeyword(keyword);
+        }
     }
 
     private static IEnumerable<CardInstanceId> PermanentKeywordCards(GameState state, PermanentState permanent)
@@ -146,6 +159,38 @@ public sealed class BattleKeywordService
         {
             yield return linkedCard;
         }
+    }
+
+    private static bool HasTemporaryKeyword(GameState state, PermanentState permanent, BattleKeyword keyword) =>
+        TemporaryKeywords(state, permanent).Contains(keyword);
+
+    private static IEnumerable<BattleKeyword> TemporaryKeywords(GameState state, PermanentState permanent) =>
+        state.TemporaryModifiers
+            .Where(modifier =>
+                modifier.ModifierKind == TemporaryModifierKind.Keyword
+                && AppliesTemporaryKeywordModifier(state, modifier, permanent)
+                && modifier.Keyword is not null)
+            .Select(modifier => modifier.Keyword!.Value);
+
+    private static bool AppliesTemporaryKeywordModifier(
+        GameState state,
+        TemporaryModifier modifier,
+        PermanentState permanent)
+    {
+        if (modifier.TargetPermanentId == permanent.Id)
+        {
+            return true;
+        }
+
+        if (modifier.TargetPlayerId != permanent.ControllerPlayerId)
+        {
+            return false;
+        }
+
+        return !permanent.IsBreedingArea
+            && BattleRules.IsDigimon(state, permanent.TopCardId)
+            && (modifier.TargetMetadataCriteria is null
+                || modifier.TargetMetadataCriteria.Matches(BattleRules.Definition(state, permanent.TopCardId)));
     }
 
     private static void EnsureSupportedKeyword(BattleKeyword keyword)

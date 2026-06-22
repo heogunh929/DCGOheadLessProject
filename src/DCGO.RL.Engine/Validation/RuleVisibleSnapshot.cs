@@ -9,6 +9,7 @@ public sealed record RuleVisibleSnapshot(
     int Memory,
     IReadOnlyList<RuleVisiblePlayerSnapshot> Players,
     IReadOnlyList<RuleVisibleTemporaryModifierSnapshot> TemporaryModifiers,
+    IReadOnlyList<RuleVisibleTemporaryGrantedEffectSnapshot> TemporaryGrantedEffects,
     RuleVisibleGameResultSnapshot GameResult,
     string CanonicalStateHash)
 {
@@ -30,6 +31,12 @@ public sealed record RuleVisibleSnapshot(
                 .ThenBy(modifier => modifier.SourceCardId?.Value ?? -1)
                 .ThenBy(modifier => modifier.TargetPermanentId?.Value ?? -1)
                 .Select(RuleVisibleTemporaryModifierSnapshot.Capture)
+                .ToArray(),
+            state.TemporaryGrantedEffects
+                .OrderBy(effect => effect.StableId, StringComparer.Ordinal)
+                .ThenBy(effect => effect.SourceCardId?.Value ?? -1)
+                .ThenBy(effect => effect.TargetPermanentId?.Value ?? -1)
+                .Select(RuleVisibleTemporaryGrantedEffectSnapshot.Capture)
                 .ToArray(),
             new RuleVisibleGameResultSnapshot(
                 state.Result.Kind.ToString(),
@@ -166,6 +173,8 @@ public sealed record RuleVisibleTemporaryModifierSnapshot(
     int CreatedTurnCount,
     string CreatedPhase,
     int? ExpiresAtTurnPlayer,
+    string? Keyword,
+    string TargetMetadataCriteria,
     string DebugLabel)
 {
     public static RuleVisibleTemporaryModifierSnapshot Capture(TemporaryModifier modifier) =>
@@ -182,7 +191,79 @@ public sealed record RuleVisibleTemporaryModifierSnapshot(
             modifier.CreatedTurnCount,
             modifier.CreatedPhase.ToString(),
             modifier.ExpiresAtTurnPlayerId?.Value,
+            modifier.Keyword?.ToString(),
+            FormatMetadataCriteria(modifier.TargetMetadataCriteria),
             modifier.DebugLabel);
+
+    private static string FormatMetadataCriteria(CardMetadataCriteria? criteria)
+    {
+        if (criteria is null)
+        {
+            return "-";
+        }
+
+        return string.Join(
+            "|",
+            FormatCriteriaList("traits-all", criteria.RequiredTraits),
+            FormatCriteriaList("traits-any", criteria.AnyTraits),
+            FormatCriteriaList("name", criteria.RequiredNameSubstrings),
+            FormatCriteriaList("text", criteria.RequiredTextSubstrings));
+    }
+
+    private static string FormatCriteriaList(string label, IReadOnlyList<string> values) =>
+        $"{label}={string.Join(",", values.OrderBy(value => value, StringComparer.OrdinalIgnoreCase))}";
+}
+
+public sealed record RuleVisibleTemporaryGrantedEffectSnapshot(
+    string StableId,
+    int? SourceCard,
+    int? SourcePermanent,
+    int Controller,
+    int? TargetPermanent,
+    int? TargetPlayer,
+    string Timing,
+    string GrantedEffectKey,
+    string DurationScope,
+    int CreatedTurnCount,
+    string CreatedPhase,
+    int? ExpiresAtTurnPlayer,
+    string TargetMetadataCriteria,
+    string DebugLabel)
+{
+    public static RuleVisibleTemporaryGrantedEffectSnapshot Capture(TemporaryGrantedEffect effect) =>
+        new(
+            effect.StableId,
+            effect.SourceCardId?.Value,
+            effect.SourcePermanentId?.Value,
+            effect.ControllerPlayerId.Value,
+            effect.TargetPermanentId?.Value,
+            effect.TargetPlayerId?.Value,
+            effect.Timing.ToString(),
+            effect.GrantedEffectKey,
+            effect.DurationScope.ToString(),
+            effect.CreatedTurnCount,
+            effect.CreatedPhase.ToString(),
+            effect.ExpiresAtTurnPlayerId?.Value,
+            FormatMetadataCriteria(effect.TargetMetadataCriteria),
+            effect.DebugLabel);
+
+    private static string FormatMetadataCriteria(CardMetadataCriteria? criteria)
+    {
+        if (criteria is null)
+        {
+            return "-";
+        }
+
+        return string.Join(
+            "|",
+            FormatCriteriaList("traits-all", criteria.RequiredTraits),
+            FormatCriteriaList("traits-any", criteria.AnyTraits),
+            FormatCriteriaList("name", criteria.RequiredNameSubstrings),
+            FormatCriteriaList("text", criteria.RequiredTextSubstrings));
+    }
+
+    private static string FormatCriteriaList(string label, IReadOnlyList<string> values) =>
+        $"{label}={string.Join(",", values.OrderBy(value => value, StringComparer.OrdinalIgnoreCase))}";
 }
 
 public sealed record RuleVisibleGameResultSnapshot(

@@ -4,10 +4,13 @@ public sealed record CardDefinition
 {
     private string _cardId = string.Empty;
     private string _cardNameEnglish = string.Empty;
+    private string _cardTextEnglish = string.Empty;
+    private string _cardTextJapanese = string.Empty;
     private string _cardEffectClassName = string.Empty;
     private string _variantKey = string.Empty;
     private int _dp;
     private IReadOnlyList<CardColor> _cardColors = Array.Empty<CardColor>();
+    private IReadOnlyList<string> _traits = Array.Empty<string>();
     private IReadOnlyList<EvoCostDefinition> _evoCosts = Array.Empty<EvoCostDefinition>();
     private IReadOnlyList<CardKind> _cardKinds = Array.Empty<CardKind>();
     private IReadOnlyList<CardColor> _optionCardColorRequirements = Array.Empty<CardColor>();
@@ -55,6 +58,24 @@ public sealed record CardDefinition
 
     public string CardNameJapanese { get; init; } = string.Empty;
 
+    public string CardTextEnglish
+    {
+        get => _cardTextEnglish;
+        init => _cardTextEnglish = value ?? string.Empty;
+    }
+
+    public string Text
+    {
+        get => _cardTextEnglish;
+        init => _cardTextEnglish = value ?? string.Empty;
+    }
+
+    public string CardTextJapanese
+    {
+        get => _cardTextJapanese;
+        init => _cardTextJapanese = value ?? string.Empty;
+    }
+
     public IReadOnlyList<CardColor> CardColors
     {
         get => _cardColors;
@@ -65,6 +86,18 @@ public sealed record CardDefinition
     {
         get => _cardColors;
         init => _cardColors = ToReadOnlyList(value);
+    }
+
+    public IReadOnlyList<string> Traits
+    {
+        get => _traits;
+        init => _traits = ToReadOnlyStringList(value);
+    }
+
+    public IReadOnlyList<string> CardTraits
+    {
+        get => _traits;
+        init => _traits = ToReadOnlyStringList(value);
     }
 
     public int Level { get; init; }
@@ -153,6 +186,15 @@ public sealed record CardDefinition
 
     private static IReadOnlyList<T> ToReadOnlyList<T>(IEnumerable<T>? values) =>
         values is null ? Array.Empty<T>() : Array.AsReadOnly(values.ToArray());
+
+    private static IReadOnlyList<string> ToReadOnlyStringList(IEnumerable<string>? values) =>
+        values is null
+            ? Array.Empty<string>()
+            : Array.AsReadOnly(values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(value => value.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray());
 }
 
 public sealed record EvoCostDefinition(CardColor CardColor, int Level, int MemoryCost);

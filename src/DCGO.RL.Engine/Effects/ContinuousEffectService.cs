@@ -20,9 +20,75 @@ public interface IStaticEvolutionRequirementCardScript
         ContinuousEffectScriptContext context);
 }
 
+public interface ICannotIgnoreDigivolutionRequirementCardScript
+{
+    IReadOnlyList<CannotIgnoreDigivolutionRequirementDescriptor> CreateCannotIgnoreDigivolutionRequirementDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
 public interface IStaticLinkRequirementCardScript
 {
     IReadOnlyList<StaticLinkRequirementDescriptor> CreateStaticLinkRequirementDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCostModifierCardScript
+{
+    IReadOnlyList<StaticCostModifierDescriptor> CreateStaticCostModifierDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticRestrictionCardScript
+{
+    IReadOnlyList<StaticRestrictionDescriptor> CreateStaticRestrictionDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCardRestrictionCardScript
+{
+    IReadOnlyList<StaticCardRestrictionDescriptor> CreateStaticCardRestrictionDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticImmunityCardScript
+{
+    IReadOnlyList<StaticImmunityDescriptor> CreateStaticImmunityDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCardColorCardScript
+{
+    IReadOnlyList<StaticCardColorDescriptor> CreateStaticCardColorDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCardNameCardScript
+{
+    IReadOnlyList<StaticCardNameDescriptor> CreateStaticCardNameDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCardTraitCardScript
+{
+    IReadOnlyList<StaticCardTraitDescriptor> CreateStaticCardTraitDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticCardLevelCardScript
+{
+    IReadOnlyList<StaticCardLevelDescriptor> CreateStaticCardLevelDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IStaticPermanentLevelCardScript
+{
+    IReadOnlyList<StaticPermanentLevelDescriptor> CreateStaticPermanentLevelDescriptors(
+        ContinuousEffectScriptContext context);
+}
+
+public interface IIgnoreColorRequirementCardScript
+{
+    IReadOnlyList<IgnoreColorRequirementDescriptor> CreateIgnoreColorRequirementDescriptors(
         ContinuousEffectScriptContext context);
 }
 
@@ -59,7 +125,8 @@ public sealed class ContinuousEffectSourceCollector
                     source.Card,
                     source.Permanent?.Id,
                     source.ControllerPlayerId,
-                    source.Kind)));
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
         }
 
         return descriptors
@@ -91,7 +158,8 @@ public sealed class ContinuousEffectSourceCollector
                     source.Card,
                     source.Permanent?.Id,
                     source.ControllerPlayerId,
-                    source.Kind)));
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
         }
 
         return descriptors
@@ -123,7 +191,42 @@ public sealed class ContinuousEffectSourceCollector
                     source.Card,
                     source.Permanent?.Id,
                     source.ControllerPlayerId,
-                    source.Kind)));
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<CannotIgnoreDigivolutionRequirementDescriptor> CollectCannotIgnoreDigivolutionRequirements(
+        GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<CannotIgnoreDigivolutionRequirementDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not ICannotIgnoreDigivolutionRequirementCardScript restrictionScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(restrictionScript.CreateCannotIgnoreDigivolutionRequirementDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
         }
 
         return descriptors
@@ -155,7 +258,338 @@ public sealed class ContinuousEffectSourceCollector
                     source.Card,
                     source.Permanent?.Id,
                     source.ControllerPlayerId,
-                    source.Kind)));
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCostModifierDescriptor> CollectStaticCostModifiers(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCostModifierDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCostModifierCardScript costScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(costScript.CreateStaticCostModifierDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticRestrictionDescriptor> CollectStaticRestrictions(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticRestrictionDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticRestrictionCardScript restrictionScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(restrictionScript.CreateStaticRestrictionDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCardRestrictionDescriptor> CollectStaticCardRestrictions(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCardRestrictionDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCardRestrictionCardScript restrictionScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(restrictionScript.CreateStaticCardRestrictionDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticImmunityDescriptor> CollectStaticImmunities(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticImmunityDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticImmunityCardScript immunityScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(immunityScript.CreateStaticImmunityDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCardColorDescriptor> CollectStaticCardColors(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCardColorDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCardColorCardScript colorScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(colorScript.CreateStaticCardColorDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCardNameDescriptor> CollectStaticCardNames(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCardNameDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCardNameCardScript nameScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(nameScript.CreateStaticCardNameDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCardTraitDescriptor> CollectStaticCardTraits(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCardTraitDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCardTraitCardScript traitScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(traitScript.CreateStaticCardTraitDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticCardLevelDescriptor> CollectStaticCardLevels(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticCardLevelDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticCardLevelCardScript levelScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(levelScript.CreateStaticCardLevelDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<StaticPermanentLevelDescriptor> CollectStaticPermanentLevels(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<StaticPermanentLevelDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IStaticPermanentLevelCardScript levelScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(levelScript.CreateStaticPermanentLevelDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
+        }
+
+        return descriptors
+            .OrderBy(descriptor => descriptor.StableId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    public IReadOnlyList<IgnoreColorRequirementDescriptor> CollectIgnoreColorRequirements(GameState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        var descriptors = new List<IgnoreColorRequirementDescriptor>();
+        foreach (var source in EnumerateSources(state))
+        {
+            if (!state.CardDefinitions.TryGetValue(source.Instance.DefinitionId, out var definition))
+            {
+                throw new DomainException($"Card definition '{source.Instance.DefinitionId}' does not exist.");
+            }
+
+            var script = _cardScriptRegistry.GetScript(definition);
+            if (script is not IIgnoreColorRequirementCardScript ignoreScript)
+            {
+                continue;
+            }
+
+            descriptors.AddRange(ignoreScript.CreateIgnoreColorRequirementDescriptors(
+                new ContinuousEffectScriptContext(
+                    state,
+                    source.Card,
+                    source.Permanent?.Id,
+                    source.ControllerPlayerId,
+                    source.Kind))
+                .Where(descriptor => MatchesMetadata(descriptor.SourceMetadataCriteria, definition)));
         }
 
         return descriptors
@@ -253,6 +687,9 @@ public sealed class ContinuousEffectSourceCollector
     {
         public PlayerId ControllerPlayerId => Permanent?.ControllerPlayerId ?? Instance.Owner;
     }
+
+    private static bool MatchesMetadata(CardMetadataCriteria? criteria, CardDefinition definition) =>
+        criteria is null || criteria.Matches(definition);
 }
 
 public sealed class ContinuousEffectService
@@ -388,11 +825,13 @@ public sealed class ContinuousEffectService
         return descriptor.AppliesTo switch
         {
             ContinuousEffectTargetKind.SelfPermanent =>
-                descriptor.SourcePermanentId == target.Id,
+                descriptor.SourcePermanentId == target.Id
+                && MatchesTargetMetadata(state, descriptor.TargetMetadataCriteria, target),
             ContinuousEffectTargetKind.OwnerBattleAreaDigimon =>
                 target.ControllerPlayerId == descriptor.ControllerPlayerId
                 && !target.IsBreedingArea
-                && BattleRules.IsDigimon(state, target.TopCardId),
+                && BattleRules.IsDigimon(state, target.TopCardId)
+                && MatchesTargetMetadata(state, descriptor.TargetMetadataCriteria, target),
             _ => false,
         };
     }
@@ -405,14 +844,22 @@ public sealed class ContinuousEffectService
         return descriptor.AppliesTo switch
         {
             ContinuousEffectTargetKind.SelfPermanent =>
-                descriptor.SourcePermanentId == target.Id,
+                descriptor.SourcePermanentId == target.Id
+                && MatchesTargetMetadata(state, descriptor.TargetMetadataCriteria, target),
             ContinuousEffectTargetKind.OwnerBattleAreaDigimon =>
                 target.ControllerPlayerId == descriptor.ControllerPlayerId
                 && !target.IsBreedingArea
-                && BattleRules.IsDigimon(state, target.TopCardId),
+                && BattleRules.IsDigimon(state, target.TopCardId)
+                && MatchesTargetMetadata(state, descriptor.TargetMetadataCriteria, target),
             _ => false,
         };
     }
+
+    private static bool MatchesTargetMetadata(
+        GameState state,
+        CardMetadataCriteria? criteria,
+        PermanentState target) =>
+        criteria is null || criteria.Matches(BattleRules.Definition(state, target.TopCardId));
 
     private static bool AppliesToPlayer(
         GameState state,

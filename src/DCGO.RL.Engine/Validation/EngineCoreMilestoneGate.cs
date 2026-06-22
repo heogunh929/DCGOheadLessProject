@@ -134,19 +134,23 @@ public sealed class EngineCoreMilestoneGateRunner
 
     private static EngineCoreMilestoneEvidence AssetRegistryGate(AssetRegistryMappingReport report)
     {
+        var sourceUnavailable = report.SourceStatus != AssetRegistrySourceStatus.Available;
         var status = report.SourceStatus != AssetRegistrySourceStatus.Available
             || report.Issues.Any(issue => issue.Severity == AssetRegistryMappingSeverity.Error)
                 ? EngineCoreMilestoneGateStatus.Failed
                 : report.Issues.Any(issue => issue.Severity == AssetRegistryMappingSeverity.NeedsReview)
                     ? EngineCoreMilestoneGateStatus.NeedsReview
                     : EngineCoreMilestoneGateStatus.Passed;
+        var relevantIssues = report.Issues
+            .Where(issue =>
+                issue.Severity is AssetRegistryMappingSeverity.Error or AssetRegistryMappingSeverity.NeedsReview
+                || (sourceUnavailable && issue.Code == "SourceUnavailable"))
+            .ToArray();
         var details = status == EngineCoreMilestoneGateStatus.Passed
             ? "Asset registry mapping has no blocking finding."
             : string.Join(
                 " | ",
-                report.Issues
-                    .Where(issue => issue.Severity is AssetRegistryMappingSeverity.Error or AssetRegistryMappingSeverity.NeedsReview)
-                    .Select(issue => $"{issue.Code}:{issue.Message}"));
+                relevantIssues.Select(issue => $"{issue.Code}:{issue.Message}"));
 
         return new EngineCoreMilestoneEvidence(
             "asset-registry-validator",
@@ -159,19 +163,23 @@ public sealed class EngineCoreMilestoneGateRunner
     private static IReadOnlyList<EngineCoreMilestoneFinding> CreateAssetRegistryFindings(AssetRegistryMappingReport report)
     {
         var findings = new List<EngineCoreMilestoneFinding>();
-        foreach (var issue in report.Issues.Where(issue => issue.Severity is AssetRegistryMappingSeverity.Error or AssetRegistryMappingSeverity.NeedsReview))
+        foreach (var issue in report.Issues.Where(issue =>
+            issue.Severity is AssetRegistryMappingSeverity.Error or AssetRegistryMappingSeverity.NeedsReview
+            || (report.SourceStatus != AssetRegistrySourceStatus.Available && issue.Code == "SourceUnavailable")))
         {
             var assetIds = issue.Assets.Select(asset => asset.StableId).ToArray();
             var isSt3Two = issue.Assets.Any(asset =>
                 string.Equals(asset.CardId, "ST3-02", StringComparison.Ordinal));
+            var blocksFullCardPoolInventory = issue.Severity == AssetRegistryMappingSeverity.Error
+                || issue.Code == "SourceUnavailable";
             findings.Add(new EngineCoreMilestoneFinding(
                 issue.Code,
-                issue.Severity == AssetRegistryMappingSeverity.Error
+                blocksFullCardPoolInventory
                     ? EngineCoreMilestoneGateStatus.Failed
                     : EngineCoreMilestoneGateStatus.NeedsReview,
                 issue.Message,
                 assetIds,
-                BlocksFullCardPoolInventory: issue.Severity == AssetRegistryMappingSeverity.Error,
+                BlocksFullCardPoolInventory: blocksFullCardPoolInventory,
                 BlocksVariantImplementation: true,
                 BlocksRlEnvironmentDesign: true));
 

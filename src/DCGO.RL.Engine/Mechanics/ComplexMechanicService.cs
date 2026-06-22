@@ -15,22 +15,26 @@ public sealed class ComplexMechanicService
     private readonly ComplexMechanicMatcher _matcher;
     private readonly CostResolver _costResolver;
     private readonly StaticRequirementService? _staticRequirements;
+    private readonly StaticEffectService? _staticEffects;
 
     public ComplexMechanicService(
         IZoneMover? zoneMover = null,
         DrawService? drawService = null,
         ComplexMechanicMatcher? matcher = null,
         CostResolver? costResolver = null,
-        StaticRequirementService? staticRequirementService = null)
+        StaticRequirementService? staticRequirementService = null,
+        StaticEffectService? staticEffectService = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
         _matcher = matcher ?? new ComplexMechanicMatcher();
-        _costResolver = costResolver ?? new CostResolver();
+        _costResolver = costResolver ?? new CostResolver(staticEffectService, staticRequirementService);
         _staticRequirements = staticRequirementService;
+        _staticEffects = staticEffectService;
     }
 
     internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
+    internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
 
     public IReadOnlyList<LegalAction> GenerateActions(GameState state, PlayerId playerId)
     {
@@ -193,6 +197,7 @@ public sealed class ComplexMechanicService
         }
 
         ValidateMaterialCards(state, action.Actor, action.Materials, requirement.Materials);
+        ThrowIfCannotPutFieldFromHand(state, action.Actor, action.Card);
         PayCost(state, action.Actor, _costResolver.ResolveDigiXros(state, action.Card, requirement, action.Materials.Count).FinalCost);
 
         var permanent = PlayPermanentFromHand(state, action.Actor, action.Card, action.TargetFrameIndex, MoveReason.Play);
@@ -210,6 +215,7 @@ public sealed class ComplexMechanicService
         }
 
         ValidateMaterialCards(state, action.Actor, action.Materials, requirement.Materials);
+        ThrowIfCannotPutFieldFromHand(state, action.Actor, action.Card);
         PayCost(state, action.Actor, _costResolver.ResolveAssembly(state, action.Card, requirement, action.Materials.Count).FinalCost);
 
         var permanent = PlayPermanentFromHand(state, action.Actor, action.Card, action.TargetFrameIndex, MoveReason.Play);
@@ -226,7 +232,7 @@ public sealed class ComplexMechanicService
             throw new DomainException("Link target must be an actor-controlled Digimon.");
         }
 
-        var staticRequirement = _staticRequirements?.FirstLinkRequirement(state, action.LinkCard, target);
+        var staticRequirement = _staticRequirements?.FirstLinkRequirement(state, action.LinkCard, target, _staticEffects);
         var definitionRequirementMatches = requirement is not null
             && _matcher.MatchesPermanent(state, target, requirement.LinkTargetRequirement);
         if (!definitionRequirementMatches && staticRequirement is null)
@@ -239,9 +245,10 @@ public sealed class ComplexMechanicService
             throw new DomainException($"Permanent '{target.Id}' has no open linked card slots.");
         }
 
-        var cost = definitionRequirementMatches
-            ? _costResolver.ResolveLink(requirement!).FinalCost
+        var baseCost = definitionRequirementMatches
+            ? requirement!.LinkCost
             : staticRequirement!.Cost;
+        var cost = _costResolver.ResolveLink(state, action.LinkCard, target, baseCost).FinalCost;
         PayCost(state, action.Actor, cost);
         MoveFromCurrentZone(state, action.LinkCard, Zone.LinkedCards, MoveReason.Link, target.Id);
     }
@@ -261,6 +268,7 @@ public sealed class ComplexMechanicService
             throw new DomainException("Delay option play requires an Option card.");
         }
 
+        ThrowIfCannotPutFieldFromHand(state, action.Actor, action.Card);
         PayCost(state, action.Actor, requirement.FixedCost ?? Math.Max(0, definition.PlayCost));
         var permanent = PlayPermanentFromHand(state, action.Actor, action.Card, action.TargetFrameIndex, MoveReason.Play);
         permanent.IsDelayOption = true;
@@ -340,6 +348,11 @@ public sealed class ComplexMechanicService
             switch (requirement.Mode)
             {
                 case PlayMode.DigiXros:
+                    if (!CanPutFieldFromHand(state, player.Id, card))
+                    {
+                        break;
+                    }
+
                     foreach (var frame in EmptyFrames(player, state.Config.FieldSlotCount))
                     {
                         var materials = PickMaterials(state, player.Id, requirement.Materials, allowPartial: true);
@@ -356,6 +369,11 @@ public sealed class ComplexMechanicService
                     break;
 
                 case PlayMode.Assembly:
+                    if (!CanPutFieldFromHand(state, player.Id, card))
+                    {
+                        break;
+                    }
+
                     foreach (var frame in EmptyFrames(player, state.Config.FieldSlotCount))
                     {
                         var materials = PickMaterials(state, player.Id, requirement.Materials, allowPartial: false);
@@ -372,6 +390,11 @@ public sealed class ComplexMechanicService
                     break;
 
                 case PlayMode.DelayOption:
+                    if (!CanPutFieldFromHand(state, player.Id, card))
+                    {
+                        break;
+                    }
+
                     foreach (var frame in EmptyFrames(player, state.Config.FieldSlotCount))
                     {
                         yield return new LegalAction(
@@ -404,6 +427,25 @@ public sealed class ComplexMechanicService
         foreach (var action in GenerateStaticLinkActions(state, player, card, sourcePermanent: null))
         {
             yield return action;
+        }
+    }
+
+    private bool CanPutFieldFromHand(GameState state, PlayerId player, CardInstanceId card) =>
+        _staticEffects?.HasCardRestriction(
+            state,
+            card,
+            StaticCardRestrictionKind.CannotPutField,
+            new StaticCardRestrictionCause(
+                EffectSourceCardId: null,
+                EffectSourcePermanentId: null,
+                ControllerPlayerId: player,
+                MoveReason: MoveReason.Play)) != true;
+
+    private void ThrowIfCannotPutFieldFromHand(GameState state, PlayerId player, CardInstanceId card)
+    {
+        if (!CanPutFieldFromHand(state, player, card))
+        {
+            throw new DomainException($"Permanent card '{card}' cannot be played by a static effect.");
         }
     }
 
@@ -452,7 +494,7 @@ public sealed class ComplexMechanicService
             .Where(permanent => BattleRules.IsDigimon(state, permanent.TopCardId))
             .Where(permanent => permanent.LinkedCards.Count < LinkMax(state, permanent)))
         {
-            foreach (var evaluation in _staticRequirements.EvaluateLinkRequirements(state, card, target))
+            foreach (var evaluation in _staticRequirements.EvaluateLinkRequirements(state, card, target, _staticEffects))
             {
                 var definition = BattleRules.Definition(state, card);
                 var stableId = StableActionId(evaluation.Descriptor.StableId);

@@ -6,7 +6,7 @@
 - ST1 target deck validation: 통과.
 - ST1~ST3 registry snapshot: 48장 모두 `Implemented` 또는 `NoEffect`로 등록되어 있으며, 최신 구조 guard 기록은 `All 225 tests passed.`다.
 - source-alignment 정리: `ST2-07`, `ST3-07`은 asset의 shared `ST1_06` 참조를 card-id 기반 `Implemented` script로 연결하고 `SourceEffectClassName: ST1_06` metadata를 보존한다. 남은 risk는 `ST3-02`의 `ST3_02_P2.asset` variant source body 미확인이다.
-- 학습 단계: 아직 진입하지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment API는 구현 금지 상태다.
+- 학습 단계: 아직 진입하지 않는다. `ObservationEncoder`, `RewardCalculator`, `DatasetExporter`, `Trainer`, RL Environment 인터페이스는 구현 금지 상태다.
 
 ## Scope
 

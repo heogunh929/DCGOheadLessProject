@@ -22,7 +22,6 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from generate_full_card_pool_manifest import (  # noqa: E402
-    assert_current_source_fingerprint,
     assert_source_lock,
     file_sha256,
     unix_path,
@@ -40,6 +39,20 @@ SOURCE_SCOPE_GLOBS = [
     "DCGO/Assets/Scripts/CardEffect/**/*.cs",
     "DCGO/Assets/Scripts/Script/**/*.cs",
 ]
+
+LOCAL_SOURCE_BASE_CANDIDATES = [
+    Path(r"E:\headlessDCGO"),
+]
+
+TIMING_STATUS_OVERRIDES = {
+    "None": STATUS_PARTIAL,
+    "OnEnterFieldAnyone": STATUS_PARTIAL,
+}
+
+TIMING_STATUS_OVERRIDE_NOTES = {
+    "None": "EffectTiming.None is the source enum channel used for static/continuous effects and is tracked by ContinuousOrStaticEffect foundation coverage.",
+    "OnEnterFieldAnyone": "PlayCardService and DigivolveService chain a global enter-field payload after self OnPlay/WhenDigivolving groups; source ordering and all enter-field variants remain partial.",
+}
 
 CARD_EFFECT_ROOT = "DCGO/Assets/Scripts/CardEffect/"
 SCRIPT_ROOT = "DCGO/Assets/Scripts/Script/"
@@ -147,7 +160,20 @@ SOURCE_KEYWORD_NAMES = [
 ]
 
 ENGINE_FEATURE_TOKENS: dict[str, list[str]] = {
-    "static_or_continuous": ["ContinuousEffectService", "ContinuousEffectDescriptor", "EffectiveStatService"],
+    "static_or_continuous": [
+        "ContinuousEffectService",
+        "ContinuousEffectDescriptor",
+        "EffectiveStatService",
+        "StaticEffectService",
+        "StaticRequirementService",
+        "StaticCardColorDescriptor",
+        "StaticCardNameDescriptor",
+        "StaticCardTraitDescriptor",
+        "StaticCardLevelDescriptor",
+        "StaticPermanentLevelDescriptor",
+        "IgnoreColorRequirementDescriptor",
+        "CardMetadataSnapshot",
+    ],
     "inherited": ["SourceRole.Inherited", "TriggerSourceRole.Inherited", "IsInherited"],
     "linked": ["SourceRole.Linked", "LinkedCards", "Mechanic.Link"],
     "security": ["SecurityCheckService", "SecurityEffectExecutionService", "EffectTiming.SecuritySkill"],
@@ -194,12 +220,47 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=False) + "\n", encoding="utf-8")
 
 
-def read_all_source_files(workspace: Path, globs: Iterable[str]) -> dict[str, str]:
+def resolve_source_base(workspace: Path) -> Path:
+    candidates = [workspace, *LOCAL_SOURCE_BASE_CANDIDATES]
+    for candidate in candidates:
+        if (candidate / "DCGO/Assets/Scripts/Script/ICardEffect.cs").exists():
+            return candidate
+
+    raise RuntimeError("Unable to resolve DCGO source root. Expected DCGO/Assets in the workspace or E:\\headlessDCGO\\DCGO\\Assets.")
+
+
+def assert_current_source_fingerprint_at(workspace: Path, source_base: Path, lock: dict[str, Any]) -> None:
+    selected = lock["selectedSnapshot"]
+    manifest = read_json(workspace / selected["fileManifest"])
+    expected_paths: dict[str, dict[str, Any]] = {entry["path"]: entry for entry in manifest["files"]}
+
+    for relative_path, entry in expected_paths.items():
+        full_path = source_base / relative_path
+        if not full_path.exists():
+            raise RuntimeError(f"source fingerprint mismatch: missing file {relative_path}")
+        if full_path.stat().st_size != int(entry["size"]):
+            raise RuntimeError(f"source fingerprint mismatch: size changed {relative_path}")
+        actual_hash = file_sha256(full_path)
+        if actual_hash.lower() != str(entry["sha256"]).lower():
+            raise RuntimeError(f"source fingerprint mismatch: hash changed {relative_path}")
+
+    for root in manifest["roots"]:
+        root_path = source_base / root
+        if not root_path.exists():
+            raise RuntimeError(f"source fingerprint mismatch: missing root {root}")
+        for current_file in sorted(path for path in root_path.rglob("*") if path.is_file()):
+            relative_path = unix_path(current_file, source_base)
+            if relative_path not in expected_paths:
+                raise RuntimeError(f"source fingerprint mismatch: unexpected file {relative_path}")
+
+
+def read_all_source_files(workspace: Path, globs: Iterable[str], relative_base: Path | None = None) -> dict[str, str]:
+    base = relative_base or workspace
     files: dict[str, str] = {}
     for glob in globs:
-        for file_path in sorted(workspace.glob(glob)):
+        for file_path in sorted(base.glob(glob)):
             if file_path.is_file():
-                files[unix_path(file_path, workspace)] = file_path.read_text(encoding="utf-8-sig", errors="replace")
+                files[unix_path(file_path, base)] = file_path.read_text(encoding="utf-8-sig", errors="replace")
     return files
 
 
@@ -317,20 +378,21 @@ def make_evidence(
 
 def build_inventory(workspace: Path) -> dict[str, Any]:
     lock = assert_source_lock(workspace)
-    assert_current_source_fingerprint(workspace, lock)
+    source_base = resolve_source_base(workspace)
+    assert_current_source_fingerprint_at(workspace, source_base, lock)
 
     card_manifest_path = workspace / "docs/generated/full-card-pool-manifest.json"
     if not card_manifest_path.exists():
         raise RuntimeError("docs/generated/full-card-pool-manifest.json 파일이 없습니다. 62번 manifest를 먼저 생성해야 합니다.")
     card_manifest = read_json(card_manifest_path)
 
-    source_files = read_all_source_files(workspace, SOURCE_SCOPE_GLOBS)
+    source_files = read_all_source_files(workspace, SOURCE_SCOPE_GLOBS, source_base)
     card_effect_source_files = {path: text for path, text in source_files.items() if path.startswith(CARD_EFFECT_ROOT)}
     engine_files = read_all_source_files(workspace, ["src/DCGO.RL.Engine/**/*.cs"])
     engine_test_files = read_all_source_files(workspace, ["src/DCGO.RL.Engine.Tests/**/*.cs"])
     docs_files = read_all_source_files(workspace, ["docs/rl-engine/**/*.md"])
 
-    source_icard_effect = (workspace / "DCGO/Assets/Scripts/Script/ICardEffect.cs").read_text(encoding="utf-8-sig", errors="replace")
+    source_icard_effect = (source_base / "DCGO/Assets/Scripts/Script/ICardEffect.cs").read_text(encoding="utf-8-sig", errors="replace")
     engine_effect_timing = (workspace / "src/DCGO.RL.Engine/Effects/EffectTiming.cs").read_text(encoding="utf-8-sig", errors="replace")
     source_timings = extract_enum_values(source_icard_effect, "EffectTiming")
     engine_timings = set(extract_enum_values(engine_effect_timing, "EffectTiming"))
@@ -405,6 +467,12 @@ def build_inventory(workspace: Path) -> dict[str, Any]:
             engine_source_refs,
             engine_test_refs,
         )
+        status = TIMING_STATUS_OVERRIDES.get(timing, status)
+        evidence_notes = [
+            "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        ]
+        if timing in TIMING_STATUS_OVERRIDE_NOTES:
+            evidence_notes.append(TIMING_STATUS_OVERRIDE_NOTES[timing])
         timings.append(
             {
                 "name": timing,
@@ -423,7 +491,7 @@ def build_inventory(workspace: Path) -> dict[str, Any]:
                     full_source_paths,
                     engine_source_refs,
                     engine_test_refs,
-                    ["Implemented 판정은 엔진 enum, 엔진 코드 참조, 테스트/문서 근거를 함께 본 보수적 mapping입니다."],
+                    evidence_notes,
                 ),
             }
         )
@@ -640,6 +708,7 @@ def build_inventory(workspace: Path) -> dict[str, Any]:
         "sourceSnapshot": {
             "kind": lock["selectedSnapshot"]["kind"],
             "path": lock["selectedSnapshot"]["path"],
+            "resolvedLocalSourceRootPath": str(source_base / "DCGO/Assets"),
             "fileManifest": lock["selectedSnapshot"]["fileManifest"],
             "fileManifestSha256": lock["selectedSnapshot"]["fileManifestSha256"],
             "fileCount": lock["selectedSnapshot"]["fileCount"],

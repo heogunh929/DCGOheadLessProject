@@ -61,7 +61,8 @@ public sealed class TriggerCollector
                 descriptor.SourcePersistencePolicy,
                 descriptor.IsCounterEffect,
                 descriptor.IsSkippable,
-                descriptor.CounterSelectionConsumesOptional);
+                descriptor.CounterSelectionConsumesOptional,
+                descriptor.TemporaryGrantedEffect);
 
             if (descriptor.IsBackground)
             {

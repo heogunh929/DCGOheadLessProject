@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-23T05:37:16+09:00",
+  "sourceRoot": "E:\\headlessDCGO\\DCGO",
+  "workItems": [
+    {
+      "workItem": "ICardEffect / ActivateICardEffect 대응 모델",
+      "tier": "Tier0",
+      "originalSource": "ICardEffect.cs, CEntity_Effect.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "-",
+      "doneCondition": "EffectDescriptor/Trigger 계약이 원본 timing/source/use-count 의미를 문서와 테스트로 고정"
+    },
+    {
+      "workItem": "EffectTiming / EffectDuration 대응",
+      "tier": "Tier0",
+      "originalSource": "ICardEffect.cs, CardEffectCommons.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "S",
+      "blockedBy": "-",
+      "doneCondition": "원본 timing enum과 headless enum/alias 차이가 명시됨"
+    },
+    {
+      "workItem": "CardSource / card instance facade",
+      "tier": "Tier0",
+      "originalSource": "CardSource.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "L",
+      "blockedBy": "CardDefinition",
+      "doneCondition": "CardEffect가 쓰는 Owner, PermanentOfThisCard, EffectList 계열 API 대응"
+    },
+    {
+      "workItem": "Permanent / field permanent facade",
+      "tier": "Tier0",
+      "originalSource": "Permanent.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "L",
+      "blockedBy": "ZoneMover",
+      "doneCondition": "TopCard, DP, stack, digivolution cards, battle/breeding 존재 판정 대응"
+    },
+    {
+      "workItem": "Player zone/state facade",
+      "tier": "Tier0",
+      "originalSource": "Player.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "CardSource/Permanent",
+      "doneCondition": "hand/security/trash/field/effect list 수집 범위가 deterministic state로 대응"
+    },
+    {
+      "workItem": "GameContext turn/player/memory facade",
+      "tier": "Tier0",
+      "originalSource": "GameContext.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "PlayerState",
+      "doneCondition": "TurnPlayer/NonTurnPlayer/Memory/phase 조회가 headless service에서 통일"
+    },
+    {
+      "workItem": "CEntity_Base card definition 대응",
+      "tier": "Tier0",
+      "originalSource": "CEntity_Base.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "asset registry",
+      "doneCondition": "CardEffectClassName, colors, level, cost, traits 등 CardEffect-facing metadata 고정"
+    },
+    {
+      "workItem": "CEntity_EffectController binding registry",
+      "tier": "Tier0",
+      "originalSource": "CEntity_EffectController.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "EffectDescriptor",
+      "doneCondition": "ClassName lookup/fallback/added effect collection 규칙이 실패 명시 방식으로 대응"
+    },
+    {
+      "workItem": "CardEffectCommons facade inventory",
+      "tier": "Tier0",
+      "originalSource": "CardEffectCommons.cs, CardEffectCommons/**/*.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "XL",
+      "blockedBy": "state facade",
+      "doneCondition": "상위 참조 helper부터 primitive/service 대응 표와 unsupported 명시"
+    },
+    {
+      "workItem": "CardEffectFactory primitive descriptor",
+      "tier": "Tier0",
+      "originalSource": "CardEffectFactory/**/*.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "L",
+      "blockedBy": "EffectDescriptor",
+      "doneCondition": "factory helper가 deterministic EffectDescriptor/primitive로 대응"
+    },
+    {
+      "workItem": "AutoProcessing trigger collection",
+      "tier": "Tier1",
+      "originalSource": "AutoProcessing.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "L",
+      "blockedBy": "ICardEffect model",
+      "doneCondition": "StackSkillInfos/GetSkillInfos/TriggeredSkillProcess 순서와 수집 범위 재현"
+    },
+    {
+      "workItem": "selection request/result facade",
+      "tier": "Tier1",
+      "originalSource": "SelectCardEffect.cs, SelectPermanentEffect.cs, SelectCountEffect.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Exists",
+      "estimatedSize": "M",
+      "blockedBy": "DecisionPoint",
+      "doneCondition": "Unity UI 선택이 RL/CLI SelectionRequest로 분리"
+    },
+    {
+      "workItem": "zone movement primitive coverage",
+      "tier": "Tier1",
+      "originalSource": "CardEffectCommons.cs, Player.cs, Permanent.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "L",
+      "blockedBy": "ZoneMover",
+      "doneCondition": "trash/security/hand/deck/field 이동이 공통 primitive만 사용"
+    },
+    {
+      "workItem": "play/digivolve/option lifecycle",
+      "tier": "Tier1",
+      "originalSource": "CardController.cs, MainPhaseAction/**/*.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "XL",
+      "blockedBy": "CostResolver",
+      "doneCondition": "BeforePayCost/AfterPayCost/OnEnterField/security option 흐름 대응"
+    },
+    {
+      "workItem": "security skill execution",
+      "tier": "Tier1",
+      "originalSource": "AutoProcessing.cs, AttackProcess.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "M",
+      "blockedBy": "TriggerPipeline",
+      "doneCondition": "face-up security, security option, security digimon 처리 순서 대응"
+    },
+    {
+      "workItem": "AttackProcess state machine",
+      "tier": "Tier2",
+      "originalSource": "AttackProcess.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "L",
+      "blockedBy": "BattleRules",
+      "doneCondition": "Counter/Block/Battle/End/Cleanup 상태와 trigger timing 대응"
+    },
+    {
+      "workItem": "MultipleSkills nested resolution",
+      "tier": "Tier2",
+      "originalSource": "MultipleSkills.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "M",
+      "blockedBy": "TriggerPipeline",
+      "doneCondition": "중첩 효과 처리와 IsUsing stack semantics 대응"
+    },
+    {
+      "workItem": "rule process / DP 0 deletion",
+      "tier": "Tier2",
+      "originalSource": "AutoProcessing.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "M",
+      "blockedBy": "StaticEffectService",
+      "doneCondition": "룰 처리와 상태 기반 삭제/공격 종료 조건 재현"
+    },
+    {
+      "workItem": "MainPhaseAction legal action flow",
+      "tier": "Tier2",
+      "originalSource": "MainPhaseAction/**/*.cs",
+      "neededForCardEffect": "필수",
+      "currentStatus": "Partial",
+      "estimatedSize": "L",
+      "blockedBy": "LegalActionGenerator",
+      "doneCondition": "원본 클릭/action 후보와 headless LegalAction 차이 문서화"
+    },
+    {
+      "workItem": "Unity visual/network separation",
+      "tier": "Later",
+      "originalSource": "CardObjectController.cs, GManager, UI panels",
+      "neededForCardEffect": "간접",
+      "currentStatus": "UnityOnly",
+      "estimatedSize": "M",
+      "blockedBy": "-",
+      "doneCondition": "RL.Engine 금지 의존성은 UnityAdapter 또는 CLI rendering으로 격리"
+    }
+  ]
+}

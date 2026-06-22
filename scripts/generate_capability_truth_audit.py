@@ -47,65 +47,99 @@ SELECTION_CAPABILITIES = {
     "SelectSecurity": "Selection.SelectSecurity",
 }
 
+TIMING_CAPABILITY_ALIASES = {
+    "None": "ContinuousOrStaticEffect",
+}
+
 VERIFIED_EVIDENCE = {
     "Blocker": {
-        "implementation": ["src/DCGO.RL.Engine/Battle/AttackService.cs", "src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Battle/AttackService.cs", "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"],
         "tests": ["BattleKeywords Blocker selection request", "Attack timing blocker selection switches defender"],
         "replay": ["Attack timing blocker replay deterministic"],
     },
     "Piercing": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"],
         "tests": ["BattleKeywords Piercing security check"],
         "replay": ["ST1 CardEffect replay determinism"],
     },
     "Jamming": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"],
         "tests": ["BattleKeywords Jamming security battle"],
         "replay": ["ST1 CardEffect replay determinism"],
     },
     "Reboot": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"],
         "tests": ["BattleKeywords Reboot active phase"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "Rush": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/BattleKeywordService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"],
         "tests": ["BattleKeywords Rush attack legality"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "Jogress": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/JogressService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"],
         "tests": ["ComplexMechanics Jogress legal action", "ComplexMechanics Jogress execution top sources"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "Burst": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/BurstService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"],
         "tests": ["ComplexMechanics Burst legal action", "ComplexMechanics Burst tamer selection request"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "AppFusion": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/AppFusionService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"],
         "tests": ["ComplexMechanics App Fusion link card selection", "ComplexMechanics Link card state consistency"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "DigiXros": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/DigiXrosService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"],
         "tests": ["ComplexMechanics DigiXros materials and cost"],
         "replay": ["ComplexMechanics replay determinism"],
     },
     "Assembly": {
-        "implementation": ["src/DCGO.RL.Engine/Mechanics/AssemblyService.cs"],
+        "implementation": ["src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"],
         "tests": ["ComplexMechanics Assembly material selection"],
         "replay": ["ComplexMechanics replay determinism"],
     },
 }
 
 PARTIAL_EVIDENCE = {
+    "OnEnterFieldAnyone": {
+        "implementation": [
+            "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+            "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+            "src/DCGO.RL.Engine/Effects/EnterFieldEventPayload.cs",
+            "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        ],
+        "tests": [
+            "TriggerPipeline OnEnterFieldAnyone play payload invokes global descriptor",
+            "TriggerPipeline OnEnterFieldAnyone digivolve payload invokes global descriptor",
+            "TriggerPipeline OnEnterFieldAnyone tail resumes after OnPlay selection",
+        ],
+        "replay": [],
+    },
     "ContinuousOrStaticEffect": {
         "implementation": [
+            "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+            "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+            "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
+            "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+            "src/DCGO.RL.Engine/Domain/CardMetadataCriteria.cs",
+            "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+            "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
             "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
             "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+            "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+            "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
             "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+            "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs",
+            "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+            "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs",
+            "src/DCGO.RL.Engine/Mechanics/CostResolver.cs",
+            "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
+            "src/DCGO.RL.Engine/Validation/EngineInvariantChecker.cs",
+            "src/DCGO.RL.Engine/Validation/RuleVisibleSnapshot.cs",
         ],
         "tests": [
             "Continuous linked source applies from linked zone",
@@ -117,16 +151,45 @@ PARTIAL_EVIDENCE = {
             "Continuous static keyword field source grants Blocker",
             "Continuous static keyword inherited source stops after move",
             "Continuous static keyword condition gates keyword",
+            "Continuous metadata criteria gates target trait and text",
             "Continuous static keyword replay deterministic",
             "Static evolution requirement hand source generates and executes",
             "Static evolution requirement stops after source move",
             "Static evolution requirement condition gates target",
+            "Static evolution requirement ignore permission generates and executes",
+            "Static evolution requirement cannot-ignore restriction blocks permission",
+            "Static evolution requirement cannot-ignore restriction condition gates",
+            "Static evolution requirement ignore permission requires target gate",
+            "Static requirement metadata criteria gates source and target",
+            "Static cost modifier adjusts play and digivolution cost",
+            "Static link cost modifier adjusts link cost",
+            "Static restriction blocks attack and block",
+            "Static card restriction blocks option play",
+            "Static card restriction blocks permanent field play",
+            "Static card restriction blocks return to hand",
+            "Static immunity descriptor evaluates metadata",
+            "Static card metadata modifier affects cost criteria",
+            "Static card level modifier feeds permanent level requirement",
+            "Static permanent level modifier affects normal digivolution requirement",
+            "Static card color modifier affects option color requirement",
+            "Static ignore color requirement permits option",
+            "Static card color modifier affects digivolution color requirement",
             "Static link requirement hand source generates and executes",
+            "Static link requirement uses effective metadata and level",
             "Static requirement replay deterministic",
             "Duration player DP modifier affects owner battle area",
             "Duration player SecurityAttack modifier affects owner Digimon",
             "Duration player runtime modifiers clone restore hash",
             "Duration player runtime modifiers replay deterministic",
+            "Duration temporary keyword grants Blocker until cleanup",
+            "Duration temporary keyword grants Rush attack legality",
+            "Duration player keyword grants Rush to matching battle area Digimon",
+            "Duration temporary keyword hash and replay deterministic",
+            "Duration player keyword hash and replay deterministic",
+            "Duration temporary granted trigger runs from target permanent timing",
+            "Duration temporary granted trigger hash and replay deterministic",
+            "Duration invariant detects invalid keyword modifier",
+            "Duration invariant detects invalid granted trigger",
         ],
         "replay": [
             "Continuous effects are derived for state hash",
@@ -134,6 +197,11 @@ PARTIAL_EVIDENCE = {
             "Continuous static keyword replay deterministic",
             "Static requirement replay deterministic",
             "Duration player runtime modifiers replay deterministic",
+            "Duration temporary keyword hash and replay deterministic",
+            "Duration player keyword hash and replay deterministic",
+            "Duration temporary granted trigger hash and replay deterministic",
+            "Duration invariant detects invalid keyword modifier",
+            "Duration invariant detects invalid granted trigger",
         ],
     },
 }
@@ -154,6 +222,10 @@ CAPABILITY_OVERRIDES = {
     "OnDeclaration": {
         "status": "Unsupported",
         "reason": "Declaration/cost continuation is still unresolved for generated full-card batches.",
+    },
+    "OnEnterFieldAnyone": {
+        "status": "PartiallyImplemented",
+        "reason": "PlayCardService and DigivolveService now chain a source-wide OnEnterFieldAnyone payload after existing self OnPlay/WhenDigivolving groups. Source ordering parity, multi-permanent payloads, and all enter-field variants remain incomplete.",
     },
     "OnEndBattle": {
         "status": "Unsupported",
@@ -209,7 +281,7 @@ CAPABILITY_OVERRIDES = {
     },
     "ContinuousOrStaticEffect": {
         "status": "PartiallyImplemented",
-        "reason": "Continuous descriptors support field top, inherited, linked, face-up security, hand, trash, and executing source scopes; continuous static keyword descriptors cover source/condition-aware supported BattleKeyword grants; StaticRequirementService covers source/condition-aware static digivolution and link requirement descriptors for generated action/execution/replay paths; and TemporaryModifier covers supported player-level DP/SecurityAttack/SecurityDigimonDP runtime stat effects with clone/hash/replay evidence. Trait/name/text metadata, unsupported static effect interfaces, ignore-digivolution-permission semantics, and full-card parity evidence remain unresolved.",
+        "reason": "Continuous descriptors support field top, inherited, linked, face-up security, hand, trash, and executing source scopes; metadata criteria cover trait/name/text source and target gates; continuous static keyword descriptors cover source/condition-aware supported BattleKeyword grants; StaticRequirementService covers source/condition-aware static digivolution/link requirements, ignore-digivolution permission semantics, cannot-ignore digivolution restriction descriptors, effective card colors and effective permanent levels for digivolution requirements, effective link requirement metadata/level gates through ComplexMechanicService, static link cost modifiers through CostResolver, and effective metadata criteria where a StaticEffectService is available; StaticEffectService covers static cost/restriction/immunity descriptor evaluation, static card play restriction descriptors for option play gates, static card put-field restriction descriptors for permanent field-entry gates, static card move restriction descriptors for return-to-hand gates, effective card/base/current color descriptors, effective card name/trait metadata descriptors, effective card/permanent level descriptors, and ignore color requirements for option play. TemporaryModifier covers supported player-level DP/SecurityAttack/SecurityDigimonDP runtime stat effects, target permanent temporary keyword grants, and player-wide temporary keyword grants with metadata-gated battle-area Digimon targets. TemporaryGrantedEffect covers duration-bound granted trigger source/timing descriptors through the trigger pipeline. Full-card parity evidence is generated conservatively as NotRun, and generated/runtime status mismatch is closed by separating legacy pilot divergence from generated source truth. The capability remains partial until remaining full-card continuous/static variants have source-locked parity evidence.",
     },
     "DurationModifier": {
         "status": "PartiallyImplemented",
@@ -229,11 +301,11 @@ CAPABILITY_OVERRIDES = {
     },
     "OnPlayTrigger": {
         "status": "PartiallyImplemented",
-        "reason": "OnPlay-compatible descriptors exist in fixtures, but global OnEnterFieldAnyone payload coverage is incomplete.",
+        "reason": "OnPlay-compatible descriptors exist in fixtures and global OnEnterFieldAnyone play payload coverage is partial, but full source ordering and all generated variants remain incomplete.",
     },
     "WhenDigivolvingTrigger": {
         "status": "PartiallyImplemented",
-        "reason": "WhenDigivolving descriptors exist in fixtures, but full event payload/source eligibility remains incomplete.",
+        "reason": "WhenDigivolving descriptors exist in fixtures and global OnEnterFieldAnyone digivolve payload coverage is partial, but full event payload/source eligibility remains incomplete.",
     },
 }
 
@@ -271,10 +343,14 @@ def source_records(workspace: Path) -> list[dict[str, Any]]:
     return records
 
 
+def timing_capability_id(timing: str) -> str:
+    return TIMING_CAPABILITY_ALIASES.get(timing, timing)
+
+
 def infer_required_capabilities(record: dict[str, Any]) -> list[str]:
     capabilities: set[str] = set()
     for timing in record.get("timings", []):
-        capabilities.add(str(timing))
+        capabilities.add(timing_capability_id(str(timing)))
     flags = record.get("flags", {})
     if isinstance(flags, dict):
         flag_names = [name for name, enabled in flags.items() if enabled]
@@ -298,13 +374,29 @@ def collect_inventory_capabilities(inventory: dict[str, Any]) -> dict[str, dict[
             name = str(item.get("name", ""))
             if not name:
                 continue
-            capabilities[name] = {
-                "capabilityId": name,
-                "inventorySection": section,
-                "inventoryStatus": item.get("mappingStatus", "Unknown"),
-                "affectedCardCount": item.get("affectedCardCount", 0),
-                "sourceFileCount": item.get("cardEffectSourceFileCount", item.get("sourceFileCount", 0)),
-            }
+            capability_id = timing_capability_id(name) if section == "timings" else name
+            entry = capabilities.setdefault(
+                capability_id,
+                {
+                    "capabilityId": capability_id,
+                    "inventorySection": section,
+                    "inventoryStatus": item.get("mappingStatus", "Unknown"),
+                    "affectedCardCount": 0,
+                    "sourceFileCount": 0,
+                    "inventoryAliases": [],
+                },
+            )
+            entry["affectedCardCount"] = max(int(entry.get("affectedCardCount", 0)), int(item.get("affectedCardCount", 0) or 0))
+            entry["sourceFileCount"] = max(
+                int(entry.get("sourceFileCount", 0)),
+                int(item.get("cardEffectSourceFileCount", item.get("sourceFileCount", 0)) or 0),
+            )
+            entry["inventoryStatus"] = item.get("mappingStatus", entry.get("inventoryStatus", "Unknown"))
+            if capability_id != name:
+                entry["inventoryAliases"].append(name)
+    for entry in capabilities.values():
+        if not entry["inventoryAliases"]:
+            entry.pop("inventoryAliases")
     return capabilities
 
 
@@ -399,11 +491,11 @@ def build_capability_registry(workspace: Path) -> dict[str, Any]:
         if partial := PARTIAL_EVIDENCE.get(capability_id):
             evidence["implementationEvidence"] = sorted(
                 set(evidence["implementationEvidence"]) | set(partial["implementation"])
-            )[:12]
+            )
             evidence["testEvidence"] = sorted(
                 set(evidence["testEvidence"]) | set(partial["tests"])
-            )[:12]
-            replay_evidence = sorted(set(partial["replay"]))[:12]
+            )
+            replay_evidence = sorted(set(partial["replay"]))
         if verified:
             status = "Verified"
             reason = "Implementation, execution tests, and replay/invariant evidence are all present in the current engine test suite."
@@ -438,6 +530,7 @@ def build_capability_registry(workspace: Path) -> dict[str, Any]:
                 "inventoryStatus": base.get("inventoryStatus"),
                 "affectedCardCount": base.get("affectedCardCount", 0),
                 "sourceFileCount": base.get("sourceFileCount", 0),
+                "inventoryAliases": base.get("inventoryAliases", []),
                 "reason": reason,
                 "implementationEvidence": evidence["implementationEvidence"],
                 "testEvidence": evidence["testEvidence"],
@@ -594,19 +687,32 @@ def build_status_mismatches(workspace: Path) -> dict[str, Any]:
     }
     code_records = collect_code_porting_records(workspace)
     mismatches = []
+    legacy_pilot_divergences = []
     for record in code_records:
         generated = scaffold_status.get(record["effectClassName"])
         if generated is None:
             continue
         if generated != record["status"]:
-            mismatches.append(
-                {
-                    "effectClassName": record["effectClassName"],
-                    "cardEffectPortingRecordStatus": record["status"],
-                    "generatedSourceScaffoldStatus": generated,
-                    "path": record["path"],
-                }
-            )
+            entry = {
+                "effectClassName": record["effectClassName"],
+                "cardEffectPortingRecordStatus": record["status"],
+                "generatedSourceScaffoldStatus": generated,
+                "path": record["path"],
+            }
+            if (
+                generated == "Unsupported"
+                and record["status"] in {"Implemented", "PartiallyImplemented", "Verified"}
+            ):
+                legacy_pilot_divergences.append(
+                    entry
+                    | {
+                        "classification": "LegacyPilotRuntimeRecord",
+                        "blocksGeneratedStatusTruth": False,
+                        "statusPromotionAllowed": False,
+                    }
+                )
+            else:
+                mismatches.append(entry)
 
     status_registry = load_json(workspace / STATUS_REGISTRY_PATH)
     registry_source = workspace / "src/DCGO.RL.Engine/CardEffects/CardScriptRegistry.cs"
@@ -631,18 +737,26 @@ def build_status_mismatches(workspace: Path) -> dict[str, Any]:
         )
 
     return {
-        "schemaVersion": "dcgo.status-mismatch-report.66B.v1",
+        "schemaVersion": "dcgo.status-mismatch-report.66Q.v1",
         "inputs": {
             "generatedStatusRegistry": STATUS_REGISTRY_PATH.as_posix(),
             "cardEffectPortingRecords": "src/DCGO.RL.Engine/CardEffects/**/*.cs",
+        },
+        "policy": {
+            "generatedStatusRegistryIsAuthoritativeForFullCardSourceScaffold": True,
+            "legacyPilotRuntimeRecordsDoNotPromoteGeneratedStatus": True,
+            "legacyPilotRuntimeDivergenceIsReportedSeparately": True,
+            "statusMismatchCountScope": "authoritative generated status claims only",
         },
         "summary": {
             "generatedImplementedOrVerifiedCount": status_registry.get("implementedOrVerifiedCount", 0),
             "codePortingRecordCount": len(code_records),
             "statusMismatchCount": len(mismatches),
+            "legacyPilotDivergenceCount": len(legacy_pilot_divergences),
             "blockerIssueCount": len([issue for issue in issues if issue["severity"] == "blocker"]),
         },
         "mismatches": mismatches,
+        "legacyPilotDivergences": legacy_pilot_divergences,
         "issues": issues,
     }
 
@@ -661,6 +775,14 @@ def write_report(
     on_draw = next(
         entry for entry in registry["capabilities"]
         if entry["capabilityId"] == "OnDraw"
+    )
+    on_enter_field_anyone = next(
+        entry for entry in registry["capabilities"]
+        if entry["capabilityId"] == "OnEnterFieldAnyone"
+    )
+    continuous = next(
+        entry for entry in registry["capabilities"]
+        if entry["capabilityId"] == "ContinuousOrStaticEffect"
     )
     lines = [
         "# 66B Capability Truth Audit",
@@ -684,6 +806,7 @@ def write_report(
         f"- Source effects with non-verified capabilities: {required['summary']['sourceEffectsWithNonVerifiedCapabilities']} / {required['summary']['sourceEffectCount']}",
         f"- Blocked card batches: {batch_blockers['summary']['blockedCardBatchCount']} / {batch_blockers['summary']['cardBatchCount']}",
         f"- Status mismatches: {mismatch['summary']['statusMismatchCount']}",
+        f"- Legacy pilot runtime divergences: {mismatch['summary'].get('legacyPilotDivergenceCount', 0)}",
         "",
         "## OnDraw 충돌",
         "",
@@ -692,6 +815,27 @@ def write_report(
         f"- Final status: `{on_draw['status']}`",
         f"- Reason: {on_draw['reason']}",
         "- L0006의 coverage는 실제 구현/테스트 근거로 인정하지만, L0005의 draw primitive selection-aware boundary blocker를 숨기지 않는다.",
+        "",
+        "## OnEnterFieldAnyone Evidence",
+        "",
+        "`OnEnterFieldAnyone`는 self `OnPlay`/`WhenDigivolving` branch와 global enter-field branch가 같은 timing에서 공존하는 원본 흐름을 반영해야 한다. 66W는 payload foundation을 연결했지만 full source ordering parity가 끝난 것은 아니므로 partial로 유지한다.",
+        "",
+        f"- Final status: `{on_enter_field_anyone['status']}`",
+        f"- Reason: {on_enter_field_anyone['reason']}",
+        f"- Implementation evidence count: {len(on_enter_field_anyone['implementationEvidence'])}",
+        f"- Test evidence count: {len(on_enter_field_anyone['testEvidence'])}",
+        "- Remaining blockers: multi-permanent enter payload, Jogress/DigiXros/Assembly variants, and complete source ordering parity.",
+        "",
+        "## ContinuousOrStaticEffect Evidence",
+        "",
+        "`ContinuousOrStaticEffect`는 66F~66X foundation evidence를 machine-readable audit에 반영하지만, 아직 `Verified`로 승격하지 않는다.",
+        "",
+        f"- Final status: `{continuous['status']}`",
+        f"- Reason: {continuous['reason']}",
+        f"- Implementation evidence count: {len(continuous['implementationEvidence'])}",
+        f"- Test evidence count: {len(continuous['testEvidence'])}",
+        f"- Replay/invariant evidence count: {len(continuous['replayOrInvariantEvidence'])}",
+        "- Remaining blockers: full-card continuous/static variants still need source-locked parity evidence before `Verified` promotion.",
         "",
         "## C0039 실행 가능성",
         "",
@@ -711,7 +855,7 @@ def write_report(
             else [
                 "- `CardScriptRegistry`는 exact `DefinitionStableId` lookup을 우선하고 legacy CardId fallback을 단일 정의 경로로 제한한다.",
                 "- full-card identity policy `CardId#CardIndex@VariantKey`와 runtime registry lookup 경계가 연결되었다.",
-                "- generated status registry와 실제 `CardEffectPortingRecord` 불일치는 여전히 남아 있으며 66D/66E의 capability dependency gate에서 계속 차단된다.",
+                "- legacy pilot `CardEffectPortingRecord` divergence는 별도 공개 카운트로 남기며 generated source scaffold status를 자동 승격하지 않는다.",
             ]
         ),
         "",
