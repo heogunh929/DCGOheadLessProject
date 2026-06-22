@@ -1,5 +1,23 @@
 # AGENTS.md
 
+## Active Development Phase
+
+현재 프로젝트의 활성 목표는 foundation-first completion이다.
+
+작업 전에 반드시 다음 파일을 읽는다.
+
+- `docs/codex-prompts/GOAL_FOUNDATION_COMPLETION.md`
+- `docs/codex-prompts/ACTIVE/RUN_NEXT_FOUNDATION_COMPLETION.md`
+- foundation queue/progress 문서
+
+Foundation Completion Gate가 `OpenCodeReady=true`가 되기 전까지:
+
+- card-porting batch를 실행하지 않는다.
+- C0039 이후를 실행하지 않는다.
+- 개별 CardEffect body를 추가 구현하지 않는다.
+- OpenCode/local-model task를 생성하지 않는다.
+- RL 학습 구성요소를 구현하지 않는다.
+
 ## 언어 규칙
 
 - 분석 결과, 진행상황, 작업 계획, 변경 요약, 테스트 결과, TODO는 한국어로 작성한다.
