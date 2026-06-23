@@ -111,7 +111,21 @@ public sealed class PlayCardService
         }
 
         var cost = ResolvePlayCost(state, action.Card, definition);
+        var memoryBeforeCost = state.Memory;
         BattleRules.PayMemory(state, action.Actor, cost);
+        RunAfterPayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            cost,
+            memoryBeforeCost,
+            state.Memory,
+            root: Zone.Hand,
+            sourceZone: Zone.Hand,
+            isEvolution: false,
+            targetPermanents: Array.Empty<PermanentId>(),
+            costKind: "Play",
+            trace);
 
         var permanentId = new PermanentId(BattleRules.NextPermanentId(state));
         _zoneMover.MoveCard(
@@ -171,9 +185,24 @@ public sealed class PlayCardService
         }
 
         var cost = ResolvePlayCost(state, action.Card, definition);
+        var memoryBeforeCost = state.Memory;
         BattleRules.PayMemory(state, action.Actor, cost);
 
         MoveHandOptionToExecuting(state, action.Actor, action.Card, trace);
+        _invariantChecker.ThrowIfInvalid(state);
+        RunAfterPayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            cost,
+            memoryBeforeCost,
+            state.Memory,
+            root: Zone.Hand,
+            sourceZone: Zone.Executing,
+            isEvolution: false,
+            targetPermanents: Array.Empty<PermanentId>(),
+            costKind: "Play",
+            trace);
         _invariantChecker.ThrowIfInvalid(state);
 
         var pipelineResult = RunOptionTriggerPipeline(state, action.Actor, action.Card, trace);
@@ -224,6 +253,49 @@ public sealed class PlayCardService
             baseCost,
             StaticCostKind.Play)
             ?? baseCost;
+    }
+
+    private TriggerPipelineResult RunAfterPayCostPipeline(
+        GameState state,
+        PlayerId player,
+        CardInstanceId card,
+        int paidCost,
+        int memoryBeforeCost,
+        int memoryAfterCost,
+        Zone root,
+        Zone sourceZone,
+        bool isEvolution,
+        IReadOnlyList<PermanentId> targetPermanents,
+        string costKind,
+        GameTrace? trace)
+    {
+        var result = _triggerPipelineService.Run(
+            state,
+            EffectTiming.AfterPayCost,
+            player,
+            card,
+            sourcePermanent: null,
+            values: CostPaymentRuleEventPayload.CreateAfterPayCost(
+                state,
+                player,
+                card,
+                paidCost,
+                memoryBeforeCost,
+                memoryAfterCost,
+                root,
+                sourceZone,
+                isEvolution,
+                targetPermanents,
+                isJogress: false,
+                costKind),
+            trace: trace);
+
+        if (result.HasPendingSelection)
+        {
+            throw new UnsupportedMechanicException("AfterPayCost selection continuation before play resolution is not implemented.");
+        }
+
+        return result;
     }
 
     private void MoveHandOptionToExecuting(

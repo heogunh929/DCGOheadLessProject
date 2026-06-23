@@ -1,5 +1,17 @@
 # QUEUE_FOUNDATION_COMPLETION
 
+## 2026-06-23 Restart Queue Update
+
+- `DATA-001` closed: CardBaseEntity/variant/EffectClassName policy artifacts are available under `docs/as-is-restart/` and `docs/generated/as-is-restart/`.
+- `FND-003-A` closed: 15 `ImplementableFoundationTask` entries are split into 45 child goals in `docs/generated/as-is-restart/fnd-003-a-foundation-goal-queue.json`.
+- `FND-003-B OnRemovedField` implemented in primitive destroy scope and verified by full regression (`All 612 tests passed.`).
+- `FND-003-C AfterPayCost` implemented in standard play/option/digivolve cost-payment scope and verified by full regression (`All 613 tests passed.`).
+- `FND-003-D OnDiscardSecurity` implemented in primitive security-trash event scope and verified by full regression (`All 614 tests passed.`).
+- `FND-003-E OnAddSecurity` implemented in primitive security-add/recovery event scope and verified by full regression (`All 615 tests passed.`).
+- `FND-003-F OnDiscardLibrary` implemented in primitive deck-trash event scope and verified by full regression (`All 616 tests passed.`).
+- Foundation Gate remains `OpenCodeReady=false`; generated status was not promoted.
+- Next recommended queue item: `FND-003-G OnUseOption`, then continue one foundation task at a time. Direct `BattleResolver` battle destruction `OnRemovedField` hook, complex-mechanic `AfterPayCost` hooks, multi-card security discard batching, separate `IFlipSecurity` face-up flip hooks, and card-specific deck trash body wiring are trace-aware follow-ups, not C0039 card-porting permission.
+
 이 문서는 Script Runtime Foundation 완성 작업을 추적하는 전용 queue다.
 `QUEUE_FULL_CARD_PORTING_BATCHES.md`에 섞여 있던 66B~66AE foundation-remediation 흐름은 이 문서에서 foundation 작업으로 다시 분류한다.
 

@@ -87,11 +87,65 @@ public sealed class DigivolveService
             throw new DomainException($"Card '{action.Card}' cannot digivolve onto permanent '{action.TargetPermanent}'.");
         }
 
+        var memoryBeforeCost = state.Memory;
         BattleRules.PayMemory(state, action.Actor, cost);
+        RunAfterPayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            cost,
+            memoryBeforeCost,
+            state.Memory,
+            action.TargetPermanent,
+            trace);
         _zoneMover.DigivolveCard(state, new DigivolveCardCommand(action.Card, Zone.Hand, action.TargetPermanent));
         _drawService.DrawCards(state, action.Actor, 1, trace);
         var triggerResult = RunTriggerPipeline(state, action.Actor, action.Card, action.TargetPermanent, trace);
         return new DigivolveResult(permanent, triggerResult);
+    }
+
+    private TriggerPipelineResult? RunAfterPayCostPipeline(
+        GameState state,
+        PlayerId player,
+        CardInstanceId card,
+        int paidCost,
+        int memoryBeforeCost,
+        int memoryAfterCost,
+        PermanentId targetPermanent,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        var result = _triggerPipelineService.Run(
+            state,
+            EffectTiming.AfterPayCost,
+            player,
+            card,
+            sourcePermanent: null,
+            values: CostPaymentRuleEventPayload.CreateAfterPayCost(
+                state,
+                player,
+                card,
+                paidCost,
+                memoryBeforeCost,
+                memoryAfterCost,
+                root: Zone.Hand,
+                sourceZone: Zone.Hand,
+                isEvolution: true,
+                targetPermanents: new[] { targetPermanent },
+                isJogress: false,
+                costKind: "Digivolution"),
+            trace: trace);
+
+        if (result.HasPendingSelection)
+        {
+            throw new UnsupportedMechanicException("AfterPayCost selection continuation before digivolution resolution is not implemented.");
+        }
+
+        return result;
     }
 
     private TriggerPipelineResult? RunTriggerPipeline(

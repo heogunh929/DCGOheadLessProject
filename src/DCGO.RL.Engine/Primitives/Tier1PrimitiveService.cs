@@ -26,6 +26,13 @@ public sealed record RecoverFromDeckResult(
     IReadOnlyList<MoveCardResult> Moves,
     bool RequestedMoreThanAvailable);
 
+public sealed record TrashFromDeckResult(
+    PlayerId Player,
+    IReadOnlyList<CardInstanceId> DiscardedCards,
+    IReadOnlyList<MoveCardResult> Moves,
+    int RequestedCount,
+    bool RequestedMoreThanAvailable);
+
 public sealed class Tier1PrimitiveService
 {
     private readonly IZoneMover _zoneMover;
@@ -344,29 +351,117 @@ public sealed class Tier1PrimitiveService
         MoveReason reason = MoveReason.Trash) =>
         _zoneMover.MoveCard(state, new MoveCardCommand(card, sourceZone, Zone.Trash, reason, SourcePermanent: sourcePermanent));
 
+    public TrashFromDeckResult TrashTopDeckCardsWithEvents(
+        GameState state,
+        PlayerId playerId,
+        int count,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
+    {
+        if (count < 0)
+        {
+            throw new DomainException("Deck trash count must not be negative.");
+        }
+
+        if (count == 0)
+        {
+            return new TrashFromDeckResult(
+                playerId,
+                Array.Empty<CardInstanceId>(),
+                Array.Empty<MoveCardResult>(),
+                count,
+                RequestedMoreThanAvailable: false);
+        }
+
+        var player = state.GetPlayer(playerId);
+        var deckSnapshot = player.Deck.Take(count).ToArray();
+        if (deckSnapshot.Length == 0)
+        {
+            return new TrashFromDeckResult(
+                playerId,
+                Array.Empty<CardInstanceId>(),
+                Array.Empty<MoveCardResult>(),
+                count,
+                RequestedMoreThanAvailable: true);
+        }
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in deckSnapshot)
+        {
+            var command = new MoveCardCommand(card, Zone.Deck, Zone.Trash, MoveReason.Effect, FaceUp: true);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"trash-deck-top:{playerId.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnDiscardLibrary,
+            playerId,
+            ZoneEventPayload(
+                deckSnapshot,
+                Zone.Deck,
+                Zone.Trash,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Player"] = playerId,
+                    ["DiscardedCards"] = deckSnapshot,
+                    ["CardSources"] = deckSnapshot,
+                    ["RequestedCount"] = count,
+                    ["RequestedMoreThanAvailable"] = deckSnapshot.Length < count,
+                    ["MoveReason"] = MoveReason.Effect,
+                }));
+
+        return new TrashFromDeckResult(
+            playerId,
+            deckSnapshot,
+            moves,
+            count,
+            RequestedMoreThanAvailable: deckSnapshot.Length < count);
+    }
+
     public MoveCardResult AddSecurity(
         GameState state,
         PlayerId player,
         CardInstanceId card,
         Zone sourceZone,
         bool toTop = true,
-        bool faceUp = false)
+        bool faceUp = false,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
     {
         if (state.Cards[card].Owner != player)
         {
             throw new UnsupportedMechanicException("Adding another player's card to security");
         }
 
-        return _zoneMover.MoveCard(
+        var result = _zoneMover.MoveCard(
             state,
             new MoveCardCommand(card, sourceZone, Zone.Security, MoveReason.Effect, ToTop: toTop, FaceUp: faceUp));
+        QueueSecurityAddedEvents(
+            state,
+            player,
+            new[] { card },
+            sourceZone,
+            sourceCard,
+            sourcePermanent,
+            toTop,
+            state.Cards[card].IsFaceUp);
+
+        return result;
     }
 
     public RecoverFromDeckResult RecoverFromDeck(
         GameState state,
         PlayerId playerId,
         int count,
-        GameTrace? trace = null)
+        GameTrace? trace = null,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
     {
         if (count <= 0)
         {
@@ -394,6 +489,15 @@ public sealed class Tier1PrimitiveService
             var before = trace is null ? null : state.Clone();
             var result = _zoneMover.MoveCard(state, command);
             trace?.AddMove($"recovery-from-deck:{playerId.Value}:{i}", before!, state, command, result);
+            QueueSecurityAddedEvents(
+                state,
+                playerId,
+                new[] { card },
+                Zone.Deck,
+                sourceCard,
+                sourcePermanent,
+                toTop: true,
+                faceUp: false);
             addedCards.Add(card);
             moves.Add(result);
         }
@@ -409,7 +513,9 @@ public sealed class Tier1PrimitiveService
         GameState state,
         PlayerId player,
         CardInstanceId? card = null,
-        Zone destinationZone = Zone.Trash)
+        Zone destinationZone = Zone.Trash,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
     {
         var playerState = state.GetPlayer(player);
         if (playerState.Security.Count == 0)
@@ -423,9 +529,84 @@ public sealed class Tier1PrimitiveService
             throw new DomainException($"Card '{target}' is not in player '{player}' security.");
         }
 
-        return _zoneMover.MoveCard(
+        var result = _zoneMover.MoveCard(
             state,
             new MoveCardCommand(target, Zone.Security, destinationZone, MoveReason.Effect, FaceUp: true));
+        if (destinationZone == Zone.Trash)
+        {
+            QueueSecurityDiscardEvents(state, player, target, sourceCard, sourcePermanent);
+        }
+
+        return result;
+    }
+
+    private static void QueueSecurityAddedEvents(
+        GameState state,
+        PlayerId player,
+        IReadOnlyList<CardInstanceId> addedCards,
+        Zone sourceZone,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        bool toTop,
+        bool faceUp)
+    {
+        if (addedCards.Count == 0)
+        {
+            return;
+        }
+
+        var firstCard = addedCards[0];
+        var payload = ZoneEventPayload(
+            addedCards,
+            sourceZone,
+            Zone.Security,
+            sourceCard,
+            sourcePermanent,
+            extra: new Dictionary<string, object?>
+            {
+                ["Player"] = player,
+                ["SkillInfo"] = null,
+                ["AddedSecurityCards"] = addedCards.ToArray(),
+                ["SecurityCards"] = addedCards.ToArray(),
+                ["SecurityCard"] = firstCard,
+                ["ToTop"] = toTop,
+                ["FaceUp"] = faceUp,
+                ["MoveReason"] = MoveReason.Effect,
+            });
+
+        QueueRuleEvent(state, EffectTiming.OnAddSecurity, player, payload);
+        if (faceUp)
+        {
+            QueueRuleEvent(state, EffectTiming.OnFaceUpSecurityIncreased, player, payload);
+        }
+    }
+
+    private static void QueueSecurityDiscardEvents(
+        GameState state,
+        PlayerId player,
+        CardInstanceId discardedCard,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent)
+    {
+        var cards = new[] { discardedCard };
+        var payload = ZoneEventPayload(
+            cards,
+            Zone.Security,
+            Zone.Trash,
+            sourceCard,
+            sourcePermanent,
+            extra: new Dictionary<string, object?>
+            {
+                ["Player"] = player,
+                ["SkillInfo"] = null,
+                ["DiscardedCards"] = cards,
+                ["SecurityCards"] = cards,
+                ["SecurityCard"] = discardedCard,
+                ["MoveReason"] = MoveReason.Effect,
+            });
+
+        QueueRuleEvent(state, EffectTiming.OnLoseSecurity, player, payload);
+        QueueRuleEvent(state, EffectTiming.OnDiscardSecurity, player, payload);
     }
 
     public MoveCardResult AddExecutingSecurityEffectCardToHand(
@@ -729,9 +910,44 @@ public sealed class Tier1PrimitiveService
     public DeletePermanentResult DestroyPermanent(GameState state, PermanentId permanentId, GameTrace? trace = null)
     {
         var permanent = BattleRules.Permanent(state, permanentId);
+        if (permanent.LinkedCards.Count > 0)
+        {
+            throw new UnsupportedMechanicException("Destroying permanents with linked cards");
+        }
+
         var stack = permanent.StackCardIds.Concat(permanent.LinkedCards).ToArray();
+        QueueOnRemovedFieldEvent(state, permanent, stack);
         _battleResolver.DestroyPermanent(state, permanent, trace);
         return new DeletePermanentResult(permanentId, stack);
+    }
+
+    private static void QueueOnRemovedFieldEvent(
+        GameState state,
+        PermanentState permanent,
+        IReadOnlyList<CardInstanceId> stack)
+    {
+        var sourceZone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnRemovedField,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                stack,
+                sourceZone,
+                Zone.Trash,
+                sourceCard: null,
+                sourcePermanent: null,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanents"] = new[] { permanent.Id },
+                    ["Permanent"] = permanent.Id,
+                    ["RemovedPermanent"] = permanent.Id,
+                    ["RemovedController"] = permanent.ControllerPlayerId,
+                    ["RemovedTopCard"] = permanent.TopCardId,
+                    ["battle"] = null,
+                    ["digixros"] = false,
+                    ["MoveReason"] = MoveReason.Trash,
+                }));
     }
 
     public bool Suspend(GameState state, PermanentId permanentId)

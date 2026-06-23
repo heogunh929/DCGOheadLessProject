@@ -360,6 +360,11 @@ var tests = new (string Name, Action Test)[]
     ("RuleProcessor state-only event covers DP zero destruction", RuleProcessorStateOnlyEventCoversDpZeroDestruction),
     ("Runtime rule pending events clone restore hash", RuntimeRulePendingEventsCloneRestoreHash),
     ("Zone events OnAddHand and OnDraw drain through auto process", ZoneEventsOnAddHandAndOnDrawDrainThroughAutoProcess),
+    ("FND-003-B OnRemovedField queues explicit removal event", Fnd003BOnRemovedFieldQueuesExplicitRemovalEvent),
+    ("FND-003-C AfterPayCost runs after cost payment", Fnd003CAfterPayCostRunsAfterCostPayment),
+    ("FND-003-D OnDiscardSecurity queues security discard events", Fnd003DOnDiscardSecurityQueuesSecurityDiscardEvents),
+    ("FND-003-E OnAddSecurity queues security add events", Fnd003EOnAddSecurityQueuesSecurityAddEvents),
+    ("FND-003-F OnDiscardLibrary queues deck trash event", Fnd003FOnDiscardLibraryQueuesDeckTrashEvent),
     ("Zone events discard hand aggregates payload", ZoneEventsDiscardHandAggregatesPayload),
     ("Zone events trash return fire before hand and library moves", ZoneEventsTrashReturnFireBeforeHandAndLibraryMoves),
     ("Zone events return permanent and top trash timings", ZoneEventsReturnPermanentAndTopTrashTimings),
@@ -13971,6 +13976,419 @@ static void RuntimeRulePendingEventsCloneRestoreHash()
 
     AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
     AssertEqual(queuedHash, state.ComputeStateHash());
+}
+
+static void Fnd003BOnRemovedFieldQueuesExplicitRemovalEvent()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-REMOVED"] = CardEffectTestFixture.NoEffectDefinition("FX-REMOVED");
+    state.CardDefinitions["FX-SOURCE"] = CardEffectTestFixture.NoEffectDefinition("FX-SOURCE");
+    var permanent = AddBattlePermanent(state, 66005, 6605, "FX-REMOVED", PlayerId.Player1, 0, enterTurn: 1);
+    var source = AddEvolutionSource(state, 66006, "FX-SOURCE", PlayerId.Player1, permanent.Id);
+    var topCard = permanent.TopCardId;
+
+    var result = new Tier1PrimitiveService().DestroyPermanent(state, permanent.Id);
+
+    AssertSequence(new[] { topCard, source }, result.TrashedCards.ToArray());
+    AssertFalse(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(candidate => candidate.Id == permanent.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(topCard));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(source));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnRemovedField, ruleEvent.Timing);
+    AssertNotEqual(EffectTiming.WhenRemoveField, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player1, ruleEvent.Player);
+    AssertEqual(permanent.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(permanent.Id, (PermanentId)ruleEvent.Values["RemovedPermanent"]!);
+    AssertEqual(PlayerId.Player1, (PlayerId)ruleEvent.Values["RemovedController"]!);
+    AssertEqual(topCard, (CardInstanceId)ruleEvent.Values["RemovedTopCard"]!);
+    AssertSequence(new[] { permanent.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { topCard, source }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(false, (bool)ruleEvent.Values["digixros"]!);
+}
+
+static void Fnd003CAfterPayCostRunsAfterCostPayment()
+{
+    var playProbe = new PayloadProbeCardScript("FX-AFTER-PLAY", "FX_AfterPlay", EffectTiming.AfterPayCost);
+    var playServices = CreateL0006ProbeServices(playProbe);
+    var playState = CreateMinimalBattleState();
+    playState.CardDefinitions["FX-AFTER-PLAY"] =
+        CardEffectTestFixture.EffectDefinition("FX-AFTER-PLAY", "FX_AfterPlay") with
+        {
+            PlayCost = 2,
+        };
+    var playCard = AddCardToZone(playState, 66100, "FX-AFTER-PLAY", PlayerId.Player0, Zone.Hand);
+
+    var playResult = playServices.PlayCardService.PlayWithResult(
+        playState,
+        new PlayCardAction(PlayerId.Player0, playCard, 0));
+
+    AssertFalse(playResult.HasPendingSelection);
+    AssertEqual(3, playState.Memory);
+    AssertEqual(1, playProbe.Observed.Count);
+    AssertAfterPayCostPayload(
+        playProbe.Observed[0],
+        playCard,
+        expectedCost: 2,
+        expectedMemoryBefore: 5,
+        expectedMemoryAfter: 3,
+        expectedSourceZone: Zone.Hand,
+        expectedIsEvolution: false,
+        expectedPermanents: Array.Empty<PermanentId>());
+
+    var optionProbe = new PayloadProbeCardScript("FX-AFTER-OPTION", "FX_AfterOption", EffectTiming.AfterPayCost);
+    var optionServices = CreateL0006ProbeServices(optionProbe);
+    var optionState = CreateMinimalBattleState();
+    optionState.CardDefinitions["FX-AFTER-OPTION"] =
+        CardEffectTestFixture.OptionEffectDefinition("FX-AFTER-OPTION", "FX_AfterOption", playCost: 1);
+    var optionCard = AddCardToZone(optionState, 66101, "FX-AFTER-OPTION", PlayerId.Player0, Zone.Hand);
+
+    var optionResult = optionServices.PlayCardService.PlayWithResult(
+        optionState,
+        new PlayCardAction(PlayerId.Player0, optionCard, -1));
+
+    AssertFalse(optionResult.HasPendingSelection);
+    AssertEqual(4, optionState.Memory);
+    AssertTrue(optionState.GetPlayer(PlayerId.Player0).Trash.Contains(optionCard));
+    AssertEqual(1, optionProbe.Observed.Count);
+    AssertAfterPayCostPayload(
+        optionProbe.Observed[0],
+        optionCard,
+        expectedCost: 1,
+        expectedMemoryBefore: 5,
+        expectedMemoryAfter: 4,
+        expectedSourceZone: Zone.Executing,
+        expectedIsEvolution: false,
+        expectedPermanents: Array.Empty<PermanentId>());
+
+    var digivolveProbe = new PayloadProbeCardScript("FX-AFTER-EVO", "FX_AfterEvo", EffectTiming.AfterPayCost);
+    var digivolveServices = CreateL0006ProbeServices(
+        digivolveProbe,
+        new NoEffectCardScript("FX-EVO-HOST"));
+    var digivolveState = CreateMinimalBattleState();
+    digivolveState.CardDefinitions["FX-EVO-HOST"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-EVO-HOST");
+    digivolveState.CardDefinitions["FX-AFTER-EVO"] =
+        CardEffectTestFixture.EffectDefinition("FX-AFTER-EVO", "FX_AfterEvo") with
+        {
+            Level = 4,
+            PlayCost = 5,
+            EvoCosts = new[] { new EvoCostDefinition(CardColor.Red, 3, 2) },
+        };
+    var target = AddBattlePermanent(digivolveState, 66102, 6602, "FX-EVO-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var digivolveCard = AddCardToZone(digivolveState, 66103, "FX-AFTER-EVO", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(digivolveState, 66104, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+
+    var digivolveResult = digivolveServices.DigivolveService.DigivolveWithResult(
+        digivolveState,
+        new DigivolveAction(PlayerId.Player0, digivolveCard, target.Id));
+
+    AssertFalse(digivolveResult.HasPendingSelection);
+    AssertEqual(3, digivolveState.Memory);
+    AssertEqual(1, digivolveProbe.Observed.Count);
+    AssertAfterPayCostPayload(
+        digivolveProbe.Observed[0],
+        digivolveCard,
+        expectedCost: 2,
+        expectedMemoryBefore: 5,
+        expectedMemoryAfter: 3,
+        expectedSourceZone: Zone.Hand,
+        expectedIsEvolution: true,
+        expectedPermanents: new[] { target.Id });
+}
+
+static void AssertAfterPayCostPayload(
+    ObservedEffectPayload observation,
+    CardInstanceId expectedCard,
+    int expectedCost,
+    int expectedMemoryBefore,
+    int expectedMemoryAfter,
+    Zone expectedSourceZone,
+    bool expectedIsEvolution,
+    IReadOnlyList<PermanentId> expectedPermanents)
+{
+    AssertEqual(EffectTiming.AfterPayCost, observation.Timing);
+    AssertEqual(expectedCard, observation.SourceCard!.Value);
+    AssertEqual(true, (bool)observation.Values["PayCost"]!);
+    AssertEqual(expectedCard, (CardInstanceId)observation.Values["Card"]!);
+    AssertSequence(new[] { expectedCard }, PayloadCards(observation, "CardSources").ToArray());
+    AssertEqual(expectedCost, (int)observation.Values["PaidCost"]!);
+    AssertEqual(expectedCost, (int)observation.Values["Cost"]!);
+    AssertEqual(expectedMemoryBefore, (int)observation.Values["MemoryBeforeCost"]!);
+    AssertEqual(expectedMemoryAfter, (int)observation.Values["MemoryAfterCost"]!);
+    AssertEqual(Zone.Hand, (Zone)observation.Values["Root"]!);
+    AssertEqual(expectedSourceZone, (Zone)observation.Values["SourceZone"]!);
+    AssertEqual(expectedIsEvolution, (bool)observation.Values["isEvolution"]!);
+    AssertEqual(false, (bool)observation.Values["isJogress"]!);
+    AssertSequence(expectedPermanents.ToArray(), ((IEnumerable<PermanentId>)observation.Values["Permanents"]!).ToArray());
+    AssertTrue(((string)observation.Values["CostTransactionId"]!).StartsWith("cost:", StringComparison.Ordinal));
+}
+
+static void Fnd003DOnDiscardSecurityQueuesSecurityDiscardEvents()
+{
+    var loseSecurity = new PayloadProbeCardScript("FX-LOSE-SECURITY", "FX_LoseSecurity", EffectTiming.OnLoseSecurity);
+    var discardSecurity = new PayloadProbeCardScript("FX-DISCARD-SECURITY", "FX_DiscardSecurity", EffectTiming.OnDiscardSecurity);
+    var services = CreateL0006ProbeServices(
+        loseSecurity,
+        discardSecurity,
+        new NoEffectCardScript("FX-SECURITY-CARD"),
+        new NoEffectCardScript("FX-SECURITY-SOURCE"));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-LOSE-SECURITY"] =
+        CardEffectTestFixture.EffectDefinition("FX-LOSE-SECURITY", "FX_LoseSecurity");
+    state.CardDefinitions["FX-DISCARD-SECURITY"] =
+        CardEffectTestFixture.EffectDefinition("FX-DISCARD-SECURITY", "FX_DiscardSecurity");
+    state.CardDefinitions["FX-SECURITY-CARD"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SECURITY-CARD");
+    state.CardDefinitions["FX-SECURITY-SOURCE"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SECURITY-SOURCE");
+    AddBattlePermanent(state, 66200, 6620, "FX-LOSE-SECURITY", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66201, 6621, "FX-DISCARD-SECURITY", PlayerId.Player0, 1, enterTurn: 1);
+    var securityCard = AddCardToZone(state, 66202, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Security, isFaceUp: false);
+    var sourceCard = AddCardToZone(state, 66203, "FX-SECURITY-SOURCE", PlayerId.Player0, Zone.Hand);
+
+    var move = services.PrimitiveService.RemoveSecurity(
+        state,
+        PlayerId.Player0,
+        securityCard,
+        sourceCard: sourceCard);
+
+    AssertEqual(Zone.Security, move.SourceZone);
+    AssertEqual(Zone.Trash, move.DestinationZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(securityCard));
+    AssertTrue(state.Cards[securityCard].IsFaceUp);
+    AssertSequence(
+        new[] { EffectTiming.OnLoseSecurity, EffectTiming.OnDiscardSecurity },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var loseEvent = state.RuntimeRules.PendingRuleEvents[0];
+    var discardEvent = state.RuntimeRules.PendingRuleEvents[1];
+    AssertEqual(PlayerId.Player0, loseEvent.Player);
+    AssertEqual(PlayerId.Player0, discardEvent.Player);
+    AssertSequence(new[] { securityCard }, ((IEnumerable<CardInstanceId>)discardEvent.Values["DiscardedCards"]!).ToArray());
+    AssertSequence(new[] { securityCard }, ((IEnumerable<CardInstanceId>)discardEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(sourceCard, (CardInstanceId)discardEvent.Values["CardEffect"]!);
+    AssertEqual(sourceCard, (CardInstanceId)discardEvent.Values["SourceCard"]!);
+    AssertEqual(Zone.Security, (Zone)discardEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)discardEvent.Values["DestinationZone"]!);
+    AssertEqual(MoveReason.Effect, (MoveReason)discardEvent.Values["MoveReason"]!);
+
+    var result = DrainL0006Events(services, state);
+
+    AssertFalse(result.HasPendingSelection);
+    AssertEqual(1, loseSecurity.Observed.Count);
+    AssertEqual(1, discardSecurity.Observed.Count);
+    AssertSequence(new[] { securityCard }, PayloadCards(discardSecurity.Observed[0], "DiscardedCards"));
+    AssertEqual(sourceCard, (CardInstanceId)discardSecurity.Observed[0].Values["CardEffect"]!);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+
+    var nonTrashState = CreateMinimalBattleState();
+    nonTrashState.CardDefinitions["FX-SECURITY-CARD"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SECURITY-CARD");
+    var nonTrashSecurity = AddCardToZone(nonTrashState, 66204, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Security);
+
+    new Tier1PrimitiveService().RemoveSecurity(
+        nonTrashState,
+        PlayerId.Player0,
+        nonTrashSecurity,
+        destinationZone: Zone.Hand);
+
+    AssertTrue(nonTrashState.RuntimeRules.PendingRuleEvents.Count == 0);
+}
+
+static void Fnd003EOnAddSecurityQueuesSecurityAddEvents()
+{
+    var addSecurity = new PayloadProbeCardScript("FX-ADD-SECURITY", "FX_AddSecurity", EffectTiming.OnAddSecurity);
+    var faceUpSecurity = new PayloadProbeCardScript(
+        "FX-FACEUP-SECURITY",
+        "FX_FaceUpSecurity",
+        EffectTiming.OnFaceUpSecurityIncreased);
+    var services = CreateL0006ProbeServices(
+        addSecurity,
+        faceUpSecurity,
+        new NoEffectCardScript("FX-SECURITY-CARD"),
+        new NoEffectCardScript("FX-SECURITY-SOURCE"));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ADD-SECURITY"] =
+        CardEffectTestFixture.EffectDefinition("FX-ADD-SECURITY", "FX_AddSecurity");
+    state.CardDefinitions["FX-FACEUP-SECURITY"] =
+        CardEffectTestFixture.EffectDefinition("FX-FACEUP-SECURITY", "FX_FaceUpSecurity");
+    state.CardDefinitions["FX-SECURITY-CARD"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SECURITY-CARD");
+    state.CardDefinitions["FX-SECURITY-SOURCE"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SECURITY-SOURCE");
+    AddBattlePermanent(state, 66210, 6630, "FX-ADD-SECURITY", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66211, 6631, "FX-FACEUP-SECURITY", PlayerId.Player0, 1, enterTurn: 1);
+    var faceDownCard = AddCardToZone(state, 66212, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Hand);
+    var sourceCard = AddCardToZone(state, 66213, "FX-SECURITY-SOURCE", PlayerId.Player0, Zone.Hand);
+
+    var faceDownMove = services.PrimitiveService.AddSecurity(
+        state,
+        PlayerId.Player0,
+        faceDownCard,
+        Zone.Hand,
+        sourceCard: sourceCard);
+
+    AssertEqual(Zone.Hand, faceDownMove.SourceZone);
+    AssertEqual(Zone.Security, faceDownMove.DestinationZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Security.Contains(faceDownCard));
+    AssertFalse(state.Cards[faceDownCard].IsFaceUp);
+    AssertSequence(
+        new[] { EffectTiming.OnAddSecurity },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var faceDownEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(PlayerId.Player0, faceDownEvent.Player);
+    AssertSequence(new[] { faceDownCard }, ((IEnumerable<CardInstanceId>)faceDownEvent.Values["AddedSecurityCards"]!).ToArray());
+    AssertSequence(new[] { faceDownCard }, ((IEnumerable<CardInstanceId>)faceDownEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(sourceCard, (CardInstanceId)faceDownEvent.Values["CardEffect"]!);
+    AssertEqual(sourceCard, (CardInstanceId)faceDownEvent.Values["SourceCard"]!);
+    AssertEqual(Zone.Hand, (Zone)faceDownEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Security, (Zone)faceDownEvent.Values["DestinationZone"]!);
+    AssertEqual(true, (bool)faceDownEvent.Values["ToTop"]!);
+    AssertEqual(false, (bool)faceDownEvent.Values["FaceUp"]!);
+    AssertEqual(MoveReason.Effect, (MoveReason)faceDownEvent.Values["MoveReason"]!);
+
+    var faceDownResult = DrainL0006Events(services, state);
+
+    AssertFalse(faceDownResult.HasPendingSelection);
+    AssertEqual(1, addSecurity.Observed.Count);
+    AssertEqual(0, faceUpSecurity.Observed.Count);
+    AssertSequence(new[] { faceDownCard }, PayloadCards(addSecurity.Observed[0], "AddedSecurityCards"));
+    AssertEqual(sourceCard, (CardInstanceId)addSecurity.Observed[0].Values["CardEffect"]!);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+
+    var faceUpCard = AddCardToZone(state, 66214, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Trash);
+    var faceUpMove = services.PrimitiveService.AddSecurity(
+        state,
+        PlayerId.Player0,
+        faceUpCard,
+        Zone.Trash,
+        toTop: false,
+        faceUp: true,
+        sourceCard: sourceCard);
+
+    AssertEqual(Zone.Trash, faceUpMove.SourceZone);
+    AssertEqual(Zone.Security, faceUpMove.DestinationZone);
+    AssertTrue(state.Cards[faceUpCard].IsFaceUp);
+    AssertSequence(
+        new[] { EffectTiming.OnAddSecurity, EffectTiming.OnFaceUpSecurityIncreased },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var faceUpEvent = state.RuntimeRules.PendingRuleEvents[1];
+    AssertSequence(new[] { faceUpCard }, ((IEnumerable<CardInstanceId>)faceUpEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(Zone.Trash, (Zone)faceUpEvent.Values["SourceZone"]!);
+    AssertEqual(false, (bool)faceUpEvent.Values["ToTop"]!);
+    AssertEqual(true, (bool)faceUpEvent.Values["FaceUp"]!);
+
+    var faceUpResult = DrainL0006Events(services, state);
+
+    AssertFalse(faceUpResult.HasPendingSelection);
+    AssertEqual(2, addSecurity.Observed.Count);
+    AssertEqual(1, faceUpSecurity.Observed.Count);
+    AssertSequence(new[] { faceUpCard }, PayloadCards(faceUpSecurity.Observed[0], "CardSources"));
+    AssertEqual(true, (bool)faceUpSecurity.Observed[0].Values["FaceUp"]!);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+
+    AddCardToZone(state, 66215, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Deck);
+    AddCardToZone(state, 66216, "FX-SECURITY-CARD", PlayerId.Player0, Zone.Deck);
+
+    var recovery = services.PrimitiveService.RecoverFromDeck(state, PlayerId.Player0, 2);
+
+    AssertFalse(recovery.RequestedMoreThanAvailable);
+    AssertEqual(2, recovery.AddedCards.Count);
+    AssertSequence(
+        new[] { EffectTiming.OnAddSecurity, EffectTiming.OnAddSecurity },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+    AssertSequence(
+        new[] { recovery.AddedCards[0] },
+        ((IEnumerable<CardInstanceId>)state.RuntimeRules.PendingRuleEvents[0].Values["CardSources"]!).ToArray());
+    AssertEqual(Zone.Deck, (Zone)state.RuntimeRules.PendingRuleEvents[0].Values["SourceZone"]!);
+    AssertEqual(false, (bool)state.RuntimeRules.PendingRuleEvents[0].Values["FaceUp"]!);
+
+    var recoveryResult = DrainL0006Events(services, state);
+
+    AssertFalse(recoveryResult.HasPendingSelection);
+    AssertEqual(4, addSecurity.Observed.Count);
+    AssertEqual(1, faceUpSecurity.Observed.Count);
+    AssertSequence(new[] { recovery.AddedCards[0] }, PayloadCards(addSecurity.Observed[2], "AddedSecurityCards"));
+    AssertSequence(new[] { recovery.AddedCards[1] }, PayloadCards(addSecurity.Observed[3], "AddedSecurityCards"));
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+}
+
+static void Fnd003FOnDiscardLibraryQueuesDeckTrashEvent()
+{
+    var discardLibrary = new PayloadProbeCardScript("FX-DISCARD-LIBRARY", "FX_DiscardLibrary", EffectTiming.OnDiscardLibrary);
+    var services = CreateL0006ProbeServices(
+        discardLibrary,
+        new NoEffectCardScript("FX-DECK-CARD"),
+        new NoEffectCardScript("FX-LIBRARY-SOURCE"));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DISCARD-LIBRARY"] =
+        CardEffectTestFixture.EffectDefinition("FX-DISCARD-LIBRARY", "FX_DiscardLibrary");
+    state.CardDefinitions["FX-DECK-CARD"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-DECK-CARD");
+    state.CardDefinitions["FX-LIBRARY-SOURCE"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-LIBRARY-SOURCE");
+    AddBattlePermanent(state, 66220, 6640, "FX-DISCARD-LIBRARY", PlayerId.Player0, 0, enterTurn: 1);
+    var first = AddCardToZone(state, 66221, "FX-DECK-CARD", PlayerId.Player0, Zone.Deck);
+    var second = AddCardToZone(state, 66222, "FX-DECK-CARD", PlayerId.Player0, Zone.Deck);
+    var sourceCard = AddCardToZone(state, 66223, "FX-LIBRARY-SOURCE", PlayerId.Player0, Zone.Hand);
+
+    var result = services.PrimitiveService.TrashTopDeckCardsWithEvents(
+        state,
+        PlayerId.Player0,
+        count: 3,
+        sourceCard: sourceCard);
+
+    AssertEqual(3, result.RequestedCount);
+    AssertTrue(result.RequestedMoreThanAvailable);
+    AssertSequence(new[] { first, second }, result.DiscardedCards.ToArray());
+    AssertEqual(2, result.Moves.Count);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(first));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(second));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Deck.Contains(first));
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Deck.Contains(second));
+    AssertTrue(state.Cards[first].IsFaceUp);
+    AssertTrue(state.Cards[second].IsFaceUp);
+    AssertSequence(
+        new[] { EffectTiming.OnDiscardLibrary },
+        state.RuntimeRules.PendingRuleEvents.Select(ruleEvent => ruleEvent.Timing).ToArray());
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(PlayerId.Player0, ruleEvent.Player);
+    AssertSequence(new[] { first, second }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["DiscardedCards"]!).ToArray());
+    AssertSequence(new[] { first, second }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(sourceCard, (CardInstanceId)ruleEvent.Values["CardEffect"]!);
+    AssertEqual(sourceCard, (CardInstanceId)ruleEvent.Values["SourceCard"]!);
+    AssertEqual(Zone.Deck, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(3, (int)ruleEvent.Values["RequestedCount"]!);
+    AssertEqual(true, (bool)ruleEvent.Values["RequestedMoreThanAvailable"]!);
+    AssertEqual(MoveReason.Effect, (MoveReason)ruleEvent.Values["MoveReason"]!);
+
+    var drain = DrainL0006Events(services, state);
+
+    AssertFalse(drain.HasPendingSelection);
+    AssertEqual(1, discardLibrary.Observed.Count);
+    AssertSequence(new[] { first, second }, PayloadCards(discardLibrary.Observed[0], "DiscardedCards"));
+    AssertEqual(sourceCard, (CardInstanceId)discardLibrary.Observed[0].Values["CardEffect"]!);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+
+    var zero = services.PrimitiveService.TrashTopDeckCardsWithEvents(state, PlayerId.Player0, count: 0);
+    AssertEqual(0, zero.RequestedCount);
+    AssertFalse(zero.RequestedMoreThanAvailable);
+    AssertTrue(zero.DiscardedCards.Count == 0);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
+
+    var emptyDeck = services.PrimitiveService.TrashTopDeckCardsWithEvents(state, PlayerId.Player0, count: 1);
+    AssertEqual(1, emptyDeck.RequestedCount);
+    AssertTrue(emptyDeck.RequestedMoreThanAvailable);
+    AssertTrue(emptyDeck.DiscardedCards.Count == 0);
+    AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
 }
 
 static void ZoneEventsOnAddHandAndOnDrawDrainThroughAutoProcess()
