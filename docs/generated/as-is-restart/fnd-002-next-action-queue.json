@@ -1,0 +1,394 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002-next-action-queue.v1",
+  "generatedAt": "2026-06-23T07:47:29.955002+00:00",
+  "goal": "FND-002",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json",
+  "summary": {
+    "fnd001HandoffCount": 25,
+    "fnd003HandoffCount": 26,
+    "manualReviewCount": 1,
+    "note": "이 queue는 FND-002 산출물이다. FND-001/FND-003 자체를 수행하지 않는다."
+  },
+  "fnd001FoundationDependencyItems": [
+    {
+      "apiName": "OnDeclaration",
+      "classification": "FoundationRequired",
+      "reason": "선언형 효과 legal action/decision boundary와 once-per-turn 사용 등록이 필요한 공통 layer다.",
+      "dependencyScope": "CardSource/Permanent/TurnStateMachine declaration skill discovery"
+    },
+    {
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "classification": "FoundationRequired",
+      "reason": "삭제 replacement/delete prevention cut-in이며 keyword와 source effect가 모두 참조한다.",
+      "dependencyScope": "Permanent delete prevention and keyword-granted replacement"
+    },
+    {
+      "apiName": "OnTappedAnyone",
+      "classification": "FoundationRequired",
+      "reason": "suspend 완료 후 payload를 stack하는 공통 suspend primitive/event layer가 필요하다.",
+      "dependencyScope": "CardController suspend event stack"
+    },
+    {
+      "apiName": "WhenRemoveField",
+      "classification": "FoundationRequired",
+      "reason": "actual removal 이후가 아니라 would-remove cut-in이므로 target refix와 replacement payload가 필요하다.",
+      "dependencyScope": "CardController/CardObjectController would-remove cut-in"
+    },
+    {
+      "apiName": "BeforePayCost",
+      "classification": "FoundationRequired",
+      "reason": "비용 지불 전 후보 수집, background effect, cut-in, 비용 변경을 묶는 cost state machine이 필요하다.",
+      "dependencyScope": "CardController/CardSource pre-cost collection and cut-in"
+    },
+    {
+      "apiName": "OnDetermineDoSecurityCheck",
+      "classification": "FoundationRequired",
+      "reason": "Pierce/security check 결정 시점 payload와 security check modifier가 필요한 battle/security layer다.",
+      "dependencyScope": "CardController/Permanent security-check modifier collection"
+    },
+    {
+      "apiName": "OnEndBattle",
+      "classification": "FoundationRequired",
+      "reason": "winner/loser/battle object snapshot을 전달하는 battle lifecycle layer가 필요하다.",
+      "dependencyScope": "CardController battle end stack"
+    },
+    {
+      "apiName": "OnDigivolutionCardDiscarded",
+      "classification": "FoundationRequired",
+      "reason": "source trash actual event이며 would-discard cut-in 이후 snapshot payload가 필요하다.",
+      "dependencyScope": "CardController source trash actual event stack"
+    },
+    {
+      "apiName": "OnAddDigivolutionCards",
+      "classification": "FoundationRequired",
+      "reason": "source add 이후 Permanent/CardSources/root payload를 전달하는 source movement layer가 필요하다.",
+      "dependencyScope": "Permanent source-add event stack"
+    },
+    {
+      "apiName": "WhenLinked",
+      "classification": "FoundationRequired",
+      "reason": "link lifecycle에서 link source와 target permanent 조건을 함께 보는 공통 layer다.",
+      "dependencyScope": "Permanent/CardEffectFactory link timing and CanTriggerWhenLinked"
+    },
+    {
+      "apiName": "OnMove",
+      "classification": "FoundationRequired",
+      "reason": "단순 zone 이동 완료가 아니라 이동한 permanent 생존 재검증 payload가 필요한 movement layer다.",
+      "dependencyScope": "CardObjectController/CardEffectFactory movement event stack"
+    },
+    {
+      "apiName": "OnUnTappedAnyone",
+      "classification": "FoundationRequired",
+      "reason": "WhenUntapAnyone cut-in 뒤 actual unsuspend와 후속 stack이 분리되어야 한다.",
+      "dependencyScope": "CardController unsuspend actual event stack"
+    },
+    {
+      "apiName": "OnUseOption",
+      "classification": "FoundationRequired",
+      "reason": "executing zone, root, cost, background timing, OptionSkill 순서를 보존하는 option execution boundary가 필요하다.",
+      "dependencyScope": "CardController option execution boundary"
+    },
+    {
+      "apiName": "OnDiscardLibrary",
+      "classification": "FoundationRequired",
+      "reason": "library/deck trash primitive와 DiscardedCards payload가 필요한 mill event layer다.",
+      "dependencyScope": "CardController deck trash event stack"
+    },
+    {
+      "apiName": "OnAddSecurity",
+      "classification": "FoundationRequired",
+      "reason": "security 증가 후 trigger stack과 face-up 상태 경계가 필요한 security movement layer다.",
+      "dependencyScope": "CardController security-add event stack"
+    },
+    {
+      "apiName": "WhenReturntoLibraryAnyone",
+      "classification": "FoundationRequired",
+      "reason": "return-to-library actual mutation 전 replacement cut-in과 willBeRemoveField target refix가 필요하다.",
+      "dependencyScope": "CardController return-to-library would-remove cut-in"
+    },
+    {
+      "apiName": "OnDiscardSecurity",
+      "classification": "FoundationRequired",
+      "reason": "security trash/discard primitive와 payload stack이 필요한 security movement layer다.",
+      "dependencyScope": "CardController security discard event stack"
+    },
+    {
+      "apiName": "WhenDigisorption",
+      "classification": "FoundationRequired",
+      "reason": "BeforePayCost 비용 감소 body와 이후 WhenDigisorption trigger가 결합된 cost mechanic layer다.",
+      "dependencyScope": "BeforePayCost cost-reduction body timing"
+    },
+    {
+      "apiName": "AfterPayCost",
+      "classification": "FoundationRequired",
+      "reason": "비용 지불 이후 cut-in stack boundary가 필요한 cost state machine 후단이다.",
+      "dependencyScope": "CardController post-cost cut-in stack"
+    },
+    {
+      "apiName": "OnLinkCardDiscarded",
+      "classification": "FoundationRequired",
+      "reason": "link source discard 후속 event이며 link lifecycle/source discard payload가 필요하다.",
+      "dependencyScope": "CardController link source discard event stack"
+    },
+    {
+      "apiName": "OnRemovedField",
+      "classification": "FoundationRequired",
+      "reason": "field removal 완료/후속 timing 의미가 source body 단위로 고정되어야 하는 field-removal layer다.",
+      "dependencyScope": "CardObjectController post-removal event stack"
+    },
+    {
+      "apiName": "WhenWouldLink",
+      "classification": "FoundationRequired",
+      "reason": "link 실행 직전 cut-in/replacement 성격의 would-link boundary가 필요하다.",
+      "dependencyScope": "CardController/CardEffectCommons would-link cut-in"
+    },
+    {
+      "apiName": "OnFaceUpSecurityIncreased",
+      "classification": "DataDrivenRequired",
+      "reason": "face-up security 수와 security card 상태 변화에 의존하므로 source data/state 모델 확정이 필요하다.",
+      "dependencyScope": "CardController face-up security state event stack"
+    },
+    {
+      "apiName": "WhenUntapAnyone",
+      "classification": "FoundationRequired",
+      "reason": "actual unsuspend 이전 선택/지속효과/재검증을 포함하는 replacement 성격 cut-in이다.",
+      "dependencyScope": "CardController would-untap cut-in"
+    },
+    {
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "classification": "FoundationRequired",
+      "reason": "source trash actual mutation 전 replacement/cut-in boundary가 필요하다.",
+      "dependencyScope": "CardController would-source-trash cut-in"
+    }
+  ],
+  "fnd003UnsupportedRemediationItems": [
+    {
+      "apiName": "OnDeclaration",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 302,
+      "affectedCardCount": 578,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 210,
+      "affectedCardCount": 405,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnTappedAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 140,
+      "affectedCardCount": 306,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenRemoveField",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 167,
+      "affectedCardCount": 304,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "BeforePayCost",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 143,
+      "affectedCardCount": 284,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnDetermineDoSecurityCheck",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 122,
+      "affectedCardCount": 228,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnEndBattle",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 86,
+      "affectedCardCount": 160,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnDigivolutionCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 54,
+      "affectedCardCount": 121,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnAddDigivolutionCards",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 51,
+      "affectedCardCount": 102,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenLinked",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 67,
+      "affectedCardCount": 87,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnMove",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 32,
+      "affectedCardCount": 79,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnUnTappedAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 30,
+      "affectedCardCount": 70,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnUseOption",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 31,
+      "affectedCardCount": 65,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnDiscardLibrary",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 21,
+      "affectedCardCount": 51,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnAddSecurity",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 15,
+      "affectedCardCount": 38,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenReturntoLibraryAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 10,
+      "affectedCardCount": 25,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnDiscardSecurity",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 15,
+      "affectedCardCount": 23,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenDigisorption",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 10,
+      "affectedCardCount": 15,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "AfterPayCost",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 8,
+      "affectedCardCount": 15,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnLinkCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 8,
+      "affectedCardCount": 14,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnRemovedField",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 3,
+      "affectedCardCount": 4,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenWouldLink",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 3,
+      "affectedCardCount": 2,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnFaceUpSecurityIncreased",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "DataDrivenRequired",
+      "sourceFileCount": 2,
+      "affectedCardCount": 2,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "OnUseDigiburst",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "CardEffectBodySpecific",
+      "sourceFileCount": 2,
+      "affectedCardCount": 1,
+      "recommendedRemediation": "special mechanic/body-specific source review로 분해하되 CardEffect body 구현은 후속 goal에서만 수행한다."
+    },
+    {
+      "apiName": "WhenUntapAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 2,
+      "affectedCardCount": 1,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    },
+    {
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "classification": "FoundationRequired",
+      "sourceFileCount": 2,
+      "affectedCardCount": 1,
+      "recommendedRemediation": "common runtime/event layer remediation prompt로 분해한다."
+    }
+  ],
+  "manualReviewItems": [
+    {
+      "apiName": "OnStartBattle",
+      "classification": "BlockedNeedsManualReview",
+      "reason": "source dispatch는 있지만 affected card가 0이므로 Gate blocker로 유지할지와 fixture 필요 범위를 수동 검토해야 한다.",
+      "currentCapabilityStatus": "Unsupported",
+      "affectedCardCount": 0,
+      "sourceFileCount": 1
+    }
+  ],
+  "notInScopeNow": [
+    "FND-001 수행",
+    "FND-003 수행",
+    "TRUST-001 수행",
+    "src 수정",
+    "DCGO 원본 수정",
+    "CardEffect body 구현",
+    "generated status 승격",
+    "commit/push"
+  ]
+}

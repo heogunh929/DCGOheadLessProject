@@ -1,0 +1,624 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd003-next-action-queue.v1",
+  "generatedAt": "2026-06-23T09:23:47.067050+00:00",
+  "goal": "FND-003",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-003-unsupported-capability-remediation.json",
+  "summary": {
+    "implementableFoundationTaskCount": 15,
+    "partialNeedsSubtasksCount": 9,
+    "dataPolicyRequiredCount": 1,
+    "cardEffectBodySpecificCount": 1,
+    "blockedNeedsManualReviewCount": 0,
+    "fnd001ContinuousOrStaticHandoffCount": 25,
+    "trust001HandoffCount": 26,
+    "note": "이 queue는 FND-003 산출물이다. 구현, FND-001, TRUST-001 자체는 수행하지 않는다."
+  },
+  "implementableFoundationTasks": [
+    {
+      "capabilityId": "OnDeclaration",
+      "affectedCardCount": 578,
+      "sourceFileCount": 298,
+      "remediationTasks": [
+        "declarable effect discovery contract를 CardSource/Permanent source collection 단위로 문서화한다.",
+        "legal action/DecisionPoint payload에 source card, root, once-per-turn key, activation owner를 포함하는 task로 분리한다.",
+        "TurnStateMachine command 선택과 headless action generation parity fixture 범위를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnTappedAnyone",
+      "affectedCardCount": 306,
+      "sourceFileCount": 139,
+      "remediationTasks": [
+        "suspend primitive의 actual suspend 후 event payload를 Permanents/IsBlock/CardEffect로 고정한다.",
+        "block suspend와 effect-caused suspend를 구분하는 trigger source task를 만든다.",
+        "OnTappedAnyone queue/replay payload fixture를 추가 task로 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "BeforePayCost",
+      "affectedCardCount": 284,
+      "sourceFileCount": 141,
+      "remediationTasks": [
+        "pay-cost state machine의 pre-cost collection, background effects, cut-in 순서를 task로 분리한다.",
+        "cost modifier source scope와 max payable memory validation task를 분리한다.",
+        "Digisorption/DigiXros/option play cost와 공유 가능한 CostResolver hook contract를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnDetermineDoSecurityCheck",
+      "affectedCardCount": 228,
+      "sourceFileCount": 119,
+      "remediationTasks": [
+        "battle security-check 결정 payload에 attacker, defender, battle object, security-check count를 고정한다.",
+        "Pierce/security check modifier source collection task를 분리한다.",
+        "security check 변경 후 OnSecurityCheck와의 순서 fixture task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnEndBattle",
+      "affectedCardCount": 160,
+      "sourceFileCount": 84,
+      "remediationTasks": [
+        "battle end payload를 winner/loser/tie/battle snapshot으로 고정한다.",
+        "attack cleanup 이전/이후 trigger 순서 fixture task를 분리한다.",
+        "battle object lifetime과 stale permanent handling task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnDigivolutionCardDiscarded",
+      "affectedCardCount": 121,
+      "sourceFileCount": 53,
+      "remediationTasks": [
+        "would-discard cut-in과 actual source trash event를 별도 task로 분리한다.",
+        "DiscardedCards snapshot payload와 rollback/resume 불가 조건을 정의한다.",
+        "source trash primitive가 ZoneMover 경유로 event를 발행하는 fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "OnAddDigivolutionCards",
+      "affectedCardCount": 102,
+      "sourceFileCount": 50,
+      "remediationTasks": [
+        "source add primitive payload를 Permanent/CardEffect/CardSources/isFromSameDigimon/isFromDigimon으로 고정한다.",
+        "face-down/source-bottom add와 inherited source refresh task를 분리한다.",
+        "source add 후 trigger stack order fixture task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnMove",
+      "affectedCardCount": 79,
+      "sourceFileCount": 30,
+      "remediationTasks": [
+        "move event payload에 moved permanent, old/new zone, battle-area survival recheck를 포함한다.",
+        "CardObjectController/CardEffectFactory CanTriggerOnMove parity fixture task를 분리한다.",
+        "ZoneMover event bridge와 stale target negative case를 별도 task로 둔다."
+      ]
+    },
+    {
+      "capabilityId": "OnUnTappedAnyone",
+      "affectedCardCount": 70,
+      "sourceFileCount": 29,
+      "remediationTasks": [
+        "WhenUntapAnyone cut-in 뒤 actual unsuspend event를 별도 payload로 고정한다.",
+        "CanUnsuspend/effect immunity 재검증 후 OnUnTappedAnyone stack task를 정의한다.",
+        "suspend/unsuspend replay trace payload fixture task를 분리한다."
+      ]
+    },
+    {
+      "capabilityId": "OnUseOption",
+      "affectedCardCount": 65,
+      "sourceFileCount": 30,
+      "remediationTasks": [
+        "option card executing zone 이동, Root, Cost, Card payload boundary를 정의한다.",
+        "OnUseOption/background OnUseOption/OptionSkill 순서 task를 분리한다.",
+        "executing source cleanup과 interruption/resume negative fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "OnDiscardLibrary",
+      "affectedCardCount": 51,
+      "sourceFileCount": 20,
+      "remediationTasks": [
+        "deck trash primitive payload를 DiscardedCards/CardEffect로 고정한다.",
+        "mill event source collection과 deck exhaustion edge case task를 분리한다.",
+        "OnDiscardLibrary trigger stack fixture task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "OnAddSecurity",
+      "affectedCardCount": 38,
+      "sourceFileCount": 14,
+      "remediationTasks": [
+        "security add primitive payload와 face-up/down state를 분리한다.",
+        "OnAddSecurity와 OnFaceUpSecurityIncreased ordering fixture task를 정의한다.",
+        "security count/hash/replay payload task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "OnDiscardSecurity",
+      "affectedCardCount": 23,
+      "sourceFileCount": 14,
+      "remediationTasks": [
+        "security discard primitive payload를 security card snapshot과 source effect로 고정한다.",
+        "security trash/recovery flow와 OnLoseSecurity/OnDiscardSecurity ordering task를 분리한다.",
+        "security discard replay fixture task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "AfterPayCost",
+      "affectedCardCount": 15,
+      "sourceFileCount": 7,
+      "remediationTasks": [
+        "actual payment 이후 cut-in boundary와 paid cost payload를 정의한다.",
+        "BeforePayCost와 같은 cost transaction id를 공유하는 task를 분리한다.",
+        "post-cost trigger order fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "OnRemovedField",
+      "affectedCardCount": 4,
+      "sourceFileCount": 2,
+      "remediationTasks": [
+        "actual field removal 완료 후 payload와 would-remove cut-in과의 관계를 고정한다.",
+        "CardObjectController OnRemovedField call parity fixture task를 분리한다.",
+        "OnRemovedField를 WhenRemoveField alias로 처리하지 않는 negative task를 둔다."
+      ]
+    }
+  ],
+  "partialNeedsSubtasks": [
+    {
+      "capabilityId": "WhenPermanentWouldBeDeleted",
+      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "remediationTasks": [
+        "delete-prevention/replacement cut-in payload를 deletion reason, source effect, candidate permanents로 분리한다.",
+        "Barrier/Evade/Scapegoat 계열 granted timing source collection task를 분리한다.",
+        "actual deletion 전 target refix와 self-effect exclusion fixture task를 별도로 둔다."
+      ]
+    },
+    {
+      "capabilityId": "WhenRemoveField",
+      "reason": "Would-remove replacement/cut-in semantics remain unresolved for generated batches.",
+      "remediationTasks": [
+        "would-remove cut-in payload를 willBeRemoveField, reason, battle/digixros flags로 분리한다.",
+        "return-to-hand/deck/delete/security-like removal별 shared target refix task를 만든다.",
+        "WhenRemoveField를 OnLeaveFieldAnyone/OnRemovedField alias로 처리하지 않는 negative fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "WhenLinked",
+      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "remediationTasks": [
+        "link source/target permanent 조건을 shared payload로 분리한다.",
+        "CanTriggerWhenLinked parity fixture와 linked source collection task를 분리한다.",
+        "link execution completion과 WhenWouldLink/OnLinkCardDiscarded 순서 task를 정의한다."
+      ]
+    },
+    {
+      "capabilityId": "WhenReturntoLibraryAnyone",
+      "reason": "Return-to-library cut-in shares unresolved would-remove replacement semantics.",
+      "remediationTasks": [
+        "return-to-library actual mutation 전 cut-in payload와 willBeRemoveField marking task를 분리한다.",
+        "post-cut-in target refix와 OnLeaveFieldAnyone follow-up task를 별도로 둔다.",
+        "WhenRemoveField와 shared replacement task dependency를 명시한다."
+      ]
+    },
+    {
+      "capabilityId": "WhenDigisorption",
+      "reason": "Digisorption timing remains a documented common-layer blocker.",
+      "remediationTasks": [
+        "BeforePayCost 안에서 선택한 suspend source, reduction amount, cost target을 분리한다.",
+        "비용 감소 후 WhenDigisorption trigger stack task를 별도 정의한다.",
+        "Digisorption special mechanic을 CardEffect body 구현 없이 common cost mechanic prompt로 쪼갠다."
+      ]
+    },
+    {
+      "capabilityId": "OnLinkCardDiscarded",
+      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "remediationTasks": [
+        "link source discard payload를 discarded link cards/source permanent로 고정한다.",
+        "link lifecycle cleanup과 OnLinkCardDiscarded trigger ordering task를 분리한다.",
+        "linked source removal hash/replay fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "WhenWouldLink",
+      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "remediationTasks": [
+        "link 실행 직전 candidate card/permanent/root/effect payload를 정의한다.",
+        "CanTriggerWhenWouldLink parity fixture task를 분리한다.",
+        "WhenLinked와의 pre/post lifecycle ordering task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "WhenUntapAnyone",
+      "reason": "Untap cut-in pre/post refix semantics remain unresolved.",
+      "remediationTasks": [
+        "actual unsuspend 전 candidate collection, duplicate guard, selection payload를 분리한다.",
+        "BT7_055형 hand discard 선택과 cannot-unsuspend duration task를 분리한다.",
+        "post-cut-in CanUnsuspend/effect immunity target refix fixture task를 둔다."
+      ]
+    },
+    {
+      "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "remediationTasks": [
+        "source trash actual mutation 전 would-discard cut-in payload를 정의한다.",
+        "replacement 처리 후 actual discarded source snapshot task를 분리한다.",
+        "OnDigivolutionCardDiscarded와 ordering/replay fixture task를 둔다."
+      ]
+    }
+  ],
+  "fnd001ContinuousOrStaticHandoffItems": [
+    {
+      "capabilityId": "OnDeclaration",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenPermanentWouldBeDeleted",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnTappedAnyone",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenRemoveField",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "BeforePayCost",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnDetermineDoSecurityCheck",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnEndBattle",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnDigivolutionCardDiscarded",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnAddDigivolutionCards",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenLinked",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnMove",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnUnTappedAnyone",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnUseOption",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnDiscardLibrary",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnAddSecurity",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenReturntoLibraryAnyone",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnDiscardSecurity",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "AfterPayCost",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenDigisorption",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnLinkCardDiscarded",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnRemovedField",
+      "classification": "ImplementableFoundationTask",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "OnFaceUpSecurityIncreased",
+      "classification": "DataPolicyRequired",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenWouldLink",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenUntapAnyone",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    },
+    {
+      "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+      "classification": "PartialNeedsSubtasks",
+      "reason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다."
+    }
+  ],
+  "trust001ReviewItems": [
+    {
+      "capabilityId": "OnDeclaration",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenPermanentWouldBeDeleted",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnTappedAnyone",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenRemoveField",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "BeforePayCost",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_065.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_088.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_011.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnDetermineDoSecurityCheck",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnEndBattle",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_047.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnDigivolutionCardDiscarded",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT21/Black/BT21_055.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnAddDigivolutionCards",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_034.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_080.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_090.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_054.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_001.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_004.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenLinked",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnMove",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnUnTappedAnyone",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnUseOption",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnDiscardLibrary",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_071.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnAddSecurity",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenReturntoLibraryAnyone",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnDiscardSecurity",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "AfterPayCost",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenDigisorption",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnLinkCardDiscarded",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnRemovedField",
+      "classification": "ImplementableFoundationTask",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnFaceUpSecurityIncreased",
+      "classification": "DataPolicyRequired",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenWouldLink",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "OnUseDigiburst",
+      "classification": "CardEffectBodySpecific",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenUntapAnyone",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    },
+    {
+      "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+      "classification": "PartialNeedsSubtasks",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다."
+    }
+  ],
+  "blockedNeedsManualReviewItems": [],
+  "notInScopeNow": [
+    "src 구현 코드 수정",
+    "DCGO 원본 수정",
+    "CardEffect body 구현",
+    "C0039 이후 card-porting",
+    "RL 구성요소 구현",
+    "FND-001 수행",
+    "TRUST-001 수행",
+    "Foundation Gate 수치 조작",
+    "generated status Implemented/Verified 승격",
+    "commit/push"
+  ]
+}

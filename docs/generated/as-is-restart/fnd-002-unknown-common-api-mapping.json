@@ -1,0 +1,1480 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002-unknown-common-api-source-mapping.v1",
+  "generatedAt": "2026-06-23T07:47:29.955002+00:00",
+  "goal": "FND-002",
+  "sourceRoot": "E:/headlessDCGO/DCGO",
+  "inputs": {
+    "goal09Priority": "docs/as-is-restart/GOAL_09_ASIS_IMPLEMENTATION_PRIORITY_REWRITE.md",
+    "goal08TrustAudit": "docs/as-is-restart/GOAL_08_ASIS_HEADLESS_TRUST_AUDIT.md",
+    "goal07RequirementMatrix": "docs/as-is-restart/GOAL_07_ASIS_HEADLESS_REQUIREMENT_MATRIX.md",
+    "goal04SymbolInventory": "docs/as-is-restart/GOAL_04_ASIS_CSHARP_SYMBOL_INVENTORY.md",
+    "goal05CallGraph": "docs/as-is-restart/GOAL_05_ASIS_CSHARP_CALL_GRAPH.md",
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "capabilityMatrix": "docs/generated/capability-truth-audit/capability-registry.json"
+  },
+  "summary": {
+    "expectedUnknownCommonApiCount": 27,
+    "gateUnknownCommonApiCount": 27,
+    "gateSampleMissingCommonApiCandidateCount": 20,
+    "discoveredUnknownCommonApiCount": 27,
+    "countMatchesExpected": true,
+    "countMatchesGate": true,
+    "missingExpectedNames": [],
+    "unexpectedNames": [],
+    "classificationCounts": {
+      "FoundationRequired": 24,
+      "DataDrivenRequired": 1,
+      "CardEffectBodySpecific": 1,
+      "BlockedNeedsManualReview": 1
+    },
+    "foundationRequiredCount": 24,
+    "blockedNeedsManualReviewCount": 1,
+    "fnd001HandoffCount": 25,
+    "fnd003HandoffCount": 26,
+    "manualReviewCount": 1,
+    "excludedItemCount": 0
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "entries": [
+    {
+      "apiName": "OnDeclaration",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 578,
+      "sourceFileCount": 302,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 12,
+      "capabilityMatrix": {
+        "capabilityId": "OnDeclaration",
+        "status": "Unsupported",
+        "sourceFileCount": 298,
+        "affectedCardCount": 578
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:973 - EffectTiming.OnDeclaration"
+      ],
+      "sourceClassOrMethodArea": "CardSource/Permanent/TurnStateMachine declaration skill discovery",
+      "sourceRuntimeCallEvidence": "CardSource.cs:1051, Permanent.cs:1623/2927, TurnStateMachine.cs:1472/3061/3063",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_100.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_061.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_015.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_089.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/White/BT12_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Blue/BT13_028.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT1_088",
+        "BT1_089",
+        "BT10_025",
+        "BT10_097",
+        "BT10_053"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "선언형 효과 legal action/decision boundary와 once-per-turn 사용 등록이 필요한 공통 layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 405,
+      "sourceFileCount": 210,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 1,
+      "capabilityMatrix": {
+        "capabilityId": "WhenPermanentWouldBeDeleted",
+        "status": "Unsupported",
+        "sourceFileCount": 206,
+        "affectedCardCount": 405
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:980 - EffectTiming.WhenPermanentWouldBeDeleted"
+      ],
+      "sourceClassOrMethodArea": "Permanent delete prevention and keyword-granted replacement",
+      "sourceRuntimeCallEvidence": "CardController.cs:3696, Permanent.cs:2898/2954/3117/3138, Barrier.cs:99, Evade.cs:77",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_066.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_024.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_015.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_111.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "AD1_012",
+        "AD1_014",
+        "BT10_066",
+        "BT10_024",
+        "BT10_026"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "삭제 replacement/delete prevention cut-in이며 keyword와 source effect가 모두 참조한다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnTappedAnyone",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 306,
+      "sourceFileCount": 140,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 25,
+      "capabilityMatrix": {
+        "capabilityId": "OnTappedAnyone",
+        "status": "Unsupported",
+        "sourceFileCount": 139,
+        "affectedCardCount": 306
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1000 - EffectTiming.OnTappedAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController suspend event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5648",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_048.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_051.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_011.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_103.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_056.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "AD1_014",
+        "AD1_016",
+        "AD1_021",
+        "BT10_004",
+        "BT10_044"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "suspend 완료 후 payload를 stack하는 공통 suspend primitive/event layer가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenRemoveField",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 304,
+      "sourceFileCount": 167,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 15,
+      "capabilityMatrix": {
+        "capabilityId": "WhenRemoveField",
+        "status": "Unsupported",
+        "sourceFileCount": 164,
+        "affectedCardCount": 304
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:979 - EffectTiming.WhenRemoveField"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardObjectController would-remove cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:2333/2499/2660/2932/2948/3228/3244/3538/3705, CardObjectController.cs:1048, CanUseEffects/WhenRemoveField.cs:11",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Black/AD1_023.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_111.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Black/BT13_075.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_040.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_060.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "AD1_023",
+        "AD1_011",
+        "AD1_013",
+        "AD1_003",
+        "AD1_006"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "actual removal 이후가 아니라 would-remove cut-in이므로 target refix와 replacement payload가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "BeforePayCost",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 284,
+      "sourceFileCount": 143,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 66,
+      "capabilityMatrix": {
+        "capabilityId": "BeforePayCost",
+        "status": "Unsupported",
+        "sourceFileCount": 141,
+        "affectedCardCount": 284
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1015 - EffectTiming.BeforePayCost"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardSource pre-cost collection and cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:604-621/709-711, CardSource.cs:2641",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_091.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/White/BT11_095.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_094.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_102.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Purple/BT12_096.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_088",
+        "BT10_052",
+        "BT10_093",
+        "BT10_087",
+        "BT11_091"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "비용 지불 전 후보 수집, background effect, cut-in, 비용 변경을 묶는 cost state machine이 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnDetermineDoSecurityCheck",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 228,
+      "sourceFileCount": 122,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 7,
+      "capabilityMatrix": {
+        "capabilityId": "OnDetermineDoSecurityCheck",
+        "status": "Unsupported",
+        "sourceFileCount": 119,
+        "affectedCardCount": 228
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1013 - EffectTiming.OnDetermineDoSecurityCheck"
+      ],
+      "sourceClassOrMethodArea": "CardController/Permanent security-check modifier collection",
+      "sourceRuntimeCallEvidence": "CardController.cs:4731, Permanent.cs:2591, Pierce.cs:78",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_081.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_022.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_049.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_016.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_057.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "AD1_004",
+        "AD1_008",
+        "AD1_009",
+        "BT1_081",
+        "BT1_083"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "Pierce/security check 결정 시점 payload와 security check modifier가 필요한 battle/security layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnEndBattle",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 160,
+      "sourceFileCount": 86,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 16,
+      "capabilityMatrix": {
+        "capabilityId": "OnEndBattle",
+        "status": "Unsupported",
+        "sourceFileCount": 84,
+        "affectedCardCount": 160
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1012 - EffectTiming.OnEndBattle"
+      ],
+      "sourceClassOrMethodArea": "CardController battle end stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:4718, CardEffectFactory.cs:452",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Green/BT13_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_047.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT1_077",
+        "BT1_112",
+        "BT10_028",
+        "BT10_045",
+        "BT10_054"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "winner/loser/battle object snapshot을 전달하는 battle lifecycle layer가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnDigivolutionCardDiscarded",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 121,
+      "sourceFileCount": 54,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 18,
+      "capabilityMatrix": {
+        "capabilityId": "OnDigivolutionCardDiscarded",
+        "status": "Unsupported",
+        "sourceFileCount": 53,
+        "affectedCardCount": 121
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1017 - EffectTiming.OnDigivolutionCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController source trash actual event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5181/5215",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_072.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_075.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_076.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_081.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_082.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Blue/BT14_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Blue/BT14_083.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_006",
+        "BT10_072",
+        "BT10_073",
+        "BT10_075",
+        "BT10_076"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "source trash actual event이며 would-discard cut-in 이후 snapshot payload가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnAddDigivolutionCards",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 102,
+      "sourceFileCount": 51,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 22,
+      "capabilityMatrix": {
+        "capabilityId": "OnAddDigivolutionCards",
+        "status": "Unsupported",
+        "sourceFileCount": 50,
+        "affectedCardCount": 102
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1002 - EffectTiming.OnAddDigivolutionCards"
+      ],
+      "sourceClassOrMethodArea": "Permanent source-add event stack",
+      "sourceRuntimeCallEvidence": "Permanent.cs:1119/1223",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_090.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_080.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Yellow/BT20_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Yellow/BT20_035.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_080.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_090.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_093",
+        "BT11_088",
+        "BT17_056",
+        "BT17_006",
+        "BT17_090"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "source add 이후 Permanent/CardSources/root payload를 전달하는 source movement layer가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenLinked",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 87,
+      "sourceFileCount": 67,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 0,
+      "capabilityMatrix": {
+        "capabilityId": "WhenLinked",
+        "status": "Unsupported",
+        "sourceFileCount": 64,
+        "affectedCardCount": 87
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1025 - EffectTiming.WhenLinked"
+      ],
+      "sourceClassOrMethodArea": "Permanent/CardEffectFactory link timing and CanTriggerWhenLinked",
+      "sourceRuntimeCallEvidence": "Permanent.cs:1290, CardEffectFactory.cs:874, CanUseEffects/WhenLinked.cs:45",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Green/BT21_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_018.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_023.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_084.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT21_053",
+        "BT21_054",
+        "BT21_059",
+        "BT21_005",
+        "BT21_070"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "link lifecycle에서 link source와 target permanent 조건을 함께 보는 공통 layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnMove",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 79,
+      "sourceFileCount": 32,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 8,
+      "capabilityMatrix": {
+        "capabilityId": "OnMove",
+        "status": "Unsupported",
+        "sourceFileCount": 30,
+        "affectedCardCount": 79
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:997 - EffectTiming.OnMove"
+      ],
+      "sourceClassOrMethodArea": "CardObjectController/CardEffectFactory movement event stack",
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:1111, CardEffectFactory.cs:854, CanUseEffects/OnMove.cs:10",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Black/BT24_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Purple/BT24_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Yellow/BT24_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Yellow/BT5_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT6/Blue/BT6_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT6/Red/BT6_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Black/BT8_092.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/White/BT8_094.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT11_087",
+        "BT15_054",
+        "BT16_082",
+        "BT24_052",
+        "BT24_069"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "단순 zone 이동 완료가 아니라 이동한 permanent 생존 재검증 payload가 필요한 movement layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnUnTappedAnyone",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 70,
+      "sourceFileCount": 30,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 11,
+      "capabilityMatrix": {
+        "capabilityId": "OnUnTappedAnyone",
+        "status": "Unsupported",
+        "sourceFileCount": 29,
+        "affectedCardCount": 70
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1001 - EffectTiming.OnUnTappedAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController unsuspend actual event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5694/5754",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Black/BT15_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_002.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Black/BT22_101.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT11_069",
+        "BT11_074",
+        "BT11_032",
+        "BT11_112",
+        "BT12_029"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "WhenUntapAnyone cut-in 뒤 actual unsuspend와 후속 stack이 분리되어야 한다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnUseOption",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 65,
+      "sourceFileCount": 31,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 7,
+      "capabilityMatrix": {
+        "capabilityId": "OnUseOption",
+        "status": "Unsupported",
+        "sourceFileCount": 30,
+        "affectedCardCount": 65
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:972 - EffectTiming.OnUseOption"
+      ],
+      "sourceClassOrMethodArea": "CardController option execution boundary",
+      "sourceRuntimeCallEvidence": "CardController.cs:1765/1767",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_031.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_040.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_091.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_032",
+        "BT12_044",
+        "BT17_031",
+        "BT17_032",
+        "BT17_038"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "executing zone, root, cost, background timing, OptionSkill 순서를 보존하는 option execution boundary가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnDiscardLibrary",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 51,
+      "sourceFileCount": 21,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 7,
+      "capabilityMatrix": {
+        "capabilityId": "OnDiscardLibrary",
+        "status": "Unsupported",
+        "sourceFileCount": 20,
+        "affectedCardCount": 51
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:995 - EffectTiming.OnDiscardLibrary"
+      ],
+      "sourceClassOrMethodArea": "CardController deck trash event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5816",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_108.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Purple/BT14_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_079.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_041.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX2/Purple/EX2_039.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX2/Purple/EX2_044.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_108",
+        "BT14_077",
+        "BT19_071",
+        "BT19_097",
+        "BT8_006"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "library/deck trash primitive와 DiscardedCards payload가 필요한 mill event layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnAddSecurity",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 38,
+      "sourceFileCount": 15,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 16,
+      "capabilityMatrix": {
+        "capabilityId": "OnAddSecurity",
+        "status": "Unsupported",
+        "sourceFileCount": 14,
+        "affectedCardCount": 38
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:991 - EffectTiming.OnAddSecurity"
+      ],
+      "sourceClassOrMethodArea": "CardController security-add event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5489",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_041.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT23/Green/BT23_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Yellow/BT8_090.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT9/Yellow/BT9_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Yellow/EX1_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Yellow/EX1_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX11/Green/EX11_003.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT14_003",
+        "BT14_033",
+        "BT14_041",
+        "BT14_084",
+        "BT16_056"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "security 증가 후 trigger stack과 face-up 상태 경계가 필요한 security movement layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenReturntoLibraryAnyone",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 25,
+      "sourceFileCount": 10,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 8,
+      "capabilityMatrix": {
+        "capabilityId": "WhenReturntoLibraryAnyone",
+        "status": "Unsupported",
+        "sourceFileCount": 9,
+        "affectedCardCount": 25
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:981 - EffectTiming.WhenReturntoLibraryAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController return-to-library would-remove cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:2323/2489",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT9/Red/BT9_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX4/Blue/EX4_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX6/Yellow/EX6_031.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Red/P_072.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT11_062",
+        "BT11_064",
+        "BT20_074",
+        "BT5_086",
+        "BT9_012"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "return-to-library actual mutation 전 replacement cut-in과 willBeRemoveField target refix가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnDiscardSecurity",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 23,
+      "sourceFileCount": 15,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 6,
+      "capabilityMatrix": {
+        "capabilityId": "OnDiscardSecurity",
+        "status": "Unsupported",
+        "sourceFileCount": 14,
+        "affectedCardCount": 23
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:994 - EffectTiming.OnDiscardSecurity"
+      ],
+      "sourceClassOrMethodArea": "CardController security discard event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:4377",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_106.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_092.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_036.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT18/Yellow/BT18_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Yellow/BT22_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Yellow/BT22_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_040.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT13_098",
+        "BT13_106",
+        "BT15_037",
+        "BT15_084",
+        "BT15_092"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "security trash/discard primitive와 payload stack이 필요한 security movement layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenDigisorption",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 15,
+      "sourceFileCount": 10,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 12,
+      "capabilityMatrix": {
+        "capabilityId": "WhenDigisorption",
+        "status": "Unsupported",
+        "sourceFileCount": 10,
+        "affectedCardCount": 15
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:978 - EffectTiming.WhenDigisorption"
+      ],
+      "sourceClassOrMethodArea": "BeforePayCost cost-reduction body timing",
+      "sourceRuntimeCallEvidence": "ICardEffect.cs:978 plus CardEffect body samples from inventory",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_047.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_058.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Green/BT8_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Green/P_056.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_052",
+        "BT2_045",
+        "BT2_047",
+        "BT2_050",
+        "BT3_054"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "BeforePayCost 비용 감소 body와 이후 WhenDigisorption trigger가 결합된 cost mechanic layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "AfterPayCost",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 15,
+      "sourceFileCount": 8,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 13,
+      "capabilityMatrix": {
+        "capabilityId": "AfterPayCost",
+        "status": "Unsupported",
+        "sourceFileCount": 7,
+        "affectedCardCount": 15
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1016 - EffectTiming.AfterPayCost"
+      ],
+      "sourceClassOrMethodArea": "CardController post-cost cut-in stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:985",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Green/EX1_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/White/EX1_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/ST12/Red/ST12_15.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT1_109",
+        "BT3_103",
+        "BT5_109",
+        "EX1_033",
+        "EX1_071"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "비용 지불 이후 cut-in stack boundary가 필요한 cost state machine 후단이다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnLinkCardDiscarded",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 14,
+      "sourceFileCount": 8,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 0,
+      "capabilityMatrix": {
+        "capabilityId": "OnLinkCardDiscarded",
+        "status": "Unsupported",
+        "sourceFileCount": 7,
+        "affectedCardCount": 14
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1029 - EffectTiming.OnLinkCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController link source discard event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5327",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Green/EX10_001.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Black/P_234.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "EX10_030",
+        "EX10_062",
+        "EX10_070",
+        "EX10_073",
+        "EX10_001"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "link source discard 후속 event이며 link lifecycle/source discard payload가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnRemovedField",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 4,
+      "sourceFileCount": 3,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 3,
+      "capabilityMatrix": {
+        "capabilityId": "OnRemovedField",
+        "status": "Unsupported",
+        "sourceFileCount": 2,
+        "affectedCardCount": 4
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1028 - EffectTiming.OnRemovedField"
+      ],
+      "sourceClassOrMethodArea": "CardObjectController post-removal event stack",
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:524",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Red/EX10_010.cs",
+        "DCGO/Assets/Scripts/Script/CardObjectController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT22_007",
+        "EX10_010"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "field removal 완료/후속 timing 의미가 source body 단위로 고정되어야 하는 field-removal layer다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenWouldLink",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 2,
+      "sourceFileCount": 3,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 0,
+      "capabilityMatrix": {
+        "capabilityId": "WhenWouldLink",
+        "status": "Unsupported",
+        "sourceFileCount": 2,
+        "affectedCardCount": 2
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1024 - EffectTiming.WhenWouldLink"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardEffectCommons would-link cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:3477, CanUseEffects/WhenWouldLink.cs:11",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT25_004",
+        "BT25_045"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "link 실행 직전 cut-in/replacement 성격의 would-link boundary가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnFaceUpSecurityIncreased",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "DataDrivenRequired",
+      "affectedCardCount": 2,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 0,
+      "capabilityMatrix": {
+        "capabilityId": "OnFaceUpSecurityIncreased",
+        "status": "Unsupported",
+        "sourceFileCount": 1,
+        "affectedCardCount": 2
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1030 - EffectTiming.OnFaceUpSecurityIncreased"
+      ],
+      "sourceClassOrMethodArea": "CardController face-up security state event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5506/5548",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "EX11_004"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "face-up security 수와 security card 상태 변화에 의존하므로 source data/state 모델 확정이 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnUseDigiburst",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "CardEffectBodySpecific",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 0,
+      "capabilityMatrix": {
+        "capabilityId": "OnUseDigiburst",
+        "status": "Unsupported",
+        "sourceFileCount": 1,
+        "affectedCardCount": 1
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:992 - EffectTiming.OnUseDigiburst"
+      ],
+      "sourceClassOrMethodArea": "CardController DigiBurst use event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:2228",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT5_056"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "affected card가 1건이고 DigiBurst special mechanic body와 결합되어 있어 FND-003에서 mechanic 분해가 먼저 필요하다.",
+      "handoffTargets": [
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenUntapAnyone",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 13,
+      "capabilityMatrix": {
+        "capabilityId": "WhenUntapAnyone",
+        "status": "Unsupported",
+        "sourceFileCount": 1,
+        "affectedCardCount": 1
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:983 - EffectTiming.WhenUntapAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController would-untap cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:5694",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT7_055"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "actual unsuspend 이전 선택/지속효과/재검증을 포함하는 replacement 성격 cut-in이다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "FoundationRequired",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 1,
+      "capabilityMatrix": {
+        "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+        "status": "Unsupported",
+        "sourceFileCount": 1,
+        "affectedCardCount": 1
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1023 - EffectTiming.WhenWouldDigivolutionCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController would-source-trash cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:5181/5293(commented historical occurrence)",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [
+        "BT10_084"
+      ],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "source trash actual mutation 전 replacement/cut-in boundary가 필요하다.",
+      "handoffTargets": [
+        "FND-001",
+        "FND-003"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "apiName": "OnStartBattle",
+      "category": "timing",
+      "originalMappingStatus": "NeedsSourceReview",
+      "fnd002Classification": "BlockedNeedsManualReview",
+      "affectedCardCount": 0,
+      "sourceFileCount": 1,
+      "engineSourceReferenceCount": 0,
+      "engineTestReferenceCount": 4,
+      "capabilityMatrix": {
+        "capabilityId": "OnStartBattle",
+        "status": "Unsupported",
+        "sourceFileCount": 0,
+        "affectedCardCount": 0
+      },
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1011 - EffectTiming.OnStartBattle"
+      ],
+      "sourceClassOrMethodArea": "CardController battle start stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:4557",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sampleCardEffectClasses": [],
+      "gateEvidence": {
+        "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json: missingLayerCandidates mappingStatus=NeedsSourceReview",
+        "missingLayerReport": "docs/generated/full-missing-layer-report.md",
+        "foundationGateJson": "docs/generated/foundation-completion-gate.json",
+        "gateUnknownCommonApiCount": 27,
+        "gateSampleMissingCommonApiCandidateCount": 20,
+        "note": "Foundation Gate JSON samples truncate missingCommonApiCandidates to 20; full list is in full-mechanic-inventory.json."
+      },
+      "rationale": "source dispatch는 있지만 affected card가 0이므로 Gate blocker로 유지할지와 fixture 필요 범위를 수동 검토해야 한다.",
+      "handoffTargets": [
+        "ManualReview"
+      ],
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    }
+  ],
+  "excludedItems": []
+}

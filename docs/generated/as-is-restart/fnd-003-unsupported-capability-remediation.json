@@ -1,0 +1,3752 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd003-unsupported-capability-remediation.v1",
+  "generatedAt": "2026-06-23T09:23:47.067050+00:00",
+  "goal": "FND-003",
+  "sourceRoot": "E:/headlessDCGO/DCGO",
+  "inputs": {
+    "fnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json",
+    "fnd002NextActionQueue": "docs/generated/as-is-restart/fnd-002-next-action-queue.json",
+    "goal09Priority": "docs/as-is-restart/GOAL_09_ASIS_IMPLEMENTATION_PRIORITY_REWRITE.md",
+    "goal08TrustAudit": "docs/as-is-restart/GOAL_08_ASIS_HEADLESS_TRUST_AUDIT.md",
+    "goal07RequirementMatrix": "docs/as-is-restart/GOAL_07_ASIS_HEADLESS_REQUIREMENT_MATRIX.md",
+    "goal04SymbolInventory": "docs/as-is-restart/GOAL_04_ASIS_CSHARP_SYMBOL_INVENTORY.md",
+    "goal05CallGraph": "docs/as-is-restart/GOAL_05_ASIS_CSHARP_CALL_GRAPH.md",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "capabilityMatrix": "docs/generated/capability-truth-audit/capability-registry.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json"
+  },
+  "summary": {
+    "expectedUnsupportedCapabilityCount": 26,
+    "gateUnsupportedCapabilityCount": 26,
+    "gateSampleUnsupportedCapabilityCount": 20,
+    "discoveredUnsupportedCapabilityCount": 26,
+    "countMatchesExpected": true,
+    "countMatchesGate": true,
+    "fnd002Fnd003HandoffCount": 26,
+    "fnd002HandoffMatches": true,
+    "missingFromFnd002Handoff": [],
+    "extraInFnd002Handoff": [],
+    "classificationCounts": {
+      "ImplementableFoundationTask": 15,
+      "PartialNeedsSubtasks": 9,
+      "DataPolicyRequired": 1,
+      "CardEffectBodySpecific": 1
+    },
+    "implementableFoundationTaskCount": 15,
+    "blockedNeedsManualReviewCount": 0,
+    "fnd001ContinuousOrStaticHandoffCount": 25,
+    "trust001HandoffCount": 26,
+    "excludedItemCount": 0,
+    "differenceNotes": [
+      "Gate JSON samples.unsupportedCapabilities는 20건으로 잘려 있으므로 전체 26건은 source-required-capabilities와 capability-registry 교집합으로 재계산했다.",
+      "FND-002의 OnStartBattle은 affected card 0/manual review 항목이라 FND-003 referenced unsupported 26건에는 포함되지 않는다."
+    ]
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "c0039OrLaterCardPortingRun": false,
+    "fnd001Performed": false,
+    "trust001Performed": false,
+    "foundationGateManipulated": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "classificationsAllowed": [
+    "ImplementableFoundationTask",
+    "PartialNeedsSubtasks",
+    "CardEffectBodySpecific",
+    "DataPolicyRequired",
+    "UnityOnlyExcluded",
+    "ExternalAdapterRequired",
+    "AliasOrDuplicate",
+    "ObsoleteOrDead",
+    "BlockedNeedsManualReview"
+  ],
+  "entries": [
+    {
+      "capabilityId": "OnDeclaration",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 578,
+      "sourceFileCount": 298,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 302,
+      "fnd002AffectedCardCount": 578,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:973 - EffectTiming.OnDeclaration"
+      ],
+      "sourceClassOrMethodArea": "CardSource/Permanent/TurnStateMachine declaration skill discovery",
+      "sourceRuntimeCallEvidence": "CardSource.cs:1051, Permanent.cs:1623/2927, TurnStateMachine.cs:1472/3061/3063",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT1_088",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-088",
+              "definitionStableId": "BT1-088#277@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088.asset"
+            },
+            {
+              "cardId": "BT1-088",
+              "definitionStableId": "BT1-088#278@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088_P1.asset"
+            },
+            {
+              "cardId": "BT1-088",
+              "definitionStableId": "BT1-088#279@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT1_089",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+          "affectedCardCount": 4,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-089",
+              "definitionStableId": "BT1-089#280@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089.asset"
+            },
+            {
+              "cardId": "BT1-089",
+              "definitionStableId": "BT1-089#281@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089_P1.asset"
+            },
+            {
+              "cardId": "BT1-089",
+              "definitionStableId": "BT1-089#282@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_025",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-025",
+              "definitionStableId": "BT10-025#2062@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_025.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_053",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-053",
+              "definitionStableId": "BT10-053#2094@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053.asset"
+            },
+            {
+              "cardId": "BT10-053",
+              "definitionStableId": "BT10-053#4324@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_053_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_097",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_097.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-097",
+              "definitionStableId": "BT10-097#2153@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Option/BT10_097.asset"
+            },
+            {
+              "cardId": "BT10-097",
+              "definitionStableId": "BT10-097#4354@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Option/BT10_097_P0.asset"
+            },
+            {
+              "cardId": "BT10-097",
+              "definitionStableId": "BT10-097#4355@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Option/BT10_097_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_100.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_061.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_029.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Declaration/cost continuation is still unresolved for generated full-card batches.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0007-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0013-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0014-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0019-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0025-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "declarable effect discovery contract를 CardSource/Permanent source collection 단위로 문서화한다.",
+        "legal action/DecisionPoint payload에 source card, root, once-per-turn key, activation owner를 포함하는 task로 분리한다.",
+        "TurnStateMachine command 선택과 headless action generation parity fixture 범위를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenPermanentWouldBeDeleted",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 405,
+      "sourceFileCount": 206,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 210,
+      "fnd002AffectedCardCount": 405,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:980 - EffectTiming.WhenPermanentWouldBeDeleted"
+      ],
+      "sourceClassOrMethodArea": "Permanent delete prevention and keyword-granted replacement",
+      "sourceRuntimeCallEvidence": "CardController.cs:3696, Permanent.cs:2898/2954/3117/3138, Barrier.cs:99, Evade.cs:77",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "AD1_012",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-012",
+              "definitionStableId": "AD1-012#7836@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_012.asset"
+            },
+            {
+              "cardId": "AD1-012",
+              "definitionStableId": "AD1-012#7837@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_012_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_014",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-014",
+              "definitionStableId": "AD1-014#7839@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014.asset"
+            },
+            {
+              "cardId": "AD1-014",
+              "definitionStableId": "AD1-014#7840@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_009",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-009",
+              "definitionStableId": "BT10-009#2041@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_009.asset"
+            },
+            {
+              "cardId": "BT10-009",
+              "definitionStableId": "BT10-009#4292@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_009_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_012",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_012.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-012",
+              "definitionStableId": "BT10-012#2045@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_012.asset"
+            },
+            {
+              "cardId": "BT10-012",
+              "definitionStableId": "BT10-012#4297@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_012_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_013",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-013",
+              "definitionStableId": "BT10-013#2046@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_013.asset"
+            },
+            {
+              "cardId": "BT10-013",
+              "definitionStableId": "BT10-013#2047@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_013_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_066.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_024.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_012.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0001-existing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "delete-prevention/replacement cut-in payload를 deletion reason, source effect, candidate permanents로 분리한다.",
+        "Barrier/Evade/Scapegoat 계열 granted timing source collection task를 분리한다.",
+        "actual deletion 전 target refix와 self-effect exclusion fixture task를 별도로 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnTappedAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 306,
+      "sourceFileCount": 139,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 140,
+      "fnd002AffectedCardCount": 306,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1000 - EffectTiming.OnTappedAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController suspend event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5648",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "AD1_014",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-014",
+              "definitionStableId": "AD1-014#7839@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014.asset"
+            },
+            {
+              "cardId": "AD1-014",
+              "definitionStableId": "AD1-014#7840@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_016",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-016",
+              "definitionStableId": "AD1-016#7843@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Yellow/Digimon/AD1_016.asset"
+            },
+            {
+              "cardId": "AD1-016",
+              "definitionStableId": "AD1-016#7844@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Yellow/Digimon/AD1_016_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_021",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_021.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-021",
+              "definitionStableId": "AD1-021#7852@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Yellow/Tamer/AD1_021.asset"
+            },
+            {
+              "cardId": "AD1-021",
+              "definitionStableId": "AD1-021#7853@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Yellow/Tamer/AD1_021_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_004",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_004.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-004",
+              "definitionStableId": "BT10-004#2036@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/DigiEgg/BT10_004.asset"
+            },
+            {
+              "cardId": "BT10-004",
+              "definitionStableId": "BT10-004#4285@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/DigiEgg/BT10_004_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_011",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_011.cs",
+          "affectedCardCount": 6,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-011",
+              "definitionStableId": "BT10-011#2043@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_011.asset"
+            },
+            {
+              "cardId": "BT10-011",
+              "definitionStableId": "BT10-011#2044@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_011_P1.asset"
+            },
+            {
+              "cardId": "BT10-011",
+              "definitionStableId": "BT10-011#4293@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_011_P0.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_048.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_051.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0008-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0011-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0015-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0018-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0020-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0021-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0031-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "suspend primitive의 actual suspend 후 event payload를 Permanents/IsBlock/CardEffect로 고정한다.",
+        "block suspend와 effect-caused suspend를 구분하는 trigger source task를 만든다.",
+        "OnTappedAnyone queue/replay payload fixture를 추가 task로 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenRemoveField",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 304,
+      "sourceFileCount": 164,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 167,
+      "fnd002AffectedCardCount": 304,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:979 - EffectTiming.WhenRemoveField"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardObjectController would-remove cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:2333/2499/2660/2932/2948/3228/3244/3538/3705, CardObjectController.cs:1048, CanUseEffects/WhenRemoveField.cs:11",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "AD1_003",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-003",
+              "definitionStableId": "AD1-003#7821@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_003.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_006",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-006",
+              "definitionStableId": "AD1-006#7826@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006.asset"
+            },
+            {
+              "cardId": "AD1-006",
+              "definitionStableId": "AD1-006#7827@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_011",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-011",
+              "definitionStableId": "AD1-011#7835@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_011.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_013",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-013",
+              "definitionStableId": "AD1-013#7838@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_013.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_023",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Black/AD1_023.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-023",
+              "definitionStableId": "AD1-023#7855@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Black/Tamer/AD1_023.asset"
+            },
+            {
+              "cardId": "AD1-023",
+              "definitionStableId": "AD1-023#7856@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Black/Tamer/AD1_023_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Black/AD1_023.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_111.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Would-remove replacement/cut-in semantics remain unresolved for generated batches.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0028-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0029-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0004-cut-in-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "would-remove cut-in payload를 willBeRemoveField, reason, battle/digixros flags로 분리한다.",
+        "return-to-hand/deck/delete/security-like removal별 shared target refix task를 만든다.",
+        "WhenRemoveField를 OnLeaveFieldAnyone/OnRemovedField alias로 처리하지 않는 negative fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "BeforePayCost",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 284,
+      "sourceFileCount": 141,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 143,
+      "fnd002AffectedCardCount": 284,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1015 - EffectTiming.BeforePayCost"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardSource pre-cost collection and cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:604-621/709-711, CardSource.cs:2641",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_052",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-052",
+              "definitionStableId": "BT10-052#2093@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_052.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_087",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+          "affectedCardCount": 4,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-087",
+              "definitionStableId": "BT10-087#2137@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087.asset"
+            },
+            {
+              "cardId": "BT10-087",
+              "definitionStableId": "BT10-087#2138@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087_P1.asset"
+            },
+            {
+              "cardId": "BT10-087",
+              "definitionStableId": "BT10-087#4343@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_088",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-088",
+              "definitionStableId": "BT10-088#2139@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088.asset"
+            },
+            {
+              "cardId": "BT10-088",
+              "definitionStableId": "BT10-088#2140@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088_P1.asset"
+            },
+            {
+              "cardId": "BT10-088",
+              "definitionStableId": "BT10-088#4344@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_093",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+          "affectedCardCount": 4,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#2148@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093.asset"
+            },
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#2149@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093_P1.asset"
+            },
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#4351@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_091",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_091.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-091",
+              "definitionStableId": "BT11-091#2371@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Green/Tamer/BT11_091.asset"
+            },
+            {
+              "cardId": "BT11-091",
+              "definitionStableId": "BT11-091#2372@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Green/Tamer/BT11_091_P1.asset"
+            },
+            {
+              "cardId": "BT11-091",
+              "definitionStableId": "BT11-091#4435@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Green/Tamer/BT11_091_P0.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_091.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/White/BT11_095.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_094.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Cost modifier/replacement layer is documented as a common blocker and is not executable for full-card batches.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_065.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_088.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_011.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0011-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0013-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0014-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0025-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0026-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0028-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0034-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0035-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0036-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0038-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0001-existing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "pay-cost state machine의 pre-cost collection, background effects, cut-in 순서를 task로 분리한다.",
+        "cost modifier source scope와 max payable memory validation task를 분리한다.",
+        "Digisorption/DigiXros/option play cost와 공유 가능한 CostResolver hook contract를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnDetermineDoSecurityCheck",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 228,
+      "sourceFileCount": 119,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 122,
+      "fnd002AffectedCardCount": 228,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1013 - EffectTiming.OnDetermineDoSecurityCheck"
+      ],
+      "sourceClassOrMethodArea": "CardController/Permanent security-check modifier collection",
+      "sourceRuntimeCallEvidence": "CardController.cs:4731, Permanent.cs:2591, Pierce.cs:78",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "AD1_004",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-004",
+              "definitionStableId": "AD1-004#7822@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_004.asset"
+            },
+            {
+              "cardId": "AD1-004",
+              "definitionStableId": "AD1-004#7823@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_004_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_008",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-008",
+              "definitionStableId": "AD1-008#7830@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_008.asset"
+            },
+            {
+              "cardId": "AD1-008",
+              "definitionStableId": "AD1-008#7831@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_008_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "AD1_009",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "AD1-009",
+              "definitionStableId": "AD1-009#7832@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_009.asset"
+            },
+            {
+              "cardId": "AD1-009",
+              "definitionStableId": "AD1-009#7833@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_009_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT1_022",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_022.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-022",
+              "definitionStableId": "BT1-022#163@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Red/Digimon/BT1_022.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT1_026",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_026.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-026",
+              "definitionStableId": "BT1-026#171@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Red/Digimon/BT1_026.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_081.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_022.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_049.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0008-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0010-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0020-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0024-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0025-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0026-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "battle security-check 결정 payload에 attacker, defender, battle object, security-check count를 고정한다.",
+        "Pierce/security check modifier source collection task를 분리한다.",
+        "security check 변경 후 OnSecurityCheck와의 순서 fixture task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnEndBattle",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 160,
+      "sourceFileCount": 84,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 86,
+      "fnd002AffectedCardCount": 160,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1012 - EffectTiming.OnEndBattle"
+      ],
+      "sourceClassOrMethodArea": "CardController battle end stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:4718, CardEffectFactory.cs:452",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT1_077",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-077",
+              "definitionStableId": "BT1-077#250@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077.asset"
+            },
+            {
+              "cardId": "BT1-077",
+              "definitionStableId": "BT1-077#251@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077_P1.asset"
+            },
+            {
+              "cardId": "BT1-077",
+              "definitionStableId": "BT1-077#252@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT1_112",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-112",
+              "definitionStableId": "BT1-112#314@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Option/BT1_112.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_028",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-028",
+              "definitionStableId": "BT10-028#2066@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028.asset"
+            },
+            {
+              "cardId": "BT10-028",
+              "definitionStableId": "BT10-028#4308@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_045",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_045.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-045",
+              "definitionStableId": "BT10-045#2086@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_045.asset"
+            },
+            {
+              "cardId": "BT12-036",
+              "definitionStableId": "BT12-036#2446@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT12/Yellow/Digimon/BT12_036.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_054",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_054.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-054",
+              "definitionStableId": "BT10-054#2095@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_054.asset"
+            },
+            {
+              "cardId": "BT10-054",
+              "definitionStableId": "BT10-054#2096@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_054_P1.asset"
+            },
+            {
+              "cardId": "BT10-054",
+              "definitionStableId": "BT10-054#4325@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_054_P0.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_053.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Battle-end payload and lifecycle boundary remain unresolved for generated full-card batches.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_047.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0007-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0010-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0020-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0022-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0026-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0027-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0028-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0037-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "battle end payload를 winner/loser/tie/battle snapshot으로 고정한다.",
+        "attack cleanup 이전/이후 trigger 순서 fixture task를 분리한다.",
+        "battle object lifetime과 stale permanent handling task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnDigivolutionCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 121,
+      "sourceFileCount": 53,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 54,
+      "fnd002AffectedCardCount": 121,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1017 - EffectTiming.OnDigivolutionCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController source trash actual event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5181/5215",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_006",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_006.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-006",
+              "definitionStableId": "BT10-006#2038@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006.asset"
+            },
+            {
+              "cardId": "BT10-006",
+              "definitionStableId": "BT10-006#4287@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/DigiEgg/BT10_006_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_072",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_072.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-072",
+              "definitionStableId": "BT10-072#2118@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_072.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_073",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_073.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-073",
+              "definitionStableId": "BT10-073#2119@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_073.asset"
+            },
+            {
+              "cardId": "BT10-073",
+              "definitionStableId": "BT10-073#4335@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_073_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_075",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_075.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-075",
+              "definitionStableId": "BT10-075#2121@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_075.asset"
+            },
+            {
+              "cardId": "BT10-075",
+              "definitionStableId": "BT10-075#4336@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_075_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT10_076",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_076.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-076",
+              "definitionStableId": "BT10-076#2122@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_076.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_072.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_075.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_076.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_081.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT21/Black/BT21_055.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0007-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0008-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0011-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0012-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0018-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0035-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "would-discard cut-in과 actual source trash event를 별도 task로 분리한다.",
+        "DiscardedCards snapshot payload와 rollback/resume 불가 조건을 정의한다.",
+        "source trash primitive가 ZoneMover 경유로 event를 발행하는 fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnAddDigivolutionCards",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 102,
+      "sourceFileCount": 50,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 51,
+      "fnd002AffectedCardCount": 102,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1002 - EffectTiming.OnAddDigivolutionCards"
+      ],
+      "sourceClassOrMethodArea": "Permanent source-add event stack",
+      "sourceRuntimeCallEvidence": "Permanent.cs:1119/1223",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_093",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+          "affectedCardCount": 4,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#2148@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093.asset"
+            },
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#2149@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093_P1.asset"
+            },
+            {
+              "cardId": "BT10-093",
+              "definitionStableId": "BT10-093#4351@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Tamer/BT10_093_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_088",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_088.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-088",
+              "definitionStableId": "BT11-088#2365@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_088.asset"
+            },
+            {
+              "cardId": "BT11-088",
+              "definitionStableId": "BT11-088#2366@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_088_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_003",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_003.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-003",
+              "definitionStableId": "BT17-003#3543@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/DigiEgg/BT17_003.asset"
+            },
+            {
+              "cardId": "BT17-003",
+              "definitionStableId": "BT17-003#4835@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/DigiEgg/BT17_003_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_006",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_006.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-006",
+              "definitionStableId": "BT17-006#3546@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006.asset"
+            },
+            {
+              "cardId": "BT17-006",
+              "definitionStableId": "BT17-006#4838@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Purple/DigiEgg/BT17_006_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_056",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_056.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-056",
+              "definitionStableId": "BT17-056#3605@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Black/Digimon/BT17_056.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_090.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_080.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_034.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_080.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_090.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_054.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_001.cs",
+          "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_004.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0007-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0008-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0009-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0011-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0012-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0023-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0032-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0035-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0036-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0038-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "source add primitive payload를 Permanent/CardEffect/CardSources/isFromSameDigimon/isFromDigimon으로 고정한다.",
+        "face-down/source-bottom add와 inherited source refresh task를 분리한다.",
+        "source add 후 trigger stack order fixture task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenLinked",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 87,
+      "sourceFileCount": 64,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 67,
+      "fnd002AffectedCardCount": 87,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1025 - EffectTiming.WhenLinked"
+      ],
+      "sourceClassOrMethodArea": "Permanent/CardEffectFactory link timing and CanTriggerWhenLinked",
+      "sourceRuntimeCallEvidence": "Permanent.cs:1290, CardEffectFactory.cs:874, CanUseEffects/WhenLinked.cs:45",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT21_005",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Green/BT21_005.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT21-005",
+              "definitionStableId": "BT21-005#5311@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Green/DigiEgg/BT21_005.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT21_009",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_009.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT21-009",
+              "definitionStableId": "BT21-009#5316@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Red/Digimon/BT21_009.asset"
+            },
+            {
+              "cardId": "BT21-009",
+              "definitionStableId": "BT21-009#5317@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Red/Digimon/BT21_009_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT21_018",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_018.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT21-018",
+              "definitionStableId": "BT21-018#5326@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Red/Digimon/BT21_018.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT21_023",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_023.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT21-023",
+              "definitionStableId": "BT21-023#5331@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Red/Digimon/BT21_023.asset"
+            },
+            {
+              "cardId": "BT21-023",
+              "definitionStableId": "BT21-023#5332@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Red/Digimon/BT21_023_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT21_043",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Yellow/BT21_043.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT21-043",
+              "definitionStableId": "BT21-043#5354@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT21/Yellow/Digimon/BT21_043.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Green/BT21_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_074.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "link source/target permanent 조건을 shared payload로 분리한다.",
+        "CanTriggerWhenLinked parity fixture와 linked source collection task를 분리한다.",
+        "link execution completion과 WhenWouldLink/OnLinkCardDiscarded 순서 task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnMove",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 79,
+      "sourceFileCount": 30,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 32,
+      "fnd002AffectedCardCount": 79,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:997 - EffectTiming.OnMove"
+      ],
+      "sourceClassOrMethodArea": "CardObjectController/CardEffectFactory movement event stack",
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:1111, CardEffectFactory.cs:854, CanUseEffects/OnMove.cs:10",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT11_087",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-087",
+              "definitionStableId": "BT11-087#2364@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_087.asset"
+            },
+            {
+              "cardId": "BT11-087",
+              "definitionStableId": "BT11-087#4432@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_087_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT15_054",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT15-054",
+              "definitionStableId": "BT15-054#3185@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_054.asset"
+            },
+            {
+              "cardId": "BT15-054",
+              "definitionStableId": "BT15-054#4739@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_054_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT16_082",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+          "affectedCardCount": 9,
+          "sampleCardData": [
+            {
+              "cardId": "BT16-082",
+              "definitionStableId": "BT16-082#3403@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082.asset"
+            },
+            {
+              "cardId": "BT16-082",
+              "definitionStableId": "BT16-082#3404@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P1.asset"
+            },
+            {
+              "cardId": "BT16-082",
+              "definitionStableId": "BT16-082#4812@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT24_034",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT24/Yellow/BT24_034.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT24-034",
+              "definitionStableId": "BT24-034#7558@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT24/Yellow/Digimon/BT24_034.asset"
+            },
+            {
+              "cardId": "BT24-034",
+              "definitionStableId": "BT24-034#7559@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT24/Yellow/Digimon/BT24_034_P1.asset"
+            },
+            {
+              "cardId": "BT24-034",
+              "definitionStableId": "BT24-034#7560@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT24/Yellow/Digimon/BT24_034_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT24_052",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT24/Black/BT24_052.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT24-052",
+              "definitionStableId": "BT24-052#7582@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT24/Black/Digimon/BT24_052.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Black/BT24_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Purple/BT24_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Yellow/BT24_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Yellow/BT5_044.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Move timing payload and source-zone semantics remain unresolved.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0023-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "move event payload에 moved permanent, old/new zone, battle-area survival recheck를 포함한다.",
+        "CardObjectController/CardEffectFactory CanTriggerOnMove parity fixture task를 분리한다.",
+        "ZoneMover event bridge와 stale target negative case를 별도 task로 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnUnTappedAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 70,
+      "sourceFileCount": 29,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 30,
+      "fnd002AffectedCardCount": 70,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1001 - EffectTiming.OnUnTappedAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController unsuspend actual event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5694/5754",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT11_032",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_032.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-032",
+              "definitionStableId": "BT11-032#2302@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_032.asset"
+            },
+            {
+              "cardId": "BT11-032",
+              "definitionStableId": "BT11-032#2303@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_032_P1.asset"
+            },
+            {
+              "cardId": "BT11-032",
+              "definitionStableId": "BT11-032#8107@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Digimon/BT11_032_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_069",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_069.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-069",
+              "definitionStableId": "BT11-069#2343@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_069.asset"
+            },
+            {
+              "cardId": "BT11-069",
+              "definitionStableId": "BT11-069#4420@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_069_P0.asset"
+            },
+            {
+              "cardId": "BT11-069",
+              "definitionStableId": "BT11-069#8108@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_069_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_074",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-074",
+              "definitionStableId": "BT11-074#2348@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_074.asset"
+            },
+            {
+              "cardId": "BT11-074",
+              "definitionStableId": "BT11-074#2349@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_074_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_112",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-112",
+              "definitionStableId": "BT11-112#2396@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Tamer/BT11_112.asset"
+            },
+            {
+              "cardId": "BT11-112",
+              "definitionStableId": "BT11-112#2397@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Tamer/BT11_112_P1.asset"
+            },
+            {
+              "cardId": "BT11-112",
+              "definitionStableId": "BT11-112#8114@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Blue/Tamer/BT11_112_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT12_029",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_029.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT12-029",
+              "definitionStableId": "BT12-029#2437@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_029.asset"
+            },
+            {
+              "cardId": "BT12-029",
+              "definitionStableId": "BT12-029#2438@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT12/Blue/Digimon/BT12_029_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Black/BT15_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_002.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_021.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0009-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0004-cut-in-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "WhenUntapAnyone cut-in 뒤 actual unsuspend event를 별도 payload로 고정한다.",
+        "CanUnsuspend/effect immunity 재검증 후 OnUnTappedAnyone stack task를 정의한다.",
+        "suspend/unsuspend replay trace payload fixture task를 분리한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnUseOption",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 65,
+      "sourceFileCount": 30,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 31,
+      "fnd002AffectedCardCount": 65,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:972 - EffectTiming.OnUseOption"
+      ],
+      "sourceClassOrMethodArea": "CardController option execution boundary",
+      "sourceRuntimeCallEvidence": "CardController.cs:1765/1767",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_032",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_032.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-032",
+              "definitionStableId": "BT10-032#2070@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_032.asset"
+            },
+            {
+              "cardId": "BT10-032",
+              "definitionStableId": "BT10-032#4309@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Yellow/Digimon/BT10_032_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT12_044",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT12-044",
+              "definitionStableId": "BT12-044#2456@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT12/Yellow/Digimon/BT12_044.asset"
+            },
+            {
+              "cardId": "BT12-044",
+              "definitionStableId": "BT12-044#4503@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT12/Yellow/Digimon/BT12_044_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_031",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_031.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-031",
+              "definitionStableId": "BT17-031#3576@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_031.asset"
+            },
+            {
+              "cardId": "BT17-031",
+              "definitionStableId": "BT17-031#4850@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_031_P1.asset"
+            },
+            {
+              "cardId": "BT17-031",
+              "definitionStableId": "BT17-031#8227@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_031_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_032",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_032.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-032",
+              "definitionStableId": "BT17-032#3577@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_032.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT17_038",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_038.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT17-038",
+              "definitionStableId": "BT17-038#3583@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_038.asset"
+            },
+            {
+              "cardId": "BT17-038",
+              "definitionStableId": "BT17-038#4851@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_038_P0.asset"
+            },
+            {
+              "cardId": "BT17-038",
+              "definitionStableId": "BT17-038#8230@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT17/Yellow/Digimon/BT17_038_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_031.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_040.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "option card executing zone 이동, Root, Cost, Card payload boundary를 정의한다.",
+        "OnUseOption/background OnUseOption/OptionSkill 순서 task를 분리한다.",
+        "executing source cleanup과 interruption/resume negative fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnDiscardLibrary",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 51,
+      "sourceFileCount": 20,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 21,
+      "fnd002AffectedCardCount": 51,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:995 - EffectTiming.OnDiscardLibrary"
+      ],
+      "sourceClassOrMethodArea": "CardController deck trash event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5816",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_108",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_108.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-108",
+              "definitionStableId": "BT10-108#2164@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Option/BT10_108.asset"
+            },
+            {
+              "cardId": "BT10-108",
+              "definitionStableId": "BT10-108#4364@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Option/BT10_108_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT14_077",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT14/Purple/BT14_077.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT14-077",
+              "definitionStableId": "BT14-077#3005@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Purple/Digimon/BT14_077.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT19_071",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT19-071",
+              "definitionStableId": "BT19-071#5051@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Digimon/BT19_071.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT19_097",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT19-097",
+              "definitionStableId": "BT19-097#5074@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT19/Purple/Option/BT19_097.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT8_006",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_006.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT8-006",
+              "definitionStableId": "BT8-006#1560@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Purple/DigiEgg/BT8_006.asset"
+            },
+            {
+              "cardId": "BT8-006",
+              "definitionStableId": "BT8-006#8845@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT8/Purple/DigiEgg/BT8_006_P0.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_108.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Purple/BT14_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_079.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_005.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_071.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0018-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0028-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "deck trash primitive payload를 DiscardedCards/CardEffect로 고정한다.",
+        "mill event source collection과 deck exhaustion edge case task를 분리한다.",
+        "OnDiscardLibrary trigger stack fixture task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnAddSecurity",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 38,
+      "sourceFileCount": 14,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 15,
+      "fnd002AffectedCardCount": 38,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:991 - EffectTiming.OnAddSecurity"
+      ],
+      "sourceClassOrMethodArea": "CardController security-add event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5489",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT14_003",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_003.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT14-003",
+              "definitionStableId": "BT14-003#2916@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/DigiEgg/BT14_003.asset"
+            },
+            {
+              "cardId": "BT14-003",
+              "definitionStableId": "BT14-003#2917@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/DigiEgg/BT14_003_P1.asset"
+            },
+            {
+              "cardId": "BT14-003",
+              "definitionStableId": "BT14-003#4634@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/DigiEgg/BT14_003_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT14_033",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_033.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT14-033",
+              "definitionStableId": "BT14-033#2954@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_033.asset"
+            },
+            {
+              "cardId": "BT14-033",
+              "definitionStableId": "BT14-033#2955@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_033_P1.asset"
+            },
+            {
+              "cardId": "BT14-033",
+              "definitionStableId": "BT14-033#8173@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_033_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT14_041",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_041.cs",
+          "affectedCardCount": 7,
+          "sampleCardData": [
+            {
+              "cardId": "BT14-041",
+              "definitionStableId": "BT14-041#2964@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041.asset"
+            },
+            {
+              "cardId": "BT14-041",
+              "definitionStableId": "BT14-041#4657@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P0.asset"
+            },
+            {
+              "cardId": "BT14-041",
+              "definitionStableId": "BT14-041#4658@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Digimon/BT14_041_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT14_084",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_084.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT14-084",
+              "definitionStableId": "BT14-084#3015@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084.asset"
+            },
+            {
+              "cardId": "BT14-084",
+              "definitionStableId": "BT14-084#3016@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P1.asset"
+            },
+            {
+              "cardId": "BT14-084",
+              "definitionStableId": "BT14-084#4694@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT14/Yellow/Tamer/BT14_084_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT16_056",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_056.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT16-056",
+              "definitionStableId": "BT16-056#3373@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT16/Black/Digimon/BT16_056.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_041.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT23/Green/BT23_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Yellow/BT8_090.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0016-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0017-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0018-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0023-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "security add primitive payload와 face-up/down state를 분리한다.",
+        "OnAddSecurity와 OnFaceUpSecurityIncreased ordering fixture task를 정의한다.",
+        "security count/hash/replay payload task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenReturntoLibraryAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 25,
+      "sourceFileCount": 9,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 10,
+      "fnd002AffectedCardCount": 25,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:981 - EffectTiming.WhenReturntoLibraryAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController return-to-library would-remove cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:2323/2489",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT11_062",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-062",
+              "definitionStableId": "BT11-062#2336@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_062.asset"
+            },
+            {
+              "cardId": "BT11-062",
+              "definitionStableId": "BT11-062#4414@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_062_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT11_064",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT11-064",
+              "definitionStableId": "BT11-064#2338@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_064.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT20_074",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT20-074",
+              "definitionStableId": "BT20-074#5153@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT20/Purple/Digimon/BT20_074.asset"
+            },
+            {
+              "cardId": "BT20-074",
+              "definitionStableId": "BT20-074#8352@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT20/Purple/Digimon/BT20_074_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT5_086",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs",
+          "affectedCardCount": 10,
+          "sampleCardData": [
+            {
+              "cardId": "BT5-086",
+              "definitionStableId": "BT5-086#1055@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Digimon/BT5_086.asset"
+            },
+            {
+              "cardId": "BT5-086",
+              "definitionStableId": "BT5-086#1056@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Digimon/BT5_086_P1.asset"
+            },
+            {
+              "cardId": "BT5-086",
+              "definitionStableId": "BT5-086#1057@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Digimon/BT5_086_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT9_012",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT9/Red/BT9_012.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT9-012",
+              "definitionStableId": "BT9-012#1794@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT9/Red/Digimon/BT9_012.asset"
+            },
+            {
+              "cardId": "BT9-012",
+              "definitionStableId": "BT9-012#8952@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT9/Red/Digimon/BT9_012_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT9/Red/BT9_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX4/Blue/EX4_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX6/Yellow/EX6_031.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Return-to-library cut-in shares unresolved would-remove replacement semantics.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0029-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0004-cut-in-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "return-to-library actual mutation 전 cut-in payload와 willBeRemoveField marking task를 분리한다.",
+        "post-cut-in target refix와 OnLeaveFieldAnyone follow-up task를 별도로 둔다.",
+        "WhenRemoveField와 shared replacement task dependency를 명시한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnDiscardSecurity",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 23,
+      "sourceFileCount": 14,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 15,
+      "fnd002AffectedCardCount": 23,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:994 - EffectTiming.OnDiscardSecurity"
+      ],
+      "sourceClassOrMethodArea": "CardController security discard event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:4377",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT13_098",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_098.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT13-098",
+              "definitionStableId": "BT13-098#2764@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_098.asset"
+            },
+            {
+              "cardId": "BT13-098",
+              "definitionStableId": "BT13-098#2765@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_098_P1.asset"
+            },
+            {
+              "cardId": "BT13-098",
+              "definitionStableId": "BT13-098#4617@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT13/Yellow/Tamer/BT13_098_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT13_106",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_106.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT13-106",
+              "definitionStableId": "BT13-106#2776@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT13/Yellow/Option/BT13_106.asset"
+            },
+            {
+              "cardId": "BT13-106",
+              "definitionStableId": "BT13-106#4626@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT13/Yellow/Option/BT13_106_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT15_037",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_037.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT15-037",
+              "definitionStableId": "BT15-037#3162@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Digimon/BT15_037.asset"
+            },
+            {
+              "cardId": "BT15-037",
+              "definitionStableId": "BT15-037#3163@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Digimon/BT15_037_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT15_084",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_084.cs",
+          "affectedCardCount": 4,
+          "sampleCardData": [
+            {
+              "cardId": "BT15-084",
+              "definitionStableId": "BT15-084#3221@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084.asset"
+            },
+            {
+              "cardId": "BT15-084",
+              "definitionStableId": "BT15-084#3222@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P1.asset"
+            },
+            {
+              "cardId": "BT15-084",
+              "definitionStableId": "BT15-084#4759@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Tamer/BT15_084_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT15_092",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_092.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT15-092",
+              "definitionStableId": "BT15-092#3233@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Option/BT15_092.asset"
+            },
+            {
+              "cardId": "BT15-092",
+              "definitionStableId": "BT15-092#4768@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Yellow/Option/BT15_092_P0.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_106.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_092.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_036.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT18/Yellow/BT18_098.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0022-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-C0027-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "security discard primitive payload를 security card snapshot과 source effect로 고정한다.",
+        "security trash/recovery flow와 OnLoseSecurity/OnDiscardSecurity ordering task를 분리한다.",
+        "security discard replay fixture task를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "AfterPayCost",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 15,
+      "sourceFileCount": 7,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 8,
+      "fnd002AffectedCardCount": 15,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1016 - EffectTiming.AfterPayCost"
+      ],
+      "sourceClassOrMethodArea": "CardController post-cost cut-in stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:985",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT1_109",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT1-109",
+              "definitionStableId": "BT1-109#308@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Option/BT1_109.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT3_103",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT3-103",
+              "definitionStableId": "BT3-103#744@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103.asset"
+            },
+            {
+              "cardId": "BT3-103",
+              "definitionStableId": "BT3-103#745@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P1.asset"
+            },
+            {
+              "cardId": "BT3-103",
+              "definitionStableId": "BT3-103#8492@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT5_109",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT5-109",
+              "definitionStableId": "BT5-109#1090@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109.asset"
+            },
+            {
+              "cardId": "BT5-109",
+              "definitionStableId": "BT5-109#1091@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109_P1.asset"
+            },
+            {
+              "cardId": "BT5-109",
+              "definitionStableId": "BT5-109#8655@P0",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109_P0.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX1_033",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX1/Green/EX1_033.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "EX1-033",
+              "definitionStableId": "EX1-033#1318@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX1/Green/Digimon/EX1_033.asset"
+            },
+            {
+              "cardId": "EX1-033",
+              "definitionStableId": "EX1-033#1319@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX1/Green/Digimon/EX1_033_P1.asset"
+            },
+            {
+              "cardId": "EX1-033",
+              "definitionStableId": "EX1-033#9091@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX1/Green/Digimon/EX1_033_P2.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX1_071",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX1/White/EX1_071.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX1-071",
+              "definitionStableId": "EX1-071#1373@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX1/White/Option/EX1_071.asset"
+            },
+            {
+              "cardId": "EX1-071",
+              "definitionStableId": "EX1-071#1374@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX1/White/Option/EX1_071_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Green/EX1_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/White/EX1_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/ST12/Red/ST12_15.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "After-pay-cost layer remains a common blocker.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0001-existing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "actual payment 이후 cut-in boundary와 paid cost payload를 정의한다.",
+        "BeforePayCost와 같은 cost transaction id를 공유하는 task를 분리한다.",
+        "post-cost trigger order fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenDigisorption",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 15,
+      "sourceFileCount": 10,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 10,
+      "fnd002AffectedCardCount": 15,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:978 - EffectTiming.WhenDigisorption"
+      ],
+      "sourceClassOrMethodArea": "BeforePayCost cost-reduction body timing",
+      "sourceRuntimeCallEvidence": "ICardEffect.cs:978 plus CardEffect body samples from inventory",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_052",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-052",
+              "definitionStableId": "BT10-052#2093@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_052.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT2_045",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT2-045",
+              "definitionStableId": "BT2-045#441@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Green/Digimon/BT2_045.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT2_047",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_047.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "BT2-047",
+              "definitionStableId": "BT2-047#444@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Green/Digimon/BT2_047.asset"
+            },
+            {
+              "cardId": "BT2-047",
+              "definitionStableId": "BT2-047#445@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Green/Digimon/BT2_047_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT2_050",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_050.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT2-050",
+              "definitionStableId": "BT2-050#449@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT2/Green/Digimon/BT2_050.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT3_054",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "BT3-054",
+              "definitionStableId": "BT3-054#673@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054.asset"
+            },
+            {
+              "cardId": "BT3-054",
+              "definitionStableId": "BT3-054#674@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054_P1.asset"
+            },
+            {
+              "cardId": "BT3-054",
+              "definitionStableId": "BT3-054#8476@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Digimon/BT3_054_P2.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_047.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_058.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Green/BT8_054.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Digisorption timing remains a documented common-layer blocker.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0001-existing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "BeforePayCost 안에서 선택한 suspend source, reduction amount, cost target을 분리한다.",
+        "비용 감소 후 WhenDigisorption trigger stack task를 별도 정의한다.",
+        "Digisorption special mechanic을 CardEffect body 구현 없이 common cost mechanic prompt로 쪼갠다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnLinkCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 14,
+      "sourceFileCount": 7,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 8,
+      "fnd002AffectedCardCount": 14,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1029 - EffectTiming.OnLinkCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController link source discard event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5327",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "EX10_001",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Green/EX10_001.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-001",
+              "definitionStableId": "EX10-001#7132@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Green/DigiEgg/EX10_001.asset"
+            },
+            {
+              "cardId": "EX10-001",
+              "definitionStableId": "EX10-001#7269@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Green/DigiEgg/EX10_001_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX10_030",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_030.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-030",
+              "definitionStableId": "EX10-030#7187@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Digimon/EX10_030.asset"
+            },
+            {
+              "cardId": "EX10-030",
+              "definitionStableId": "EX10-030#7295@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Digimon/EX10_030_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX10_043",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_043.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-043",
+              "definitionStableId": "EX10-043#7211@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Purple/Digimon/EX10_043.asset"
+            },
+            {
+              "cardId": "EX10-043",
+              "definitionStableId": "EX10-043#7306@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Purple/Digimon/EX10_043_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX10_062",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_062.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-062",
+              "definitionStableId": "EX10-062#7243@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Tamer/EX10_062.asset"
+            },
+            {
+              "cardId": "EX10-062",
+              "definitionStableId": "EX10-062#7319@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Tamer/EX10_062_P1.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX10_070",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_070.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-070",
+              "definitionStableId": "EX10-070#7259@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Option/EX10_070.asset"
+            },
+            {
+              "cardId": "EX10-070",
+              "definitionStableId": "EX10-070#7327@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Black/Option/EX10_070_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Green/EX10_001.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Black/P_234.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "link source discard payload를 discarded link cards/source permanent로 고정한다.",
+        "link lifecycle cleanup과 OnLinkCardDiscarded trigger ordering task를 분리한다.",
+        "linked source removal hash/replay fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnRemovedField",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "ImplementableFoundationTask",
+      "affectedCardCount": 4,
+      "sourceFileCount": 2,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 3,
+      "fnd002AffectedCardCount": 4,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1028 - EffectTiming.OnRemovedField"
+      ],
+      "sourceClassOrMethodArea": "CardObjectController post-removal event stack",
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:524",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT22_007",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT22-007",
+              "definitionStableId": "BT22-007#6995@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT22/White/DigiEgg/BT22_007.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "EX10_010",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX10/Red/EX10_010.cs",
+          "affectedCardCount": 3,
+          "sampleCardData": [
+            {
+              "cardId": "EX10-010",
+              "definitionStableId": "EX10-010#7149@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Red/Digimon/EX10_010.asset"
+            },
+            {
+              "cardId": "EX10-010",
+              "definitionStableId": "EX10-010#7277@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Red/Digimon/EX10_010_P1.asset"
+            },
+            {
+              "cardId": "EX10-010",
+              "definitionStableId": "EX10-010#7278@P2",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX10/Red/Digimon/EX10_010_P2.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Red/EX10_010.cs",
+        "DCGO/Assets/Scripts/Script/CardObjectController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "actual field removal 완료 후 payload와 would-remove cut-in과의 관계를 고정한다.",
+        "CardObjectController OnRemovedField call parity fixture task를 분리한다.",
+        "OnRemovedField를 WhenRemoveField alias로 처리하지 않는 negative task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnFaceUpSecurityIncreased",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "DataPolicyRequired",
+      "affectedCardCount": 2,
+      "sourceFileCount": 1,
+      "fnd002Classification": "DataDrivenRequired",
+      "fnd002SourceFileCount": 2,
+      "fnd002AffectedCardCount": 2,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1030 - EffectTiming.OnFaceUpSecurityIncreased"
+      ],
+      "sourceClassOrMethodArea": "CardController face-up security state event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:5506/5548",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "EX11_004",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs",
+          "affectedCardCount": 2,
+          "sampleCardData": [
+            {
+              "cardId": "EX11-004",
+              "definitionStableId": "EX11-004#7663@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX11/Black/DigiEgg/EX11_004.asset"
+            },
+            {
+              "cardId": "EX11-004",
+              "definitionStableId": "EX11-004#7664@P1",
+              "assetPath": "DCGO/Assets/CardBaseEntity/EX11/Black/DigiEgg/EX11_004_P1.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "face-up security state 모델과 count-change event policy를 먼저 확정한다.",
+        "CardBaseEntity/security card data에서 face-up source identity를 추적하는 data task를 분리한다.",
+        "OnAddSecurity와 별도 증가 이벤트 ordering fixture를 정의한다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenWouldLink",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 2,
+      "sourceFileCount": 2,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 3,
+      "fnd002AffectedCardCount": 2,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1024 - EffectTiming.WhenWouldLink"
+      ],
+      "sourceClassOrMethodArea": "CardController/CardEffectCommons would-link cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:3477, CanUseEffects/WhenWouldLink.cs:11",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT25_004",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT25-004",
+              "definitionStableId": "BT25-004#7966@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/DigiEgg/BT25_004.asset"
+            }
+          ]
+        },
+        {
+          "sourceEffectClassName": "BT25_045",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT25-045",
+              "definitionStableId": "BT25-045#8014@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT25/Green/Digimon/BT25_045.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "link 실행 직전 candidate card/permanent/root/effect payload를 정의한다.",
+        "CanTriggerWhenWouldLink parity fixture task를 분리한다.",
+        "WhenLinked와의 pre/post lifecycle ordering task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "OnUseDigiburst",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "CardEffectBodySpecific",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1,
+      "fnd002Classification": "CardEffectBodySpecific",
+      "fnd002SourceFileCount": 2,
+      "fnd002AffectedCardCount": 1,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:992 - EffectTiming.OnUseDigiburst"
+      ],
+      "sourceClassOrMethodArea": "CardController DigiBurst use event stack",
+      "sourceRuntimeCallEvidence": "CardController.cs:2228",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT5_056",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT5-056",
+              "definitionStableId": "BT5-056#1014@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT5/Green/Digimon/BT5_056.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "DigiBurst source selection/cost/use event를 CardEffect body 구현 없이 mechanic contract로 분리한다.",
+        "affected source BT5_056과 CardController OnUseDigiburst call만 review fixture 후보로 기록한다.",
+        "DigiBurst special mechanic partial 상태와 연결되는 후속 prompt로 보낸다."
+      ],
+      "fnd001ContinuousOrStaticRelated": false,
+      "fnd001HandoffReason": "DigiBurst special mechanic 자체 분해가 우선이며 FND-001 직접 handoff에서는 제외한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenUntapAnyone",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 2,
+      "fnd002AffectedCardCount": 1,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:983 - EffectTiming.WhenUntapAnyone"
+      ],
+      "sourceClassOrMethodArea": "CardController would-untap cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:5694",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT7_055",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT7-055",
+              "definitionStableId": "BT7-055#1462@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT7/Green/Digimon/BT7_055.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Untap cut-in pre/post refix semantics remain unresolved.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-C0007-zone-security-recovery-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0003-movement-action-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          },
+          {
+            "path": "docs/rl-engine/full-card-porting-L0004-cut-in-timing-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "actual unsuspend 전 candidate collection, duplicate guard, selection payload를 분리한다.",
+        "BT7_055형 hand discard 선택과 cannot-unsuspend duration task를 분리한다.",
+        "post-cut-in CanUnsuspend/effect immunity target refix fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    },
+    {
+      "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+      "currentCapabilityStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "NeedsSourceReview",
+      "fnd003Classification": "PartialNeedsSubtasks",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1,
+      "fnd002Classification": "FoundationRequired",
+      "fnd002SourceFileCount": 2,
+      "fnd002AffectedCardCount": 1,
+      "sourceDefinitionEvidence": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs:1023 - EffectTiming.WhenWouldDigivolutionCardDiscarded"
+      ],
+      "sourceClassOrMethodArea": "CardController would-source-trash cut-in",
+      "sourceRuntimeCallEvidence": "CardController.cs:5181/5293(commented historical occurrence)",
+      "sourceEffectSamples": [
+        {
+          "sourceEffectClassName": "BT10_084",
+          "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+          "affectedCardCount": 1,
+          "sampleCardData": [
+            {
+              "cardId": "BT10-084",
+              "definitionStableId": "BT10-084#2132@base",
+              "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_084.asset"
+            }
+          ]
+        }
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "capabilityMatrixEvidence": {
+        "reason": "Conservative audit status derived from inventory and local evidence.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        ],
+        "testEvidence": [],
+        "documentClaims": [
+          {
+            "path": "docs/rl-engine/full-card-porting-L0002-timing-layer-source-mapping.md",
+            "queueStatus": "blocked"
+          }
+        ],
+        "hasDocumentationConflict": false
+      },
+      "gateEvidence": {
+        "foundationGate": "docs/generated/foundation-completion-gate.json",
+        "gateUnsupportedCapabilityCount": 26,
+        "gateSampleUnsupportedCapabilityCount": 20,
+        "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+        "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+        "note": "Foundation Gate samples truncate unsupportedCapabilities to 20; full list is derived from source-required-capabilities intersected with capability-registry status=Unsupported."
+      },
+      "remediationTasks": [
+        "source trash actual mutation 전 would-discard cut-in payload를 정의한다.",
+        "replacement 처리 후 actual discarded source snapshot task를 분리한다.",
+        "OnDigivolutionCardDiscarded와 ordering/replay fixture task를 둔다."
+      ],
+      "fnd001ContinuousOrStaticRelated": true,
+      "fnd001HandoffReason": "ContinuousOrStaticEffect/source collection, temporary granted trigger, linked/inherited/face-up security source scope와 맞물려 FND-001 dependency로 표시한다.",
+      "trust001ReviewRequired": true,
+      "trust001Reason": "capability matrix status가 Unsupported이고 registry implementationEvidence가 있으므로 기존 src stub/partial claim과 Source of Truth를 TRUST-001에서 대조해야 한다.",
+      "implementationInThisGoal": "NotImplemented",
+      "statusPromotionInThisGoal": "NotPromoted"
+    }
+  ],
+  "excludedItems": []
+}
