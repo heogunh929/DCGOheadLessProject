@@ -17,6 +17,7 @@ production service graph는 다음 의존성이 없으면 유효하지 않다.
 - `Tier1PrimitiveService`
 - `SecurityCheckService`
 - `EngineInvariantChecker`
+- `ICEntityEffectRegistry`
 
 `BattleEngineServices.ValidationReport`는 단순 non-null만 보지 않는다. 다음 공유 관계도 검증한다.
 
@@ -25,10 +26,16 @@ production service graph는 다음 의존성이 없으면 유효하지 않다.
 - `TriggerPipelineService`, `PlayCardService`, `SecurityEffectExecutionService`가 같은 `Tier1PrimitiveService`를 쓴다.
 - `AttackService`와 `Tier1PrimitiveService`가 같은 runtime `SecurityCheckService`를 쓴다.
 - `ActionExecutor`, `TurnRunner`, `RuleProcessor`가 root에서 만든 동일 서비스 인스턴스를 쓴다.
+- `ICEntityEffectRegistry`는 `BattleEngineServices` root dependency로 추적되며, script-runtime facade는 GManager/reflection fallback 없이 이 명시 dependency를 사용한다.
 
 ## Production 경로
 
 - production code는 실제 `ICardScriptRegistry`를 전달해서 `BattleEngineServices.Create(...)`를 호출해야 한다.
+- `CEntity_EffectController`/`CardSource.EffectList`/`Permanent.EffectList` 계열을 사용하는 runtime은 `BattleEngineServices.Create(ICardScriptRegistry, ICEntityEffectRegistry, IDecisionProvider?)` overload로 source-aligned `CEntityEffectRegistry`를 전달할 수 있다. 기존 descriptor 기반 graph는 `CEntityEffectRegistry.Empty`를 기본 dependency로 보유한다.
+- production registry는 raw dictionary를 직접 노출하지 않고 `CEntityEffectRegistry.FromEntries(...)`로 `(CardId, EffectClassName, factory)` entry를 direct class, source namespace, token namespace lookup key로 확장할 수 있다.
+- `CEntityEffectRegistryBuilder`는 `ICardScriptRegistry.PortingRecords` 또는 명시 `CardEffectPortingRecord` 목록의 `EffectiveSourceEffectClassName`을 factory catalog와 대조해 entry 목록을 만든다.
+- `CEntityEffectFactoryCatalog`는 source effect class factory catalog를 검증하고 `BattleEngineServices.Create(ICardScriptRegistry, CEntityEffectFactoryCatalog, IDecisionProvider?)` overload가 이 catalog에서 `ICEntityEffectRegistry` root dependency를 조립한다. `ICEntityEffectFactoryProvider`를 구현한 bridge script는 `CEntityEffectFactoryCatalog.FromScripts(...)`로 catalog를 채울 수 있으며, non-empty source effect class에 provider가 없거나 둘 이상이거나 provider가 null factory를 반환하면 명시 실패한다. 실제 production card script catalog의 provider 채택은 별도 foundation 후속 작업으로 남긴다.
+- `Permanent.EffectList_Added(timing, TemporaryGrantedEffectRegistry)`와 `Player.EffectList(timing, TemporaryGrantedEffectRegistry)`는 원본 duration list에 대응해 `GameState.TemporaryGrantedEffects` 중 target permanent/player와 timing이 일치하는 grant를 descriptor-backed `ICardEffect`로 노출한다. registry 없는 기존 호출과 missing granted-effect handler는 명시 실패하며, original `PermanentEffects`/`Until*` bucket cleanup parity와 production provider catalog adoption은 별도 foundation 후속 작업으로 남긴다.
 - `ActionExecutor`와 `TurnRunner`의 public 기본 생성자는 더 이상 fallback graph를 만들지 않는다.
 - `ActionExecutor`는 일부 custom service와 일부 default service를 섞는 부분 주입을 허용하지 않는다. 모든 dependency는 같은 service graph에서 온 완성 인스턴스여야 한다.
 - 테스트에서 no-effect graph가 필요하면 테스트 전용 `ICardScriptRegistry`를 만들어 `BattleEngineServices.Create(...)`에 명시 전달한다.

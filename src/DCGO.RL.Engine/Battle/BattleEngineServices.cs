@@ -49,6 +49,7 @@ public sealed class BattleEngineServices
         ComplexMechanicService complexMechanicService,
         StaticRequirementService staticRequirementService,
         StaticEffectService staticEffectService,
+        ICEntityEffectRegistry cEntityEffectRegistry,
         LegalActionGenerator legalActionGenerator,
         PhaseRunner phaseRunner,
         RuleProcessor ruleProcessor,
@@ -69,6 +70,7 @@ public sealed class BattleEngineServices
         ComplexMechanicService = complexMechanicService;
         StaticRequirementService = staticRequirementService;
         StaticEffectService = staticEffectService;
+        CEntityEffectRegistry = cEntityEffectRegistry;
         LegalActionGenerator = legalActionGenerator;
         PhaseRunner = phaseRunner;
         RuleProcessor = ruleProcessor;
@@ -103,6 +105,8 @@ public sealed class BattleEngineServices
 
     public StaticEffectService StaticEffectService { get; }
 
+    public ICEntityEffectRegistry CEntityEffectRegistry { get; }
+
     public LegalActionGenerator LegalActionGenerator { get; }
 
     public PhaseRunner PhaseRunner { get; }
@@ -123,7 +127,30 @@ public sealed class BattleEngineServices
         IDecisionProvider? decisionProvider = null)
     {
         ArgumentNullException.ThrowIfNull(cardScriptRegistry);
-        return CreateCore(cardScriptRegistry, decisionProvider);
+        return CreateCore(cardScriptRegistry, DCGO.RL.Engine.Effects.CEntityEffectRegistry.Empty, decisionProvider);
+    }
+
+    public static BattleEngineServices Create(
+        ICardScriptRegistry cardScriptRegistry,
+        ICEntityEffectRegistry cEntityEffectRegistry,
+        IDecisionProvider? decisionProvider = null)
+    {
+        ArgumentNullException.ThrowIfNull(cardScriptRegistry);
+        ArgumentNullException.ThrowIfNull(cEntityEffectRegistry);
+        return CreateCore(cardScriptRegistry, cEntityEffectRegistry, decisionProvider);
+    }
+
+    public static BattleEngineServices Create(
+        ICardScriptRegistry cardScriptRegistry,
+        CEntityEffectFactoryCatalog cEntityEffectFactoryCatalog,
+        IDecisionProvider? decisionProvider = null)
+    {
+        ArgumentNullException.ThrowIfNull(cardScriptRegistry);
+        ArgumentNullException.ThrowIfNull(cEntityEffectFactoryCatalog);
+        return CreateCore(
+            cardScriptRegistry,
+            cEntityEffectFactoryCatalog.CreateRegistry(cardScriptRegistry),
+            decisionProvider);
     }
 
     public EngineSession CreateSession(GameState state, GameTrace? trace = null) =>
@@ -134,7 +161,8 @@ public sealed class BattleEngineServices
         IZoneMover? zoneMover,
         Tier1PrimitiveService? primitiveService,
         EngineInvariantChecker? invariantChecker,
-        SecurityCheckService? securityCheckService = null)
+        SecurityCheckService? securityCheckService = null,
+        ICEntityEffectRegistry? cEntityEffectRegistry = null)
     {
         var issues = new List<BattleEngineServiceGraphIssue>();
         AddMissing(issues, nameof(BattleEngineServices), nameof(TriggerPipelineService), triggerPipelineService);
@@ -142,6 +170,7 @@ public sealed class BattleEngineServices
         AddMissing(issues, nameof(BattleEngineServices), nameof(Tier1PrimitiveService), primitiveService);
         AddMissing(issues, nameof(BattleEngineServices), nameof(EngineInvariantChecker), invariantChecker);
         AddMissing(issues, nameof(BattleEngineServices), nameof(SecurityCheckService), securityCheckService);
+        AddMissing(issues, nameof(BattleEngineServices), nameof(ICEntityEffectRegistry), cEntityEffectRegistry);
         return new BattleEngineServiceGraphValidationReport(issues);
     }
 
@@ -163,7 +192,8 @@ public sealed class BattleEngineServices
             services.ZoneMover,
             services.PrimitiveService,
             services.InvariantChecker,
-            services.SecurityCheckService).Issues.ToList();
+            services.SecurityCheckService,
+            services.CEntityEffectRegistry).Issues.ToList();
 
         AddMismatch(
             issues,
@@ -396,6 +426,7 @@ public sealed class BattleEngineServices
 
     private static BattleEngineServices CreateCore(
         ICardScriptRegistry cardScriptRegistry,
+        ICEntityEffectRegistry cEntityEffectRegistry,
         IDecisionProvider? decisionProvider)
     {
         var zoneMover = new ZoneMover();
@@ -513,6 +544,7 @@ public sealed class BattleEngineServices
             complexMechanicService,
             staticRequirementService,
             staticEffectService,
+            cEntityEffectRegistry,
             legalActionGenerator,
             phaseRunner,
             ruleProcessor,

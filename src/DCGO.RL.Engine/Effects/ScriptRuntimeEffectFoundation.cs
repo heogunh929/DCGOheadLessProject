@@ -95,7 +95,7 @@ public abstract class ICardEffect
 
     public bool CanUse(EffectContext context) => _canUseCondition?.Invoke(context) ?? true;
 
-    public EffectDescriptor ToEffectDescriptor(
+    public virtual EffectDescriptor ToEffectDescriptor(
         EffectTiming timing,
         PlayerId? controller = null,
         PermanentId? sourcePermanent = null)
@@ -282,6 +282,38 @@ public abstract class ActivateICardEffect : ICardEffect
     public CardSource? TopCardWhenTriggered { get; set; }
 }
 
+public sealed class DescriptorBackedCardEffect : ICardEffect
+{
+    private readonly EffectDescriptor _descriptor;
+
+    public DescriptorBackedCardEffect(
+        EffectDescriptor descriptor,
+        CardSource? effectSourceCard = null,
+        Permanent? effectSourcePermanent = null,
+        string? effectName = null)
+    {
+        _descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
+        SetEffectSourceCard(effectSourceCard);
+        SetEffectSourcePermanent(effectSourcePermanent);
+        SetHashString(descriptor.StableId);
+        SetEffectName(effectName ?? descriptor.StableId);
+    }
+
+    public override EffectDescriptor ToEffectDescriptor(
+        EffectTiming timing,
+        PlayerId? controller = null,
+        PermanentId? sourcePermanent = null)
+    {
+        if (timing != _descriptor.Timing)
+        {
+            throw new DomainException(
+                $"Descriptor-backed effect '{_descriptor.StableId}' was requested for timing '{timing}' but is registered for '{_descriptor.Timing}'.");
+        }
+
+        return _descriptor;
+    }
+}
+
 public interface IAddSkillEffect
 {
     bool ShouldAddEffect(EffectTiming timing);
@@ -329,14 +361,23 @@ public abstract class CEntity_Effect
 
 public sealed class CEntity_EffectController
 {
-    private readonly IReadOnlyDictionary<string, Func<CEntity_Effect>> _effectFactories;
+    private readonly ICEntityEffectRegistry _effectRegistry;
 
     public CEntity_EffectController(
         CEntity_Effect? cEntityEffect = null,
-        IReadOnlyDictionary<string, Func<CEntity_Effect>>? effectFactories = null)
+        IReadOnlyDictionary<string, Func<CEntity_Effect>>? effectFactories = null,
+        ICEntityEffectRegistry? effectRegistry = null)
     {
+        if (effectFactories is not null && effectRegistry is not null)
+        {
+            throw new DomainException("CEntity_EffectController requires either effectFactories or effectRegistry, not both.");
+        }
+
         cEntity_Effect = cEntityEffect ?? new EmptyEffectClass();
-        _effectFactories = effectFactories ?? new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal);
+        _effectRegistry = effectRegistry
+            ?? (effectFactories is null
+                ? CEntityEffectRegistry.Empty
+                : new CEntityEffectRegistry(effectFactories));
     }
 
     public CEntity_Effect cEntity_Effect { get; private set; }
@@ -355,15 +396,9 @@ public sealed class CEntity_EffectController
             return;
         }
 
-        foreach (var lookupKey in EffectLookupKeys(ID, ClassName))
+        if (_effectRegistry.TryCreate(ID, ClassName, out var effect))
         {
-            if (!_effectFactories.TryGetValue(lookupKey, out var factory))
-            {
-                continue;
-            }
-
-            cEntity_Effect = factory()
-                ?? throw new DomainException($"Card effect factory for '{lookupKey}' returned null.");
+            cEntity_Effect = effect;
             return;
         }
 
@@ -543,15 +578,9 @@ public sealed class CEntity_EffectController
             return null;
         }
 
-        foreach (var lookupKey in EffectLookupKeys(source.Entity.CardID, className))
+        if (_effectRegistry.TryCreate(source.Entity.CardID, className, out var effect))
         {
-            if (!_effectFactories.TryGetValue(lookupKey, out var factory))
-            {
-                continue;
-            }
-
-            return factory()
-                ?? throw new DomainException($"Card effect factory for '{lookupKey}' returned null.");
+            return effect;
         }
 
         throw new UnsupportedMechanicException(

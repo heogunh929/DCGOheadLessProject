@@ -18,10 +18,19 @@ var tests = new (string Name, Action Test)[]
     ("PlayerState zone list 비공유", PlayerStateZoneListsAreIndependent),
     ("PermanentState top/source 구분", PermanentStateSeparatesTopAndSources),
     ("Script runtime state facade exposes original contracts", ScriptRuntimeStateFacadeExposesOriginalContracts),
+    ("Script runtime CardSource effect list uses explicit registry", ScriptRuntimeCardSourceEffectListUsesExplicitRegistry),
+    ("Script runtime Permanent effect list preserves stack roles", ScriptRuntimePermanentEffectListPreservesStackRoles),
+    ("Script runtime Permanent added effect list uses temporary granted effects", ScriptRuntimePermanentAddedEffectListUsesTemporaryGrantedEffects),
+    ("Script runtime Player effect list uses temporary granted effects", ScriptRuntimePlayerEffectListUsesTemporaryGrantedEffects),
     ("CardEffectCommons query facade matches original contracts", CardEffectCommonsQueryFacadeMatchesOriginalContracts),
     ("Script runtime effect model creates descriptors", ScriptRuntimeEffectModelCreatesDescriptors),
     ("Script runtime selection descriptor uses hash identity", ScriptRuntimeSelectionDescriptorUsesHashIdentity),
     ("Script runtime effect controller resolves class names", ScriptRuntimeEffectControllerResolvesClassNames),
+    ("Script runtime CEntity effect registry validates factories", ScriptRuntimeCEntityEffectRegistryValidatesFactories),
+    ("Script runtime CEntity effect registry builds source-aligned entries", ScriptRuntimeCEntityEffectRegistryBuildsSourceAlignedEntries),
+    ("Script runtime CEntity effect registry builds from porting metadata", ScriptRuntimeCEntityEffectRegistryBuildsFromPortingMetadata),
+    ("Script runtime CEntity effect factory catalog feeds service graph", ScriptRuntimeCEntityEffectFactoryCatalogFeedsServiceGraph),
+    ("Script runtime CEntity effect factory catalog builds from bridge scripts", ScriptRuntimeCEntityEffectFactoryCatalogBuildsFromBridgeScripts),
     ("Script runtime effect controller applies added skill effects", ScriptRuntimeEffectControllerAppliesAddedSkillEffects),
     ("Script runtime effect controller respects cannot affected providers", ScriptRuntimeEffectControllerRespectsCannotAffectedProviders),
     ("CardEffect interface mapping classifies core contracts", CardEffectInterfaceMappingClassifiesCoreContracts),
@@ -391,6 +400,7 @@ var tests = new (string Name, Action Test)[]
     ("Option lifecycle invalid action leaves zones clean", OptionLifecycleInvalidActionLeavesZonesClean),
     ("Option lifecycle action trace replay deterministic", OptionLifecycleActionTraceReplayDeterministic),
     ("Runtime composition production graph validates required services", RuntimeCompositionProductionGraphValidatesRequiredServices),
+    ("Runtime composition tracks CEntity effect registry", RuntimeCompositionTracksCEntityEffectRegistry),
     ("Runtime composition missing TriggerPipeline fails validation", RuntimeCompositionMissingTriggerPipelineFailsValidation),
     ("Runtime composition PlayCardService requires TriggerPipeline", RuntimeCompositionPlayCardServiceRequiresTriggerPipeline),
     ("Runtime composition ActionExecutor returns pending option selection", RuntimeCompositionActionExecutorReturnsPendingOptionSelection),
@@ -832,6 +842,217 @@ static void ScriptRuntimeStateFacadeExposesOriginalContracts()
     AssertEqual<Permanent?>(null, context.CardSourceFromId(handCard.Id).PermanentOfThisCard());
 }
 
+static void ScriptRuntimeCardSourceEffectListUsesExplicitRegistry()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-SOURCE"] = new CardDefinition
+    {
+        CardId = "FX-SOURCE",
+        Name = "Fixture Source",
+        CardKinds = new[] { CardKind.Option },
+        Colors = new[] { CardColor.Red },
+        PlayCost = 1,
+        CardEffectClassName = "FixtureDirect",
+    };
+
+    var card = AddCardToZone(state, 3121, "FX-SOURCE", PlayerId.Player0, Zone.Hand);
+    var source = new GameContext(state).CardSourceFromId(card);
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureDirect"] = () => new FixtureCEntityEffect(),
+    };
+    var registry = new CEntityEffectRegistry(factories);
+
+    AssertThrows<UnsupportedMechanicException>(() => source.EffectList(EffectTiming.OnPlay));
+    AssertThrows<UnsupportedMechanicException>(() => source.EffectList_ExceptAddedEffects(EffectTiming.OnPlay));
+
+    var effects = source.EffectList(EffectTiming.OnPlay, registry);
+    AssertSequence(new[] { "fixture:stable" }, effects.Select(effect => effect.HashString).ToArray());
+    AssertEqual(card, effects[0].EffectSourceCard!.Id);
+
+    var exceptAdded = source.EffectList_ExceptAddedEffects(EffectTiming.OnPlay, registry);
+    AssertSequence(new[] { "fixture:stable" }, exceptAdded.Select(effect => effect.HashString).ToArray());
+    AssertEqual(card, exceptAdded[0].EffectSourceCard!.Id);
+}
+
+static void ScriptRuntimePermanentEffectListPreservesStackRoles()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-TOP"] = new CardDefinition
+    {
+        CardId = "FX-TOP",
+        Name = "Fixture Top",
+        CardKinds = new[] { CardKind.Digimon },
+        Colors = new[] { CardColor.Red },
+        Level = 3,
+        PlayCost = 3,
+        Dp = 2000,
+        CardEffectClassName = "FixtureDirect",
+    };
+    state.CardDefinitions["FX-SOURCE"] = state.CardDefinitions["FX-TOP"] with
+    {
+        CardId = "FX-SOURCE",
+        CardEffectClassName = "FixtureInherited",
+    };
+    state.CardDefinitions["FX-LINK"] = state.CardDefinitions["FX-TOP"] with
+    {
+        CardId = "FX-LINK",
+        CardEffectClassName = "FixtureLinked",
+    };
+    state.CardDefinitions["FX-SKIPPED"] = state.CardDefinitions["FX-TOP"] with
+    {
+        CardId = "FX-SKIPPED",
+        CardEffectClassName = "FixtureDirect",
+    };
+    state.CardDefinitions["FX-FACEDOWN"] = state.CardDefinitions["FX-TOP"] with
+    {
+        CardId = "FX-FACEDOWN",
+        CardEffectClassName = "FixtureInherited",
+    };
+
+    var permanent = AddBattlePermanent(state, 3131, 9131, "FX-TOP", PlayerId.Player0, 0, enterTurn: 1);
+    var inheritedSource = AddEvolutionSource(state, 3132, "FX-SOURCE", PlayerId.Player0, permanent.Id);
+    AddEvolutionSource(state, 3133, "FX-SKIPPED", PlayerId.Player0, permanent.Id);
+    var faceDownSource = AddEvolutionSource(state, 3134, "FX-FACEDOWN", PlayerId.Player0, permanent.Id);
+    var linkedSource = AddLinkedCard(state, 3135, "FX-LINK", PlayerId.Player0, permanent.Id);
+    state.Cards[faceDownSource].IsFaceUp = false;
+
+    var permanentFacade = new GameContext(state).PermanentOfCard(permanent.TopCardId)
+        ?? throw new InvalidOperationException("Permanent facade should resolve.");
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureDirect"] = () => new FixtureCEntityEffect(),
+        ["FixtureInherited"] = () => new FixtureInheritedCEntityEffect(),
+        ["FixtureLinked"] = () => new FixtureLinkedCEntityEffect(),
+    };
+    var registry = new CEntityEffectRegistry(factories);
+
+    AssertThrows<UnsupportedMechanicException>(() => permanentFacade.EffectList(EffectTiming.OnPlay));
+    AssertThrows<UnsupportedMechanicException>(() => permanentFacade.EffectList_Added(EffectTiming.OnPlay));
+
+    var effects = permanentFacade.EffectList(EffectTiming.OnPlay, registry);
+    AssertSequence(
+        new[] { "fixture:stable", "fixture:inherited", "fixture:linked" },
+        effects.Select(effect => effect.HashString).ToArray());
+    AssertSequence(
+        new[] { permanent.TopCardId, inheritedSource, linkedSource },
+        effects.Select(effect => effect.EffectSourceCard!.Id).ToArray());
+    AssertSequence(
+        new[] { permanent.Id, permanent.Id, permanent.Id },
+        effects.Select(effect => effect.EffectSourcePermanent!.Id).ToArray());
+}
+
+static void ScriptRuntimePermanentAddedEffectListUsesTemporaryGrantedEffects()
+{
+    var state = CreateMinimalBattleState();
+    var target = AddBattlePermanent(state, 3141, 9141, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var other = AddBattlePermanent(state, 3142, 9142, "BT1-STRONG", PlayerId.Player0, 1, enterTurn: 1);
+    var permanentFacade = new GameContext(state).PermanentOfCard(target.TopCardId)
+        ?? throw new InvalidOperationException("Permanent facade should resolve.");
+    var primitives = new Tier1PrimitiveService();
+
+    var grant = primitives.AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:memory",
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetPermanent: target.Id,
+        stableId: "duration:test:added-effect-list");
+    primitives.AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:memory",
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetPermanent: other.Id,
+        stableId: "duration:test:other-added-effect");
+
+    AssertThrows<UnsupportedMechanicException>(() => permanentFacade.EffectList_Added(EffectTiming.OnAllyAttack));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        permanentFacade.EffectList_Added(EffectTiming.OnAllyAttack, TemporaryGrantedEffectRegistry.Empty));
+
+    var addedEffects = permanentFacade.EffectList_Added(
+        EffectTiming.OnAllyAttack,
+        CreateMemoryGrantedEffectRegistry());
+
+    AssertSequence(
+        new[] { "duration:test:added-effect-list:descriptor" },
+        addedEffects.Select(effect => effect.HashString).ToArray());
+    AssertEqual(target.TopCardId, addedEffects[0].EffectSourceCard!.Id);
+    AssertEqual(target.Id, addedEffects[0].EffectSourcePermanent!.Id);
+    AssertFalse(addedEffects[0].IsInheritedEffect);
+
+    var descriptor = addedEffects[0].ToEffectDescriptor(EffectTiming.OnAllyAttack);
+    AssertEqual(grant, descriptor.TemporaryGrantedEffect);
+    AssertEqual(target.TopCardId, descriptor.SourceCard!.Value);
+    AssertEqual(target.Id, descriptor.SourcePermanent!.Value);
+    AssertEqual(PlayerId.Player0, descriptor.Controller!.Value);
+    AssertThrows<DomainException>(() => addedEffects[0].ToEffectDescriptor(EffectTiming.OnPlay));
+
+    var combinedEffects = permanentFacade.EffectList(
+        EffectTiming.OnAllyAttack,
+        CEntityEffectRegistry.Empty,
+        CreateMemoryGrantedEffectRegistry());
+    AssertSequence(
+        new[] { "duration:test:added-effect-list:descriptor" },
+        combinedEffects.Select(effect => effect.HashString).ToArray());
+}
+
+static void ScriptRuntimePlayerEffectListUsesTemporaryGrantedEffects()
+{
+    var state = CreateMinimalBattleState();
+    var source = AddBattlePermanent(state, 3151, 9151, "BT1-ROOKIE", PlayerId.Player0, 0, enterTurn: 1);
+    var playerFacade = new GameContext(state).FirstPlayer;
+    var primitives = new Tier1PrimitiveService();
+
+    var grant = primitives.AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:player-effect",
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetPlayer: PlayerId.Player0,
+        sourceCard: source.TopCardId,
+        sourcePermanent: source.Id,
+        stableId: "duration:test:player-effect-list");
+    primitives.AddTemporaryGrantedTriggerEffect(
+        state,
+        EffectTiming.OnAllyAttack,
+        "fixture:player-effect",
+        DurationScope.UntilTurnEnd,
+        PlayerId.Player0,
+        targetPlayer: PlayerId.Player1,
+        sourceCard: source.TopCardId,
+        sourcePermanent: source.Id,
+        stableId: "duration:test:other-player-effect");
+
+    AssertThrows<UnsupportedMechanicException>(() => playerFacade.EffectList(EffectTiming.OnAllyAttack));
+    AssertThrows<UnsupportedMechanicException>(() =>
+        playerFacade.EffectList(EffectTiming.OnAllyAttack, TemporaryGrantedEffectRegistry.Empty));
+
+    var playerEffects = playerFacade.EffectList(
+        EffectTiming.OnAllyAttack,
+        CreatePlayerGrantedEffectRegistry());
+
+    AssertSequence(
+        new[] { "duration:test:player-effect-list:player-descriptor" },
+        playerEffects.Select(effect => effect.HashString).ToArray());
+    AssertEqual(source.TopCardId, playerEffects[0].EffectSourceCard!.Id);
+    AssertEqual(source.Id, playerEffects[0].EffectSourcePermanent!.Id);
+
+    var descriptor = playerEffects[0].ToEffectDescriptor(EffectTiming.OnAllyAttack);
+    AssertEqual(grant, descriptor.TemporaryGrantedEffect);
+    AssertEqual(source.TopCardId, descriptor.SourceCard!.Value);
+    AssertEqual(source.Id, descriptor.SourcePermanent!.Value);
+    AssertEqual(PlayerId.Player0, descriptor.Controller!.Value);
+    var canTrigger = descriptor.CanTrigger
+        ?? throw new InvalidOperationException("Player descriptor should expose a trigger condition.");
+    AssertTrue(canTrigger(new EffectContext(state, EffectTiming.OnAllyAttack, PlayerId.Player0)));
+    AssertFalse(canTrigger(new EffectContext(state, EffectTiming.OnAllyAttack, PlayerId.Player1)));
+    AssertThrows<DomainException>(() => playerEffects[0].ToEffectDescriptor(EffectTiming.OnPlay));
+}
+
 static void CardEffectCommonsQueryFacadeMatchesOriginalContracts()
 {
     var state = CreateMinimalBattleState();
@@ -889,11 +1110,11 @@ static void CardEffectCommonsQueryFacadeMatchesOriginalContracts()
     AssertTrue(CardEffectCommons.IsExistDigivolutionCards(sourceStackCard));
     AssertTrue(CardEffectCommons.IsExistLinked(linkedCard));
     AssertTrue(CardEffectCommons.IsExistOnSecurity(securityCard));
-    AssertFalse(securityCard.IsFlipped);
-    AssertTrue(faceUpSecurityCard.IsFlipped);
-    AssertTrue(CardEffectCommons.IsExistInSecurity(securityCard));
-    AssertFalse(CardEffectCommons.IsExistInSecurity(faceUpSecurityCard));
-    AssertTrue(CardEffectCommons.IsExistInSecurity(faceUpSecurityCard, isFlipped: true));
+    AssertTrue(securityCard.IsFlipped);
+    AssertFalse(faceUpSecurityCard.IsFlipped);
+    AssertFalse(CardEffectCommons.IsExistInSecurity(securityCard));
+    AssertTrue(CardEffectCommons.IsExistInSecurity(faceUpSecurityCard));
+    AssertTrue(CardEffectCommons.IsExistInSecurity(securityCard, isFlipped: true));
     AssertTrue(CardEffectCommons.IsExistInAnyTrash(ownerTrashCard));
     AssertTrue(CardEffectCommons.IsExistInAnyTrash(opponentTrashCard));
     AssertFalse(CardEffectCommons.IsExistInAnyTrash(handCard));
@@ -1102,9 +1323,11 @@ static void CardEffectCommonsQueryFacadeMatchesOriginalContracts()
     AssertTrue(CardEffectCommons.HasMatchConditionOwnersHand(sourceCard, card => card.Id == handCard.Id));
     AssertEqual(1, CardEffectCommons.MatchConditionOwnersCardCountInHand(sourceCard, card => card.IsDigimon));
     AssertTrue(CardEffectCommons.HasMatchConditionPermanentDigivolutionCards(sourceCard, card => card.Id == sourceStackCard.Id));
-    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id));
-    AssertFalse(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id, flipped: false));
-    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.IsOption, flipped: false));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == securityCard.Id));
+    AssertFalse(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == securityCard.Id, flipped: false));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id, flipped: false));
+    AssertFalse(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.Id == faceUpSecurityCard.Id));
+    AssertTrue(CardEffectCommons.HasMatchConditionOwnersSecurity(sourceCard, card => card.IsOption));
     AssertEqual(1, CardEffectCommons.MatchConditionOwnersCardCountInTrash(sourceCard, card => card.IsDigimon));
     AssertEqual(1, CardEffectCommons.MatchConditionOpponentsCardCountInTrash(sourceCard, card => card.IsDigimon));
     AssertTrue(CardEffectCommons.HasMatchConditionOwnersCardInTrash(sourceCard, card => card.Id == ownerTrashCard.Id));
@@ -1488,7 +1711,8 @@ static void ScriptRuntimeEffectControllerResolvesClassNames()
         new[] { "fixture_token", "DCGO.CardEffects.Tokens.fixture_token" },
         CEntity_EffectController.EffectLookupKeys("BT1-001", "fixture_token").ToArray());
 
-    var controller = new CEntity_EffectController(effectFactories: factories);
+    var registry = new CEntityEffectRegistry(factories);
+    var controller = new CEntity_EffectController(effectRegistry: registry);
     controller.AddCardEffect("BT1-001", "FixtureDirect");
     AssertTrue(controller.cEntity_Effect is FixtureCEntityEffect);
 
@@ -1503,6 +1727,323 @@ static void ScriptRuntimeEffectControllerResolvesClassNames()
 
     AssertThrows<UnsupportedMechanicException>(() =>
         controller.AddCardEffect("BT1-001", "MissingEffect"));
+}
+
+static void ScriptRuntimeCEntityEffectRegistryValidatesFactories()
+{
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureDirect"] = () => new FixtureCEntityEffect(),
+        ["DCGO.CardEffects.BT1.FixtureNamespaced"] = () => new FixtureInheritedCEntityEffect(),
+        ["DCGO.CardEffects.Tokens.fixture_token"] = () => new FixtureCEntityEffect(),
+    };
+    var registry = new CEntityEffectRegistry(factories);
+
+    AssertSequence(
+        new[]
+        {
+            "DCGO.CardEffects.BT1.FixtureNamespaced",
+            "DCGO.CardEffects.Tokens.fixture_token",
+            "FixtureDirect",
+        },
+        registry.RegisteredKeys.ToArray());
+
+    AssertTrue(registry.TryCreate("BT1-001", "FixtureDirect", out var direct));
+    AssertTrue(direct is FixtureCEntityEffect);
+
+    AssertTrue(registry.TryCreate("BT1-001", "FixtureNamespaced", out var namespaced));
+    AssertTrue(namespaced is FixtureInheritedCEntityEffect);
+
+    AssertTrue(registry.TryCreate("BT1-001", "fixture_token", out var token));
+    AssertTrue(token is FixtureCEntityEffect);
+
+    AssertFalse(registry.TryCreate("BT1-001", "MissingEffect", out var missing));
+    AssertEqual<CEntity_Effect?>(null, missing);
+
+    AssertThrows<DomainException>(() => new CEntityEffectRegistry(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>("Duplicate", () => new FixtureCEntityEffect()),
+        new KeyValuePair<string, Func<CEntity_Effect>>("Duplicate", () => new FixtureInheritedCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => new CEntityEffectRegistry(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>(string.Empty, () => new FixtureCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => new CEntityEffectRegistry(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>("MissingFactory", null!),
+    }));
+    AssertThrows<DomainException>(() =>
+        new CEntity_EffectController(effectFactories: factories, effectRegistry: registry));
+}
+
+static void ScriptRuntimeCEntityEffectRegistryBuildsSourceAlignedEntries()
+{
+    var sourceEntry = new CEntityEffectRegistryEntry(
+        "BT1-001",
+        "FixtureNamespaced",
+        () => new FixtureInheritedCEntityEffect());
+    var tokenEntry = new CEntityEffectRegistryEntry(
+        "BT1-002",
+        "fixture_token",
+        () => new FixtureCEntityEffect());
+
+    AssertSequence(
+        new[] { "FixtureNamespaced", "DCGO.CardEffects.BT1.FixtureNamespaced" },
+        sourceEntry.LookupKeys.ToArray());
+    AssertSequence(
+        new[] { "fixture_token", "DCGO.CardEffects.Tokens.fixture_token" },
+        tokenEntry.LookupKeys.ToArray());
+
+    var registry = CEntityEffectRegistry.FromEntries(new[] { sourceEntry, tokenEntry });
+
+    AssertSequence(
+        new[]
+        {
+            "DCGO.CardEffects.BT1.FixtureNamespaced",
+            "DCGO.CardEffects.Tokens.fixture_token",
+            "FixtureNamespaced",
+            "fixture_token",
+        },
+        registry.RegisteredKeys.ToArray());
+
+    AssertTrue(registry.TryCreate("BT1-001", "FixtureNamespaced", out var namespaced));
+    AssertTrue(namespaced is FixtureInheritedCEntityEffect);
+
+    AssertTrue(registry.TryCreate("BT1-002", "fixture_token", out var token));
+    AssertTrue(token is FixtureCEntityEffect);
+
+    AssertThrows<DomainException>(() => CEntityEffectRegistry.FromEntries(new[]
+    {
+        new CEntityEffectRegistryEntry("BT1-001", "FixtureNamespaced", () => new FixtureInheritedCEntityEffect()),
+        new CEntityEffectRegistryEntry("BT1-002", "FixtureNamespaced", () => new FixtureCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectRegistry.FromEntries(new[]
+    {
+        new CEntityEffectRegistryEntry(string.Empty, "FixtureNamespaced", () => new FixtureInheritedCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectRegistry.FromEntries(new[]
+    {
+        new CEntityEffectRegistryEntry("BT1-001", string.Empty, () => new FixtureInheritedCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectRegistry.FromEntries(new[]
+    {
+        new CEntityEffectRegistryEntry("BT1-001", "FixtureNamespaced", null!),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectRegistry.FromEntries(new[]
+    {
+        (CEntityEffectRegistryEntry)null!,
+    }));
+}
+
+static void ScriptRuntimeCEntityEffectRegistryBuildsFromPortingMetadata()
+{
+    var records = new[]
+    {
+        new CardEffectPortingRecord(
+            "BT1-001",
+            "FixtureNamespaced",
+            CardEffectPortingStatus.Implemented),
+        new CardEffectPortingRecord(
+            "ST2-007",
+            "SharedAlias",
+            CardEffectPortingStatus.Implemented,
+            SourceEffectClassName: "FixtureNamespaced"),
+        new CardEffectPortingRecord(
+            "BT1-002",
+            string.Empty,
+            CardEffectPortingStatus.NoEffect),
+        new CardEffectPortingRecord(
+            "BT1-003",
+            "fixture_token",
+            CardEffectPortingStatus.Implemented),
+    };
+    var factories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureNamespaced"] = () => new FixtureInheritedCEntityEffect(),
+        ["fixture_token"] = () => new FixtureCEntityEffect(),
+    };
+
+    var entries = CEntityEffectRegistryBuilder.CreateEntries(records, factories);
+
+    AssertEqual(2, entries.Count);
+    AssertEqual("BT1-001", entries[0].CardId);
+    AssertEqual("FixtureNamespaced", entries[0].EffectClassName);
+    AssertEqual("BT1-003", entries[1].CardId);
+    AssertEqual("fixture_token", entries[1].EffectClassName);
+
+    var registry = CEntityEffectRegistryBuilder.CreateRegistry(records, factories);
+    AssertSequence(
+        new[]
+        {
+            "DCGO.CardEffects.BT1.FixtureNamespaced",
+            "DCGO.CardEffects.Tokens.fixture_token",
+            "FixtureNamespaced",
+            "fixture_token",
+        },
+        registry.RegisteredKeys.ToArray());
+
+    AssertTrue(registry.TryCreate("ST2-007", "FixtureNamespaced", out var shared));
+    AssertTrue(shared is FixtureInheritedCEntityEffect);
+    AssertTrue(registry.TryCreate("BT1-003", "fixture_token", out var token));
+    AssertTrue(token is FixtureCEntityEffect);
+
+    var scriptRegistry = new CardScriptRegistry(new[]
+    {
+        new FixtureCEntityCardScript(
+            "BT1-004",
+            "FixtureScript",
+            new FixtureCEntityEffect(),
+            EffectTiming.OnPlay),
+    });
+    var scriptFactories = new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureScript"] = () => new FixtureCEntityEffect(),
+    };
+    var scriptEffectRegistry = CEntityEffectRegistryBuilder.CreateRegistry(scriptRegistry, scriptFactories);
+    AssertTrue(scriptEffectRegistry.TryCreate("BT1-004", "FixtureScript", out var scriptEffect));
+    AssertTrue(scriptEffect is FixtureCEntityEffect);
+
+    AssertThrows<DomainException>(() => CEntityEffectRegistryBuilder.CreateRegistry(
+        records,
+        new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+        {
+            ["FixtureNamespaced"] = () => new FixtureInheritedCEntityEffect(),
+        }));
+    AssertThrows<DomainException>(() => CEntityEffectRegistryBuilder.CreateEntries(
+        new[]
+        {
+            new CardEffectPortingRecord(
+                string.Empty,
+                "FixtureNamespaced",
+                CardEffectPortingStatus.Implemented),
+        },
+        factories));
+    AssertThrows<DomainException>(() => CEntityEffectRegistryBuilder.CreateEntries(
+        new CardEffectPortingRecord[] { null! },
+        factories));
+    AssertThrows<DomainException>(() => CEntityEffectRegistryBuilder.CreateEntries(
+        records,
+        new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+        {
+            ["FixtureNamespaced"] = () => new FixtureInheritedCEntityEffect(),
+            ["fixture_token"] = null!,
+        }));
+}
+
+static void ScriptRuntimeCEntityEffectFactoryCatalogFeedsServiceGraph()
+{
+    var scriptRegistry = new CardScriptRegistry(new[]
+    {
+        new FixtureCEntityCardScript(
+            "BT1-004",
+            "FixtureScript",
+            new FixtureCEntityEffect(),
+            EffectTiming.OnPlay),
+    });
+    var catalog = new CEntityEffectFactoryCatalog(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>("FixtureScript", () => new FixtureCEntityEffect()),
+    });
+
+    AssertSequence(new[] { "FixtureScript" }, catalog.RegisteredSourceEffectClassNames.ToArray());
+    AssertTrue(catalog.TryGetFactory("FixtureScript", out var factory));
+    AssertTrue(factory!() is FixtureCEntityEffect);
+    AssertFalse(catalog.TryGetFactory("MissingScript", out var missingFactory));
+    AssertEqual<Func<CEntity_Effect>?>(null, missingFactory);
+
+    var entries = catalog.CreateEntries(scriptRegistry);
+    AssertEqual(1, entries.Count);
+    AssertEqual("BT1-004", entries[0].CardId);
+    AssertEqual("FixtureScript", entries[0].EffectClassName);
+
+    var services = BattleEngineServices.Create(scriptRegistry, catalog);
+
+    AssertTrue(services.ValidationReport.IsValid);
+    AssertSequence(
+        new[] { "DCGO.CardEffects.BT1.FixtureScript", "FixtureScript" },
+        services.CEntityEffectRegistry.RegisteredKeys.ToArray());
+    AssertTrue(services.CEntityEffectRegistry.TryCreate("BT1-004", "FixtureScript", out var effect));
+    AssertTrue(effect is FixtureCEntityEffect);
+
+    AssertThrows<DomainException>(() => new CEntityEffectFactoryCatalog(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>("Duplicate", () => new FixtureCEntityEffect()),
+        new KeyValuePair<string, Func<CEntity_Effect>>("Duplicate", () => new FixtureInheritedCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => new CEntityEffectFactoryCatalog(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>(string.Empty, () => new FixtureCEntityEffect()),
+    }));
+    AssertThrows<DomainException>(() => new CEntityEffectFactoryCatalog(new[]
+    {
+        new KeyValuePair<string, Func<CEntity_Effect>>("MissingFactory", null!),
+    }));
+    AssertThrows<DomainException>(() => BattleEngineServices.Create(
+        scriptRegistry,
+        new CEntityEffectFactoryCatalog()));
+}
+
+static void ScriptRuntimeCEntityEffectFactoryCatalogBuildsFromBridgeScripts()
+{
+    var scripts = new ICardScript[]
+    {
+        new FixtureCEntityFactoryProviderScript(
+            "ST2-007",
+            "SharedAlias",
+            () => new FixtureInheritedCEntityEffect(),
+            sourceEffectClassName: "FixtureBridge"),
+        new FixtureCEntityCardScript(
+            "BT1-005",
+            "FixtureBridge",
+            new FixtureCEntityEffect(),
+            EffectTiming.OnPlay),
+        new NoEffectCardScript("BT1-006"),
+    };
+
+    var catalog = CEntityEffectFactoryCatalog.FromScripts(scripts);
+
+    AssertSequence(new[] { "FixtureBridge" }, catalog.RegisteredSourceEffectClassNames.ToArray());
+    AssertTrue(catalog.TryGetFactory("FixtureBridge", out var factory));
+    AssertTrue(factory!() is FixtureInheritedCEntityEffect);
+
+    var scriptRegistry = new CardScriptRegistry(scripts);
+    var services = BattleEngineServices.Create(scriptRegistry, catalog);
+
+    AssertTrue(services.ValidationReport.IsValid);
+    AssertTrue(services.CEntityEffectRegistry.TryCreate("ST2-007", "FixtureBridge", out var shared));
+    AssertTrue(shared is FixtureInheritedCEntityEffect);
+    AssertTrue(services.CEntityEffectRegistry.TryCreate("BT1-005", "FixtureBridge", out var direct));
+    AssertTrue(direct is FixtureInheritedCEntityEffect);
+
+    AssertThrows<DomainException>(() => CEntityEffectFactoryCatalog.FromScripts(new ICardScript[]
+    {
+        new FixtureCEntityCardScript(
+            "BT1-007",
+            "MissingBridge",
+            new FixtureCEntityEffect(),
+            EffectTiming.OnPlay),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectFactoryCatalog.FromScripts(new ICardScript[]
+    {
+        new FixtureCEntityFactoryProviderScript(
+            "BT1-008",
+            "DuplicateBridge",
+            () => new FixtureCEntityEffect()),
+        new FixtureCEntityFactoryProviderScript(
+            "ST2-008",
+            "SharedDuplicateBridge",
+            () => new FixtureInheritedCEntityEffect(),
+            sourceEffectClassName: "DuplicateBridge"),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectFactoryCatalog.FromScripts(new ICardScript[]
+    {
+        new FixtureCEntityFactoryProviderScript(
+            "BT1-009",
+            "NullBridge",
+            null),
+    }));
+    AssertThrows<DomainException>(() => CEntityEffectFactoryCatalog.FromScripts(new ICardScript[] { null! }));
 }
 
 static void ScriptRuntimeEffectControllerAppliesAddedSkillEffects()
@@ -10102,6 +10643,21 @@ static TemporaryGrantedEffectRegistry CreateMemoryGrantedEffectRegistry(string k
             executionContext.WithState((state, primitives) =>
                 primitives.ModifyMemory(state, grant.ControllerPlayerId, amount))));
 
+static TemporaryGrantedEffectRegistry CreatePlayerGrantedEffectRegistry(string key = "fixture:player-effect") =>
+    new(new TemporaryGrantedEffectHandler(
+        key,
+        descriptorContext => new EffectDescriptor(
+            $"{descriptorContext.GrantedEffect.StableId}:player-descriptor",
+            descriptorContext.GrantedEffect.Timing,
+            SourceCard: descriptorContext.SourceCard,
+            SourcePermanent: descriptorContext.SourcePermanent,
+            Controller: descriptorContext.Controller,
+            CanTrigger: effectContext => effectContext.Player == descriptorContext.GrantedEffect.TargetPlayerId,
+            SourceSnapshot: descriptorContext.SourceSnapshot),
+        (executionContext, grant) =>
+            executionContext.WithState((state, primitives) =>
+                primitives.ModifyMemory(state, grant.ControllerPlayerId, 1))));
+
 static PermanentState? FindTestPermanent(GameState state, PermanentId permanentId) =>
     state.Players
         .SelectMany(player => player.FieldPermanents)
@@ -14589,6 +15145,33 @@ static void RuntimeCompositionProductionGraphValidatesRequiredServices()
     AssertTrue(services.ActionExecutor is not null);
     AssertTrue(services.TurnRunner is not null);
     AssertTrue(services.StaticEffectService is not null);
+    var cEntityEffectRegistry = services.CEntityEffectRegistry
+        ?? throw new InvalidOperationException("CEntity effect registry should be part of the production graph.");
+    AssertEmpty(cEntityEffectRegistry.RegisteredKeys.ToArray());
+}
+
+static void RuntimeCompositionTracksCEntityEffectRegistry()
+{
+    var registry = new CEntityEffectRegistry(new Dictionary<string, Func<CEntity_Effect>>(StringComparer.Ordinal)
+    {
+        ["FixtureDirect"] = () => new FixtureCEntityEffect(),
+    });
+    var services = BattleEngineServices.Create(St1CardScriptCatalog.CreateRegistry(), registry);
+
+    AssertTrue(services.ValidationReport.IsValid);
+    AssertTrue(ReferenceEquals(registry, services.CEntityEffectRegistry));
+    AssertSequence(new[] { "FixtureDirect" }, services.CEntityEffectRegistry.RegisteredKeys.ToArray());
+
+    var report = BattleEngineServices.Validate(
+        triggerPipelineService: new TriggerPipelineService(new TestNoEffectCardScriptRegistry()),
+        zoneMover: new ZoneMover(),
+        primitiveService: new Tier1PrimitiveService(),
+        invariantChecker: new EngineInvariantChecker(),
+        securityCheckService: new SecurityCheckService(),
+        cEntityEffectRegistry: null);
+
+    AssertFalse(report.IsValid);
+    AssertTrue(report.Issues.Any(issue => issue.DependencyName == nameof(ICEntityEffectRegistry)));
 }
 
 static void RuntimeCompositionMissingTriggerPipelineFailsValidation()
@@ -23071,7 +23654,8 @@ internal sealed class FixtureCEntityCardScript : ICardScript
         string cardId,
         string effectClassName,
         CEntity_Effect entity,
-        EffectTiming timing)
+        EffectTiming timing,
+        string sourceEffectClassName = "")
     {
         _entity = entity;
         _timing = timing;
@@ -23079,7 +23663,8 @@ internal sealed class FixtureCEntityCardScript : ICardScript
             cardId,
             effectClassName,
             CardEffectPortingStatus.Implemented,
-            "Test fixture adapter that routes CEntity_Effect through the card script registry.");
+            "Test fixture adapter that routes CEntity_Effect through the card script registry.",
+            sourceEffectClassName);
     }
 
     public CardEffectPortingRecord Porting { get; }
@@ -23095,6 +23680,49 @@ internal sealed class FixtureCEntityCardScript : ICardScript
     public void Resolve(CardScriptExecutionContext context) =>
         throw new DomainException(
             $"Fixture CEntity script '{Porting.CardId}' should resolve through descriptor continuations.");
+}
+
+internal sealed class FixtureCEntityFactoryProviderScript : ICardScript, ICEntityEffectFactoryProvider
+{
+    private readonly Func<CEntity_Effect>? _factory;
+    private readonly EffectTiming _timing;
+
+    public FixtureCEntityFactoryProviderScript(
+        string cardId,
+        string effectClassName,
+        Func<CEntity_Effect>? factory,
+        EffectTiming timing = EffectTiming.OnPlay,
+        string sourceEffectClassName = "")
+    {
+        _factory = factory;
+        _timing = timing;
+        Porting = new CardEffectPortingRecord(
+            cardId,
+            effectClassName,
+            CardEffectPortingStatus.Implemented,
+            "Test fixture bridge script that exposes a CEntity_Effect factory provider.",
+            sourceEffectClassName);
+    }
+
+    public CardEffectPortingRecord Porting { get; }
+
+    public Func<CEntity_Effect> CreateCEntityEffectFactory() => _factory!;
+
+    public IReadOnlyList<EffectDescriptor> CreateEffectDescriptors(CardScriptContext context)
+    {
+        var entity = _factory?.Invoke()
+            ?? throw new DomainException($"Fixture CEntity factory provider '{Porting.CardId}' returned null.");
+        return entity.CreateEffectDescriptors(
+            context.State,
+            _timing,
+            context.SourceCard,
+            context.SourcePermanent,
+            context.Controller);
+    }
+
+    public void Resolve(CardScriptExecutionContext context) =>
+        throw new DomainException(
+            $"Fixture CEntity factory provider script '{Porting.CardId}' should resolve through descriptor continuations.");
 }
 
 internal sealed class FixtureLimitedEffect : ICardEffect
