@@ -1,0 +1,2697 @@
+{
+  "schemaVersion": "dcgo.as-is-card-data-field-summary.v1",
+  "generatedAtUtc": "2026-06-23T06:03:59.2983503+00:00",
+  "goal": "GOAL 06 AS-IS CardBaseEntity and ScriptableObject Data Structure Analysis",
+  "asisRoot": "E:\\headlessDCGO\\DCGO",
+  "fields": [
+    {
+      "fieldName": "m_CorrespondingSourceObject",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "{fileID: 0}",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_EditorClassIdentifier",
+      "presenceCount": 8187,
+      "nonEmptyCount": 0,
+      "valueKindCounts": {
+        "emptyScalar": 8187
+      },
+      "samples": []
+    },
+    {
+      "fieldName": "m_EditorHideFlags",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_Enabled",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "1",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_GameObject",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "{fileID: 0}",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_Name",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "BT10_003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT10_003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT12_001_P1",
+          "count": 2
+        },
+        {
+          "value": "BT1_003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT1_003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT2_001_P1",
+          "count": 2
+        },
+        {
+          "value": "BT2_004_P1",
+          "count": 2
+        },
+        {
+          "value": "BT2_004_P2",
+          "count": 2
+        },
+        {
+          "value": "BT2_004_P3",
+          "count": 2
+        },
+        {
+          "value": "BT3_002_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3_002_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3_003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3_003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3_004_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3_004_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3_006_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3_006_P2",
+          "count": 2
+        },
+        {
+          "value": "BT4_005_P1",
+          "count": 2
+        },
+        {
+          "value": "BT4_005_P2",
+          "count": 2
+        },
+        {
+          "value": "BT4_005_P3",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "fieldName": "m_ObjectHideFlags",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_PrefabAsset",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "{fileID: 0}",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_PrefabInstance",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "{fileID: 0}",
+          "count": 8187
+        }
+      ]
+    },
+    {
+      "fieldName": "m_Script",
+      "presenceCount": 8187,
+      "nonEmptyCount": 8187,
+      "valueKindCounts": {
+        "scalar": 8187
+      },
+      "samples": [
+        {
+          "value": "{fileID: 11500000, guid: ac423894725fed64a9146a10d3878ce1, type: 3}",
+          "count": 8186
+        },
+        {
+          "value": "{fileID: 11500000, guid: f9ac13da4f60f1c4cb0d1a4e2c3b986c, type: 3}",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "Attribute_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 7322,
+      "valueKindCounts": {
+        "emptyList": 864,
+        "objectList": 7322
+      },
+      "samples": [
+        {
+          "value": "- Virus",
+          "count": 1862
+        },
+        {
+          "value": "- Vaccine",
+          "count": 1791
+        },
+        {
+          "value": "- '-'",
+          "count": 1446
+        },
+        {
+          "value": "- Data",
+          "count": 1418
+        },
+        {
+          "value": "[]",
+          "count": 864
+        },
+        {
+          "value": "- Free",
+          "count": 359
+        },
+        {
+          "value": "- Variable",
+          "count": 176
+        },
+        {
+          "value": "- Unknown",
+          "count": 146
+        },
+        {
+          "value": "- System",
+          "count": 18
+        },
+        {
+          "value": "- God",
+          "count": 16
+        },
+        {
+          "value": "- Social",
+          "count": 16
+        },
+        {
+          "value": "- Tool",
+          "count": 15
+        },
+        {
+          "value": "- Data - Virus",
+          "count": 11
+        },
+        {
+          "value": "- Game",
+          "count": 10
+        },
+        {
+          "value": "- Entertainment",
+          "count": 8
+        },
+        {
+          "value": "- Navi",
+          "count": 7
+        },
+        {
+          "value": "- Life",
+          "count": 6
+        },
+        {
+          "value": "- LIBERATOR",
+          "count": 4
+        },
+        {
+          "value": "- Vaccine - Free",
+          "count": 3
+        },
+        {
+          "value": "- NO DATA",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "fieldName": "Attribute_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 2812,
+      "valueKindCounts": {
+        "emptyList": 5374,
+        "objectList": 2812
+      },
+      "samples": [
+        {
+          "value": "[]",
+          "count": 5374
+        },
+        {
+          "value": "- \"\\u30EF\\u30AF\\u30C1\\u30F3\\u7A2E\"",
+          "count": 877
+        },
+        {
+          "value": "- \"\\u30A6\\u30A3\\u30EB\\u30B9\\u7A2E\"",
+          "count": 800
+        },
+        {
+          "value": "- \"\\u30C7\\u30FC\\u30BF\\u7A2E\"",
+          "count": 623
+        },
+        {
+          "value": "- \"\\u30D5\\u30EA\\u30FC\"",
+          "count": 178
+        },
+        {
+          "value": "- \"\\u30F4\\u30A1\\u30EA\\u30A2\\u30D6\\u30EB\\u7A2E\"",
+          "count": 73
+        },
+        {
+          "value": "- \"\\u4E0D\\u660E\"",
+          "count": 65
+        },
+        {
+          "value": "- \"\\u30EF\\u30AF\\u30C1\\u30F3\\u7A2E\\r\"",
+          "count": 43
+        },
+        {
+          "value": "- '-'",
+          "count": 42
+        },
+        {
+          "value": "- \"-\\r\"",
+          "count": 37
+        },
+        {
+          "value": "- \"\\u30A6\\u30A3\\u30EB\\u30B9\\u7A2E\\r\"",
+          "count": 37
+        },
+        {
+          "value": "- \"\\u30C7\\u30FC\\u30BF\\u7A2E\\r\"",
+          "count": 33
+        },
+        {
+          "value": "- \"\\u4E0D\\u660E\\r\"",
+          "count": 3
+        },
+        {
+          "value": "- NODATA",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "CardEffectClassName",
+      "presenceCount": 8186,
+      "nonEmptyCount": 7961,
+      "valueKindCounts": {
+        "emptyScalar": 225,
+        "scalar": 7961
+      },
+      "samples": [
+        {
+          "value": "ST1_06",
+          "count": 43
+        },
+        {
+          "value": "BT1_016",
+          "count": 15
+        },
+        {
+          "value": "BT1_031",
+          "count": 14
+        },
+        {
+          "value": "BT3_011",
+          "count": 14
+        },
+        {
+          "value": "BT3_046",
+          "count": 13
+        },
+        {
+          "value": "BT5_086",
+          "count": 10
+        },
+        {
+          "value": "BT16_082",
+          "count": 9
+        },
+        {
+          "value": "ST1_07",
+          "count": 9
+        },
+        {
+          "value": "BT16_028",
+          "count": 8
+        },
+        {
+          "value": "BT1_010",
+          "count": 8
+        },
+        {
+          "value": "BT2_055",
+          "count": 8
+        },
+        {
+          "value": "BT4_005",
+          "count": 8
+        },
+        {
+          "value": "BT4_011",
+          "count": 8
+        },
+        {
+          "value": "BT7_005",
+          "count": 8
+        },
+        {
+          "value": "ST1_03",
+          "count": 8
+        },
+        {
+          "value": "BT10_042",
+          "count": 7
+        },
+        {
+          "value": "BT12_043",
+          "count": 7
+        },
+        {
+          "value": "BT14_041",
+          "count": 7
+        },
+        {
+          "value": "BT17_077",
+          "count": 7
+        },
+        {
+          "value": "BT1_021",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "fieldName": "CardID",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "BT5-086",
+          "count": 10
+        },
+        {
+          "value": "BT16-082",
+          "count": 9
+        },
+        {
+          "value": "BT16-028",
+          "count": 8
+        },
+        {
+          "value": "BT4-005",
+          "count": 8
+        },
+        {
+          "value": "BT4-011",
+          "count": 8
+        },
+        {
+          "value": "BT10-042",
+          "count": 7
+        },
+        {
+          "value": "BT12-043",
+          "count": 7
+        },
+        {
+          "value": "BT14-041",
+          "count": 7
+        },
+        {
+          "value": "BT17-077",
+          "count": 7
+        },
+        {
+          "value": "BT2-004",
+          "count": 7
+        },
+        {
+          "value": "BT3-046",
+          "count": 7
+        },
+        {
+          "value": "BT7-005",
+          "count": 7
+        },
+        {
+          "value": "BT7-056",
+          "count": 7
+        },
+        {
+          "value": "BT8-053",
+          "count": 7
+        },
+        {
+          "value": "BT9-092",
+          "count": 7
+        },
+        {
+          "value": "P-016",
+          "count": 7
+        },
+        {
+          "value": "P-036",
+          "count": 7
+        },
+        {
+          "value": "P-037",
+          "count": 7
+        },
+        {
+          "value": "P-038",
+          "count": 7
+        },
+        {
+          "value": "ST1-03",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "fieldName": "CardIndex",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "1",
+          "count": 1
+        },
+        {
+          "value": "10",
+          "count": 1
+        },
+        {
+          "value": "100",
+          "count": 1
+        },
+        {
+          "value": "1000",
+          "count": 1
+        },
+        {
+          "value": "1001",
+          "count": 1
+        },
+        {
+          "value": "1002",
+          "count": 1
+        },
+        {
+          "value": "1003",
+          "count": 1
+        },
+        {
+          "value": "1004",
+          "count": 1
+        },
+        {
+          "value": "1005",
+          "count": 1
+        },
+        {
+          "value": "1006",
+          "count": 1
+        },
+        {
+          "value": "1007",
+          "count": 1
+        },
+        {
+          "value": "1008",
+          "count": 1
+        },
+        {
+          "value": "1009",
+          "count": 1
+        },
+        {
+          "value": "101",
+          "count": 1
+        },
+        {
+          "value": "1010",
+          "count": 1
+        },
+        {
+          "value": "1011",
+          "count": 1
+        },
+        {
+          "value": "1012",
+          "count": 1
+        },
+        {
+          "value": "1013",
+          "count": 1
+        },
+        {
+          "value": "1014",
+          "count": 1
+        },
+        {
+          "value": "1015",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "CardName_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "multilineScalar": 3,
+        "scalar": 8183
+      },
+      "samples": [
+        {
+          "value": "Agumon",
+          "count": 96
+        },
+        {
+          "value": "Greymon",
+          "count": 56
+        },
+        {
+          "value": "MetalGreymon",
+          "count": 50
+        },
+        {
+          "value": "WarGreymon",
+          "count": 47
+        },
+        {
+          "value": "Gabumon",
+          "count": 45
+        },
+        {
+          "value": "Koromon",
+          "count": 44
+        },
+        {
+          "value": "Veemon",
+          "count": 42
+        },
+        {
+          "value": "Guilmon",
+          "count": 33
+        },
+        {
+          "value": "Omnimon",
+          "count": 32
+        },
+        {
+          "value": "Patamon",
+          "count": 32
+        },
+        {
+          "value": "Tai Kamiya",
+          "count": 32
+        },
+        {
+          "value": "MetalGarurumon",
+          "count": 31
+        },
+        {
+          "value": "Gallantmon",
+          "count": 30
+        },
+        {
+          "value": "'Imperialdramon: Dragon Mode'",
+          "count": 29
+        },
+        {
+          "value": "Paildramon",
+          "count": 28
+        },
+        {
+          "value": "WereGarurumon",
+          "count": 28
+        },
+        {
+          "value": "DemiMeramon",
+          "count": 27
+        },
+        {
+          "value": "Gatomon",
+          "count": 27
+        },
+        {
+          "value": "Impmon",
+          "count": 27
+        },
+        {
+          "value": "Biyomon",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "fieldName": "CardName_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 3609,
+      "valueKindCounts": {
+        "emptyScalar": 4577,
+        "scalar": 3609
+      },
+      "samples": [
+        {
+          "value": "\"\\u30A2\\u30B0\\u30E2\\u30F3\"",
+          "count": 51
+        },
+        {
+          "value": "\"\\u30B0\\u30EC\\u30A4\\u30E2\\u30F3\"",
+          "count": 30
+        },
+        {
+          "value": "\"\\u30E1\\u30BF\\u30EB\\u30B0\\u30EC\\u30A4\\u30E2\\u30F3\"",
+          "count": 25
+        },
+        {
+          "value": "\"\\u30AC\\u30D6\\u30E2\\u30F3\"",
+          "count": 24
+        },
+        {
+          "value": "\"\\u30A6\\u30A9\\u30FC\\u30B0\\u30EC\\u30A4\\u30E2\\u30F3\"",
+          "count": 23
+        },
+        {
+          "value": "\"\\u30D6\\u30A4\\u30E2\\u30F3\"",
+          "count": 22
+        },
+        {
+          "value": "\"\\u30AE\\u30EB\\u30E2\\u30F3\"",
+          "count": 19
+        },
+        {
+          "value": "\"\\u30D1\\u30BF\\u30E2\\u30F3\"",
+          "count": 19
+        },
+        {
+          "value": "\"\\u30EF\\u30FC\\u30AC\\u30EB\\u30EB\\u30E2\\u30F3\"",
+          "count": 18
+        },
+        {
+          "value": "\"\\u516B\\u795E\\u592A\\u4E00\"",
+          "count": 17
+        },
+        {
+          "value": "\"\\u30A4\\u30F3\\u30DA\\u30EA\\u30A2\\u30EB\\u30C9\\u30E9\\u30E2\\u30F3\\uFF1A\\u30C9\\u30E9\\u30B4\\u30F3\\u30E2\\u30FC\\u30C9\"",
+          "count": 15
+        },
+        {
+          "value": "\"\\u30B4\\u30DE\\u30E2\\u30F3\"",
+          "count": 15
+        },
+        {
+          "value": "\"\\u30D1\\u30A4\\u30EB\\u30C9\\u30E9\\u30E2\\u30F3\"",
+          "count": 15
+        },
+        {
+          "value": "\"\\u30C6\\u30A4\\u30EB\\u30E2\\u30F3\"",
+          "count": 14
+        },
+        {
+          "value": "\"\\u30D4\\u30E8\\u30E2\\u30F3\"",
+          "count": 14
+        },
+        {
+          "value": "\"\\u30E1\\u30BF\\u30EB\\u30AC\\u30EB\\u30EB\\u30E2\\u30F3\"",
+          "count": 14
+        },
+        {
+          "value": "\"\\u30A8\\u30F3\\u30B8\\u30A7\\u30A6\\u30FC\\u30E2\\u30F3\"",
+          "count": 13
+        },
+        {
+          "value": "\"\\u30AA\\u30E1\\u30AC\\u30E2\\u30F3\"",
+          "count": 13
+        },
+        {
+          "value": "\"\\u30AC\\u30EB\\u30EB\\u30E2\\u30F3\"",
+          "count": 13
+        },
+        {
+          "value": "\"\\u30B3\\u30ED\\u30E2\\u30F3\"",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "fieldName": "CardSpriteName",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "BT1-003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT1-003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT10-003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT10-003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT12-001_P1",
+          "count": 2
+        },
+        {
+          "value": "BT2-001_P1",
+          "count": 2
+        },
+        {
+          "value": "BT2-004_P1",
+          "count": 2
+        },
+        {
+          "value": "BT2-004_P2",
+          "count": 2
+        },
+        {
+          "value": "BT2-004_P3",
+          "count": 2
+        },
+        {
+          "value": "BT3-002_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3-002_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3-003_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3-003_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3-004_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3-004_P2",
+          "count": 2
+        },
+        {
+          "value": "BT3-006_P1",
+          "count": 2
+        },
+        {
+          "value": "BT3-006_P2",
+          "count": 2
+        },
+        {
+          "value": "BT4-005_P1",
+          "count": 2
+        },
+        {
+          "value": "BT4-005_P2",
+          "count": 2
+        },
+        {
+          "value": "BT4-005_P3",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "fieldName": "DP",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 2308
+        },
+        {
+          "value": "7000",
+          "count": 761
+        },
+        {
+          "value": "12000",
+          "count": 754
+        },
+        {
+          "value": "1000",
+          "count": 626
+        },
+        {
+          "value": "5000",
+          "count": 574
+        },
+        {
+          "value": "2000",
+          "count": 550
+        },
+        {
+          "value": "4000",
+          "count": 500
+        },
+        {
+          "value": "11000",
+          "count": 496
+        },
+        {
+          "value": "6000",
+          "count": 376
+        },
+        {
+          "value": "8000",
+          "count": 339
+        },
+        {
+          "value": "13000",
+          "count": 235
+        },
+        {
+          "value": "3000",
+          "count": 210
+        },
+        {
+          "value": "15000",
+          "count": 165
+        },
+        {
+          "value": "10000",
+          "count": 89
+        },
+        {
+          "value": "14000",
+          "count": 85
+        },
+        {
+          "value": "16000",
+          "count": 62
+        },
+        {
+          "value": "9000",
+          "count": 51
+        },
+        {
+          "value": "17000",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "fieldName": "EffectDiscription_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 7489,
+      "valueKindCounts": {
+        "emptyScalar": 697,
+        "multilineScalar": 6885,
+        "scalar": 604
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 391
+        },
+        {
+          "value": "\"\\uFF1CBlocker\\uFF1E (When an opponent's Digimon attacks, you may suspend this Digimon to force the opponent to attack i",
+          "count": 69
+        },
+        {
+          "value": "\"\\uFF1CBlocker\\uFF1E (When an opponent's Digimon attacks\\uFF0C you may suspend this Digimon to force the opponent to att",
+          "count": 20
+        },
+        {
+          "value": "\"\\uFF1CJamming\\uFF1E (This Digimon can't be deleted in battles against Security Digimon.)\"",
+          "count": 20
+        },
+        {
+          "value": "\"\\uFF1CPiercing\\uFF1E (When this Digimon attacks and deletes an opponent's Digimon and survives the battle, it performs ",
+          "count": 16
+        },
+        {
+          "value": "\"\\uFF1CArmor Purge\\uFF1E (When this Digimon would be deleted, you may trash the top card of this Digimon to prevent that",
+          "count": 15
+        },
+        {
+          "value": "'[Security] At the end of the battle, play this card without paying its memory cost.'",
+          "count": 15
+        },
+        {
+          "value": "'[All Turns] Your opponent can''t gain memory except with Tamer effects.'",
+          "count": 12
+        },
+        {
+          "value": "'[Main] 1 of your Digimon gets +3000 DP for the turn.'",
+          "count": 12
+        },
+        {
+          "value": "\"While you have no face-up security cards, you can ignore this card's color requirements.\\n[Security] [All Turns] All of",
+          "count": 11
+        },
+        {
+          "value": "\"[Digivolve] Lv.2 w/[DM]\\_trait: Cost 0 \\n\\n[On Play] Reveal the top 3 cards of your deck. Among them, add 1 card with t",
+          "count": 11
+        },
+        {
+          "value": "\"[Security] Play this card without paying the cost.\\n[Start of Your Turn] If you have 2 memory or less, set your memory ",
+          "count": 11
+        },
+        {
+          "value": "\"[Digivolve] Lv.2 w/[DM]\\_trait: Cost 0 \\n\\n\\uFF1CTraining\\uFF1E.\"",
+          "count": 10
+        },
+        {
+          "value": "\"[On Play] \\uFF1CDraw 1\\uFF1E (Draw 1 card from your deck). Then, you may play 1 [Deva]\\_trait Digimon card without the ",
+          "count": 10
+        },
+        {
+          "value": "\"[Security] Play this card without paying the cost.\\n[Start of Your Main Phase] If your opponent has a Digimon, gain 1 m",
+          "count": 9
+        },
+        {
+          "value": "\"\\uFF1CRaid\\uFF1E (When this Digimon attacks, you may switch the target of attack to 1 of your opponent's unsuspended Di",
+          "count": 9
+        },
+        {
+          "value": "'[When Digivolving] You may reveal the top 3 cards of your deck. Add 1 level 6 Digimon card with [Machine] in its traits",
+          "count": 9
+        },
+        {
+          "value": "'[Your Turn] [Once Per Turn] When one of your Digimon moves from the breeding area to the battle area, reveal the top 3 ",
+          "count": 9
+        },
+        {
+          "value": "\"When one of your Digimon with a Tamer card in its digivolution cards would digivolve into this card in your hand, reduc",
+          "count": 8
+        },
+        {
+          "value": "\"[Digivolve] Lv.3 w/[DM]\\_trait: Cost 2 \\n\\n[End of Your Turn] [Once Per Turn] By placing 3 Digimon cards with the [Ver.",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "fieldName": "EffectDiscription_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 2617,
+      "valueKindCounts": {
+        "emptyScalar": 5569,
+        "scalar": 2617
+      },
+      "samples": [
+        {
+          "value": "\"\\u226A\\u30D6\\u30ED\\u30C3\\u30AB\\u30FC\\u226B\\uFF08\\u76F8\\u624B\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u30A2\\u30BF\\u30C3\\u30A",
+          "count": 88
+        },
+        {
+          "value": "\"\\u3010\\u767B\\u5834\\u6642\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30893\\u679A\\u30AA\\u30FC\\u30D7\\u30",
+          "count": 67
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u958B\\u59CB\\u6642\\u3011\\u30E1\\u30E2\\u30EA\\u30FC\\u304C2\\u4EE5\\u4E0B\\u306E\\u30",
+          "count": 48
+        },
+        {
+          "value": "\"\\u3010\\u767B\\u5834\\u6642\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30894\\u679A\\u30AA\\u30FC\\u30D7\\u30",
+          "count": 46
+        },
+        {
+          "value": "\"\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u3053\\u306E\\u30BF\\u30FC\\u30F3\\u306E\\u9593\\u3001\\u81EA\\u5206\\u306E\\u30C7\\u30B8\\u30E2\\u30F",
+          "count": 31
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u30D0\\u30C8\\u30EB\\u7D42\\u4E86\\u6642\\u3001\\u3053\\u306E\\u30AB\\u30FC\\u30C",
+          "count": 30
+        },
+        {
+          "value": "\"\\u3010\\u767B\\u5834\\u6642\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30895\\u679A\\u30AA\\u30FC\\u30D7\\u30",
+          "count": 26
+        },
+        {
+          "value": "\"\\u226A\\u30B8\\u30E3\\u30DF\\u30F3\\u30B0\\u226B\\uFF08\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u306F\\u30BB\\u30AD\\u30E5\\u30EA\\u30C",
+          "count": 25
+        },
+        {
+          "value": "\"\\u226A\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u30A2\\u30BF\\u30C3\\u30AF+1\\u226B\\uFF08\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u3",
+          "count": 23
+        },
+        {
+          "value": "\"\\u226A\\u8CAB\\u901A\\u226B\\uFF08\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u30A2\\u30BF\\u30C3\\u30AF\\u3057\\u305F\\u30D0\\u30C",
+          "count": 20
+        },
+        {
+          "value": "\"\\u3010\\u9032\\u5316\\u6642\\u3011\\u226A\\u9032\\u6483\\u226B\\uFF08\\u30E1\\u30E2\\u30EA\\u30FC\\u304C\\u76F8\\u624B\\u5074\\u306E1\\u4E",
+          "count": 20
+        },
+        {
+          "value": "\"\\u3010\\u9032\\u5316\\u6642\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30893\\u679A\\u30AA\\u30FC\\u30D7\\u30",
+          "count": 20
+        },
+        {
+          "value": "\"\\u226A\\u9053\\u9023\\u308C\\u226B\\uFF08\\u30D0\\u30C8\\u30EB\\u3067\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u3060\\u3051\\u304C\\u6D8",
+          "count": 19
+        },
+        {
+          "value": "\"\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u226A\\u30C7\\u30B8\\u30D0\\u30FC\\u30B9\\u30C82\\u226B\\uFF08\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30",
+          "count": 15
+        },
+        {
+          "value": "\"\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u76F8\\u624B\\u306E\\u30C7\\u30B8\\u30E2\\u30F31\\u4F53\\u3092\\u30EC\\u30B9\\u30C8\\u3055\\u305B\\u30",
+          "count": 14
+        },
+        {
+          "value": "\"\\u226A\\u901F\\u653B\\u226B\\uFF08\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u306F\\u767B\\u5834\\u3057\\u305F\\u30BF\\u30FC\\u30F3\\u306",
+          "count": 13
+        },
+        {
+          "value": "\"\\u226A\\u518D\\u8D77\\u52D5\\u226B\\uFF08\\u76F8\\u624B\\u306E\\u30A2\\u30AF\\u30C6\\u30A3\\u30D6\\u30D5\\u30A7\\u30A4\\u30BA\\u306B\\u300",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30894\\u679A\\u30AA\\u30FC\\u30D7\\u30",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u767B\\u5834\\u6642\\u3011\\u226A1\\u30C9\\u30ED\\u30FC\\u226B\\uFF08\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u304B\\u3089\\u30",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30E1\\u30A4\\u30F3\\u30D5\\u30A7\\u30A4\\u30BA\\u958B\\u59CB\\u6642\\u3011\\u81EA\\u5206\\u306E\\u624B\\u672",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "fieldName": "EvoCosts",
+      "presenceCount": 8186,
+      "nonEmptyCount": 5741,
+      "valueKindCounts": {
+        "emptyList": 2445,
+        "objectList": 5741
+      },
+      "samples": [
+        {
+          "value": "[]",
+          "count": 2445
+        },
+        {
+          "value": "- CardColor: 0 Level: 2 MemoryCost: 0",
+          "count": 190
+        },
+        {
+          "value": "- CardColor: 3 Level: 2 MemoryCost: 0",
+          "count": 174
+        },
+        {
+          "value": "- CardColor: 1 Level: 2 MemoryCost: 0",
+          "count": 172
+        },
+        {
+          "value": "- CardColor: 6 Level: 2 MemoryCost: 0",
+          "count": 171
+        },
+        {
+          "value": "- CardColor: 2 Level: 2 MemoryCost: 0",
+          "count": 162
+        },
+        {
+          "value": "- CardColor: 5 Level: 2 MemoryCost: 0",
+          "count": 152
+        },
+        {
+          "value": "- CardColor: 3 Level: 3 MemoryCost: 2",
+          "count": 144
+        },
+        {
+          "value": "- CardColor: 0 Level: 3 MemoryCost: 2",
+          "count": 143
+        },
+        {
+          "value": "- CardColor: 5 Level: 3 MemoryCost: 2",
+          "count": 142
+        },
+        {
+          "value": "- CardColor: 1 Level: 3 MemoryCost: 2",
+          "count": 139
+        },
+        {
+          "value": "- CardColor: 2 Level: 3 MemoryCost: 2",
+          "count": 133
+        },
+        {
+          "value": "- CardColor: 6 Level: 3 MemoryCost: 2",
+          "count": 132
+        },
+        {
+          "value": "- CardColor: 5 Level: 4 MemoryCost: 3",
+          "count": 129
+        },
+        {
+          "value": "- CardColor: 6 Level: 4 MemoryCost: 3",
+          "count": 124
+        },
+        {
+          "value": "- CardColor: 0 Level: 4 MemoryCost: 3",
+          "count": 122
+        },
+        {
+          "value": "- CardColor: 1 Level: 4 MemoryCost: 3",
+          "count": 119
+        },
+        {
+          "value": "- CardColor: 2 Level: 4 MemoryCost: 3",
+          "count": 119
+        },
+        {
+          "value": "- CardColor: 3 Level: 4 MemoryCost: 3",
+          "count": 109
+        },
+        {
+          "value": "- CardColor: 6 Level: 5 MemoryCost: 3",
+          "count": 80
+        }
+      ]
+    },
+    {
+      "fieldName": "Form_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 7530,
+      "valueKindCounts": {
+        "emptyList": 656,
+        "objectList": 7530
+      },
+      "samples": [
+        {
+          "value": "- Mega",
+          "count": 1813
+        },
+        {
+          "value": "- Rookie",
+          "count": 1316
+        },
+        {
+          "value": "- Ultimate",
+          "count": 1205
+        },
+        {
+          "value": "- Champion",
+          "count": 1170
+        },
+        {
+          "value": "- '-'",
+          "count": 1108
+        },
+        {
+          "value": "[]",
+          "count": 656
+        },
+        {
+          "value": "- In-Training",
+          "count": 526
+        },
+        {
+          "value": "- Hybrid",
+          "count": 176
+        },
+        {
+          "value": "- Armor Form",
+          "count": 47
+        },
+        {
+          "value": "- ArmorForm",
+          "count": 38
+        },
+        {
+          "value": "- Sup. - Appmon",
+          "count": 28
+        },
+        {
+          "value": "- Stnd. - Appmon",
+          "count": 27
+        },
+        {
+          "value": "- D-Reaper",
+          "count": 16
+        },
+        {
+          "value": "- God - Appmon",
+          "count": 16
+        },
+        {
+          "value": "- Ult. - Appmon",
+          "count": 16
+        },
+        {
+          "value": "- Appmon",
+          "count": 10
+        },
+        {
+          "value": "- Eater",
+          "count": 10
+        },
+        {
+          "value": "- Unknown",
+          "count": 5
+        },
+        {
+          "value": "- Mega - Hybrid",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "fieldName": "Form_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 2999,
+      "valueKindCounts": {
+        "emptyList": 5187,
+        "objectList": 2999
+      },
+      "samples": [
+        {
+          "value": "[]",
+          "count": 5187
+        },
+        {
+          "value": "- \"\\u7A76\\u6975\\u4F53\"",
+          "count": 737
+        },
+        {
+          "value": "- \"\\u6210\\u9577\\u671F\"",
+          "count": 626
+        },
+        {
+          "value": "- \"\\u6210\\u719F\\u671F\"",
+          "count": 570
+        },
+        {
+          "value": "- \"\\u5B8C\\u5168\\u4F53\"",
+          "count": 569
+        },
+        {
+          "value": "- \"\\u5E7C\\u5E74\\u671F\"",
+          "count": 189
+        },
+        {
+          "value": "- \"\\u30CF\\u30A4\\u30D6\\u30EA\\u30C3\\u30C9\\u4F53\"",
+          "count": 73
+        },
+        {
+          "value": "- \"\\u30A2\\u30FC\\u30DE\\u30FC\\u4F53\"",
+          "count": 39
+        },
+        {
+          "value": "- \"\\u5B8C\\u5168\\u4F53\\r\"",
+          "count": 34
+        },
+        {
+          "value": "- \"\\u6210\\u719F\\u671F\\r\"",
+          "count": 29
+        },
+        {
+          "value": "- '-'",
+          "count": 29
+        },
+        {
+          "value": "- \"\\u6210\\u9577\\u671F\\r\"",
+          "count": 27
+        },
+        {
+          "value": "- \"\\u7A76\\u6975\\u4F53\\r\"",
+          "count": 26
+        },
+        {
+          "value": "- \"-\\r\"",
+          "count": 25
+        },
+        {
+          "value": "- \"\\u5E7C\\u5E74\\u671F\\r\"",
+          "count": 12
+        },
+        {
+          "value": "- \"\\u30C7\\u30FB\\u30EA\\u30FC\\u30D1\\u30FC\"",
+          "count": 11
+        },
+        {
+          "value": "- \"\\u4E0D\\u660E\"",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "fieldName": "InheritedEffectDiscription_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 5848,
+      "valueKindCounts": {
+        "emptyScalar": 2338,
+        "multilineScalar": 2743,
+        "scalar": 3105
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 2492
+        },
+        {
+          "value": "'[Your Turn] This Digimon gets +2000 DP.'",
+          "count": 121
+        },
+        {
+          "value": "'[All Turns] This Digimon gets +1000 DP.'",
+          "count": 61
+        },
+        {
+          "value": "\"\\uFF1CRetaliation\\uFF1E.\"",
+          "count": 31
+        },
+        {
+          "value": "\"\\uFF1CReboot\\uFF1E.\"",
+          "count": 28
+        },
+        {
+          "value": "\"\\uFF1CPiercing\\uFF1E.\"",
+          "count": 27
+        },
+        {
+          "value": "\"\\uFF1CBarrier\\uFF1E \"",
+          "count": 25
+        },
+        {
+          "value": "'[When Attacking] [Once Per Turn] 1 of your opponent''s Digimon gets -2000 DP for the turn.'",
+          "count": 25
+        },
+        {
+          "value": "\"\\uFF1CBlocker\\uFF1E.\"",
+          "count": 24
+        },
+        {
+          "value": "'[On Deletion] Gain 1 memory.'",
+          "count": 24
+        },
+        {
+          "value": "\"\\uFF1CJamming\\uFF1E.\"",
+          "count": 23
+        },
+        {
+          "value": "'[Opponent''s Turn] This Digimon gets +2000 DP.'",
+          "count": 20
+        },
+        {
+          "value": "\"\\uFF1CJamming\\uFF1E \"",
+          "count": 19
+        },
+        {
+          "value": "\"\\uFF1CBlocker\\uFF1E \"",
+          "count": 18
+        },
+        {
+          "value": "'[When Attacking] [Once Per Turn] Suspend 1 of your opponent''s Digimon.'",
+          "count": 18
+        },
+        {
+          "value": "\"\\uFF1CPiercing\\uFF1E \"",
+          "count": 17
+        },
+        {
+          "value": "\"\\uFF1CSecurity Attack +1\\uFF1E.\"",
+          "count": 15
+        },
+        {
+          "value": "'[End of Your Turn] This Digimon and another of your Digimon may DNA digivolve into a Digimon card in the hand.'",
+          "count": 15
+        },
+        {
+          "value": "'[Your Turn] All of your opponent''s Security Digimon get -3000 DP.'",
+          "count": 15
+        },
+        {
+          "value": "\"\\uFF1CBarrier\\uFF1E.\"",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "fieldName": "InheritedEffectDiscription_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 1467,
+      "valueKindCounts": {
+        "emptyScalar": 6719,
+        "scalar": 1467
+      },
+      "samples": [
+        {
+          "value": "\"-\\r\"",
+          "count": 77
+        },
+        {
+          "value": "\"\\u3010\\u30A2\\u30BF\\u30C3\\u30AF\\u6642\\u3011\\uFF3B\\u30BF\\u30FC\\u30F3\\u306B1\\u56DE\\uFF3D\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30",
+          "count": 49
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u3092\\u30B3\\u30B9\\u30C8\\u3092\\u652F\\u625",
+          "count": 40
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\uFF3B\\u30BF\\u30FC\\u30F3\\u306B1\\u56DE\\uFF3D\\u76F8\\u624B\\u306E\\u30C7\\u30",
+          "count": 29
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u306E\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u52B",
+          "count": 25
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u540D\\u79F0\\u306B\\u300C\\u30B",
+          "count": 23
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u3092\\u30D0\\u30C8\\u30EB\\u30A8\\u30EA\\u30A",
+          "count": 20
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\uFF3B\\u30BF\\u30FC\\u30F3\\u306B1\\u56DE\\uFF3D\\u3053\\u306E\\u30C7\\u30B8\\u30",
+          "count": 18
+        },
+        {
+          "value": "\"\\u3010\\u304A\\u4E92\\u3044\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u7279\\u5FB4\\u306B\\u300",
+          "count": 17
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u540D\\u79F0\\u306B\\u300C\\u30A",
+          "count": 17
+        },
+        {
+          "value": "\"\\u226A\\u9053\\u9023\\u308C\\u226B\\uFF08\\u30D0\\u30C8\\u30EB\\u3067\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u3060\\u3051\\u304C\\u6D8",
+          "count": 15
+        },
+        {
+          "value": "\"\\u3010\\u304A\\u4E92\\u3044\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u30EC\\u30B9\\u30C8\\u72B",
+          "count": 15
+        },
+        {
+          "value": "\"\\u3010\\u304A\\u4E92\\u3044\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u540D\\u79F0\\u306B\\u300",
+          "count": 15
+        },
+        {
+          "value": "\"\\u3010\\u30A2\\u30BF\\u30C3\\u30AF\\u6642\\u3011\\u76F8\\u624B\\u306E\\u30C7\\u30B8\\u30E2\\u30F31\\u4F53\\u306E\\u9032\\u5316\\u5143\\u30",
+          "count": 13
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u767A\\u63EE\\u3057\\u305F\\u226",
+          "count": 13
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\uFF3B\\u30BF\\u30FC\\u30F3\\u306B1\\u56DE\\uFF3D\\u81EA\\u5206\\u306E\\u30BB\\u30",
+          "count": 13
+        },
+        {
+          "value": "\"\\u3010\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u7D42\\u4E86\\u6642\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u3068\\u4ED6\\u306",
+          "count": 13
+        },
+        {
+          "value": "\"\\u226A\\u518D\\u8D77\\u52D5\\u226B\\uFF08\\u76F8\\u624B\\u306E\\u30A2\\u30AF\\u30C6\\u30A3\\u30D6\\u30D5\\u30A7\\u30A4\\u30BA\\u306B\\u300",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u30A2\\u30BF\\u30C3\\u30AF\\u6642\\u3011\\u3053\\u306E\\u30BF\\u30FC\\u30F3\\u306E\\u9593\\u3001\\u76F8\\u624B\\u306E\\u30C7\\u30B",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u30A2\\u30BF\\u30C3\\u30AF\\u6642\\u3011\\uFF3B\\u30BF\\u30FC\\u30F3\\u306B1\\u56DE\\uFF3D\\u81EA\\u5206\\u306E\\u30BB\\u30AD\\u30",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "fieldName": "Level",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 1798
+        },
+        {
+          "value": "6",
+          "count": 1548
+        },
+        {
+          "value": "4",
+          "count": 1387
+        },
+        {
+          "value": "3",
+          "count": 1359
+        },
+        {
+          "value": "5",
+          "count": 1260
+        },
+        {
+          "value": "2",
+          "count": 537
+        },
+        {
+          "value": "7",
+          "count": 297
+        }
+      ]
+    },
+    {
+      "fieldName": "LinkDP",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 8103
+        },
+        {
+          "value": "2000",
+          "count": 38
+        },
+        {
+          "value": "3000",
+          "count": 28
+        },
+        {
+          "value": "4000",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "fieldName": "LinkEffect",
+      "presenceCount": 8186,
+      "nonEmptyCount": 2582,
+      "valueKindCounts": {
+        "emptyScalar": 5604,
+        "multilineScalar": 50,
+        "scalar": 2532
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 2501
+        },
+        {
+          "value": "\"\\uFF1CBlocker\\uFF1E \"",
+          "count": 3
+        },
+        {
+          "value": "\"[When Attacking] By trashing 1 of this Digimon's link cards, \\uFF1CDe-Digivolve 1\\uFF1E 1 of your opponent's Digimon. \"",
+          "count": 2
+        },
+        {
+          "value": "\"[When Linking] By trashing 1 of this Digimon's link cards, \\uFF1CDe-Digivolve\\uFF1E effects don't affect 1 of your Digi",
+          "count": 2
+        },
+        {
+          "value": "\"[When Linking] \\uFF1CDraw 1\\uFF1E \"",
+          "count": 2
+        },
+        {
+          "value": "\"[When Linking] \\uFF1CDraw 1\\uFF1E.\"",
+          "count": 2
+        },
+        {
+          "value": "\"\\uFF1CRaid\\uFF1E.\"",
+          "count": 2
+        },
+        {
+          "value": "\"\\uFF1CRetaliation\\uFF1E \"",
+          "count": 2
+        },
+        {
+          "value": "'[All Turns] When any of your opponent''s Digimon suspend, by trashing 1 of this Digimon''s link cards, trash your oppon",
+          "count": 2
+        },
+        {
+          "value": "'[All Turns] When this Digimon would leave the battle area, by placing 1 of its link cards as its bottom digivolution ca",
+          "count": 2
+        },
+        {
+          "value": "'[When Attacking] By trashing 1 of this Digimon''s link cards, 1 of your opponent''s Digimon gets -6000 DP for the turn.",
+          "count": 2
+        },
+        {
+          "value": "'[When Attacking] By trashing 1 of this Digimon''s link cards, delete 1 of your opponent''s level 4 or lower Digimon.'",
+          "count": 2
+        },
+        {
+          "value": "'[When Attacking] By trashing 1 of this Digimon''s link cards, suspend 2 of your opponent''s Digimon.'",
+          "count": 2
+        },
+        {
+          "value": "'[When Linking] Delete 1 of your opponent''s Digimon. with as much or less DP as this Digimon.'",
+          "count": 2
+        },
+        {
+          "value": "'[When Linking] Suspend 1 of your opponent''s Digimon.'",
+          "count": 2
+        },
+        {
+          "value": "\"[All Turns] When any of your opponent's Digimon suspend, by trashing 1 of this Digimon's link cards, \\uFF1CDraw 1\\uFF1E",
+          "count": 1
+        },
+        {
+          "value": "\"[On Deletion] You may play 1 level 3 [Appmon]\\_trait Digimon card from your trash without paying the cost.\"",
+          "count": 1
+        },
+        {
+          "value": "\"[On Deletion] \\uFF1CDe-Digivolve 1\\uFF1E 1 of your opponent's Digimon. \"",
+          "count": 1
+        },
+        {
+          "value": "\"[When Attacking] By trashing 1 of this Digimon's link cards, you may return 1 [Appmon]\\_trait Digimon card from your tr",
+          "count": 1
+        },
+        {
+          "value": "\"[When Attacking] You may play 1 level 3 Digimon card with the [Appmon]\\_trait from your hand without paying the cost.\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "LinkRequirement",
+      "presenceCount": 8186,
+      "nonEmptyCount": 2583,
+      "valueKindCounts": {
+        "emptyScalar": 5603,
+        "scalar": 2583
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 2509
+        },
+        {
+          "value": "\"[Link] [Appmon]\\_trait: Cost 1 \"",
+          "count": 24
+        },
+        {
+          "value": "\"[Link] [Appmon]\\_trait: Cost 2 \"",
+          "count": 24
+        },
+        {
+          "value": "\"[Link] [Appmon]\\_trait: Cost 3 \"",
+          "count": 14
+        },
+        {
+          "value": "\"[Link] [TS]\\_trait: Cost 3 \"",
+          "count": 5
+        },
+        {
+          "value": "'[Link] Lv.3 or higher: Cost 2 '",
+          "count": 3
+        },
+        {
+          "value": "\"[Link] [Maquinamon]\\_in text: Cost 2 \"",
+          "count": 2
+        },
+        {
+          "value": "\"[Link] [TS]\\_trait: Cost 2 \"",
+          "count": 1
+        },
+        {
+          "value": "'[Link] [Vulcanusmon]: Cost 3 '",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "MaxCountInDeck",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "4",
+          "count": 8176
+        },
+        {
+          "value": "50",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "fieldName": "OptionCardColorRequirements",
+      "presenceCount": 8186,
+      "nonEmptyCount": 1383,
+      "valueKindCounts": {
+        "emptyScalar": 6803,
+        "scalar": 1383
+      },
+      "samples": [
+        {
+          "value": "07000000",
+          "count": 1367
+        },
+        {
+          "value": "03000000",
+          "count": 4
+        },
+        {
+          "value": "0000000002000000",
+          "count": 3
+        },
+        {
+          "value": "02000000",
+          "count": 3
+        },
+        {
+          "value": "0200000000000000",
+          "count": 3
+        },
+        {
+          "value": "06000000",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "fieldName": "OptionEffect",
+      "presenceCount": 8186,
+      "nonEmptyCount": 1383,
+      "valueKindCounts": {
+        "emptyScalar": 6803,
+        "multilineScalar": 16,
+        "scalar": 1367
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 1367
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([DATA SQUAD] trait)\\uFF1E \\n[Main] 1 of your opponent's Digimon gets -15000 DP for the turn. Then, you ",
+          "count": 3
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([DATA SQUAD] trait)\\uFF1E \\n[Main] 1 of your opponent's Digimon gets -6000 DP for the turn. Then, delet",
+          "count": 3
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([Glowing Dawn] trait)\\uFF1E \\n[Main] 1 of your Digimon gains \\uFF1CRush\\uFF1E , \\uFF1CSecurity A. +1\\uF",
+          "count": 3
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([Glowing Dawn] trait)\\uFF1E \\n[Main] 1 of your opponent's Digimon gets -8000 DP for the turn. Then, by ",
+          "count": 3
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([Three Musketeers] in text)\\uFF1E \\n[Main] Delete 1 of your opponent's highest level Digimon. Then, you",
+          "count": 3
+        },
+        {
+          "value": "\"\\uFF1CUse Req. ([BEATBREAK] trait)\\uFF1E \\n[Main] Suspend 1 of your opponent's Digimon. Then, return 1 of your opponent",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "OverflowMemory",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "0",
+          "count": 7948
+        },
+        {
+          "value": "4",
+          "count": 135
+        },
+        {
+          "value": "5",
+          "count": 57
+        },
+        {
+          "value": "3",
+          "count": 46
+        }
+      ]
+    },
+    {
+      "fieldName": "PlayCost",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "3",
+          "count": 1888
+        },
+        {
+          "value": "4",
+          "count": 1021
+        },
+        {
+          "value": "7",
+          "count": 807
+        },
+        {
+          "value": "5",
+          "count": 805
+        },
+        {
+          "value": "12",
+          "count": 696
+        },
+        {
+          "value": "-1",
+          "count": 546
+        },
+        {
+          "value": "6",
+          "count": 495
+        },
+        {
+          "value": "8",
+          "count": 457
+        },
+        {
+          "value": "11",
+          "count": 359
+        },
+        {
+          "value": "2",
+          "count": 295
+        },
+        {
+          "value": "13",
+          "count": 282
+        },
+        {
+          "value": "15",
+          "count": 152
+        },
+        {
+          "value": "9",
+          "count": 80
+        },
+        {
+          "value": "14",
+          "count": 79
+        },
+        {
+          "value": "10",
+          "count": 66
+        },
+        {
+          "value": "1",
+          "count": 64
+        },
+        {
+          "value": "0",
+          "count": 50
+        },
+        {
+          "value": "16",
+          "count": 36
+        },
+        {
+          "value": "20",
+          "count": 6
+        },
+        {
+          "value": "17",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "fieldName": "SecurityEffectDiscription_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 5212,
+      "valueKindCounts": {
+        "emptyScalar": 2974,
+        "multilineScalar": 598,
+        "scalar": 4614
+      },
+      "samples": [
+        {
+          "value": "'-'",
+          "count": 3551
+        },
+        {
+          "value": "'[Security] Play this card without paying the cost.'",
+          "count": 561
+        },
+        {
+          "value": "'[Security] Activate this card''s [Main] effect.'",
+          "count": 192
+        },
+        {
+          "value": "'[Security] Play this card without paying its memory cost.'",
+          "count": 191
+        },
+        {
+          "value": "'[Security] Place this card in the battle area.'",
+          "count": 115
+        },
+        {
+          "value": "'[Security] Activate this card''s [Main] effects.'",
+          "count": 69
+        },
+        {
+          "value": "'[Security] Add this card to its owner''s hand.'",
+          "count": 50
+        },
+        {
+          "value": "'[Security] Place this card in its owner''s battle area.'",
+          "count": 26
+        },
+        {
+          "value": "'[Security] Add this card to the hand.'",
+          "count": 21
+        },
+        {
+          "value": "\"-\\r\"",
+          "count": 17
+        },
+        {
+          "value": "'[Security] Add this card to your hand.'",
+          "count": 13
+        },
+        {
+          "value": "\"[Security] If this card was face-up, you may play 1 level 5 or lower card with [Dark Masters]\\_in its text from your ha",
+          "count": 8
+        },
+        {
+          "value": "'[Security] Gain 2 memory.'",
+          "count": 8
+        },
+        {
+          "value": "'[Security] Suspend 1 of your opponent''s Digimon.'",
+          "count": 7
+        },
+        {
+          "value": "'[Security] You may place 1 of your opponent''s Digimon face down at the top or bottom of its owner''s security stack.'",
+          "count": 6
+        },
+        {
+          "value": "\"[Security] Suspend all of your opponent's Digimon without \\uFF1CBlocker\\uFF1E.\"",
+          "count": 5
+        },
+        {
+          "value": "'[Security] Suspend 1 of your opponent''s Digimon or Tamers.'",
+          "count": 5
+        },
+        {
+          "value": "'[Security] You may play 1 yellow Digimon card with 2000 DP or less from your trash without paying the cost. Then, add t",
+          "count": 5
+        },
+        {
+          "value": "\"[Security] You may play 1 Tamer card with [Davis Motomiya] or [Ken Ichijoji]\\_in its name from your hand or trash witho",
+          "count": 4
+        },
+        {
+          "value": "\"[Security] You may play 1 level 5 or lower Digimon card with the [Royal Base]\\_trait from your hand without paying the ",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "fieldName": "SecurityEffectDiscription_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 628,
+      "valueKindCounts": {
+        "emptyScalar": 7558,
+        "scalar": 628
+      },
+      "samples": [
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u3092\\u30B3\\u30B9\\u30C8\\u3092\\u652F\\u625",
+          "count": 253
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u306E\\u3010\\u30E1\\u30A4\\u30F3\\u3011\\u52B",
+          "count": 152
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u3092\\u624B\\u672D\\u306B\\u52A0\\u3048\\u308",
+          "count": 60
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30AB\\u30FC\\u30C9\\u3092\\u30D0\\u30C8\\u30EB\\u30A8\\u30EA\\u30A",
+          "count": 32
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u81EA\\u5206\\u306E\\u624B\\u672D\\u304B\\u30C8\\u30E9\\u30C3\\u30B7\\u30E5\\u304",
+          "count": 13
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u76F8\\u624B\\u306E\\u30C7\\u30B8\\u30E2\\u30F31\\u4F53\\u3092\\u30EC\\u30B9\\u30",
+          "count": 12
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30AD\\u306E\\u4E0A\\u304B\\u30893\\u679A\\u30",
+          "count": 9
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30BF\\u30FC\\u30F3\\u306E\\u9593\\u3001\\u76F8\\u624B\\u306E\\u30C",
+          "count": 8
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u30E1\\u30E2\\u30EA\\u30FC\\u3092+2\\u3059\\u308B\\u3002\"",
+          "count": 7
+        },
+        {
+          "value": "\"\\u3010\\u304A\\u4E92\\u3044\\u306E\\u30BF\\u30FC\\u30F3\\u3011\\u3053\\u306E\\u30C7\\u30B8\\u30E2\\u30F3\\u304C\\u7279\\u5FB4\\u306B\\u300",
+          "count": 6
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u226A\\u30D6\\u30ED\\u30C3\\u30AB\\u30FC\\u226B\\u3092\\u6301\\u305F\\u306A\\u304",
+          "count": 5
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u6B21\\u306E\\u81EA\\u5206\\u306E\\u30BF\\u30FC\\u30F3\\u7D42\\u4E86\\u6642\\u307",
+          "count": 4
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u81EA\\u5206\\u306E\\u624B\\u672D/\\u30C8\\u30E9\\u30C3\\u30B7\\u30E5\\u304B\\u30",
+          "count": 4
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u226A1\\u30C9\\u30ED\\u30FC\\u226B\\uFF08\\u81EA\\u5206\\u306E\\u30C7\\u30C3\\u30",
+          "count": 3
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u3053\\u306E\\u30BF\\u30FC\\u30F3\\u306E\\u9593\\u3001\\u81EA\\u5206\\u306E\\u30C",
+          "count": 3
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u81EA\\u5206\\u306E\\u30C8\\u30E9\\u30C3\\u30B7\\u30E5\\u304B\\u3089\\u3001\\u7D2",
+          "count": 3
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u81EA\\u5206\\u306E\\u624B\\u672D\\u304B\\u3089\\u3001\\u7279\\u5FB4\\u306B\\u300",
+          "count": 3
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u226A\\u30D6\\u30ED\\u30C3\\u30AB\\u30FC\\u226B\\u3092\\u6301\\u3064\\u81EA\\u520",
+          "count": 2
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u226A\\u30EA\\u30AB\\u30D0\\u30EA\\u30FC+1\\u300A\\u30C7\\u30C3\\u30AD\\u300B\\u2",
+          "count": 2
+        },
+        {
+          "value": "\"\\u3010\\u30BB\\u30AD\\u30E5\\u30EA\\u30C6\\u30A3\\u3011\\u30BF\\u30FC\\u30F3\\u7D42\\u4E86\\u307E\\u3067,\\u76F8\\u624B\\u306E\\u30C7\\u30",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "fieldName": "Type_ENG",
+      "presenceCount": 8186,
+      "nonEmptyCount": 7594,
+      "valueKindCounts": {
+        "emptyList": 592,
+        "objectList": 7594
+      },
+      "samples": [
+        {
+          "value": "[]",
+          "count": 592
+        },
+        {
+          "value": "- '-'",
+          "count": 460
+        },
+        {
+          "value": "- Cyborg",
+          "count": 320
+        },
+        {
+          "value": "- Lesser",
+          "count": 216
+        },
+        {
+          "value": "- Beastkin",
+          "count": 157
+        },
+        {
+          "value": "- Reptile",
+          "count": 155
+        },
+        {
+          "value": "- Beast",
+          "count": 149
+        },
+        {
+          "value": "- Holy Warrior - Royal Knight",
+          "count": 146
+        },
+        {
+          "value": "- Dragonkin",
+          "count": 145
+        },
+        {
+          "value": "- Option",
+          "count": 145
+        },
+        {
+          "value": "- LIBERATOR",
+          "count": 137
+        },
+        {
+          "value": "- Insectoid",
+          "count": 131
+        },
+        {
+          "value": "- Dinosaur",
+          "count": 130
+        },
+        {
+          "value": "- Wizard",
+          "count": 114
+        },
+        {
+          "value": "- Mutant",
+          "count": 110
+        },
+        {
+          "value": "- Puppet",
+          "count": 110
+        },
+        {
+          "value": "- Machine",
+          "count": 106
+        },
+        {
+          "value": "- Mammal",
+          "count": 96
+        },
+        {
+          "value": "- Vegetation",
+          "count": 92
+        },
+        {
+          "value": "- Holy Beast",
+          "count": 85
+        }
+      ]
+    },
+    {
+      "fieldName": "Type_JPN",
+      "presenceCount": 8186,
+      "nonEmptyCount": 3051,
+      "valueKindCounts": {
+        "emptyList": 5135,
+        "objectList": 3051
+      },
+      "samples": [
+        {
+          "value": "[]",
+          "count": 5135
+        },
+        {
+          "value": "- \"\\u30B5\\u30A4\\u30DC\\u30FC\\u30B0\\u578B\"",
+          "count": 185
+        },
+        {
+          "value": "- \"\\u722C\\u866B\\u985E\\u578B\"",
+          "count": 101
+        },
+        {
+          "value": "- \"\\u7363\\u578B\"",
+          "count": 100
+        },
+        {
+          "value": "- \"\\u7363\\u4EBA\\u578B\"",
+          "count": 99
+        },
+        {
+          "value": "- \"\\u30EC\\u30C3\\u30B5\\u30FC\\u578B\"",
+          "count": 96
+        },
+        {
+          "value": "- \"\\u6606\\u866B\\u578B\"",
+          "count": 85
+        },
+        {
+          "value": "- \"\\u6050\\u7ADC\\u578B\"",
+          "count": 84
+        },
+        {
+          "value": "- \"\\u8056\\u9A0E\\u58EB\\u578B\" - \"\\u30ED\\u30A4\\u30E4\\u30EB\\u30CA\\u30A4\\u30C4\"",
+          "count": 79
+        },
+        {
+          "value": "- \"\\u7ADC\\u4EBA\\u578B\"",
+          "count": 78
+        },
+        {
+          "value": "- \"\\u30DE\\u30B7\\u30FC\\u30F3\\u578B\"",
+          "count": 65
+        },
+        {
+          "value": "- \"\\u7A81\\u7136\\u5909\\u7570\\u578B\"",
+          "count": 64
+        },
+        {
+          "value": "- \"\\u54FA\\u4E73\\u985E\\u578B\"",
+          "count": 63
+        },
+        {
+          "value": "- \"\\u9B54\\u4EBA\\u578B\"",
+          "count": 61
+        },
+        {
+          "value": "- \"\\u30D1\\u30DA\\u30C3\\u30C8\\u578B\"",
+          "count": 60
+        },
+        {
+          "value": "- \"\\u690D\\u7269\\u578B\"",
+          "count": 57
+        },
+        {
+          "value": "- \"\\u8056\\u7363\\u578B\"",
+          "count": 57
+        },
+        {
+          "value": "- \"\\u5996\\u7CBE\\u578B\"",
+          "count": 45
+        },
+        {
+          "value": "- \"\\u5C0F\\u7ADC\\u578B\"",
+          "count": 41
+        },
+        {
+          "value": "- \"\\u7A2E\\u65CF\\u4E0D\\u660E\"",
+          "count": 37
+        }
+      ]
+    },
+    {
+      "fieldName": "cardColors",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "00000000",
+          "count": 1090
+        },
+        {
+          "value": "06000000",
+          "count": 1043
+        },
+        {
+          "value": "05000000",
+          "count": 1036
+        },
+        {
+          "value": "01000000",
+          "count": 998
+        },
+        {
+          "value": "03000000",
+          "count": 975
+        },
+        {
+          "value": "02000000",
+          "count": 929
+        },
+        {
+          "value": "04000000",
+          "count": 392
+        },
+        {
+          "value": "0000000002000000",
+          "count": 99
+        },
+        {
+          "value": "0600000000000000",
+          "count": 96
+        },
+        {
+          "value": "0100000003000000",
+          "count": 89
+        },
+        {
+          "value": "0200000000000000",
+          "count": 85
+        },
+        {
+          "value": "0300000005000000",
+          "count": 83
+        },
+        {
+          "value": "0500000002000000",
+          "count": 77
+        },
+        {
+          "value": "0600000002000000",
+          "count": 76
+        },
+        {
+          "value": "0000000006000000",
+          "count": 70
+        },
+        {
+          "value": "0500000000000000",
+          "count": 70
+        },
+        {
+          "value": "0600000005000000",
+          "count": 70
+        },
+        {
+          "value": "0000000005000000",
+          "count": 66
+        },
+        {
+          "value": "0200000006000000",
+          "count": 63
+        },
+        {
+          "value": "0200000005000000",
+          "count": 53
+        }
+      ]
+    },
+    {
+      "fieldName": "cardKind",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "00000000",
+          "count": 5861
+        },
+        {
+          "value": "02000000",
+          "count": 921
+        },
+        {
+          "value": "01000000",
+          "count": 841
+        },
+        {
+          "value": "03000000",
+          "count": 547
+        },
+        {
+          "value": "0000000002000000",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "fieldName": "dualEffect",
+      "presenceCount": 8186,
+      "nonEmptyCount": 1383,
+      "valueKindCounts": {
+        "emptyScalar": 6803,
+        "scalar": 1383
+      },
+      "samples": [
+        {
+          "value": "Agumon",
+          "count": 15
+        },
+        {
+          "value": "Koromon",
+          "count": 14
+        },
+        {
+          "value": "Omnimon",
+          "count": 12
+        },
+        {
+          "value": "RizeGreymon",
+          "count": 11
+        },
+        {
+          "value": "Veemon",
+          "count": 9
+        },
+        {
+          "value": "WarGreymon",
+          "count": 9
+        },
+        {
+          "value": "Dorimon",
+          "count": 8
+        },
+        {
+          "value": "Dorumon",
+          "count": 8
+        },
+        {
+          "value": "Impmon",
+          "count": 8
+        },
+        {
+          "value": "Paildramon",
+          "count": 8
+        },
+        {
+          "value": "Tai Kamiya",
+          "count": 8
+        },
+        {
+          "value": "Cool Boy",
+          "count": 7
+        },
+        {
+          "value": "DemiMeramon",
+          "count": 7
+        },
+        {
+          "value": "DemiVeemon",
+          "count": 7
+        },
+        {
+          "value": "Gabumon",
+          "count": 7
+        },
+        {
+          "value": "Guilmon",
+          "count": 7
+        },
+        {
+          "value": "Marcus Damon",
+          "count": 7
+        },
+        {
+          "value": "MetalGarurumon",
+          "count": 7
+        },
+        {
+          "value": "Tsunomon",
+          "count": 7
+        },
+        {
+          "value": "Zephagamon",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "fieldName": "rarity",
+      "presenceCount": 8186,
+      "nonEmptyCount": 8186,
+      "valueKindCounts": {
+        "scalar": 8186
+      },
+      "samples": [
+        {
+          "value": "1",
+          "count": 2157
+        },
+        {
+          "value": "2",
+          "count": 1987
+        },
+        {
+          "value": "0",
+          "count": 1954
+        },
+        {
+          "value": "3",
+          "count": 1242
+        },
+        {
+          "value": "5",
+          "count": 553
+        },
+        {
+          "value": "4",
+          "count": 197
+        },
+        {
+          "value": "6",
+          "count": 96
+        }
+      ]
+    },
+    {
+      "fieldName": "prevCardIndex",
+      "presenceCount": 1,
+      "nonEmptyCount": 1,
+      "valueKindCounts": {
+        "scalar": 1
+      },
+      "samples": [
+        {
+          "value": "9314",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "promoCardIndex",
+      "presenceCount": 1,
+      "nonEmptyCount": 1,
+      "valueKindCounts": {
+        "scalar": 1
+      },
+      "samples": [
+        {
+          "value": "10449",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "fieldName": "setCardIndex",
+      "presenceCount": 1,
+      "nonEmptyCount": 1,
+      "valueKindCounts": {
+        "scalar": 1
+      },
+      "samples": [
+        {
+          "value": "9315",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
