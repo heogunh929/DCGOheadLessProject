@@ -1,0 +1,325 @@
+﻿{
+    "schema":  "dcgo.git-generated-artifact-manifest.v1",
+    "goal":  "GIT-001 Generated Raw Index Git Policy",
+    "generatedDate":  "2026-06-23",
+    "generatedRoot":  "docs/generated/as-is-restart",
+    "thresholds":  {
+                       "githubWarningBytes":  52428800,
+                       "githubBlockBytes":  104857600,
+                       "warningLabel":  "50MiB or larger: GitHub warning risk",
+                       "blockLabel":  "100MiB or larger: GitHub normal Git block risk"
+                   },
+    "policyDefinitions":  {
+                              "Track":  "Keep the generated artifact in normal Git.",
+                              "TrackSummaryOnly":  "Keep summary, manifest, or compact governance output in normal Git; do not require the corresponding raw dump.",
+                              "IgnoreRaw":  "Do not track raw full dump in normal Git; keep ignored locally or regenerate when needed.",
+                              "SplitCandidate":  "Currently below 100MiB but above warning threshold; keep only as current baseline and split below 50MiB on next regeneration.",
+                              "LfsCandidate":  "Candidate for Git LFS or external object storage if exact raw payload must be preserved."
+                          },
+    "summary":  {
+                    "presentGeneratedFiles":  21,
+                    "absentKnownRawFiles":  2,
+                    "trackedInHeadFiles":  20,
+                    "policyCounts":  {
+                                         "TrackSummaryOnly":  10,
+                                         "SplitCandidate":  3,
+                                         "Track":  8,
+                                         "IgnoreRaw":  2
+                                     },
+                    "githubRiskCounts":  {
+                                             "Normal":  18,
+                                             "WarningOver50MiB":  3,
+                                             "BlockOver100MiB":  2
+                                         },
+                    "warningOrLargerCurrentFiles":  [
+                                                        "docs/generated/as-is-restart/asis-role-reclassification.json",
+                                                        "docs/generated/as-is-restart/asis-headless-requirement-matrix.json",
+                                                        "docs/generated/as-is-restart/asis-csharp-unresolved-calls.json"
+                                                    ],
+                    "blockOrLargerCurrentFiles":  [
+
+                                                  ],
+                    "blockOrLargerKnownRawFiles":  [
+                                                       "docs/generated/as-is-restart/asis-csharp-call-edge-index.json",
+                                                       "docs/generated/as-is-restart/asis-csharp-symbol-index.json"
+                                                   ]
+                },
+    "gitignoreRequirements":  {
+                                  "requiredExplicitIgnores":  [
+                                                                  "docs/generated/as-is-restart/asis-csharp-call-edge-index.json",
+                                                                  "docs/generated/as-is-restart/asis-csharp-symbol-index.json"
+                                                              ],
+                                  "requiredFuturePatterns":  [
+                                                                 "docs/generated/as-is-restart/*-raw-index.json",
+                                                                 "docs/generated/as-is-restart/*-raw-dump.json",
+                                                                 "docs/generated/as-is-restart/*-full-dump.json"
+                                                             ],
+                                  "trackedOver100MiBFilesInHead":  [
+
+                                                                   ],
+                                  "gitRmCachedRequiredNow":  false
+                              },
+    "fnd002Impact":  {
+                         "canProceed":  true,
+                         "note":  "FND-002 should use tracked summaries, scripts, and current warning-range unresolved calls output. The ignored raw symbol/call-edge dumps are not required as Git-tracked inputs."
+                     },
+    "entries":  [
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-implementation-priority-summary.json",
+                        "fileName":  "asis-implementation-priority-summary.json",
+                        "sizeBytes":  97784,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-role-reclassification.json",
+                        "fileName":  "asis-role-reclassification.json",
+                        "sizeBytes":  63595870,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "SplitCandidate",
+                        "githubRisk":  "WarningOver50MiB",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "50MiB warning range; role reclassification detail is useful, but future updates should split below warning threshold."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-implementation-priority-rewrite.json",
+                        "fileName":  "asis-implementation-priority-rewrite.json",
+                        "sizeBytes":  242776,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-headless-trust-audit.json",
+                        "fileName":  "asis-headless-trust-audit.json",
+                        "sizeBytes":  765170,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-headless-trust-audit-summary.json",
+                        "fileName":  "asis-headless-trust-audit-summary.json",
+                        "sizeBytes":  32086,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-role-summary.json",
+                        "fileName":  "asis-role-summary.json",
+                        "sizeBytes":  308083,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-call-edge-index.json",
+                        "fileName":  "asis-csharp-call-edge-index.json",
+                        "sizeBytes":  null,
+                        "knownHistoricalBlobBytes":  3870427792,
+                        "presentInWorktree":  false,
+                        "trackedInHead":  false,
+                        "ignoredByGitignore":  true,
+                        "gitPolicy":  "IgnoreRaw",
+                        "githubRisk":  "BlockOver100MiB",
+                        "gitAction":  "DoNotTrack; if ever tracked, run git rm --cached docs/generated/as-is-restart/asis-csharp-call-edge-index.json",
+                        "reason":  "GOAL 05 raw call edge dump; too large for normal Git and reproducible from scripts plus tracked summaries."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-symbol-index.json",
+                        "fileName":  "asis-csharp-symbol-index.json",
+                        "sizeBytes":  null,
+                        "knownHistoricalBlobBytes":  192654059,
+                        "presentInWorktree":  false,
+                        "trackedInHead":  false,
+                        "ignoredByGitignore":  true,
+                        "gitPolicy":  "IgnoreRaw",
+                        "githubRisk":  "BlockOver100MiB",
+                        "gitAction":  "DoNotTrack; if ever tracked, run git rm --cached docs/generated/as-is-restart/asis-csharp-symbol-index.json",
+                        "reason":  "GOAL 04 raw symbol dump; too large for normal Git and reproducible from scripts plus tracked summaries."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/git-generated-artifact-manifest.json",
+                        "fileName":  "git-generated-artifact-manifest.json",
+                        "sizeBytes":  20343,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  false,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "GIT-001 policy manifest; track as generated governance metadata."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-source-of-truth-audit.json",
+                        "fileName":  "asis-source-of-truth-audit.json",
+                        "sizeBytes":  1364619,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-source-of-truth-audit-summary.json",
+                        "fileName":  "asis-source-of-truth-audit-summary.json",
+                        "sizeBytes":  7060,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-headless-requirement-summary.json",
+                        "fileName":  "asis-headless-requirement-summary.json",
+                        "sizeBytes":  262604,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-call-graph.json",
+                        "fileName":  "asis-csharp-call-graph.json",
+                        "sizeBytes":  31076253,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-call-graph-summary.json",
+                        "fileName":  "asis-csharp-call-graph-summary.json",
+                        "sizeBytes":  10573093,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-card-data-structure.json",
+                        "fileName":  "asis-card-data-structure.json",
+                        "sizeBytes":  2042483,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-cardbaseentity-card-index.json",
+                        "fileName":  "asis-cardbaseentity-card-index.json",
+                        "sizeBytes":  17356098,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-card-data-field-summary.json",
+                        "fileName":  "asis-card-data-field-summary.json",
+                        "sizeBytes":  69693,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-file-index.json",
+                        "fileName":  "asis-csharp-file-index.json",
+                        "sizeBytes":  11163323,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-full-file-inventory.json",
+                        "fileName":  "asis-full-file-inventory.json",
+                        "sizeBytes":  44234309,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "Track",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Generated analysis artifact below GitHub warning threshold or accepted as current baseline."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-headless-requirement-matrix.json",
+                        "fileName":  "asis-headless-requirement-matrix.json",
+                        "sizeBytes":  80372008,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "SplitCandidate",
+                        "githubRisk":  "WarningOver50MiB",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "50MiB warning range; generated matrix is useful, but future updates should split below warning threshold."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-file-type-summary.json",
+                        "fileName":  "asis-file-type-summary.json",
+                        "sizeBytes":  25730045,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-symbol-summary.json",
+                        "fileName":  "asis-csharp-symbol-summary.json",
+                        "sizeBytes":  2862359,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "TrackSummaryOnly",
+                        "githubRisk":  "Normal",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "Summary or manifest artifact needed for reproducible analysis without raw dump size risk."
+                    },
+                    {
+                        "path":  "docs/generated/as-is-restart/asis-csharp-unresolved-calls.json",
+                        "fileName":  "asis-csharp-unresolved-calls.json",
+                        "sizeBytes":  61482179,
+                        "presentInWorktree":  true,
+                        "trackedInHead":  true,
+                        "gitPolicy":  "SplitCandidate",
+                        "githubRisk":  "WarningOver50MiB",
+                        "gitAction":  "TrackOrKeepTracked",
+                        "reason":  "50MiB warning range; keep as FND-002 input for now, split if regenerated or expanded."
+                    }
+                ]
+}

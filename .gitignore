@@ -8,5 +8,9 @@ DCGO/
 *.csproj.AssemblyReference.cache
 *.tmp
 *.log
+# GIT-001: generated raw AS-IS indexes are local/regenerable and may exceed GitHub limits.
 docs/generated/as-is-restart/asis-csharp-call-edge-index.json
 docs/generated/as-is-restart/asis-csharp-symbol-index.json
+docs/generated/as-is-restart/*-raw-index.json
+docs/generated/as-is-restart/*-raw-dump.json
+docs/generated/as-is-restart/*-full-dump.json
