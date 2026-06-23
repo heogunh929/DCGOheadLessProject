@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "dcgo.as-is-porting-scope-decision-summary.v1",
+  "generatedAtUtc": "2026-06-23T11:31:20+00:00",
+  "goal": "AS-IS Porting Scope Decision Closure",
+  "asisRoot": "E:/headlessDCGO/DCGO",
+  "sourceFiles": {
+    "requirementMatrix": "docs/generated/as-is-restart/asis-headless-requirement-matrix.json",
+    "fullFileInventory": "docs/generated/as-is-restart/asis-full-file-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json"
+  },
+  "totals": {
+    "fileCount": 71180,
+    "inventoryFileCount": 71180,
+    "folderCount": 4798,
+    "inventoryFolderCountIncludingRoot": 4798,
+    "allFilesHaveDecision": true,
+    "allFilesHaveBucket": true,
+    "manualReviewFileCount": 0,
+    "candidateReviewInputFileCount": 259,
+    "candidateReviewClosedToManualReviewCount": 0,
+    "unknownFinalFileCount": 0
+  },
+  "decisionCounts": {
+    "ReferenceOnly": 17653,
+    "Exclude": 40986,
+    "Port": 12541
+  },
+  "bucketCounts": {
+    "UnityOnly": 397,
+    "VisualOnly": 6383,
+    "GeneratedOrBuild": 34501,
+    "SourceMeta": 14343,
+    "CardData": 8187,
+    "EditorDataProvenance": 259,
+    "ExternalDependency": 2623,
+    "CardEffectLogic": 3918,
+    "CoreRuntime": 436,
+    "SoundOnly": 102,
+    "ProjectConfig": 31
+  },
+  "blockedByCounts": {
+    "None": 58639,
+    "DataPolicy": 8187,
+    "Foundation": 4354
+  },
+  "nextActionCounts": {
+    "PreserveAsReferenceEvidence": 17653,
+    "DoNotPort": 40986,
+    "ImplementAfterFoundationAndPolicy": 12541
+  },
+  "folderDecisionCounts": {
+    "Exclude": 1785,
+    "ReferenceOnly": 1678,
+    "Port": 1335
+  },
+  "folderBucketCounts": {
+    "GeneratedOrBuild": 1421,
+    "UnityOnly": 47,
+    "SourceMeta": 462,
+    "VisualOnly": 306,
+    "EmptyOrFolderOnly": 63,
+    "CardData": 992,
+    "EditorDataProvenance": 55,
+    "ExternalDependency": 1104,
+    "CardEffectLogic": 325,
+    "CoreRuntime": 18,
+    "SoundOnly": 3,
+    "ProjectConfig": 2
+  },
+  "needLevelToDecisionCounts": {
+    "CandidateReview->ReferenceOnly": 259,
+    "Excluded->Exclude": 40986,
+    "Reference->ReferenceOnly": 17394,
+    "Required->Port": 12541
+  },
+  "headlessCategoryToDecisionCounts": {
+    "CardDataRequired->Port": 8187,
+    "CardEffectLogicRequired->Port": 3918,
+    "DataProvenanceToolCandidate->ReferenceOnly": 24,
+    "ExternalDependencyReference->ReferenceOnly": 2623,
+    "GeneratedOrBuildExcluded->Exclude": 34501,
+    "RuntimeLogicRequired->Port": 436,
+    "SerializedAssetReviewCandidate->ReferenceOnly": 235,
+    "SoundOnlyExcluded->Exclude": 102,
+    "SourceMetaReference->ReferenceOnly": 14343,
+    "UnityProjectConfigReference->ReferenceOnly": 31,
+    "UnityProjectSourceReference->ReferenceOnly": 397,
+    "VisualOnlyExcluded->Exclude": 6383
+  },
+  "foundationGate": {
+    "openCodeReady": false,
+    "unknownCommonApiCount": 27,
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented"
+  },
+  "policy": {
+    "srcModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "manualReviewSamples": []
+}

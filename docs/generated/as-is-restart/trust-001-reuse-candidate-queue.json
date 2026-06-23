@@ -1,0 +1,3461 @@
+{
+  "schemaVersion": "dcgo.trust-001-reuse-candidate-queue.v1",
+  "generatedAtUtc": "2026-06-23T09:57:15+00:00",
+  "goal": "TRUST-001 reuse candidate queue",
+  "summary": {
+    "reuseCandidateCount": 52,
+    "verifiedCandidateNeedsTestCount": 27,
+    "partialNeedsWorkCount": 50,
+    "blockedByFoundationCount": 185,
+    "blockedByDataPolicyCount": 17,
+    "deleteCandidateCount": 7,
+    "manualReviewCount": 0,
+    "staleOrWrongMappingCount": 0,
+    "trustedAsVerifiedCount": 0
+  },
+  "reuseCandidates": [
+    {
+      "relativePath": "src/DCGO.RL.Engine/Actions/GameAction.cs",
+      "group": "ActionModel",
+      "sourceMappingKind": "ActionBoundaryConcept",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "action boundary model maps to source command/selection concepts and can be reused pending coverage."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/BattleEngineServices.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/EngineSession.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/HatchService.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/MoveFromBreedingService.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/RuleProcessor.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/TurnRunner.cs",
+      "group": "BattleOrchestration",
+      "sourceMappingKind": "RuntimeConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs"
+      ],
+      "reason": "orchestration/state transition support는 SourceOfTruth 개념 매핑과 deterministic tests 후보가 있어 폐기보다 재사용 후보로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/DecisionPoint.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/DecisionToken.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/IDecisionProvider.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/LegalAction.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/SelectableTarget.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/SelectionResult.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/SelectionValidator.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Decisions/TestDecisionProvider.cs",
+      "group": "DecisionBoundary",
+      "sourceMappingKind": "SelectionConceptSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectCardPanel.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/SelectPermanentEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "reason": "Unity UI 자체가 아니라 선택 경계/결과 모델로 재사용 가능성이 있다. UI adapter 구현은 범위 밖이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/AttackRuntimeContext.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/CardInstance.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/CardInstanceFactory.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/ComplexMechanicDefinitions.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/DigivolveCardCommand.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/DigivolveCardResult.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/DomainException.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/Enums.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/GameConfig.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/GameResult.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/GameState.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/IZoneMover.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/Ids.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/MoveCardCommand.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/MoveCardResult.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/PermanentState.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/PermanentZoneMoveCommand.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/PermanentZoneMoveResult.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/PlayerState.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/UnsupportedMechanicException.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/ZoneMoveTrace.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/ZoneMover.cs",
+      "group": "DomainStateModel",
+      "sourceMappingKind": "RuntimeStateSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs"
+      ],
+      "reason": "core state/value object는 SourceOfTruth runtime state와 매핑되며 재사용 후보지만 parity fixture 전 Verified는 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Infrastructure/IDeterministicRng.cs",
+      "group": "DeterministicInfrastructure",
+      "sourceMappingKind": "HeadlessInvariantPolicy",
+      "mappedSourceFiles": [
+        "docs/codex-prompts/GOAL_FOUNDATION_COMPLETION.md"
+      ],
+      "reason": "determinism is a headless invariant rather than a Unity source class; keep as reuse candidate but not source-verified behavior."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Infrastructure/XorShiftDeterministicRng.cs",
+      "group": "DeterministicInfrastructure",
+      "sourceMappingKind": "HeadlessInvariantPolicy",
+      "mappedSourceFiles": [
+        "docs/codex-prompts/GOAL_FOUNDATION_COMPLETION.md"
+      ],
+      "reason": "determinism is a headless invariant rather than a Unity source class; keep as reuse candidate but not source-verified behavior."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/DeckInstantiationService.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/DrawService.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/FirstPlayerSelector.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/GameSetupRequest.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/GameSetupResult.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/GameSetupService.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/PlayerDeckList.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/SecuritySetupService.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Setup/WinConditionChecker.cs",
+      "group": "SetupRuntime",
+      "sourceMappingKind": "SetupSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+      ],
+      "reason": "setup flow has SourceOfTruth runtime mapping and is not a current FND blocker; keep as reuse candidate pending tests."
+    }
+  ],
+  "verifiedCandidateNeedsTest": [
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/CardEffectTestFixture.cs",
+      "group": "TestHarness",
+      "sourceMappingKind": "TestInventoryCandidate",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "테스트 실행 결과가 아니라 정적 테스트 inventory와 실행 후보로만 신뢰한다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "group": "TestHarness",
+      "sourceMappingKind": "TestInventoryCandidate",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "테스트 실행 결과가 아니라 정적 테스트 inventory와 실행 후보로만 신뢰한다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/AssetRegistryMappingValidator.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/CliDebugRenderer.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/DeckMechanicValidator.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/DeckValidationReport.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineCompletionChecklistRunner.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineCoreExpansionReadiness.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineCoreMilestoneGate.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineInvariantChecker.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineInvariantReport.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/EngineInvariantViolation.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/FullCardPoolValidator.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/FullCardSourceScaffoldValidator.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/GameTrace.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/ParityFixtureComparer.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/ParityTrace.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/RandomLegalActionRunner.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/ReplayDeterminismHelper.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/ReplayRunner.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/RuleVisibleSnapshot.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/ScriptedScenarioRunner.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/StateHasher.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/TargetCardPoolValidationReport.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/TraceEvent.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/TraceStore.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Validation/UnsupportedMechanicReporter.cs",
+      "group": "ValidationHarness",
+      "sourceMappingKind": "GeneratedEvidenceHarness",
+      "candidateTestFile": "src/DCGO.RL.Engine.Tests/Program.cs",
+      "reason": "validation harness is not SourceOfTruth behavior, but it is a verification candidate inventory. Tests are not rerun in TRUST-001."
+    }
+  ],
+  "partialNeedsWork": [
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/ActionExecutor.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/AttackRuntimeOperations.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/AttackService.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+      "group": "BattleRuntime",
+      "sourceMappingKind": "DirectBattleSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AttackProcess.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs"
+      ],
+      "reason": "battle runtime은 SourceOfTruth 핵심 파일과 매핑되지만 cost/use-option/replacement/timing blockers가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CEntityEffectFactoryCatalog.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CEntityEffectRegistryBuilder.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
+      "group": "CardEffectFactoryFoundation",
+      "sourceMappingKind": "DirectCommonEffectSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectCommons.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "공통 effect facade는 source-aligned 재사용 후보지만 FND-001/FND-003 blocker와 full parity 미실행 때문에 부분 작업으로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
+      "group": "CardEffectFactoryFoundation",
+      "sourceMappingKind": "DirectCommonEffectSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectCommons.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "공통 effect facade는 source-aligned 재사용 후보지만 FND-001/FND-003 blocker와 full parity 미실행 때문에 부분 작업으로 둔다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CardEffectPortingStatus.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CardScriptContext.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/CardScriptRegistry.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ICEntityEffectFactoryProvider.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ICardScript.cs",
+      "group": "CEntityEffectRegistryFoundation",
+      "sourceMappingKind": "DirectEffectRegistrySource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "source effect registry facade는 mapping 근거가 있으나 production catalog/provider 및 duration bucket parity가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/RuntimeRuleState.cs",
+      "group": "ScriptRuntimeDomainFoundation",
+      "sourceMappingKind": "DirectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Base.cs"
+      ],
+      "reason": "원본 runtime facade와 직접 연결되지만 FND-001 partial closure와 FND-005 catalog parity 후 재검증이 필요하다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs",
+      "group": "ScriptRuntimeDomainFoundation",
+      "sourceMappingKind": "DirectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Base.cs"
+      ],
+      "reason": "원본 runtime facade와 직접 연결되지만 FND-001 partial closure와 FND-005 catalog parity 후 재검증이 필요하다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+      "group": "ScriptRuntimeDomainFoundation",
+      "sourceMappingKind": "DirectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Base.cs"
+      ],
+      "reason": "원본 runtime facade와 직접 연결되지만 FND-001 partial closure와 FND-005 catalog parity 후 재검증이 필요하다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
+      "group": "ScriptRuntimeDomainFoundation",
+      "sourceMappingKind": "DirectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/GameContext.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardSource.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Base.cs"
+      ],
+      "reason": "원본 runtime facade와 직접 연결되지만 FND-001 partial closure와 FND-005 catalog parity 후 재검증이 필요하다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/CEntityEffectRegistry.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EffectContext.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EffectDescriptor.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EffectQueue.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EffectResolution.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/EnterFieldEventPayload.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/OncePerTurnTracker.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/OptionalEffectBoundary.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/RuleStabilizationResult.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/ScriptRuntimeEffectFoundation.cs",
+      "group": "ScriptRuntimeEffectFoundation",
+      "sourceMappingKind": "DirectEffectRuntimeSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_Effect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CEntity_EffectController.cs"
+      ],
+      "reason": "Effect timing/facade는 SourceOfTruth mapping이 있으나 unknown/unsupported timing과 continuous/static partial blocker가 남아 있다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/SecurityEffectExecutionService.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/SelectionResultApplicator.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs",
+      "group": "ContinuousStaticFoundation",
+      "sourceMappingKind": "DirectContinuousStaticSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs"
+      ],
+      "reason": "ContinuousOrStaticEffect가 PartiallyImplemented로 남은 직접 대상이다. FND-001 task closure 전 Verified로 볼 수 없다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/TriggerCollector.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Effects/TriggerSourceSnapshot.cs",
+      "group": "TriggerPipelineFoundation",
+      "sourceMappingKind": "DirectTimingPipelineSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/ICardEffect.cs"
+      ],
+      "reason": "trigger/timing pipeline은 source window mapping이 있으나 FND-002/FND-003 unsupported timing 26건과 연결된다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Mechanics/ComplexMechanicMatcher.cs",
+      "group": "MechanicFoundation",
+      "sourceMappingKind": "ComplexMechanicSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects"
+      ],
+      "reason": "complex mechanics have source mapping but unresolved foundation capabilities remain."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Mechanics/ComplexMechanicModels.cs",
+      "group": "MechanicFoundation",
+      "sourceMappingKind": "ComplexMechanicSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects"
+      ],
+      "reason": "complex mechanics have source mapping but unresolved foundation capabilities remain."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Mechanics/ComplexMechanicSelectionFactory.cs",
+      "group": "MechanicFoundation",
+      "sourceMappingKind": "ComplexMechanicSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects"
+      ],
+      "reason": "complex mechanics have source mapping but unresolved foundation capabilities remain."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs",
+      "group": "MechanicFoundation",
+      "sourceMappingKind": "ComplexMechanicSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects"
+      ],
+      "reason": "complex mechanics have source mapping but unresolved foundation capabilities remain."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Mechanics/CostResolver.cs",
+      "group": "MechanicFoundation",
+      "sourceMappingKind": "ComplexMechanicSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectFactory.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffects"
+      ],
+      "reason": "complex mechanics have source mapping but unresolved foundation capabilities remain."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
+      "group": "PrimitiveFoundation",
+      "sourceMappingKind": "PrimitiveSource",
+      "mappedSourceFiles": [
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardEffectCommons.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/CardController.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Player.cs",
+        "E:/headlessDCGO/DCGO/Assets/Scripts/Script/Permanent.cs"
+      ],
+      "reason": "common primitive facade is source-mapped but broad immunity/replacement/data-policy integration is still open."
+    }
+  ],
+  "blockedByFoundation": [
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_029"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_036.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_036"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_043.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_043"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_086"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Bt1CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_067.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_067"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_070"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_074.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_074"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_088.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_088"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_089.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_089"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_010.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_010"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_017.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_017"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_018.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_018"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_023.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_023"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_025.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_025"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_085.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_085"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_005.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_005"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_048.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_048"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_049.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_049"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_053.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_053"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_055.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_055"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_060.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_060"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_061.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_061"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_062.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_062"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_063.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_063"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_087.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT1_087"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_057"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_058.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_058"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_059.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_059"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_062.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_062"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_068.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_068"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Bt18CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Bt18ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_052"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_056.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_056"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_090.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_090"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_075"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_080.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_080"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_085"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_093.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_093"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Red/BT18_087.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_087"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT18_098"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Black/BT19_055.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_055"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_016.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_016"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_021.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_021"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_022.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_022"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_026.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_026"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_027.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_027"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_028.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_028"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_092.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_092"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Bt19CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Bt19ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_045"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_046.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_046"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_052"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_084.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_084"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_096.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_096"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_006.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_006"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_067.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_067"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_071.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_071"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_015.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_015"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_089.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_089"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/White/BT19_077.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_077"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_039.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_039"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT19_041"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_048.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_048"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_049.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_049"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_055.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_055"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Black/BT20_086.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_086"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Bt20CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Bt20ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Green/BT20_004.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_004"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Green/BT20_039.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_039"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_006.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_006"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_062.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_062"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_063.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_063"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_065.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_065"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_067.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_067"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_069.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_069"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_072.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_072"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_075.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_075"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_079.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_079"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_088.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_088"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_096"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_001.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_001"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_009.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_009"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/White/BT20_092.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_092"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_003.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_003"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT20/Yellow/BT20_034.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT20_034"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Black/BT21_055.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_055"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_003.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_003"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_033.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_033"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_085.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_085"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Blue/BT21_095.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_095"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Bt21CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Green/BT21_048.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_048"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Green/BT21_049.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_049"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_063.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_063"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_065.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_065"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_088.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_088"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_099.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_099"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_001.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_001"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_007.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_007"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_008.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_008"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_011.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_011"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_012.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_012"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_015.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_015"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_024.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_024"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_080.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_080"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_082.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_082"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_090.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_090"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_091.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_091"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_092.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_092"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_093.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT21_093"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_005.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_005"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_054.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_054"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_056.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_056"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_065.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_065"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_001.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_001"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_018.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_018"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_021.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_021"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_027.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_027"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Bt22CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Bt22ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_004.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_004"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_043.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_043"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_044.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_044"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_046.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_046"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_047.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_047"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_048.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_048"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_051.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_051"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_006.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_006"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_069.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_069"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_077.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_077"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Purple/BT22_092.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_092"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_079"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_093.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_093"
+      ],
+      "localStatusTokens": [
+        "PartiallyImplemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Yellow/BT22_002.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_002"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/BT22/Yellow/BT22_040.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "BT22_040"
+      ],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/NoEffectCardScript.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [
+        "NoEffect"
+      ],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_01.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_01"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_03.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_03"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_06.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_06"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_07.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_07"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_08.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_08"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_09.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_09"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_11.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_11"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_12.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_12"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_13.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_13"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_14.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_14"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_15.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_15"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_16.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_16"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_01.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_01"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_03.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_03"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_06.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_06"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_07.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_06"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_08.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_08"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_09.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_09"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_11.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_11"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_12.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_12"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_13.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_13"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_14.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_14"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_15.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_15"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_16.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST2_16"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/St2ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_01.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_01"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_04.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_04"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_05.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_05"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_07.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST1_06"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_08.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_08"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_09.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_09"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_11.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_11"
+      ],
+      "localStatusTokens": [],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_12.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_12"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_13.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_13"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_14.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_14"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_15.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_15"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_16.cs",
+      "group": "CardEffectLocalScript",
+      "sourceEffectClassNameTokens": [
+        "ST3_16"
+      ],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "원본 CardEffect class 매칭은 있으나 generated full-card scaffold가 Unsupported이고 parity evidence가 NotRun이다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/St3ScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [
+        "Implemented"
+      ],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/St1CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/St2St3CardScriptCatalog.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [
+        "ST3_02"
+      ],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/UnsupportedCardScript.cs",
+      "group": "CardScriptCatalogSupport",
+      "sourceEffectClassNameTokens": [],
+      "localStatusTokens": [
+        "Unsupported"
+      ],
+      "reason": "카드 script catalog/지원층은 production source registry 채움과 full-card parity가 열리기 전까지 blocker 상태다."
+    }
+  ],
+  "blockedByDataPolicy": [
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_02.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_04.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_05.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_10.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_02.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_04.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_05.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_10.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_02.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_03.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_06.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_10.cs",
+      "group": "CardEffectNoSourceToken",
+      "sourceMappingKind": "CardDataNoEffectOrMissingEffectClassPolicy",
+      "reason": "카드별 source effect class token이 없어 CardBaseEntity data/no-effect 정책 확인 전 신뢰하지 않는다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/CardDefinition.cs",
+      "group": "CardDataPolicy",
+      "sourceMappingKind": "CardBaseEntityDataSource",
+      "reason": "CardBaseEntity data interpretation is required before trusting loader/database semantics."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/CardDefinitionIdentity.cs",
+      "group": "CardDataPolicy",
+      "sourceMappingKind": "CardBaseEntityDataSource",
+      "reason": "CardBaseEntity data interpretation is required before trusting loader/database semantics."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/CardMetadataCriteria.cs",
+      "group": "CardDataPolicy",
+      "sourceMappingKind": "CardBaseEntityDataSource",
+      "reason": "CardBaseEntity data interpretation is required before trusting loader/database semantics."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/ICardDatabase.cs",
+      "group": "CardDataPolicy",
+      "sourceMappingKind": "CardBaseEntityDataSource",
+      "reason": "CardBaseEntity data interpretation is required before trusting loader/database semantics."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/Domain/InMemoryCardDatabase.cs",
+      "group": "CardDataPolicy",
+      "sourceMappingKind": "CardBaseEntityDataSource",
+      "reason": "CardBaseEntity data interpretation is required before trusting loader/database semantics."
+    }
+  ],
+  "deleteCandidates": [
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/.tmp/66AA-build-obj/Debug/net8.0/DCGO.RL.Engine.Tests.GlobalUsings.g.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/obj/Debug/net8.0/DCGO.RL.Engine.Tests.AssemblyInfo.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine.Tests/obj/Debug/net8.0/DCGO.RL.Engine.Tests.GlobalUsings.g.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/obj/Debug/net8.0/DCGO.RL.Engine.AssemblyInfo.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    },
+    {
+      "relativePath": "src/DCGO.RL.Engine/obj/Debug/net8.0/DCGO.RL.Engine.GlobalUsings.g.cs",
+      "group": "GeneratedBuildArtifacts",
+      "reason": "src 아래에 남은 obj/.tmp generated C# 산출물이다. SourceOfTruth 구현이 아니며 추적/재사용 후보가 아니다."
+    }
+  ],
+  "manualReview": [],
+  "notInScopeNow": [
+    "src implementation changes",
+    "DCGO original changes",
+    "CardEffect body implementation",
+    "C0039 or later card-porting",
+    "RL Environment/Observation/Reward/Dataset/Trainer implementation",
+    "generated status promotion",
+    "Foundation Gate number manipulation",
+    "commit/push"
+  ]
+}

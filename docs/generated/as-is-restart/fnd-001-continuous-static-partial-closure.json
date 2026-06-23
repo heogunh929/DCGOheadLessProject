@@ -1,0 +1,1234 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001-continuous-static-partial-closure.v1",
+  "generatedAt": "2026-06-23T09:42:39.597233+00:00",
+  "goal": "FND-001 ContinuousOrStaticEffect partial closure decomposition",
+  "asIsRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+  "inputs": {
+    "fnd002": [
+      "docs/as-is-restart/FND_002_UNKNOWN_COMMON_API_SOURCE_MAPPING.md",
+      "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+    ],
+    "fnd003": [
+      "docs/as-is-restart/FND_003_UNSUPPORTED_CAPABILITY_REMEDIATION.md",
+      "docs/generated/as-is-restart/fnd-003-unsupported-capability-remediation.json",
+      "docs/generated/as-is-restart/fnd-003-next-action-queue.json"
+    ],
+    "goal09": [
+      "docs/as-is-restart/GOAL_09_ASIS_IMPLEMENTATION_PRIORITY_REWRITE.md",
+      "docs/generated/as-is-restart/asis-implementation-priority-rewrite.json"
+    ],
+    "goal08": [
+      "docs/as-is-restart/GOAL_08_ASIS_HEADLESS_TRUST_AUDIT.md",
+      "docs/generated/as-is-restart/asis-headless-trust-audit.json"
+    ],
+    "goal07": [
+      "docs/as-is-restart/GOAL_07_ASIS_HEADLESS_REQUIREMENT_MATRIX.md",
+      "docs/generated/as-is-restart/asis-headless-requirement-matrix.json"
+    ],
+    "goal05": [
+      "docs/as-is-restart/GOAL_05_ASIS_CSHARP_CALL_GRAPH.md",
+      "docs/generated/as-is-restart/asis-csharp-call-graph-summary.json",
+      "docs/generated/as-is-restart/asis-csharp-unresolved-calls.json"
+    ],
+    "gateAndCapability": [
+      "docs/generated/foundation-completion-gate.json",
+      "docs/generated/capability-truth-audit/capability-registry.json",
+      "docs/generated/capability-truth-audit/mechanic-first-scheduler-66E.json",
+      "docs/generated/full-card-parity-evidence.json"
+    ]
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "trust001Performed": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "rawJsonOver100MiBAdded": false,
+    "commitOrPushPerformed": false
+  },
+  "partialSource": {
+    "capabilityId": "ContinuousOrStaticEffect",
+    "status": "PartiallyImplemented",
+    "inventorySection": "timings",
+    "inventoryStatus": "PartiallyImplemented",
+    "inventoryAliases": [
+      "None"
+    ],
+    "affectedCardCountRegistry": 4326,
+    "sourceFileCountRegistry": 2220,
+    "selectedAffectedCardCountScheduler": 7867,
+    "selectedSourceEffectCountScheduler": 3896,
+    "selectedCardBatchCount": 397,
+    "sourceRequiredContinuousEffectCount": 3897,
+    "sourceRequiredTotalEffectCount": 3918,
+    "parityNotRunSourceEffectCount": 3918,
+    "parityPassedSourceEffectCount": 0,
+    "gateSummary": {
+      "openCodeReady": false,
+      "passedGateCount": 11,
+      "failedGateCount": 3,
+      "unknownCommonApiCount": 27,
+      "unsupportedCapabilityCount": 26,
+      "partiallyImplementedCapabilityCount": 37,
+      "runtimeGeneratedStatusMismatchCount": 0,
+      "legacyPilotRuntimeDivergenceCount": 92,
+      "silentNoOpCount": 0,
+      "blockedEmptyDescriptorCount": 0,
+      "legacyContinuousOnlyEmptyDescriptorCount": 13,
+      "falseNoEffectCount": 0,
+      "variantIdentityConflictCount": 0,
+      "coreCardIdBranchCount": 0,
+      "directZoneMutationCount": 0,
+      "sourceLockChangedCount": 0,
+      "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+      "selectedNextFoundationStatus": "PartiallyImplemented",
+      "sourceEffectCount": 3918,
+      "sourceEffectsWithNonVerifiedCapabilities": 3918,
+      "generatedStatusCounts": {
+        "Unsupported": 3918
+      },
+      "cardMappingStatusCounts": {
+        "NeedsSourceReview": 40,
+        "NoEffect": 225,
+        "Unsupported": 7921
+      },
+      "localSourceRootAvailable": true,
+      "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"
+    },
+    "reason": "Continuous descriptors support field top, inherited, linked, face-up security, hand, trash, and executing source scopes; metadata criteria cover trait/name/text source and target gates; continuous static keyword descriptors cover source/condition-aware supported BattleKeyword grants; StaticRequirementService covers source/condition-aware static digivolution/link requirements, ignore-digivolution permission semantics, cannot-ignore digivolution restriction descriptors, effective card colors and effective permanent levels for digivolution requirements, effective link requirement metadata/level gates through ComplexMechanicService, static link cost modifiers through CostResolver, and effective metadata criteria where a StaticEffectService is available; StaticEffectService covers static cost/restriction/immunity descriptor evaluation, static card play restriction descriptors for option play gates, static card put-field restriction descriptors for permanent field-entry gates, static card move restriction descriptors for return-to-hand gates, effective card/base/current color descriptors, effective card name/trait metadata descriptors, effective card/permanent level descriptors, and ignore color requirements for option play. TemporaryModifier covers supported player-level DP/SecurityAttack/SecurityDigimonDP runtime stat effects, target permanent temporary keyword grants, and player-wide temporary keyword grants with metadata-gated battle-area Digimon targets. TemporaryGrantedEffect covers duration-bound granted trigger source/timing descriptors through the trigger pipeline. Full-card parity evidence is generated conservatively as NotRun, and generated/runtime status mismatch is closed by separating legacy pilot divergence from generated source truth. The capability remains partial until remaining full-card continuous/static variants have source-locked parity evidence.",
+    "sourceFiles": [
+      "docs/generated/capability-truth-audit/capability-registry.json",
+      "docs/generated/foundation-completion-gate.json",
+      "docs/generated/capability-truth-audit/mechanic-first-scheduler-66E.json",
+      "docs/generated/capability-truth-audit/source-required-capabilities.json",
+      "docs/generated/full-card-parity-evidence.json",
+      "docs/rl-engine/capability-truth-audit-66B.md",
+      "docs/rl-engine/full-card-parity-evidence-scope-66P.md",
+      "docs/rl-engine/validation-strategy.md",
+      "docs/as-is-restart/GOAL_09_ASIS_IMPLEMENTATION_PRIORITY_REWRITE.md",
+      "docs/as-is-restart/GOAL_08_ASIS_HEADLESS_TRUST_AUDIT.md",
+      "docs/as-is-restart/GOAL_07_ASIS_HEADLESS_REQUIREMENT_MATRIX.md",
+      "docs/as-is-restart/GOAL_05_ASIS_CSHARP_CALL_GRAPH.md"
+    ],
+    "originalSourceFiles": [
+      "DCGO/Assets/Scripts/Script/ICardEffect.cs",
+      "DCGO/Assets/Scripts/Script/CardSource.cs",
+      "DCGO/Assets/Scripts/Script/Permanent.cs",
+      "DCGO/Assets/Scripts/Script/Player.cs",
+      "DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+      "DCGO/Assets/Scripts/Script/CardController.cs",
+      "DCGO/Assets/Scripts/Script/CardObjectController.cs",
+      "DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+      "DCGO/Assets/Scripts/Script/AttackProcess.cs",
+      "DCGO/Assets/Scripts/Script/CardEffectFactory/**/*.cs",
+      "DCGO/Assets/Scripts/Script/CardEffectCommons/**/*.cs",
+      "DCGO/Assets/CardBaseEntity/**/*.asset"
+    ]
+  },
+  "classificationCounts": {
+    "CloseableFoundationTask": 6,
+    "NeedsSourceMapping": 3,
+    "NeedsDataPolicy": 2,
+    "NeedsCapabilityRemediation": 3,
+    "CardEffectBodySpecific": 1,
+    "UnityOnlyExcluded": 1,
+    "ExternalAdapterRequired": 0,
+    "BlockedNeedsManualReview": 0
+  },
+  "tasks": [
+    {
+      "id": "FND001-CS-01",
+      "title": "Full-card continuous/static source-locked parity evidence 계획",
+      "classification": "NeedsSourceMapping",
+      "partialReason": "registry reason과 66P parity evidence가 full-card continuous/static variants의 source-locked parity evidence를 NotRun으로 남겨 ContinuousOrStaticEffect를 PartiallyImplemented로 유지한다.",
+      "sourceEvidence": {
+        "files": [
+          "docs/generated/full-card-parity-evidence.json",
+          "docs/rl-engine/full-card-parity-evidence-scope-66P.md",
+          "docs/generated/capability-truth-audit/source-required-capabilities.json"
+        ],
+        "classes": [
+          "FullCardParityEvidence records",
+          "sourceRequiredCapabilities.sourceEffects"
+        ],
+        "methodsOrCalls": [
+          "coverageStatus=NotRun",
+          "missingUnityFixture=true",
+          "requiredCapabilities includes ContinuousOrStaticEffect"
+        ],
+        "cardData": [
+          {
+            "sourceScaffoldId": "AD1_001@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+            "sourceEffectClassName": "AD1_001",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-001#7817@base",
+                "cardId": "AD1-001",
+                "cardIndex": 7817,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_001.asset"
+              },
+              {
+                "definitionStableId": "AD1-001#7818@P1",
+                "cardId": "AD1-001",
+                "cardIndex": 7818,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_001_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceEffectClassName": "AD1_002",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-002#7819@base",
+                "cardId": "AD1-002",
+                "cardIndex": 7819,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_002.asset"
+              },
+              {
+                "definitionStableId": "AD1-002#7820@P1",
+                "cardId": "AD1-002",
+                "cardIndex": 7820,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_002_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_003@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+            "sourceEffectClassName": "AD1_003",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+            "affectedCardCount": 1,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-003#7821@base",
+                "cardId": "AD1-003",
+                "cardIndex": 7821,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_003.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceEffectClassName": "AD1_004",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-004#7822@base",
+                "cardId": "AD1-004",
+                "cardIndex": 7822,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_004.asset"
+              },
+              {
+                "definitionStableId": "AD1-004#7823@P1",
+                "cardId": "AD1-004",
+                "cardIndex": 7823,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_004_P1.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "docs/generated/parity-fixtures/unity/full-card-source",
+        "docs/generated/parity-fixtures/rl/full-card-source",
+        "docs/generated/parity-fixtures/reports/full-card-source",
+        "scripts/generate_full_card_parity_evidence.py"
+      ],
+      "closureTasks": [
+        "ContinuousOrStaticEffect 포함 sourceEffect 3897건을 fixture 대상 set으로 고정한다.",
+        "Unity fixture/RL fixture/comparison report missing 정책을 카드별 body 구현 없이 문서화한다.",
+        "NotRun은 pass가 아니라는 gate 재계산 후보만 기록한다."
+      ],
+      "testCandidates": [
+        "full-card parity evidence NotRun count remains 3918 until fixture exists",
+        "ContinuousOrStaticEffect sourceEffect sample retains sourcePath/card asset mapping"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-02",
+      "title": "EffectTiming.None alias와 gate accounting 고정",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "원본 EffectTiming.None은 별도 unsupported capability가 아니라 ContinuousOrStaticEffect alias로 집계되어야 한다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs",
+          "DCGO/Assets/Scripts/Script/CardSource.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs",
+          "DCGO/Assets/Scripts/Script/Player.cs",
+          "docs/rl-engine/validation-strategy.md"
+        ],
+        "classes": [
+          "EffectTiming",
+          "CardSource",
+          "Permanent",
+          "Player"
+        ],
+        "methodsOrCalls": [
+          "EffectTiming.None",
+          "CardSource.EffectList(EffectTiming.None)",
+          "Permanent.EffectList(EffectTiming.None)",
+          "Player.EffectList(EffectTiming.None)"
+        ],
+        "cardData": [
+          "static_or_continuous/None timing records are capability aliases, not raw None blockers"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "docs/generated/capability-truth-audit/capability-registry.json"
+      ],
+      "closureTasks": [
+        "raw None capability가 registry에 없고 ContinuousOrStaticEffect.inventoryAliases에만 남는지 audit한다.",
+        "source-required-capabilities에서 None timing이 unsupported blocker로 재등장하지 않도록 verifier 후보를 만든다."
+      ],
+      "testCandidates": [
+        "validation-strategy 66V alias assertions",
+        "capability registry has inventoryAliases [None]"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-03",
+      "title": "continuous/static source collector scope parity",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "field top, inherited, linked, face-up security, hand, trash, executing source가 headless collector에 후보로 있으나 full-card source ordering parity는 아직 닫히지 않았다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+          "DCGO/Assets/Scripts/Script/CardSource.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs",
+          "DCGO/Assets/Scripts/Script/Player.cs"
+        ],
+        "classes": [
+          "AutoProcessing",
+          "CardSource",
+          "Permanent",
+          "Player"
+        ],
+        "methodsOrCalls": [
+          "AutoProcessing.GetSkillInfos",
+          "GetSkillInfosOfCards",
+          "EffectList_ForCard",
+          "EffectList_Added"
+        ],
+        "cardData": [
+          {
+            "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceEffectClassName": "AD1_005",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-005#7824@base",
+                "cardId": "AD1-005",
+                "cardIndex": 7824,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_005.asset"
+              },
+              {
+                "definitionStableId": "AD1-005#7825@P1",
+                "cardId": "AD1-005",
+                "cardIndex": 7825,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_005_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+            "sourceEffectClassName": "AD1_006",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-006#7826@base",
+                "cardId": "AD1-006",
+                "cardIndex": 7826,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006.asset"
+              },
+              {
+                "definitionStableId": "AD1-006#7827@P1",
+                "cardId": "AD1-006",
+                "cardIndex": 7827,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "sourceEffectClassName": "AD1_007",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-007#7828@base",
+                "cardId": "AD1-007",
+                "cardIndex": 7828,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_007.asset"
+              },
+              {
+                "definitionStableId": "AD1-007#7829@P1",
+                "cardId": "AD1-007",
+                "cardIndex": 7829,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_007_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "sourceEffectClassName": "AD1_008",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "affectedCardCount": 2,
+            "sampleCards": [
+              {
+                "definitionStableId": "AD1-008#7830@base",
+                "cardId": "AD1-008",
+                "cardIndex": 7830,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_008.asset"
+              },
+              {
+                "definitionStableId": "AD1-008#7831@P1",
+                "cardId": "AD1-008",
+                "cardIndex": 7831,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_008_P1.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs"
+      ],
+      "closureTasks": [
+        "source kind별 fixture 후보를 full-card scaffold sourcePath와 연결한다.",
+        "linked/inherited/face-up security ordering이 원본 AutoProcessing 수집 순서와 다르면 별도 blocker로 분리한다."
+      ],
+      "testCandidates": [
+        "Continuous linked source applies from linked zone",
+        "Continuous face-up security source applies",
+        "Continuous hand source applies only from hand",
+        "Continuous trash source applies from trash",
+        "Continuous executing source applies during execution"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-04",
+      "title": "duration bucket cleanup/provider integration parity",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "Player/Permanent의 PermanentEffects 및 Until* bucket은 TemporaryModifier/TemporaryGrantedEffect 후보와 연결되어 있지만 original cleanup parity와 production provider catalog adoption이 남아 있다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/Player.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs",
+          "DCGO/Assets/Scripts/Script/TurnStateMachine.cs",
+          "DCGO/Assets/Scripts/Script/AttackProcess.cs"
+        ],
+        "classes": [
+          "Player",
+          "Permanent",
+          "TurnStateMachine",
+          "AttackProcess"
+        ],
+        "methodsOrCalls": [
+          "Player.EffectList",
+          "Permanent.EffectList_Added",
+          "UntilEndBattleEffects",
+          "UntilEachTurnEndEffects",
+          "UntilOwnerTurnEndEffects",
+          "UntilEndAttackEffects",
+          "UntilNextUntapEffects"
+        ],
+        "cardData": [
+          "duration-bound granted effects and modifiers from CardEffectCommons/GiveEffect paths"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+        "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+        "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs"
+      ],
+      "closureTasks": [
+        "Until* bucket별 cleanup timing을 원본 Player/Permanent/TurnStateMachine/AttackProcess와 대조한다.",
+        "PermanentEffects/provider catalog adoption 미완 범위를 TRUST-001 후보와 분리한다."
+      ],
+      "testCandidates": [
+        "Duration player runtime modifiers replay deterministic",
+        "Duration temporary keyword grants Blocker until cleanup",
+        "Duration temporary granted trigger runs from target permanent timing",
+        "Script runtime Player effect list uses temporary granted effects"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-05",
+      "title": "temporary granted trigger와 FND-003 event timing 의존성",
+      "classification": "NeedsCapabilityRemediation",
+      "partialReason": "TemporaryGrantedEffect는 duration-bound trigger descriptor를 제공하지만 FND-003의 unsupported timing 25건이 source collection/event payload layer와 맞물려 있다.",
+      "sourceEvidence": {
+        "files": [
+          "docs/generated/as-is-restart/fnd-003-next-action-queue.json",
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs",
+          "DCGO/Assets/Scripts/Script/CardObjectController.cs"
+        ],
+        "classes": [
+          "CardController",
+          "Permanent",
+          "CardObjectController",
+          "AutoProcessing"
+        ],
+        "methodsOrCalls": [
+          "OnDeclaration",
+          "WhenPermanentWouldBeDeleted",
+          "OnTappedAnyone",
+          "WhenRemoveField",
+          "BeforePayCost",
+          "OnDetermineDoSecurityCheck",
+          "OnEndBattle",
+          "OnDigivolutionCardDiscarded",
+          "OnAddDigivolutionCards",
+          "WhenLinked",
+          "OnMove",
+          "OnUnTappedAnyone",
+          "OnUseOption",
+          "OnDiscardLibrary",
+          "OnAddSecurity",
+          "WhenReturntoLibraryAnyone",
+          "OnDiscardSecurity",
+          "AfterPayCost",
+          "WhenDigisorption",
+          "OnLinkCardDiscarded",
+          "OnRemovedField",
+          "OnFaceUpSecurityIncreased",
+          "WhenWouldLink",
+          "WhenUntapAnyone",
+          "WhenWouldDigivolutionCardDiscarded"
+        ],
+        "cardData": [
+          "FND-003 fnd001ContinuousOrStaticHandoffCount=25"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs"
+      ],
+      "closureTasks": [
+        "FND-003 event hooks가 common source payload로 구현/partial/blocked 재분류된 뒤 ContinuousOrStaticEffect dependency를 재계산한다.",
+        "Unsupported timing을 빈 descriptor로 통과시키지 않는다."
+      ],
+      "testCandidates": [
+        "Duration temporary granted trigger hash and replay deterministic",
+        "FND-003 event-specific tests after remediation"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-06",
+      "title": "supported static keyword descriptor parity",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "Blocker/Rush/Reboot/Collision/Jamming 등 supported static keyword wrappers는 descriptor 후보가 있으나 full-card source parity가 필요하다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Blocker.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Rush.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Reboot.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Collision.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Jamming.cs"
+        ],
+        "classes": [
+          "BlockerClass",
+          "RushClass",
+          "RebootClass",
+          "CollisionClass",
+          "CanNotBeDestroyedByBattleClass"
+        ],
+        "methodsOrCalls": [
+          "BlockerSelfStaticEffect",
+          "RushSelfStaticEffect",
+          "RebootSelfStaticEffect",
+          "CollisionSelfStaticEffect",
+          "JammingSelfStaticEffect"
+        ],
+        "cardData": [
+          "BT/EX/ST inherited/static keyword source samples in source-required-capabilities"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs"
+      ],
+      "closureTasks": [
+        "supported keyword factory method별 source sample을 descriptor snapshot 후보로 묶는다.",
+        "condition/source metadata/stable ID가 registry evidence와 일치하는지 검증 후보로 둔다."
+      ],
+      "testCandidates": [
+        "Continuous static keyword field source grants Blocker",
+        "CardEffectFactory static keyword wrappers map supported keywords",
+        "Continuous static keyword replay deterministic"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-07",
+      "title": "unsupported trigger/process keyword static factory mapping",
+      "classification": "NeedsSourceMapping",
+      "partialReason": "factory facade는 일부 static keyword만 지원하며 Pierce/Retaliation/Alliance/Vortex/Scapegoat/Iceclad/Progress 등 trigger/process 성격 keyword shape는 source mapping 없이는 static descriptor로 추정하면 안 된다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Pierce.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Alliance.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/VortexCanAttackPlayers.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Scapegoat.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Iceclad.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Progress.cs"
+        ],
+        "classes": [
+          "ActivateClass",
+          "VortexCanAttackPlayersClass",
+          "ScapegoatClass",
+          "IcecladClass",
+          "CanNotAffectedClass"
+        ],
+        "methodsOrCalls": [
+          "AllianceStaticEffect",
+          "VortexCanAttackPlayersStaticEffect",
+          "ScapegoatStaticEffect",
+          "IcecladStaticEffect",
+          "ProgressStaticEffect"
+        ],
+        "cardData": [
+          "keyword effect source samples from CardEffectFactory/KeyWordEffects and CardEffectCommons/KeyWordEffects"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
+      ],
+      "closureTasks": [
+        "factory method를 static keyword, trigger keyword, process/replacement keyword로 분류한다.",
+        "unsupported keyword shape는 explicit failure/remediation queue로 남기고 ContinuousOrStaticEffect Verified 근거로 쓰지 않는다."
+      ],
+      "testCandidates": [
+        "CardEffectFactory keyword static effect rejects unsupported keyword shape",
+        "future trigger/process keyword mapping fixtures"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-08",
+      "title": "static DP/SecurityAttack/SecurityDigimonDP descriptor parity",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "DP/SecurityAttack/SecurityDigimonDP static modifiers have descriptor and runtime tests, but full-card fixture parity must lock source variants and dynamic amount delegates.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangeDP.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangeSAttack.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangeCardDP.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangeOriginDP.cs"
+        ],
+        "classes": [
+          "ChangeDPClass",
+          "ChangeSAttackClass",
+          "ChangeCardDPClass",
+          "ChangeBaseDPClass"
+        ],
+        "methodsOrCalls": [
+          "ChangeSelfDPStaticEffect",
+          "ChangeDPStaticEffect",
+          "ChangeSelfSAttackStaticEffect",
+          "ChangeSecurityDigimonCardDPStaticEffect",
+          "ChangeBaseDPStaticEffect"
+        ],
+        "cardData": [
+          "BT19_026, BT19_045, BT1_005, BT1_018, BT22 C0037/C0038 test samples"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/EffectiveStatService.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs"
+      ],
+      "closureTasks": [
+        "fixed/dynamic amount delegate를 source scaffold sample과 매핑한다.",
+        "base definition mutation 금지와 derived stat hash evidence를 gate 후보로 연결한다."
+      ],
+      "testCandidates": [
+        "Continuous DP modifier affects effective DP",
+        "Continuous dynamic SecurityAttack from source count",
+        "Continuous effects are derived for state hash",
+        "Continuous and duration modifiers stack deterministically"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-09",
+      "title": "static cost modifiers와 pay timing windows",
+      "classification": "NeedsCapabilityRemediation",
+      "partialReason": "play/digivolution/link cost static modifiers는 후보가 있으나 BeforePayCost/AfterPayCost unsupported timing과 원본 cost payment window가 남아 있다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangePlayCost.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/ChangeDigivolutionCost.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/AddLinkRequirement.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/Scripts/Script/CardSource.cs"
+        ],
+        "classes": [
+          "ChangeCostClass",
+          "AddLinkConditionClass",
+          "CardController",
+          "CardSource"
+        ],
+        "methodsOrCalls": [
+          "ChangePlayCostStaticEffect",
+          "ChangeDigivolutionCostStaticEffect",
+          "AddLinkConditionStaticEffect",
+          "BeforePayCost",
+          "AfterPayCost",
+          "CardSource.PayingCost"
+        ],
+        "cardData": [
+          "FND-003 BeforePayCost affected 284, AfterPayCost affected 15"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Mechanics/CostResolver.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs"
+      ],
+      "closureTasks": [
+        "FND-003 BeforePayCost/AfterPayCost remediation 이후 static cost graph와 pay windows를 재검증한다.",
+        "DigiXros/Assembly selected-material exclusion은 별도 source mapping 후보로 남긴다."
+      ],
+      "testCandidates": [
+        "Static cost modifier adjusts play and digivolution cost",
+        "Static link cost modifier adjusts link cost",
+        "future BeforePayCost/AfterPayCost window fixtures"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-10",
+      "title": "static restriction/immunity와 replacement window 의존성",
+      "classification": "NeedsCapabilityRemediation",
+      "partialReason": "restriction/immunity descriptors exist but WhenPermanentWouldBeDeleted/WhenRemoveField/WhenReturntoLibraryAnyone 등 replacement-like unsupported timings이 ContinuousOrStaticEffect source payload와 연결된다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/CanNotBeDeleted.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/CanNotReturnToHand.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/CanNoReturnToDeck.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs"
+        ],
+        "classes": [
+          "CanNotBeDestroyedClass",
+          "CannotReturnToHandClass",
+          "CannotReturnToLibraryClass",
+          "CardController",
+          "Permanent"
+        ],
+        "methodsOrCalls": [
+          "WhenPermanentWouldBeDeleted",
+          "WhenRemoveField",
+          "WhenReturntoLibraryAnyone",
+          "CannotReturnToHandStaticEffect",
+          "CannotReturnToDeckStaticEffect"
+        ],
+        "cardData": [
+          "FND-003 WhenPermanentWouldBeDeleted affected 405, WhenRemoveField affected 304"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs",
+        "src/DCGO.RL.Engine/Battle/AttackService.cs"
+      ],
+      "closureTasks": [
+        "FND-003 replacement/removal timing이 source-aligned task로 분리된 뒤 static restriction coverage를 다시 계산한다.",
+        "restriction을 silent no-op로 처리하지 않고 explicit unsupported/partial로 유지한다."
+      ],
+      "testCandidates": [
+        "Static restriction blocks attack and block",
+        "Static card restriction blocks return to hand",
+        "Static immunity descriptor evaluates metadata",
+        "future would/delete/remove timing fixtures"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-11",
+      "title": "static evolution/link requirement effective gates",
+      "classification": "CloseableFoundationTask",
+      "partialReason": "static digivolution/link requirement, ignore permission, cannot-ignore restriction, effective metadata/level query는 후보가 있으나 source variants 전체 parity가 필요하다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/AddDigivolutionRequirement.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/AddLinkRequirement.cs",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/GiveEffect/GiveEffectToPlayer/IgnoreDigivolutionRequirement.cs",
+          "DCGO/Assets/Scripts/Script/CardSource.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs"
+        ],
+        "classes": [
+          "AddDigivolutionRequirementClass",
+          "AddLinkConditionClass",
+          "CardSource",
+          "Permanent"
+        ],
+        "methodsOrCalls": [
+          "AddSelfDigivolutionRequirementStaticEffect",
+          "AddLinkConditionStaticEffect",
+          "CardSource.CostList",
+          "Permanent.Level",
+          "GetJogressLevels"
+        ],
+        "cardData": [
+          "AD1_010, BT7_017, BT7_111, EX7/P/BT samples with AddSelfDigivolutionRequirementStaticEffect"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
+      ],
+      "closureTasks": [
+        "digivolution/link requirement source sample을 fixture 후보로 묶는다.",
+        "effective metadata/level query가 있을 때와 없을 때의 gate 결과를 별도 테스트 후보로 유지한다."
+      ],
+      "testCandidates": [
+        "Static evolution requirement hand source generates and executes",
+        "Static evolution requirement cannot-ignore restriction blocks permission",
+        "Static link requirement uses effective metadata and level",
+        "Static requirement replay deterministic"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-12",
+      "title": "effective card metadata name/trait/text policy",
+      "classification": "NeedsDataPolicy",
+      "partialReason": "CardSource의 BaseCardNames/CardNames/CardTraits 및 text metadata는 static criteria에 필요하지만 CardBaseEntity import/variant/data anomaly policy와 맞물린다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardSource.cs",
+          "DCGO/Assets/CardBaseEntity/**/*.asset",
+          "docs/generated/as-is-restart/asis-card-data-field-summary.json"
+        ],
+        "classes": [
+          "CardSource",
+          "CEntity_Base",
+          "CardMetadataSnapshot"
+        ],
+        "methodsOrCalls": [
+          "BaseCardNames",
+          "CardNames",
+          "CardTraits",
+          "HasSameCardName",
+          "CardTextEnglish"
+        ],
+        "cardData": [
+          "GOAL 09 DATA-001 duplicateCardIdGroupCount=2384, missingEffectSourceCandidateCount=39"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Domain/CardMetadataCriteria.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Domain/CardDefinition.cs"
+      ],
+      "closureTasks": [
+        "name/trait/text normalization policy를 DATA-001과 연결한다.",
+        "metadata criteria가 asset text 전문 복제 없이 stable field만 참조하도록 한다."
+      ],
+      "testCandidates": [
+        "Continuous metadata criteria gates target trait and text",
+        "Static card metadata modifier affects cost criteria",
+        "Static requirement metadata criteria gates source and target"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": false,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-13",
+      "title": "effective color/level/face-up security data policy",
+      "classification": "NeedsDataPolicy",
+      "partialReason": "CardSource CardColors/DualCardColors/TreatedLevel/IsFaceUp와 face-up security trigger는 static criteria와 source scope에 필요하지만 data/variant policy를 먼저 고정해야 한다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardSource.cs",
+          "DCGO/Assets/Scripts/Script/Permanent.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/CardBaseEntity/**/*.asset"
+        ],
+        "classes": [
+          "CardSource",
+          "Permanent",
+          "CardController"
+        ],
+        "methodsOrCalls": [
+          "CardColors",
+          "DualCardColors",
+          "TreatedLevel",
+          "IsFaceUp",
+          "SetFaceUp",
+          "OnFaceUpSecurityIncreased"
+        ],
+        "cardData": [
+          "FND-003 OnFaceUpSecurityIncreased DataPolicyRequired affected 2"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Domain/CardDefinition.cs",
+        "src/DCGO.RL.Engine/Domain/CardInstance.cs"
+      ],
+      "closureTasks": [
+        "face-up security와 color/level variant policy를 DATA-001에 넘긴다.",
+        "effective card/base/current color와 option color requirement fixture 후보를 유지한다."
+      ],
+      "testCandidates": [
+        "Static card color modifier affects option color requirement",
+        "Static ignore color requirement permits option",
+        "Static card level modifier feeds permanent level requirement",
+        "Continuous face-up security source applies"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": false,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-14",
+      "title": "AutoProcessing priority/cut-in/background ordering parity",
+      "classification": "NeedsSourceMapping",
+      "partialReason": "AutoProcessing.GetSkillInfos/StackSkillInfos/ActivateBackgroundEffects와 cut-in/background ordering은 source collection의 실제 실행 순서를 좌우하므로 source mapping 없이 Verified 근거로 쓸 수 없다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/AutoProcessing.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/Scripts/Script/TurnStateMachine.cs"
+        ],
+        "classes": [
+          "AutoProcessing",
+          "SkillInfo",
+          "CardController",
+          "TurnStateMachine"
+        ],
+        "methodsOrCalls": [
+          "GetSkillInfos",
+          "GetSkillInfosOfCards",
+          "StackSkillInfos",
+          "ActivateBackgroundEffects",
+          "autoProcessing_CutIn"
+        ],
+        "cardData": [
+          "BeforePayCost/OnUseOption/OnSecurityCheck/cut-in samples in GOAL 05 call graph"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        "src/DCGO.RL.Engine/Effects/TriggerCollector.cs",
+        "src/DCGO.RL.Engine/Effects/SelectionContinuation.cs"
+      ],
+      "closureTasks": [
+        "priority/cut-in/background ordering을 ContinuousOrStaticEffect closure blocker 또는 별도 capability로 분리한다.",
+        "동시 trigger priority를 현재 passing tests만으로 source parity 처리하지 않는다."
+      ],
+      "testCandidates": [
+        "future MultipleSkills priority/source ordering fixtures",
+        "existing TriggerPipeline continuation tests as candidates only"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": true,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-15",
+      "title": "CardEffect body-specific static/continuous variants 제외",
+      "classification": "CardEffectBodySpecific",
+      "partialReason": "일부 static/continuous-like surface는 개별 CardEffect body나 special mechanic 분해가 필요하므로 FND-001에서 구현하지 않는다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/CardEffect/**/*.cs",
+          "docs/generated/as-is-restart/fnd-003-next-action-queue.json"
+        ],
+        "classes": [
+          "individual CardEffect classes",
+          "OnUseDigiburst special mechanic"
+        ],
+        "methodsOrCalls": [
+          "OnUseDigiburst",
+          "card-specific CanUse/Activate bodies"
+        ],
+        "cardData": [
+          "FND-003 CardEffectBodySpecificCount=1"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "future card-specific porting only after OpenCodeReady",
+        "generated full-card source scaffold"
+      ],
+      "closureTasks": [
+        "FND-001 closure list에서 개별 CardEffect body 구현을 제외한다.",
+        "special mechanic은 별도 remediation queue로만 남긴다."
+      ],
+      "testCandidates": [
+        "none in FND-001; future mechanic-specific tests only"
+      ],
+      "trust001Handoff": true,
+      "gateRecalculationCandidate": false,
+      "blocked": false
+    },
+    {
+      "id": "FND001-CS-16",
+      "title": "Unity visual/display-only continuous surfaces 제외",
+      "classification": "UnityOnlyExcluded",
+      "partialReason": "Security display, ShowCardEffect, BrainStormCoroutine, ContinuousController coroutine/UI surfaces는 headless closure 근거가 아니라 UnityAdapter/visual-only 범위다.",
+      "sourceEvidence": {
+        "files": [
+          "DCGO/Assets/Scripts/Script/CardController.cs",
+          "DCGO/Assets/Scripts/Script/CardObjectController.cs"
+        ],
+        "classes": [
+          "ContinuousController",
+          "Effects",
+          "BrainStormObject"
+        ],
+        "methodsOrCalls": [
+          "ShowCardEffect",
+          "MoveToExecuteCardEffect",
+          "BrainStormCoroutine",
+          "ShrinkSecurityDigimonDisplay"
+        ],
+        "cardData": [
+          "visual/security display calls around security and remove-field flows"
+        ]
+      },
+      "currentHeadlessCandidates": [
+        "UnityAdapter future scope",
+        "DecisionPoint/SelectionRequest for non-visual decisions"
+      ],
+      "closureTasks": [
+        "visual-only calls를 ContinuousOrStaticEffect foundation blocker에서 제외한다.",
+        "rule-visible state 변화가 있는 호출만 source mapping 대상으로 유지한다."
+      ],
+      "testCandidates": [
+        "none for visual display; only state-change parity candidates remain"
+      ],
+      "trust001Handoff": false,
+      "gateRecalculationCandidate": false,
+      "blocked": false
+    }
+  ],
+  "closeableFoundationTaskIds": [
+    "FND001-CS-02",
+    "FND001-CS-03",
+    "FND001-CS-04",
+    "FND001-CS-06",
+    "FND001-CS-08",
+    "FND001-CS-11"
+  ],
+  "blockedNeedsManualReviewIds": [],
+  "fnd003ContinuousOrStaticHandoffCapabilities": [
+    "OnDeclaration",
+    "WhenPermanentWouldBeDeleted",
+    "OnTappedAnyone",
+    "WhenRemoveField",
+    "BeforePayCost",
+    "OnDetermineDoSecurityCheck",
+    "OnEndBattle",
+    "OnDigivolutionCardDiscarded",
+    "OnAddDigivolutionCards",
+    "WhenLinked",
+    "OnMove",
+    "OnUnTappedAnyone",
+    "OnUseOption",
+    "OnDiscardLibrary",
+    "OnAddSecurity",
+    "WhenReturntoLibraryAnyone",
+    "OnDiscardSecurity",
+    "AfterPayCost",
+    "WhenDigisorption",
+    "OnLinkCardDiscarded",
+    "OnRemovedField",
+    "OnFaceUpSecurityIncreased",
+    "WhenWouldLink",
+    "WhenUntapAnyone",
+    "WhenWouldDigivolutionCardDiscarded"
+  ],
+  "trust001Handoff": {
+    "taskIds": [
+      "FND001-CS-01",
+      "FND001-CS-02",
+      "FND001-CS-03",
+      "FND001-CS-04",
+      "FND001-CS-05",
+      "FND001-CS-06",
+      "FND001-CS-07",
+      "FND001-CS-08",
+      "FND001-CS-09",
+      "FND001-CS-10",
+      "FND001-CS-11",
+      "FND001-CS-12",
+      "FND001-CS-13",
+      "FND001-CS-14",
+      "FND001-CS-15"
+    ],
+    "fnd003Capabilities": [
+      "OnDeclaration",
+      "WhenPermanentWouldBeDeleted",
+      "OnTappedAnyone",
+      "WhenRemoveField",
+      "BeforePayCost",
+      "OnDetermineDoSecurityCheck",
+      "OnEndBattle",
+      "OnDigivolutionCardDiscarded",
+      "OnAddDigivolutionCards",
+      "WhenLinked",
+      "OnMove",
+      "OnUnTappedAnyone",
+      "OnUseOption",
+      "OnDiscardLibrary",
+      "OnAddSecurity",
+      "WhenReturntoLibraryAnyone",
+      "OnDiscardSecurity",
+      "AfterPayCost",
+      "WhenDigisorption",
+      "OnLinkCardDiscarded",
+      "OnRemovedField",
+      "OnFaceUpSecurityIncreased",
+      "WhenWouldLink",
+      "OnUseDigiburst",
+      "WhenUntapAnyone",
+      "WhenWouldDigivolutionCardDiscarded"
+    ]
+  },
+  "testCandidates": [
+    "CardEffectFactory keyword static effect rejects unsupported keyword shape",
+    "CardEffectFactory static keyword wrappers map supported keywords",
+    "Continuous DP modifier affects effective DP",
+    "Continuous and duration modifiers stack deterministically",
+    "Continuous dynamic SecurityAttack from source count",
+    "Continuous effects are derived for state hash",
+    "Continuous executing source applies during execution",
+    "Continuous face-down security source is ignored",
+    "Continuous face-up security source applies",
+    "Continuous hand source applies only from hand",
+    "Continuous linked source applies from linked zone",
+    "Continuous metadata criteria gates target trait and text",
+    "Continuous static keyword condition gates keyword",
+    "Continuous static keyword field source grants Blocker",
+    "Continuous static keyword inherited source stops after move",
+    "Continuous static keyword replay deterministic",
+    "Continuous trash source applies from trash",
+    "ContinuousOrStaticEffect sourceEffect sample retains sourcePath/card asset mapping",
+    "Duration invariant detects invalid granted trigger",
+    "Duration invariant detects invalid keyword modifier",
+    "Duration player DP modifier affects owner battle area",
+    "Duration player SecurityAttack modifier affects owner Digimon",
+    "Duration player keyword grants Rush to matching battle area Digimon",
+    "Duration player keyword hash and replay deterministic",
+    "Duration player runtime modifiers clone restore hash",
+    "Duration player runtime modifiers replay deterministic",
+    "Duration temporary granted trigger hash and replay deterministic",
+    "Duration temporary granted trigger runs from target permanent timing",
+    "Duration temporary keyword grants Blocker until cleanup",
+    "Duration temporary keyword grants Rush attack legality",
+    "Duration temporary keyword hash and replay deterministic",
+    "FND-003 event-specific tests after remediation",
+    "Script runtime Player effect list uses temporary granted effects",
+    "Static card color modifier affects digivolution color requirement",
+    "Static card color modifier affects option color requirement",
+    "Static card level modifier feeds permanent level requirement",
+    "Static card metadata modifier affects cost criteria",
+    "Static card restriction blocks option play",
+    "Static card restriction blocks permanent field play",
+    "Static card restriction blocks return to hand",
+    "Static cost modifier adjusts play and digivolution cost",
+    "Static evolution requirement cannot-ignore restriction blocks permission",
+    "Static evolution requirement cannot-ignore restriction condition gates",
+    "Static evolution requirement condition gates target",
+    "Static evolution requirement hand source generates and executes",
+    "Static evolution requirement ignore permission generates and executes",
+    "Static evolution requirement ignore permission requires target gate",
+    "Static evolution requirement stops after source move",
+    "Static ignore color requirement permits option",
+    "Static immunity descriptor evaluates metadata",
+    "Static link cost modifier adjusts link cost",
+    "Static link requirement hand source generates and executes",
+    "Static link requirement uses effective metadata and level",
+    "Static permanent level modifier affects normal digivolution requirement",
+    "Static requirement metadata criteria gates source and target",
+    "Static requirement replay deterministic",
+    "Static restriction blocks attack and block",
+    "capability registry has inventoryAliases [None]",
+    "existing TriggerPipeline continuation tests as candidates only",
+    "full-card parity evidence NotRun count remains 3918 until fixture exists",
+    "future BeforePayCost/AfterPayCost window fixtures",
+    "future MultipleSkills priority/source ordering fixtures",
+    "future trigger/process keyword mapping fixtures",
+    "future would/delete/remove timing fixtures",
+    "none for visual display; only state-change parity candidates remain",
+    "none in FND-001; future mechanic-specific tests only",
+    "validation-strategy 66V alias assertions"
+  ],
+  "nextWork": {
+    "canProceedWithoutImplementationNow": false,
+    "recommendedNextGoal": "FND-001 산출물 검토 후 FND-003 capability remediation 또는 TRUST-001 trust boundary audit 중 하나를 별도 goal로 실행한다.",
+    "recommendedCommitMessage": "docs: decompose FND-001 continuous static partial closure"
+  }
+}

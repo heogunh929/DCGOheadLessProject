@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001-foundation-task-queue.v1",
+  "generatedAt": "2026-06-23T09:42:39.597233+00:00",
+  "goal": "FND-001 ContinuousOrStaticEffect partial closure task queue",
+  "summary": {
+    "totalTaskCount": 16,
+    "closeableFoundationTaskCount": 6,
+    "blockedNeedsManualReviewCount": 0,
+    "needsSourceMappingCount": 3,
+    "needsDataPolicyCount": 2,
+    "needsCapabilityRemediationCount": 3,
+    "trust001HandoffCount": 15,
+    "implementationPerformed": false,
+    "srcModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "trust001Performed": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "rawJsonOver100MiBAdded": false,
+    "commitOrPushPerformed": false
+  },
+  "closeableFoundationTasks": [
+    {
+      "id": "FND001-CS-02",
+      "title": "EffectTiming.None alias와 gate accounting 고정",
+      "closureTasks": [
+        "raw None capability가 registry에 없고 ContinuousOrStaticEffect.inventoryAliases에만 남는지 audit한다.",
+        "source-required-capabilities에서 None timing이 unsupported blocker로 재등장하지 않도록 verifier 후보를 만든다."
+      ],
+      "testCandidates": [
+        "validation-strategy 66V alias assertions",
+        "capability registry has inventoryAliases [None]"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "docs/generated/capability-truth-audit/capability-registry.json"
+      ]
+    },
+    {
+      "id": "FND001-CS-03",
+      "title": "continuous/static source collector scope parity",
+      "closureTasks": [
+        "source kind별 fixture 후보를 full-card scaffold sourcePath와 연결한다.",
+        "linked/inherited/face-up security ordering이 원본 AutoProcessing 수집 순서와 다르면 별도 blocker로 분리한다."
+      ],
+      "testCandidates": [
+        "Continuous linked source applies from linked zone",
+        "Continuous face-up security source applies",
+        "Continuous hand source applies only from hand",
+        "Continuous trash source applies from trash",
+        "Continuous executing source applies during execution"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs"
+      ]
+    },
+    {
+      "id": "FND001-CS-04",
+      "title": "duration bucket cleanup/provider integration parity",
+      "closureTasks": [
+        "Until* bucket별 cleanup timing을 원본 Player/Permanent/TurnStateMachine/AttackProcess와 대조한다.",
+        "PermanentEffects/provider catalog adoption 미완 범위를 TRUST-001 후보와 분리한다."
+      ],
+      "testCandidates": [
+        "Duration player runtime modifiers replay deterministic",
+        "Duration temporary keyword grants Blocker until cleanup",
+        "Duration temporary granted trigger runs from target permanent timing",
+        "Script runtime Player effect list uses temporary granted effects"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+        "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+        "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs"
+      ]
+    },
+    {
+      "id": "FND001-CS-06",
+      "title": "supported static keyword descriptor parity",
+      "closureTasks": [
+        "supported keyword factory method별 source sample을 descriptor snapshot 후보로 묶는다.",
+        "condition/source metadata/stable ID가 registry evidence와 일치하는지 검증 후보로 둔다."
+      ],
+      "testCandidates": [
+        "Continuous static keyword field source grants Blocker",
+        "CardEffectFactory static keyword wrappers map supported keywords",
+        "Continuous static keyword replay deterministic"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs"
+      ]
+    },
+    {
+      "id": "FND001-CS-08",
+      "title": "static DP/SecurityAttack/SecurityDigimonDP descriptor parity",
+      "closureTasks": [
+        "fixed/dynamic amount delegate를 source scaffold sample과 매핑한다.",
+        "base definition mutation 금지와 derived stat hash evidence를 gate 후보로 연결한다."
+      ],
+      "testCandidates": [
+        "Continuous DP modifier affects effective DP",
+        "Continuous dynamic SecurityAttack from source count",
+        "Continuous effects are derived for state hash",
+        "Continuous and duration modifiers stack deterministically"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+        "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/EffectiveStatService.cs",
+        "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs"
+      ]
+    },
+    {
+      "id": "FND001-CS-11",
+      "title": "static evolution/link requirement effective gates",
+      "closureTasks": [
+        "digivolution/link requirement source sample을 fixture 후보로 묶는다.",
+        "effective metadata/level query가 있을 때와 없을 때의 gate 결과를 별도 테스트 후보로 유지한다."
+      ],
+      "testCandidates": [
+        "Static evolution requirement hand source generates and executes",
+        "Static evolution requirement cannot-ignore restriction blocks permission",
+        "Static link requirement uses effective metadata and level",
+        "Static requirement replay deterministic"
+      ],
+      "currentHeadlessCandidates": [
+        "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+        "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
+        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
+      ]
+    }
+  ],
+  "needsSourceMappingTasks": [
+    "FND001-CS-01",
+    "FND001-CS-07",
+    "FND001-CS-14"
+  ],
+  "needsDataPolicyTasks": [
+    "FND001-CS-12",
+    "FND001-CS-13"
+  ],
+  "needsCapabilityRemediationTasks": [
+    "FND001-CS-05",
+    "FND001-CS-09",
+    "FND001-CS-10"
+  ],
+  "trust001HandoffTasks": [
+    "FND001-CS-01",
+    "FND001-CS-02",
+    "FND001-CS-03",
+    "FND001-CS-04",
+    "FND001-CS-05",
+    "FND001-CS-06",
+    "FND001-CS-07",
+    "FND001-CS-08",
+    "FND001-CS-09",
+    "FND001-CS-10",
+    "FND001-CS-11",
+    "FND001-CS-12",
+    "FND001-CS-13",
+    "FND001-CS-14",
+    "FND001-CS-15"
+  ],
+  "blockedNeedsManualReviewTasks": [],
+  "notInScopeNow": [
+    "src implementation",
+    "DCGO original modification",
+    "CardEffect body implementation",
+    "C0039+ card-porting",
+    "TRUST-001 execution",
+    "Foundation Gate number manipulation",
+    "generated status promotion",
+    "commit/push"
+  ]
+}
