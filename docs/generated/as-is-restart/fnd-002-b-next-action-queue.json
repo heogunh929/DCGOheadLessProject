@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002b-next-action-queue.v1",
+  "generatedAt": "2026-06-23T22:38:40.355036+00:00",
+  "goal": "FND-002-B",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-b-link-lifecycle-source-mapping.json",
+  "summary": {
+    "nextFoundationTaskCount": 3,
+    "note": "These tasks are source-known Unsupported link lifecycle blockers, not CardEffect body tasks."
+  },
+  "nextFoundationTasks": [
+    {
+      "taskId": "FND-002-B1",
+      "apiName": "WhenWouldLink",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "link action pre-cut-in before link cost payment and AddLinkCard/IPlacePermanentToLinkCards continuation",
+      "missingHeadlessBoundary": "pre-link cut-in queue, payload preservation, root-aware continuation, and post-cut-in target revalidation",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "link lifecycle ordering",
+        "source/target revalidation",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-B2",
+      "apiName": "WhenLinked",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "post-link trigger emitted after a card is inserted into LinkedCards and LinkedDP/cardSources are updated",
+      "missingHeadlessBoundary": "post-link rule event queue, linked-source role snapshot, isFromDigimon payload, and WhenLinking factory wrapper parity",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "link lifecycle ordering",
+        "source/target revalidation",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-B3",
+      "apiName": "OnLinkCardDiscarded",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "linked-card discard event emitted for fixed linked cards before RemoveLinkedCard actually removes/trashes them",
+      "missingHeadlessBoundary": "linked-card discard primitive, willBeRemoveSources equivalent, OnLinkCardDiscarded trigger queue, and Ace overflow ordering",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "link lifecycle ordering",
+        "source/target revalidation",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    }
+  ]
+}

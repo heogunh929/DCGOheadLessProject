@@ -1,14 +1,16 @@
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Primitives;
 
 namespace DCGO.RL.Engine.Battle;
 
 public sealed class MoveFromBreedingService
 {
-    private readonly IZoneMover _zoneMover;
+    private readonly Tier1PrimitiveService _primitives;
 
-    public MoveFromBreedingService(IZoneMover? zoneMover = null)
+    public MoveFromBreedingService(IZoneMover? zoneMover = null, Tier1PrimitiveService? primitiveService = null)
     {
-        _zoneMover = zoneMover ?? new ZoneMover();
+        var mover = zoneMover ?? new ZoneMover();
+        _primitives = primitiveService ?? new Tier1PrimitiveService(mover);
     }
 
     public PermanentState Move(GameState state, PlayerId playerId, PermanentId permanentId, int targetFrameIndex)
@@ -34,7 +36,7 @@ public sealed class MoveFromBreedingService
             throw new DomainException($"Battle frame '{targetFrameIndex}' is not empty.");
         }
 
-        _zoneMover.MovePermanent(
+        _primitives.MovePermanentWithEvents(
             state,
             new PermanentZoneMoveCommand(permanentId, Zone.BreedingArea, Zone.BattleArea, MoveReason.MoveFromBreeding, targetFrameIndex));
 

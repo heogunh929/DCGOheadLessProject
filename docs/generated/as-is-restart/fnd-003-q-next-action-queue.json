@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd003q-next-action-queue.v1",
+  "generatedAt": "2026-06-23T23:39:41.282016+00:00",
+  "goal": "FND-003-Q",
+  "reconciliation": "docs/generated/as-is-restart/fnd-003-q-capability-status-reconciliation.json",
+  "summary": {
+    "closedUnsupportedByReconciliationCount": 5,
+    "remainingUnsupportedCapabilityCount": 10,
+    "remainingPartiallyImplementedCapabilityCount": 53,
+    "openCodeReady": false
+  },
+  "reconciledItems": [
+    {
+      "capabilityId": "AfterPayCost",
+      "fndGoalId": "FND-003-C",
+      "fndGoalCompleted": true,
+      "previousAuditStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "reconciledCapabilityStatus": "PartiallyImplemented",
+      "reconciliationClassification": "SourceAlignedPartialFoundation",
+      "affectedCardCount": 15,
+      "sourceFileCount": 7,
+      "sourceRequired": {
+        "sourceEffectCount": 7,
+        "sourceFileCount": 7,
+        "affectedCardCount": 15,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT1_109",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT1-109#308@base",
+                "cardId": "BT1-109",
+                "cardIndex": 308,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Option/BT1_109.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT3_103",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+            "affectedCardCount": 3,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT3-103#744@base",
+                "cardId": "BT3-103",
+                "cardIndex": 744,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103.asset"
+              },
+              {
+                "definitionStableId": "BT3-103#745@P1",
+                "cardId": "BT3-103",
+                "cardIndex": 745,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P1.asset"
+              },
+              {
+                "definitionStableId": "BT3-103#8492@P2",
+                "cardId": "BT3-103",
+                "cardIndex": 8492,
+                "variantKey": "P2",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT3/Green/Option/BT3_103_P2.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT5_109",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+            "affectedCardCount": 3,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT5-109#1090@base",
+                "cardId": "BT5-109",
+                "cardIndex": 1090,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109.asset"
+              },
+              {
+                "definitionStableId": "BT5-109#1091@P1",
+                "cardId": "BT5-109",
+                "cardIndex": 1091,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109_P1.asset"
+              },
+              {
+                "definitionStableId": "BT5-109#8655@P0",
+                "cardId": "BT5-109",
+                "cardIndex": 8655,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT5/White/Option/BT5_109_P0.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "inventoryEvidence": {
+        "mappingStatus": "PartiallyImplemented",
+        "cardEffectSourceFileCount": 7,
+        "cardEffectOccurrenceCount": 7,
+        "sourceScopeFileCount": 8,
+        "sourceScopeOccurrenceCount": 8,
+        "engineSourceReferenceCount": 2,
+        "engineTestReferenceCount": 39,
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX1/Green/EX1_033.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX1/White/EX1_071.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+          "DCGO/Assets/Scripts/CardEffect/ST12/Red/ST12_15.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs"
+        ],
+        "notes": [
+          "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+          "FND-003-C post-cost runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        ]
+      },
+      "capabilityRegistryReason": "FND-003-C connects the source post-cost timing to standard play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun, so this is not Verified.",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/CostPaymentRuleEventPayload.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "testEvidence": [
+        "FND-003-C AfterPayCost runs after cost payment"
+      ],
+      "scopeDoc": "docs/rl-engine/after-pay-cost-foundation-scope-fnd003c.md",
+      "completedScope": "standard play, option play, and digivolution post-cost trigger runtime scope",
+      "latestVerification": "All 613 tests passed at FND-003-C; latest later full regression before this evidence-only reconciliation was All 640 tests passed.",
+      "remainingBoundary": "full-card parity remains NotRun and card-specific cost/body variants are not promoted.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "capabilityId": "BeforePayCost",
+      "fndGoalId": "FND-003-N",
+      "fndGoalCompleted": true,
+      "previousAuditStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "reconciledCapabilityStatus": "PartiallyImplemented",
+      "reconciliationClassification": "SourceAlignedPartialFoundation",
+      "affectedCardCount": 284,
+      "sourceFileCount": 141,
+      "sourceRequired": {
+        "sourceEffectCount": 141,
+        "sourceFileCount": 141,
+        "affectedCardCount": 284,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT10_052",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-052#2093@base",
+                "cardId": "BT10-052",
+                "cardIndex": 2093,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Green/Digimon/BT10_052.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT10_087",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+            "affectedCardCount": 4,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-087#2137@base",
+                "cardId": "BT10-087",
+                "cardIndex": 2137,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087.asset"
+              },
+              {
+                "definitionStableId": "BT10-087#2138@P1",
+                "cardId": "BT10-087",
+                "cardIndex": 2138,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087_P1.asset"
+              },
+              {
+                "definitionStableId": "BT10-087#4343@P0",
+                "cardId": "BT10-087",
+                "cardIndex": 4343,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Tamer/BT10_087_P0.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT10_088",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+            "affectedCardCount": 3,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-088#2139@base",
+                "cardId": "BT10-088",
+                "cardIndex": 2139,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088.asset"
+              },
+              {
+                "definitionStableId": "BT10-088#2140@P1",
+                "cardId": "BT10-088",
+                "cardIndex": 2140,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088_P1.asset"
+              },
+              {
+                "definitionStableId": "BT10-088#4344@P0",
+                "cardId": "BT10-088",
+                "cardIndex": 4344,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Tamer/BT10_088_P0.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "inventoryEvidence": {
+        "mappingStatus": "PartiallyImplemented",
+        "cardEffectSourceFileCount": 141,
+        "cardEffectOccurrenceCount": 173,
+        "sourceScopeFileCount": 143,
+        "sourceScopeOccurrenceCount": 177,
+        "engineSourceReferenceCount": 2,
+        "engineTestReferenceCount": 95,
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_091.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/White/BT11_095.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_094.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_102.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_050.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_093.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Purple/BT12_096.cs"
+        ],
+        "notes": [
+          "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+          "FND-003-N pre-cost runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        ]
+      },
+      "capabilityRegistryReason": "FND-003-N connects the source pre-cost timing to play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun and cost replacement variants remain incomplete, so this is not Verified.",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/CostPaymentRuleEventPayload.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_045.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_065.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Purple/BT21_088.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_011.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "testEvidence": [
+        "FND-003-N BeforePayCost runs before play and option cost payment",
+        "FND-003-N BeforePayCost background effects run before cut-in",
+        "FND-003-N BeforePayCost runs before digivolution cost payment"
+      ],
+      "scopeDoc": "docs/rl-engine/before-pay-cost-foundation-scope-fnd003n.md",
+      "completedScope": "pre-cost play, option, and digivolution cost payment runtime scope",
+      "latestVerification": "All 629 tests passed at FND-003-N; latest later full regression before this evidence-only reconciliation was All 640 tests passed.",
+      "remainingBoundary": "full-card parity remains NotRun and replacement/cost-policy variants remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "capabilityId": "OnDeclaration",
+      "fndGoalId": "FND-003-P",
+      "fndGoalCompleted": true,
+      "previousAuditStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "reconciledCapabilityStatus": "PartiallyImplemented",
+      "reconciliationClassification": "SourceAlignedPartialFoundation",
+      "affectedCardCount": 578,
+      "sourceFileCount": 298,
+      "sourceRequired": {
+        "sourceEffectCount": 298,
+        "sourceFileCount": 298,
+        "affectedCardCount": 578,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT1_088",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+            "affectedCardCount": 3,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT1-088#277@base",
+                "cardId": "BT1-088",
+                "cardIndex": 277,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088.asset"
+              },
+              {
+                "definitionStableId": "BT1-088#278@P1",
+                "cardId": "BT1-088",
+                "cardIndex": 278,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088_P1.asset"
+              },
+              {
+                "definitionStableId": "BT1-088#279@P2",
+                "cardId": "BT1-088",
+                "cardIndex": 279,
+                "variantKey": "P2",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_088_P2.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT1_089",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+            "affectedCardCount": 4,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT1-089#280@base",
+                "cardId": "BT1-089",
+                "cardIndex": 280,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089.asset"
+              },
+              {
+                "definitionStableId": "BT1-089#281@P1",
+                "cardId": "BT1-089",
+                "cardIndex": 281,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089_P1.asset"
+              },
+              {
+                "definitionStableId": "BT1-089#282@P2",
+                "cardId": "BT1-089",
+                "cardIndex": 282,
+                "variantKey": "P2",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Tamer/BT1_089_P2.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT10_025",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-025#2062@base",
+                "cardId": "BT10-025",
+                "cardIndex": 2062,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_025.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "inventoryEvidence": {
+        "mappingStatus": "PartiallyImplemented",
+        "cardEffectSourceFileCount": 298,
+        "cardEffectOccurrenceCount": 301,
+        "sourceScopeFileCount": 302,
+        "sourceScopeOccurrenceCount": 308,
+        "engineSourceReferenceCount": 1,
+        "engineTestReferenceCount": 28,
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_097.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_100.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_061.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_029.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_015.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_089.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/White/BT12_098.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT13/Blue/BT13_028.cs"
+        ],
+        "notes": [
+          "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+          "FND-003-P declaration legal action/runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        ]
+      },
+      "capabilityRegistryReason": "FND-003-P connects declaration timing to legal action generation and selected declaration execution with source-aligned tests. Full-card parity and all declaration continuation variants remain incomplete, so this is not Verified.",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "testEvidence": [
+        "OnDeclaration legal actions include field hand trash",
+        "OnDeclaration declare action executes selected effect",
+        "OnDeclaration declare action revalidates source role"
+      ],
+      "scopeDoc": "docs/rl-engine/on-declaration-foundation-scope-fnd003p.md",
+      "completedScope": "legal action generation and selected declaration execution runtime scope",
+      "latestVerification": "All 633 tests passed at FND-003-P; latest later full regression before this evidence-only reconciliation was All 640 tests passed.",
+      "remainingBoundary": "full-card parity remains NotRun and declaration continuation/card-body variants remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "capabilityId": "OnEndBattle",
+      "fndGoalId": "FND-003-L",
+      "fndGoalCompleted": true,
+      "previousAuditStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "reconciledCapabilityStatus": "PartiallyImplemented",
+      "reconciliationClassification": "SourceAlignedPartialFoundation",
+      "affectedCardCount": 160,
+      "sourceFileCount": 84,
+      "sourceRequired": {
+        "sourceEffectCount": 84,
+        "sourceFileCount": 84,
+        "affectedCardCount": 160,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT1_077",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+            "affectedCardCount": 3,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT1-077#250@base",
+                "cardId": "BT1-077",
+                "cardIndex": 250,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077.asset"
+              },
+              {
+                "definitionStableId": "BT1-077#251@P1",
+                "cardId": "BT1-077",
+                "cardIndex": 251,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077_P1.asset"
+              },
+              {
+                "definitionStableId": "BT1-077#252@P2",
+                "cardId": "BT1-077",
+                "cardIndex": 252,
+                "variantKey": "P2",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Digimon/BT1_077_P2.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT1_112",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT1-112#314@base",
+                "cardId": "BT1-112",
+                "cardIndex": 314,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT1/Green/Option/BT1_112.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT10_028",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-028#2066@base",
+                "cardId": "BT10-028",
+                "cardIndex": 2066,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028.asset"
+              },
+              {
+                "definitionStableId": "BT10-028#4308@P0",
+                "cardId": "BT10-028",
+                "cardIndex": 4308,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Blue/Digimon/BT10_028_P0.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "inventoryEvidence": {
+        "mappingStatus": "PartiallyImplemented",
+        "cardEffectSourceFileCount": 84,
+        "cardEffectOccurrenceCount": 87,
+        "sourceScopeFileCount": 86,
+        "sourceScopeOccurrenceCount": 89,
+        "engineSourceReferenceCount": 1,
+        "engineTestReferenceCount": 31,
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_045.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_054.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_055.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_059.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_053.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_055.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT13/Green/BT13_055.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_043.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_047.cs"
+        ],
+        "notes": [
+          "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+          "FND-003-L battle-result runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        ]
+      },
+      "capabilityRegistryReason": "FND-003-L connects battle-end timing to battle-result runtime scope and selection pause/resume tests. Full-card parity and all battle lifecycle variants remain incomplete, so this is not Verified.",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/AttackService.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_047.cs",
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+      ],
+      "testEvidence": [
+        "FND-003-L OnEndBattle queues battle end event",
+        "FND-003-L OnEndBattle selection pauses and resumes"
+      ],
+      "scopeDoc": "docs/rl-engine/on-end-battle-foundation-scope-fnd003l.md",
+      "completedScope": "battle-result runtime scope with selection pause/resume handling",
+      "latestVerification": "All 623 tests passed at FND-003-L; latest later full regression before this evidence-only reconciliation was All 640 tests passed.",
+      "remainingBoundary": "full-card parity remains NotRun and all battle lifecycle/card-body variants remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "capabilityId": "OnMove",
+      "fndGoalId": "FND-003-I",
+      "fndGoalCompleted": true,
+      "previousAuditStatus": "Unsupported",
+      "inventorySection": "timings",
+      "inventoryStatus": "PartiallyImplemented",
+      "reconciledCapabilityStatus": "PartiallyImplemented",
+      "reconciliationClassification": "SourceAlignedPartialFoundation",
+      "affectedCardCount": 79,
+      "sourceFileCount": 30,
+      "sourceRequired": {
+        "sourceEffectCount": 30,
+        "sourceFileCount": 30,
+        "affectedCardCount": 79,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT11_087",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT11-087#2364@base",
+                "cardId": "BT11-087",
+                "cardIndex": 2364,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_087.asset"
+              },
+              {
+                "definitionStableId": "BT11-087#4432@P0",
+                "cardId": "BT11-087",
+                "cardIndex": 4432,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Purple/Digimon/BT11_087_P0.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT15_054",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT15-054#3185@base",
+                "cardId": "BT15-054",
+                "cardIndex": 3185,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_054.asset"
+              },
+              {
+                "definitionStableId": "BT15-054#4739@P0",
+                "cardId": "BT15-054",
+                "cardIndex": 4739,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT15/Green/Digimon/BT15_054_P0.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT16_082",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+            "affectedCardCount": 9,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT16-082#3403@base",
+                "cardId": "BT16-082",
+                "cardIndex": 3403,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082.asset"
+              },
+              {
+                "definitionStableId": "BT16-082#3404@P1",
+                "cardId": "BT16-082",
+                "cardIndex": 3404,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P1.asset"
+              },
+              {
+                "definitionStableId": "BT16-082#4812@P0",
+                "cardId": "BT16-082",
+                "cardIndex": 4812,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT16/White/Digimon/BT16_082_P0.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "inventoryEvidence": {
+        "mappingStatus": "PartiallyImplemented",
+        "cardEffectSourceFileCount": 30,
+        "cardEffectOccurrenceCount": 30,
+        "sourceScopeFileCount": 32,
+        "sourceScopeOccurrenceCount": 32,
+        "engineSourceReferenceCount": 1,
+        "engineTestReferenceCount": 21,
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT24/Black/BT24_052.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT24/Purple/BT24_069.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT24/Yellow/BT24_034.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT5/Yellow/BT5_044.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT6/Blue/BT6_088.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT6/Red/BT6_087.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT8/Black/BT8_092.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT8/White/BT8_094.cs"
+        ],
+        "notes": [
+          "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+          "FND-003-I permanent-move primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        ]
+      },
+      "capabilityRegistryReason": "FND-003-I connects permanent move timing to the primitive move event scope with execution tests. Source-zone edge variants and full-card parity remain incomplete, so this is not Verified.",
+      "implementationEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+      ],
+      "testEvidence": [
+        "FND-003-I OnMove queues battle-area permanent move event"
+      ],
+      "scopeDoc": "docs/rl-engine/on-move-foundation-scope-fnd003i.md",
+      "completedScope": "primitive permanent-move event runtime scope",
+      "latestVerification": "All 619 tests passed at FND-003-I; latest later full regression before this evidence-only reconciliation was All 640 tests passed.",
+      "remainingBoundary": "full-card parity remains NotRun and source-zone edge variants remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    }
+  ],
+  "remainingUnsupportedCapabilityIds": [
+    "OnLinkCardDiscarded",
+    "OnUseDigiburst",
+    "WhenDigisorption",
+    "WhenLinked",
+    "WhenPermanentWouldBeDeleted",
+    "WhenRemoveField",
+    "WhenReturntoLibraryAnyone",
+    "WhenUntapAnyone",
+    "WhenWouldDigivolutionCardDiscarded",
+    "WhenWouldLink"
+  ],
+  "remainingUnsupportedCapabilities": [
+    {
+      "capabilityId": "OnLinkCardDiscarded",
+      "affectedCardCount": 14,
+      "sourceFileCount": 7
+    },
+    {
+      "capabilityId": "OnUseDigiburst",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1
+    },
+    {
+      "capabilityId": "WhenDigisorption",
+      "affectedCardCount": 15,
+      "sourceFileCount": 10
+    },
+    {
+      "capabilityId": "WhenLinked",
+      "affectedCardCount": 87,
+      "sourceFileCount": 64
+    },
+    {
+      "capabilityId": "WhenPermanentWouldBeDeleted",
+      "affectedCardCount": 405,
+      "sourceFileCount": 206
+    },
+    {
+      "capabilityId": "WhenRemoveField",
+      "affectedCardCount": 304,
+      "sourceFileCount": 164
+    },
+    {
+      "capabilityId": "WhenReturntoLibraryAnyone",
+      "affectedCardCount": 25,
+      "sourceFileCount": 9
+    },
+    {
+      "capabilityId": "WhenUntapAnyone",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1
+    },
+    {
+      "capabilityId": "WhenWouldDigivolutionCardDiscarded",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1
+    },
+    {
+      "capabilityId": "WhenWouldLink",
+      "affectedCardCount": 2,
+      "sourceFileCount": 2
+    }
+  ],
+  "recommendedNextQueueGroups": [
+    {
+      "taskId": "FND-003-R",
+      "status": "Pending",
+      "capabilityIds": [
+        "WhenPermanentWouldBeDeleted",
+        "WhenRemoveField",
+        "WhenReturntoLibraryAnyone",
+        "WhenUntapAnyone",
+        "WhenWouldDigivolutionCardDiscarded"
+      ],
+      "reason": "Replacement/cut-in timings are still source-mapped Unsupported and require runtime foundation decomposition."
+    },
+    {
+      "taskId": "FND-003-S",
+      "status": "Pending",
+      "capabilityIds": [
+        "WhenWouldLink",
+        "WhenLinked",
+        "OnLinkCardDiscarded"
+      ],
+      "reason": "Link lifecycle timings are still source-mapped Unsupported and require runtime foundation decomposition."
+    },
+    {
+      "taskId": "FND-003-T",
+      "status": "Pending",
+      "capabilityIds": [
+        "WhenDigisorption",
+        "OnUseDigiburst"
+      ],
+      "reason": "Digisorption/DigiBurst lifecycle timings are still source-mapped Unsupported and require data/runtime policy work."
+    },
+    {
+      "taskId": "FND-001-CONTINUE",
+      "status": "Pending",
+      "capabilityIds": [
+        "ContinuousOrStaticEffect"
+      ],
+      "reason": "Partial capability count remains non-zero and the Gate still selects ContinuousOrStaticEffect as next foundation capability."
+    },
+    {
+      "taskId": "PARITY-001-A",
+      "status": "Pending",
+      "capabilityIds": [],
+      "reason": "Full-card parity remains NotRun and is still required before any Verified/generated status promotion."
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002c-digisorption-digiburst-timing-policy.v1",
+  "generatedAt": "2026-06-23T22:53:13.972271+00:00",
+  "goal": "FND-002-C",
+  "sourceRoot": "E:/headlessDCGO/DCGO",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "fnd002Rerun": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+    "originalFnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 2,
+    "currentStatusCounts": {
+      "Unsupported": 2
+    },
+    "classificationCounts": {
+      "SourceMappedUnsupportedFoundation": 2
+    },
+    "movedFromNeedsSourceReviewToUnsupportedCount": 2,
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 2,
+    "foundationGateUnsupportedCapabilityCount": 26,
+    "foundationGatePartiallyImplementedCapabilityCount": 37,
+    "inventorySha256": "a829f8e1fe419d1bc8e20d707ed733cb81150ad529b90ebc4d37618a9b8c2df2",
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "WhenDigisorption",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentRerunMappingStatus": "Unsupported",
+      "previousRerunClassification": "SourceMappedUnsupportedFoundation",
+      "currentMappingStatus": "Unsupported",
+      "fnd002CClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "DigisorptionCostWindow",
+      "affectedCardCount": 15,
+      "sourceFileCount": 10,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 12,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:978",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:2640",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:2641",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:2645",
+        "DCGO/Assets/Scripts/Script/Player.cs:1180",
+        "DCGO/Assets/Scripts/Script/Player.cs:1198",
+        "DCGO/Assets/Scripts/Script/Player.cs:1204",
+        "DCGO/Assets/Scripts/Script/Player.cs:1250",
+        "DCGO/Assets/Scripts/Script/Player.cs:1268",
+        "DCGO/Assets/Scripts/Script/Player.cs:1274",
+        "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs:366",
+        "DCGO/Assets/Scripts/Script/CardEffectInterfaces.cs:368",
+        "DCGO/Assets/Scripts/Script/CardEffects/CanSuspendByDigisorptionClass.cs:6",
+        "DCGO/Assets/Scripts/Script/CardEffects/CanSuspendByDigisorptionClass.cs:8",
+        "DCGO/Assets/Scripts/Script/CardEffects/CanSuspendByDigisorptionClass.cs:19",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:15",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:18",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:60",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:130",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:136",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:144",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:150",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:165",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:193",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs:196",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:279",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:282",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:374",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:377",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:411",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs:425"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_047.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_058.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Green/BT8_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX3/Green/EX3_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Green/P_056.cs"
+      ],
+      "payloadKeys": [
+        "CardEffect"
+      ],
+      "derivedContext": [
+        "Card",
+        "isEvolution",
+        "Permanents",
+        "selected suspended permanent",
+        "cost reduction amount",
+        "UntilCalculateFixedCostEffect"
+      ],
+      "sourceMeaning": "Digisorption is a BeforePayCost card-effect body pattern that selects a suspend source, installs a temporary cost-reduction provider, then opens a WhenDigisorption cut-in/trigger window for effects that modify which permanent may be suspended.",
+      "policyDecision": "Do not port individual Digisorption card bodies until a shared cost-window state machine exists. The timing is source-known and should be tracked as a known Unsupported foundation blocker, not unknown.",
+      "missingHeadlessBoundary": "source-aligned Digisorption cost transaction, selected suspend-source snapshot, reduction amount, UntilCalculateFixedCostEffect equivalent, and post-selection WhenDigisorption trigger queue",
+      "nextFoundationTask": "FND-002-C1",
+      "cardEffectBodyBoundaryRetained": false,
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-C digisorption cost-window source policy has source call/payload evidence, but RL.Engine has no source-aligned Digisorption/DigiBurst common mechanic runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "OnUseDigiburst",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentRerunMappingStatus": "Unsupported",
+      "previousRerunClassification": "SourceMappedUnsupportedFoundation",
+      "currentMappingStatus": "Unsupported",
+      "fnd002CClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "DigiBurstLifecycleBoundary",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 0,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:992",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:2544",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:2552",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2114",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2135",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2163",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2173",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2220",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2222",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2223",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2228",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2233",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenUseDigiBurst.cs:11",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenUseDigiBurst.cs:13",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenUseDigiBurst.cs:21",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnTrashBySelfDigiBurst.cs:10",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnTrashBySelfDigiBurst.cs:18",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnTrashBySelfDigiBurst.cs:24",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs:59",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs:89",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_004.cs:37"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT5/Green/BT5_056.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Permanent",
+        "CardEffect"
+      ],
+      "derivedContext": [
+        "selected digivolution cards",
+        "DigiBurst count",
+        "up-to-max selection flag",
+        "self source-trash follow-up via CanTriggerOnTrashBySelfDigiBurst"
+      ],
+      "sourceMeaning": "IDigiBurst selects digivolution cards, emits OnUseDigiburst with Permanent/CardEffect before actual ITrashDigivolutionCards, then self source-trash triggers use the same activating DigiBurst effect as follow-up context.",
+      "policyDecision": "Treat the common DigiBurst lifecycle as a known Unsupported foundation blocker. Individual DigiBurst card effect bodies remain excluded until the common selection/trash lifecycle exists.",
+      "missingHeadlessBoundary": "source-aligned DigiBurst primitive, selected source snapshot, OnUseDigiburst trigger ordering before source trash, and self-source-trash follow-up payload",
+      "nextFoundationTask": "FND-002-C2",
+      "cardEffectBodyBoundaryRetained": true,
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-C DigiBurst lifecycle source policy has source call/payload evidence, but RL.Engine has no source-aligned Digisorption/DigiBurst common mechanic runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    }
+  ]
+}

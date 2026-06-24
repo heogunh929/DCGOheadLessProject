@@ -6,8 +6,8 @@
 ## 결과
 
 - OpenCodeReady: `false`
-- 통과 gate: 11
-- 실패 gate: 3
+- 통과 gate: 12
+- 실패 gate: 2
 - 다음 foundation capability 후보: `ContinuousOrStaticEffect` (`PartiallyImplemented`)
 
 ## Gate
@@ -17,9 +17,9 @@
 | 원본 Script/CardEffects inventory | `passed` | `{"effectSetMethodUsageCount": 102, "generatedScriptSourceFileCount": 436, "localSourceRootAvailable": true, "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"}` | `> 0` |
 | 원본 CardEffectFactory inventory | `passed` | `{"factoryApiUsageCount": 95, "localSourceRootAvailable": true, "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"}` | `> 0` |
 | 원본 CardEffectCommons inventory | `passed` | `{"commonsApiUsageCount": 263, "localSourceRootAvailable": true, "localSourceRootPath": "E:\\headlessDCGO\\DCGO\\Assets"}` | `> 0` |
-| referenced common API unknown count | `failed` | `27` | `0` |
-| referenced Unsupported capability count | `failed` | `26` | `0` |
-| referenced PartiallyImplemented capability count | `failed` | `37` | `0` |
+| referenced common API unknown count | `passed` | `0` | `0` |
+| referenced Unsupported capability count | `failed` | `5` | `0` |
+| referenced PartiallyImplemented capability count | `failed` | `58` | `0` |
 | runtime/generated status mismatch count | `passed` | `0` | `0` |
 | silent no-op count | `passed` | `0` | `0` |
 | blocked empty descriptor count | `passed` | `0` | `0` |
@@ -31,9 +31,9 @@
 
 ## 주요 실패 수치
 
-- referenced common API unknown count: 27
-- referenced Unsupported capability count: 26
-- referenced PartiallyImplemented capability count: 37
+- referenced common API unknown count: 0
+- referenced Unsupported capability count: 5
+- referenced PartiallyImplemented capability count: 58
 - runtime/generated status mismatch count: 0
 - legacy pilot runtime divergence count: 92
 - silent no-op candidate count: 0

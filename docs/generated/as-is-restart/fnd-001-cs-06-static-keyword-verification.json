@@ -1,0 +1,2071 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001cs06-static-keyword-verification.v1",
+  "generatedAt": "2026-06-23T21:01:00.874456+00:00",
+  "goal": "FND-001-A supported static keyword descriptor parity evidence",
+  "inputs": {
+    "asIsSourceRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+    "fnd001PartialClosure": "docs/generated/as-is-restart/fnd-001-continuous-static-partial-closure.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "programTests": "src/DCGO.RL.Engine.Tests/Program.cs"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "srcTestModifiedOnlyForEvidence": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "trust001Performed": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-06",
+    "classification": "CloseableFoundationTask",
+    "title": "supported static keyword descriptor parity",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-08",
+    "unsupportedKeywordBoundaryTask": "FND001-CS-07",
+    "parityBoundaryTask": "PARITY-001"
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-06",
+    "requiredKeywordWrapperCount": 5,
+    "coveredSourceKeywordWrapperCount": 5,
+    "coveredHeadlessKeywordWrapperCount": 5,
+    "sourceSampleCandidateCount": 470,
+    "factoryReferenceCount": 521,
+    "sourceRequiredLinkedSampleCount": 470,
+    "parityNotRunSampleCount": 470,
+    "requiredTestCount": 12,
+    "coveredTestCount": 12,
+    "unsupportedKeywordBoundaryRetained": true,
+    "unsupportedKeywordBoundaryTask": "FND001-CS-07",
+    "fullCardParityReduced": false,
+    "parityNotRunSourceEffectCount": 3918,
+    "parityPassedSourceEffectCount": 0,
+    "jammingSourceClass": "CanNotBeDestroyedByBattleClass"
+  },
+  "conditions": {
+    "sourceWrappersCovered": true,
+    "headlessFactoryWrappersCovered": true,
+    "continuousKeywordDescriptorCovered": true,
+    "continuousKeywordServiceCovered": true,
+    "supportedKeywordFactoryBoundaryCovered": true,
+    "sourceSamplesLinked": true,
+    "testCandidatesPresent": true,
+    "unsupportedKeywordBoundaryRetained": true,
+    "fullCardParityBoundaryRetained": true,
+    "openCodeStillFalse": true,
+    "continuousStillPartial": true
+  },
+  "sourceWrappers": [
+    {
+      "keyword": "Blocker",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\KeyWordEffects\\Blocker.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\BlockerClass.cs",
+      "sourceClass": "BlockerClass",
+      "sourceInterface": "IBlockerEffect",
+      "sourceFactoryMethod": "BlockerSelfStaticEffect",
+      "sourceStaticMethod": "BlockerStaticEffect",
+      "sourceClassMethod": "IsBlocker",
+      "sourceSetupMethod": "SetUpBlockerClass",
+      "factoryPatterns": [
+        {
+          "pattern": "public static BlockerClass BlockerSelfStaticEffect",
+          "present": true,
+          "lines": [
+            11
+          ]
+        },
+        {
+          "pattern": "public static BlockerClass BlockerStaticEffect",
+          "present": true,
+          "lines": [
+            35
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsExistOnBattleAreaDigimon(card)",
+          "present": true,
+          "lines": [
+            17
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsPermanentExistsOnBattleArea(permanent)",
+          "present": true,
+          "lines": [
+            60
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class BlockerClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "IBlockerEffect",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "IsBlocker",
+          "present": true,
+          "lines": [
+            17
+          ]
+        },
+        {
+          "pattern": "SetUpBlockerClass",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            10,
+            12,
+            15,
+            19,
+            25
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "keyword": "Rush",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\KeyWordEffects\\Rush.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\RushClass.cs",
+      "sourceClass": "RushClass",
+      "sourceInterface": "IRushEffect",
+      "sourceFactoryMethod": "RushSelfStaticEffect",
+      "sourceStaticMethod": "RushStaticEffect",
+      "sourceClassMethod": "HasRush",
+      "sourceSetupMethod": "SetUpRushClass",
+      "factoryPatterns": [
+        {
+          "pattern": "public static RushClass RushSelfStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "public static RushClass RushStaticEffect",
+          "present": true,
+          "lines": [
+            32
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsExistOnBattleAreaDigimon(card)",
+          "present": true,
+          "lines": [
+            16
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsPermanentExistsOnBattleArea(permanent)",
+          "present": true,
+          "lines": [
+            52
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class RushClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "IRushEffect",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "HasRush",
+          "present": true,
+          "lines": [
+            17
+          ]
+        },
+        {
+          "pattern": "SetUpRushClass",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            10,
+            12,
+            15,
+            19,
+            25
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "keyword": "Reboot",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\KeyWordEffects\\Reboot.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\RebootClass.cs",
+      "sourceClass": "RebootClass",
+      "sourceInterface": "IRebootEffect",
+      "sourceFactoryMethod": "RebootSelfStaticEffect",
+      "sourceStaticMethod": "RebootStaticEffect",
+      "sourceClassMethod": "HasReboot",
+      "sourceSetupMethod": "SetUpRebootClass",
+      "factoryPatterns": [
+        {
+          "pattern": "public static RebootClass RebootSelfStaticEffect",
+          "present": true,
+          "lines": [
+            7
+          ]
+        },
+        {
+          "pattern": "public static RebootClass RebootStaticEffect",
+          "present": true,
+          "lines": [
+            29
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsExistOnBattleAreaDigimon(card)",
+          "present": true,
+          "lines": [
+            13
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsPermanentExistsOnBattleArea(permanent)",
+          "present": true,
+          "lines": [
+            54
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class RebootClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "IRebootEffect",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "HasReboot",
+          "present": true,
+          "lines": [
+            17
+          ]
+        },
+        {
+          "pattern": "SetUpRebootClass",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            10,
+            12,
+            15,
+            19,
+            25
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "keyword": "Collision",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\KeyWordEffects\\Collision.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\CollisionClass.cs",
+      "sourceClass": "CollisionClass",
+      "sourceInterface": "ICollisionEffect",
+      "sourceFactoryMethod": "CollisionSelfStaticEffect",
+      "sourceStaticMethod": "CollisionStaticEffect",
+      "sourceClassMethod": "HasCollision",
+      "sourceSetupMethod": "SetUpCollisionClass",
+      "factoryPatterns": [
+        {
+          "pattern": "public static CollisionClass CollisionSelfStaticEffect",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "public static CollisionClass CollisionStaticEffect",
+          "present": true,
+          "lines": [
+            30
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsExistOnBattleAreaDigimon(card)",
+          "present": true,
+          "lines": [
+            14
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsPermanentExistsOnBattleArea(permanent)",
+          "present": true,
+          "lines": [
+            45
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class CollisionClass",
+          "present": true,
+          "lines": [
+            3
+          ]
+        },
+        {
+          "pattern": "ICollisionEffect",
+          "present": true,
+          "lines": [
+            3
+          ]
+        },
+        {
+          "pattern": "HasCollision",
+          "present": true,
+          "lines": [
+            12
+          ]
+        },
+        {
+          "pattern": "SetUpCollisionClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            5,
+            7,
+            10,
+            14,
+            20
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "keyword": "Jamming",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\KeyWordEffects\\Jamming.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\CanNotBeDestroyedByBattleClass.cs",
+      "sourceClass": "CanNotBeDestroyedByBattleClass",
+      "sourceInterface": "ICanNotBeDestroyedByBattleEffect",
+      "sourceFactoryMethod": "JammingSelfStaticEffect",
+      "sourceStaticMethod": "JammingStaticEffect",
+      "sourceClassMethod": "CanNotBeDestroyedByBattle",
+      "sourceSetupMethod": "SetUpCanNotBeDestroyedByBattleClass",
+      "factoryPatterns": [
+        {
+          "pattern": "public static CanNotBeDestroyedByBattleClass JammingSelfStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "public static CanNotBeDestroyedByBattleClass JammingStaticEffect",
+          "present": true,
+          "lines": [
+            32
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsExistOnBattleAreaDigimon(card)",
+          "present": true,
+          "lines": [
+            16
+          ]
+        },
+        {
+          "pattern": "CardEffectCommons.IsPermanentExistsOnBattleArea(permanent)",
+          "present": true,
+          "lines": [
+            59
+          ]
+        },
+        {
+          "pattern": "CanNotBeDestroyedByBattleStaticEffect",
+          "present": true,
+          "lines": [
+            70
+          ]
+        },
+        {
+          "pattern": "GManager.instance.attackProcess.SecurityDigimon",
+          "present": true,
+          "lines": [
+            47
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class CanNotBeDestroyedByBattleClass",
+          "present": true,
+          "lines": [
+            6
+          ]
+        },
+        {
+          "pattern": "ICanNotBeDestroyedByBattleEffect",
+          "present": true,
+          "lines": [
+            6
+          ]
+        },
+        {
+          "pattern": "CanNotBeDestroyedByBattle",
+          "present": true,
+          "lines": [
+            6,
+            8,
+            17
+          ]
+        },
+        {
+          "pattern": "SetUpCanNotBeDestroyedByBattleClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            23,
+            36
+          ]
+        }
+      ],
+      "covered": true
+    }
+  ],
+  "headlessSurfaces": {
+    "files": [
+      "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+      "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+      "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+      "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
+      "src/DCGO.RL.Engine/Battle/BattleResolver.cs"
+    ],
+    "keywordWrappers": [
+      {
+        "keyword": "Blocker",
+        "headlessFactoryMethods": [
+          "BlockerSelfStaticEffect",
+          "BlockerStaticEffect"
+        ],
+        "battleKeyword": "BattleKeyword.Blocker",
+        "factoryPatterns": [
+          {
+            "pattern": "public static ContinuousKeywordDescriptor BlockerSelfStaticEffect",
+            "present": true,
+            "lines": [
+              97
+            ]
+          },
+          {
+            "pattern": "public static ContinuousKeywordDescriptor BlockerStaticEffect",
+            "present": true,
+            "lines": [
+              111
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Blocker",
+            "present": true,
+            "lines": [
+              120,
+              287
+            ]
+          },
+          {
+            "pattern": "KeywordStaticEffect(",
+            "present": true,
+            "lines": [
+              118,
+              148,
+              178,
+              208,
+              238,
+              247
+            ]
+          },
+          {
+            "pattern": "ContinuousEffectTargetKind.SelfPermanent",
+            "present": true,
+            "lines": [
+              17,
+              33,
+              105,
+              135,
+              165,
+              195,
+              225
+            ]
+          }
+        ],
+        "runtimeFiles": [
+          "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
+        ],
+        "runtimePatterns": [
+          {
+            "pattern": "CreateBlockerSelectionRequest",
+            "present": true,
+            "lines": [
+              76
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Blocker",
+            "present": true,
+            "lines": [
+              72
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Rush",
+        "headlessFactoryMethods": [
+          "RushSelfStaticEffect",
+          "RushStaticEffect"
+        ],
+        "battleKeyword": "BattleKeyword.Rush",
+        "factoryPatterns": [
+          {
+            "pattern": "public static ContinuousKeywordDescriptor RushSelfStaticEffect",
+            "present": true,
+            "lines": [
+              127
+            ]
+          },
+          {
+            "pattern": "public static ContinuousKeywordDescriptor RushStaticEffect",
+            "present": true,
+            "lines": [
+              141
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Rush",
+            "present": true,
+            "lines": [
+              150,
+              288
+            ]
+          },
+          {
+            "pattern": "KeywordStaticEffect(",
+            "present": true,
+            "lines": [
+              118,
+              148,
+              178,
+              208,
+              238,
+              247
+            ]
+          },
+          {
+            "pattern": "ContinuousEffectTargetKind.SelfPermanent",
+            "present": true,
+            "lines": [
+              17,
+              33,
+              105,
+              135,
+              165,
+              195,
+              225
+            ]
+          }
+        ],
+        "runtimeFiles": [
+          "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+          "src/DCGO.RL.Engine/Battle/BattleRules.cs"
+        ],
+        "runtimePatterns": [
+          {
+            "pattern": "BattleKeyword.Rush",
+            "present": true,
+            "lines": [
+              408
+            ]
+          },
+          {
+            "pattern": "EnterFieldTurnCount",
+            "present": true,
+            "lines": [
+              408
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Reboot",
+        "headlessFactoryMethods": [
+          "RebootSelfStaticEffect",
+          "RebootStaticEffect"
+        ],
+        "battleKeyword": "BattleKeyword.Reboot",
+        "factoryPatterns": [
+          {
+            "pattern": "public static ContinuousKeywordDescriptor RebootSelfStaticEffect",
+            "present": true,
+            "lines": [
+              157
+            ]
+          },
+          {
+            "pattern": "public static ContinuousKeywordDescriptor RebootStaticEffect",
+            "present": true,
+            "lines": [
+              171
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Reboot",
+            "present": true,
+            "lines": [
+              180,
+              289
+            ]
+          },
+          {
+            "pattern": "KeywordStaticEffect(",
+            "present": true,
+            "lines": [
+              118,
+              148,
+              178,
+              208,
+              238,
+              247
+            ]
+          },
+          {
+            "pattern": "ContinuousEffectTargetKind.SelfPermanent",
+            "present": true,
+            "lines": [
+              17,
+              33,
+              105,
+              135,
+              165,
+              195,
+              225
+            ]
+          }
+        ],
+        "runtimeFiles": [
+          "src/DCGO.RL.Engine/Battle/PhaseRunner.cs"
+        ],
+        "runtimePatterns": [
+          {
+            "pattern": "BattleKeyword.Reboot",
+            "present": true,
+            "lines": [
+              75
+            ]
+          },
+          {
+            "pattern": "RunActivePhase",
+            "present": true,
+            "lines": [
+              57,
+              59,
+              63,
+              145
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Collision",
+        "headlessFactoryMethods": [
+          "CollisionSelfStaticEffect",
+          "CollisionStaticEffect"
+        ],
+        "battleKeyword": "BattleKeyword.Collision",
+        "factoryPatterns": [
+          {
+            "pattern": "public static ContinuousKeywordDescriptor CollisionSelfStaticEffect",
+            "present": true,
+            "lines": [
+              187
+            ]
+          },
+          {
+            "pattern": "public static ContinuousKeywordDescriptor CollisionStaticEffect",
+            "present": true,
+            "lines": [
+              201
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Collision",
+            "present": true,
+            "lines": [
+              210,
+              290
+            ]
+          },
+          {
+            "pattern": "KeywordStaticEffect(",
+            "present": true,
+            "lines": [
+              118,
+              148,
+              178,
+              208,
+              238,
+              247
+            ]
+          },
+          {
+            "pattern": "ContinuousEffectTargetKind.SelfPermanent",
+            "present": true,
+            "lines": [
+              17,
+              33,
+              105,
+              135,
+              165,
+              195,
+              225
+            ]
+          }
+        ],
+        "runtimeFiles": [
+          "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs"
+        ],
+        "runtimePatterns": [
+          {
+            "pattern": "BattleKeyword.Collision",
+            "present": true,
+            "lines": [
+              73,
+              84
+            ]
+          },
+          {
+            "pattern": "canSkip = !HasKeyword",
+            "present": true,
+            "lines": [
+              84
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Jamming",
+        "headlessFactoryMethods": [
+          "JammingSelfStaticEffect",
+          "JammingStaticEffect"
+        ],
+        "battleKeyword": "BattleKeyword.Jamming",
+        "factoryPatterns": [
+          {
+            "pattern": "public static ContinuousKeywordDescriptor JammingSelfStaticEffect",
+            "present": true,
+            "lines": [
+              217
+            ]
+          },
+          {
+            "pattern": "public static ContinuousKeywordDescriptor JammingStaticEffect",
+            "present": true,
+            "lines": [
+              231
+            ]
+          },
+          {
+            "pattern": "BattleKeyword.Jamming",
+            "present": true,
+            "lines": [
+              240,
+              291
+            ]
+          },
+          {
+            "pattern": "KeywordStaticEffect(",
+            "present": true,
+            "lines": [
+              118,
+              148,
+              178,
+              208,
+              238,
+              247
+            ]
+          },
+          {
+            "pattern": "ContinuousEffectTargetKind.SelfPermanent",
+            "present": true,
+            "lines": [
+              17,
+              33,
+              105,
+              135,
+              165,
+              195,
+              225
+            ]
+          }
+        ],
+        "runtimeFiles": [
+          "src/DCGO.RL.Engine/Battle/BattleResolver.cs"
+        ],
+        "runtimePatterns": [
+          {
+            "pattern": "BattleKeyword.Jamming",
+            "present": true,
+            "lines": [
+              71
+            ]
+          },
+          {
+            "pattern": "ResolveSecurityBattle",
+            "present": true,
+            "lines": [
+              59
+            ]
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "descriptorPatterns": [
+      {
+        "pattern": "public sealed record ContinuousKeywordDescriptor",
+        "present": true,
+        "lines": [
+          139
+        ]
+      },
+      {
+        "pattern": "CardInstanceId? SourceCardId",
+        "present": true,
+        "lines": [
+          122,
+          141,
+          165,
+          190,
+          218,
+          239,
+          261,
+          285,
+          309,
+          332
+        ]
+      },
+      {
+        "pattern": "PermanentId? SourcePermanentId",
+        "present": true,
+        "lines": [
+          123,
+          142,
+          166,
+          191,
+          219,
+          240,
+          262,
+          286,
+          310,
+          333
+        ]
+      },
+      {
+        "pattern": "PlayerId ControllerPlayerId",
+        "present": true,
+        "lines": [
+          124,
+          143,
+          167,
+          192,
+          213,
+          220,
+          241,
+          263,
+          287,
+          311
+        ]
+      },
+      {
+        "pattern": "BattleKeyword Keyword",
+        "present": true,
+        "lines": [
+          144
+        ]
+      },
+      {
+        "pattern": "ContinuousEffectTargetKind AppliesTo",
+        "present": true,
+        "lines": [
+          125,
+          145
+        ]
+      },
+      {
+        "pattern": "Func<ContinuousKeywordEvaluationContext, bool>? Condition",
+        "present": true,
+        "lines": [
+          146
+        ]
+      },
+      {
+        "pattern": "CardMetadataCriteria? SourceMetadataCriteria",
+        "present": true,
+        "lines": [
+          130,
+          148,
+          173,
+          197,
+          225,
+          246,
+          269,
+          293,
+          316,
+          339
+        ]
+      },
+      {
+        "pattern": "CardMetadataCriteria? TargetMetadataCriteria",
+        "present": true,
+        "lines": [
+          131,
+          149,
+          198,
+          247,
+          363,
+          412,
+          437,
+          463
+        ]
+      }
+    ],
+    "servicePatterns": [
+      {
+        "pattern": "CollectKeywords(GameState state)",
+        "present": true,
+        "lines": [
+          137
+        ]
+      },
+      {
+        "pattern": "EvaluateKeywordsForPermanent",
+        "present": true,
+        "lines": [
+          751,
+          770,
+          952,
+          955
+        ]
+      },
+      {
+        "pattern": "HasContinuousKeyword",
+        "present": true,
+        "lines": [
+          951
+        ]
+      },
+      {
+        "pattern": "ContinuousKeywords(GameState state, PermanentState permanent)",
+        "present": true,
+        "lines": [
+          954
+        ]
+      },
+      {
+        "pattern": "descriptor.Keyword == keyword",
+        "present": true,
+        "lines": [
+          760
+        ]
+      }
+    ],
+    "factoryBoundaryPatterns": [
+      {
+        "pattern": "IsSupportedStaticKeywordFactoryKeyword",
+        "present": true,
+        "lines": [
+          263,
+          286
+        ]
+      },
+      {
+        "pattern": "BattleKeyword.Blocker",
+        "present": true,
+        "lines": [
+          120,
+          287
+        ]
+      },
+      {
+        "pattern": "BattleKeyword.Rush",
+        "present": true,
+        "lines": [
+          150,
+          288
+        ]
+      },
+      {
+        "pattern": "BattleKeyword.Reboot",
+        "present": true,
+        "lines": [
+          180,
+          289
+        ]
+      },
+      {
+        "pattern": "BattleKeyword.Collision",
+        "present": true,
+        "lines": [
+          210,
+          290
+        ]
+      },
+      {
+        "pattern": "BattleKeyword.Jamming",
+        "present": true,
+        "lines": [
+          240,
+          291
+        ]
+      },
+      {
+        "pattern": "does not have a static keyword factory descriptor mapping",
+        "present": true,
+        "lines": [
+          266
+        ]
+      }
+    ],
+    "wrappersCovered": true,
+    "descriptorCovered": true,
+    "serviceCovered": true,
+    "factoryBoundaryCovered": true
+  },
+  "sourceSamples": {
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceSampleCandidateCount": 470,
+    "factoryReferenceCount": 521,
+    "keywordSourceSampleCounts": {
+      "Rush": 43,
+      "Blocker": 287,
+      "Jamming": 70,
+      "Reboot": 91,
+      "Collision": 30
+    },
+    "keywordFactoryReferenceCounts": {
+      "Rush": 43,
+      "Blocker": 287,
+      "Jamming": 70,
+      "Reboot": 91,
+      "Collision": 30
+    },
+    "sourceRequiredLinkedSampleCount": 470,
+    "parityNotRunSampleCount": 470,
+    "byKeyword": [
+      {
+        "keyword": "Blocker",
+        "sourceSampleCount": 287,
+        "factoryReferenceCount": 287,
+        "sourceRequiredLinkedCount": 287,
+        "parityNotRunCount": 287,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceEffectClassName": "AD1_005",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "sourceEffectClassName": "AD1_007",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_009@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+            "sourceEffectClassName": "AD1_009",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceEffectClassName": "AD1_013",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect",
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker",
+              "Reboot"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_014@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+            "sourceEffectClassName": "AD1_014",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Rush",
+        "sourceSampleCount": 43,
+        "factoryReferenceCount": 43,
+        "sourceRequiredLinkedCount": 43,
+        "parityNotRunCount": 43,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceEffectClassName": "AD1_002",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "RushSelfStaticEffect"
+            ],
+            "keywords": [
+              "Rush"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "sourceEffectClassName": "AD1_008",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "RushSelfStaticEffect"
+            ],
+            "keywords": [
+              "Rush"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT10_008@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+            "sourceEffectClassName": "BT10_008",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+            "sourceSetId": "BT10",
+            "factoryApi": [
+              "RushSelfStaticEffect"
+            ],
+            "keywords": [
+              "Rush"
+            ],
+            "affectedCardCount": 5,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT10_070@DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_070.cs",
+            "sourceEffectClassName": "BT10_070",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_070.cs",
+            "sourceSetId": "BT10",
+            "factoryApi": [
+              "RushSelfStaticEffect"
+            ],
+            "keywords": [
+              "Rush"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_070_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_070.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_070_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_070.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_070_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_070.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT11_019@DCGO/Assets/Scripts/CardEffect/BT11/Red/BT11_019.cs",
+            "sourceEffectClassName": "BT11_019",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Red/BT11_019.cs",
+            "sourceSetId": "BT11",
+            "factoryApi": [
+              "RushSelfStaticEffect"
+            ],
+            "keywords": [
+              "Rush"
+            ],
+            "affectedCardCount": 6,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT11_019_DCGO_Assets_Scripts_CardEffect_BT11_Red_BT11_019.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT11_019_DCGO_Assets_Scripts_CardEffect_BT11_Red_BT11_019.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT11_019_DCGO_Assets_Scripts_CardEffect_BT11_Red_BT11_019.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Reboot",
+        "sourceSampleCount": 91,
+        "factoryReferenceCount": 91,
+        "sourceRequiredLinkedCount": 91,
+        "parityNotRunCount": 91,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceEffectClassName": "AD1_013",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "BlockerSelfStaticEffect",
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Blocker",
+              "Reboot"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT10_060@DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_060.cs",
+            "sourceEffectClassName": "BT10_060",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_060.cs",
+            "sourceSetId": "BT10",
+            "factoryApi": [
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Reboot"
+            ],
+            "affectedCardCount": 3,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_060_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_060.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_060_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_060.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_060_DCGO_Assets_Scripts_CardEffect_BT10_Black_BT10_060.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT11_067@DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_067.cs",
+            "sourceEffectClassName": "BT11_067",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_067.cs",
+            "sourceSetId": "BT11",
+            "factoryApi": [
+              "JammingSelfStaticEffect",
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming",
+              "Reboot"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT11_074@DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+            "sourceEffectClassName": "BT11_074",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+            "sourceSetId": "BT11",
+            "factoryApi": [
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Reboot"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT11_074_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_074.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT11_074_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_074.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT11_074_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_074.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT12_061@DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_061.cs",
+            "sourceEffectClassName": "BT12_061",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_061.cs",
+            "sourceSetId": "BT12",
+            "factoryApi": [
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Reboot"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT12_061_DCGO_Assets_Scripts_CardEffect_BT12_Black_BT12_061.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT12_061_DCGO_Assets_Scripts_CardEffect_BT12_Black_BT12_061.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT12_061_DCGO_Assets_Scripts_CardEffect_BT12_Black_BT12_061.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Collision",
+        "sourceSampleCount": 30,
+        "factoryReferenceCount": 30,
+        "sourceRequiredLinkedCount": 30,
+        "parityNotRunCount": 30,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "BT16_032@DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_032.cs",
+            "sourceEffectClassName": "BT16_032",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_032.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "CollisionSelfStaticEffect"
+            ],
+            "keywords": [
+              "Collision"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_032_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_032.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_032_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_032.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_032_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_032.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_058@DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_058.cs",
+            "sourceEffectClassName": "BT16_058",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_058.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "CollisionSelfStaticEffect"
+            ],
+            "keywords": [
+              "Collision"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_058_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_058.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_058_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_058.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_058_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_058.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_061@DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_061.cs",
+            "sourceEffectClassName": "BT16_061",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_061.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "CollisionSelfStaticEffect"
+            ],
+            "keywords": [
+              "Collision"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_061_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_061.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_061_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_061.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_061_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_061.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_064@DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_064.cs",
+            "sourceEffectClassName": "BT16_064",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_064.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "CollisionSelfStaticEffect"
+            ],
+            "keywords": [
+              "Collision"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_064_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_064.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_064_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_064.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_064_DCGO_Assets_Scripts_CardEffect_BT16_Black_BT16_064.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT17_054@DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_054.cs",
+            "sourceEffectClassName": "BT17_054",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_054.cs",
+            "sourceSetId": "BT17",
+            "factoryApi": [
+              "CollisionSelfStaticEffect"
+            ],
+            "keywords": [
+              "Collision"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT17_054_DCGO_Assets_Scripts_CardEffect_BT17_Black_BT17_054.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT17_054_DCGO_Assets_Scripts_CardEffect_BT17_Black_BT17_054.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT17_054_DCGO_Assets_Scripts_CardEffect_BT17_Black_BT17_054.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "keyword": "Jamming",
+        "sourceSampleCount": 70,
+        "factoryReferenceCount": 70,
+        "sourceRequiredLinkedCount": 70,
+        "parityNotRunCount": 70,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_010@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+            "sourceEffectClassName": "AD1_010",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "JammingSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_015@DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+            "sourceEffectClassName": "AD1_015",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "JammingSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT1_016@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_016.cs",
+            "sourceEffectClassName": "BT1_016",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_016.cs",
+            "sourceSetId": "BT1",
+            "factoryApi": [
+              "JammingSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming"
+            ],
+            "affectedCardCount": 15,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT11_067@DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_067.cs",
+            "sourceEffectClassName": "BT11_067",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_067.cs",
+            "sourceSetId": "BT11",
+            "factoryApi": [
+              "JammingSelfStaticEffect",
+              "RebootSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming",
+              "Reboot"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT11_067_DCGO_Assets_Scripts_CardEffect_BT11_Black_BT11_067.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT12_022@DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs",
+            "sourceEffectClassName": "BT12_022",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs",
+            "sourceSetId": "BT12",
+            "factoryApi": [
+              "JammingSelfStaticEffect"
+            ],
+            "keywords": [
+              "Jamming"
+            ],
+            "affectedCardCount": 5,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT12_022_DCGO_Assets_Scripts_CardEffect_BT12_Blue_BT12_022.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT12_022_DCGO_Assets_Scripts_CardEffect_BT12_Blue_BT12_022.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT12_022_DCGO_Assets_Scripts_CardEffect_BT12_Blue_BT12_022.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "sampleRecords": [
+      {
+        "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceEffectClassName": "AD1_002",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "RushSelfStaticEffect"
+        ],
+        "keywords": [
+          "Rush"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceEffectClassName": "AD1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceEffectClassName": "AD1_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceEffectClassName": "AD1_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "RushSelfStaticEffect"
+        ],
+        "keywords": [
+          "Rush"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_009@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceEffectClassName": "AD1_009",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_010@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+        "sourceEffectClassName": "AD1_010",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "JammingSelfStaticEffect"
+        ],
+        "keywords": [
+          "Jamming"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceEffectClassName": "AD1_013",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect",
+          "RebootSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker",
+          "Reboot"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_014@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "sourceEffectClassName": "AD1_014",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_015@DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+        "sourceEffectClassName": "AD1_015",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "JammingSelfStaticEffect"
+        ],
+        "keywords": [
+          "Jamming"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_016@DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "sourceEffectClassName": "AD1_016",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_024@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceEffectClassName": "AD1_024",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 3,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_025@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+        "sourceEffectClassName": "AD1_025",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_025_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_025.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_025_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_025.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_025_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_025.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_016@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_016.cs",
+        "sourceEffectClassName": "BT1_016",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_016.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "JammingSelfStaticEffect"
+        ],
+        "keywords": [
+          "Jamming"
+        ],
+        "affectedCardCount": 15,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_016_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_016.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_031@DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_031.cs",
+        "sourceEffectClassName": "BT1_031",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_031.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 14,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_031_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_031.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_031_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_031.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_031_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_031.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_008@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+        "sourceEffectClassName": "BT10_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "RushSelfStaticEffect"
+        ],
+        "keywords": [
+          "Rush"
+        ],
+        "affectedCardCount": 5,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_013@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+        "sourceEffectClassName": "BT10_013",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_013_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_013.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_013_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_013.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_013_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_013.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_015@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_015.cs",
+        "sourceEffectClassName": "BT10_015",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_015.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_015_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_015.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_015_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_015.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_015_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_015.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_028@DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+        "sourceEffectClassName": "BT10_028",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_028_DCGO_Assets_Scripts_CardEffect_BT10_Blue_BT10_028.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_028_DCGO_Assets_Scripts_CardEffect_BT10_Blue_BT10_028.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_028_DCGO_Assets_Scripts_CardEffect_BT10_Blue_BT10_028.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_031@DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_031.cs",
+        "sourceEffectClassName": "BT10_031",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_031.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_031_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_031.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_031_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_031.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_031_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_031.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_049@DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_049.cs",
+        "sourceEffectClassName": "BT10_049",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_049.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "BlockerSelfStaticEffect"
+        ],
+        "keywords": [
+          "Blocker"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_049_DCGO_Assets_Scripts_CardEffect_BT10_Green_BT10_049.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_049_DCGO_Assets_Scripts_CardEffect_BT10_Green_BT10_049.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_049_DCGO_Assets_Scripts_CardEffect_BT10_Green_BT10_049.cs.comparison.json"
+      }
+    ],
+    "covered": true
+  },
+  "testEvidence": {
+    "program": "src/DCGO.RL.Engine.Tests/Program.cs",
+    "requiredTests": [
+      "BattleKeywords Blocker selection request",
+      "BattleKeywords Collision forced block request",
+      "BattleKeywords Jamming security battle",
+      "BattleKeywords Reboot active phase",
+      "BattleKeywords Rush attack legality",
+      "CardEffectFactory Blocker static effect maps to keyword descriptor",
+      "CardEffectFactory keyword static effect rejects unsupported keyword shape",
+      "CardEffectFactory static keyword wrappers map supported keywords",
+      "Continuous static keyword condition gates keyword",
+      "Continuous static keyword field source grants Blocker",
+      "Continuous static keyword inherited source stops after move",
+      "Continuous static keyword replay deterministic"
+    ],
+    "presence": {
+      "BattleKeywords Blocker selection request": true,
+      "BattleKeywords Collision forced block request": true,
+      "BattleKeywords Jamming security battle": true,
+      "BattleKeywords Reboot active phase": true,
+      "BattleKeywords Rush attack legality": true,
+      "CardEffectFactory Blocker static effect maps to keyword descriptor": true,
+      "CardEffectFactory keyword static effect rejects unsupported keyword shape": true,
+      "CardEffectFactory static keyword wrappers map supported keywords": true,
+      "Continuous static keyword condition gates keyword": true,
+      "Continuous static keyword field source grants Blocker": true,
+      "Continuous static keyword inherited source stops after move": true,
+      "Continuous static keyword replay deterministic": true
+    },
+    "coveredTestCount": 12,
+    "requiredTestCount": 12,
+    "allRequiredTestsPresent": true
+  },
+  "keywordBoundary": {
+    "unsupportedKeywordBoundaryRetained": true,
+    "ownerTask": "FND001-CS-07",
+    "reason": "Only Blocker, Rush, Reboot, Collision, and Jamming are source-mapped to ContinuousKeywordDescriptor static wrappers here. Trigger/process keyword shapes such as Piercing, Retaliation, Alliance, Vortex, Scapegoat, Iceclad, and Progress remain source-mapping/remediation work and must not be inferred from CS-06."
+  },
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "parityBoundary": {
+    "notRunSourceEffectCount": 3918,
+    "passedSourceEffectCount": 0,
+    "failedSourceEffectCount": 0,
+    "allGeneratedSourceEffectsHaveUnityParity": false,
+    "parityBoundaryOwner": "PARITY-001"
+  },
+  "trust001Handoff": {
+    "handoffRequired": true,
+    "items": [
+      "Treat CardEffectFactory static keyword wrappers as ReuseCandidate only after TRUST-001 maps them to original KeyWordEffects files and CardEffects classes.",
+      "Keep Jamming mapped through CanNotBeDestroyedByBattleClass rather than a guessed JammingClass.",
+      "Do not reuse CS-06 evidence for unsupported trigger/process keyword shapes owned by FND001-CS-07.",
+      "Full-card parity remains NotRun until PARITY-001 creates executable Unity/RL comparison reports."
+    ]
+  }
+}

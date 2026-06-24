@@ -46,6 +46,7 @@ public sealed class BattleEngineServices
         DigivolveService digivolveService,
         SecurityCheckService securityCheckService,
         AttackService attackService,
+        DeclarationEffectService declarationEffectService,
         ComplexMechanicService complexMechanicService,
         StaticRequirementService staticRequirementService,
         StaticEffectService staticEffectService,
@@ -67,6 +68,7 @@ public sealed class BattleEngineServices
         DigivolveService = digivolveService;
         SecurityCheckService = securityCheckService;
         AttackService = attackService;
+        DeclarationEffectService = declarationEffectService;
         ComplexMechanicService = complexMechanicService;
         StaticRequirementService = staticRequirementService;
         StaticEffectService = staticEffectService;
@@ -98,6 +100,8 @@ public sealed class BattleEngineServices
     public SecurityCheckService SecurityCheckService { get; }
 
     public AttackService AttackService { get; }
+
+    public DeclarationEffectService DeclarationEffectService { get; }
 
     public ComplexMechanicService ComplexMechanicService { get; }
 
@@ -287,6 +291,12 @@ public sealed class BattleEngineServices
             services.ComplexMechanicService.RuntimeStaticEffectService);
         AddMismatch(
             issues,
+            nameof(ComplexMechanicService),
+            nameof(Tier1PrimitiveService),
+            services.PrimitiveService,
+            services.ComplexMechanicService.RuntimePrimitiveService);
+        AddMismatch(
+            issues,
             nameof(LegalActionGenerator),
             nameof(StaticRequirementService),
             services.StaticRequirementService,
@@ -305,10 +315,22 @@ public sealed class BattleEngineServices
             services.LegalActionGenerator.RuntimeComplexMechanicService);
         AddMismatch(
             issues,
+            nameof(LegalActionGenerator),
+            nameof(DeclarationEffectService),
+            services.DeclarationEffectService,
+            services.LegalActionGenerator.RuntimeDeclarationEffectService);
+        AddMismatch(
+            issues,
             nameof(AttackService),
             nameof(TriggerPipelineService),
             services.TriggerPipelineService,
             services.AttackService.RuntimeTriggerPipelineService);
+        AddMismatch(
+            issues,
+            nameof(DeclarationEffectService),
+            nameof(TriggerPipelineService),
+            services.TriggerPipelineService,
+            services.DeclarationEffectService.RuntimeTriggerPipelineService);
         AddMismatch(
             issues,
             nameof(AttackService),
@@ -411,6 +433,12 @@ public sealed class BattleEngineServices
         AddMismatch(
             issues,
             nameof(ActionExecutor),
+            nameof(DeclarationEffectService),
+            services.DeclarationEffectService,
+            services.ActionExecutor.RuntimeDeclarationEffectService);
+        AddMismatch(
+            issues,
+            nameof(ActionExecutor),
             nameof(PhaseRunner),
             services.PhaseRunner,
             services.ActionExecutor.RuntimePhaseRunner);
@@ -468,6 +496,7 @@ public sealed class BattleEngineServices
             securityEffectExecutionService,
             triggerPipelineService,
             effectiveStats);
+        var declarationEffectService = new DeclarationEffectService(triggerPipelineService);
         var playCardService = new PlayCardService(
             triggerPipelineService,
             zoneMover,
@@ -482,7 +511,7 @@ public sealed class BattleEngineServices
             staticEffectService);
         primitiveService.AttachRuntimeServices(securityCheckService, playCardService, digivolveService, staticEffectService);
         var hatchService = new HatchService(zoneMover);
-        var moveFromBreedingService = new MoveFromBreedingService(zoneMover);
+        var moveFromBreedingService = new MoveFromBreedingService(zoneMover, primitiveService);
         var attackService = new AttackService(
             battleResolver,
             securityCheckService,
@@ -497,18 +526,21 @@ public sealed class BattleEngineServices
             zoneMover,
             drawService,
             staticRequirementService: staticRequirementService,
-            staticEffectService: staticEffectService);
+            staticEffectService: staticEffectService,
+            primitiveService: primitiveService);
         var legalActionGenerator = new LegalActionGenerator(
             complexMechanicService,
             keywordService,
             effectiveStats,
             staticRequirementService,
-            staticEffectService);
+            staticEffectService,
+            declarationEffectService);
         var phaseRunner = new PhaseRunner(
             drawService,
             keywordService,
             durationCleanupService,
-            triggerPipelineService);
+            triggerPipelineService,
+            primitiveService);
         var ruleProcessor = new RuleProcessor(
             zoneMover,
             phaseRunner,
@@ -526,6 +558,7 @@ public sealed class BattleEngineServices
             playCardService,
             digivolveService,
             attackService,
+            declarationEffectService,
             complexMechanicService,
             phaseRunner,
             ruleProcessor);
@@ -541,6 +574,7 @@ public sealed class BattleEngineServices
             digivolveService,
             securityCheckService,
             attackService,
+            declarationEffectService,
             complexMechanicService,
             staticRequirementService,
             staticEffectService,

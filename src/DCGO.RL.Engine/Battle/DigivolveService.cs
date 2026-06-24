@@ -20,6 +20,19 @@ public sealed record DigivolveResult(PermanentState Permanent, TriggerPipelineRe
 
 public sealed class DigivolveService
 {
+    private static readonly TriggerPipelineOptions BeforePayCostOptions = new(
+        SourceZones: TriggerSourceZone.FieldTop
+            | TriggerSourceZone.Inherited
+            | TriggerSourceZone.Linked
+            | TriggerSourceZone.Hand
+            | TriggerSourceZone.Trash
+            | TriggerSourceZone.Executing
+            | TriggerSourceZone.FaceUpSecurity,
+        ExecuteBackgroundEffects: true,
+        ExecuteBackgroundEffectsFirst: true,
+        ResolveAfterEffectsActivate: true,
+        UseMultipleSkillsOrdering: false);
+
     private readonly IZoneMover _zoneMover;
     private readonly DrawService _drawService;
     private readonly TriggerPipelineService? _triggerPipelineService;
@@ -87,6 +100,28 @@ public sealed class DigivolveService
             throw new DomainException($"Card '{action.Card}' cannot digivolve onto permanent '{action.TargetPermanent}'.");
         }
 
+        RunBeforePayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            currentCost: cost,
+            baseCost: cost,
+            memoryBeforeCost: state.Memory,
+            action.TargetPermanent,
+            trace);
+
+        player = state.GetPlayer(action.Actor);
+        if (!player.Hand.Contains(action.Card))
+        {
+            throw new DomainException($"Card '{action.Card}' is not in player '{action.Actor}' hand.");
+        }
+
+        permanent = BattleRules.Permanent(state, action.TargetPermanent);
+        if (!BattleRules.CanDigivolve(state, action.Card, permanent, out cost, _staticRequirements, _staticEffects))
+        {
+            throw new DomainException($"Card '{action.Card}' cannot digivolve onto permanent '{action.TargetPermanent}'.");
+        }
+
         var memoryBeforeCost = state.Memory;
         BattleRules.PayMemory(state, action.Actor, cost);
         RunAfterPayCostPipeline(
@@ -102,6 +137,51 @@ public sealed class DigivolveService
         _drawService.DrawCards(state, action.Actor, 1, trace);
         var triggerResult = RunTriggerPipeline(state, action.Actor, action.Card, action.TargetPermanent, trace);
         return new DigivolveResult(permanent, triggerResult);
+    }
+
+    private TriggerPipelineResult? RunBeforePayCostPipeline(
+        GameState state,
+        PlayerId player,
+        CardInstanceId card,
+        int currentCost,
+        int baseCost,
+        int memoryBeforeCost,
+        PermanentId targetPermanent,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        var result = _triggerPipelineService.Run(
+            state,
+            EffectTiming.BeforePayCost,
+            player,
+            sourceCard: null,
+            sourcePermanent: null,
+            values: CostPaymentRuleEventPayload.CreateBeforePayCost(
+                state,
+                player,
+                card,
+                currentCost,
+                baseCost,
+                memoryBeforeCost,
+                root: Zone.Hand,
+                sourceZone: Zone.Hand,
+                isEvolution: true,
+                targetPermanents: new[] { targetPermanent },
+                isJogress: false,
+                costKind: "Digivolution"),
+            options: BeforePayCostOptions,
+            trace: trace);
+
+        if (result.HasPendingSelection)
+        {
+            throw new UnsupportedMechanicException("BeforePayCost selection continuation before digivolution cost payment is not implemented.");
+        }
+
+        return result;
     }
 
     private TriggerPipelineResult? RunAfterPayCostPipeline(

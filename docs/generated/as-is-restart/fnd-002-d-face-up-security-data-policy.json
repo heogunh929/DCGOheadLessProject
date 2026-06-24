@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002d-face-up-security-data-policy.v1",
+  "generatedAt": "2026-06-23T23:06:56.033539+00:00",
+  "goal": "FND-002-D",
+  "sourceRoot": "E:/headlessDCGO/DCGO/Assets",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+    "fnd002Rerun": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+    "originalFnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 1,
+    "currentStatusCounts": {
+      "PartiallyImplemented": 1
+    },
+    "classificationCounts": {
+      "SourceMappedDataPolicyPartial": 1
+    },
+    "movedFromNeedsSourceReviewToPartialCount": 1,
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 1,
+    "foundationGateUnsupportedCapabilityCount": 15,
+    "foundationGatePartiallyImplementedCapabilityCount": 48,
+    "inventorySha256": "e89ce3c77728945cf327776156164a0a5b2cf32f21e9a93a72f0a433ac792c38",
+    "capabilityRegistrySha256": "337faea4bb7761c5174ba4592007ab05dbf6ab0f1b42edcbe2e48e06fcbe2c21",
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "OnFaceUpSecurityIncreased",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "currentRerunMappingStatus": "PartiallyImplemented",
+      "currentRerunClassification": "SourceMappedDataPolicyPartial",
+      "currentMappingStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd002DClassification": "SourceMappedDataPolicyPartial",
+      "sourceClassification": "FaceUpSecurityDataPolicy",
+      "affectedCardCount": 2,
+      "affectedCards": [
+        {
+          "definitionStableId": "EX11-004#7663@base",
+          "cardId": "EX11-004",
+          "cardIndex": 7663,
+          "variantKey": "base",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX11/Black/DigiEgg/EX11_004.asset"
+        },
+        {
+          "definitionStableId": "EX11-004#7664@P1",
+          "cardId": "EX11-004",
+          "cardIndex": 7664,
+          "variantKey": "P1",
+          "assetPath": "DCGO/Assets/CardBaseEntity/EX11/Black/DigiEgg/EX11_004_P1.asset"
+        }
+      ],
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 6,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1030",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5494",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5506",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5516",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5529",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5532",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5548",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnFaceUpSecurityIncrease.cs:11",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnFaceUpSecurityIncrease.cs:13",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/OnFaceUpSecurityIncrease.cs:17",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:56",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:76",
+        "DCGO/Assets/Scripts/Script/CardSource.cs:91",
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs:15",
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs:30"
+      ],
+      "headlessEvidence": [
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs:66",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:705",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:821",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:855",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:858",
+        "src/DCGO.RL.Engine.Tests/Program.cs:14968",
+        "src/DCGO.RL.Engine.Tests/Program.cs:15043",
+        "docs/rl-engine/on-add-security-foundation-scope-fnd003e.md"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Player",
+        "CardSources",
+        "AddedSecurityCards",
+        "SecurityCards",
+        "SecurityCard",
+        "SourceZone",
+        "DestinationZone",
+        "CardEffect",
+        "SourceCard",
+        "SourcePermanent",
+        "ToTop",
+        "FaceUp",
+        "MoveReason"
+      ],
+      "sourceMeaning": "The source event is raised when a card is added to security already face-up, or when an existing face-down security card is flipped face-up. The source hashtable carries Player and CardSources, and CanTriggerOnFaceUpSecurityIncreases checks player match plus at least one matching face-up security card.",
+      "policyDecision": "Treat the timing as source-known PartiallyImplemented data-policy foundation. Headless AddSecurity already queues OnAddSecurity followed by OnFaceUpSecurityIncreased for face-up additions, but source-aligned IFlipSecurity conversion and EX11-004 full-card parity are not closed.",
+      "missingHeadlessBoundary": "source-aligned FlipSecurity primitive/event, explicit face-up security increase fixture for flip-not-add, EX11-004 inherited draw body parity, and Unity/RL full-card replay comparison",
+      "nextFoundationTask": "FND-002-D1",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-D face-up security data policy has source call/payload evidence and headless AddSecurity face-up event coverage, but IFlipSecurity face-up conversion and EX11-004 full-card parity remain incomplete; this inventory treats the timing as source-known PartiallyImplemented data-policy foundation instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    }
+  ]
+}

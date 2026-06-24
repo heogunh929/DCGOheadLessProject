@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002c-next-action-queue.v1",
+  "generatedAt": "2026-06-23T22:53:13.972271+00:00",
+  "goal": "FND-002-C",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-c-digisorption-digiburst-timing-policy.json",
+  "summary": {
+    "nextFoundationTaskCount": 2,
+    "bodySpecificBoundaryRetainedCount": 1,
+    "note": "These tasks are source-known Unsupported common-mechanic blockers, not card-porting tasks."
+  },
+  "nextFoundationTasks": [
+    {
+      "taskId": "FND-002-C1",
+      "apiName": "WhenDigisorption",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "Digisorption is a BeforePayCost card-effect body pattern that selects a suspend source, installs a temporary cost-reduction provider, then opens a WhenDigisorption cut-in/trigger window for effects that modify which permanent may be suspended.",
+      "policyDecision": "Do not port individual Digisorption card bodies until a shared cost-window state machine exists. The timing is source-known and should be tracked as a known Unsupported foundation blocker, not unknown.",
+      "missingHeadlessBoundary": "source-aligned Digisorption cost transaction, selected suspend-source snapshot, reduction amount, UntilCalculateFixedCostEffect equivalent, and post-selection WhenDigisorption trigger queue",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "selection snapshot ordering",
+        "cost/source-trash lifecycle ordering",
+        "explicit unsupported until common runtime exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-C2",
+      "apiName": "OnUseDigiburst",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "IDigiBurst selects digivolution cards, emits OnUseDigiburst with Permanent/CardEffect before actual ITrashDigivolutionCards, then self source-trash triggers use the same activating DigiBurst effect as follow-up context.",
+      "policyDecision": "Treat the common DigiBurst lifecycle as a known Unsupported foundation blocker. Individual DigiBurst card effect bodies remain excluded until the common selection/trash lifecycle exists.",
+      "missingHeadlessBoundary": "source-aligned DigiBurst primitive, selected source snapshot, OnUseDigiburst trigger ordering before source trash, and self-source-trash follow-up payload",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "selection snapshot ordering",
+        "cost/source-trash lifecycle ordering",
+        "explicit unsupported until common runtime exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    }
+  ]
+}

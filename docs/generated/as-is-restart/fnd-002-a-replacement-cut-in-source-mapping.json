@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002a-replacement-cut-in-source-mapping.v1",
+  "generatedAt": "2026-06-23T22:27:42.281847+00:00",
+  "goal": "FND-002-A",
+  "sourceRoot": "E:/headlessDCGO/DCGO",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "fnd002Rerun": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+    "originalFnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 5,
+    "currentStatusCounts": {
+      "Unsupported": 5
+    },
+    "classificationCounts": {
+      "SourceMappedUnsupportedFoundation": 5
+    },
+    "movedFromNeedsSourceReviewToUnsupportedCount": 5,
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 7,
+    "foundationGateUnsupportedCapabilityCount": 26,
+    "foundationGatePartiallyImplementedCapabilityCount": 37,
+    "inventorySha256": "02ab501d843151674ebe97735d54e674ac8ed02d9cd68f5f7d28984e01fb657c",
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002AClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "ReplacementDeletePrevention",
+      "affectedCardCount": 405,
+      "sourceFileCount": 210,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 1,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:980",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:2898",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:2954",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:3117",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:3138",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3696",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/KeyWordEffects/Barrier.cs:99",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/KeyWordEffects/Evade.cs:77"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_066.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_024.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_015.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_111.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs"
+      ],
+      "payloadKeys": [
+        "Permanents",
+        "battle",
+        "CardEffect"
+      ],
+      "sourceMeaning": "deletion/destruction replacement window for Evade, Barrier, Partition, Scapegoat, and related prevention effects",
+      "missingHeadlessBoundary": "delete-prevention replacement queue before actual field removal",
+      "nextFoundationTask": "FND-002-A1",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-A replacement/delete-prevention cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned replacement/cut-in foundation runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "WhenRemoveField",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002AClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "WouldRemoveFieldCutIn",
+      "affectedCardCount": 304,
+      "sourceFileCount": 167,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 18,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:979",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2333",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2499",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2932",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2948",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3228",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3244",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3538",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3705",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:70",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenRemoveField.cs:11",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/ArmorPurge.cs:21",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Decode.cs:54",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Fragment.cs:52",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/MaterialSave.cs:47"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Black/AD1_023.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_111.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Black/BT13_075.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_040.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_060.cs"
+      ],
+      "payloadKeys": [
+        "Permanents",
+        "battle",
+        "CardEffect",
+        "digixros"
+      ],
+      "sourceMeaning": "generic would-leave-battle-area cut-in before bounce, placement under cards, link placement, and removal paths",
+      "missingHeadlessBoundary": "willBeRemoveField target marking, cut-in ordering, target re-fix, and actual movement continuation",
+      "nextFoundationTask": "FND-002-A2",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-A would-remove-field cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned replacement/cut-in foundation runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "WhenReturntoLibraryAnyone",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002AClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "WouldReturnToLibraryCutIn",
+      "affectedCardCount": 25,
+      "sourceFileCount": 10,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 8,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:981",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2323",
+        "DCGO/Assets/Scripts/Script/CardController.cs:2489",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:70"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT9/Red/BT9_012.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX4/Blue/EX4_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX6/Yellow/EX6_031.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Red/P_072.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Permanents",
+        "CardEffect",
+        "battle",
+        "digixros"
+      ],
+      "sourceMeaning": "specific deck-return replacement window that precedes the generic WhenRemoveField window",
+      "missingHeadlessBoundary": "return-to-library pre-move cut-in before deck bottom/top mutation",
+      "nextFoundationTask": "FND-002-A3",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-A return-to-library replacement cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned replacement/cut-in foundation runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "WhenUntapAnyone",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002AClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "WouldUnsuspendCutIn",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 16,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:983",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5694"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Permanents",
+        "CardEffect"
+      ],
+      "sourceMeaning": "would-unsuspend cut-in before actual IsSuspended=false mutation and OnUnTappedAnyone trigger",
+      "missingHeadlessBoundary": "pre-unsuspend replacement/selection window and target re-fix before primitive unsuspend",
+      "nextFoundationTask": "FND-002-A4",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-A would-unsuspend cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned replacement/cut-in foundation runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002AClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "WouldSourceTrashCutIn",
+      "affectedCardCount": 1,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 2,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1023",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5181",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5293",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:321"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Permanent",
+        "DiscardedCards",
+        "CardEffect"
+      ],
+      "sourceMeaning": "would-trash-digivolution-cards cut-in before source cards are removed and OnDigivolutionCardDiscarded fires",
+      "missingHeadlessBoundary": "source-card willBeRemoveSources marking, cut-in processing, and post-cut-in fixed source trash continuation",
+      "nextFoundationTask": "FND-002-A5",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-A would-source-trash cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned replacement/cut-in foundation runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    }
+  ]
+}

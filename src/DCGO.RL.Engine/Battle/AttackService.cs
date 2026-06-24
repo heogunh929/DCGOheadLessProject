@@ -17,17 +17,21 @@ public sealed record AttackResult(
 
 public enum AttackExecutionContinuationKind
 {
+    ContinueAfterAttackDeclarationTapped,
     ContinueAfterAllyAttack,
     ContinueAfterCounterNonCounter,
     ResolveCounterSelection,
     ContinueAfterCounterCounter,
     ResolveBlockerSelection,
+    ContinueAfterBlockTapped,
     ContinueAfterBlockTrigger,
     ContinueAfterAttackTargetChangedToCounterNonCounter,
     ContinueAfterAttackTargetChangedToCounterCounter,
     ContinueAfterAttackTargetChangedToBlockDesignation,
     ContinueAfterAttackTargetChangedToBattle,
     ContinueAfterSecurityCheck,
+    ContinueAfterEndBattle,
+    ContinueAfterDetermineDoSecurityCheck,
     CompleteAfterEndAttack,
 }
 
@@ -37,7 +41,9 @@ public sealed record AttackExecutionContinuation(
     AttackRuntimeContext? Context = null,
     AttackResult? AttackResult = null,
     BattleResolutionResult? BattleResult = null,
-    SecurityCheckContinuation? SecurityCheckContinuation = null);
+    SecurityCheckContinuation? SecurityCheckContinuation = null,
+    IReadOnlyList<PermanentId>? BattleWinnerPermanents = null,
+    IReadOnlyDictionary<PermanentId, CardInstanceId>? BattleTopCards = null);
 
 public sealed record AttackExecutionResult(
     AttackResult? Attack,
@@ -86,6 +92,17 @@ public sealed class AttackService
         | TriggerSourceZone.Trash
         | TriggerSourceZone.FaceUpSecurity,
         ResolveAfterEffectsActivate: true);
+
+    private static readonly TriggerPipelineOptions DetermineSecurityCheckOptions = new(
+        TriggerSourceZone.FieldTop
+        | TriggerSourceZone.Inherited
+        | TriggerSourceZone.Linked
+        | TriggerSourceZone.Hand
+        | TriggerSourceZone.Trash
+        | TriggerSourceZone.FaceUpSecurity,
+        ResolveAfterEffectsActivate: true,
+        UseMultipleSkillsOrdering: false,
+        UseFirstActiveOnly: true);
 
     private readonly BattleResolver _battleResolver;
     private readonly SecurityCheckService _securityCheckService;
@@ -196,12 +213,33 @@ public sealed class AttackService
             throw new DomainException($"Permanent '{action.Attacker}' could not be suspended for attack declaration.");
         }
 
+        var tappedTrigger = RunPendingRuleEventsWithResult(state, trace);
+        if (tappedTrigger?.HasPendingSelection == true)
+        {
+            return PendingTrigger(
+                tappedTrigger,
+                new AttackExecutionContinuation(
+                    AttackExecutionContinuationKind.ContinueAfterAttackDeclarationTapped,
+                    action,
+                    context));
+        }
+
+        return RunAllyAttackAfterDeclarationWithResult(state, action, context, trace);
+    }
+
+    private AttackExecutionResult RunAllyAttackAfterDeclarationWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        GameTrace? trace)
+    {
+        var current = state.RuntimeRules.Attack ?? context;
         var allyAttackTrigger = RunTriggerPipelineWithResult(
             state,
             EffectTiming.OnAllyAttack,
             action.Actor,
-            context.Attacker,
-            AttackValues(context),
+            current.Attacker,
+            AttackValues(current),
             trace);
         if (allyAttackTrigger?.HasPendingSelection == true)
         {
@@ -210,10 +248,10 @@ public sealed class AttackService
                 new AttackExecutionContinuation(
                     AttackExecutionContinuationKind.ContinueAfterAllyAttack,
                     action,
-                    context));
+                    current));
         }
 
-        return ContinueAfterAllyAttackWithResult(state, action, context, trace);
+        return ContinueAfterAllyAttackWithResult(state, action, current, trace);
     }
 
     public AttackExecutionResult CompleteAttackContinuationWithResult(
@@ -227,6 +265,9 @@ public sealed class AttackService
 
         return continuation.Kind switch
         {
+            AttackExecutionContinuationKind.ContinueAfterAttackDeclarationTapped =>
+                RunAllyAttackAfterDeclarationWithResult(state, continuation.Action, RequireContext(state, continuation), trace),
+
             AttackExecutionContinuationKind.ContinueAfterAllyAttack =>
                 ContinueAfterAllyAttackWithResult(state, continuation.Action, RequireContext(state, continuation), trace),
 
@@ -246,6 +287,9 @@ public sealed class AttackService
 
             AttackExecutionContinuationKind.ResolveBlockerSelection =>
                 throw new DomainException("Blocker selection attack continuation requires a SelectionResult."),
+
+            AttackExecutionContinuationKind.ContinueAfterBlockTapped =>
+                RunBlockTriggerAfterTappedWithResult(state, continuation.Action, trace),
 
             AttackExecutionContinuationKind.ContinueAfterBlockTrigger =>
                 ContinueAfterBlockTriggerWithResult(
@@ -283,6 +327,26 @@ public sealed class AttackService
 
             AttackExecutionContinuationKind.ContinueAfterSecurityCheck =>
                 throw new DomainException("Security check attack continuation requires a SelectionResult."),
+
+            AttackExecutionContinuationKind.ContinueAfterEndBattle =>
+                ContinueAfterEndBattleWithResult(
+                    state,
+                    continuation.Action,
+                    RequireContext(state, continuation),
+                    continuation.BattleResult
+                    ?? throw new DomainException("Completing OnEndBattle requires the resolved battle result."),
+                    RequireBattleWinnerPermanents(continuation),
+                    RequireBattleTopCards(continuation),
+                    trace),
+
+            AttackExecutionContinuationKind.ContinueAfterDetermineDoSecurityCheck =>
+                ContinueAfterDetermineDoSecurityCheckWithResult(
+                    state,
+                    continuation.Action,
+                    RequireContext(state, continuation),
+                    continuation.BattleResult
+                    ?? throw new DomainException("Completing OnDetermineDoSecurityCheck requires the resolved battle result."),
+                    trace),
 
             AttackExecutionContinuationKind.CompleteAfterEndAttack =>
                 CompleteAfterEndAttack(state, continuation.AttackResult),
@@ -678,11 +742,6 @@ public sealed class AttackService
             throw new DomainException($"Permanent '{blocker}' is already the current attack target.");
         }
 
-        if (!_primitives.Suspend(state, blocker))
-        {
-            return ResolveBattleWithResult(state, action, context.WithState(AttackRuntimeState.Battle), trace);
-        }
-
         if (!AttackRuntimeOperations.SwitchDefender(
             state,
             blocker,
@@ -695,6 +754,37 @@ public sealed class AttackService
 
         var blockContext = state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.BlockTrigger);
         state.RuntimeRules.SetAttack(blockContext);
+        if (!_primitives.Suspend(state, blocker, isBlock: true))
+        {
+            return ResolveBattleWithResult(state, action, blockContext.WithState(AttackRuntimeState.Battle), trace);
+        }
+
+        var tappedTrigger = RunPendingRuleEventsWithResult(state, trace);
+        if (tappedTrigger?.HasPendingSelection == true)
+        {
+            return PendingTrigger(
+                tappedTrigger,
+                new AttackExecutionContinuation(
+                    AttackExecutionContinuationKind.ContinueAfterBlockTapped,
+                    action,
+                    blockContext));
+        }
+
+        return RunBlockTriggerAfterTappedWithResult(state, action, trace);
+    }
+
+    private AttackExecutionResult RunBlockTriggerAfterTappedWithResult(
+        GameState state,
+        AttackAction action,
+        GameTrace? trace)
+    {
+        var blockContext = state.RuntimeRules.RequireAttack().WithState(AttackRuntimeState.BlockTrigger);
+        state.RuntimeRules.SetAttack(blockContext);
+        if (blockContext.Blocker is not { } blocker || !TryFindPermanent(state, blocker, out var blockerPermanent))
+        {
+            return ContinueAfterBlockTriggerWithResult(state, action, trace);
+        }
+
         var blockTrigger = RunTriggerPipelineWithResult(
             state,
             EffectTiming.OnBlockAnyone,
@@ -840,35 +930,36 @@ public sealed class AttackService
                 return RunEndAttackWithResult(state, action, current.EndAttack(), null, null, false, trace);
             }
 
+            var attackerBeforeBattle = BattleRules.Permanent(state, current.Attacker);
+            var defenderBeforeBattle = BattleRules.Permanent(state, defenderId);
+            var winnerPermanents = BattleWinnerPermanents(
+                state,
+                attackerBeforeBattle,
+                defenderBeforeBattle);
+            var battleTopCards = BattleTopCardSnapshot(attackerBeforeBattle, defenderBeforeBattle);
             var battle = _battleResolver.ResolvePermanentBattle(state, current.Attacker, defenderId, trace);
-            _durationCleanupService.CleanupBattleEnd(state);
-
-            SecurityCheckResult? piercingCheck = null;
-            if (TryFindPermanent(state, current.Attacker, out var attackerAfterBattle)
-                && _keywordService.HasKeyword(state, attackerAfterBattle, BattleKeyword.Piercing)
-                && battle.DestroyedPermanents.Contains(defenderId)
-                && !battle.DestroyedPermanents.Contains(current.Attacker)
-                && OpponentHasSecurity(state, action.Actor))
+            var onEndBattleTrigger = RunOnEndBattleWithResult(
+                state,
+                action,
+                current,
+                battle,
+                winnerPermanents,
+                battleTopCards,
+                trace);
+            if (onEndBattleTrigger?.HasPendingSelection == true)
             {
-                var piercingCheckResult = _securityCheckService.CheckSecurityWithResult(
-                    state,
-                    current.Attacker,
-                    state.NonTurnPlayerId,
-                    trace);
-                if (piercingCheckResult.HasPendingSelection)
-                {
-                    return PendingSecurityCheck(
+                return PendingTrigger(
+                    onEndBattleTrigger,
+                    new AttackExecutionContinuation(
+                        AttackExecutionContinuationKind.ContinueAfterEndBattle,
                         action,
                         current,
-                        piercingCheckResult,
-                        battle);
-                }
-
-                piercingCheck = piercingCheckResult.Result
-                    ?? throw new DomainException("Completed piercing security check result is missing.");
+                        BattleResult: battle,
+                        BattleWinnerPermanents: winnerPermanents,
+                        BattleTopCards: battleTopCards));
             }
 
-            return RunEndAttackWithResult(state, action, current, battle, piercingCheck, false, trace);
+            return ContinueAfterEndBattleWithResult(state, action, current, battle, winnerPermanents, battleTopCards, trace);
         }
 
         var opponent = state.Players.First(player => player.Id != action.Actor);
@@ -933,6 +1024,70 @@ public sealed class AttackService
         BattleResolutionResult? battleResult,
         GameTrace? trace) =>
         RunEndAttackWithResult(state, action, context, battleResult ?? securityCheck.BattleResult, securityCheck, false, trace);
+
+    private AttackExecutionResult ContinueAfterEndBattleWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        BattleResolutionResult battle,
+        IReadOnlyList<PermanentId> winnerPermanents,
+        IReadOnlyDictionary<PermanentId, CardInstanceId> battleTopCards,
+        GameTrace? trace)
+    {
+        var determineTrigger = RunOnDetermineDoSecurityCheckWithResult(
+            state,
+            action,
+            context,
+            battle,
+            winnerPermanents,
+            battleTopCards,
+            trace);
+        if (determineTrigger?.HasPendingSelection == true)
+        {
+            return PendingTrigger(
+                determineTrigger,
+                new AttackExecutionContinuation(
+                    AttackExecutionContinuationKind.ContinueAfterDetermineDoSecurityCheck,
+                    action,
+                    context,
+                    BattleResult: battle));
+        }
+
+        return ContinueAfterDetermineDoSecurityCheckWithResult(state, action, context, battle, trace);
+    }
+
+    private AttackExecutionResult ContinueAfterDetermineDoSecurityCheckWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        BattleResolutionResult battle,
+        GameTrace? trace)
+    {
+        _durationCleanupService.CleanupBattleEnd(state);
+
+        SecurityCheckResult? piercingCheck = null;
+        if (CanDoPiercingSecurityCheck(state, action, context, battle))
+        {
+            var piercingCheckResult = _securityCheckService.CheckSecurityWithResult(
+                state,
+                context.Attacker,
+                state.NonTurnPlayerId,
+                trace);
+            if (piercingCheckResult.HasPendingSelection)
+            {
+                return PendingSecurityCheck(
+                    action,
+                    context,
+                    piercingCheckResult,
+                    battle);
+            }
+
+            piercingCheck = piercingCheckResult.Result
+                ?? throw new DomainException("Completed piercing security check result is missing.");
+        }
+
+        return RunEndAttackWithResult(state, action, context, battle, piercingCheck, false, trace);
+    }
 
     private AttackExecutionResult RunEndAttackWithResult(
         GameState state,
@@ -1050,6 +1205,89 @@ public sealed class AttackService
             options: options,
             descriptorFilter: descriptorFilter,
             trace: trace);
+    }
+
+    private TriggerPipelineResult? RunPendingRuleEventsWithResult(GameState state, GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        while (state.RuntimeRules.TryDequeuePendingRuleEvent(out var ruleEvent))
+        {
+            var result = _triggerPipelineService.Run(
+                state,
+                ruleEvent.Timing,
+                ruleEvent.Player,
+                values: ruleEvent.Values,
+                trace: trace);
+            if (result.HasPendingSelection)
+            {
+                return result;
+            }
+        }
+
+        return null;
+    }
+
+    private TriggerPipelineResult? RunOnEndBattleWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        BattleResolutionResult battle,
+        IReadOnlyList<PermanentId> winnerPermanents,
+        IReadOnlyDictionary<PermanentId, CardInstanceId> battleTopCards,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        var values = BattleEndValues(context, battle, winnerPermanents, battleTopCards);
+        return RunTriggerPipelineWithResult(
+            state,
+            EffectTiming.OnEndBattle,
+            action.Actor,
+            context.Attacker,
+            values,
+            trace);
+    }
+
+    private TriggerPipelineResult? RunOnDetermineDoSecurityCheckWithResult(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        BattleResolutionResult battle,
+        IReadOnlyList<PermanentId> winnerPermanents,
+        IReadOnlyDictionary<PermanentId, CardInstanceId> battleTopCards,
+        GameTrace? trace)
+    {
+        if (_triggerPipelineService is null)
+        {
+            return null;
+        }
+
+        var canDoSecurityCheck = CanDoPiercingSecurityCheck(state, action, context, battle);
+        var values = BattleEndValues(context, battle, winnerPermanents, battleTopCards);
+        values["SecurityCheckCount"] = TryFindPermanent(state, context.Attacker, out var attacker)
+            ? _keywordService.SecurityAttackCount(state, attacker)
+            : 0;
+        values["ChecksCompleted"] = 0;
+        values["DoSecurityCheck"] = canDoSecurityCheck;
+        values["CanDoSecurityCheck"] = canDoSecurityCheck;
+        values["WillDoSecurityCheck"] = canDoSecurityCheck;
+        values["PiercingSecurityCheck"] = canDoSecurityCheck;
+
+        return RunTriggerPipelineWithResult(
+            state,
+            EffectTiming.OnDetermineDoSecurityCheck,
+            action.Actor,
+            context.Attacker,
+            values,
+            trace,
+            options: DetermineSecurityCheckOptions);
     }
 
     private PreparedTriggerGroup? PrepareCounterEffects(
@@ -1286,6 +1524,16 @@ public sealed class AttackService
         return state.RuntimeRules.RequireAttack();
     }
 
+    private static IReadOnlyList<PermanentId> RequireBattleWinnerPermanents(AttackExecutionContinuation continuation) =>
+        continuation.BattleWinnerPermanents
+        ?? throw new DomainException(
+            $"Attack continuation '{continuation.Kind}' requires battle winner permanent snapshot.");
+
+    private static IReadOnlyDictionary<PermanentId, CardInstanceId> RequireBattleTopCards(AttackExecutionContinuation continuation) =>
+        continuation.BattleTopCards
+        ?? throw new DomainException(
+            $"Attack continuation '{continuation.Kind}' requires battle top-card snapshot.");
+
     private static void RequireValidAttackTarget(GameState state, AttackAction action, PermanentId defenderId)
     {
         var defender = BattleRules.Permanent(state, defenderId);
@@ -1332,6 +1580,18 @@ public sealed class AttackService
     private static bool OpponentHasSecurity(GameState state, PlayerId actor) =>
         state.Players.First(player => player.Id != actor).Security.Count > 0;
 
+    private bool CanDoPiercingSecurityCheck(
+        GameState state,
+        AttackAction action,
+        AttackRuntimeContext context,
+        BattleResolutionResult battle) =>
+        context.Defender is { } defenderId
+        && TryFindPermanent(state, context.Attacker, out var attackerAfterBattle)
+        && _keywordService.HasKeyword(state, attackerAfterBattle, BattleKeyword.Piercing)
+        && battle.DestroyedPermanents.Contains(defenderId)
+        && !battle.DestroyedPermanents.Contains(context.Attacker)
+        && OpponentHasSecurity(state, action.Actor);
+
     private static bool ShouldRunOnEndAttack(GameState state, AttackRuntimeContext context, bool directWin) =>
         !directWin
         && !state.IsGameOver
@@ -1342,6 +1602,78 @@ public sealed class AttackService
         new[] { permanent.TopCardId }
             .Concat(permanent.SourceCardIds)
             .Concat(permanent.LinkedCards)
+            .ToArray();
+
+    private IReadOnlyList<PermanentId> BattleWinnerPermanents(
+        GameState state,
+        PermanentState attacker,
+        PermanentState defender)
+    {
+        var attackerDp = _effectiveStats.Dp(state, attacker);
+        var defenderDp = _effectiveStats.Dp(state, defender);
+        if (attackerDp > defenderDp)
+        {
+            return new[] { attacker.Id };
+        }
+
+        if (attackerDp < defenderDp)
+        {
+            return new[] { defender.Id };
+        }
+
+        return new[] { attacker.Id, defender.Id };
+    }
+
+    private static IReadOnlyDictionary<PermanentId, CardInstanceId> BattleTopCardSnapshot(
+        PermanentState attacker,
+        PermanentState defender) =>
+        new Dictionary<PermanentId, CardInstanceId>
+        {
+            [attacker.Id] = attacker.TopCardId,
+            [defender.Id] = defender.TopCardId,
+        };
+
+    private static Dictionary<string, object?> BattleEndValues(
+        AttackRuntimeContext context,
+        BattleResolutionResult battle,
+        IReadOnlyList<PermanentId> winnerPermanents,
+        IReadOnlyDictionary<PermanentId, CardInstanceId> battleTopCards)
+    {
+        var values = AttackValues(context);
+        var participants = context.Defender is { } defender
+            ? new[] { context.Attacker, defender }
+            : new[] { context.Attacker };
+        var loserPermanents = battle.DestroyedPermanents.ToArray();
+        values["Battle"] = battle;
+        values["battle"] = battle;
+        values["BattleResult"] = battle;
+        values["Permanents"] = participants;
+        values["BattlePermanents"] = participants;
+        values["WinnerPermanents"] = winnerPermanents.ToArray();
+        values["WinnerPermanents_real"] = winnerPermanents.ToArray();
+        values["WinnerTopCards"] = CardsForPermanents(winnerPermanents, battleTopCards);
+        values["LoserPermanents"] = loserPermanents;
+        values["LoserPermanents_real"] = loserPermanents;
+        values["DestroyedPermanents"] = loserPermanents;
+        values["LoserTopCards"] = CardsForPermanents(loserPermanents, battleTopCards);
+        values["LoserCard"] = null;
+        values["WasTie"] = battle.WasTie;
+        values["AttackerTopCard"] = battleTopCards.TryGetValue(context.Attacker, out var attackerTopCard)
+            ? attackerTopCard
+            : context.AttackerTopCardWhenDeclared;
+        values["DefenderTopCard"] = context.Defender is { } defenderId
+            && battleTopCards.TryGetValue(defenderId, out var defenderTopCard)
+                ? defenderTopCard
+                : null;
+        return values;
+    }
+
+    private static IReadOnlyList<CardInstanceId> CardsForPermanents(
+        IEnumerable<PermanentId> permanents,
+        IReadOnlyDictionary<PermanentId, CardInstanceId> topCards) =>
+        permanents
+            .Where(topCards.ContainsKey)
+            .Select(permanent => topCards[permanent])
             .ToArray();
 
     private static Dictionary<string, object?> AttackValues(

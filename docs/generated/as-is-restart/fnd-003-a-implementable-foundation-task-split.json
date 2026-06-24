@@ -1,6 +1,6 @@
 {
   "schemaVersion": "dcgo.fnd-003-a-implementable-task-split.v1",
-  "generatedAtUtc": "2026-06-23T13:13:57.331327Z",
+  "generatedAtUtc": "2026-06-23T20:12:39Z",
   "goal": "FND-003-A split ImplementableFoundationTask items into small source-aligned goals",
   "sourceRoot": "E:/headlessDCGO/DCGO",
   "inputs": {
@@ -208,7 +208,17 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationNotes": [
+        "PlayCardService runs AfterPayCost after standard permanent and option cost payment.",
+        "DigivolveService runs AfterPayCost after normal digivolution cost payment.",
+        "CostPaymentRuleEventPayload preserves paid cost, base cost, memory-before/after, root/source zone, and cost transaction identity."
+      ],
+      "verification": "All 613 tests passed",
+      "remainingScope": [
+        "complex-mechanic AfterPayCost hooks remain follow-up work",
+        "card-specific AfterPayCost bodies remain out of scope"
+      ]
     },
     {
       "goalId": "FND-003-D",
@@ -599,7 +609,14 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationEvidence": [
+        "PlayCardService hand option play queues and resolves OnUseOption after cost payment and before OptionSkill.",
+        "OnUseOption payload preserves Card, Cards, CardSources, SourceCard, Root, Cost, PaidCost, PayCost, SourceZone, and ActivatedFromSecurity.",
+        "Regression fixture covers queued trigger/background OnUseOption ordering before OptionSkill."
+      ],
+      "verification": "All 617 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-H",
@@ -703,7 +720,14 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "Tier1PrimitiveService.Unsuspend queues OnUnTappedAnyone only for an actual non-breeding suspended-to-unsuspended state change.",
+        "Payload preserves Permanents, Permanent, UnsuspendedPermanents, UnsuspendedPermanent, UnsuspendedController, UnsuspendedTopCard, CardSources, SourceZone, and DestinationZone.",
+        "Regression fixture covers idempotent unsuspend suppression and auto-process payload observation."
+      ],
+      "verification": "All 618 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-I",
@@ -802,7 +826,14 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "MovePermanentWithEvents queues OnMove when a permanent moves into battle area and survives as a battle-area permanent.",
+        "MoveFromBreedingService routes breeding-to-battle movement through the shared primitive.",
+        "Payload preserves Permanent, MovedPermanent, old/new zones, moved top card, controller, move reason, and battle-area survival metadata."
+      ],
+      "verification": "All 619 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-J",
@@ -901,7 +932,14 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "AddDigivolutionCardsWithEvents validates EvolutionSources destination and destination Permanent, moves cards through ZoneMover, and queues OnAddDigivolutionCards when effect enqueue is not skipped.",
+        "Payload preserves Permanent, DestinationPermanent, CardEffect, SourceCard, SourcePermanent, Cards, CardSources, AddedDigivolutionCards, isFromSameDigimon, isFromDigimon, SourceZone, DestinationZone, SourceZones, MoveReason, ToTop, and FaceUp.",
+        "Regression fixture covers hand-to-source add, skipEffectAndActivateSkill, and same-permanent linked-card source add."
+      ],
+      "verification": "All 620 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-K",
@@ -990,7 +1028,15 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "TrashDigivolutionCardsWithEvents validates battle-area Digimon source targets, moves discarded source cards through ZoneMover from EvolutionSources to Trash, and queues OnDigivolutionCardDiscarded when an effect source is present.",
+        "Payload preserves CardEffect, Permanent, DiscardedCards, CardSources, source/destination zones, move reason, and triggered-source metadata for discarded source cards now in Trash.",
+        "TriggerPipelineService collects OnDigivolutionCardDiscarded TriggeredSourceCards from payload as trash-zone sources so the discarded source card can observe the pending rule event.",
+        "Regression fixture covers explicit selected source trash, bottom-source trash wrapper routing, discarded-source payload observation, and skipEffectAndActivateSkill suppression."
+      ],
+      "verification": "All 621 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-L",
@@ -1084,7 +1130,19 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationNotes": [
+        "AttackService runs OnEndBattle after permanent-vs-permanent battle result resolution and before UntilBattleEnd cleanup, piercing/security checks, and OnEndAttack.",
+        "Payload preserves battle result snapshots, winner/loser permanents, destroyed permanents, top cards, tie state, and attack context.",
+        "ContinueAfterEndBattle resumes selection-bound effects before cleanup and the remaining attack tail."
+      ],
+      "verification": "All 623 tests passed",
+      "remainingScope": [
+        "security Digimon battle OnEndBattle parity remains follow-up work",
+        "strict cloned Permanent object parity remains follow-up work",
+        "battle object lifetime and stale permanent parity remain follow-up work",
+        "card-specific OnEndBattle bodies remain out of scope"
+      ]
     },
     {
       "goalId": "FND-003-M",
@@ -1178,7 +1236,21 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationNotes": [
+        "AttackService runs OnDetermineDoSecurityCheck after OnEndBattle and before UntilBattleEnd cleanup/security check resolution.",
+        "The trigger uses a source-aligned first-active-only option to mirror CardController skillInfos_Pierce[0] selection.",
+        "Payload preserves battle result snapshots and security-check decision fields: SecurityCheckCount, ChecksCompleted, DoSecurityCheck, CanDoSecurityCheck, WillDoSecurityCheck, PiercingSecurityCheck.",
+        "ContinueAfterDetermineDoSecurityCheck resumes selection-bound effects before cleanup and the piercing security check."
+      ],
+      "verification": "All 626 tests passed",
+      "remainingScope": [
+        "card-specific Pierce body wiring remains out of scope",
+        "direct attack SecurityAttack count parity is separate from OnDetermineDoSecurityCheck",
+        "strict source PutStackedSkill stack object parity remains a future parity fixture",
+        "broader security-check modifier source parity remains a follow-up",
+        "OnSecurityCheck ordering fixtures remain a follow-up"
+      ]
     },
     {
       "goalId": "FND-003-N",
@@ -1277,7 +1349,21 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationNotes": [
+        "PlayCardService runs BeforePayCost before normal permanent play cost payment and revalidates hand/frame/static gates before paying.",
+        "Option play runs BeforePayCost before cost payment, revalidates static CannotPlay and color requirements, then continues AfterPayCost, OnUseOption, and OptionSkill.",
+        "DigivolveService runs BeforePayCost before normal digivolution cost payment and recomputes digivolution legality/cost before paying.",
+        "TriggerPipelineOptions.ExecuteBackgroundEffectsFirst preserves Unity background-before-cut-in ordering for this timing."
+      ],
+      "verification": "All 629 tests passed",
+      "remainingScope": [
+        "BeforePayCost selection continuation before payment remains explicit unsupported scope",
+        "DigiXros, Assembly, Burst, AppFusion, Jogress, and Digisorption-specific payment flows remain follow-up work",
+        "card-specific BeforePayCost bodies remain out of scope",
+        "strict PutStackedSkill stack object parity remains a future parity fixture",
+        "max-payable memory and material-selection policies remain source-mapping follow-up"
+      ]
     },
     {
       "goalId": "FND-003-O",
@@ -1371,7 +1457,20 @@
       ],
       "implementationAllowedNow": false,
       "statusPromotionAllowed": false,
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "verification": "All 630 tests passed",
+      "completedScope": "actual suspend primitive OnTappedAnyone event payload and attack/block immediate drain scope",
+      "runtimeEvidence": [
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs - Suspend queues OnTappedAnyone payload after actual suspend",
+        "src/DCGO.RL.Engine/Battle/AttackService.cs - attack declaration and block suspend drain OnTappedAnyone before next attack timing",
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs - generic tap selection forwards source metadata to primitive",
+        "src/DCGO.RL.Engine.Tests/Program.cs - FND-003-O OnTappedAnyone queues actual suspend event"
+      ],
+      "remainingFollowUps": [
+        "CanSuspend / ICanNotSuspend policy parity is not implemented in this scope.",
+        "Individual card body source metadata wiring remains card-specific follow-up and was not expanded here.",
+        "Strict Unity stack object parity for SuspendPermanentsClass and card-specific OnTappedAnyone body parity remain future work."
+      ]
     },
     {
       "goalId": "FND-003-P",
@@ -3056,7 +3155,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationEvidence": [
+        "PlayCardService hand option play queues and resolves OnUseOption after cost payment and before OptionSkill.",
+        "OnUseOption payload preserves Card, Cards, CardSources, SourceCard, Root, Cost, PaidCost, PayCost, SourceZone, and ActivatedFromSecurity.",
+        "Regression fixture covers queued trigger/background OnUseOption ordering before OptionSkill."
+      ],
+      "verification": "All 617 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-G-R",
@@ -3161,7 +3267,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationEvidence": [
+        "PlayCardService hand option play queues and resolves OnUseOption after cost payment and before OptionSkill.",
+        "OnUseOption payload preserves Card, Cards, CardSources, SourceCard, Root, Cost, PaidCost, PayCost, SourceZone, and ActivatedFromSecurity.",
+        "Regression fixture covers queued trigger/background OnUseOption ordering before OptionSkill."
+      ],
+      "verification": "All 617 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-G-T",
@@ -3266,7 +3379,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "implementationEvidence": [
+        "PlayCardService hand option play queues and resolves OnUseOption after cost payment and before OptionSkill.",
+        "OnUseOption payload preserves Card, Cards, CardSources, SourceCard, Root, Cost, PaidCost, PayCost, SourceZone, and ActivatedFromSecurity.",
+        "Regression fixture covers queued trigger/background OnUseOption ordering before OptionSkill."
+      ],
+      "verification": "All 617 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-H-S",
@@ -3376,7 +3496,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "Tier1PrimitiveService.Unsuspend queues OnUnTappedAnyone only for an actual non-breeding suspended-to-unsuspended state change.",
+        "Payload preserves Permanents, Permanent, UnsuspendedPermanents, UnsuspendedPermanent, UnsuspendedController, UnsuspendedTopCard, CardSources, SourceZone, and DestinationZone.",
+        "Regression fixture covers idempotent unsuspend suppression and auto-process payload observation."
+      ],
+      "verification": "All 618 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-H-R",
@@ -3486,7 +3613,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "Tier1PrimitiveService.Unsuspend queues OnUnTappedAnyone only for an actual non-breeding suspended-to-unsuspended state change.",
+        "Payload preserves Permanents, Permanent, UnsuspendedPermanents, UnsuspendedPermanent, UnsuspendedController, UnsuspendedTopCard, CardSources, SourceZone, and DestinationZone.",
+        "Regression fixture covers idempotent unsuspend suppression and auto-process payload observation."
+      ],
+      "verification": "All 618 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-H-T",
@@ -3596,7 +3730,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "Tier1PrimitiveService.Unsuspend queues OnUnTappedAnyone only for an actual non-breeding suspended-to-unsuspended state change.",
+        "Payload preserves Permanents, Permanent, UnsuspendedPermanents, UnsuspendedPermanent, UnsuspendedController, UnsuspendedTopCard, CardSources, SourceZone, and DestinationZone.",
+        "Regression fixture covers idempotent unsuspend suppression and auto-process payload observation."
+      ],
+      "verification": "All 618 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-I-S",
@@ -3701,7 +3842,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "MovePermanentWithEvents queues OnMove when a permanent moves into battle area and survives as a battle-area permanent.",
+        "MoveFromBreedingService routes breeding-to-battle movement through the shared primitive.",
+        "Payload preserves Permanent, MovedPermanent, old/new zones, moved top card, controller, move reason, and battle-area survival metadata."
+      ],
+      "verification": "All 619 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-I-R",
@@ -3806,7 +3954,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "MovePermanentWithEvents queues OnMove when a permanent moves into battle area and survives as a battle-area permanent.",
+        "MoveFromBreedingService routes breeding-to-battle movement through the shared primitive.",
+        "Payload preserves Permanent, MovedPermanent, old/new zones, moved top card, controller, move reason, and battle-area survival metadata."
+      ],
+      "verification": "All 619 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-I-T",
@@ -3911,7 +4066,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "MovePermanentWithEvents queues OnMove when a permanent moves into battle area and survives as a battle-area permanent.",
+        "MoveFromBreedingService routes breeding-to-battle movement through the shared primitive.",
+        "Payload preserves Permanent, MovedPermanent, old/new zones, moved top card, controller, move reason, and battle-area survival metadata."
+      ],
+      "verification": "All 619 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-J-S",
@@ -4016,7 +4178,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "AddDigivolutionCardsWithEvents validates EvolutionSources destination and destination Permanent, moves cards through ZoneMover, and queues OnAddDigivolutionCards when effect enqueue is not skipped.",
+        "Payload preserves Permanent, DestinationPermanent, CardEffect, SourceCard, SourcePermanent, Cards, CardSources, AddedDigivolutionCards, isFromSameDigimon, isFromDigimon, SourceZone, DestinationZone, SourceZones, MoveReason, ToTop, and FaceUp.",
+        "Regression fixture covers hand-to-source add, skipEffectAndActivateSkill, and same-permanent linked-card source add."
+      ],
+      "verification": "All 620 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-J-R",
@@ -4121,7 +4290,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "AddDigivolutionCardsWithEvents validates EvolutionSources destination and destination Permanent, moves cards through ZoneMover, and queues OnAddDigivolutionCards when effect enqueue is not skipped.",
+        "Payload preserves Permanent, DestinationPermanent, CardEffect, SourceCard, SourcePermanent, Cards, CardSources, AddedDigivolutionCards, isFromSameDigimon, isFromDigimon, SourceZone, DestinationZone, SourceZones, MoveReason, ToTop, and FaceUp.",
+        "Regression fixture covers hand-to-source add, skipEffectAndActivateSkill, and same-permanent linked-card source add."
+      ],
+      "verification": "All 620 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-J-T",
@@ -4226,7 +4402,14 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "AddDigivolutionCardsWithEvents validates EvolutionSources destination and destination Permanent, moves cards through ZoneMover, and queues OnAddDigivolutionCards when effect enqueue is not skipped.",
+        "Payload preserves Permanent, DestinationPermanent, CardEffect, SourceCard, SourcePermanent, Cards, CardSources, AddedDigivolutionCards, isFromSameDigimon, isFromDigimon, SourceZone, DestinationZone, SourceZones, MoveReason, ToTop, and FaceUp.",
+        "Regression fixture covers hand-to-source add, skipEffectAndActivateSkill, and same-permanent linked-card source add."
+      ],
+      "verification": "All 620 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-K-S",
@@ -4321,7 +4504,15 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "TrashDigivolutionCardsWithEvents validates battle-area Digimon source targets, moves discarded source cards through ZoneMover from EvolutionSources to Trash, and queues OnDigivolutionCardDiscarded when an effect source is present.",
+        "Payload preserves CardEffect, Permanent, DiscardedCards, CardSources, source/destination zones, move reason, and triggered-source metadata for discarded source cards now in Trash.",
+        "TriggerPipelineService collects OnDigivolutionCardDiscarded TriggeredSourceCards from payload as trash-zone sources so the discarded source card can observe the pending rule event.",
+        "Regression fixture covers explicit selected source trash, bottom-source trash wrapper routing, discarded-source payload observation, and skipEffectAndActivateSkill suppression."
+      ],
+      "verification": "All 621 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-K-R",
@@ -4416,7 +4607,15 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "TrashDigivolutionCardsWithEvents validates battle-area Digimon source targets, moves discarded source cards through ZoneMover from EvolutionSources to Trash, and queues OnDigivolutionCardDiscarded when an effect source is present.",
+        "Payload preserves CardEffect, Permanent, DiscardedCards, CardSources, source/destination zones, move reason, and triggered-source metadata for discarded source cards now in Trash.",
+        "TriggerPipelineService collects OnDigivolutionCardDiscarded TriggeredSourceCards from payload as trash-zone sources so the discarded source card can observe the pending rule event.",
+        "Regression fixture covers explicit selected source trash, bottom-source trash wrapper routing, discarded-source payload observation, and skipEffectAndActivateSkill suppression."
+      ],
+      "verification": "All 621 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-K-T",
@@ -4511,7 +4710,15 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedPrimitiveScope",
+      "implementationEvidence": [
+        "TrashDigivolutionCardsWithEvents validates battle-area Digimon source targets, moves discarded source cards through ZoneMover from EvolutionSources to Trash, and queues OnDigivolutionCardDiscarded when an effect source is present.",
+        "Payload preserves CardEffect, Permanent, DiscardedCards, CardSources, source/destination zones, move reason, and triggered-source metadata for discarded source cards now in Trash.",
+        "TriggerPipelineService collects OnDigivolutionCardDiscarded TriggeredSourceCards from payload as trash-zone sources so the discarded source card can observe the pending rule event.",
+        "Regression fixture covers explicit selected source trash, bottom-source trash wrapper routing, discarded-source payload observation, and skipEffectAndActivateSkill suppression."
+      ],
+      "verification": "All 621 tests passed",
+      "completedAt": "2026-06-24"
     },
     {
       "goalId": "FND-003-L-S",
@@ -4911,7 +5118,8 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "verification": "All 626 tests passed"
     },
     {
       "goalId": "FND-003-M-R",
@@ -5011,7 +5219,8 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "verification": "All 626 tests passed"
     },
     {
       "goalId": "FND-003-M-T",
@@ -5111,7 +5320,8 @@
         "FND-001-A ContinuousOrStaticEffect closeable source-collection items",
         "TRUST-001-RERUN before trusting existing src implementation"
       ],
-      "progressStatus": "Pending"
+      "progressStatus": "CompletedRuntimeScope",
+      "verification": "All 626 tests passed"
     },
     {
       "goalId": "FND-003-N-S",
@@ -6059,7 +6269,17 @@
       "FND-003-C",
       "FND-003-D",
       "FND-003-E",
-      "FND-003-F"
+      "FND-003-F",
+      "FND-003-G",
+      "FND-003-H",
+      "FND-003-I",
+      "FND-003-J",
+      "FND-003-K",
+      "FND-003-L",
+      "FND-003-M",
+      "FND-003-N",
+      "FND-003-O",
+      "FND-003-P"
     ],
     "completedChildGoalIds": [
       "FND-003-B-S",
@@ -6076,17 +6296,50 @@
       "FND-003-E-T",
       "FND-003-F-S",
       "FND-003-F-R",
-      "FND-003-F-T"
+      "FND-003-F-T",
+      "FND-003-G-S",
+      "FND-003-G-R",
+      "FND-003-G-T",
+      "FND-003-H-S",
+      "FND-003-H-R",
+      "FND-003-H-T",
+      "FND-003-I-S",
+      "FND-003-I-R",
+      "FND-003-I-T",
+      "FND-003-J-S",
+      "FND-003-J-R",
+      "FND-003-J-T",
+      "FND-003-K-S",
+      "FND-003-K-R",
+      "FND-003-K-T",
+      "FND-003-L-S",
+      "FND-003-L-R",
+      "FND-003-L-T",
+      "FND-003-M-S",
+      "FND-003-M-R",
+      "FND-003-M-T",
+      "FND-003-N-S",
+      "FND-003-N-R",
+      "FND-003-N-T",
+      "FND-003-O-S",
+      "FND-003-O-R",
+      "FND-003-O-T",
+      "FND-003-P-S",
+      "FND-003-P-R",
+      "FND-003-P-T"
     ],
-    "lastCompletedGoal": "FND-003-F",
-    "lastCompletedCapability": "OnDiscardLibrary",
-    "lastVerification": "All 616 tests passed",
+    "lastCompletedGoal": "FND-003-P",
+    "lastCompletedCapability": "OnDeclaration",
+    "lastVerification": "All 633 tests passed",
     "foundationGateAfterLastCompletedGoal": {
       "openCodeReady": false,
       "passedGateCount": 11,
       "failedGateCount": 3
     },
-    "nextParentGoalId": "FND-003-G",
-    "nextCapabilityId": "OnUseOption"
+    "nextParentGoalId": null,
+    "nextCapabilityId": null,
+    "nextProgramGoalId": "FND-001-A",
+    "nextProgramCapabilityId": "ContinuousOrStaticEffect",
+    "nextProgramRecommendation": "Process the first CloseableFoundationTask bundle from FND-001 without card body implementation or generated status promotion."
   }
 }

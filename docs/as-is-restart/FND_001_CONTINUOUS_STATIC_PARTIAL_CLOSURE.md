@@ -1,6 +1,30 @@
 # FND-001 ContinuousOrStaticEffect Partial Closure
 
-이번 문서는 FND-001만 수행한다. 구현, `src` 수정, 원본 `DCGO` 수정, `CardEffect` body 구현, C0039 이후 card-porting, TRUST-001 수행, Foundation Gate 수치 조작, generated status 승격, commit/push는 하지 않는다.
+## 2026-06-24 FND001-CS-11 Evidence Update
+
+`FND001-CS-11 static evolution/link requirement effective gates` is closed by source-aligned evidence.
+
+- Evidence JSON: `docs/generated/as-is-restart/fnd-001-cs-11-static-requirement-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-requirement-descriptor-scope-fnd001cs11.md`
+- Verifier: `scripts/verify_fnd001_static_requirement_scope.py`
+- AS-IS root: `E:\headlessDCGO\DCGO\Assets`
+- Source requirement groups covered: 3 / 3
+- Headless requirement groups covered: 3 / 3
+- Source sample candidates: 1196
+- Factory references: 1257
+- Source-required linked samples: 1196
+- Full-card parity samples in this scope: `NotRun` 1196
+- Existing test candidates covered: 15 / 15
+- Direct `IgnorePermission` source scaffold samples: 0, retained as common-helper/runtime-restriction boundary
+- Headless source-facing link factory wrapper present: false, retained as `FND001-CS-07`/`PARITY-001` boundary
+
+Closed evidence covers original `AddDigivolutionRequirementClass.GetEvoCost`, `AddLinkConditionClass.GetLinkCondition`, `GainIgnoreDigivolutionRequirementPlayerEffect`, `CannotIgnoreDigivolutionConditionClass`, and `Player.CanIgnoreDigivolutionRequirement` against current `StaticEvolutionRequirementDescriptor`, `StaticLinkRequirementDescriptor`, `CannotIgnoreDigivolutionRequirementDescriptor`, `StaticRequirementService`, `BattleRules`, `DigivolveService`, `LegalActionGenerator`, and `ComplexMechanicService` surfaces.
+
+All six first-group `CloseableFoundationTask` items are now closed by evidence: `FND001-CS-02`, `FND001-CS-03`, `FND001-CS-04`, `FND001-CS-06`, `FND001-CS-08`, and `FND001-CS-11`.
+
+Retained blockers remain: full-card parity is still `NotRun 3918`, `Passed 0`; `ContinuousOrStaticEffect` remains `PartiallyImplemented`; `OpenCodeReady=false`; generated status was not promoted; Foundation Gate values were not manually changed.
+
+이번 문서는 FND-001만 수행한다. `src/DCGO.RL.Engine` 구현 코드 수정, 원본 `DCGO` 수정, `CardEffect` body 구현, C0039 이후 card-porting, TRUST-001 수행, Foundation Gate 수치 조작, generated status 승격, commit/push는 하지 않는다. FND001-CS-03/CS-04에서는 evidence 회귀 보호를 위해 `src/DCGO.RL.Engine.Tests`의 JSON 검증 테스트만 추가했다.
 
 ## AS-IS Root
 
@@ -91,6 +115,41 @@ Continuous descriptors support field top, inherited, linked, face-up security, h
 - FND001-CS-06: supported static keyword descriptor parity
 - FND001-CS-08: static DP/SecurityAttack/SecurityDigimonDP descriptor parity
 - FND001-CS-11: static evolution/link requirement effective gates
+
+## FND-001-A Progress
+
+- `FND001-CS-02`는 2026-06-24에 evidence 기준으로 닫았다.
+- Evidence: `docs/generated/as-is-restart/fnd-001-a-none-alias-verification.json`
+- Scope doc: `docs/rl-engine/effect-timing-none-alias-fnd001a.md`
+- 검증 결과: raw `None` capability entry/source-required/non-verified/batch-blocker/gate sample count가 모두 0이고, `None`은 `ContinuousOrStaticEffect.inventoryAliases`에서만 소유된다.
+- Status policy: `ContinuousOrStaticEffect`는 `PartiallyImplemented`로 유지했고 generated status 승격은 수행하지 않았다.
+- Verification: `All 634 tests passed`; Foundation Gate remains `OpenCodeReady=false`.
+- `FND001-CS-03`은 2026-06-24에 evidence 기준으로 닫았다.
+- Evidence: `docs/generated/as-is-restart/fnd-001-cs-03-source-collector-scope-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-source-collector-scope-fnd001cs03.md`
+- 검증 결과: `FieldTop`, `InheritedSource`, `LinkedCard`, `FaceUpSecurity`, `Hand`, `Trash`, `Executing` source kind 7개가 원본 source surface, headless collector, 기존 테스트 후보, full-card scaffold fixture 후보와 연결된다.
+- Boundary: strict Unity ordering parity와 full-card Unity/RL parity는 닫지 않았다. `FND001-CS-14`와 `PARITY-001`로 남긴다.
+- `FND001-CS-04`는 2026-06-24에 evidence 기준으로 닫았다.
+- Evidence: `docs/generated/as-is-restart/fnd-001-cs-04-duration-bucket-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-duration-bucket-scope-fnd001cs04.md`
+- 검증 결과: source duration bucket 7/7, headless duration cleanup bucket 7/7, 테스트 후보 16/16이 연결된다.
+- Boundary: production provider catalog adoption은 닫지 않고 TRUST-001-RERUN/FND-005로 남긴다. `UntilNextUntapEffects`와 `UntilOwnerActivePhaseEnd`는 timing 대응만 닫고 strict bucket-name parity는 닫지 않았다.
+- `FND001-CS-06`은 2026-06-24에 evidence 기준으로 닫았다.
+- Evidence: `docs/generated/as-is-restart/fnd-001-cs-06-static-keyword-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-keyword-descriptor-scope-fnd001cs06.md`
+- 검증 결과: supported static keyword wrapper 5/5, headless descriptor wrapper 5/5, source sample candidate 470개, factory reference 521건, 테스트 후보 12/12가 연결된다.
+- Boundary: unsupported trigger/process keyword static factory mapping은 `FND001-CS-07`로 남기고, executable full-card parity는 `PARITY-001`로 남긴다.
+- `FND001-CS-08` closed by evidence on 2026-06-24.
+- Evidence: `docs/generated/as-is-restart/fnd-001-cs-08-static-modifier-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-modifier-descriptor-scope-fnd001cs08.md`
+- Verification result: source modifier groups 4/4, headless runtime modifier kinds 3/3, source sample candidates 532, factory references 554, source-required linked samples 532, full-card parity `NotRun` samples 532, and test candidates 12/12.
+- Boundary: `ChangeBaseDPStaticEffect`/`ChangeBaseDPGlobalEffect` exact origin-DP set semantics is recorded but not closed. It remains assigned to `PARITY-001` and TRUST rerun evidence. `InvertSAttack*` remains outside CS-08 scope.
+- `FND001-CS-11` closed by evidence on 2026-06-24.
+- Evidence: `docs/generated/as-is-restart/fnd-001-cs-11-static-requirement-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-requirement-descriptor-scope-fnd001cs11.md`
+- Verification result: source requirement groups 3/3, headless descriptor/runtime groups 3/3, source sample candidates 1196, factory references 1257, source-required linked samples 1196, full-card parity `NotRun` samples 1196, and test candidates 15/15.
+- Boundary: headless source-facing link factory wrapper is not present, direct `IgnorePermission` scaffold count is 0, and full-card parity remains `NotRun 3918`, `Passed 0`.
+- First-group CloseableFoundationTask list is exhausted; next candidates are `FND001-CS-07`, `PARITY-001`, then `TRUST-001-RERUN`.
 
 ## Blocked 목록
 
@@ -312,6 +371,12 @@ Recommended commit message: `docs: decompose FND-001 continuous static partial c
 - Test candidates: `Duration player runtime modifiers replay deterministic`, `Duration temporary keyword grants Blocker until cleanup`, `Duration temporary granted trigger runs from target permanent timing`, `Script runtime Player effect list uses temporary granted effects`
 - TRUST-001 handoff: yes
 - Gate recalculation candidate: yes
+- FND001-CS-04 evidence status: `ClosedByEvidence`
+- Evidence JSON: `docs/generated/as-is-restart/fnd-001-cs-04-duration-bucket-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-duration-bucket-scope-fnd001cs04.md`
+- Closed scope: Until* bucket cleanup timing for source bucket 7/7 and headless cleanup bucket 7/7.
+- Retained boundary: production provider catalog adoption is not closed and remains TRUST-001-RERUN/FND-005 handoff.
+- Additional original cleanup callsite recorded: `DCGO/Assets/Scripts/Script/CardController.cs`
 
 ### FND001-CS-05 temporary granted trigger와 FND-003 event timing 의존성
 
@@ -344,6 +409,12 @@ Recommended commit message: `docs: decompose FND-001 continuous static partial c
 - Test candidates: `Continuous static keyword field source grants Blocker`, `CardEffectFactory static keyword wrappers map supported keywords`, `Continuous static keyword replay deterministic`
 - TRUST-001 handoff: yes
 - Gate recalculation candidate: yes
+- FND001-CS-06 evidence status: `ClosedByEvidence`
+- Evidence JSON: `docs/generated/as-is-restart/fnd-001-cs-06-static-keyword-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-keyword-descriptor-scope-fnd001cs06.md`
+- Closed scope: supported static keyword wrapper 5/5 and headless descriptor wrapper 5/5 are mapped to source wrapper/class/runtime/test evidence.
+- Source sample candidates: 470 records, 521 factory references, all retained as full-card parity `NotRun` boundary.
+- Retained boundary: unsupported trigger/process keyword static factory mapping remains assigned to `FND001-CS-07`; executable full-card parity remains assigned to `PARITY-001`.
 
 ### FND001-CS-07 unsupported trigger/process keyword static factory mapping
 
@@ -376,6 +447,14 @@ Recommended commit message: `docs: decompose FND-001 continuous static partial c
 - Test candidates: `Continuous DP modifier affects effective DP`, `Continuous dynamic SecurityAttack from source count`, `Continuous effects are derived for state hash`, `Continuous and duration modifiers stack deterministically`
 - TRUST-001 handoff: yes
 - Gate recalculation candidate: yes
+
+
+- FND001-CS-08 evidence status: `ClosedByEvidence`
+- Evidence JSON: `docs/generated/as-is-restart/fnd-001-cs-08-static-modifier-verification.json`
+- Scope doc: `docs/rl-engine/continuous-static-modifier-descriptor-scope-fnd001cs08.md`
+- Closed scope: DP, SecurityAttack, SecurityDigimonDP source modifier groups 4/4 and headless runtime modifier kinds 3/3 are mapped to source-aligned descriptor/runtime evidence.
+- Source sample candidates: 532 records, 554 factory references, source-required linked samples 532, full-card parity `NotRun` samples 532.
+- Retained boundary: `ChangeBaseDPStaticEffect` exact origin-DP set semantics is not closed by CS-08 and remains assigned to `PARITY-001`/TRUST rerun evidence. `InvertSAttack*` remains outside this task.
 
 ### FND001-CS-09 static cost modifiers와 pay timing windows
 

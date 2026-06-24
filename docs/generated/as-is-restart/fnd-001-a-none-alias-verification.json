@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001a-none-alias-verification.v1",
+  "generatedAt": "2026-06-23T20:21:05.639314+00:00",
+  "goal": "FND-001-A EffectTiming.None alias verification",
+  "inputs": {
+    "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "batchCapabilityBlockers": "docs/generated/capability-truth-audit/batch-capability-blockers.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-02",
+    "classification": "CloseableFoundationTask",
+    "title": "EffectTiming.None alias gate accounting",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-03"
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-02",
+    "rawNoneCapabilityEntryCount": 0,
+    "continuousAliasOwnerCount": 1,
+    "sourceRequiredRawNoneCount": 0,
+    "sourceNonVerifiedRawNoneCount": 0,
+    "batchBlockerRawNoneCount": 0,
+    "gateUnsupportedRawNoneCount": 0,
+    "gatePartialRawNoneCount": 0
+  },
+  "conditions": {
+    "rawNoneCapabilityAbsent": true,
+    "continuousAliasHasSingleOwner": true,
+    "continuousAliasPresent": true,
+    "continuousStatusConservative": true,
+    "sourceRequiredRawNoneAbsent": true,
+    "sourceNonVerifiedRawNoneAbsent": true,
+    "batchBlockerRawNoneAbsent": true,
+    "gateUnsupportedRawNoneAbsent": true,
+    "gatePartialRawNoneAbsent": true,
+    "openCodeStillFalse": true
+  },
+  "continuousOrStaticEffect": {
+    "capabilityId": "ContinuousOrStaticEffect",
+    "status": "PartiallyImplemented",
+    "inventoryAliases": [
+      "None"
+    ],
+    "affectedCardCount": 4326,
+    "sourceFileCount": 2220
+  },
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "samples": {
+    "rawNoneCapabilities": [],
+    "sourceRequiredRawNone": [],
+    "sourceNonVerifiedRawNone": [],
+    "batchBlockerRawNone": [],
+    "gateUnsupportedRawNone": [],
+    "gatePartialRawNone": []
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd003r-next-action-queue.v1",
+  "generatedAt": "2026-06-24T00:01:25.749562+00:00",
+  "source": "docs/generated/as-is-restart/fnd-003-r-replacement-cut-in-foundation-scope.json",
+  "policy": {
+    "implementationPerformed": true,
+    "srcImplementationModified": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "nextRecommendedQueue": [
+    {
+      "id": "FND-003-R1",
+      "classification": "NeedsCapabilityRemediation",
+      "title": "replacement/cut-in continuation contract",
+      "reason": "FND-003-R queues would events before mutation, but does not yet resume actual delete/return/source-trash/unsuspend continuation after replacement choices.",
+      "blocked": false
+    },
+    {
+      "id": "FND-003-R2",
+      "classification": "NeedsCapabilityRemediation",
+      "title": "target re-fix and stale target policy",
+      "reason": "Original CardController refixes targets after cut-in windows; headless currently records payload and request only.",
+      "blocked": false
+    },
+    {
+      "id": "FND-003-S",
+      "classification": "NeedsCapabilityRemediation",
+      "title": "link lifecycle unsupported remediation",
+      "reason": "Remaining unsupported link timings are WhenWouldLink, WhenLinked, and OnLinkCardDiscarded.",
+      "blocked": false
+    },
+    {
+      "id": "FND-003-T",
+      "classification": "NeedsCapabilityRemediation",
+      "title": "Digisorption/DigiBurst unsupported remediation",
+      "reason": "Remaining unsupported cost/mechanic timings are WhenDigisorption and OnUseDigiburst.",
+      "blocked": false
+    },
+    {
+      "id": "PARITY-001-A",
+      "classification": "NeedsSourceMapping",
+      "title": "Unity full-card fixture exporter scenario contract",
+      "reason": "All FND-003-R targets remain NotRun for full-card parity.",
+      "blocked": false
+    }
+  ]
+}

@@ -3,6 +3,7 @@ using DCGO.RL.Engine.Battle;
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 using DCGO.RL.Engine.Effects;
+using DCGO.RL.Engine.Primitives;
 using DCGO.RL.Engine.Setup;
 using DCGO.RL.Engine.Validation;
 
@@ -16,6 +17,7 @@ public sealed class ComplexMechanicService
     private readonly CostResolver _costResolver;
     private readonly StaticRequirementService? _staticRequirements;
     private readonly StaticEffectService? _staticEffects;
+    private readonly Tier1PrimitiveService _primitives;
 
     public ComplexMechanicService(
         IZoneMover? zoneMover = null,
@@ -23,7 +25,8 @@ public sealed class ComplexMechanicService
         ComplexMechanicMatcher? matcher = null,
         CostResolver? costResolver = null,
         StaticRequirementService? staticRequirementService = null,
-        StaticEffectService? staticEffectService = null)
+        StaticEffectService? staticEffectService = null,
+        Tier1PrimitiveService? primitiveService = null)
     {
         _zoneMover = zoneMover ?? new ZoneMover();
         _drawService = drawService ?? new DrawService(_zoneMover);
@@ -31,10 +34,12 @@ public sealed class ComplexMechanicService
         _costResolver = costResolver ?? new CostResolver(staticEffectService, staticRequirementService);
         _staticRequirements = staticRequirementService;
         _staticEffects = staticEffectService;
+        _primitives = primitiveService ?? new Tier1PrimitiveService(_zoneMover, _drawService, staticEffectService: staticEffectService);
     }
 
     internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
     internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
+    internal Tier1PrimitiveService RuntimePrimitiveService => _primitives;
 
     public IReadOnlyList<LegalAction> GenerateActions(GameState state, PlayerId playerId)
     {
@@ -103,18 +108,18 @@ public sealed class ComplexMechanicService
         var result = BattleRules.Permanent(state, newPermanentId);
         result.EnterFieldTurnCount = -1;
 
-        foreach (var material in materialCards)
-        {
-            _zoneMover.MoveCard(
-                state,
-                new MoveCardCommand(
-                    material,
-                    Zone.OutsideGame,
-                    Zone.EvolutionSources,
-                    MoveReason.Digivolve,
-                    DestinationPermanent: result.Id,
-                    ToTop: false));
-        }
+        _primitives.AddDigivolutionCardsWithEvents(
+            state,
+            result.Id,
+            materialCards.Select(material => new MoveCardCommand(
+                material,
+                Zone.OutsideGame,
+                Zone.EvolutionSources,
+                MoveReason.Digivolve,
+                DestinationPermanent: result.Id,
+                ToTop: false)),
+            skipEffectAndActivateSkill: true,
+            trace: trace);
 
         _drawService.DrawCards(state, action.Actor, 1, trace);
         return result;
@@ -171,16 +176,22 @@ public sealed class ComplexMechanicService
         }
 
         PayCost(state, action.Actor, _costResolver.ResolveAppFusion(requirement).FinalCost);
-        _zoneMover.MoveCard(
+        _primitives.AddDigivolutionCardsWithEvents(
             state,
-            new MoveCardCommand(
-                action.LinkCard,
-                Zone.LinkedCards,
-                Zone.EvolutionSources,
-                MoveReason.Link,
-                SourcePermanent: target.Id,
-                DestinationPermanent: target.Id,
-                ToTop: true));
+            target.Id,
+            new[]
+            {
+                new MoveCardCommand(
+                    action.LinkCard,
+                    Zone.LinkedCards,
+                    Zone.EvolutionSources,
+                    MoveReason.Link,
+                    SourcePermanent: target.Id,
+                    DestinationPermanent: target.Id,
+                    ToTop: true),
+            },
+            skipEffectAndActivateSkill: true,
+            trace: trace);
         _zoneMover.DigivolveCard(state, new DigivolveCardCommand(action.Card, Zone.Hand, action.TargetPermanent, MoveReason.Digivolve));
         target.IsAppFusion = true;
         _drawService.DrawCards(state, action.Actor, 1, trace);
@@ -633,10 +644,26 @@ public sealed class ComplexMechanicService
 
     private void MoveMaterialsToSources(GameState state, PermanentId destinationPermanent, IEnumerable<CardInstanceId> materials)
     {
-        foreach (var material in materials)
-        {
-            MoveFromCurrentZone(state, material, Zone.EvolutionSources, MoveReason.ComplexMechanic, destinationPermanent, toTop: false);
-        }
+        var commands = materials
+            .Select(material =>
+            {
+                var instance = state.Cards[material];
+                return new MoveCardCommand(
+                    material,
+                    instance.CurrentZone,
+                    Zone.EvolutionSources,
+                    MoveReason.ComplexMechanic,
+                    SourcePermanent: instance.PermanentId,
+                    DestinationPermanent: destinationPermanent,
+                    ToTop: false);
+            })
+            .ToArray();
+
+        _primitives.AddDigivolutionCardsWithEvents(
+            state,
+            destinationPermanent,
+            commands,
+            skipEffectAndActivateSkill: true);
     }
 
     private MoveCardResult MoveFromCurrentZone(

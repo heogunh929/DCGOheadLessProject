@@ -1,0 +1,838 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001cs04-duration-bucket-verification.v1",
+  "generatedAt": "2026-06-23T20:47:40.394103+00:00",
+  "goal": "FND-001-A duration bucket cleanup/provider integration parity evidence",
+  "inputs": {
+    "asIsSourceRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+    "fnd001PartialClosure": "docs/generated/as-is-restart/fnd-001-continuous-static-partial-closure.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "programTests": "src/DCGO.RL.Engine.Tests/Program.cs"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "srcTestModifiedOnlyForEvidence": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "trust001Performed": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-04",
+    "classification": "CloseableFoundationTask",
+    "title": "duration bucket cleanup/provider integration parity",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-06",
+    "strictBucketNameParityBoundaryTask": "NeedsSourceMapping follow-up"
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-04",
+    "requiredDurationBucketCount": 7,
+    "coveredSourceBucketCount": 7,
+    "coveredHeadlessBucketCount": 7,
+    "requiredTestCount": 16,
+    "coveredTestCount": 16,
+    "providerCatalogAdoptionClosed": false,
+    "providerCatalogBoundaryRetained": true,
+    "strictBucketNameParityClosed": false,
+    "additionalSourceCleanupCallsite": "DCGO/Assets/Scripts/Script/CardController.cs"
+  },
+  "conditions": {
+    "sourceBucketsCovered": true,
+    "headlessDurationModelsCovered": true,
+    "headlessCleanupCovered": true,
+    "temporaryGrantedRegistryCovered": true,
+    "runtimeFacadesCovered": true,
+    "triggerPipelineTemporaryGrantedCovered": true,
+    "testCandidatesPresent": true,
+    "providerCatalogBoundaryRetained": true,
+    "strictBucketNameBoundaryRetained": true,
+    "openCodeStillFalse": true,
+    "continuousStillPartial": true
+  },
+  "sourceBuckets": [
+    {
+      "bucket": "UntilEachTurnEndEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilTurnEnd",
+      "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+      "sourcePatterns": [
+        {
+          "pattern": "player.UntilEachTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3177
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "permanent.UntilEachTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3185
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "targetPermanent.UntilEachTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                40
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.UntilEachTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                74
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "Duration cleanup UntilTurnEnd removes modifier",
+        "Duration player runtime modifiers replay deterministic"
+      ]
+    },
+    {
+      "bucket": "UntilOwnerTurnEndEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilOwnerTurnEnd",
+      "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+      "sourcePatterns": [
+        {
+          "pattern": "gameContext.TurnPlayer.UntilOwnerTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3196
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "permanent.UntilOwnerTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3191
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "targetPermanent.UntilOwnerTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                24,
+                31
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.UntilOwnerTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                70
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "Duration cleanup keeps modifier before expiry",
+        "ST2-14 attack block restriction option and security"
+      ]
+    },
+    {
+      "bucket": "UntilOpponentTurnEndEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilOpponentTurnEnd",
+      "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+      "sourcePatterns": [
+        {
+          "pattern": "gameContext.NonTurnPlayer.UntilOpponentTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3194
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "pokemon.UntilOpponentTurnEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                3200
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "targetPermanent.UntilOpponentTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                20,
+                35
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.UntilOpponentTurnEndEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                66
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "ST2-14 attack block restriction option and security",
+        "ST3-15 main and security SecurityAttack reduction"
+      ]
+    },
+    {
+      "bucket": "UntilEndBattleEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilBattleEnd",
+      "cleanupOwner": "AttackService/SecurityCheckService battle-end resolution",
+      "sourcePatterns": [
+        {
+          "pattern": "permanent.UntilEndBattleEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "CardController",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs",
+              "lines": [
+                4754
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.UntilEndBattleEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "CardController",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs",
+              "lines": [
+                4757
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.UntilEndBattleEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                78
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "Duration cleanup UntilBattleEnd removes modifier",
+        "FND-003-M OnDetermineDoSecurityCheck sees battle durations before cleanup"
+      ]
+    },
+    {
+      "bucket": "UntilEndAttackEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\AttackProcess.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilAttackEnd",
+      "cleanupOwner": "AttackService.CleanupAttackRuntime",
+      "sourcePatterns": [
+        {
+          "pattern": "permanent.UntilEndAttackEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "AttackProcess",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\AttackProcess.cs",
+              "lines": [
+                493
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "targetPermanent.UntilEndAttackEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                44
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "Attack timing battle and attack duration scopes"
+      ]
+    },
+    {
+      "bucket": "UntilSecurityCheckEndEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs"
+      ],
+      "headlessScope": "DurationScope.UntilSecurityCheckEnd",
+      "cleanupOwner": "SecurityCheckService.ContinueAfterSecurityBattleAndCleanup",
+      "sourcePatterns": [
+        {
+          "pattern": "player.UntilSecurityCheckEndEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "CardController",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs",
+              "lines": [
+                4209
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "SecurityCheckEnd cleanup runs before next security card"
+      ]
+    },
+    {
+      "bucket": "UntilOwnerActivePhaseEffects/UntilNextUntapEffects",
+      "sourceFiles": [
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+        "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs"
+      ],
+      "headlessScope": "DurationScope.UntilOwnerActivePhaseEnd",
+      "cleanupOwner": "PhaseRunner.RunActivePhaseWithResult after active-phase unsuspend",
+      "sourcePatterns": [
+        {
+          "pattern": "gameContext.TurnPlayer.UntilOwnerActivePhaseEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                644
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "permanent.UntilNextUntapEffects = new List<Func<EffectTiming, ICardEffect>>();",
+          "present": true,
+          "matches": [
+            {
+              "file": "TurnStateMachine",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\TurnStateMachine.cs",
+              "lines": [
+                646
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "player.Enemy.UntilOwnerActivePhaseEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                82
+              ]
+            }
+          ]
+        },
+        {
+          "pattern": "targetPermanent.UntilNextUntapEffects.Add(getCardEffect);",
+          "present": true,
+          "matches": [
+            {
+              "file": "GiveEffectToPermanentOrPlayer",
+              "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPermanentOrPlayer.cs",
+              "lines": [
+                48
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceEvidencePresent": true,
+      "cleanupTests": [
+        "BattleKeywords Reboot active phase"
+      ]
+    }
+  ],
+  "headlessSurfaces": {
+    "files": [
+      "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs",
+      "src/DCGO.RL.Engine/Domain/TemporaryGrantedEffect.cs",
+      "src/DCGO.RL.Engine/Effects/DurationCleanupService.cs",
+      "src/DCGO.RL.Engine/Effects/TemporaryGrantedEffectRegistry.cs",
+      "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs",
+      "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
+      "src/DCGO.RL.Engine/Battle/AttackService.cs",
+      "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+      "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs"
+    ],
+    "modelPatterns": [
+      {
+        "pattern": "public enum DurationScope",
+        "present": true
+      },
+      {
+        "pattern": "public sealed record TemporaryModifier",
+        "present": true
+      },
+      {
+        "pattern": "public sealed record TemporaryGrantedEffect",
+        "present": true
+      },
+      {
+        "pattern": "PlayerId? ExpiresAtTurnPlayerId",
+        "present": true
+      },
+      {
+        "pattern": "CardMetadataCriteria? TargetMetadataCriteria",
+        "present": true
+      },
+      {
+        "pattern": "state.TemporaryModifiers.RemoveAll",
+        "present": true
+      },
+      {
+        "pattern": "state.TemporaryGrantedEffects.RemoveAll",
+        "present": true
+      }
+    ],
+    "registryPatterns": [
+      {
+        "pattern": "TemporaryGrantedEffectDescriptorContext",
+        "present": true
+      },
+      {
+        "pattern": "TryCreateDescriptor",
+        "present": true
+      },
+      {
+        "pattern": "Resolve(CardScriptExecutionContext context, TemporaryGrantedEffect grantedEffect)",
+        "present": true
+      },
+      {
+        "pattern": "TemporaryGrantedEffectRegistry.Unsupported",
+        "present": true
+      }
+    ],
+    "facadePatterns": [
+      {
+        "pattern": "Player.EffectList requires duration-scoped granted effect registry support",
+        "present": true
+      },
+      {
+        "pattern": "public IReadOnlyList<ICardEffect> EffectList(",
+        "present": true
+      },
+      {
+        "pattern": "Permanent.EffectList_Added requires duration-scoped granted effect registry support",
+        "present": true
+      },
+      {
+        "pattern": "public IReadOnlyList<ICardEffect> EffectList_Added(",
+        "present": true
+      },
+      {
+        "pattern": "TemporaryGrantedEffectRegistry temporaryGrantedEffectRegistry",
+        "present": true
+      },
+      {
+        "pattern": "DescriptorBackedCardEffect",
+        "present": true
+      }
+    ],
+    "pipelinePatterns": [
+      {
+        "pattern": "CollectTemporaryGrantedEffectDescriptors",
+        "present": true
+      },
+      {
+        "pattern": "state.TemporaryGrantedEffects",
+        "present": true
+      },
+      {
+        "pattern": "TemporaryGrantedEffect = grantedEffect",
+        "present": true
+      }
+    ],
+    "durationBuckets": [
+      {
+        "bucket": "UntilEachTurnEndEffects",
+        "headlessScope": "DurationScope.UntilTurnEnd",
+        "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+        "patterns": [
+          {
+            "pattern": "UntilTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "CleanupTurnEnd(GameState state, PlayerId endingTurnPlayer)",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope == DurationScope.UntilTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope == DurationScope.UntilTurnEnd",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilOwnerTurnEndEffects",
+        "headlessScope": "DurationScope.UntilOwnerTurnEnd",
+        "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+        "patterns": [
+          {
+            "pattern": "UntilOwnerTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope is DurationScope.UntilOwnerTurnEnd or DurationScope.UntilOpponentTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope is DurationScope.UntilOwnerTurnEnd or DurationScope.UntilOpponentTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "modifier.ExpiresAtTurnPlayerId == endingTurnPlayer",
+            "present": true
+          },
+          {
+            "pattern": "effect.ExpiresAtTurnPlayerId == endingTurnPlayer",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilOpponentTurnEndEffects",
+        "headlessScope": "DurationScope.UntilOpponentTurnEnd",
+        "cleanupOwner": "PhaseRunner.CompleteEndCurrentTurnAfterEndTriggerWithResult",
+        "patterns": [
+          {
+            "pattern": "UntilOpponentTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope is DurationScope.UntilOwnerTurnEnd or DurationScope.UntilOpponentTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope is DurationScope.UntilOwnerTurnEnd or DurationScope.UntilOpponentTurnEnd",
+            "present": true
+          },
+          {
+            "pattern": "modifier.ExpiresAtTurnPlayerId == endingTurnPlayer",
+            "present": true
+          },
+          {
+            "pattern": "effect.ExpiresAtTurnPlayerId == endingTurnPlayer",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilEndBattleEffects",
+        "headlessScope": "DurationScope.UntilBattleEnd",
+        "cleanupOwner": "AttackService/SecurityCheckService battle-end resolution",
+        "patterns": [
+          {
+            "pattern": "UntilBattleEnd",
+            "present": true
+          },
+          {
+            "pattern": "CleanupBattleEnd(GameState state)",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope == DurationScope.UntilBattleEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope == DurationScope.UntilBattleEnd",
+            "present": true
+          },
+          {
+            "pattern": "_durationCleanupService.CleanupBattleEnd(state)",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilEndAttackEffects",
+        "headlessScope": "DurationScope.UntilAttackEnd",
+        "cleanupOwner": "AttackService.CleanupAttackRuntime",
+        "patterns": [
+          {
+            "pattern": "UntilAttackEnd",
+            "present": true
+          },
+          {
+            "pattern": "CleanupAttackEnd(GameState state)",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope == DurationScope.UntilAttackEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope == DurationScope.UntilAttackEnd",
+            "present": true
+          },
+          {
+            "pattern": "_durationCleanupService.CleanupAttackEnd(state)",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilSecurityCheckEndEffects",
+        "headlessScope": "DurationScope.UntilSecurityCheckEnd",
+        "cleanupOwner": "SecurityCheckService.ContinueAfterSecurityBattleAndCleanup",
+        "patterns": [
+          {
+            "pattern": "UntilSecurityCheckEnd",
+            "present": true
+          },
+          {
+            "pattern": "CleanupSecurityCheckEnd(GameState state)",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope == DurationScope.UntilSecurityCheckEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope == DurationScope.UntilSecurityCheckEnd",
+            "present": true
+          },
+          {
+            "pattern": "_durationCleanupService.CleanupSecurityCheckEnd(state)",
+            "present": true
+          }
+        ],
+        "covered": true
+      },
+      {
+        "bucket": "UntilOwnerActivePhaseEffects/UntilNextUntapEffects",
+        "headlessScope": "DurationScope.UntilOwnerActivePhaseEnd",
+        "cleanupOwner": "PhaseRunner.RunActivePhaseWithResult after active-phase unsuspend",
+        "patterns": [
+          {
+            "pattern": "UntilOwnerActivePhaseEnd",
+            "present": true
+          },
+          {
+            "pattern": "CleanupOwnerActivePhaseEnd(GameState state, PlayerId activePlayer)",
+            "present": true
+          },
+          {
+            "pattern": "modifier.DurationScope == DurationScope.UntilOwnerActivePhaseEnd",
+            "present": true
+          },
+          {
+            "pattern": "effect.DurationScope == DurationScope.UntilOwnerActivePhaseEnd",
+            "present": true
+          },
+          {
+            "pattern": "_durationCleanupService.CleanupOwnerActivePhaseEnd(state, state.TurnPlayerId)",
+            "present": true
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "modelsCovered": true,
+    "registryCovered": true,
+    "facadesCovered": true,
+    "pipelineCovered": true,
+    "durationBucketsCovered": true
+  },
+  "testEvidence": {
+    "program": "src/DCGO.RL.Engine.Tests/Program.cs",
+    "requiredTests": [
+      "Attack timing battle and attack duration scopes",
+      "BattleKeywords Reboot active phase",
+      "Duration cleanup UntilBattleEnd removes modifier",
+      "Duration cleanup UntilTurnEnd removes modifier",
+      "Duration cleanup keeps modifier before expiry",
+      "Duration invariant detects invalid granted trigger",
+      "Duration player runtime modifiers replay deterministic",
+      "Duration temporary granted trigger hash and replay deterministic",
+      "Duration temporary granted trigger runs from target permanent timing",
+      "Duration temporary keyword grants Blocker until cleanup",
+      "FND-003-M OnDetermineDoSecurityCheck sees battle durations before cleanup",
+      "ST2-14 attack block restriction option and security",
+      "ST3-15 main and security SecurityAttack reduction",
+      "Script runtime Permanent added effect list uses temporary granted effects",
+      "Script runtime Player effect list uses temporary granted effects",
+      "SecurityCheckEnd cleanup runs before next security card"
+    ],
+    "presence": {
+      "Attack timing battle and attack duration scopes": true,
+      "BattleKeywords Reboot active phase": true,
+      "Duration cleanup UntilBattleEnd removes modifier": true,
+      "Duration cleanup UntilTurnEnd removes modifier": true,
+      "Duration cleanup keeps modifier before expiry": true,
+      "Duration invariant detects invalid granted trigger": true,
+      "Duration player runtime modifiers replay deterministic": true,
+      "Duration temporary granted trigger hash and replay deterministic": true,
+      "Duration temporary granted trigger runs from target permanent timing": true,
+      "Duration temporary keyword grants Blocker until cleanup": true,
+      "FND-003-M OnDetermineDoSecurityCheck sees battle durations before cleanup": true,
+      "ST2-14 attack block restriction option and security": true,
+      "ST3-15 main and security SecurityAttack reduction": true,
+      "Script runtime Permanent added effect list uses temporary granted effects": true,
+      "Script runtime Player effect list uses temporary granted effects": true,
+      "SecurityCheckEnd cleanup runs before next security card": true
+    },
+    "coveredTestCount": 16,
+    "requiredTestCount": 16,
+    "allRequiredTestsPresent": true
+  },
+  "providerCatalogBoundary": {
+    "adoptionClosed": false,
+    "handoffRequired": true,
+    "handoffTargets": [
+      "TRUST-001-RERUN",
+      "FND-005"
+    ],
+    "reason": "Duration cleanup and TemporaryGrantedEffect facades are source-aligned, but production PermanentEffects/provider catalog adoption still requires source-of-truth mapping and reuse/delete/manual-review classification before it can be trusted."
+  },
+  "bucketNameBoundary": {
+    "strictBucketNameParityClosed": false,
+    "reason": "Original UntilNextUntapEffects and UntilOwnerActivePhaseEffects map to the headless UntilOwnerActivePhaseEnd cleanup event by timing, not by identical bucket naming."
+  },
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "trust001Handoff": {
+    "handoffRequired": true,
+    "items": [
+      "Treat DurationCleanupService and TemporaryGrantedEffectRegistry as ReuseCandidate only after TRUST-001 maps them back to Player/Permanent/TurnStateMachine/AttackProcess/CardController evidence.",
+      "Production provider catalog adoption remains unclosed and should be separated from duration cleanup evidence.",
+      "Strict bucket-name parity for UntilNextUntapEffects versus UntilOwnerActivePhaseEnd remains source-mapping review, not a status promotion reason."
+    ]
+  }
+}

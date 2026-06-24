@@ -1,0 +1,708 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001cs03-source-collector-scope-verification.v1",
+  "generatedAt": "2026-06-23T20:38:39.476183+00:00",
+  "goal": "FND-001-A continuous/static source collector scope parity evidence",
+  "inputs": {
+    "asIsSourceRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+    "fnd001PartialClosure": "docs/generated/as-is-restart/fnd-001-continuous-static-partial-closure.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "programTests": "src/DCGO.RL.Engine.Tests/Program.cs"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-03",
+    "classification": "CloseableFoundationTask",
+    "title": "continuous/static source collector scope parity",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-04",
+    "orderingBoundaryTask": "FND001-CS-14"
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-03",
+    "requiredSourceKindCount": 7,
+    "coveredSourceKindCount": 7,
+    "sourceSurfaceCount": 5,
+    "coveredSourceSurfaceCount": 5,
+    "requiredTestCount": 10,
+    "coveredTestCount": 10,
+    "fixtureCandidateSourceEffectCount": 4,
+    "parityNotRunSourceEffectCount": 3918,
+    "parityPassedSourceEffectCount": 0,
+    "strictUnityOrderingParityClosed": false,
+    "fullCardParityReduced": false,
+    "orderingBoundaryTaskId": "FND001-CS-14"
+  },
+  "conditions": {
+    "sourceSurfacesCovered": true,
+    "headlessSourceKindsCovered": true,
+    "collectorMethodsCovered": true,
+    "roleValidationCovered": true,
+    "sourceKindRowsCovered": true,
+    "testCandidatesPresent": true,
+    "fixtureCandidatesLinked": true,
+    "strictOrderingBoundaryRetained": true,
+    "fullCardParityBoundaryRetained": true,
+    "openCodeStillFalse": true,
+    "continuousStillPartial": true
+  },
+  "sourceSurfaces": [
+    {
+      "name": "AutoProcessing",
+      "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\AutoProcessing.cs",
+      "requiredPatternCount": 9,
+      "presentPatternCount": 9,
+      "covered": true,
+      "patterns": [
+        {
+          "pattern": "public static List<SkillInfo> GetSkillInfos",
+          "present": true,
+          "lines": [
+            770,
+            993
+          ]
+        },
+        {
+          "pattern": "player.EffectList(timing)",
+          "present": true,
+          "lines": [
+            777,
+            894
+          ]
+        },
+        {
+          "pattern": "permanent.EffectList(timing)",
+          "present": true,
+          "lines": [
+            798,
+            917
+          ]
+        },
+        {
+          "pattern": "player.TrashCards",
+          "present": true,
+          "lines": [
+            818,
+            938
+          ]
+        },
+        {
+          "pattern": "player.HandCards",
+          "present": true,
+          "lines": [
+            840,
+            961
+          ]
+        },
+        {
+          "pattern": "player.SecurityCards",
+          "present": true,
+          "lines": [
+            862
+          ]
+        },
+        {
+          "pattern": "source.IsFlipped",
+          "present": true,
+          "lines": [
+            864
+          ]
+        },
+        {
+          "pattern": "public static List<SkillInfo> GetSkillInfosOfCards",
+          "present": true,
+          "lines": [
+            993
+          ]
+        },
+        {
+          "pattern": "public static IEnumerator ActivateBackgroundEffects",
+          "present": true,
+          "lines": [
+            889,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Permanent",
+      "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Permanent.cs",
+      "requiredPatternCount": 6,
+      "presentPatternCount": 6,
+      "covered": true,
+      "patterns": [
+        {
+          "pattern": "public List<ICardEffect> EffectList_ForCard",
+          "present": true,
+          "lines": [
+            1497
+          ]
+        },
+        {
+          "pattern": "if (!cardSource.IsFlipped)",
+          "present": true,
+          "lines": [
+            1049,
+            1508
+          ]
+        },
+        {
+          "pattern": "cardEffect.IsInheritedEffect && !isTopCard",
+          "present": true,
+          "lines": [
+            1526
+          ]
+        },
+        {
+          "pattern": "cardEffect.IsLinkedEffect && cardSource.IsLinked",
+          "present": true,
+          "lines": [
+            1532
+          ]
+        },
+        {
+          "pattern": "isTopCard && !cardEffect.IsInheritedEffect && !cardEffect.IsLinkedEffect",
+          "present": true,
+          "lines": [
+            1538
+          ]
+        },
+        {
+          "pattern": "EffectList_Added(timing)",
+          "present": true,
+          "lines": [
+            1550
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CardSource",
+      "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardSource.cs",
+      "requiredPatternCount": 4,
+      "presentPatternCount": 4,
+      "covered": true,
+      "patterns": [
+        {
+          "pattern": "public List<ICardEffect> EffectList(EffectTiming timing)",
+          "present": true,
+          "lines": [
+            981
+          ]
+        },
+        {
+          "pattern": "public List<ICardEffect> EffectList_ForCard",
+          "present": true,
+          "lines": [
+            990,
+            1020
+          ]
+        },
+        {
+          "pattern": "GetCardEffects(timing, cardSource)",
+          "present": true,
+          "lines": [
+            993
+          ]
+        },
+        {
+          "pattern": "cardEffect.SetEffectSourceCard(this)",
+          "present": true,
+          "lines": [
+            1000,
+            1030
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Player",
+      "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+      "requiredPatternCount": 5,
+      "presentPatternCount": 5,
+      "covered": true,
+      "patterns": [
+        {
+          "pattern": "public List<CardSource> HandCards",
+          "present": true,
+          "lines": [
+            506
+          ]
+        },
+        {
+          "pattern": "public List<CardSource> TrashCards",
+          "present": true,
+          "lines": [
+            510
+          ]
+        },
+        {
+          "pattern": "public List<CardSource> SecurityCards",
+          "present": true,
+          "lines": [
+            518
+          ]
+        },
+        {
+          "pattern": "public List<CardSource> ExecutingCards",
+          "present": true,
+          "lines": [
+            522
+          ]
+        },
+        {
+          "pattern": "public List<ICardEffect> EffectList(EffectTiming timing)",
+          "present": true,
+          "lines": [
+            830
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CardController",
+      "path": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardController.cs",
+      "requiredPatternCount": 2,
+      "presentPatternCount": 2,
+      "covered": true,
+      "patterns": [
+        {
+          "pattern": "card.Owner.ExecutingCards.Contains(card)",
+          "present": true,
+          "lines": [
+            1788,
+            1836,
+            1888
+          ]
+        },
+        {
+          "pattern": "card.EffectList(EffectTiming.None)",
+          "present": true,
+          "lines": [
+            1824
+          ]
+        }
+      ]
+    }
+  ],
+  "headlessSurfaces": {
+    "files": [
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+      "src/DCGO.RL.Engine/Effects/ScriptRuntimeEffectFoundation.cs",
+      "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs"
+    ],
+    "sourceKindPresence": {
+      "FieldTop": true,
+      "InheritedSource": true,
+      "LinkedCard": true,
+      "FaceUpSecurity": true,
+      "Hand": true,
+      "Trash": true,
+      "Executing": true
+    },
+    "enumeratorPresence": {
+      "fieldTop": true,
+      "inherited": true,
+      "linked": true,
+      "faceUpSecurity": true,
+      "hand": true,
+      "trash": true,
+      "executing": true
+    },
+    "collectorMethodPresence": {
+      "Collect(GameState state)": true,
+      "CollectKeywords(GameState state)": true,
+      "CollectStaticEvolutionRequirements(GameState state)": true,
+      "CollectCannotIgnoreDigivolutionRequirements": true,
+      "CollectStaticLinkRequirements": true,
+      "CollectStaticCostModifiers": true,
+      "CollectStaticRestrictions": true,
+      "CollectStaticCardRestrictions": true,
+      "CollectStaticImmunities": true,
+      "CollectStaticCardColors": true,
+      "CollectStaticCardNames": true,
+      "CollectStaticCardTraits": true,
+      "CollectStaticCardLevels": true,
+      "CollectStaticPermanentLevels": true,
+      "CollectIgnoreColorRequirements": true
+    },
+    "roleValidationPresence": {
+      "resolveInherited": true,
+      "resolveLinked": true,
+      "resolveFaceUpSecurity": true,
+      "resolveHand": true,
+      "resolveTrash": true,
+      "resolveExecuting": true,
+      "domainEffectListForCard": true,
+      "domainFaceDownSkip": true,
+      "domainLinkedEffect": true
+    },
+    "allSourceKindsPresent": true,
+    "allEnumeratorsPresent": true,
+    "allCollectorMethodsPresent": true,
+    "allRoleValidationPresent": true
+  },
+  "sourceKinds": [
+    {
+      "sourceKind": "FieldTop",
+      "sourcePatterns": [
+        "permanent.EffectList(timing)",
+        "isTopCard && !cardEffect.IsInheritedEffect && !cardEffect.IsLinkedEffect"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.FieldTop",
+        "permanent.TopCardId"
+      ],
+      "testCandidates": [
+        "Continuous static keyword field source grants Blocker"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "FieldTop",
+        "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceEffectClassName": "AD1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "InheritedSource",
+      "sourcePatterns": [
+        "cardEffect.IsInheritedEffect && !isTopCard"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.InheritedSource",
+        "permanent.SourceCardIds"
+      ],
+      "testCandidates": [
+        "Continuous inherited source applies only from source zone",
+        "Continuous static keyword inherited source stops after move"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "InheritedSource",
+        "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "sourceEffectClassName": "AD1_006",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "LinkedCard",
+      "sourcePatterns": [
+        "cardEffect.IsLinkedEffect && cardSource.IsLinked"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.LinkedCard",
+        "permanent.LinkedCards"
+      ],
+      "testCandidates": [
+        "Continuous linked source applies from linked zone"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "LinkedCard",
+        "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceEffectClassName": "AD1_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "FaceUpSecurity",
+      "sourcePatterns": [
+        "player.SecurityCards",
+        "source.IsFlipped"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.FaceUpSecurity",
+        "player.Security.Where(card => state.Cards[card].IsFaceUp)"
+      ],
+      "testCandidates": [
+        "Continuous face-up security source applies",
+        "Continuous face-down security source is ignored"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "FaceUpSecurity",
+        "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceEffectClassName": "AD1_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "Hand",
+      "sourcePatterns": [
+        "player.HandCards"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.Hand",
+        "player.Hand"
+      ],
+      "testCandidates": [
+        "Continuous hand source applies only from hand",
+        "Static evolution requirement hand source generates and executes"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "Hand",
+        "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceEffectClassName": "AD1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "Trash",
+      "sourcePatterns": [
+        "player.TrashCards"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.Trash",
+        "player.Trash"
+      ],
+      "testCandidates": [
+        "Continuous trash source applies from trash"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "Trash",
+        "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "sourceEffectClassName": "AD1_006",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    },
+    {
+      "sourceKind": "Executing",
+      "sourcePatterns": [
+        "ExecutingCards",
+        "card.EffectList(EffectTiming.None)"
+      ],
+      "headlessPatterns": [
+        "ContinuousEffectSourceKind.Executing",
+        "player.Executing"
+      ],
+      "testCandidates": [
+        "Continuous executing source applies during execution"
+      ],
+      "sourceEvidencePresent": true,
+      "headlessEvidencePresent": true,
+      "testEvidencePresent": true,
+      "fixtureCandidate": {
+        "sourceKind": "Executing",
+        "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceEffectClassName": "AD1_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "affectedCardCount": 2,
+        "coverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json",
+        "status": "FixtureCandidateOnly"
+      },
+      "covered": true
+    }
+  ],
+  "fixtureCandidates": [
+    {
+      "sourceKind": "FieldTop",
+      "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+      "sourceEffectClassName": "AD1_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "InheritedSource",
+      "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+      "sourceEffectClassName": "AD1_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "LinkedCard",
+      "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+      "sourceEffectClassName": "AD1_007",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "FaceUpSecurity",
+      "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+      "sourceEffectClassName": "AD1_008",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "Hand",
+      "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+      "sourceEffectClassName": "AD1_005",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "Trash",
+      "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+      "sourceEffectClassName": "AD1_006",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    },
+    {
+      "sourceKind": "Executing",
+      "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+      "sourceEffectClassName": "AD1_007",
+      "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+      "affectedCardCount": 2,
+      "coverageStatus": "NotRun",
+      "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+      "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+      "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json",
+      "status": "FixtureCandidateOnly"
+    }
+  ],
+  "testEvidence": {
+    "program": "src/DCGO.RL.Engine.Tests/Program.cs",
+    "requiredTests": [
+      "Continuous executing source applies during execution",
+      "Continuous face-down security source is ignored",
+      "Continuous face-up security source applies",
+      "Continuous hand source applies only from hand",
+      "Continuous inherited source applies only from source zone",
+      "Continuous linked source applies from linked zone",
+      "Continuous static keyword field source grants Blocker",
+      "Continuous static keyword inherited source stops after move",
+      "Continuous trash source applies from trash",
+      "Static evolution requirement hand source generates and executes"
+    ],
+    "presence": {
+      "Continuous executing source applies during execution": true,
+      "Continuous face-down security source is ignored": true,
+      "Continuous face-up security source applies": true,
+      "Continuous hand source applies only from hand": true,
+      "Continuous inherited source applies only from source zone": true,
+      "Continuous linked source applies from linked zone": true,
+      "Continuous static keyword field source grants Blocker": true,
+      "Continuous static keyword inherited source stops after move": true,
+      "Continuous trash source applies from trash": true,
+      "Static evolution requirement hand source generates and executes": true
+    },
+    "coveredTestCount": 10,
+    "requiredTestCount": 10,
+    "allRequiredTestsPresent": true
+  },
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "parityBoundary": {
+    "notRunSourceEffectCount": 3918,
+    "passedSourceEffectCount": 0,
+    "failedSourceEffectCount": 0,
+    "allGeneratedSourceEffectsHaveUnityParity": false,
+    "strictUnityOrderingParityClosed": false,
+    "strictUnityOrderingParityOwner": "FND001-CS-14 AutoProcessing priority/cut-in/background ordering parity"
+  },
+  "trust001Handoff": {
+    "handoffRequired": true,
+    "items": [
+      "ContinuousEffectSourceCollector source kind coverage should be treated as ReuseCandidate only after TRUST-001 maps it to original AutoProcessing/CardSource/Permanent/Player evidence.",
+      "Strict ordering parity remains NeedsSourceMapping and must not be inferred from source kind coverage.",
+      "Full-card parity remains NotRun until PARITY-001 creates executable Unity/RL fixture reports."
+    ]
+  }
+}

@@ -13,18 +13,21 @@ public sealed class LegalActionGenerator
     private readonly EffectiveStatService _effectiveStats;
     private readonly StaticRequirementService? _staticRequirements;
     private readonly StaticEffectService? _staticEffects;
+    private readonly DeclarationEffectService? _declarationEffects;
 
     public LegalActionGenerator(
         ComplexMechanicService? complexMechanicService = null,
         BattleKeywordService? keywordService = null,
         EffectiveStatService? effectiveStats = null,
         StaticRequirementService? staticRequirements = null,
-        StaticEffectService? staticEffects = null)
+        StaticEffectService? staticEffects = null,
+        DeclarationEffectService? declarationEffects = null)
     {
         _effectiveStats = effectiveStats ?? EffectiveStatService.NoContinuous;
         _staticEffects = staticEffects;
         _keywordService = keywordService ?? new BattleKeywordService(_effectiveStats, _staticEffects);
         _staticRequirements = staticRequirements;
+        _declarationEffects = declarationEffects;
         _complexMechanicService = complexMechanicService
             ?? new ComplexMechanicService(staticRequirementService: staticRequirements);
     }
@@ -34,6 +37,8 @@ public sealed class LegalActionGenerator
     internal StaticRequirementService? RuntimeStaticRequirementService => _staticRequirements;
 
     internal StaticEffectService? RuntimeStaticEffectService => _staticEffects;
+
+    internal DeclarationEffectService? RuntimeDeclarationEffectService => _declarationEffects;
 
     public IReadOnlyList<LegalAction> Generate(GameState state, PlayerId playerId)
     {
@@ -145,6 +150,10 @@ public sealed class LegalActionGenerator
         }
 
         actions.AddRange(_complexMechanicService.GenerateActions(state, playerId));
+        if (_declarationEffects is not null)
+        {
+            actions.AddRange(_declarationEffects.GenerateLegalActions(state, playerId));
+        }
 
         foreach (var attacker in player.BattleAreaPermanents.Where(permanent => BattleRules.CanAttack(state, permanent, _keywordService, _effectiveStats, _staticEffects)))
         {

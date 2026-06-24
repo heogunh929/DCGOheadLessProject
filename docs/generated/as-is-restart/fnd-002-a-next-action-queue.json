@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002a-next-action-queue.v1",
+  "generatedAt": "2026-06-23T22:27:42.281847+00:00",
+  "goal": "FND-002-A",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+  "summary": {
+    "nextFoundationTaskCount": 5,
+    "note": "These tasks are source-known Unsupported blockers, not CardEffect body tasks."
+  },
+  "nextFoundationTasks": [
+    {
+      "taskId": "FND-002-A1",
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "deletion/destruction replacement window for Evade, Barrier, Partition, Scapegoat, and related prevention effects",
+      "missingHeadlessBoundary": "delete-prevention replacement queue before actual field removal",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "pre-mutation cut-in ordering",
+        "target re-fix after cut-in",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-A2",
+      "apiName": "WhenRemoveField",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "generic would-leave-battle-area cut-in before bounce, placement under cards, link placement, and removal paths",
+      "missingHeadlessBoundary": "willBeRemoveField target marking, cut-in ordering, target re-fix, and actual movement continuation",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "pre-mutation cut-in ordering",
+        "target re-fix after cut-in",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-A3",
+      "apiName": "WhenReturntoLibraryAnyone",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "specific deck-return replacement window that precedes the generic WhenRemoveField window",
+      "missingHeadlessBoundary": "return-to-library pre-move cut-in before deck bottom/top mutation",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "pre-mutation cut-in ordering",
+        "target re-fix after cut-in",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-A4",
+      "apiName": "WhenUntapAnyone",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "would-unsuspend cut-in before actual IsSuspended=false mutation and OnUnTappedAnyone trigger",
+      "missingHeadlessBoundary": "pre-unsuspend replacement/selection window and target re-fix before primitive unsuspend",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "pre-mutation cut-in ordering",
+        "target re-fix after cut-in",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    },
+    {
+      "taskId": "FND-002-A5",
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "classification": "SourceMappedUnsupportedFoundation",
+      "sourceMeaning": "would-trash-digivolution-cards cut-in before source cards are removed and OnDigivolutionCardDiscarded fires",
+      "missingHeadlessBoundary": "source-card willBeRemoveSources marking, cut-in processing, and post-cut-in fixed source trash continuation",
+      "candidateTestScope": [
+        "source payload key preservation",
+        "pre-mutation cut-in ordering",
+        "target re-fix after cut-in",
+        "explicit unsupported until implementation exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation",
+        "C0039+ card-porting",
+        "generated status promotion",
+        "silent no-op"
+      ]
+    }
+  ]
+}

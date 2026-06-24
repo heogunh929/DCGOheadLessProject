@@ -8,7 +8,7 @@
 - Card mapping records: 8186 / 8186
 - Source scaffold records: 3918
 - Set catalogs: 63
-- Blocking issues: 11983
+- Blocking issues: 11961
 
 ## Status Counts
 
@@ -20,7 +20,7 @@
 
 - `MissingSourceBody`: 39
 - `SourceMappingMissing`: 1
-- `UnsupportedMechanic`: 64
+- `UnsupportedMechanic`: 42
 - `UnsupportedOrPartial`: 11879
 
 ## Deck Validation API Smoke

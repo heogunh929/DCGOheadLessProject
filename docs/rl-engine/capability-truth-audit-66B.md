@@ -14,7 +14,7 @@
 ## 핵심 발견
 
 - Capability total: 160
-- Status counts: {'PartiallyImplemented': 100, 'Unsupported': 51, 'Verified': 9}
+- Status counts: {'PartiallyImplemented': 121, 'Unsupported': 30, 'Verified': 9}
 - Documentation conflicts: 12
 - Source effects with non-verified capabilities: 3918 / 3918
 - Blocked card batches: 397 / 397

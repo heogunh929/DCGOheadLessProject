@@ -492,7 +492,11 @@ public sealed class SelectPermanentEffect
                 context.Primitives.DestroyPermanent(context.State, permanent, context.Trace);
                 break;
             case Mode.Tap:
-                context.Primitives.Suspend(context.State, permanent);
+                context.Primitives.Suspend(
+                    context.State,
+                    permanent,
+                    context.Resolution.SourceCard,
+                    context.Resolution.SourcePermanent);
                 break;
             case Mode.UnTap:
                 context.Primitives.Unsuspend(context.State, permanent);

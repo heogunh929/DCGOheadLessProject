@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002d-next-action-queue.v1",
+  "generatedAt": "2026-06-23T23:06:56.033539+00:00",
+  "goal": "FND-002-D",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-d-face-up-security-data-policy.json",
+  "summary": {
+    "nextFoundationTaskCount": 3,
+    "note": "These tasks are source-known data-policy/foundation blockers, not card-porting tasks."
+  },
+  "nextFoundationTasks": [
+    {
+      "taskId": "FND-002-D1",
+      "apiName": "OnFaceUpSecurityIncreased",
+      "classification": "CloseableFoundationTask",
+      "title": "Define source-aligned FlipSecurity primitive and event payload",
+      "candidateTestScope": [
+        "face-down security flip queues OnFaceUpSecurityIncreased once",
+        "non-security or already face-up card does not queue the event",
+        "payload preserves Player/CardSources/FaceUp and source metadata"
+      ],
+      "prohibited": [
+        "EX11-004 body implementation",
+        "C0039+ card-porting",
+        "generated status promotion"
+      ]
+    },
+    {
+      "taskId": "FND-002-D2",
+      "apiName": "OnFaceUpSecurityIncreased",
+      "classification": "NeedsParityFixture",
+      "title": "Add source-locked Unity/RL fixture contract for EX11-004",
+      "candidateTestScope": [
+        "opponent face-up security increase triggers owner-turn inherited draw candidate",
+        "face-down recovery does not trigger EX11-004",
+        "full-card parity remains NotRun until Unity fixture exists"
+      ],
+      "prohibited": [
+        "CardEffect body implementation before gate",
+        "synthetic parity pass"
+      ]
+    },
+    {
+      "taskId": "FND-002-E",
+      "apiName": "OnStartBattle",
+      "classification": "BlockedNeedsManualReview",
+      "title": "Manual review of remaining zero-card OnStartBattle timing",
+      "candidateTestScope": [
+        "source enum/call presence",
+        "affected-card count 0",
+        "gate blocker policy"
+      ],
+      "prohibited": [
+        "removing the enum without source review",
+        "silent no-op"
+      ]
+    }
+  ]
+}

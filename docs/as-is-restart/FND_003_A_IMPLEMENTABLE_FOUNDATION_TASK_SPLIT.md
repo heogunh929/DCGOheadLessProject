@@ -7,11 +7,21 @@
 - `FND-003-D` `OnDiscardSecurity` primitive event scope has been completed after `FND-003-C`.
 - `FND-003-E` `OnAddSecurity` primitive event scope has been completed after `FND-003-D`.
 - `FND-003-F` `OnDiscardLibrary` primitive event scope has been completed after `FND-003-E`.
-- Queue JSON now marks `FND-003-B` as `CompletedPrimitiveScope`, `FND-003-C` as `CompletedRuntimeScope`, `FND-003-D` as `CompletedPrimitiveScope`, `FND-003-E` as `CompletedPrimitiveScope`, `FND-003-F` as `CompletedPrimitiveScope`, and points `nextImmediateGoal` to `FND-003-G` `OnUseOption`.
-- Verification: `.\\.dotnet\\dotnet.exe run --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 616 tests passed.`
+- `FND-003-G` `OnUseOption` runtime scope has been completed after `FND-003-F`.
+- `FND-003-H` `OnUnTappedAnyone` primitive event scope has been completed after `FND-003-G`.
+- `FND-003-I` `OnMove` primitive event scope has been completed after `FND-003-H`.
+- `FND-003-J` `OnAddDigivolutionCards` primitive source-add event scope has been completed after `FND-003-I`.
+- `FND-003-K` `OnDigivolutionCardDiscarded` primitive source-trash event scope has been completed after `FND-003-J`.
+- `FND-003-L` `OnEndBattle` battle-result runtime scope has been completed after `FND-003-K`.
+- `FND-003-M` `OnDetermineDoSecurityCheck` battle security-check decision runtime scope has been completed after `FND-003-L`.
+- `FND-003-N` `BeforePayCost` pre-cost runtime scope has been completed after `FND-003-M`.
+- `FND-003-O` `OnTappedAnyone` actual suspend primitive and attack/block immediate-drain runtime scope has been completed after `FND-003-N`.
+- `FND-003-P` `OnDeclaration` legal action and selected declaration execution scope has been completed after `FND-003-O`.
+- Queue JSON now marks `FND-003-B` through `FND-003-P` as completed in their scoped foundation status and points the next program recommendation to `FND-001-A` `ContinuousOrStaticEffect`.
+- Verification: `.\\.dotnet\\dotnet.exe run --project .\\src\\DCGO.RL.Engine.Tests\\DCGO.RL.Engine.Tests.csproj` -> `All 633 tests passed.`
 - Foundation Gate remains `OpenCodeReady=false`; no generated status promotion was performed.
 
-> FND-003-A는 FND-003의 `ImplementableFoundationTask` 15개를 다음 구현 goal에서 바로 꺼낼 수 있는 작은 source-aligned goal queue로 분해한 산출물이다. 이번 작업에서는 구현, 테스트 결과 조작, Foundation Gate 수치 변경, generated status 승격을 수행하지 않았다.
+> FND-003-A는 FND-003의 `ImplementableFoundationTask` 15개를 다음 구현 goal에서 바로 꺼낼 수 있는 작은 source-aligned goal queue로 분해한 산출물이다. 위 progress update는 이후 foundation 구현 작업의 누적 상태를 반영한다. 테스트 결과 조작, Foundation Gate 수치 조작, generated status 승격은 수행하지 않았다.
 
 ## 기준선
 
@@ -114,13 +124,11 @@
 
 ## 다음 즉시 실행 후보
 
-1. `FND-003-G` `OnUseOption`: affected cards 65, source files 30
-2. `FND-003-H` `OnUnTappedAnyone`: affected cards 70, source files 29
-3. `FND-003-I` `OnMove`: affected cards 79, source files 30
+1. `FND-001-A` `ContinuousOrStaticEffect`: FND-001 CloseableFoundationTask 6개 중 첫 묶음을 처리한다.
 
 ## 금지 확인
 
-- `src` 구현 코드 수정 없음
+- `src` foundation primitive/runtime/test code는 `FND-003-P` 범위에서만 수정됨
 - 원본 `DCGO` 수정 없음
 - CardEffect body 구현 없음
 - C0039 이후 card-porting 실행 없음

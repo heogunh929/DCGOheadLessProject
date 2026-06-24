@@ -1,0 +1,582 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd003r-replacement-cut-in-foundation-scope.v1",
+  "generatedAt": "2026-06-24T00:01:25.749562+00:00",
+  "goal": "FND-003-R",
+  "sourceRoot": "E:/headlessDCGO/DCGO/Assets",
+  "inputs": {
+    "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "fnd002AReplacementCutInSourceMapping": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": true,
+    "srcImplementationModified": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 5,
+    "classificationCounts": {
+      "SourceAlignedReplacementWindowPartial": 5
+    },
+    "currentCapabilityStatusCounts": {
+      "PartiallyImplemented": 5
+    },
+    "movedFromUnsupportedToPartiallyImplementedCount": 5,
+    "closedBoundary": "replacement/cut-in request events are source-aligned and queued before state mutation.",
+    "remainingBoundary": "replacement body execution, cut-in continuation, target re-fix, and full-card parity remain incomplete.",
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 0,
+    "foundationGateUnsupportedCapabilityCount": 5,
+    "foundationGatePartiallyImplementedCapabilityCount": 58,
+    "foundationGateFailedGateCount": 2,
+    "fullCardParityStatus": "NotRun",
+    "generatedStatusCounts": {
+      "Unsupported": 3918
+    },
+    "inventorySha256": "674811df9b141a5b4ca871176469177c129f55d5f3382d4a90fea073d9cec4fb",
+    "capabilityRegistrySha256": "100b0e95408a6deb2e0b79ec46806da601ec4305c38419fc41c68fc41cd6ab8c",
+    "implementationPerformed": true,
+    "srcImplementationModified": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "WhenPermanentWouldBeDeleted",
+      "sourceMappingInput": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+      "previousFnd002AStatus": "Unsupported",
+      "currentInventoryStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd003RClassification": "SourceAlignedReplacementWindowPartial",
+      "affectedCardCount": 405,
+      "sourceFileCount": 206,
+      "sourceRequired": {
+        "sourceEffectCount": 206,
+        "sourceFileCount": 206,
+        "affectedCardCount": 405,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "AD1_012",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "AD1-012#7836@base",
+                "cardId": "AD1-012",
+                "cardIndex": 7836,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_012.asset"
+              },
+              {
+                "definitionStableId": "AD1-012#7837@P1",
+                "cardId": "AD1-012",
+                "cardIndex": 7837,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_012_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "AD1_014",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "AD1-014#7839@base",
+                "cardId": "AD1-014",
+                "cardIndex": 7839,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014.asset"
+              },
+              {
+                "definitionStableId": "AD1-014#7840@P1",
+                "cardId": "AD1-014",
+                "cardIndex": 7840,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_014_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT10_009",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-009#2041@base",
+                "cardId": "BT10-009",
+                "cardIndex": 2041,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_009.asset"
+              },
+              {
+                "definitionStableId": "BT10-009#4292@P0",
+                "cardId": "BT10-009",
+                "cardIndex": 4292,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Red/Digimon/BT10_009_P0.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "sourceEvidence": {
+        "sourceClassification": "ReplacementDeletePrevention",
+        "sourceMeaning": "deletion/destruction replacement window for Evade, Barrier, Partition, Scapegoat, and related prevention effects",
+        "sourceFiles": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs:980",
+          "DCGO/Assets/Scripts/Script/Permanent.cs:2898",
+          "DCGO/Assets/Scripts/Script/Permanent.cs:2954",
+          "DCGO/Assets/Scripts/Script/Permanent.cs:3117",
+          "DCGO/Assets/Scripts/Script/Permanent.cs:3138",
+          "DCGO/Assets/Scripts/Script/CardController.cs:3696",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/KeyWordEffects/Barrier.cs:99",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/KeyWordEffects/Evade.cs:77"
+        ],
+        "payloadKeys": [
+          "Permanents",
+          "battle",
+          "CardEffect"
+        ],
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Black/BT10_066.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_024.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_026.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_074.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_009.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_012.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_013.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_015.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_111.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs"
+        ],
+        "missingHeadlessBoundaryBeforeFnd003R": "delete-prevention replacement queue before actual field removal"
+      },
+      "headlessEvidence": {
+        "methodEvidence": [
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:PermanentRemovalReplacementWindowRequest",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:QueuePermanentRemovalReplacementWindow"
+        ],
+        "testEvidence": [
+          "FND-003-R permanent removal replacement windows queue before mutation"
+        ],
+        "closedFoundationBoundary": "delete replacement window request and payload are queued before the target permanent leaves the field.",
+        "capabilityRegistryReason": "FND-003-R queues source-aligned permanent delete replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+        ],
+        "testInventoryEvidence": []
+      },
+      "remainingBoundary": "replacement body execution, cut-in continuation, target re-fix after selection, and actual destroy continuation remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "apiName": "WhenRemoveField",
+      "sourceMappingInput": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+      "previousFnd002AStatus": "Unsupported",
+      "currentInventoryStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd003RClassification": "SourceAlignedReplacementWindowPartial",
+      "affectedCardCount": 304,
+      "sourceFileCount": 164,
+      "sourceRequired": {
+        "sourceEffectCount": 164,
+        "sourceFileCount": 164,
+        "affectedCardCount": 304,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "AD1_003",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "AD1-003#7821@base",
+                "cardId": "AD1-003",
+                "cardIndex": 7821,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_003.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "AD1_006",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "AD1-006#7826@base",
+                "cardId": "AD1-006",
+                "cardIndex": 7826,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006.asset"
+              },
+              {
+                "definitionStableId": "AD1-006#7827@P1",
+                "cardId": "AD1-006",
+                "cardIndex": 7827,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Red/Digimon/AD1_006_P1.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "AD1_011",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "AD1-011#7835@base",
+                "cardId": "AD1-011",
+                "cardIndex": 7835,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/AD1/Blue/Digimon/AD1_011.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "sourceEvidence": {
+        "sourceClassification": "WouldRemoveFieldCutIn",
+        "sourceMeaning": "generic would-leave-battle-area cut-in before bounce, placement under cards, link placement, and removal paths",
+        "sourceFiles": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs:979",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2333",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2499",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2932",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2948",
+          "DCGO/Assets/Scripts/Script/CardController.cs:3228",
+          "DCGO/Assets/Scripts/Script/CardController.cs:3244",
+          "DCGO/Assets/Scripts/Script/CardController.cs:3538",
+          "DCGO/Assets/Scripts/Script/CardController.cs:3705",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:70",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenRemoveField.cs:11",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/ArmorPurge.cs:21",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Decode.cs:54",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/Fragment.cs:52",
+          "DCGO/Assets/Scripts/Script/CardEffectFactory/KeyWordEffects/MaterialSave.cs:47"
+        ],
+        "payloadKeys": [
+          "Permanents",
+          "battle",
+          "CardEffect",
+          "digixros"
+        ],
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/AD1/Black/AD1_023.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+          "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_025.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_111.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT13/Black/BT13_075.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_040.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_056.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT14/Black/BT14_060.cs"
+        ],
+        "missingHeadlessBoundaryBeforeFnd003R": "willBeRemoveField target marking, cut-in ordering, target re-fix, and actual movement continuation"
+      },
+      "headlessEvidence": {
+        "methodEvidence": [
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:PermanentRemovalReplacementWindowRequest",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:QueuePermanentRemovalReplacementWindow"
+        ],
+        "testEvidence": [
+          "FND-003-R permanent removal replacement windows queue before mutation"
+        ],
+        "closedFoundationBoundary": "generic would-remove-field replacement window request and payload are queued before field mutation.",
+        "capabilityRegistryReason": "FND-003-R queues source-aligned would-remove-field replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+        ],
+        "testInventoryEvidence": []
+      },
+      "remainingBoundary": "willBeRemoveField target marking parity, replacement body execution, target re-fix, and actual movement continuation remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "apiName": "WhenReturntoLibraryAnyone",
+      "sourceMappingInput": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+      "previousFnd002AStatus": "Unsupported",
+      "currentInventoryStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd003RClassification": "SourceAlignedReplacementWindowPartial",
+      "affectedCardCount": 25,
+      "sourceFileCount": 9,
+      "sourceRequired": {
+        "sourceEffectCount": 9,
+        "sourceFileCount": 9,
+        "affectedCardCount": 25,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT11_062",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT11-062#2336@base",
+                "cardId": "BT11-062",
+                "cardIndex": 2336,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_062.asset"
+              },
+              {
+                "definitionStableId": "BT11-062#4414@P0",
+                "cardId": "BT11-062",
+                "cardIndex": 4414,
+                "variantKey": "P0",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_062_P0.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT11_064",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT11-064#2338@base",
+                "cardId": "BT11-064",
+                "cardIndex": 2338,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT11/Black/Digimon/BT11_064.asset"
+              }
+            ]
+          },
+          {
+            "sourceEffectClassName": "BT20_074",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+            "affectedCardCount": 2,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT20-074#5153@base",
+                "cardId": "BT20-074",
+                "cardIndex": 5153,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT20/Purple/Digimon/BT20_074.asset"
+              },
+              {
+                "definitionStableId": "BT20-074#8352@P1",
+                "cardId": "BT20-074",
+                "cardIndex": 8352,
+                "variantKey": "P1",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT20/Purple/Digimon/BT20_074_P1.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "sourceEvidence": {
+        "sourceClassification": "WouldReturnToLibraryCutIn",
+        "sourceMeaning": "specific deck-return replacement window that precedes the generic WhenRemoveField window",
+        "sourceFiles": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs:981",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2323",
+          "DCGO/Assets/Scripts/Script/CardController.cs:2489",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:70"
+        ],
+        "payloadKeys": [
+          "Permanents",
+          "CardEffect",
+          "battle",
+          "digixros"
+        ],
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_062.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_064.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_074.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_086.cs",
+          "DCGO/Assets/Scripts/CardEffect/BT9/Red/BT9_012.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX3/Red/EX3_013.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX4/Blue/EX4_021.cs",
+          "DCGO/Assets/Scripts/CardEffect/EX6/Yellow/EX6_031.cs",
+          "DCGO/Assets/Scripts/CardEffect/P/Red/P_072.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs"
+        ],
+        "missingHeadlessBoundaryBeforeFnd003R": "return-to-library pre-move cut-in before deck bottom/top mutation"
+      },
+      "headlessEvidence": {
+        "methodEvidence": [
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:PermanentRemovalReplacementWindowRequest",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:QueuePermanentRemovalReplacementWindow"
+        ],
+        "testEvidence": [
+          "FND-003-R permanent removal replacement windows queue before mutation"
+        ],
+        "closedFoundationBoundary": "return-to-library replacement window request and payload are queued before deck mutation.",
+        "capabilityRegistryReason": "FND-003-R queues source-aligned return-to-library replacement window payloads before deck mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+        ],
+        "testInventoryEvidence": []
+      },
+      "remainingBoundary": "deck top/bottom continuation, generic WhenRemoveField continuation ordering, target re-fix, and full-card parity remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "apiName": "WhenUntapAnyone",
+      "sourceMappingInput": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+      "previousFnd002AStatus": "Unsupported",
+      "currentInventoryStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd003RClassification": "SourceAlignedReplacementWindowPartial",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1,
+      "sourceRequired": {
+        "sourceEffectCount": 1,
+        "sourceFileCount": 1,
+        "affectedCardCount": 1,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT7_055",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT7-055#1462@base",
+                "cardId": "BT7-055",
+                "cardIndex": 1462,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT7/Green/Digimon/BT7_055.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "sourceEvidence": {
+        "sourceClassification": "WouldUnsuspendCutIn",
+        "sourceMeaning": "would-unsuspend cut-in before actual IsSuspended=false mutation and OnUnTappedAnyone trigger",
+        "sourceFiles": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs:983",
+          "DCGO/Assets/Scripts/Script/CardController.cs:5694"
+        ],
+        "payloadKeys": [
+          "Permanents",
+          "CardEffect"
+        ],
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT7/Green/BT7_055.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs"
+        ],
+        "missingHeadlessBoundaryBeforeFnd003R": "pre-unsuspend replacement/selection window and target re-fix before primitive unsuspend"
+      },
+      "headlessEvidence": {
+        "methodEvidence": [
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:UnsuspendReplacementWindowRequest",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:QueueUnsuspendReplacementWindow"
+        ],
+        "testEvidence": [
+          "FND-003-R unsuspend replacement window queues before mutation"
+        ],
+        "closedFoundationBoundary": "pre-unsuspend replacement window request and payload are queued while the target remains suspended.",
+        "capabilityRegistryReason": "FND-003-R queues source-aligned pre-unsuspend replacement window payloads while the permanent is still suspended. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+        ],
+        "testInventoryEvidence": []
+      },
+      "remainingBoundary": "replacement body execution, cannot-unsuspend policy, target re-fix, and actual unsuspend continuation remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    },
+    {
+      "apiName": "WhenWouldDigivolutionCardDiscarded",
+      "sourceMappingInput": "docs/generated/as-is-restart/fnd-002-a-replacement-cut-in-source-mapping.json",
+      "previousFnd002AStatus": "Unsupported",
+      "currentInventoryStatus": "PartiallyImplemented",
+      "currentCapabilityStatus": "PartiallyImplemented",
+      "fnd003RClassification": "SourceAlignedReplacementWindowPartial",
+      "affectedCardCount": 1,
+      "sourceFileCount": 1,
+      "sourceRequired": {
+        "sourceEffectCount": 1,
+        "sourceFileCount": 1,
+        "affectedCardCount": 1,
+        "sourceEffectSamples": [
+          {
+            "sourceEffectClassName": "BT10_084",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+            "affectedCardCount": 1,
+            "sampleCardData": [
+              {
+                "definitionStableId": "BT10-084#2132@base",
+                "cardId": "BT10-084",
+                "cardIndex": 2132,
+                "variantKey": "base",
+                "assetPath": "DCGO/Assets/CardBaseEntity/BT10/Purple/Digimon/BT10_084.asset"
+              }
+            ]
+          }
+        ]
+      },
+      "sourceEvidence": {
+        "sourceClassification": "WouldSourceTrashCutIn",
+        "sourceMeaning": "would-trash-digivolution-cards cut-in before source cards are removed and OnDigivolutionCardDiscarded fires",
+        "sourceFiles": [
+          "DCGO/Assets/Scripts/Script/ICardEffect.cs:1023",
+          "DCGO/Assets/Scripts/Script/CardController.cs:5181",
+          "DCGO/Assets/Scripts/Script/CardController.cs:5293",
+          "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:321"
+        ],
+        "payloadKeys": [
+          "Permanent",
+          "DiscardedCards",
+          "CardEffect"
+        ],
+        "sampleSourcePaths": [
+          "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_084.cs",
+          "DCGO/Assets/Scripts/Script/CardController.cs"
+        ],
+        "missingHeadlessBoundaryBeforeFnd003R": "source-card willBeRemoveSources marking, cut-in processing, and post-cut-in fixed source trash continuation"
+      },
+      "headlessEvidence": {
+        "methodEvidence": [
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:DigivolutionCardDiscardReplacementWindowRequest",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs:QueueDigivolutionCardDiscardReplacementWindow"
+        ],
+        "testEvidence": [
+          "FND-003-R digivolution source discard replacement window queues before mutation"
+        ],
+        "closedFoundationBoundary": "pre-source-trash replacement window request and payload are queued before digivolution cards leave the source stack.",
+        "capabilityRegistryReason": "FND-003-R queues source-aligned pre-source-trash replacement window payloads before digivolution cards leave the source stack. Actual replacement continuation, source-trash continuation, and full-card parity remain incomplete, so this is not Verified.",
+        "implementationEvidence": [
+          "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+          "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
+        ],
+        "testInventoryEvidence": []
+      },
+      "remainingBoundary": "replacement body execution, source trash continuation, target re-fix, and full-card parity remain follow-up work.",
+      "fullCardParityStatus": "NotRun",
+      "verifiedPromotionAllowed": false,
+      "generatedCardStatusPromotionAllowed": false
+    }
+  ]
+}

@@ -33,6 +33,19 @@ public sealed record PlayCardResult(PermanentState? Permanent, OptionPlayResult?
 
 public sealed class PlayCardService
 {
+    private static readonly TriggerPipelineOptions BeforePayCostOptions = new(
+        SourceZones: TriggerSourceZone.FieldTop
+            | TriggerSourceZone.Inherited
+            | TriggerSourceZone.Linked
+            | TriggerSourceZone.Hand
+            | TriggerSourceZone.Trash
+            | TriggerSourceZone.Executing
+            | TriggerSourceZone.FaceUpSecurity,
+        ExecuteBackgroundEffects: true,
+        ExecuteBackgroundEffectsFirst: true,
+        ResolveAfterEffectsActivate: true,
+        UseMultipleSkillsOrdering: false);
+
     private readonly IZoneMover _zoneMover;
     private readonly TriggerPipelineService _triggerPipelineService;
     private readonly EngineInvariantChecker _invariantChecker;
@@ -92,6 +105,40 @@ public sealed class PlayCardService
             throw new UnsupportedMechanicException($"Playing card kind '{string.Join(",", definition.CardKinds)}'");
         }
 
+        if (_staticEffects?.HasCardRestriction(
+            state,
+            action.Card,
+            StaticCardRestrictionKind.CannotPutField,
+            new StaticCardRestrictionCause(
+                EffectSourceCardId: null,
+                EffectSourcePermanentId: null,
+                ControllerPlayerId: action.Actor,
+                MoveReason: MoveReason.Play)) == true)
+        {
+            throw new DomainException($"Permanent card '{action.Card}' cannot be played by a static effect.");
+        }
+
+        if (!BattleRules.IsEmptyBattleFrame(player, action.TargetFrameIndex))
+        {
+            throw new DomainException($"Battle frame '{action.TargetFrameIndex}' is not empty.");
+        }
+
+        var baseCost = Math.Max(0, definition.PlayCost);
+        RunBeforePayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            currentCost: ResolvePlayCost(state, action.Card, definition),
+            baseCost,
+            memoryBeforeCost: state.Memory,
+            root: Zone.Hand,
+            sourceZone: Zone.Hand,
+            isEvolution: false,
+            targetPermanents: Array.Empty<PermanentId>(),
+            costKind: "Play",
+            trace);
+
+        ValidateHandPlay(state, action);
         if (_staticEffects?.HasCardRestriction(
             state,
             action.Card,
@@ -184,6 +231,32 @@ public sealed class PlayCardService
             throw new DomainException($"Option card '{action.Card}' color requirements are not met.");
         }
 
+        var baseCost = Math.Max(0, definition.PlayCost);
+        RunBeforePayCostPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            currentCost: ResolvePlayCost(state, action.Card, definition),
+            baseCost,
+            memoryBeforeCost: state.Memory,
+            root: Zone.Hand,
+            sourceZone: Zone.Hand,
+            isEvolution: false,
+            targetPermanents: Array.Empty<PermanentId>(),
+            costKind: "Play",
+            trace);
+
+        ValidateHandPlay(state, action);
+        if (_staticEffects?.HasCardRestriction(state, action.Card, StaticCardRestrictionKind.CannotPlay) == true)
+        {
+            throw new DomainException($"Option card '{action.Card}' cannot be played by a static effect.");
+        }
+
+        if (!BattleRules.MatchesOptionColorRequirement(state, action.Actor, action.Card, _staticEffects))
+        {
+            throw new DomainException($"Option card '{action.Card}' color requirements are not met.");
+        }
+
         var cost = ResolvePlayCost(state, action.Card, definition);
         var memoryBeforeCost = state.Memory;
         BattleRules.PayMemory(state, action.Actor, cost);
@@ -202,6 +275,15 @@ public sealed class PlayCardService
             isEvolution: false,
             targetPermanents: Array.Empty<PermanentId>(),
             costKind: "Play",
+            trace);
+        _invariantChecker.ThrowIfInvalid(state);
+
+        RunOnUseOptionPipeline(
+            state,
+            action.Actor,
+            action.Card,
+            sourceCost: Math.Max(0, definition.PlayCost),
+            paidCost: cost,
             trace);
         _invariantChecker.ThrowIfInvalid(state);
 
@@ -255,6 +337,50 @@ public sealed class PlayCardService
             ?? baseCost;
     }
 
+    private TriggerPipelineResult RunBeforePayCostPipeline(
+        GameState state,
+        PlayerId player,
+        CardInstanceId card,
+        int currentCost,
+        int baseCost,
+        int memoryBeforeCost,
+        Zone root,
+        Zone sourceZone,
+        bool isEvolution,
+        IReadOnlyList<PermanentId> targetPermanents,
+        string costKind,
+        GameTrace? trace)
+    {
+        var result = _triggerPipelineService.Run(
+            state,
+            EffectTiming.BeforePayCost,
+            player,
+            sourceCard: null,
+            sourcePermanent: null,
+            values: CostPaymentRuleEventPayload.CreateBeforePayCost(
+                state,
+                player,
+                card,
+                currentCost,
+                baseCost,
+                memoryBeforeCost,
+                root,
+                sourceZone,
+                isEvolution,
+                targetPermanents,
+                isJogress: false,
+                costKind),
+            options: BeforePayCostOptions,
+            trace: trace);
+
+        if (result.HasPendingSelection)
+        {
+            throw new UnsupportedMechanicException("BeforePayCost selection continuation before cost payment is not implemented.");
+        }
+
+        return result;
+    }
+
     private TriggerPipelineResult RunAfterPayCostPipeline(
         GameState state,
         PlayerId player,
@@ -293,6 +419,44 @@ public sealed class PlayCardService
         if (result.HasPendingSelection)
         {
             throw new UnsupportedMechanicException("AfterPayCost selection continuation before play resolution is not implemented.");
+        }
+
+        return result;
+    }
+
+    private TriggerPipelineResult RunOnUseOptionPipeline(
+        GameState state,
+        PlayerId player,
+        CardInstanceId sourceCard,
+        int sourceCost,
+        int paidCost,
+        GameTrace? trace)
+    {
+        var result = _triggerPipelineService.Run(
+            state,
+            EffectTiming.OnUseOption,
+            player,
+            sourceCard: null,
+            sourcePermanent: null,
+            values: new Dictionary<string, object?>
+            {
+                ["Card"] = sourceCard,
+                ["Cards"] = new[] { sourceCard },
+                ["CardSources"] = new[] { sourceCard },
+                ["SourceCard"] = sourceCard,
+                ["Root"] = Zone.Hand,
+                ["Cost"] = sourceCost,
+                ["PaidCost"] = paidCost,
+                ["PayCost"] = true,
+                ["SourceZone"] = Zone.Executing,
+                ["ActivatedFromSecurity"] = false,
+            },
+            options: new TriggerPipelineOptions(ExecuteBackgroundEffects: true),
+            trace: trace);
+
+        if (result.HasPendingSelection)
+        {
+            throw new UnsupportedMechanicException("OnUseOption selection continuation before option skill resolution is not implemented.");
         }
 
         return result;

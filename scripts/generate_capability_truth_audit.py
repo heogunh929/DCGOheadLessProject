@@ -212,44 +212,60 @@ CAPABILITY_OVERRIDES = {
         "reason": "L0005 keeps OnDraw blocked while L0006 documents partial pending-rule coverage; draw primitive selection/replay boundary still needs a focused mechanic gate.",
     },
     "BeforePayCost": {
-        "status": "Unsupported",
-        "reason": "Cost modifier/replacement layer is documented as a common blocker and is not executable for full-card batches.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-N connects the source pre-cost timing to play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun and cost replacement variants remain incomplete, so this is not Verified.",
     },
     "AfterPayCost": {
-        "status": "Unsupported",
-        "reason": "After-pay-cost layer remains a common blocker.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-C connects the source post-cost timing to standard play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun, so this is not Verified.",
     },
     "OnDeclaration": {
-        "status": "Unsupported",
-        "reason": "Declaration/cost continuation is still unresolved for generated full-card batches.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-P connects declaration timing to legal action generation and selected declaration execution with source-aligned tests. Full-card parity and all declaration continuation variants remain incomplete, so this is not Verified.",
     },
     "OnEnterFieldAnyone": {
         "status": "PartiallyImplemented",
         "reason": "PlayCardService and DigivolveService now chain a source-wide OnEnterFieldAnyone payload after existing self OnPlay/WhenDigivolving groups. Source ordering parity, multi-permanent payloads, and all enter-field variants remain incomplete.",
     },
-    "OnEndBattle": {
+    "OnFaceUpSecurityIncreased": {
+        "status": "PartiallyImplemented",
+        "reason": "FND-002-D maps the source payload and existing headless face-up AddSecurity event coverage. IFlipSecurity face-up conversion, EX11-004 full-card body parity, and source-locked replay evidence remain incomplete.",
+    },
+    "OnStartBattle": {
         "status": "Unsupported",
-        "reason": "Battle-end payload and lifecycle boundary remain unresolved for generated full-card batches.",
+        "reason": "FND-002-E maps the source battle-start dispatch and payload, but current AS-IS CardEffect references and affected card records are zero. It is not a current source-required full-card blocker; reopen as a payload fixture task only if a future source card references EffectTiming.OnStartBattle.",
+    },
+    "OnEndBattle": {
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-L connects battle-end timing to battle-result runtime scope and selection pause/resume tests. Full-card parity and all battle lifecycle variants remain incomplete, so this is not Verified.",
     },
     "WhenDigisorption": {
         "status": "Unsupported",
         "reason": "Digisorption timing remains a documented common-layer blocker.",
     },
+    "WhenPermanentWouldBeDeleted": {
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-R queues source-aligned permanent delete replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+    },
     "WhenRemoveField": {
-        "status": "Unsupported",
-        "reason": "Would-remove replacement/cut-in semantics remain unresolved for generated batches.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-R queues source-aligned would-remove-field replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
     },
     "OnMove": {
-        "status": "Unsupported",
-        "reason": "Move timing payload and source-zone semantics remain unresolved.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-I connects permanent move timing to the primitive move event scope with execution tests. Source-zone edge variants and full-card parity remain incomplete, so this is not Verified.",
     },
     "WhenReturntoLibraryAnyone": {
-        "status": "Unsupported",
-        "reason": "Return-to-library cut-in shares unresolved would-remove replacement semantics.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-R queues source-aligned return-to-library replacement window payloads before deck mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
     },
     "WhenUntapAnyone": {
-        "status": "Unsupported",
-        "reason": "Untap cut-in pre/post refix semantics remain unresolved.",
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-R queues source-aligned pre-unsuspend replacement window payloads while the permanent is still suspended. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
+    },
+    "WhenWouldDigivolutionCardDiscarded": {
+        "status": "PartiallyImplemented",
+        "reason": "FND-003-R queues source-aligned pre-source-trash replacement window payloads before digivolution cards leave the source stack. Actual replacement continuation, source-trash continuation, and full-card parity remain incomplete, so this is not Verified.",
     },
     "Selection.SelectCard": {
         "status": "PartiallyImplemented",

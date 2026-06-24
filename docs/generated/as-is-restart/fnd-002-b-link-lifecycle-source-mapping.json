@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002b-link-lifecycle-source-mapping.v1",
+  "generatedAt": "2026-06-23T22:38:40.355036+00:00",
+  "goal": "FND-002-B",
+  "sourceRoot": "E:/headlessDCGO/DCGO",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "fnd002Rerun": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+    "originalFnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 3,
+    "currentStatusCounts": {
+      "Unsupported": 3
+    },
+    "classificationCounts": {
+      "SourceMappedUnsupportedFoundation": 3
+    },
+    "movedFromNeedsSourceReviewToUnsupportedCount": 3,
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 4,
+    "foundationGateUnsupportedCapabilityCount": 26,
+    "foundationGatePartiallyImplementedCapabilityCount": 37,
+    "inventorySha256": "1c31815deda1b65db8ebccae0106d160f32c63f9517587ac48045e73c849e943",
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "WhenWouldLink",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002BClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "PreLinkCutIn",
+      "affectedCardCount": 2,
+      "sourceFileCount": 3,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 2,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1024",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3439",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3456",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3476",
+        "DCGO/Assets/Scripts/Script/CardController.cs:3477",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/HashtableSetting.cs:198",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenWouldLink.cs:11"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Green/BT25_045.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "Card",
+        "Root",
+        "CardEffect",
+        "Permanent"
+      ],
+      "sourceMeaning": "link action pre-cut-in before link cost payment and AddLinkCard/IPlacePermanentToLinkCards continuation",
+      "missingHeadlessBoundary": "pre-link cut-in queue, payload preservation, root-aware continuation, and post-cut-in target revalidation",
+      "nextFoundationTask": "FND-002-B1",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-B pre-link cut-in source mapping has source call/payload evidence, but RL.Engine has no source-aligned link lifecycle trigger runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "WhenLinked",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002BClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "PostLinkTrigger",
+      "affectedCardCount": 87,
+      "sourceFileCount": 67,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 0,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1025",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:1237",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:1263",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:1285",
+        "DCGO/Assets/Scripts/Script/Permanent.cs:1290",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory.cs:874",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory.cs:1111",
+        "DCGO/Assets/Scripts/Script/CardEffectFactory.cs:1131",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenLinked.cs:8",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons/CanUseEffects/WhenLinked.cs:45"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Black/BT21_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Green/BT21_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Purple/BT21_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_018.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_023.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_084.cs"
+      ],
+      "payloadKeys": [
+        "Permanent",
+        "CardEffect",
+        "Card",
+        "isFromDigimon"
+      ],
+      "sourceMeaning": "post-link trigger emitted after a card is inserted into LinkedCards and LinkedDP/cardSources are updated",
+      "missingHeadlessBoundary": "post-link rule event queue, linked-source role snapshot, isFromDigimon payload, and WhenLinking factory wrapper parity",
+      "nextFoundationTask": "FND-002-B2",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-B post-link trigger source mapping has source call/payload evidence, but RL.Engine has no source-aligned link lifecycle trigger runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    },
+    {
+      "apiName": "OnLinkCardDiscarded",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousMappingStatus": "Unsupported",
+      "currentMappingStatus": "Unsupported",
+      "fnd002BClassification": "SourceMappedUnsupportedFoundation",
+      "sourceClassification": "LinkedCardDiscardEvent",
+      "affectedCardCount": 14,
+      "sourceFileCount": 8,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 0,
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1029",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5242",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5263",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5310",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5322",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5327",
+        "DCGO/Assets/Scripts/Script/CardController.cs:5339",
+        "DCGO/Assets/Scripts/Script/CardEffectCommons.cs:567"
+      ],
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_062.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_070.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Black/EX10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Green/EX10_001.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/P/Black/P_234.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "payloadKeys": [
+        "CardEffect",
+        "Permanent",
+        "DiscardedCards"
+      ],
+      "sourceMeaning": "linked-card discard event emitted for fixed linked cards before RemoveLinkedCard actually removes/trashes them",
+      "missingHeadlessBoundary": "linked-card discard primitive, willBeRemoveSources equivalent, OnLinkCardDiscarded trigger queue, and Ace overflow ordering",
+      "nextFoundationTask": "FND-002-B3",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-B linked-card discard event source mapping has source call/payload evidence, but RL.Engine has no source-aligned link lifecycle trigger runtime yet; this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    }
+  ]
+}

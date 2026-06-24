@@ -44,14 +44,110 @@ LOCAL_SOURCE_BASE_CANDIDATES = [
     Path(r"E:\headlessDCGO"),
 ]
 
+FND003_FOUNDATION_PARTIAL_TIMINGS = {
+    "OnRemovedField": "FND-003-B primitive field-removal event scope",
+    "AfterPayCost": "FND-003-C post-cost runtime scope",
+    "OnDiscardSecurity": "FND-003-D security-discard primitive scope",
+    "OnAddSecurity": "FND-003-E security-add/recovery primitive scope",
+    "OnDiscardLibrary": "FND-003-F deck-trash primitive scope",
+    "OnUseOption": "FND-003-G hand-option runtime scope",
+    "OnUnTappedAnyone": "FND-003-H actual unsuspend primitive scope",
+    "OnMove": "FND-003-I permanent-move primitive scope",
+    "OnAddDigivolutionCards": "FND-003-J source-add primitive scope",
+    "OnDigivolutionCardDiscarded": "FND-003-K source-trash primitive scope",
+    "OnEndBattle": "FND-003-L battle-result runtime scope",
+    "OnDetermineDoSecurityCheck": "FND-003-M security-check decision runtime scope",
+    "BeforePayCost": "FND-003-N pre-cost runtime scope",
+    "OnTappedAnyone": "FND-003-O actual suspend primitive scope",
+    "OnDeclaration": "FND-003-P declaration legal action/runtime scope",
+}
+
+FND003R_FOUNDATION_PARTIAL_TIMINGS = {
+    "WhenPermanentWouldBeDeleted": "FND-003-R permanent delete replacement window request foundation",
+    "WhenRemoveField": "FND-003-R permanent would-remove-field replacement window request foundation",
+    "WhenReturntoLibraryAnyone": "FND-003-R return-to-library replacement window request foundation",
+    "WhenUntapAnyone": "FND-003-R pre-unsuspend replacement window request foundation",
+    "WhenWouldDigivolutionCardDiscarded": "FND-003-R pre-source-trash replacement window request foundation",
+}
+
+FND002B_SOURCE_MAPPED_UNSUPPORTED_TIMINGS = {
+    "WhenLinked": "FND-002-B post-link trigger source mapping",
+    "WhenWouldLink": "FND-002-B pre-link cut-in source mapping",
+    "OnLinkCardDiscarded": "FND-002-B linked-card discard event source mapping",
+}
+
+FND002C_SOURCE_MAPPED_UNSUPPORTED_TIMINGS = {
+    "WhenDigisorption": "FND-002-C digisorption cost-window source policy",
+    "OnUseDigiburst": "FND-002-C DigiBurst lifecycle source policy",
+}
+
+FND002D_SOURCE_MAPPED_PARTIAL_TIMINGS = {
+    "OnFaceUpSecurityIncreased": "FND-002-D face-up security data policy",
+}
+
+FND002E_SOURCE_KNOWN_ZERO_CARD_TIMINGS = {
+    "OnStartBattle": "FND-002-E battle-start zero-card timing manual review",
+}
+
 TIMING_STATUS_OVERRIDES = {
     "None": STATUS_PARTIAL,
     "OnEnterFieldAnyone": STATUS_PARTIAL,
+    **{timing: STATUS_PARTIAL for timing in FND003_FOUNDATION_PARTIAL_TIMINGS},
+    **{timing: STATUS_PARTIAL for timing in FND003R_FOUNDATION_PARTIAL_TIMINGS},
+    **{timing: STATUS_UNSUPPORTED for timing in FND002B_SOURCE_MAPPED_UNSUPPORTED_TIMINGS},
+    **{timing: STATUS_UNSUPPORTED for timing in FND002C_SOURCE_MAPPED_UNSUPPORTED_TIMINGS},
+    **{timing: STATUS_PARTIAL for timing in FND002D_SOURCE_MAPPED_PARTIAL_TIMINGS},
 }
 
 TIMING_STATUS_OVERRIDE_NOTES = {
     "None": "EffectTiming.None is the source enum channel used for static/continuous effects and is tracked by ContinuousOrStaticEffect foundation coverage.",
     "OnEnterFieldAnyone": "PlayCardService and DigivolveService chain a global enter-field payload after self OnPlay/WhenDigivolving groups; source ordering and all enter-field variants remain partial.",
+    **{
+        timing: (
+            f"{scope} has source-aligned foundation evidence, but executable full-card parity is still NotRun; "
+            "this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+        )
+        for timing, scope in FND003_FOUNDATION_PARTIAL_TIMINGS.items()
+    },
+    **{
+        timing: (
+            f"{scope} builds on the FND-002-A source mapping and queues source-aligned would/replacement payloads before mutation, "
+            "but actual replacement continuation, target re-fix, and full-card parity remain incomplete; this inventory keeps "
+            "the timing PartiallyImplemented instead of promoting it to Verified."
+        )
+        for timing, scope in FND003R_FOUNDATION_PARTIAL_TIMINGS.items()
+    },
+    **{
+        timing: (
+            f"{scope} has source call/payload evidence, but RL.Engine has no source-aligned link lifecycle trigger runtime yet; "
+            "this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+        )
+        for timing, scope in FND002B_SOURCE_MAPPED_UNSUPPORTED_TIMINGS.items()
+    },
+    **{
+        timing: (
+            f"{scope} has source call/payload evidence, but RL.Engine has no source-aligned Digisorption/DigiBurst common mechanic runtime yet; "
+            "this inventory treats the timing as a known Unsupported foundation blocker instead of leaving it as NeedsSourceReview."
+        )
+        for timing, scope in FND002C_SOURCE_MAPPED_UNSUPPORTED_TIMINGS.items()
+    },
+    **{
+        timing: (
+            f"{scope} has source call/payload evidence and headless AddSecurity face-up event coverage, but IFlipSecurity face-up conversion "
+            "and EX11-004 full-card parity remain incomplete; this inventory treats the timing as source-known PartiallyImplemented data-policy "
+            "foundation instead of leaving it as NeedsSourceReview."
+        )
+        for timing, scope in FND002D_SOURCE_MAPPED_PARTIAL_TIMINGS.items()
+    },
+    **{
+        timing: (
+            f"{scope} found a source runtime dispatch and payload shape, but the current AS-IS CardEffect corpus has "
+            "zero EffectTiming.OnStartBattle card references and zero affected card records. This inventory treats the "
+            "timing as source-known NotReferenced for current full-card-pool completion instead of leaving it as "
+            "NeedsSourceReview; if a future source card references it, the conditional override stops applying."
+        )
+        for timing, scope in FND002E_SOURCE_KNOWN_ZERO_CARD_TIMINGS.items()
+    },
 }
 
 CARD_EFFECT_ROOT = "DCGO/Assets/Scripts/CardEffect/"
@@ -471,7 +567,16 @@ def build_inventory(workspace: Path) -> dict[str, Any]:
         evidence_notes = [
             "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
         ]
-        if timing in TIMING_STATUS_OVERRIDE_NOTES:
+        fnd002e_zero_card_override_applies = (
+            timing in FND002E_SOURCE_KNOWN_ZERO_CARD_TIMINGS
+            and card_source_file_count == 0
+            and len(affected) == 0
+        )
+        if fnd002e_zero_card_override_applies:
+            status = STATUS_NOT_REFERENCED
+        if timing in TIMING_STATUS_OVERRIDE_NOTES and (
+            timing not in FND002E_SOURCE_KNOWN_ZERO_CARD_TIMINGS or fnd002e_zero_card_override_applies
+        ):
             evidence_notes.append(TIMING_STATUS_OVERRIDE_NOTES[timing])
         timings.append(
             {

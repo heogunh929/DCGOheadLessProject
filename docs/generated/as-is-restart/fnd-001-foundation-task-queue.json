@@ -1,6 +1,6 @@
 {
   "schemaVersion": "dcgo.as-is-restart.fnd001-foundation-task-queue.v1",
-  "generatedAt": "2026-06-23T09:42:39.597233+00:00",
+  "generatedAt": "2026-06-23T21:33:05.756717+00:00",
   "goal": "FND-001 ContinuousOrStaticEffect partial closure task queue",
   "summary": {
     "totalTaskCount": 16,
@@ -21,6 +21,27 @@
     "generatedStatusPromoted": false,
     "rawJsonOver100MiBAdded": false,
     "commitOrPushPerformed": false
+  },
+  "progress": {
+    "lastCompletedTaskId": "FND001-CS-11",
+    "lastCompletedTaskTitle": "static evolution/link requirement effective gates",
+    "lastCompletedStatus": "ClosedByEvidence",
+    "lastVerificationArtifact": "docs/generated/as-is-restart/fnd-001-cs-11-static-requirement-verification.json",
+    "completedCloseableFoundationTaskIds": [
+      "FND001-CS-02",
+      "FND001-CS-03",
+      "FND001-CS-04",
+      "FND001-CS-06",
+      "FND001-CS-08",
+      "FND001-CS-11"
+    ],
+    "remainingCloseableFoundationTaskIds": [],
+    "nextCloseableFoundationTaskId": null,
+    "nextCloseableFoundationTaskTitle": null,
+    "generatedStatusPromoted": false,
+    "foundationGateManipulated": false,
+    "openCodeReady": false,
+    "closedAllFirstGroupCloseableFoundationTasks": true
   },
   "closeableFoundationTasks": [
     {
@@ -117,7 +138,22 @@
         "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
         "src/DCGO.RL.Engine/Battle/EffectiveStatService.cs",
         "src/DCGO.RL.Engine/Domain/TemporaryModifier.cs"
-      ]
+      ],
+      "evidenceStatus": "ClosedByEvidence",
+      "verificationArtifact": "docs/generated/as-is-restart/fnd-001-cs-08-static-modifier-verification.json",
+      "scopeDoc": "docs/rl-engine/continuous-static-modifier-descriptor-scope-fnd001cs08.md",
+      "verificationSummary": {
+        "sourceModifierGroupsCovered": "4/4",
+        "headlessRuntimeModifierKindsCovered": "3/3",
+        "sourceSampleCandidateCount": 532,
+        "factoryReferenceCount": 554,
+        "sourceRequiredLinkedSampleCount": 532,
+        "parityNotRunSampleCount": 532,
+        "testCandidateCoverage": "12/12",
+        "baseDpExactSetSemanticsClosed": false,
+        "fullCardParityReduced": false
+      },
+      "retainedBoundary": "ChangeBaseDPStaticEffect exact origin-DP set semantics remains PARITY-001/TRUST rerun scope; InvertSAttack is outside CS-08."
     },
     {
       "id": "FND001-CS-11",
@@ -136,7 +172,26 @@
         "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
         "src/DCGO.RL.Engine/Effects/StaticEffectService.cs",
         "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
-      ]
+      ],
+      "evidenceStatus": "ClosedByEvidence",
+      "verificationArtifact": "docs/generated/as-is-restart/fnd-001-cs-11-static-requirement-verification.json",
+      "scopeDoc": "docs/rl-engine/continuous-static-requirement-descriptor-scope-fnd001cs11.md",
+      "verificationSummary": {
+        "sourceRequirementGroupsCovered": "3/3",
+        "headlessRequirementGroupsCovered": "3/3",
+        "sourceSampleCandidateCount": 1196,
+        "factoryReferenceCount": 1257,
+        "sourceRequiredLinkedSampleCount": 1196,
+        "parityNotRunSampleCount": 1196,
+        "evolutionFactoryReferenceCount": 1187,
+        "linkFactoryReferenceCount": 70,
+        "directIgnorePermissionSourceSampleCount": 0,
+        "testCandidateCoverage": "15/15",
+        "linkSourceFacingFactoryWrapperPresent": false,
+        "ignorePermissionBoundaryRetained": true,
+        "fullCardParityReduced": false
+      },
+      "retainedBoundary": "Headless source-facing AddSelfLinkConditionStaticEffect/AddLinkConditionStaticEffect wrapper is not present; IgnorePermission direct scaffold count is 0; full-card parity remains NotRun 3918/Passed 0."
     }
   ],
   "needsSourceMappingTasks": [

@@ -1,6 +1,6 @@
 # Mechanic Dependency Graph
 
-- Inventory SHA-256: `f10fff14bd37d401b3e4a48ddd6941d767ebd046ac73f9259795cb7e25ffff97`
+- Inventory SHA-256: `674811df9b141a5b4ca871176469177c129f55d5f3382d4a90fea073d9cec4fb`
 
 ```mermaid
 flowchart TD

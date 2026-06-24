@@ -98,6 +98,7 @@ var tests = new (string Name, Action Test)[]
     ("ParityFixtureComparer missing fixture is NotRun", ParityFixtureComparerMissingFixtureNotRun),
     ("ParityFixtureComparer synthetic fixture round trip", ParityFixtureComparerSyntheticFixtureRoundTrip),
     ("FullCardParityEvidence generated coverage is conservative", FullCardParityEvidenceGeneratedCoverageIsConservative),
+    ("PARITY001 full-card fixture reduction plan is source locked", Parity001FullCardFixtureReductionPlanIsSourceLocked),
     ("GameSetup same seed same state", GameSetupSameSeedSameState),
     ("GameSetup different seed changes shuffle", GameSetupDifferentSeedChangesShuffle),
     ("GameSetup opening hand count", GameSetupOpeningHandCount),
@@ -114,6 +115,9 @@ var tests = new (string Name, Action Test)[]
     ("MinimalBattle hatch condition", MinimalBattleHatchCondition),
     ("MinimalBattle move from breeding condition", MinimalBattleMoveFromBreedingCondition),
     ("MinimalBattle memory crossing changes turn", MinimalBattleMemoryCrossingChangesTurn),
+    ("OnDeclaration legal actions include field hand trash", OnDeclarationLegalActionsIncludeFieldHandTrash),
+    ("OnDeclaration declare action executes selected effect", OnDeclarationDeclareActionExecutesSelectedEffect),
+    ("OnDeclaration declare action revalidates source role", OnDeclarationDeclareActionRevalidatesSourceRole),
     ("LegalActionGenerator generated actions execute", LegalActionGeneratorGeneratedActionsExecute),
     ("ActionExecutor invalid action fails", ActionExecutorInvalidActionFails),
     ("MinimalBattle same action sequence same hash", MinimalBattleSameActionSequenceSameHash),
@@ -148,6 +152,12 @@ var tests = new (string Name, Action Test)[]
     ("FullCardPortingScheduler documents card completion policy", FullCardPortingSchedulerDocumentsCardCompletionPolicy),
     ("CapabilityTruthAudit registry is conservative", CapabilityTruthAuditRegistryIsConservative),
     ("CapabilityTruthAudit source and batch blockers", CapabilityTruthAuditSourceAndBatchBlockers),
+    ("FND001 None alias verification closes first task", Fnd001NoneAliasVerificationClosesFirstTask),
+    ("FND001 source collector scope verification closes second task", Fnd001SourceCollectorScopeVerificationClosesSecondTask),
+    ("FND001 duration bucket verification closes third task", Fnd001DurationBucketVerificationClosesThirdTask),
+    ("FND001 static keyword verification closes fourth task", Fnd001StaticKeywordVerificationClosesFourthTask),
+    ("FND001 static modifier verification closes fifth task", Fnd001StaticModifierVerificationClosesFifthTask),
+    ("FND001 static requirement verification closes sixth task", Fnd001StaticRequirementVerificationClosesSixthTask),
     ("CapabilityTruthAudit status mismatch and variant registry integrated", CapabilityTruthAuditStatusMismatchAndVariantRegistryIntegrated),
     ("CapabilityDependencyGraph links sources and batches", CapabilityDependencyGraphLinksSourcesAndBatches),
     ("CapabilityDependencyGraph blocks coarse card batches", CapabilityDependencyGraphBlocksCoarseCardBatches),
@@ -365,6 +375,23 @@ var tests = new (string Name, Action Test)[]
     ("FND-003-D OnDiscardSecurity queues security discard events", Fnd003DOnDiscardSecurityQueuesSecurityDiscardEvents),
     ("FND-003-E OnAddSecurity queues security add events", Fnd003EOnAddSecurityQueuesSecurityAddEvents),
     ("FND-003-F OnDiscardLibrary queues deck trash event", Fnd003FOnDiscardLibraryQueuesDeckTrashEvent),
+    ("FND-003-G OnUseOption runs before OptionSkill", Fnd003GOnUseOptionRunsBeforeOptionSkill),
+    ("FND-003-H OnUnTappedAnyone queues actual unsuspend event", Fnd003HOnUnTappedAnyoneQueuesActualUnsuspendEvent),
+    ("FND-003-I OnMove queues battle-area permanent move event", Fnd003IOnMoveQueuesBattleAreaPermanentMoveEvent),
+    ("FND-003-J OnAddDigivolutionCards queues source add event", Fnd003JOnAddDigivolutionCardsQueuesSourceAddEvent),
+    ("FND-003-K OnDigivolutionCardDiscarded queues source trash event", Fnd003KOnDigivolutionCardDiscardedQueuesSourceTrashEvent),
+    ("FND-003-L OnEndBattle queues battle end event", Fnd003LOnEndBattleQueuesBattleEndEvent),
+    ("FND-003-L OnEndBattle selection pauses and resumes", Fnd003LOnEndBattleSelectionPauseResume),
+    ("FND-003-M OnDetermineDoSecurityCheck queues first active battle decision", Fnd003MOnDetermineDoSecurityCheckQueuesFirstActiveBattleDecision),
+    ("FND-003-M OnDetermineDoSecurityCheck sees battle durations before cleanup", Fnd003MOnDetermineDoSecurityCheckSeesBattleDurationsBeforeCleanup),
+    ("FND-003-M OnDetermineDoSecurityCheck selection pauses and resumes", Fnd003MOnDetermineDoSecurityCheckSelectionPauseResume),
+    ("FND-003-N BeforePayCost runs before play and option cost payment", Fnd003NBeforePayCostRunsBeforePlayAndOptionCostPayment),
+    ("FND-003-N BeforePayCost background effects run before cut-in", Fnd003NBeforePayCostBackgroundEffectsRunBeforeCutIn),
+    ("FND-003-N BeforePayCost runs before digivolution cost payment", Fnd003NBeforePayCostRunsBeforeDigivolutionCostPayment),
+    ("FND-003-O OnTappedAnyone queues actual suspend event", Fnd003OOnTappedAnyoneQueuesActualSuspendEvent),
+    ("FND-003-R permanent removal replacement windows queue before mutation", Fnd003RPermanentRemovalReplacementWindowsQueueBeforeMutation),
+    ("FND-003-R digivolution source discard replacement window queues before mutation", Fnd003RDigivolutionSourceDiscardReplacementWindowQueuesBeforeMutation),
+    ("FND-003-R unsuspend replacement window queues before mutation", Fnd003RUnsuspendReplacementWindowQueuesBeforeMutation),
     ("Zone events discard hand aggregates payload", ZoneEventsDiscardHandAggregatesPayload),
     ("Zone events trash return fire before hand and library moves", ZoneEventsTrashReturnFireBeforeHandAndLibraryMoves),
     ("Zone events return permanent and top trash timings", ZoneEventsReturnPermanentAndTopTrashTimings),
@@ -4003,6 +4030,121 @@ static void FullCardParityEvidenceGeneratedCoverageIsConservative()
     AssertTrue(markdown.Contains("does not count as `Passed`", StringComparison.Ordinal));
 }
 
+static void Parity001FullCardFixtureReductionPlanIsSourceLocked()
+{
+    var root = WorkspaceRoot();
+    var planPath = Path.Combine(root, "docs/generated/as-is-restart/parity-001-full-card-fixture-reduction-plan.json");
+    var docPath = Path.Combine(root, "docs/as-is-restart/PARITY_001_FULL_CARD_PARITY_REDUCTION_PLAN.md");
+    var summaryPath = Path.Combine(root, "docs/as-is-restart/parity-001-full-card-parity-reduction-summary.md");
+    var scriptPath = Path.Combine(root, "scripts/plan_parity001_full_card_fixture_reduction.py");
+
+    AssertTrue(File.Exists(planPath));
+    AssertTrue(File.Exists(docPath));
+    AssertTrue(File.Exists(summaryPath));
+    AssertTrue(File.Exists(scriptPath));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(planPath));
+    var plan = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.parity001-full-card-fixture-reduction-plan.v1",
+        plan.GetProperty("schemaVersion").GetString());
+
+    var policy = plan.GetProperty("policy");
+    AssertFalse(policy.GetProperty("implementationPerformed").GetBoolean());
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+    AssertFalse(policy.GetProperty("notRunCountsAsPass").GetBoolean());
+    AssertFalse(policy.GetProperty("syntheticFixturesCountAsUnityParity").GetBoolean());
+    AssertFalse(policy.GetProperty("fullCardParityReducedByThisPlan").GetBoolean());
+
+    var summary = plan.GetProperty("summary");
+    AssertEqual(3918, summary.GetProperty("sourceEffectCount").GetInt32());
+    AssertEqual(7922, summary.GetProperty("affectedDefinitionCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("currentPassedSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("currentFailedSourceEffectCount").GetInt32());
+    AssertEqual(3918, summary.GetProperty("currentNotRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("currentComparedSourceEffectCount").GetInt32());
+    AssertEqual(100, summary.GetProperty("candidateQueueCount").GetInt32());
+    AssertEqual(100, summary.GetProperty("sourceRequiredCoverageForCandidateCount").GetInt32());
+    AssertTrue(summary.GetProperty("candidateQueueSourceLocked").GetBoolean());
+    AssertEqual(3918, summary.GetProperty("missingUnityFixtureCount").GetInt32());
+    AssertEqual(3918, summary.GetProperty("missingRlFixtureCount").GetInt32());
+    AssertEqual(3918, summary.GetProperty("missingComparisonReportCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("firstExecutableReductionTargetCount").GetInt32());
+    AssertTrue(summary.GetProperty("reductionRequiresUnityExporter").GetBoolean());
+    AssertTrue(summary.GetProperty("fixtureContractReady").GetBoolean());
+    AssertTrue(summary.GetProperty("parity001CompletionEvidenceDefined").GetBoolean());
+    AssertFalse(summary.GetProperty("fullCardParityReducedByThisPlan").GetBoolean());
+    AssertFalse(summary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", summary.GetProperty("selectedNextFoundationCapability").GetString());
+
+    var contract = plan.GetProperty("fixtureContract");
+    AssertEqual("dcgo.parity.trace.v1", contract.GetProperty("traceSchemaVersion").GetString());
+    var artifacts = contract.GetProperty("requiredArtifactsPerSourceEffect").EnumerateArray().ToArray();
+    AssertEqual(3, artifacts.Length);
+    AssertTrue(artifacts.Any(artifact => artifact.GetProperty("artifact").GetString() == "UnityFixture"));
+    AssertTrue(artifacts.Any(artifact => artifact.GetProperty("artifact").GetString() == "RlFixture"));
+    AssertTrue(artifacts.Any(artifact => artifact.GetProperty("artifact").GetString() == "ComparisonReport"));
+    var transitions = contract.GetProperty("statusTransitionRules").EnumerateArray().ToArray();
+    AssertTrue(transitions.Any(rule =>
+        rule.GetProperty("coverageStatus").GetString() == "Passed"
+        && rule.GetProperty("mayReduceNotRun").GetBoolean()));
+    AssertTrue(contract.GetProperty("forbiddenEvidence").EnumerateArray()
+        .Any(item => item.GetString()!.Contains("Synthetic fixture", StringComparison.Ordinal)));
+
+    var candidates = plan.GetProperty("candidateQueue").EnumerateArray().ToArray();
+    AssertEqual(100, candidates.Length);
+    var first = candidates[0];
+    AssertEqual("NotRun", first.GetProperty("coverageStatus").GetString());
+    AssertEqual("BlockedMissingUnityFixture", first.GetProperty("reductionStatus").GetString());
+    AssertFalse(first.GetProperty("portingAllowedByThisCandidate").GetBoolean());
+    AssertTrue(first.GetProperty("unityFixturePath").GetString()!.Contains(
+        "docs/generated/parity-fixtures/unity/full-card-source",
+        StringComparison.Ordinal));
+    AssertTrue(first.GetProperty("rlFixturePath").GetString()!.Contains(
+        "docs/generated/parity-fixtures/rl/full-card-source",
+        StringComparison.Ordinal));
+    AssertTrue(first.GetProperty("comparisonReportPath").GetString()!.Contains(
+        "docs/generated/parity-fixtures/reports/full-card-source",
+        StringComparison.Ordinal));
+    AssertTrue(first.GetProperty("missingArtifacts").EnumerateArray()
+        .Select(item => item.GetString())
+        .ToHashSet(StringComparer.Ordinal)
+        .SetEquals(new[] { "UnityFixture", "RlFixture", "ComparisonReport" }));
+    AssertTrue(first.GetProperty("requiredCapabilities").EnumerateArray()
+        .Any(item => item.GetString() == "ContinuousOrStaticEffect"));
+    AssertTrue(first.GetProperty("affectedDefinitionStableIds").GetArrayLength() > 0);
+
+    var sourceLock = first.GetProperty("sourceLock");
+    AssertEqual(first.GetProperty("sourceScaffoldId").GetString(), sourceLock.GetProperty("sourceScaffoldId").GetString());
+    AssertEqual(first.GetProperty("sourcePath").GetString(), sourceLock.GetProperty("sourcePath").GetString());
+    AssertEqual(
+        first.GetProperty("sourceEffectClassName").GetString(),
+        sourceLock.GetProperty("sourceEffectClassName").GetString());
+    AssertTrue(sourceLock.GetProperty("affectedDefinitionStableIds").GetArrayLength() > 0);
+
+    var boundary = plan.GetProperty("foundationBoundary");
+    AssertEqual(
+        "FND001-CS-07",
+        boundary.GetProperty("fnd001Cs07UnsupportedKeywordMapping").GetProperty("id").GetString());
+    AssertTrue(boundary.GetProperty("needsSourceMappingTaskIds").EnumerateArray()
+        .Any(item => item.GetString() == "FND001-CS-07"));
+
+    var nextGoals = plan.GetProperty("nextGoalCandidates").EnumerateArray().ToArray();
+    AssertTrue(nextGoals.Any(goal => goal.GetProperty("id").GetString() == "PARITY-001-A"));
+    AssertTrue(nextGoals.Any(goal => goal.GetProperty("id").GetString() == "TRUST-001-RERUN"));
+
+    var markdown = File.ReadAllText(docPath);
+    AssertTrue(markdown.Contains("PARITY-001-A", StringComparison.Ordinal));
+    AssertTrue(markdown.Contains("NotRun", StringComparison.Ordinal));
+    var summaryMarkdown = File.ReadAllText(summaryPath);
+    AssertTrue(summaryMarkdown.Contains("Reduced by this plan: `false`", StringComparison.Ordinal));
+}
+
 static ParityTraceDocument CreatePublicZoneOrderTraceDocument(string scenarioId)
 {
     var state = CreateMinimalBattleState();
@@ -4264,6 +4406,80 @@ static void MinimalBattleMemoryCrossingChangesTurn()
     AssertEqual(PlayerId.Player1, state.TurnPlayerId);
     AssertEqual(2, state.Memory);
     AssertEqual(Phase.Active, state.Phase);
+}
+
+static void OnDeclarationLegalActionsIncludeFieldHandTrash()
+{
+    var services = CreateDeclarationEffectServices();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DECLARE-FIELD"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-FIELD", "FX_DeclareField");
+    state.CardDefinitions["FX-DECLARE-HAND"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-HAND", "FX_DeclareHand");
+    state.CardDefinitions["FX-DECLARE-TRASH"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-TRASH", "FX_DeclareTrash");
+    state.CardDefinitions["FX-DECLARE-OPPONENT"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-OPPONENT", "FX_DeclareOpponent");
+    var field = AddBattlePermanent(state, 1082, 1082, "FX-DECLARE-FIELD", PlayerId.Player0, 0, enterTurn: 1);
+    var hand = AddCardToZone(state, 1083, "FX-DECLARE-HAND", PlayerId.Player0, Zone.Hand);
+    var trash = AddCardToZone(state, 1084, "FX-DECLARE-TRASH", PlayerId.Player0, Zone.Trash);
+    AddCardToZone(state, 1085, "FX-DECLARE-OPPONENT", PlayerId.Player1, Zone.Hand);
+
+    var declarations = services.LegalActionGenerator
+        .Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.ActivateEffect)
+        .ToArray();
+
+    AssertEqual(3, declarations.Length);
+    AssertTrue(declarations.Any(action => ((DeclareEffectAction)action.Action).SourceCard == field.TopCardId));
+    AssertTrue(declarations.Any(action => ((DeclareEffectAction)action.Action).SourceCard == hand));
+    AssertTrue(declarations.Any(action => ((DeclareEffectAction)action.Action).SourceCard == trash));
+    AssertSequence(
+        new[] { Zone.BattleArea, Zone.Hand, Zone.Trash },
+        declarations
+            .Select(action => ((DeclareEffectAction)action.Action).SourceZone)
+            .OrderBy(zone => zone.ToString())
+            .ToArray());
+}
+
+static void OnDeclarationDeclareActionExecutesSelectedEffect()
+{
+    var services = CreateDeclarationEffectServices();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DECLARE-HAND"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-HAND", "FX_DeclareHand");
+    var hand = AddCardToZone(state, 1086, "FX-DECLARE-HAND", PlayerId.Player0, Zone.Hand);
+    var action = services.LegalActionGenerator
+        .Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.ActivateEffect)
+        .Select(action => (DeclareEffectAction)action.Action)
+        .Single(candidate => candidate.SourceCard == hand);
+
+    var result = services.ActionExecutor.Execute(state, action);
+
+    AssertEqual(8, state.Memory);
+    AssertTrue(result.RulesProcessed);
+    AssertEqual(1, result.EffectActivation!.ExecutedEffects.Count);
+    AssertEqual(EffectTiming.OnDeclaration, result.EffectActivation.ExecutedEffects[0].Timing);
+    AssertEqual(hand, result.EffectActivation.ExecutedEffects[0].SourceCard!.Value);
+}
+
+static void OnDeclarationDeclareActionRevalidatesSourceRole()
+{
+    var services = CreateDeclarationEffectServices();
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DECLARE-HAND"] = CardEffectTestFixture.EffectDefinition("FX-DECLARE-HAND", "FX_DeclareHand");
+    var hand = AddCardToZone(state, 1087, "FX-DECLARE-HAND", PlayerId.Player0, Zone.Hand);
+    var action = services.LegalActionGenerator
+        .Generate(state, PlayerId.Player0)
+        .Where(action => action.Kind == LegalActionKind.ActivateEffect)
+        .Select(action => (DeclareEffectAction)action.Action)
+        .Single(candidate => candidate.SourceCard == hand);
+
+    new ZoneMover().MoveCard(
+        state,
+        new MoveCardCommand(
+            hand,
+            Zone.Hand,
+            Zone.Trash,
+            MoveReason.Effect));
+
+    AssertThrows<DomainException>(() => services.ActionExecutor.Execute(state, action), "not available");
 }
 
 static void LegalActionGeneratorGeneratedActionsExecute()
@@ -5290,6 +5506,9 @@ static void CapabilityTruthAuditSourceAndBatchBlockers()
     AssertFalse(requiredRoot.GetProperty("sourceEffects").EnumerateArray()
         .Any(effect => effect.GetProperty("requiredCapabilities").EnumerateArray()
             .Any(capability => capability.GetString() == "None")));
+    AssertFalse(requiredRoot.GetProperty("sourceEffects").EnumerateArray()
+        .Any(effect => effect.GetProperty("nonVerifiedCapabilities").EnumerateArray()
+            .Any(capability => capability.GetString() == "None")));
 
     var bt22094 = requiredRoot.GetProperty("sourceEffects").EnumerateArray()
         .Single(effect => effect.GetProperty("sourceEffectClassName").GetString() == "BT22_094");
@@ -5308,6 +5527,9 @@ static void CapabilityTruthAuditSourceAndBatchBlockers()
     AssertTrue(blockerRoot.GetProperty("policy").GetProperty("cardBatchExecutableOnlyWhenAllRequiredCapabilitiesVerified").GetBoolean());
     AssertTrue(blockerRoot.GetProperty("policy").GetProperty("doNotSelectC0039").GetBoolean());
     AssertFalse(blockerRoot.GetProperty("summary").GetProperty("c0039Executable").GetBoolean());
+    AssertFalse(blockerRoot.GetProperty("batches").EnumerateArray()
+        .Any(batch => batch.GetProperty("blockingCapabilities").EnumerateArray()
+            .Any(capability => capability.GetProperty("capabilityId").GetString() == "None")));
 
     var c0039 = blockerRoot.GetProperty("batches").EnumerateArray()
         .Single(batch => batch.GetProperty("batchId").GetString() == "C0039_zone_security_recovery");
@@ -5318,6 +5540,553 @@ static void CapabilityTruthAuditSourceAndBatchBlockers()
     AssertTrue(blockers.Contains("BeforePayCost"));
     AssertTrue(blockers.Contains("Selection.SelectCard"));
     AssertTrue(blockers.Contains("ZoneMovement"));
+}
+
+static void Fnd001NoneAliasVerificationClosesFirstTask()
+{
+    var path = Path.Combine(WorkspaceRoot(), "docs/generated/as-is-restart/fnd-001-a-none-alias-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual("dcgo.as-is-restart.fnd001a-none-alias-verification.v1", root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-02", summary.GetProperty("taskId").GetString());
+    AssertEqual(0, summary.GetProperty("rawNoneCapabilityEntryCount").GetInt32());
+    AssertEqual(1, summary.GetProperty("continuousAliasOwnerCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("sourceRequiredRawNoneCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("sourceNonVerifiedRawNoneCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("batchBlockerRawNoneCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("gateUnsupportedRawNoneCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("gatePartialRawNoneCount").GetInt32());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-02", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-03", task.GetProperty("nextTaskCandidate").GetString());
+
+    var continuous = root.GetProperty("continuousOrStaticEffect");
+    AssertEqual("ContinuousOrStaticEffect", continuous.GetProperty("capabilityId").GetString());
+    AssertEqual("PartiallyImplemented", continuous.GetProperty("status").GetString());
+    AssertTrue(continuous.GetProperty("inventoryAliases").EnumerateArray()
+        .Any(alias => alias.GetString() == "None"));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+}
+
+static void Fnd001SourceCollectorScopeVerificationClosesSecondTask()
+{
+    var path = Path.Combine(
+        WorkspaceRoot(),
+        "docs/generated/as-is-restart/fnd-001-cs-03-source-collector-scope-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.fnd001cs03-source-collector-scope-verification.v1",
+        root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-03", summary.GetProperty("taskId").GetString());
+    AssertEqual(7, summary.GetProperty("requiredSourceKindCount").GetInt32());
+    AssertEqual(7, summary.GetProperty("coveredSourceKindCount").GetInt32());
+    AssertEqual(5, summary.GetProperty("sourceSurfaceCount").GetInt32());
+    AssertEqual(5, summary.GetProperty("coveredSourceSurfaceCount").GetInt32());
+    AssertTrue(summary.GetProperty("coveredTestCount").GetInt32() >= 10);
+    AssertEqual(4, summary.GetProperty("fixtureCandidateSourceEffectCount").GetInt32());
+    AssertEqual(3918, summary.GetProperty("parityNotRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("parityPassedSourceEffectCount").GetInt32());
+    AssertFalse(summary.GetProperty("strictUnityOrderingParityClosed").GetBoolean());
+    AssertFalse(summary.GetProperty("fullCardParityReduced").GetBoolean());
+    AssertEqual("FND001-CS-14", summary.GetProperty("orderingBoundaryTaskId").GetString());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-03", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-04", task.GetProperty("nextTaskCandidate").GetString());
+    AssertEqual("FND001-CS-14", task.GetProperty("orderingBoundaryTask").GetString());
+
+    var sourceKinds = root.GetProperty("sourceKinds").EnumerateArray().ToArray();
+    AssertEqual(7, sourceKinds.Length);
+    var coveredKinds = sourceKinds
+        .Where(kind => kind.GetProperty("covered").GetBoolean())
+        .Select(kind => kind.GetProperty("sourceKind").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(coveredKinds.SetEquals(new[]
+    {
+        "FieldTop",
+        "InheritedSource",
+        "LinkedCard",
+        "FaceUpSecurity",
+        "Hand",
+        "Trash",
+        "Executing",
+    }));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual("PartiallyImplemented", gateSummary.GetProperty("selectedNextFoundationStatus").GetString());
+
+    var parityBoundary = root.GetProperty("parityBoundary");
+    AssertEqual(3918, parityBoundary.GetProperty("notRunSourceEffectCount").GetInt32());
+    AssertFalse(parityBoundary.GetProperty("strictUnityOrderingParityClosed").GetBoolean());
+    AssertTrue(parityBoundary.GetProperty("strictUnityOrderingParityOwner")
+        .GetString()!
+        .Contains("FND001-CS-14", StringComparison.Ordinal));
+}
+
+static void Fnd001DurationBucketVerificationClosesThirdTask()
+{
+    var path = Path.Combine(
+        WorkspaceRoot(),
+        "docs/generated/as-is-restart/fnd-001-cs-04-duration-bucket-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.fnd001cs04-duration-bucket-verification.v1",
+        root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-04", summary.GetProperty("taskId").GetString());
+    AssertEqual(7, summary.GetProperty("requiredDurationBucketCount").GetInt32());
+    AssertEqual(7, summary.GetProperty("coveredSourceBucketCount").GetInt32());
+    AssertEqual(7, summary.GetProperty("coveredHeadlessBucketCount").GetInt32());
+    AssertEqual(16, summary.GetProperty("requiredTestCount").GetInt32());
+    AssertEqual(16, summary.GetProperty("coveredTestCount").GetInt32());
+    AssertFalse(summary.GetProperty("providerCatalogAdoptionClosed").GetBoolean());
+    AssertTrue(summary.GetProperty("providerCatalogBoundaryRetained").GetBoolean());
+    AssertFalse(summary.GetProperty("strictBucketNameParityClosed").GetBoolean());
+    AssertEqual(
+        "DCGO/Assets/Scripts/Script/CardController.cs",
+        summary.GetProperty("additionalSourceCleanupCallsite").GetString());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-04", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-06", task.GetProperty("nextTaskCandidate").GetString());
+
+    var sourceBuckets = root.GetProperty("sourceBuckets").EnumerateArray().ToArray();
+    AssertEqual(7, sourceBuckets.Length);
+    AssertTrue(sourceBuckets.All(bucket => bucket.GetProperty("sourceEvidencePresent").GetBoolean()));
+    var bucketNames = sourceBuckets
+        .Select(bucket => bucket.GetProperty("bucket").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(bucketNames.SetEquals(new[]
+    {
+        "UntilEachTurnEndEffects",
+        "UntilOwnerTurnEndEffects",
+        "UntilOpponentTurnEndEffects",
+        "UntilEndBattleEffects",
+        "UntilEndAttackEffects",
+        "UntilSecurityCheckEndEffects",
+        "UntilOwnerActivePhaseEffects/UntilNextUntapEffects",
+    }));
+
+    var headlessBuckets = root.GetProperty("headlessSurfaces").GetProperty("durationBuckets").EnumerateArray().ToArray();
+    AssertEqual(7, headlessBuckets.Length);
+    AssertTrue(headlessBuckets.All(bucket => bucket.GetProperty("covered").GetBoolean()));
+
+    var providerBoundary = root.GetProperty("providerCatalogBoundary");
+    AssertFalse(providerBoundary.GetProperty("adoptionClosed").GetBoolean());
+    AssertTrue(providerBoundary.GetProperty("handoffRequired").GetBoolean());
+    AssertTrue(providerBoundary.GetProperty("reason").GetString()!.Contains("production", StringComparison.Ordinal));
+
+    var bucketNameBoundary = root.GetProperty("bucketNameBoundary");
+    AssertFalse(bucketNameBoundary.GetProperty("strictBucketNameParityClosed").GetBoolean());
+    AssertTrue(bucketNameBoundary.GetProperty("reason").GetString()!.Contains("UntilNextUntapEffects", StringComparison.Ordinal));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("implementationPerformed").GetBoolean());
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("rlComponentsImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("commitOrPushPerformed").GetBoolean());
+
+    var conditions = root.GetProperty("conditions").EnumerateObject().ToArray();
+    AssertTrue(conditions.All(condition => condition.Value.GetBoolean()));
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual("PartiallyImplemented", gateSummary.GetProperty("selectedNextFoundationStatus").GetString());
+}
+
+static void Fnd001StaticKeywordVerificationClosesFourthTask()
+{
+    var path = Path.Combine(
+        WorkspaceRoot(),
+        "docs/generated/as-is-restart/fnd-001-cs-06-static-keyword-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.fnd001cs06-static-keyword-verification.v1",
+        root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-06", summary.GetProperty("taskId").GetString());
+    AssertEqual(5, summary.GetProperty("requiredKeywordWrapperCount").GetInt32());
+    AssertEqual(5, summary.GetProperty("coveredSourceKeywordWrapperCount").GetInt32());
+    AssertEqual(5, summary.GetProperty("coveredHeadlessKeywordWrapperCount").GetInt32());
+    AssertEqual(470, summary.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(521, summary.GetProperty("factoryReferenceCount").GetInt32());
+    AssertEqual(470, summary.GetProperty("sourceRequiredLinkedSampleCount").GetInt32());
+    AssertEqual(470, summary.GetProperty("parityNotRunSampleCount").GetInt32());
+    AssertEqual(12, summary.GetProperty("requiredTestCount").GetInt32());
+    AssertEqual(12, summary.GetProperty("coveredTestCount").GetInt32());
+    AssertTrue(summary.GetProperty("unsupportedKeywordBoundaryRetained").GetBoolean());
+    AssertEqual("FND001-CS-07", summary.GetProperty("unsupportedKeywordBoundaryTask").GetString());
+    AssertFalse(summary.GetProperty("fullCardParityReduced").GetBoolean());
+    AssertEqual(3918, summary.GetProperty("parityNotRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("parityPassedSourceEffectCount").GetInt32());
+    AssertEqual("CanNotBeDestroyedByBattleClass", summary.GetProperty("jammingSourceClass").GetString());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-06", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-08", task.GetProperty("nextTaskCandidate").GetString());
+    AssertEqual("FND001-CS-07", task.GetProperty("unsupportedKeywordBoundaryTask").GetString());
+    AssertEqual("PARITY-001", task.GetProperty("parityBoundaryTask").GetString());
+
+    var sourceWrappers = root.GetProperty("sourceWrappers").EnumerateArray().ToArray();
+    AssertEqual(5, sourceWrappers.Length);
+    AssertTrue(sourceWrappers.All(wrapper => wrapper.GetProperty("covered").GetBoolean()));
+    var sourceKeywords = sourceWrappers
+        .Select(wrapper => wrapper.GetProperty("keyword").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(sourceKeywords.SetEquals(new[] { "Blocker", "Rush", "Reboot", "Collision", "Jamming" }));
+    var jamming = sourceWrappers.Single(wrapper => wrapper.GetProperty("keyword").GetString() == "Jamming");
+    AssertEqual("CanNotBeDestroyedByBattleClass", jamming.GetProperty("sourceClass").GetString());
+
+    var headlessWrappers = root.GetProperty("headlessSurfaces").GetProperty("keywordWrappers").EnumerateArray().ToArray();
+    AssertEqual(5, headlessWrappers.Length);
+    AssertTrue(headlessWrappers.All(wrapper => wrapper.GetProperty("covered").GetBoolean()));
+
+    var samples = root.GetProperty("sourceSamples");
+    AssertTrue(samples.GetProperty("covered").GetBoolean());
+    AssertEqual(470, samples.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(521, samples.GetProperty("factoryReferenceCount").GetInt32());
+    var byKeyword = samples.GetProperty("byKeyword").EnumerateArray().ToArray();
+    AssertEqual(5, byKeyword.Length);
+    AssertTrue(byKeyword.All(keyword => keyword.GetProperty("covered").GetBoolean()));
+    var sampleCounts = byKeyword.ToDictionary(
+        keyword => keyword.GetProperty("keyword").GetString()!,
+        keyword => keyword.GetProperty("sourceSampleCount").GetInt32(),
+        StringComparer.Ordinal);
+    AssertEqual(287, sampleCounts["Blocker"]);
+    AssertEqual(43, sampleCounts["Rush"]);
+    AssertEqual(91, sampleCounts["Reboot"]);
+    AssertEqual(30, sampleCounts["Collision"]);
+    AssertEqual(70, sampleCounts["Jamming"]);
+
+    var keywordBoundary = root.GetProperty("keywordBoundary");
+    AssertTrue(keywordBoundary.GetProperty("unsupportedKeywordBoundaryRetained").GetBoolean());
+    AssertEqual("FND001-CS-07", keywordBoundary.GetProperty("ownerTask").GetString());
+    AssertTrue(keywordBoundary.GetProperty("reason").GetString()!.Contains("Piercing", StringComparison.Ordinal));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("implementationPerformed").GetBoolean());
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("rlComponentsImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("commitOrPushPerformed").GetBoolean());
+
+    var conditions = root.GetProperty("conditions").EnumerateObject().ToArray();
+    AssertTrue(conditions.All(condition => condition.Value.GetBoolean()));
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual("PartiallyImplemented", gateSummary.GetProperty("selectedNextFoundationStatus").GetString());
+
+    var parityBoundary = root.GetProperty("parityBoundary");
+    AssertEqual(3918, parityBoundary.GetProperty("notRunSourceEffectCount").GetInt32());
+    AssertEqual(0, parityBoundary.GetProperty("passedSourceEffectCount").GetInt32());
+    AssertEqual("PARITY-001", parityBoundary.GetProperty("parityBoundaryOwner").GetString());
+}
+
+static void Fnd001StaticModifierVerificationClosesFifthTask()
+{
+    var path = Path.Combine(
+        WorkspaceRoot(),
+        "docs/generated/as-is-restart/fnd-001-cs-08-static-modifier-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.fnd001cs08-static-modifier-verification.v1",
+        root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-08", summary.GetProperty("taskId").GetString());
+    AssertEqual(4, summary.GetProperty("requiredSourceModifierGroupCount").GetInt32());
+    AssertEqual(4, summary.GetProperty("coveredSourceModifierGroupCount").GetInt32());
+    AssertEqual(3, summary.GetProperty("requiredHeadlessRuntimeModifierKindCount").GetInt32());
+    AssertEqual(3, summary.GetProperty("coveredHeadlessRuntimeModifierKindCount").GetInt32());
+    AssertEqual(532, summary.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(554, summary.GetProperty("factoryReferenceCount").GetInt32());
+    AssertEqual(532, summary.GetProperty("sourceRequiredLinkedSampleCount").GetInt32());
+    AssertEqual(532, summary.GetProperty("parityNotRunSampleCount").GetInt32());
+    AssertEqual(12, summary.GetProperty("requiredTestCount").GetInt32());
+    AssertEqual(12, summary.GetProperty("coveredTestCount").GetInt32());
+    AssertTrue(summary.GetProperty("dynamicAmountDelegateCovered").GetBoolean());
+    AssertTrue(summary.GetProperty("baseDefinitionMutationBoundaryCovered").GetBoolean());
+    AssertFalse(summary.GetProperty("baseDpExactSetSemanticsClosed").GetBoolean());
+    AssertFalse(summary.GetProperty("fullCardParityReduced").GetBoolean());
+    AssertEqual(3918, summary.GetProperty("parityNotRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("parityPassedSourceEffectCount").GetInt32());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-08", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-11", task.GetProperty("nextTaskCandidate").GetString());
+    AssertEqual("PARITY-001/TRUST-001-RERUN", task.GetProperty("baseDpExactSetSemanticsBoundary").GetString());
+    AssertEqual("PARITY-001", task.GetProperty("parityBoundaryTask").GetString());
+
+    var sourceGroups = root.GetProperty("sourceModifierGroups").EnumerateArray().ToArray();
+    AssertEqual(4, sourceGroups.Length);
+    AssertTrue(sourceGroups.All(group => group.GetProperty("covered").GetBoolean()));
+    var groupIds = sourceGroups
+        .Select(group => group.GetProperty("id").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(groupIds.SetEquals(new[] { "DP", "SecurityAttack", "SecurityDigimonDP", "BaseDPBoundary" }));
+
+    var headlessGroups = root.GetProperty("headlessSurfaces").GetProperty("modifierGroups").EnumerateArray().ToArray();
+    AssertEqual(4, headlessGroups.Length);
+    AssertTrue(headlessGroups.All(group => group.GetProperty("covered").GetBoolean()));
+    var runtimeKinds = headlessGroups
+        .Where(group => group.GetProperty("headlessModifierKind").GetString() != "BoundaryOnly")
+        .Select(group => group.GetProperty("headlessModifierKind").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(runtimeKinds.SetEquals(new[] { "DP", "SecurityAttack", "SecurityDigimonDP" }));
+
+    var samples = root.GetProperty("sourceSamples");
+    AssertTrue(samples.GetProperty("covered").GetBoolean());
+    AssertEqual(532, samples.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(554, samples.GetProperty("factoryReferenceCount").GetInt32());
+    AssertEqual(532, samples.GetProperty("sourceRequiredLinkedSampleCount").GetInt32());
+    AssertEqual(532, samples.GetProperty("parityNotRunSampleCount").GetInt32());
+    var byGroup = samples.GetProperty("byGroup").EnumerateArray().ToArray();
+    AssertEqual(4, byGroup.Length);
+    AssertTrue(byGroup.All(group => group.GetProperty("covered").GetBoolean()));
+    var sampleCounts = byGroup.ToDictionary(
+        group => group.GetProperty("id").GetString()!,
+        group => group.GetProperty("sourceSampleCount").GetInt32(),
+        StringComparer.Ordinal);
+    AssertEqual(365, sampleCounts["DP"]);
+    AssertEqual(157, sampleCounts["SecurityAttack"]);
+    AssertEqual(24, sampleCounts["SecurityDigimonDP"]);
+    AssertEqual(1, sampleCounts["BaseDPBoundary"]);
+
+    var factoryReferenceCounts = byGroup.ToDictionary(
+        group => group.GetProperty("id").GetString()!,
+        group => group.GetProperty("factoryReferenceCount").GetInt32(),
+        StringComparer.Ordinal);
+    AssertEqual(371, factoryReferenceCounts["DP"]);
+    AssertEqual(158, factoryReferenceCounts["SecurityAttack"]);
+    AssertEqual(24, factoryReferenceCounts["SecurityDigimonDP"]);
+    AssertEqual(1, factoryReferenceCounts["BaseDPBoundary"]);
+
+    var baseDpBoundary = root.GetProperty("baseDpBoundary");
+    AssertFalse(baseDpBoundary.GetProperty("baseDpExactSetSemanticsClosed").GetBoolean());
+    AssertTrue(baseDpBoundary.GetProperty("reason").GetString()!.Contains("ChangeBaseDPStaticEffect", StringComparison.Ordinal));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("implementationPerformed").GetBoolean());
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertTrue(policy.GetProperty("srcTestModifiedOnlyForEvidence").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("rlComponentsImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("trust001Performed").GetBoolean());
+    AssertFalse(policy.GetProperty("commitOrPushPerformed").GetBoolean());
+
+    var conditions = root.GetProperty("conditions").EnumerateObject().ToArray();
+    AssertTrue(conditions.All(condition => condition.Value.GetBoolean()));
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual("PartiallyImplemented", gateSummary.GetProperty("selectedNextFoundationStatus").GetString());
+
+    var parityBoundary = root.GetProperty("parityBoundary");
+    AssertEqual(3918, parityBoundary.GetProperty("notRunSourceEffectCount").GetInt32());
+    AssertEqual(0, parityBoundary.GetProperty("passedSourceEffectCount").GetInt32());
+    AssertEqual("PARITY-001", parityBoundary.GetProperty("parityBoundaryOwner").GetString());
+}
+
+static void Fnd001StaticRequirementVerificationClosesSixthTask()
+{
+    var path = Path.Combine(
+        WorkspaceRoot(),
+        "docs/generated/as-is-restart/fnd-001-cs-11-static-requirement-verification.json");
+    AssertTrue(File.Exists(path));
+
+    using var document = JsonDocument.Parse(File.ReadAllText(path));
+    var root = document.RootElement;
+    AssertEqual(
+        "dcgo.as-is-restart.fnd001cs11-static-requirement-verification.v1",
+        root.GetProperty("schemaVersion").GetString());
+
+    var summary = root.GetProperty("summary");
+    AssertTrue(summary.GetProperty("passed").GetBoolean());
+    AssertEqual("FND001-CS-11", summary.GetProperty("taskId").GetString());
+    AssertEqual(3, summary.GetProperty("requiredSourceRequirementGroupCount").GetInt32());
+    AssertEqual(3, summary.GetProperty("coveredSourceRequirementGroupCount").GetInt32());
+    AssertEqual(3, summary.GetProperty("requiredHeadlessRequirementGroupCount").GetInt32());
+    AssertEqual(3, summary.GetProperty("coveredHeadlessRequirementGroupCount").GetInt32());
+    AssertEqual(1196, summary.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(1257, summary.GetProperty("factoryReferenceCount").GetInt32());
+    AssertEqual(1196, summary.GetProperty("sourceRequiredLinkedSampleCount").GetInt32());
+    AssertEqual(1196, summary.GetProperty("parityNotRunSampleCount").GetInt32());
+    AssertEqual(1187, summary.GetProperty("evolutionFactoryReferenceCount").GetInt32());
+    AssertEqual(70, summary.GetProperty("linkFactoryReferenceCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("directIgnorePermissionSourceSampleCount").GetInt32());
+    AssertEqual(15, summary.GetProperty("requiredTestCount").GetInt32());
+    AssertEqual(15, summary.GetProperty("coveredTestCount").GetInt32());
+    AssertTrue(summary.GetProperty("staticRequirementServiceCovered").GetBoolean());
+    AssertTrue(summary.GetProperty("evolutionFactoryWrapperCovered").GetBoolean());
+    AssertFalse(summary.GetProperty("linkSourceFacingFactoryWrapperPresent").GetBoolean());
+    AssertFalse(summary.GetProperty("linkFactoryWrapperParityClosed").GetBoolean());
+    AssertTrue(summary.GetProperty("ignorePermissionBoundaryRetained").GetBoolean());
+    AssertFalse(summary.GetProperty("fullCardParityReduced").GetBoolean());
+    AssertEqual(3918, summary.GetProperty("parityNotRunSourceEffectCount").GetInt32());
+    AssertEqual(0, summary.GetProperty("parityPassedSourceEffectCount").GetInt32());
+
+    var task = root.GetProperty("task");
+    AssertEqual("FND001-CS-11", task.GetProperty("id").GetString());
+    AssertEqual("CloseableFoundationTask", task.GetProperty("classification").GetString());
+    AssertEqual("ClosedByEvidence", task.GetProperty("status").GetString());
+    AssertEqual("FND001-CS-07", task.GetProperty("nextTaskCandidate").GetString());
+    AssertEqual("PARITY-001", task.GetProperty("parityBoundaryTask").GetString());
+    AssertEqual("TRUST-001-RERUN", task.GetProperty("trustBoundaryTask").GetString());
+    AssertFalse(task.GetProperty("linkFactoryWrapperParityClosed").GetBoolean());
+
+    var sourceGroups = root.GetProperty("sourceRequirementGroups").EnumerateArray().ToArray();
+    AssertEqual(3, sourceGroups.Length);
+    AssertTrue(sourceGroups.All(group => group.GetProperty("covered").GetBoolean()));
+    var sourceGroupIds = sourceGroups
+        .Select(group => group.GetProperty("id").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(sourceGroupIds.SetEquals(new[] { "EvolutionRequirement", "LinkRequirement", "IgnorePermission" }));
+
+    var headlessGroups = root.GetProperty("headlessSurfaces").GetProperty("requirementGroups").EnumerateArray().ToArray();
+    AssertEqual(3, headlessGroups.Length);
+    AssertTrue(headlessGroups.All(group => group.GetProperty("covered").GetBoolean()));
+    var headlessGroupIds = headlessGroups
+        .Select(group => group.GetProperty("id").GetString())
+        .ToHashSet(StringComparer.Ordinal);
+    AssertTrue(headlessGroupIds.SetEquals(new[] { "EvolutionRequirement", "LinkRequirement", "IgnorePermission" }));
+    var headless = root.GetProperty("headlessSurfaces");
+    AssertTrue(headless.GetProperty("staticRequirementServiceCovered").GetBoolean());
+    AssertTrue(headless.GetProperty("evolutionFactoryWrapperCovered").GetBoolean());
+    AssertTrue(headless.GetProperty("evolutionRuntimeWiringCovered").GetBoolean());
+    AssertTrue(headless.GetProperty("linkRuntimeWiringCovered").GetBoolean());
+    AssertFalse(headless.GetProperty("linkSourceFacingFactoryWrapperPresent").GetBoolean());
+    AssertTrue(headless.GetProperty("linkSourceFacingFactoryWrapperBoundary").GetBoolean());
+
+    var samples = root.GetProperty("sourceSamples");
+    AssertTrue(samples.GetProperty("covered").GetBoolean());
+    AssertEqual(1196, samples.GetProperty("sourceSampleCandidateCount").GetInt32());
+    AssertEqual(1257, samples.GetProperty("factoryReferenceCount").GetInt32());
+    AssertEqual(1196, samples.GetProperty("sourceRequiredLinkedSampleCount").GetInt32());
+    AssertEqual(1196, samples.GetProperty("parityNotRunSampleCount").GetInt32());
+    var byGroup = samples.GetProperty("byGroup").EnumerateArray().ToArray();
+    AssertEqual(3, byGroup.Length);
+    AssertTrue(byGroup.All(group => group.GetProperty("covered").GetBoolean()));
+    var sourceSampleCounts = byGroup.ToDictionary(
+        group => group.GetProperty("id").GetString()!,
+        group => group.GetProperty("sourceSampleCount").GetInt32(),
+        StringComparer.Ordinal);
+    AssertEqual(1186, sourceSampleCounts["EvolutionRequirement"]);
+    AssertEqual(70, sourceSampleCounts["LinkRequirement"]);
+    AssertEqual(0, sourceSampleCounts["IgnorePermission"]);
+    var factoryReferenceCounts = byGroup.ToDictionary(
+        group => group.GetProperty("id").GetString()!,
+        group => group.GetProperty("factoryReferenceCount").GetInt32(),
+        StringComparer.Ordinal);
+    AssertEqual(1187, factoryReferenceCounts["EvolutionRequirement"]);
+    AssertEqual(70, factoryReferenceCounts["LinkRequirement"]);
+    AssertEqual(0, factoryReferenceCounts["IgnorePermission"]);
+    var ignorePermission = byGroup.Single(group => group.GetProperty("id").GetString() == "IgnorePermission");
+    AssertFalse(ignorePermission.GetProperty("requiresDirectSourceScaffold").GetBoolean());
+    AssertTrue(ignorePermission.GetProperty("directScaffoldBoundaryRetained").GetBoolean());
+
+    var retainedBoundaries = root.GetProperty("retainedBoundaries").EnumerateArray().ToArray();
+    AssertTrue(retainedBoundaries.Any(boundary => boundary.GetProperty("id").GetString() == "LinkFactoryWrapperParity"));
+    AssertTrue(retainedBoundaries.Any(boundary => boundary.GetProperty("id").GetString() == "IgnorePermissionDirectScaffold"));
+    AssertTrue(retainedBoundaries.Any(boundary => boundary.GetProperty("id").GetString() == "FullCardParityNotRun"));
+
+    var policy = root.GetProperty("policy");
+    AssertFalse(policy.GetProperty("implementationPerformed").GetBoolean());
+    AssertFalse(policy.GetProperty("srcImplementationModified").GetBoolean());
+    AssertTrue(policy.GetProperty("srcTestModifiedOnlyForEvidence").GetBoolean());
+    AssertFalse(policy.GetProperty("dcgoOriginalModified").GetBoolean());
+    AssertFalse(policy.GetProperty("cardEffectBodyImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("c0039OrLaterCardPortingRun").GetBoolean());
+    AssertFalse(policy.GetProperty("rlComponentsImplemented").GetBoolean());
+    AssertFalse(policy.GetProperty("foundationGateManipulated").GetBoolean());
+    AssertFalse(policy.GetProperty("generatedStatusPromoted").GetBoolean());
+    AssertFalse(policy.GetProperty("trust001Performed").GetBoolean());
+    AssertFalse(policy.GetProperty("commitOrPushPerformed").GetBoolean());
+
+    var conditions = root.GetProperty("conditions").EnumerateObject().ToArray();
+    AssertTrue(conditions.All(condition => condition.Value.GetBoolean()));
+
+    var gateSummary = root.GetProperty("gateSummary");
+    AssertFalse(gateSummary.GetProperty("openCodeReady").GetBoolean());
+    AssertEqual("ContinuousOrStaticEffect", gateSummary.GetProperty("selectedNextFoundationCapability").GetString());
+    AssertEqual("PartiallyImplemented", gateSummary.GetProperty("selectedNextFoundationStatus").GetString());
+
+    var parityBoundary = root.GetProperty("parityBoundary");
+    AssertEqual(3918, parityBoundary.GetProperty("notRunSourceEffectCount").GetInt32());
+    AssertEqual(0, parityBoundary.GetProperty("passedSourceEffectCount").GetInt32());
+    AssertEqual("PARITY-001", parityBoundary.GetProperty("parityBoundaryOwner").GetString());
 }
 
 static void CapabilityTruthAuditStatusMismatchAndVariantRegistryIntegrated()
@@ -5499,7 +6268,7 @@ static void FoundationCompletionGateBaselineBlocksOpenCode()
     AssertEqual(13, summary.GetProperty("legacyContinuousOnlyEmptyDescriptorCount").GetInt32());
     AssertEqual(0, summary.GetProperty("coreCardIdBranchCount").GetInt32());
     AssertEqual(0, summary.GetProperty("directZoneMutationCount").GetInt32());
-    AssertTrue(summary.GetProperty("unknownCommonApiCount").GetInt32() > 0);
+    AssertEqual(0, summary.GetProperty("unknownCommonApiCount").GetInt32());
     AssertTrue(summary.GetProperty("unsupportedCapabilityCount").GetInt32() > 0);
     AssertTrue(summary.GetProperty("partiallyImplementedCapabilityCount").GetInt32() > 0);
     AssertEqual(0, summary.GetProperty("runtimeGeneratedStatusMismatchCount").GetInt32());
@@ -14391,6 +15160,1032 @@ static void Fnd003FOnDiscardLibraryQueuesDeckTrashEvent()
     AssertTrue(state.RuntimeRules.PendingRuleEvents.Count == 0);
 }
 
+static void Fnd003GOnUseOptionRunsBeforeOptionSkill()
+{
+    var onUseProbe = new PayloadProbeCardScript("FX-ON-USE-PROBE", "FX_OnUseProbe", EffectTiming.OnUseOption);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onUseProbe,
+        new TimingMemoryCardScript(
+            "FX-ON-USE-BACKGROUND",
+            "FX_OnUseBackground",
+            EffectTiming.OnUseOption,
+            amount: 2,
+            isBackground: true),
+        new TimingMemoryCardScript(
+            "FX-OPTION",
+            "FX_Option",
+            EffectTiming.OptionSkill,
+            amount: 1,
+            canActivate: context => context.State.Memory == 5)));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ON-USE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-USE-PROBE", "FX_OnUseProbe");
+    state.CardDefinitions["FX-ON-USE-BACKGROUND"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-USE-BACKGROUND", "FX_OnUseBackground");
+    state.CardDefinitions["FX-OPTION"] =
+        CardEffectTestFixture.OptionEffectDefinition("FX-OPTION", "FX_Option", playCost: 2);
+    AddBattlePermanent(state, 66230, 6650, "FX-ON-USE-PROBE", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66231, 6651, "FX-ON-USE-BACKGROUND", PlayerId.Player0, 1, enterTurn: 1);
+    var option = AddCardToZone(state, 66232, "FX-OPTION", PlayerId.Player0, Zone.Hand);
+
+    var result = services.PlayCardService.PlayWithResult(
+        state,
+        new PlayCardAction(PlayerId.Player0, option, -1));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertTrue(result.OptionPlay!.MovedToTrash);
+    AssertEqual(6, state.Memory);
+    AssertEqual(Zone.Trash, state.Cards[option].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(option));
+    AssertEqual(1, onUseProbe.Observed.Count);
+
+    var observation = onUseProbe.Observed[0];
+    AssertEqual(EffectTiming.OnUseOption, observation.Timing);
+    AssertEqual(option, (CardInstanceId)observation.Values["Card"]!);
+    AssertSequence(new[] { option }, PayloadCards(observation, "Cards"));
+    AssertSequence(new[] { option }, PayloadCards(observation, "CardSources"));
+    AssertEqual(Zone.Hand, (Zone)observation.Values["Root"]!);
+    AssertEqual(2, (int)observation.Values["Cost"]!);
+    AssertEqual(2, (int)observation.Values["PaidCost"]!);
+    AssertEqual(true, (bool)observation.Values["PayCost"]!);
+    AssertEqual(Zone.Executing, (Zone)observation.Values["SourceZone"]!);
+    AssertEqual(false, (bool)observation.Values["ActivatedFromSecurity"]!);
+}
+
+static void Fnd003HOnUnTappedAnyoneQueuesActualUnsuspendEvent()
+{
+    var onUntapProbe = new PayloadProbeCardScript("FX-ON-UNTAP-PROBE", "FX_OnUntapProbe", EffectTiming.OnUnTappedAnyone);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onUntapProbe,
+        new NoEffectCardScript("FX-UNTAP-TARGET", notes: "Test-only unsuspend target.")));
+    var state = CreateMinimalBattleState();
+    state.Phase = Phase.Main;
+    state.CardDefinitions["FX-ON-UNTAP-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-UNTAP-PROBE", "FX_OnUntapProbe");
+    state.CardDefinitions["FX-UNTAP-TARGET"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-UNTAP-TARGET");
+    AddBattlePermanent(state, 66240, 6660, "FX-ON-UNTAP-PROBE", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 66241, 6661, "FX-UNTAP-TARGET", PlayerId.Player1, 0, enterTurn: 1, isSuspended: true);
+
+    AssertTrue(services.PrimitiveService.Unsuspend(state, target.Id));
+    AssertFalse(target.IsSuspended);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnUnTappedAnyone, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player1, ruleEvent.Player);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["UnsuspendedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["UnsuspendedPermanents"]!).ToArray());
+    AssertEqual(PlayerId.Player1, (PlayerId)ruleEvent.Values["UnsuspendedController"]!);
+    AssertEqual(target.TopCardId, (CardInstanceId)ruleEvent.Values["UnsuspendedTopCard"]!);
+    AssertSequence(new[] { target.TopCardId }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["DestinationZone"]!);
+
+    AssertFalse(services.PrimitiveService.Unsuspend(state, target.Id));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var autoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(autoProcess.HasPendingSelection);
+    AssertEqual(1, onUntapProbe.Observed.Count);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var observation = onUntapProbe.Observed[0];
+    AssertEqual(EffectTiming.OnUnTappedAnyone, observation.Timing);
+    AssertEqual(target.Id, (PermanentId)observation.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)observation.Values["UnsuspendedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)observation.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.TopCardId }, PayloadCards(observation, "CardSources"));
+}
+
+static void Fnd003OOnTappedAnyoneQueuesActualSuspendEvent()
+{
+    var onTapProbe = new PayloadProbeCardScript("FX-ON-TAP-PROBE", "FX_OnTapProbe", EffectTiming.OnTappedAnyone);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onTapProbe,
+        new NoEffectCardScript("FX-TAP-TARGET", notes: "Test-only suspend target.")));
+    var state = CreateMinimalBattleState();
+    state.Phase = Phase.Main;
+    state.CardDefinitions["FX-ON-TAP-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-TAP-PROBE", "FX_OnTapProbe");
+    state.CardDefinitions["FX-TAP-TARGET"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-TAP-TARGET");
+    var source = AddBattlePermanent(state, 66242, 6662, "FX-ON-TAP-PROBE", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 66243, 6663, "FX-TAP-TARGET", PlayerId.Player1, 0, enterTurn: 1);
+
+    AssertTrue(services.PrimitiveService.Suspend(state, target.Id, source.TopCardId, source.Id));
+    AssertTrue(target.IsSuspended);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnTappedAnyone, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player1, ruleEvent.Player);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["TappedPermanent"]!);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["SuspendedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["TappedPermanents"]!).ToArray());
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["SuspendedPermanents"]!).ToArray());
+    AssertEqual(PlayerId.Player1, (PlayerId)ruleEvent.Values["TappedController"]!);
+    AssertEqual(target.TopCardId, (CardInstanceId)ruleEvent.Values["TappedTopCard"]!);
+    AssertSequence(new[] { target.TopCardId }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(source.TopCardId, (CardInstanceId)ruleEvent.Values["CardEffect"]!);
+    AssertEqual(source.TopCardId, (CardInstanceId)ruleEvent.Values["SourceCard"]!);
+    AssertEqual(source.Id, (PermanentId)ruleEvent.Values["SourcePermanent"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(false, (bool)ruleEvent.Values["IsBlock"]!);
+
+    AssertFalse(services.PrimitiveService.Suspend(state, target.Id, source.TopCardId, source.Id));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var autoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(autoProcess.HasPendingSelection);
+    AssertEqual(1, onTapProbe.Observed.Count);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var observation = onTapProbe.Observed[0];
+    AssertEqual(EffectTiming.OnTappedAnyone, observation.Timing);
+    AssertEqual(target.Id, (PermanentId)observation.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)observation.Values["TappedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)observation.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.TopCardId }, PayloadCards(observation, "CardSources"));
+    AssertEqual(source.TopCardId, (CardInstanceId)observation.Values["CardEffect"]!);
+    AssertEqual(false, (bool)observation.Values["IsBlock"]!);
+
+    var blocker = AddBattlePermanent(state, 66244, 6664, "FX-TAP-TARGET", PlayerId.Player1, 1, enterTurn: 1);
+    AssertTrue(services.PrimitiveService.Suspend(state, blocker.Id, isBlock: true));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var blockRuleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnTappedAnyone, blockRuleEvent.Timing);
+    AssertEqual(blocker.Id, (PermanentId)blockRuleEvent.Values["Permanent"]!);
+    AssertEqual(true, (bool)blockRuleEvent.Values["IsBlock"]!);
+
+    var blockAutoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(blockAutoProcess.HasPendingSelection);
+    AssertEqual(2, onTapProbe.Observed.Count);
+    AssertEqual(blocker.Id, (PermanentId)onTapProbe.Observed[1].Values["Permanent"]!);
+    AssertEqual(true, (bool)onTapProbe.Observed[1].Values["IsBlock"]!);
+}
+
+static void Fnd003RPermanentRemovalReplacementWindowsQueueBeforeMutation()
+{
+    var deleteState = CreateMinimalBattleState();
+    deleteState.CardDefinitions["FX-R-DELETE"] = CardEffectTestFixture.NoEffectDefinition("FX-R-DELETE");
+    deleteState.CardDefinitions["FX-R-SOURCE"] = CardEffectTestFixture.NoEffectDefinition("FX-R-SOURCE");
+    var deleteTarget = AddBattlePermanent(deleteState, 66245, 6665, "FX-R-DELETE", PlayerId.Player1, 0, enterTurn: 1);
+    var deleteSource = AddEvolutionSource(deleteState, 66246, "FX-R-SOURCE", PlayerId.Player1, deleteTarget.Id);
+    var primitives = new Tier1PrimitiveService();
+
+    var deleteRequest = primitives.QueuePermanentRemovalReplacementWindow(
+        deleteState,
+        deleteTarget.Id,
+        PermanentRemovalReplacementKind.Delete,
+        Zone.Trash,
+        sourceCard: deleteTarget.TopCardId,
+        sourcePermanent: deleteTarget.Id,
+        moveReason: MoveReason.Trash,
+        battle: true);
+
+    AssertSequence(
+        new[] { EffectTiming.WhenPermanentWouldBeDeleted, EffectTiming.WhenRemoveField },
+        deleteRequest.Timings.ToArray());
+    AssertSequence(new[] { deleteTarget.TopCardId, deleteSource }, deleteRequest.StackCards.ToArray());
+    AssertTrue(deleteState.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(candidate => candidate.Id == deleteTarget.Id));
+    AssertEqual(Zone.BattleArea, deleteState.Cards[deleteTarget.TopCardId].CurrentZone);
+    AssertEqual(Zone.EvolutionSources, deleteState.Cards[deleteSource].CurrentZone);
+    AssertEqual(2, deleteState.RuntimeRules.PendingRuleEvents.Count);
+
+    var wouldDelete = deleteState.RuntimeRules.PendingRuleEvents[0];
+    var wouldRemove = deleteState.RuntimeRules.PendingRuleEvents[1];
+    AssertEqual(EffectTiming.WhenPermanentWouldBeDeleted, wouldDelete.Timing);
+    AssertEqual(EffectTiming.WhenRemoveField, wouldRemove.Timing);
+    AssertEqual(PlayerId.Player1, wouldDelete.Player);
+    AssertEqual(deleteTarget.Id, (PermanentId)wouldDelete.Values["Permanent"]!);
+    AssertEqual(deleteTarget.Id, (PermanentId)wouldDelete.Values["TargetPermanent"]!);
+    AssertSequence(new[] { deleteTarget.Id }, ((IEnumerable<PermanentId>)wouldDelete.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { deleteTarget.TopCardId, deleteSource }, ((IEnumerable<CardInstanceId>)wouldDelete.Values["CardSources"]!).ToArray());
+    AssertEqual(true, (bool)wouldDelete.Values["WillBeRemoveField"]!);
+    AssertEqual(true, (bool)wouldDelete.Values["WouldRemove"]!);
+    AssertEqual(true, (bool)wouldDelete.Values["WouldDelete"]!);
+    AssertEqual(false, (bool)wouldDelete.Values["WouldReturnToLibrary"]!);
+    AssertEqual("Delete", (string)wouldDelete.Values["ReplacementKind"]!);
+    AssertEqual(Zone.BattleArea, (Zone)wouldDelete.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)wouldDelete.Values["DestinationZone"]!);
+    AssertEqual(MoveReason.Trash, (MoveReason)wouldDelete.Values["MoveReason"]!);
+    AssertEqual(true, (bool)wouldDelete.Values["battle"]!);
+    AssertEqual(deleteTarget.TopCardId, (CardInstanceId)wouldDelete.Values["CardEffect"]!);
+    AssertEqual(deleteTarget.Id, (PermanentId)wouldDelete.Values["SourcePermanent"]!);
+
+    var libraryState = CreateMinimalBattleState();
+    libraryState.CardDefinitions["FX-R-LIBRARY"] = CardEffectTestFixture.NoEffectDefinition("FX-R-LIBRARY");
+    var libraryTarget = AddBattlePermanent(libraryState, 66247, 6667, "FX-R-LIBRARY", PlayerId.Player0, 0, enterTurn: 1);
+
+    var libraryRequest = primitives.QueuePermanentRemovalReplacementWindow(
+        libraryState,
+        libraryTarget.Id,
+        PermanentRemovalReplacementKind.ReturnToLibrary,
+        Zone.Deck);
+
+    AssertSequence(
+        new[] { EffectTiming.WhenReturntoLibraryAnyone, EffectTiming.WhenRemoveField },
+        libraryRequest.Timings.ToArray());
+    AssertTrue(libraryState.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(candidate => candidate.Id == libraryTarget.Id));
+    AssertEqual(Zone.BattleArea, libraryState.Cards[libraryTarget.TopCardId].CurrentZone);
+    AssertEqual(2, libraryState.RuntimeRules.PendingRuleEvents.Count);
+    AssertEqual(EffectTiming.WhenReturntoLibraryAnyone, libraryState.RuntimeRules.PendingRuleEvents[0].Timing);
+    AssertEqual(EffectTiming.WhenRemoveField, libraryState.RuntimeRules.PendingRuleEvents[1].Timing);
+    AssertEqual(Zone.Deck, (Zone)libraryState.RuntimeRules.PendingRuleEvents[0].Values["DestinationZone"]!);
+    AssertEqual(true, (bool)libraryState.RuntimeRules.PendingRuleEvents[0].Values["WouldReturnToLibrary"]!);
+    AssertEqual("ReturnToLibrary", (string)libraryState.RuntimeRules.PendingRuleEvents[0].Values["ReplacementKind"]!);
+}
+
+static void Fnd003RDigivolutionSourceDiscardReplacementWindowQueuesBeforeMutation()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-R-SOURCE-HOST"] = CardEffectTestFixture.NoEffectDefinition("FX-R-SOURCE-HOST");
+    state.CardDefinitions["FX-R-SOURCE-CARD"] = CardEffectTestFixture.NoEffectDefinition("FX-R-SOURCE-CARD");
+    var host = AddBattlePermanent(state, 66248, 6668, "FX-R-SOURCE-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var source = AddEvolutionSource(state, 66249, "FX-R-SOURCE-CARD", PlayerId.Player0, host.Id);
+
+    var request = new Tier1PrimitiveService().QueueDigivolutionCardDiscardReplacementWindow(
+        state,
+        host.Id,
+        new[] { source },
+        sourceCard: host.TopCardId,
+        sourcePermanent: host.Id);
+
+    AssertEqual(host.Id, request.Permanent);
+    AssertSequence(new[] { source }, request.DiscardedCards.ToArray());
+    AssertSequence(new[] { EffectTiming.WhenWouldDigivolutionCardDiscarded }, request.Timings.ToArray());
+    AssertTrue(host.SourceCardIds.Contains(source));
+    AssertEqual(Zone.EvolutionSources, state.Cards[source].CurrentZone);
+    AssertFalse(state.GetPlayer(PlayerId.Player0).Trash.Contains(source));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.WhenWouldDigivolutionCardDiscarded, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player0, ruleEvent.Player);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["TargetPermanent"]!);
+    AssertSequence(new[] { source }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["DiscardedCards"]!).ToArray());
+    AssertSequence(new[] { source }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(true, (bool)ruleEvent.Values["WouldDiscardDigivolutionCards"]!);
+    AssertEqual(Zone.EvolutionSources, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(host.TopCardId, (CardInstanceId)ruleEvent.Values["CardEffect"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["SourcePermanent"]!);
+}
+
+static void Fnd003RUnsuspendReplacementWindowQueuesBeforeMutation()
+{
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-R-UNTAP"] = CardEffectTestFixture.NoEffectDefinition("FX-R-UNTAP");
+    var suspended = AddBattlePermanent(state, 66252, 6672, "FX-R-UNTAP", PlayerId.Player1, 0, enterTurn: 1, isSuspended: true);
+    var idle = AddBattlePermanent(state, 66253, 6673, "FX-R-UNTAP", PlayerId.Player1, 1, enterTurn: 1);
+    var primitives = new Tier1PrimitiveService();
+
+    var request = primitives.QueueUnsuspendReplacementWindow(state, suspended.Id);
+
+    AssertTrue(suspended.IsSuspended);
+    AssertEqual(suspended.Id, request!.Permanent);
+    AssertSequence(new[] { EffectTiming.WhenUntapAnyone }, request.Timings.ToArray());
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.WhenUntapAnyone, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player1, ruleEvent.Player);
+    AssertEqual(suspended.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(suspended.Id, (PermanentId)ruleEvent.Values["UnsuspendedPermanent"]!);
+    AssertSequence(new[] { suspended.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { suspended.TopCardId }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(true, (bool)ruleEvent.Values["WouldUnsuspend"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["DestinationZone"]!);
+
+    AssertEqual<UnsuspendReplacementWindowRequest?>(null, primitives.QueueUnsuspendReplacementWindow(state, idle.Id));
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+}
+
+static void Fnd003IOnMoveQueuesBattleAreaPermanentMoveEvent()
+{
+    var onMoveProbe = new PayloadProbeCardScript("FX-ON-MOVE-PROBE", "FX_OnMoveProbe", EffectTiming.OnMove);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onMoveProbe,
+        new NoEffectCardScript("FX-MOVE-TARGET", notes: "Test-only breeding move target.")));
+    var state = CreateMinimalBattleState();
+    state.Phase = Phase.Breeding;
+    state.CardDefinitions["FX-ON-MOVE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-MOVE-PROBE", "FX_OnMoveProbe");
+    state.CardDefinitions["FX-MOVE-TARGET"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-MOVE-TARGET");
+    AddBattlePermanent(state, 66250, 6670, "FX-ON-MOVE-PROBE", PlayerId.Player0, 0, enterTurn: 1);
+    var target = AddBattlePermanent(state, 66251, 6671, "FX-MOVE-TARGET", PlayerId.Player0, 1, enterTurn: -1, isBreeding: true);
+
+    var moved = services.MoveFromBreedingService.Move(state, PlayerId.Player0, target.Id, 2);
+
+    AssertEqual(target.Id, moved.Id);
+    AssertFalse(target.IsBreedingArea);
+    AssertEqual(2, target.FrameIndex);
+    AssertEqual(Zone.BattleArea, state.Cards[target.TopCardId].CurrentZone);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnMove, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player0, ruleEvent.Player);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)ruleEvent.Values["MovedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)ruleEvent.Values["MovedPermanents"]!).ToArray());
+    AssertEqual(PlayerId.Player0, (PlayerId)ruleEvent.Values["MovedController"]!);
+    AssertEqual(target.TopCardId, (CardInstanceId)ruleEvent.Values["MovedTopCard"]!);
+    AssertSequence(new[] { target.TopCardId }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(Zone.BreedingArea, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(Zone.BreedingArea, (Zone)ruleEvent.Values["OldZone"]!);
+    AssertEqual(Zone.BattleArea, (Zone)ruleEvent.Values["NewZone"]!);
+    AssertEqual(MoveReason.MoveFromBreeding, (MoveReason)ruleEvent.Values["MoveReason"]!);
+    AssertEqual(true, (bool)ruleEvent.Values["BattleAreaSurvived"]!);
+
+    var autoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(autoProcess.HasPendingSelection);
+    AssertEqual(1, onMoveProbe.Observed.Count);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var observation = onMoveProbe.Observed[0];
+    AssertEqual(EffectTiming.OnMove, observation.Timing);
+    AssertEqual(target.Id, (PermanentId)observation.Values["Permanent"]!);
+    AssertEqual(target.Id, (PermanentId)observation.Values["MovedPermanent"]!);
+    AssertSequence(new[] { target.Id }, ((IEnumerable<PermanentId>)observation.Values["Permanents"]!).ToArray());
+    AssertSequence(new[] { target.TopCardId }, PayloadCards(observation, "CardSources"));
+
+    services.PrimitiveService.MovePermanentWithEvents(
+        state,
+        new PermanentZoneMoveCommand(target.Id, Zone.BattleArea, Zone.BreedingArea, MoveReason.Effect));
+
+    AssertTrue(target.IsBreedingArea);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+}
+
+static void Fnd003JOnAddDigivolutionCardsQueuesSourceAddEvent()
+{
+    var onAddProbe = new PayloadProbeCardScript(
+        "FX-ON-ADD-SOURCE-PROBE",
+        "FX_OnAddSourceProbe",
+        EffectTiming.OnAddDigivolutionCards);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onAddProbe,
+        new NoEffectCardScript("FX-ADD-SOURCE-HOST", notes: "Test-only evolution source host."),
+        new NoEffectCardScript("FX-ADD-SOURCE-CARD", notes: "Test-only card added as evolution source.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-ON-ADD-SOURCE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-ON-ADD-SOURCE-PROBE", "FX_OnAddSourceProbe");
+    state.CardDefinitions["FX-ADD-SOURCE-HOST"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-ADD-SOURCE-HOST");
+    state.CardDefinitions["FX-ADD-SOURCE-CARD"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-ADD-SOURCE-CARD");
+
+    var sourcePermanent = AddBattlePermanent(state, 66260, 6680, "FX-ON-ADD-SOURCE-PROBE", PlayerId.Player0, 0, enterTurn: 1);
+    var host = AddBattlePermanent(state, 66261, 6681, "FX-ADD-SOURCE-HOST", PlayerId.Player0, 1, enterTurn: 1);
+    var added = AddCardToZone(state, 66262, "FX-ADD-SOURCE-CARD", PlayerId.Player0, Zone.Hand);
+
+    var moves = services.PrimitiveService.AddDigivolutionCardsWithEvents(
+        state,
+        host.Id,
+        new[]
+        {
+            new MoveCardCommand(
+                added,
+                Zone.Hand,
+                Zone.EvolutionSources,
+                MoveReason.Effect,
+                DestinationPermanent: host.Id,
+                ToTop: false),
+        },
+        sourceCard: sourcePermanent.TopCardId,
+        sourcePermanent: sourcePermanent.Id);
+
+    AssertEqual(1, moves.Count);
+    AssertSequence(new[] { added }, host.SourceCardIds);
+    AssertEqual(Zone.EvolutionSources, state.Cards[added].CurrentZone);
+    AssertEqual<PermanentId?>(host.Id, state.Cards[added].PermanentId);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnAddDigivolutionCards, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player0, ruleEvent.Player);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["DestinationPermanent"]!);
+    AssertEqual(sourcePermanent.TopCardId, (CardInstanceId)ruleEvent.Values["CardEffect"]!);
+    AssertEqual(sourcePermanent.TopCardId, (CardInstanceId)ruleEvent.Values["SourceCard"]!);
+    AssertEqual(sourcePermanent.Id, (PermanentId)ruleEvent.Values["SourcePermanent"]!);
+    AssertSequence(new[] { added }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertSequence(new[] { added }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["AddedDigivolutionCards"]!).ToArray());
+    AssertEqual(added, (CardInstanceId)ruleEvent.Values["AddedDigivolutionCard"]!);
+    AssertEqual(false, (bool)ruleEvent.Values["isFromSameDigimon"]!);
+    AssertEqual(false, (bool)ruleEvent.Values["isFromDigimon"]!);
+    AssertEqual(Zone.Hand, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.EvolutionSources, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertSequence(new[] { Zone.Hand }, ((IEnumerable<Zone>)ruleEvent.Values["SourceZones"]!).ToArray());
+    AssertEqual(MoveReason.Effect, (MoveReason)ruleEvent.Values["MoveReason"]!);
+    AssertEqual(false, (bool)ruleEvent.Values["ToTop"]!);
+    AssertEqual(true, (bool)ruleEvent.Values["FaceUp"]!);
+
+    var autoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(autoProcess.HasPendingSelection);
+    AssertEqual(1, onAddProbe.Observed.Count);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var observation = onAddProbe.Observed[0];
+    AssertEqual(EffectTiming.OnAddDigivolutionCards, observation.Timing);
+    AssertEqual(host.Id, (PermanentId)observation.Values["Permanent"]!);
+    AssertSequence(new[] { added }, PayloadCards(observation, "CardSources"));
+    AssertEqual(false, (bool)observation.Values["isFromSameDigimon"]!);
+    AssertEqual(false, (bool)observation.Values["isFromDigimon"]!);
+
+    var skipped = AddCardToZone(state, 66263, "FX-ADD-SOURCE-CARD", PlayerId.Player0, Zone.Hand);
+    services.PrimitiveService.AddDigivolutionCardsWithEvents(
+        state,
+        host.Id,
+        new[]
+        {
+            new MoveCardCommand(
+                skipped,
+                Zone.Hand,
+                Zone.EvolutionSources,
+                MoveReason.Effect,
+                DestinationPermanent: host.Id,
+                ToTop: false),
+        },
+        sourceCard: sourcePermanent.TopCardId,
+        sourcePermanent: sourcePermanent.Id,
+        skipEffectAndActivateSkill: true);
+    AssertSequence(new[] { added, skipped }, host.SourceCardIds);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var linked = AddLinkedCard(state, 66264, "FX-ADD-SOURCE-CARD", PlayerId.Player0, host.Id);
+    services.PrimitiveService.AddDigivolutionCardsWithEvents(
+        state,
+        host.Id,
+        new[]
+        {
+            new MoveCardCommand(
+                linked,
+                Zone.LinkedCards,
+                Zone.EvolutionSources,
+                MoveReason.Link,
+                SourcePermanent: host.Id,
+                DestinationPermanent: host.Id,
+                ToTop: true),
+        },
+        sourceCard: sourcePermanent.TopCardId,
+        sourcePermanent: sourcePermanent.Id);
+
+    var linkedEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(true, (bool)linkedEvent.Values["isFromSameDigimon"]!);
+    AssertEqual(false, (bool)linkedEvent.Values["isFromDigimon"]!);
+    AssertEqual(Zone.LinkedCards, (Zone)linkedEvent.Values["SourceZone"]!);
+    AssertEqual(MoveReason.Link, (MoveReason)linkedEvent.Values["MoveReason"]!);
+    AssertEqual(true, (bool)linkedEvent.Values["ToTop"]!);
+    AssertSequence(new[] { linked, added, skipped }, host.SourceCardIds);
+    AssertFalse(host.LinkedCards.Contains(linked));
+    AssertEqual(Zone.EvolutionSources, state.Cards[linked].CurrentZone);
+
+    var linkedProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(linkedProcess.HasPendingSelection);
+    AssertEqual(2, onAddProbe.Observed.Count);
+    AssertEqual(true, (bool)onAddProbe.Observed[1].Values["isFromSameDigimon"]!);
+    AssertSequence(new[] { linked }, PayloadCards(onAddProbe.Observed[1], "CardSources"));
+}
+
+static void Fnd003KOnDigivolutionCardDiscardedQueuesSourceTrashEvent()
+{
+    var discardedSourceProbe = new PayloadProbeCardScript(
+        "FX-DISCARDED-SOURCE-PROBE",
+        "FX_DiscardedSourceProbe",
+        EffectTiming.OnDigivolutionCardDiscarded);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        discardedSourceProbe,
+        new NoEffectCardScript("FX-SOURCE-TRASH-CAUSE", notes: "Test-only source trash effect cause."),
+        new NoEffectCardScript("FX-SOURCE-TRASH-HOST", notes: "Test-only source trash host."),
+        new NoEffectCardScript("FX-SOURCE-TRASH-FILLER", notes: "Test-only remaining source.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-DISCARDED-SOURCE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-DISCARDED-SOURCE-PROBE", "FX_DiscardedSourceProbe");
+    state.CardDefinitions["FX-SOURCE-TRASH-CAUSE"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SOURCE-TRASH-CAUSE");
+    state.CardDefinitions["FX-SOURCE-TRASH-HOST"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SOURCE-TRASH-HOST");
+    state.CardDefinitions["FX-SOURCE-TRASH-FILLER"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-SOURCE-TRASH-FILLER");
+
+    var cause = AddBattlePermanent(state, 66270, 6690, "FX-SOURCE-TRASH-CAUSE", PlayerId.Player0, 0, enterTurn: 1);
+    var host = AddBattlePermanent(state, 66271, 6691, "FX-SOURCE-TRASH-HOST", PlayerId.Player0, 1, enterTurn: 1);
+    var filler = AddEvolutionSource(state, 66272, "FX-SOURCE-TRASH-FILLER", PlayerId.Player0, host.Id);
+    var discarded = AddEvolutionSource(state, 66273, "FX-DISCARDED-SOURCE-PROBE", PlayerId.Player0, host.Id);
+
+    var moves = services.PrimitiveService.TrashDigivolutionCardsWithEvents(
+        state,
+        host.Id,
+        new[] { discarded },
+        sourceCard: cause.TopCardId,
+        sourcePermanent: cause.Id);
+
+    AssertEqual(1, moves.Count);
+    AssertSequence(new[] { filler }, host.SourceCardIds);
+    AssertEqual(Zone.Trash, state.Cards[discarded].CurrentZone);
+    AssertTrue(state.GetPlayer(PlayerId.Player0).Trash.Contains(discarded));
+    AssertEqual<PermanentId?>(null, state.Cards[discarded].PermanentId);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var ruleEvent = state.RuntimeRules.PendingRuleEvents[0];
+    AssertEqual(EffectTiming.OnDigivolutionCardDiscarded, ruleEvent.Timing);
+    AssertEqual(PlayerId.Player0, ruleEvent.Player);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["Permanent"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["TargetPermanent"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["DiscardedFromPermanent"]!);
+    AssertEqual(host.TopCardId, (CardInstanceId)ruleEvent.Values["DiscardedFromTopCard"]!);
+    AssertEqual(cause.TopCardId, (CardInstanceId)ruleEvent.Values["CardEffect"]!);
+    AssertEqual(cause.TopCardId, (CardInstanceId)ruleEvent.Values["SourceCard"]!);
+    AssertEqual(cause.Id, (PermanentId)ruleEvent.Values["SourcePermanent"]!);
+    AssertSequence(new[] { discarded }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["DiscardedCards"]!).ToArray());
+    AssertSequence(new[] { discarded }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["CardSources"]!).ToArray());
+    AssertEqual(discarded, (CardInstanceId)ruleEvent.Values["DiscardedCard"]!);
+    AssertEqual(Zone.EvolutionSources, (Zone)ruleEvent.Values["SourceZone"]!);
+    AssertEqual(Zone.Trash, (Zone)ruleEvent.Values["DestinationZone"]!);
+    AssertEqual(MoveReason.Effect, (MoveReason)ruleEvent.Values["MoveReason"]!);
+    AssertSequence(new[] { discarded }, ((IEnumerable<CardInstanceId>)ruleEvent.Values["TriggeredSourceCards"]!).ToArray());
+    AssertEqual(Zone.Trash, (Zone)ruleEvent.Values["TriggeredSourceZone"]!);
+    AssertEqual(Zone.EvolutionSources, (Zone)ruleEvent.Values["TriggeredSourceOriginalZone"]!);
+    AssertEqual(host.Id, (PermanentId)ruleEvent.Values["TriggeredSourceOriginalPermanent"]!);
+
+    var autoProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(autoProcess.HasPendingSelection);
+    AssertEqual(1, discardedSourceProbe.Observed.Count);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+
+    var observation = discardedSourceProbe.Observed[0];
+    AssertEqual(EffectTiming.OnDigivolutionCardDiscarded, observation.Timing);
+    AssertEqual(discarded, observation.SourceCard!.Value);
+    AssertEqual<PermanentId?>(null, observation.SourcePermanent);
+    AssertEqual(host.Id, (PermanentId)observation.Values["Permanent"]!);
+    AssertSequence(new[] { discarded }, PayloadCards(observation, "DiscardedCards"));
+    AssertEqual(cause.TopCardId, (CardInstanceId)observation.Values["CardEffect"]!);
+
+    var bottomSource = AddEvolutionSource(state, 66274, "FX-DISCARDED-SOURCE-PROBE", PlayerId.Player0, host.Id);
+    services.PrimitiveService.TrashBottomDigivolutionSources(
+        state,
+        host.Id,
+        count: 1,
+        sourceCard: cause.TopCardId,
+        sourcePermanent: cause.Id);
+
+    AssertSequence(new[] { filler }, host.SourceCardIds);
+    AssertEqual(Zone.Trash, state.Cards[bottomSource].CurrentZone);
+    AssertEqual(1, state.RuntimeRules.PendingRuleEvents.Count);
+    AssertSequence(
+        new[] { bottomSource },
+        ((IEnumerable<CardInstanceId>)state.RuntimeRules.PendingRuleEvents[0].Values["DiscardedCards"]!).ToArray());
+
+    var bottomProcess = services.TriggerPipelineService.RunAutoProcess(state);
+    AssertFalse(bottomProcess.HasPendingSelection);
+    AssertEqual(2, discardedSourceProbe.Observed.Count);
+    AssertSequence(new[] { bottomSource }, PayloadCards(discardedSourceProbe.Observed[1], "DiscardedCards"));
+
+    var skippedSource = AddEvolutionSource(state, 66275, "FX-DISCARDED-SOURCE-PROBE", PlayerId.Player0, host.Id);
+    services.PrimitiveService.TrashDigivolutionCardsWithEvents(
+        state,
+        host.Id,
+        new[] { skippedSource },
+        skipEffectAndActivateSkill: true);
+    AssertEqual(Zone.Trash, state.Cards[skippedSource].CurrentZone);
+    AssertEqual(0, state.RuntimeRules.PendingRuleEvents.Count);
+}
+
+static void Fnd003LOnEndBattleQueuesBattleEndEvent()
+{
+    var onEndBattleProbe = new PayloadProbeCardScript(
+        "FX-END-BATTLE-PROBE",
+        "FX_EndBattleProbe",
+        EffectTiming.OnEndBattle);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        onEndBattleProbe,
+        new NoEffectCardScript("BT1-STRONG", notes: "Test-only end-battle attacker."),
+        new NoEffectCardScript("BT1-WEAK", notes: "Test-only end-battle defender.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-END-BATTLE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-END-BATTLE-PROBE", "FX_EndBattleProbe");
+    var attacker = AddBattlePermanent(state, 66280, 6700, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 66281, 6701, "BT1-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var probePermanent = AddBattlePermanent(state, 66282, 6702, "FX-END-BATTLE-PROBE", PlayerId.Player0, 1, enterTurn: 1);
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilBattleEnd,
+        PlayerId.Player0,
+        stableId: "test:on-end-battle:until-battle");
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilAttackEnd,
+        PlayerId.Player0,
+        stableId: "test:on-end-battle:until-attack");
+    var session = services.CreateSession(state);
+
+    var result = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertFalse(result.IsPaused);
+    AssertEqual(1, onEndBattleProbe.Observed.Count);
+    AssertFalse(state.TemporaryModifiers.Any(modifier =>
+        modifier.DurationScope is DurationScope.UntilBattleEnd or DurationScope.UntilAttackEnd));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+
+    var observation = onEndBattleProbe.Observed[0];
+    AssertEqual(EffectTiming.OnEndBattle, observation.Timing);
+    AssertEqual(probePermanent.Id, observation.SourcePermanent!.Value);
+    AssertEqual(attacker.Id, (PermanentId)observation.Values["Attacker"]!);
+    AssertEqual(defender.Id, (PermanentId)observation.Values["Defender"]!);
+    AssertSequence(
+        new[] { attacker.Id, defender.Id },
+        ((IEnumerable<PermanentId>)observation.Values["BattlePermanents"]!).ToArray());
+    AssertSequence(new[] { attacker.Id }, ((IEnumerable<PermanentId>)observation.Values["WinnerPermanents"]!).ToArray());
+    AssertSequence(new[] { defender.Id }, ((IEnumerable<PermanentId>)observation.Values["LoserPermanents"]!).ToArray());
+    AssertSequence(new[] { defender.Id }, ((IEnumerable<PermanentId>)observation.Values["DestroyedPermanents"]!).ToArray());
+    AssertSequence(new[] { attacker.TopCardId }, PayloadCards(observation, "WinnerTopCards"));
+    AssertSequence(new[] { defender.TopCardId }, PayloadCards(observation, "LoserTopCards"));
+    AssertEqual(false, (bool)observation.Values["WasTie"]!);
+    AssertEqual<object?>(null, observation.Values["LoserCard"]);
+    AssertTrue(observation.Values["Battle"] is BattleResolutionResult);
+    AssertTrue(observation.Values["battle"] is BattleResolutionResult);
+}
+
+static void Fnd003LOnEndBattleSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-END-BATTLE-SELECT",
+            "FX_EndBattleSelect",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnEndBattle),
+        new NoEffectCardScript("BT1-STRONG", notes: "Test-only end-battle selection attacker."),
+        new NoEffectCardScript("BT1-WEAK", notes: "Test-only end-battle selection defender."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only end-battle selection target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-END-BATTLE-SELECT"] =
+        CardEffectTestFixture.EffectDefinition("FX-END-BATTLE-SELECT", "FX_EndBattleSelect");
+    var attacker = AddBattlePermanent(state, 66284, 6704, "BT1-STRONG", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 66285, 6705, "BT1-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66286, 6706, "FX-END-BATTLE-SELECT", PlayerId.Player0, 1, enterTurn: 1);
+    var target = AddBattlePermanent(state, 66287, 6707, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilBattleEnd,
+        PlayerId.Player0,
+        stableId: "test:on-end-battle-selection:until-battle");
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertTrue(state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilBattleEnd));
+    AssertEqual("test-selection:FX-END-BATTLE-SELECT", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-END-BATTLE-SELECT:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        "test-selection:FX-END-BATTLE-SELECT",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnEndBattle, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertFalse(state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilBattleEnd));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+}
+
+static void Fnd003MOnDetermineDoSecurityCheckQueuesFirstActiveBattleDecision()
+{
+    var determineProbe = new PayloadProbeCardScript(
+        "FX-DETERMINE-PROBE",
+        "FX_DetermineProbe",
+        EffectTiming.OnDetermineDoSecurityCheck);
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        determineProbe,
+        new TimingMemoryCardScript(
+            "FX-DETERMINE-TAIL",
+            "FX_DetermineTail",
+            EffectTiming.OnDetermineDoSecurityCheck,
+            amount: 9),
+        new NoEffectCardScript("KW-PIERCING", notes: "Test-only determine security attacker."),
+        new NoEffectCardScript("KW-WEAK", notes: "Test-only determine security defender."),
+        new NoEffectCardScript("BT1-OPTION", notes: "Test-only determine security stack filler.")));
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["FX-DETERMINE-PROBE"] =
+        CardEffectTestFixture.EffectDefinition("FX-DETERMINE-PROBE", "FX_DetermineProbe");
+    state.CardDefinitions["FX-DETERMINE-TAIL"] =
+        CardEffectTestFixture.EffectDefinition("FX-DETERMINE-TAIL", "FX_DetermineTail");
+    var attacker = AddBattlePermanent(state, 66290, 6710, "KW-PIERCING", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 66291, 6711, "KW-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    var probePermanent = AddBattlePermanent(state, 66292, 6712, "FX-DETERMINE-PROBE", PlayerId.Player0, 1, enterTurn: 1);
+    AddBattlePermanent(state, 66293, 6713, "FX-DETERMINE-TAIL", PlayerId.Player0, 2, enterTurn: 1);
+    var security = AddCardToZone(state, 66294, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+
+    var result = services.AttackService.Attack(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(result.SecurityCheck is not null);
+    AssertSequence(new[] { security }, result.SecurityCheck!.CheckedCards);
+    AssertEqual(1, determineProbe.Observed.Count);
+    AssertEqual(5, state.Memory);
+
+    var observation = determineProbe.Observed[0];
+    AssertEqual(EffectTiming.OnDetermineDoSecurityCheck, observation.Timing);
+    AssertEqual(probePermanent.Id, observation.SourcePermanent!.Value);
+    AssertEqual(attacker.Id, (PermanentId)observation.Values["Attacker"]!);
+    AssertEqual(defender.Id, (PermanentId)observation.Values["Defender"]!);
+    AssertSequence(new[] { attacker.Id }, ((IEnumerable<PermanentId>)observation.Values["WinnerPermanents"]!).ToArray());
+    AssertSequence(new[] { defender.Id }, ((IEnumerable<PermanentId>)observation.Values["LoserPermanents"]!).ToArray());
+    AssertSequence(new[] { defender.Id }, ((IEnumerable<PermanentId>)observation.Values["DestroyedPermanents"]!).ToArray());
+    AssertSequence(new[] { attacker.TopCardId }, PayloadCards(observation, "WinnerTopCards"));
+    AssertSequence(new[] { defender.TopCardId }, PayloadCards(observation, "LoserTopCards"));
+    AssertEqual(false, (bool)observation.Values["WasTie"]!);
+    AssertEqual(1, (int)observation.Values["SecurityCheckCount"]!);
+    AssertEqual(0, (int)observation.Values["ChecksCompleted"]!);
+    AssertEqual(true, (bool)observation.Values["DoSecurityCheck"]!);
+    AssertEqual(true, (bool)observation.Values["CanDoSecurityCheck"]!);
+    AssertEqual(true, (bool)observation.Values["WillDoSecurityCheck"]!);
+    AssertEqual(true, (bool)observation.Values["PiercingSecurityCheck"]!);
+    AssertTrue(observation.Values["Battle"] is BattleResolutionResult);
+    AssertTrue(observation.Values["battle"] is BattleResolutionResult);
+}
+
+static void Fnd003MOnDetermineDoSecurityCheckSeesBattleDurationsBeforeCleanup()
+{
+    var records = new List<string>();
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new DurationScopeProbeCardScript(
+            "FX-DETERMINE-DURATION",
+            "FX_DetermineDuration",
+            EffectTiming.OnDetermineDoSecurityCheck,
+            records),
+        new NoEffectCardScript("KW-PIERCING", notes: "Test-only determine duration attacker."),
+        new NoEffectCardScript("KW-WEAK", notes: "Test-only determine duration defender."),
+        new NoEffectCardScript("BT1-OPTION", notes: "Test-only determine duration stack filler.")));
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["FX-DETERMINE-DURATION"] =
+        CardEffectTestFixture.EffectDefinition("FX-DETERMINE-DURATION", "FX_DetermineDuration");
+    var attacker = AddBattlePermanent(state, 66296, 6716, "KW-PIERCING", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 66297, 6717, "KW-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66298, 6718, "FX-DETERMINE-DURATION", PlayerId.Player0, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 66299, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilBattleEnd,
+        PlayerId.Player0,
+        stableId: "test:on-determine:until-battle");
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilAttackEnd,
+        PlayerId.Player0,
+        stableId: "test:on-determine:until-attack");
+
+    var result = services.AttackService.Attack(state, new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertSequence(new[] { "battle:True;attack:True" }, records);
+    AssertFalse(state.TemporaryModifiers.Any(modifier =>
+        modifier.DurationScope is DurationScope.UntilBattleEnd or DurationScope.UntilAttackEnd));
+    AssertTrue(result.SecurityCheck is not null);
+    AssertSequence(new[] { security }, result.SecurityCheck!.CheckedCards);
+}
+
+static void Fnd003MOnDetermineDoSecurityCheckSelectionPauseResume()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new SelectionPrimitiveCardScript(
+            "FX-DETERMINE-SELECT",
+            "FX_DetermineSelect",
+            SelectionPrimitiveMode.Destroy,
+            PlayerId.Player1,
+            timing: EffectTiming.OnDetermineDoSecurityCheck),
+        new NoEffectCardScript("KW-PIERCING", notes: "Test-only determine selection attacker."),
+        new NoEffectCardScript("KW-WEAK", notes: "Test-only determine selection defender."),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only determine selection target."),
+        new NoEffectCardScript("BT1-OPTION", notes: "Test-only determine selection security filler.")));
+    var state = CreateBattleKeywordState();
+    state.CardDefinitions["FX-DETERMINE-SELECT"] =
+        CardEffectTestFixture.EffectDefinition("FX-DETERMINE-SELECT", "FX_DetermineSelect");
+    var attacker = AddBattlePermanent(state, 66301, 6721, "KW-PIERCING", PlayerId.Player0, 0, enterTurn: 1);
+    var defender = AddBattlePermanent(state, 66302, 6722, "KW-WEAK", PlayerId.Player1, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66303, 6723, "FX-DETERMINE-SELECT", PlayerId.Player0, 1, enterTurn: 1);
+    var target = AddBattlePermanent(state, 66304, 6724, "BT1-ROOKIE", PlayerId.Player1, 1, enterTurn: 1);
+    var security = AddCardToZone(state, 66305, "BT1-OPTION", PlayerId.Player1, Zone.Security, isFaceUp: false);
+    services.PrimitiveService.AddTemporaryDPModifier(
+        state,
+        attacker.Id,
+        1000,
+        DurationScope.UntilBattleEnd,
+        PlayerId.Player0,
+        stableId: "test:on-determine-selection:until-battle");
+    var session = services.CreateSession(state);
+
+    var paused = session.Step(new AttackAction(PlayerId.Player0, attacker.Id, defender.Id));
+
+    AssertTrue(paused.IsPaused);
+    AssertFalse(paused.RulesProcessed);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(defender.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).BattleAreaPermanents.Any(permanent => permanent.Id == target.Id));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Security.Contains(security));
+    AssertTrue(state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilBattleEnd));
+    AssertEqual("test-selection:FX-DETERMINE-SELECT", paused.PendingDecisionPoint!.SelectionRequest!.Id);
+    AssertEqual("FX-DETERMINE-SELECT:selection:Destroy", paused.PendingStableContinuationId);
+
+    var completed = ResumeWithDecision(session, paused, SelectionResult.ForTargets(
+        "test-selection:FX-DETERMINE-SELECT",
+        new[] { PermanentSelectionTarget(target) }));
+
+    AssertFalse(completed.IsPaused);
+    AssertTrue(completed.RulesProcessed);
+    AssertEqual(EffectTiming.OnDetermineDoSecurityCheck, completed.CompletedTiming);
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(target.TopCardId));
+    AssertTrue(state.GetPlayer(PlayerId.Player1).Trash.Contains(security));
+    AssertFalse(state.TemporaryModifiers.Any(modifier => modifier.DurationScope == DurationScope.UntilBattleEnd));
+    AssertTrue(state.GetPlayer(PlayerId.Player0).BattleAreaPermanents.Any(permanent => permanent.Id == attacker.Id));
+}
+
+static void Fnd003NBeforePayCostRunsBeforePlayAndOptionCostPayment()
+{
+    var playProbe = new PayloadProbeCardScript("FX-BEFORE-PLAY", "FX_BeforePlay", EffectTiming.BeforePayCost);
+    var playServices = CreateL0006ProbeServices(playProbe);
+    var playState = CreateMinimalBattleState();
+    playState.CardDefinitions["FX-BEFORE-PLAY"] =
+        CardEffectTestFixture.EffectDefinition("FX-BEFORE-PLAY", "FX_BeforePlay") with
+        {
+            PlayCost = 2,
+        };
+    var playCard = AddCardToZone(playState, 66310, "FX-BEFORE-PLAY", PlayerId.Player0, Zone.Hand);
+
+    var playResult = playServices.PlayCardService.PlayWithResult(
+        playState,
+        new PlayCardAction(PlayerId.Player0, playCard, 0));
+
+    AssertFalse(playResult.HasPendingSelection);
+    AssertEqual(3, playState.Memory);
+    AssertEqual(1, playProbe.Observed.Count);
+    AssertBeforePayCostPayload(
+        playProbe.Observed[0],
+        playCard,
+        expectedCost: 2,
+        expectedBaseCost: 2,
+        expectedMemoryBefore: 5,
+        expectedSourceZone: Zone.Hand,
+        expectedIsEvolution: false,
+        expectedPermanents: Array.Empty<PermanentId>());
+
+    var optionProbe = new PayloadProbeCardScript("FX-BEFORE-OPTION", "FX_BeforeOption", EffectTiming.BeforePayCost);
+    var optionServices = CreateL0006ProbeServices(optionProbe);
+    var optionState = CreateMinimalBattleState();
+    optionState.CardDefinitions["FX-BEFORE-OPTION"] =
+        CardEffectTestFixture.OptionEffectDefinition("FX-BEFORE-OPTION", "FX_BeforeOption", playCost: 1);
+    var optionCard = AddCardToZone(optionState, 66311, "FX-BEFORE-OPTION", PlayerId.Player0, Zone.Hand);
+
+    var optionResult = optionServices.PlayCardService.PlayWithResult(
+        optionState,
+        new PlayCardAction(PlayerId.Player0, optionCard, -1));
+
+    AssertFalse(optionResult.HasPendingSelection);
+    AssertEqual(4, optionState.Memory);
+    AssertTrue(optionState.GetPlayer(PlayerId.Player0).Trash.Contains(optionCard));
+    AssertEqual(1, optionProbe.Observed.Count);
+    AssertBeforePayCostPayload(
+        optionProbe.Observed[0],
+        optionCard,
+        expectedCost: 1,
+        expectedBaseCost: 1,
+        expectedMemoryBefore: 5,
+        expectedSourceZone: Zone.Hand,
+        expectedIsEvolution: false,
+        expectedPermanents: Array.Empty<PermanentId>());
+}
+
+static void Fnd003NBeforePayCostBackgroundEffectsRunBeforeCutIn()
+{
+    var services = BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript(
+            "FX-BEFORE-BACKGROUND",
+            "FX_BeforeBackground",
+            EffectTiming.BeforePayCost,
+            amount: 2,
+            isBackground: true),
+        new TimingMemoryCardScript(
+            "FX-BEFORE-CUTIN",
+            "FX_BeforeCutIn",
+            EffectTiming.BeforePayCost,
+            amount: 1,
+            canActivate: context => context.State.Memory == 7),
+        new NoEffectCardScript("FX-BEFORE-TARGET", notes: "Test-only before-pay target.")));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-BEFORE-BACKGROUND"] =
+        CardEffectTestFixture.EffectDefinition("FX-BEFORE-BACKGROUND", "FX_BeforeBackground");
+    state.CardDefinitions["FX-BEFORE-CUTIN"] =
+        CardEffectTestFixture.EffectDefinition("FX-BEFORE-CUTIN", "FX_BeforeCutIn");
+    state.CardDefinitions["FX-BEFORE-TARGET"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-BEFORE-TARGET") with
+        {
+            PlayCost = 2,
+        };
+    AddBattlePermanent(state, 66312, 6732, "FX-BEFORE-BACKGROUND", PlayerId.Player0, 0, enterTurn: 1);
+    AddBattlePermanent(state, 66313, 6733, "FX-BEFORE-CUTIN", PlayerId.Player0, 1, enterTurn: 1);
+    var card = AddCardToZone(state, 66314, "FX-BEFORE-TARGET", PlayerId.Player0, Zone.Hand);
+
+    var result = services.PlayCardService.PlayWithResult(
+        state,
+        new PlayCardAction(PlayerId.Player0, card, 2));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertEqual(6, state.Memory);
+}
+
+static void Fnd003NBeforePayCostRunsBeforeDigivolutionCostPayment()
+{
+    var digivolveProbe = new PayloadProbeCardScript("FX-BEFORE-EVO", "FX_BeforeEvo", EffectTiming.BeforePayCost);
+    var services = CreateL0006ProbeServices(
+        digivolveProbe,
+        new NoEffectCardScript("FX-BEFORE-EVO-HOST"),
+        new NoEffectCardScript("BT1-OPTION"));
+    var state = CreateMinimalBattleState();
+    state.CardDefinitions["FX-BEFORE-EVO-HOST"] =
+        CardEffectTestFixture.NoEffectDefinition("FX-BEFORE-EVO-HOST");
+    state.CardDefinitions["FX-BEFORE-EVO"] =
+        CardEffectTestFixture.EffectDefinition("FX-BEFORE-EVO", "FX_BeforeEvo") with
+        {
+            Level = 4,
+            PlayCost = 5,
+            EvoCosts = new[] { new EvoCostDefinition(CardColor.Red, 3, 2) },
+        };
+    var target = AddBattlePermanent(state, 66315, 6735, "FX-BEFORE-EVO-HOST", PlayerId.Player0, 0, enterTurn: 1);
+    var digivolveCard = AddCardToZone(state, 66316, "FX-BEFORE-EVO", PlayerId.Player0, Zone.Hand);
+    AddCardToZone(state, 66317, "BT1-OPTION", PlayerId.Player0, Zone.Deck);
+
+    var result = services.DigivolveService.DigivolveWithResult(
+        state,
+        new DigivolveAction(PlayerId.Player0, digivolveCard, target.Id));
+
+    AssertFalse(result.HasPendingSelection);
+    AssertEqual(3, state.Memory);
+    AssertEqual(1, digivolveProbe.Observed.Count);
+    AssertBeforePayCostPayload(
+        digivolveProbe.Observed[0],
+        digivolveCard,
+        expectedCost: 2,
+        expectedBaseCost: 2,
+        expectedMemoryBefore: 5,
+        expectedSourceZone: Zone.Hand,
+        expectedIsEvolution: true,
+        expectedPermanents: new[] { target.Id });
+}
+
+static void AssertBeforePayCostPayload(
+    ObservedEffectPayload observation,
+    CardInstanceId expectedCard,
+    int expectedCost,
+    int expectedBaseCost,
+    int expectedMemoryBefore,
+    Zone expectedSourceZone,
+    bool expectedIsEvolution,
+    IReadOnlyList<PermanentId> expectedPermanents)
+{
+    AssertEqual(EffectTiming.BeforePayCost, observation.Timing);
+    AssertEqual(expectedCard, observation.SourceCard!.Value);
+    AssertEqual(true, (bool)observation.Values["PayCost"]!);
+    AssertEqual(expectedCard, (CardInstanceId)observation.Values["Card"]!);
+    AssertSequence(new[] { expectedCard }, PayloadCards(observation, "Cards").ToArray());
+    AssertSequence(new[] { expectedCard }, PayloadCards(observation, "CardSources").ToArray());
+    AssertEqual(expectedCost, (int)observation.Values["Cost"]!);
+    AssertEqual(expectedBaseCost, (int)observation.Values["BaseCost"]!);
+    AssertEqual(expectedMemoryBefore, (int)observation.Values["MemoryBeforeCost"]!);
+    AssertEqual(Zone.Hand, (Zone)observation.Values["Root"]!);
+    AssertEqual(expectedSourceZone, (Zone)observation.Values["SourceZone"]!);
+    AssertEqual(expectedIsEvolution, (bool)observation.Values["isEvolution"]!);
+    AssertEqual(false, (bool)observation.Values["isJogress"]!);
+    AssertSequence(expectedPermanents.ToArray(), ((IEnumerable<PermanentId>)observation.Values["Permanents"]!).ToArray());
+    AssertTrue(((string)observation.Values["CostTransactionId"]!).StartsWith("cost:", StringComparison.Ordinal));
+}
+
 static void ZoneEventsOnAddHandAndOnDrawDrainThroughAutoProcess()
 {
     var onAddHand = new PayloadProbeCardScript("FX-ADD-HAND", "FX_AddHand", EffectTiming.OnAddHand);
@@ -15441,7 +17236,8 @@ static void OptionLifecyclePendingSelectionKeepsExecuting()
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
-            PlayerId.Player1)));
+            PlayerId.Player1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only option selection target.")));
     var service = new PlayCardService(triggerPipelineService: pipeline);
 
     var result = service.PlayOptionFromHand(state, new PlayCardAction(PlayerId.Player0, option, -1));
@@ -15467,7 +17263,8 @@ static void OptionLifecycleSelectionCompletionTrashesOption()
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
-            PlayerId.Player1)));
+            PlayerId.Player1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only option selection target.")));
     var session = services.CreateSession(state);
     var pending = session.Step(new PlayCardAction(PlayerId.Player0, option, -1));
     var request = pending.PendingDecisionPoint!.SelectionRequest!;
@@ -15622,7 +17419,8 @@ static void RuntimeCompositionActionExecutorReturnsPendingOptionSelection()
             "FX-SELECT",
             "FX_Select",
             SelectionPrimitiveMode.Destroy,
-            PlayerId.Player1)));
+            PlayerId.Player1),
+        new NoEffectCardScript("BT1-ROOKIE", notes: "Test-only action executor option target.")));
     var executor = services.ActionExecutor;
 
     var result = executor.Execute(state, new PlayCardAction(PlayerId.Player0, option, -1));
@@ -22126,6 +23924,13 @@ static ICardDatabase CreateSt1ToSt3CardDatabase() =>
 
 static BattleEngineServices CreateTestNoEffectServices() =>
     BattleEngineServices.Create(new TestNoEffectCardScriptRegistry());
+
+static BattleEngineServices CreateDeclarationEffectServices() =>
+    BattleEngineServices.Create(CardEffectTestFixture.Registry(
+        new TimingMemoryCardScript("FX-DECLARE-FIELD", "FX_DeclareField", EffectTiming.OnDeclaration, amount: 1),
+        new TimingMemoryCardScript("FX-DECLARE-HAND", "FX_DeclareHand", EffectTiming.OnDeclaration, amount: 3),
+        new TimingMemoryCardScript("FX-DECLARE-TRASH", "FX_DeclareTrash", EffectTiming.OnDeclaration, amount: 5),
+        new TimingMemoryCardScript("FX-DECLARE-OPPONENT", "FX_DeclareOpponent", EffectTiming.OnDeclaration, amount: 7)));
 
 static RuleProcessor CreateTestRuleProcessor(
     IZoneMover? zoneMover = null,

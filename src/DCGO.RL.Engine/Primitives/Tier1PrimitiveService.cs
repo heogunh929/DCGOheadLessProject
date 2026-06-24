@@ -33,6 +33,42 @@ public sealed record TrashFromDeckResult(
     int RequestedCount,
     bool RequestedMoreThanAvailable);
 
+public enum PermanentRemovalReplacementKind
+{
+    Delete,
+    RemoveField,
+    ReturnToLibrary,
+}
+
+public sealed record PermanentRemovalReplacementWindowRequest(
+    PermanentId Permanent,
+    PlayerId Controller,
+    CardInstanceId TopCard,
+    IReadOnlyList<CardInstanceId> StackCards,
+    Zone SourceZone,
+    Zone DestinationZone,
+    MoveReason MoveReason,
+    PermanentRemovalReplacementKind Kind,
+    IReadOnlyList<EffectTiming> Timings);
+
+public sealed record DigivolutionCardDiscardReplacementWindowRequest(
+    PermanentId Permanent,
+    PlayerId Controller,
+    CardInstanceId TopCard,
+    IReadOnlyList<CardInstanceId> DiscardedCards,
+    Zone SourceZone,
+    Zone DestinationZone,
+    MoveReason MoveReason,
+    IReadOnlyList<EffectTiming> Timings);
+
+public sealed record UnsuspendReplacementWindowRequest(
+    PermanentId Permanent,
+    PlayerId Controller,
+    CardInstanceId TopCard,
+    Zone SourceZone,
+    Zone DestinationZone,
+    IReadOnlyList<EffectTiming> Timings);
+
 public sealed class Tier1PrimitiveService
 {
     private readonly IZoneMover _zoneMover;
@@ -85,6 +121,185 @@ public sealed class Tier1PrimitiveService
 
     public MoveCardResult MoveCard(GameState state, MoveCardCommand command) =>
         _zoneMover.MoveCard(state, command);
+
+    public IReadOnlyList<MoveCardResult> AddDigivolutionCardsWithEvents(
+        GameState state,
+        PermanentId permanentId,
+        IEnumerable<MoveCardCommand> commands,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        bool skipEffectAndActivateSkill = false,
+        GameTrace? trace = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        var commandArray = commands.ToArray();
+        if (commandArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        foreach (var command in commandArray)
+        {
+            if (command.DestinationZone != Zone.EvolutionSources)
+            {
+                throw new DomainException("AddDigivolutionCards primitive requires DestinationZone EvolutionSources.");
+            }
+
+            if (command.DestinationPermanent != permanentId)
+            {
+                throw new DomainException($"AddDigivolutionCards primitive requires destination permanent '{permanentId}'.");
+            }
+        }
+
+        var isFromSameDigimon = commandArray.Any(command => IsCardFromSameDigimon(state, command.Card, permanentId));
+        var isFromDigimon = commandArray.Any(command => IsCardFromBattleAreaDigimonWithSources(state, command.Card));
+        var results = new List<MoveCardResult>();
+        var addedCards = new List<CardInstanceId>();
+        foreach (var command in commandArray)
+        {
+            var before = trace is null ? null : state.Clone();
+            var result = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"add-digivolution-source:{permanentId.Value}:{command.Card.Value}", before!, state, command, result);
+            results.Add(result);
+            addedCards.Add(command.Card);
+        }
+
+        if (!skipEffectAndActivateSkill && addedCards.Count > 0)
+        {
+            QueueOnAddDigivolutionCardsEvent(
+                state,
+                permanent,
+                addedCards,
+                commandArray,
+                sourceCard,
+                sourcePermanent,
+                isFromSameDigimon,
+                isFromDigimon);
+        }
+
+        return results;
+    }
+
+    private static bool IsCardFromSameDigimon(GameState state, CardInstanceId card, PermanentId permanentId)
+    {
+        if (!state.Cards.TryGetValue(card, out var instance))
+        {
+            return false;
+        }
+
+        return instance.PermanentId == permanentId
+            && instance.CurrentZone is Zone.BattleArea or Zone.BreedingArea or Zone.EvolutionSources or Zone.LinkedCards;
+    }
+
+    private static bool IsCardFromBattleAreaDigimonWithSources(GameState state, CardInstanceId card)
+    {
+        if (!state.Cards.TryGetValue(card, out var instance)
+            || instance.CurrentZone != Zone.BattleArea
+            || instance.PermanentId is not { } permanentId)
+        {
+            return false;
+        }
+
+        var sourcePermanent = BattleRules.Permanent(state, permanentId);
+        return !sourcePermanent.IsBreedingArea && sourcePermanent.SourceCardIds.Count > 0;
+    }
+
+    private static void QueueOnAddDigivolutionCardsEvent(
+        GameState state,
+        PermanentState permanent,
+        IReadOnlyList<CardInstanceId> addedCards,
+        IReadOnlyList<MoveCardCommand> commands,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        bool isFromSameDigimon,
+        bool isFromDigimon)
+    {
+        var sourceZones = commands.Select(command => command.SourceZone).Distinct().ToArray();
+        var moveReasons = commands.Select(command => command.Reason).Distinct().ToArray();
+        var toTopValues = commands.Select(command => command.ToTop).Distinct().ToArray();
+        var faceUpValues = commands.Select(command => command.FaceUp ?? true).Distinct().ToArray();
+        var firstCard = addedCards[0];
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnAddDigivolutionCards,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                addedCards,
+                sourceZones.Length == 1 ? sourceZones[0] : Zone.None,
+                Zone.EvolutionSources,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanent.Id,
+                    ["DestinationPermanent"] = permanent.Id,
+                    ["CardSources"] = addedCards.ToArray(),
+                    ["AddedDigivolutionCards"] = addedCards.ToArray(),
+                    ["AddedDigivolutionCard"] = firstCard,
+                    ["isFromSameDigimon"] = isFromSameDigimon,
+                    ["isFromDigimon"] = isFromDigimon,
+                    ["SourceZones"] = sourceZones,
+                    ["MoveReasons"] = moveReasons,
+                    ["MoveReason"] = moveReasons[0],
+                    ["ToTop"] = toTopValues.Length == 1 ? toTopValues[0] : null,
+                    ["FaceUp"] = faceUpValues.Length == 1 ? faceUpValues[0] : null,
+                }));
+    }
+
+    public PermanentZoneMoveResult MovePermanentWithEvents(
+        GameState state,
+        PermanentZoneMoveCommand command,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
+    {
+        var result = _zoneMover.MovePermanent(state, command);
+        QueueOnMoveEventIfBattleAreaSurvived(state, result, command.Reason, sourceCard, sourcePermanent);
+        return result;
+    }
+
+    private static void QueueOnMoveEventIfBattleAreaSurvived(
+        GameState state,
+        PermanentZoneMoveResult result,
+        MoveReason moveReason,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent)
+    {
+        if (result.DestinationZone != Zone.BattleArea)
+        {
+            return;
+        }
+
+        var permanent = BattleRules.Permanent(state, result.Permanent);
+        if (permanent.IsBreedingArea)
+        {
+            return;
+        }
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnMove,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                new[] { permanent.TopCardId },
+                result.SourceZone,
+                result.DestinationZone,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanents"] = new[] { permanent.Id },
+                    ["Permanent"] = permanent.Id,
+                    ["MovedPermanents"] = new[] { permanent.Id },
+                    ["MovedPermanent"] = permanent.Id,
+                    ["MovedController"] = permanent.ControllerPlayerId,
+                    ["MovedTopCard"] = permanent.TopCardId,
+                    ["OldZone"] = result.SourceZone,
+                    ["NewZone"] = result.DestinationZone,
+                    ["MoveReason"] = moveReason,
+                    ["BattleAreaSurvived"] = true,
+                }));
+    }
 
     public DrawResult Draw(GameState state, PlayerId player, int count, GameTrace? trace = null)
     {
@@ -173,6 +388,170 @@ public sealed class Tier1PrimitiveService
         }
 
         return results;
+    }
+
+    public IReadOnlyList<MoveCardResult> TrashDigivolutionCardsWithEvents(
+        GameState state,
+        PermanentId permanentId,
+        IEnumerable<CardInstanceId> cards,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        bool skipEffectAndActivateSkill = false,
+        GameTrace? trace = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        if (permanent.IsBreedingArea)
+        {
+            throw new DomainException($"Digivolution source trash target permanent '{permanentId}' is not in battle area.");
+        }
+
+        if (!BattleRules.IsDigimon(state, permanent.TopCardId))
+        {
+            throw new DomainException($"Digivolution source trash target permanent '{permanentId}' is not a Digimon.");
+        }
+
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            return Array.Empty<MoveCardResult>();
+        }
+
+        foreach (var card in cardArray)
+        {
+            if (!permanent.SourceCardIds.Contains(card))
+            {
+                throw new DomainException($"Card '{card}' is not a digivolution source under permanent '{permanentId}'.");
+            }
+        }
+
+        var moves = new List<MoveCardResult>();
+        foreach (var card in cardArray)
+        {
+            var command = new MoveCardCommand(
+                card,
+                Zone.EvolutionSources,
+                Zone.Trash,
+                MoveReason.Effect,
+                SourcePermanent: permanentId,
+                FaceUp: true);
+            var before = trace is null ? null : state.Clone();
+            var move = _zoneMover.MoveCard(state, command);
+            trace?.AddMove($"trash-digivolution-source:{permanentId.Value}:{card.Value}", before!, state, command, move);
+            moves.Add(move);
+        }
+
+        if (!skipEffectAndActivateSkill && sourceCard is not null)
+        {
+            QueueOnDigivolutionCardDiscardedEvent(
+                state,
+                permanent,
+                cardArray,
+                sourceCard,
+                sourcePermanent,
+                MoveReason.Effect);
+        }
+
+        return moves;
+    }
+
+    private static void QueueOnDigivolutionCardDiscardedEvent(
+        GameState state,
+        PermanentState permanent,
+        IReadOnlyList<CardInstanceId> discardedCards,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        MoveReason moveReason)
+    {
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnDigivolutionCardDiscarded,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                discardedCards,
+                Zone.EvolutionSources,
+                Zone.Trash,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanent.Id,
+                    ["TargetPermanent"] = permanent.Id,
+                    ["DiscardedFromPermanent"] = permanent.Id,
+                    ["DiscardedFromTopCard"] = permanent.TopCardId,
+                    ["DiscardedCards"] = discardedCards.ToArray(),
+                    ["DiscardedCard"] = discardedCards[0],
+                    ["CardSources"] = discardedCards.ToArray(),
+                    ["MoveReason"] = moveReason,
+                    ["TriggeredSourceCards"] = discardedCards.ToArray(),
+                    ["TriggeredSourceZone"] = Zone.Trash,
+                    ["TriggeredSourceOriginalZone"] = Zone.EvolutionSources,
+                    ["TriggeredSourceOriginalPermanent"] = permanent.Id,
+                }));
+    }
+
+    public DigivolutionCardDiscardReplacementWindowRequest QueueDigivolutionCardDiscardReplacementWindow(
+        GameState state,
+        PermanentId permanentId,
+        IEnumerable<CardInstanceId> cards,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        MoveReason moveReason = MoveReason.Effect)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        if (permanent.IsBreedingArea)
+        {
+            throw new DomainException($"Digivolution source discard replacement target permanent '{permanentId}' is not in battle area.");
+        }
+
+        var cardArray = cards.ToArray();
+        if (cardArray.Length == 0)
+        {
+            throw new DomainException("Digivolution source discard replacement window requires at least one card.");
+        }
+
+        foreach (var card in cardArray)
+        {
+            if (!permanent.SourceCardIds.Contains(card))
+            {
+                throw new DomainException($"Card '{card}' is not a digivolution source under permanent '{permanentId}'.");
+            }
+        }
+
+        var timings = new[] { EffectTiming.WhenWouldDigivolutionCardDiscarded };
+        var request = new DigivolutionCardDiscardReplacementWindowRequest(
+            permanent.Id,
+            permanent.ControllerPlayerId,
+            permanent.TopCardId,
+            cardArray,
+            Zone.EvolutionSources,
+            Zone.Trash,
+            moveReason,
+            timings);
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.WhenWouldDigivolutionCardDiscarded,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                cardArray,
+                Zone.EvolutionSources,
+                Zone.Trash,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanent"] = permanent.Id,
+                    ["TargetPermanent"] = permanent.Id,
+                    ["DiscardedFromPermanent"] = permanent.Id,
+                    ["DiscardedFromTopCard"] = permanent.TopCardId,
+                    ["DiscardedCards"] = cardArray,
+                    ["DiscardedCard"] = cardArray[0],
+                    ["WouldDiscardDigivolutionCards"] = true,
+                    ["MoveReason"] = moveReason,
+                    ["Timings"] = timings,
+                }));
+
+        return request;
     }
 
     public IReadOnlyList<MoveCardResult> AddCardsToHandWithEvents(
@@ -637,7 +1016,10 @@ public sealed class Tier1PrimitiveService
     public IReadOnlyList<MoveCardResult> TrashBottomDigivolutionSources(
         GameState state,
         PermanentId permanentId,
-        int count)
+        int count,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        GameTrace? trace = null)
     {
         if (count <= 0)
         {
@@ -660,22 +1042,21 @@ public sealed class Tier1PrimitiveService
             throw new DomainException($"Digivolution source trash target permanent '{permanentId}' has no digivolution sources.");
         }
 
-        var results = new List<MoveCardResult>();
         var trashCount = Math.Min(count, permanent.SourceCardIds.Count);
+        var sourceCards = new List<CardInstanceId>();
         for (var i = 0; i < trashCount; i++)
         {
-            var source = permanent.SourceCardIds[^1];
-            results.Add(_zoneMover.MoveCard(
-                state,
-                new MoveCardCommand(
-                    source,
-                    Zone.EvolutionSources,
-                    Zone.Trash,
-                    MoveReason.Effect,
-                    SourcePermanent: permanent.Id)));
+            sourceCards.Add(permanent.SourceCardIds[permanent.SourceCardIds.Count - 1 - i]);
         }
 
-        return results;
+        return TrashDigivolutionCardsWithEvents(
+            state,
+            permanentId,
+            sourceCards,
+            sourceCard,
+            sourcePermanent,
+            skipEffectAndActivateSkill: sourceCard is null,
+            trace);
     }
 
     public IReadOnlyList<MoveCardResult> ReturnDigivolutionSourcesToDeckBottomWithEvents(
@@ -847,6 +1228,87 @@ public sealed class Tier1PrimitiveService
         return result;
     }
 
+    public PermanentRemovalReplacementWindowRequest QueuePermanentRemovalReplacementWindow(
+        GameState state,
+        PermanentId permanentId,
+        PermanentRemovalReplacementKind kind,
+        Zone destinationZone,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        MoveReason moveReason = MoveReason.Effect,
+        bool battle = false,
+        bool digixros = false)
+    {
+        if (kind is PermanentRemovalReplacementKind.ReturnToLibrary && destinationZone != Zone.Deck)
+        {
+            throw new DomainException("Return-to-library replacement window requires DestinationZone Deck.");
+        }
+
+        var permanent = BattleRules.Permanent(state, permanentId);
+        var sourceZone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        var stack = permanent.StackCardIds.Concat(permanent.LinkedCards).ToArray();
+        var timings = kind switch
+        {
+            PermanentRemovalReplacementKind.Delete => new[]
+            {
+                EffectTiming.WhenPermanentWouldBeDeleted,
+                EffectTiming.WhenRemoveField,
+            },
+            PermanentRemovalReplacementKind.RemoveField => new[]
+            {
+                EffectTiming.WhenRemoveField,
+            },
+            PermanentRemovalReplacementKind.ReturnToLibrary => new[]
+            {
+                EffectTiming.WhenReturntoLibraryAnyone,
+                EffectTiming.WhenRemoveField,
+            },
+            _ => throw new DomainException($"Unsupported permanent removal replacement kind '{kind}'."),
+        };
+
+        var request = new PermanentRemovalReplacementWindowRequest(
+            permanent.Id,
+            permanent.ControllerPlayerId,
+            permanent.TopCardId,
+            stack,
+            sourceZone,
+            destinationZone,
+            moveReason,
+            kind,
+            timings);
+
+        var payload = ZoneEventPayload(
+            stack,
+            sourceZone,
+            destinationZone,
+            sourceCard,
+            sourcePermanent,
+            extra: new Dictionary<string, object?>
+            {
+                ["Permanents"] = new[] { permanent.Id },
+                ["Permanent"] = permanent.Id,
+                ["TargetPermanent"] = permanent.Id,
+                ["WillBeRemoveField"] = true,
+                ["WouldRemove"] = true,
+                ["WouldDelete"] = kind is PermanentRemovalReplacementKind.Delete,
+                ["WouldReturnToLibrary"] = kind is PermanentRemovalReplacementKind.ReturnToLibrary,
+                ["RemovedController"] = permanent.ControllerPlayerId,
+                ["RemovedTopCard"] = permanent.TopCardId,
+                ["ReplacementKind"] = kind.ToString(),
+                ["battle"] = battle,
+                ["digixros"] = digixros,
+                ["MoveReason"] = moveReason,
+                ["Timings"] = timings,
+            });
+
+        foreach (var timing in timings)
+        {
+            QueueRuleEvent(state, timing, permanent.ControllerPlayerId, payload);
+        }
+
+        return request;
+    }
+
     private void ThrowIfCannotMoveByEffect(
         GameState state,
         PermanentState permanent,
@@ -950,7 +1412,12 @@ public sealed class Tier1PrimitiveService
                 }));
     }
 
-    public bool Suspend(GameState state, PermanentId permanentId)
+    public bool Suspend(
+        GameState state,
+        PermanentId permanentId,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null,
+        bool isBlock = false)
     {
         var permanent = BattleRules.Permanent(state, permanentId);
         if (permanent.IsSuspended)
@@ -959,10 +1426,96 @@ public sealed class Tier1PrimitiveService
         }
 
         permanent.IsSuspended = true;
+        QueueOnTappedAnyoneEvent(state, permanent, sourceCard, sourcePermanent, isBlock);
         return true;
     }
 
-    public bool Unsuspend(GameState state, PermanentId permanentId)
+    private static void QueueOnTappedAnyoneEvent(
+        GameState state,
+        PermanentState permanent,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent,
+        bool isBlock)
+    {
+        var sourceZone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnTappedAnyone,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                new[] { permanent.TopCardId },
+                sourceZone,
+                sourceZone,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanents"] = new[] { permanent.Id },
+                    ["Permanent"] = permanent.Id,
+                    ["TappedPermanents"] = new[] { permanent.Id },
+                    ["TappedPermanent"] = permanent.Id,
+                    ["SuspendedPermanents"] = new[] { permanent.Id },
+                    ["SuspendedPermanent"] = permanent.Id,
+                    ["TappedController"] = permanent.ControllerPlayerId,
+                    ["TappedTopCard"] = permanent.TopCardId,
+                    ["SuspendedController"] = permanent.ControllerPlayerId,
+                    ["SuspendedTopCard"] = permanent.TopCardId,
+                    ["IsBlock"] = isBlock,
+                }));
+    }
+
+    public UnsuspendReplacementWindowRequest? QueueUnsuspendReplacementWindow(
+        GameState state,
+        PermanentId permanentId,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
+    {
+        var permanent = BattleRules.Permanent(state, permanentId);
+        if (!permanent.IsSuspended || permanent.IsBreedingArea)
+        {
+            return null;
+        }
+
+        var sourceZone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        var timings = new[] { EffectTiming.WhenUntapAnyone };
+        var request = new UnsuspendReplacementWindowRequest(
+            permanent.Id,
+            permanent.ControllerPlayerId,
+            permanent.TopCardId,
+            sourceZone,
+            sourceZone,
+            timings);
+
+        QueueRuleEvent(
+            state,
+            EffectTiming.WhenUntapAnyone,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                new[] { permanent.TopCardId },
+                sourceZone,
+                sourceZone,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanents"] = new[] { permanent.Id },
+                    ["Permanent"] = permanent.Id,
+                    ["UnsuspendedPermanents"] = new[] { permanent.Id },
+                    ["UnsuspendedPermanent"] = permanent.Id,
+                    ["UnsuspendedController"] = permanent.ControllerPlayerId,
+                    ["UnsuspendedTopCard"] = permanent.TopCardId,
+                    ["WouldUnsuspend"] = true,
+                    ["Timings"] = timings,
+                }));
+
+        return request;
+    }
+
+    public bool Unsuspend(
+        GameState state,
+        PermanentId permanentId,
+        CardInstanceId? sourceCard = null,
+        PermanentId? sourcePermanent = null)
     {
         var permanent = BattleRules.Permanent(state, permanentId);
         if (!permanent.IsSuspended)
@@ -971,7 +1524,40 @@ public sealed class Tier1PrimitiveService
         }
 
         permanent.IsSuspended = false;
+        if (!permanent.IsBreedingArea)
+        {
+            QueueOnUnTappedAnyoneEvent(state, permanent, sourceCard, sourcePermanent);
+        }
+
         return true;
+    }
+
+    private static void QueueOnUnTappedAnyoneEvent(
+        GameState state,
+        PermanentState permanent,
+        CardInstanceId? sourceCard,
+        PermanentId? sourcePermanent)
+    {
+        var sourceZone = permanent.IsBreedingArea ? Zone.BreedingArea : Zone.BattleArea;
+        QueueRuleEvent(
+            state,
+            EffectTiming.OnUnTappedAnyone,
+            permanent.ControllerPlayerId,
+            ZoneEventPayload(
+                new[] { permanent.TopCardId },
+                sourceZone,
+                sourceZone,
+                sourceCard,
+                sourcePermanent,
+                extra: new Dictionary<string, object?>
+                {
+                    ["Permanents"] = new[] { permanent.Id },
+                    ["Permanent"] = permanent.Id,
+                    ["UnsuspendedPermanents"] = new[] { permanent.Id },
+                    ["UnsuspendedPermanent"] = permanent.Id,
+                    ["UnsuspendedController"] = permanent.ControllerPlayerId,
+                    ["UnsuspendedTopCard"] = permanent.TopCardId,
+                }));
     }
 
     public int ModifyMemory(GameState state, PlayerId player, int amount)

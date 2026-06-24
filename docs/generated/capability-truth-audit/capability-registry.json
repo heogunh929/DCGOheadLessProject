@@ -21,8 +21,8 @@
   "summary": {
     "capabilityCount": 160,
     "statusCounts": {
-      "PartiallyImplemented": 100,
-      "Unsupported": 51,
+      "PartiallyImplemented": 121,
+      "Unsupported": 30,
       "Verified": 9
     },
     "documentationConflictCount": 12
@@ -811,6 +811,9 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
         "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs"
@@ -825,17 +828,22 @@
     },
     {
       "capabilityId": "AfterPayCost",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 15,
       "sourceFileCount": 7,
       "inventoryAliases": [],
-      "reason": "After-pay-cost layer remains a common blocker.",
+      "reason": "FND-003-C connects the source post-cost timing to standard play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun, so this is not Verified.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/CostPaymentRuleEventPayload.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-C AfterPayCost runs after cost payment"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -955,6 +963,7 @@
         "TriggerPipeline enqueues and drains non-background effect",
         "TriggerPipeline separates background effect",
         "TriggerPipeline stale background preserves foreground AfterEffects",
+        "FND-003-N BeforePayCost background effects run before cut-in",
         "Attack timing background counter not selectable"
       ],
       "replayOrInvariantEvidence": [],
@@ -998,20 +1007,21 @@
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
         "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
         "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
         "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
         "src/DCGO.RL.Engine/Battle/MoveFromBreedingService.cs",
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_036.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_017.cs"
+        "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_036.cs"
       ],
       "testEvidence": [
         "Duration player DP modifier affects owner battle area",
         "Duration player keyword grants Rush to matching battle area Digimon",
-        "Continuous tamer aura applies owner battle area"
+        "Continuous tamer aura applies owner battle area",
+        "FND-003-I OnMove queues battle-area permanent move event"
       ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [],
@@ -1019,14 +1029,17 @@
     },
     {
       "capabilityId": "BeforePayCost",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 284,
       "sourceFileCount": 141,
       "inventoryAliases": [],
-      "reason": "Cost modifier/replacement layer is documented as a common blocker and is not executable for full-card batches.",
+      "reason": "FND-003-N connects the source pre-cost timing to play, option, and digivolution cost payment runtime scope with execution tests. Full-card parity is still NotRun and cost replacement variants remain incomplete, so this is not Verified.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/CostPaymentRuleEventPayload.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Black/BT18_057.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_075.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
@@ -1037,7 +1050,11 @@
         "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-N BeforePayCost runs before play and option cost payment",
+        "FND-003-N BeforePayCost background effects run before cut-in",
+        "FND-003-N BeforePayCost runs before digivolution cost payment"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -1385,6 +1402,7 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs"
       ],
       "testEvidence": [
@@ -1538,6 +1556,7 @@
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/HatchService.cs",
         "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/CardEffectPortingStatus.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_049.cs",
@@ -1546,14 +1565,14 @@
         "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Red/BT20_001.cs",
         "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs",
-        "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_09.cs"
+        "src/DCGO.RL.Engine/CardEffects/BT22/White/BT22_079.cs"
       ],
       "testEvidence": [
         "ZoneMover Deck -> Hand",
         "ZoneMover Deck -> Security",
         "DrawPhase empty deck loses",
         "FullCardPoolValidator deck subset validation",
+        "FND-003-F OnDiscardLibrary queues deck trash event",
         "Zone events source return deck bottom timing",
         "CardEffectFoundation deck validation catches unsupported",
         "ST1 CardEffect catalog covers target decklist",
@@ -1774,12 +1793,12 @@
         "src/DCGO.RL.Engine/Domain/Enums.cs",
         "src/DCGO.RL.Engine/Domain/GameState.cs",
         "src/DCGO.RL.Engine/Domain/PlayerState.cs",
+        "src/DCGO.RL.Engine/Domain/ScriptRuntimeFoundation.cs",
         "src/DCGO.RL.Engine/Domain/ZoneMover.cs",
         "src/DCGO.RL.Engine/Setup/DeckInstantiationService.cs",
         "src/DCGO.RL.Engine/Setup/PlayerDeckList.cs",
         "src/DCGO.RL.Engine/Validation/DeckMechanicValidator.cs",
-        "src/DCGO.RL.Engine/Validation/EngineInvariantChecker.cs",
-        "src/DCGO.RL.Engine/Validation/ParityFixtureComparer.cs"
+        "src/DCGO.RL.Engine/Validation/EngineInvariantChecker.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -1886,18 +1905,19 @@
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/ActionExecutor.cs",
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
         "src/DCGO.RL.Engine/Battle/EngineSession.cs",
         "src/DCGO.RL.Engine/Battle/PhaseRunner.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_072.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_079.cs",
         "src/DCGO.RL.Engine/Effects/SecurityEffectExecutionService.cs",
-        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
-        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs",
-        "src/DCGO.RL.Engine/Setup/DrawService.cs",
-        "src/DCGO.RL.Engine/Validation/CliDebugRenderer.cs"
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs"
       ],
       "testEvidence": [
+        "OnDeclaration declare action executes selected effect",
         "LegalActionGenerator generated actions execute",
         "Static evolution requirement hand source generates and executes",
         "Static evolution requirement ignore permission generates and executes",
@@ -1928,17 +1948,17 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/ActionExecutor.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_088.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_089.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Red/BT1_085.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_087.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_084.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_089.cs"
+        "src/DCGO.RL.Engine/CardEffects/BT1/Yellow/BT1_087.cs"
       ],
       "testEvidence": [
         "Continuous executing source applies during execution",
@@ -2011,22 +2031,23 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
         "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
         "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_029.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Blue/BT19_021.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_089.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/ST2/Blue/ST2_16.cs",
-        "src/DCGO.RL.Engine/CardEffects/ST3/Yellow/ST3_13.cs"
+        "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs"
       ],
       "testEvidence": [
         "ZoneMover Deck -> Hand",
         "ZoneMover Hand -> Trash",
         "GameSetup opening hand count",
+        "OnDeclaration legal actions include field hand trash",
         "CapabilityTruthAudit status mismatch and variant registry integrated",
         "BT19-021 returns level 3 Digimon to hand",
         "BT19-089 security adds itself to hand",
@@ -2034,8 +2055,7 @@
         "Duration player keyword hash and replay deterministic",
         "Duration temporary granted trigger hash and replay deterministic",
         "Continuous hand source applies only from hand",
-        "Static evolution requirement hand source generates and executes",
-        "Static card restriction blocks return to hand"
+        "Static evolution requirement hand source generates and executes"
       ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
@@ -2468,13 +2488,13 @@
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
         "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/RuleProcessor.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
-        "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs",
-        "src/DCGO.RL.Engine/Domain/CardDefinition.cs",
-        "src/DCGO.RL.Engine/Domain/ComplexMechanicDefinitions.cs",
-        "src/DCGO.RL.Engine/Domain/Enums.cs"
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
+        "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs"
       ],
       "testEvidence": [
         "CapabilityDependencyGraph links sources and batches",
@@ -2511,6 +2531,7 @@
         "src/DCGO.RL.Engine/Battle/RuleProcessor.cs",
         "src/DCGO.RL.Engine/Domain/ZoneMover.cs",
         "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+        "src/DCGO.RL.Engine/Effects/ScriptRuntimeEffectFoundation.cs",
         "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
         "src/DCGO.RL.Engine/Mechanics/ComplexMechanicSelectionFactory.cs",
         "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs",
@@ -2595,9 +2616,9 @@
     },
     {
       "capabilityId": "OnAddDigivolutionCards",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 102,
       "sourceFileCount": 50,
       "inventoryAliases": [],
@@ -2609,9 +2630,12 @@
         "src/DCGO.RL.Engine/CardEffects/BT22/Black/BT22_054.cs",
         "src/DCGO.RL.Engine/CardEffects/BT22/Blue/BT22_001.cs",
         "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_004.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-J OnAddDigivolutionCards queues source add event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -2749,17 +2773,20 @@
     },
     {
       "capabilityId": "OnAddSecurity",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 38,
       "sourceFileCount": 14,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-E OnAddSecurity queues security add events"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -2868,6 +2895,8 @@
       "inventoryAliases": [],
       "reason": "RuntimeRuleState owns once-per-turn state, but generated effect identity binding remains incomplete.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Actions/GameAction.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Red/BT19_015.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_039.cs",
         "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_008.cs",
@@ -2877,9 +2906,7 @@
         "src/DCGO.RL.Engine/Domain/GameState.cs",
         "src/DCGO.RL.Engine/Domain/RuntimeRuleState.cs",
         "src/DCGO.RL.Engine/Effects/EffectDescriptor.cs",
-        "src/DCGO.RL.Engine/Effects/EffectResolution.cs",
-        "src/DCGO.RL.Engine/Effects/OncePerTurnTracker.cs",
-        "src/DCGO.RL.Engine/Effects/TriggerCollector.cs"
+        "src/DCGO.RL.Engine/Effects/EffectResolution.cs"
       ],
       "testEvidence": [
         "TriggerPipeline once-per-turn prevents duplicate execution",
@@ -2913,18 +2940,23 @@
     },
     {
       "capabilityId": "OnDeclaration",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 578,
       "sourceFileCount": 298,
       "inventoryAliases": [],
-      "reason": "Declaration/cost continuation is still unresolved for generated full-card batches.",
+      "reason": "FND-003-P connects declaration timing to legal action generation and selected declaration execution with source-aligned tests. Full-card parity and all declaration continuation variants remain incomplete, so this is not Verified.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "OnDeclaration legal actions include field hand trash",
+        "OnDeclaration declare action executes selected effect",
+        "OnDeclaration declare action revalidates source role"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3055,17 +3087,22 @@
     },
     {
       "capabilityId": "OnDetermineDoSecurityCheck",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 228,
       "sourceFileCount": 119,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/AttackService.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-M OnDetermineDoSecurityCheck queues first active battle decision",
+        "FND-003-M OnDetermineDoSecurityCheck sees battle durations before cleanup",
+        "FND-003-M OnDetermineDoSecurityCheck selection pauses and resumes"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3097,18 +3134,22 @@
     },
     {
       "capabilityId": "OnDigivolutionCardDiscarded",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 121,
       "sourceFileCount": 53,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT21/Black/BT21_055.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Effects/TriggerPipelineService.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-K OnDigivolutionCardDiscarded queues source trash event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3198,18 +3239,21 @@
     },
     {
       "capabilityId": "OnDiscardLibrary",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 51,
       "sourceFileCount": 20,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_071.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-F OnDiscardLibrary queues deck trash event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3229,18 +3273,21 @@
     },
     {
       "capabilityId": "OnDiscardSecurity",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 23,
       "sourceFileCount": 14,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT18/Yellow/BT18_098.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-D OnDiscardSecurity queues security discard events"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3364,20 +3411,24 @@
     },
     {
       "capabilityId": "OnEndBattle",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 160,
       "sourceFileCount": 84,
       "inventoryAliases": [],
-      "reason": "Battle-end payload and lifecycle boundary remain unresolved for generated full-card batches.",
+      "reason": "FND-003-L connects battle-end timing to battle-result runtime scope and selection pause/resume tests. Full-card parity and all battle lifecycle variants remain incomplete, so this is not Verified.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/AttackService.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Green/BT18_052.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Green/BT19_052.cs",
         "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_047.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-L OnEndBattle queues battle end event",
+        "FND-003-L OnEndBattle selection pauses and resumes"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -3662,15 +3713,16 @@
     },
     {
       "capabilityId": "OnFaceUpSecurityIncreased",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 2,
       "sourceFileCount": 1,
       "inventoryAliases": [],
-      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "reason": "FND-002-D maps the source payload and existing headless face-up AddSecurity event coverage. IFlipSecurity face-up conversion, EX11-004 full-card body parity, and source-locked replay evidence remain incomplete.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -3750,7 +3802,7 @@
       "capabilityId": "OnLinkCardDiscarded",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Unsupported",
       "affectedCardCount": 14,
       "sourceFileCount": 7,
       "inventoryAliases": [],
@@ -3782,7 +3834,8 @@
         "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_082.cs",
         "src/DCGO.RL.Engine/CardEffects/BT21/Red/BT21_093.cs",
         "src/DCGO.RL.Engine/CardEffects/BT22/Green/BT22_051.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -3852,17 +3905,20 @@
     },
     {
       "capabilityId": "OnMove",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 79,
       "sourceFileCount": 30,
       "inventoryAliases": [],
-      "reason": "Move timing payload and source-zone semantics remain unresolved.",
+      "reason": "FND-003-I connects permanent move timing to the primitive move event scope with execution tests. Source-zone edge variants and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-I OnMove queues battle-area permanent move event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -4022,17 +4078,20 @@
     },
     {
       "capabilityId": "OnRemovedField",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 4,
       "sourceFileCount": 2,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-B OnRemovedField queues explicit removal event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -4122,11 +4181,11 @@
       "capabilityId": "OnStartBattle",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "NotReferenced",
       "affectedCardCount": 0,
       "sourceFileCount": 0,
       "inventoryAliases": [],
-      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "reason": "FND-002-E maps the source battle-start dispatch and payload, but current AS-IS CardEffect references and affected card records are zero. It is not a current source-required full-card blocker; reopen as a payload fixture task only if a future source card references EffectTiming.OnStartBattle.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
@@ -4276,18 +4335,21 @@
     },
     {
       "capabilityId": "OnTappedAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 306,
       "sourceFileCount": 139,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_070.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-O OnTappedAnyone queues actual suspend event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -4327,17 +4389,20 @@
     },
     {
       "capabilityId": "OnUnTappedAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 70,
       "sourceFileCount": 29,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-H OnUnTappedAnyone queues actual unsuspend event"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -4376,7 +4441,7 @@
       "capabilityId": "OnUseDigiburst",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Unsupported",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
       "inventoryAliases": [],
@@ -4391,17 +4456,20 @@
     },
     {
       "capabilityId": "OnUseOption",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 65,
       "sourceFileCount": 30,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "FND-003-G OnUseOption runs before OptionSkill"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -4616,6 +4684,7 @@
         "src/DCGO.RL.Engine/CardEffects/ST1/Red/ST1_13.cs"
       ],
       "testEvidence": [
+        "FND-003-G OnUseOption runs before OptionSkill",
         "TriggerPipeline OptionSkill remains compatible with ST1-15"
       ],
       "replayOrInvariantEvidence": [],
@@ -4954,6 +5023,7 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs",
         "src/DCGO.RL.Engine/Domain/GameState.cs",
         "src/DCGO.RL.Engine/Domain/PlayerState.cs",
@@ -5312,12 +5382,12 @@
         "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
         "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
         "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
         "src/DCGO.RL.Engine/Battle/EngineSession.cs",
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Blue/BT1_086.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT1/Green/BT1_088.cs"
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
+        "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs"
       ],
       "testEvidence": [
         "ZoneMover Deck -> Security",
@@ -5739,15 +5809,20 @@
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Bt19ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT20/Bt20ScriptSupport.cs",
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs",
         "src/DCGO.RL.Engine/Mechanics/ComplexMechanicSelectionFactory.cs",
         "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "SelectCardEffect mode continuation uses primitives",
+        "SelectCardEffect play-for-free primitive continuation uses frame resolver"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -5788,6 +5863,7 @@
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
         "src/DCGO.RL.Engine/Decisions/SelectionValidator.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs"
@@ -6023,6 +6099,7 @@
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/StarterScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT1/Bt1ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Bt18ScriptSupport.cs",
@@ -6031,11 +6108,13 @@
         "src/DCGO.RL.Engine/CardEffects/BT21/Green/BT21_048.cs",
         "src/DCGO.RL.Engine/CardEffects/BT22/Bt22ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/ST1/Red/St1ScriptSupport.cs",
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
-        "src/DCGO.RL.Engine/Domain/Enums.cs",
-        "src/DCGO.RL.Engine/Mechanics/ComplexMechanicSelectionFactory.cs"
+        "src/DCGO.RL.Engine/Domain/Enums.cs"
       ],
-      "testEvidence": [],
+      "testEvidence": [
+        "SelectPermanentEffect mode continuation uses primitives"
+      ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
         {
@@ -6077,12 +6156,13 @@
       "capabilityId": "SelectSecurity",
       "status": "PartiallyImplemented",
       "inventorySection": "selections",
-      "inventoryStatus": "PartiallyImplemented",
+      "inventoryStatus": "Verified",
       "affectedCardCount": 2588,
       "sourceFileCount": 1282,
       "inventoryAliases": [],
       "reason": "Conservative audit status derived from inventory and local evidence.",
       "implementationEvidence": [
+        "src/DCGO.RL.Engine/Decisions/SelectEffectFacades.cs",
         "src/DCGO.RL.Engine/Decisions/SelectionRequest.cs",
         "src/DCGO.RL.Engine/Domain/Enums.cs"
       ],
@@ -6168,16 +6248,16 @@
       "implementationEvidence": [
         "src/DCGO.RL.Engine/Battle/AttackService.cs",
         "src/DCGO.RL.Engine/Battle/BattleResolver.cs",
+        "src/DCGO.RL.Engine/Battle/DeclarationEffectService.cs",
+        "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
         "src/DCGO.RL.Engine/Battle/PlayCardService.cs",
         "src/DCGO.RL.Engine/Battle/RuleProcessor.cs",
         "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+        "src/DCGO.RL.Engine/CardEffects/CardEffectCommons.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Bt18ScriptSupport.cs",
         "src/DCGO.RL.Engine/CardEffects/BT18/Purple/BT18_085.cs",
         "src/DCGO.RL.Engine/CardEffects/BT19/Bt19ScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_006.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT20/Purple/BT20_096.cs",
-        "src/DCGO.RL.Engine/CardEffects/BT21/Bt21ScriptSupport.cs",
-        "src/DCGO.RL.Engine/CardEffects/ST2/Blue/St2ScriptSupport.cs"
+        "src/DCGO.RL.Engine/CardEffects/BT19/Purple/BT19_006.cs"
       ],
       "testEvidence": [
         "ZoneMover Hand -> Trash",
@@ -6185,13 +6265,13 @@
         "ZoneMover evolution source -> Trash",
         "MinimalBattle lower DP trashes loser",
         "MinimalBattle tie trashes both",
+        "OnDeclaration legal actions include field hand trash",
         "BT18-085 continuous trash color modifiers",
         "Tier1 primitives move draw shuffle reveal search trash",
         "Continuous trash source applies from trash",
-        "Zone events trash return fire before hand and library moves",
-        "Zone events return permanent and top trash timings",
-        "Option lifecycle hand play moves through Executing to Trash",
-        "Option lifecycle selection completion trashes option"
+        "FND-003-F OnDiscardLibrary queues deck trash event",
+        "FND-003-K OnDigivolutionCardDiscarded queues source trash event",
+        "Zone events trash return fire before hand and library moves"
       ],
       "replayOrInvariantEvidence": [],
       "documentClaims": [
@@ -6325,7 +6405,7 @@
       "capabilityId": "WhenDigisorption",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Unsupported",
       "affectedCardCount": 15,
       "sourceFileCount": 10,
       "inventoryAliases": [],
@@ -6471,7 +6551,7 @@
       "capabilityId": "WhenLinked",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Unsupported",
       "affectedCardCount": 87,
       "sourceFileCount": 64,
       "inventoryAliases": [],
@@ -6486,15 +6566,16 @@
     },
     {
       "capabilityId": "WhenPermanentWouldBeDeleted",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 405,
       "sourceFileCount": 206,
       "inventoryAliases": [],
-      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "reason": "FND-003-R queues source-aligned permanent delete replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6508,16 +6589,17 @@
     },
     {
       "capabilityId": "WhenRemoveField",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 304,
       "sourceFileCount": 164,
       "inventoryAliases": [],
-      "reason": "Would-remove replacement/cut-in semantics remain unresolved for generated batches.",
+      "reason": "FND-003-R queues source-aligned would-remove-field replacement window payloads before field mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
         "src/DCGO.RL.Engine/CardEffects/BT19/Yellow/BT19_041.cs",
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6574,15 +6656,16 @@
     },
     {
       "capabilityId": "WhenReturntoLibraryAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 25,
       "sourceFileCount": 9,
       "inventoryAliases": [],
-      "reason": "Return-to-library cut-in shares unresolved would-remove replacement semantics.",
+      "reason": "FND-003-R queues source-aligned return-to-library replacement window payloads before deck mutation. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6623,15 +6706,16 @@
     },
     {
       "capabilityId": "WhenUntapAnyone",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
       "inventoryAliases": [],
-      "reason": "Untap cut-in pre/post refix semantics remain unresolved.",
+      "reason": "FND-003-R queues source-aligned pre-unsuspend replacement window payloads while the permanent is still suspended. Actual replacement continuation, target re-fix, and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6653,15 +6737,16 @@
     },
     {
       "capabilityId": "WhenWouldDigivolutionCardDiscarded",
-      "status": "Unsupported",
+      "status": "PartiallyImplemented",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "PartiallyImplemented",
       "affectedCardCount": 1,
       "sourceFileCount": 1,
       "inventoryAliases": [],
-      "reason": "Conservative audit status derived from inventory and local evidence.",
+      "reason": "FND-003-R queues source-aligned pre-source-trash replacement window payloads before digivolution cards leave the source stack. Actual replacement continuation, source-trash continuation, and full-card parity remain incomplete, so this is not Verified.",
       "implementationEvidence": [
-        "src/DCGO.RL.Engine/Effects/EffectTiming.cs"
+        "src/DCGO.RL.Engine/Effects/EffectTiming.cs",
+        "src/DCGO.RL.Engine/Primitives/Tier1PrimitiveService.cs"
       ],
       "testEvidence": [],
       "replayOrInvariantEvidence": [],
@@ -6677,7 +6762,7 @@
       "capabilityId": "WhenWouldLink",
       "status": "Unsupported",
       "inventorySection": "timings",
-      "inventoryStatus": "NeedsSourceReview",
+      "inventoryStatus": "Unsupported",
       "affectedCardCount": 2,
       "sourceFileCount": 2,
       "inventoryAliases": [],

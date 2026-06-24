@@ -1,5 +1,6 @@
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
+using DCGO.RL.Engine.Effects;
 
 namespace DCGO.RL.Engine.Actions;
 
@@ -75,6 +76,15 @@ public sealed record DelayOptionPlayAction(
     PlayerId Actor,
     CardInstanceId Card,
     int TargetFrameIndex) : GameAction(Actor);
+
+public sealed record DeclareEffectAction(
+    PlayerId Actor,
+    string EffectStableId,
+    CardInstanceId SourceCard,
+    PermanentId? SourcePermanent,
+    Zone SourceZone,
+    TriggerSourceRole SourceRole,
+    string? OncePerTurnKey) : GameAction(Actor);
 
 public sealed record AttackAction(
     PlayerId Actor,

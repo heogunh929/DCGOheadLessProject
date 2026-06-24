@@ -13,6 +13,7 @@ public sealed record ActionExecutionResult(
     OptionPlayResult? OptionPlay = null,
     PhaseExecutionResult? PhaseExecution = null,
     AttackExecutionResult? AttackExecution = null,
+    TriggerPipelineResult? EffectActivation = null,
     RuleProcessorExecutionResult? RuleProcessing = null,
     SelectionRequest? PendingSelectionRequest = null,
     EffectResolution? PendingResolution = null,
@@ -34,6 +35,7 @@ public sealed record ActionExecutionResult(
             OptionPlay: result.OptionPlay,
             PhaseExecution: null,
             AttackExecution: null,
+            EffectActivation: null,
             RuleProcessing: null,
             PendingSelectionRequest: pendingRequest,
             PendingResolution: result.PendingResolution,
@@ -56,6 +58,7 @@ public sealed record ActionExecutionResult(
             OptionPlay: null,
             PhaseExecution: null,
             AttackExecution: null,
+            EffectActivation: null,
             RuleProcessing: null,
             PendingSelectionRequest: pendingRequest,
             PendingResolution: result.PendingResolution,
@@ -78,6 +81,7 @@ public sealed record ActionExecutionResult(
             OptionPlay: null,
             PhaseExecution: result,
             AttackExecution: null,
+            EffectActivation: null,
             RuleProcessing: null,
             PendingSelectionRequest: pendingRequest,
             PendingResolution: result.PendingResolution,
@@ -100,6 +104,7 @@ public sealed record ActionExecutionResult(
             OptionPlay: null,
             PhaseExecution: null,
             AttackExecution: result,
+            EffectActivation: null,
             RuleProcessing: null,
             PendingSelectionRequest: pendingRequest,
             PendingResolution: result.PendingResolution,
@@ -110,6 +115,32 @@ public sealed record ActionExecutionResult(
                     pendingRequest.Player,
                     state.Phase,
                     "action-attack-pending-selection",
+                    pendingRequest));
+    }
+
+    public static ActionExecutionResult FromDeclaration(
+        GameState state,
+        DeclareEffectAction action,
+        TriggerPipelineResult result)
+    {
+        var pendingRequest = result.PendingSelectionRequest;
+        return new ActionExecutionResult(
+            Action: action,
+            PlayedPermanent: null,
+            OptionPlay: null,
+            PhaseExecution: null,
+            AttackExecution: null,
+            EffectActivation: result,
+            RuleProcessing: null,
+            PendingSelectionRequest: pendingRequest,
+            PendingResolution: result.PendingResolution,
+            PendingContinuation: result.PendingContinuation,
+            PendingDecisionPoint: pendingRequest is null
+                ? null
+                : DecisionPoint.ForSelection(
+                    pendingRequest.Player,
+                    state.Phase,
+                    "action-declaration-pending-selection",
                     pendingRequest));
     }
 
@@ -143,6 +174,7 @@ public sealed class ActionExecutor
     private readonly PlayCardService _playCardService;
     private readonly DigivolveService _digivolveService;
     private readonly AttackService _attackService;
+    private readonly DeclarationEffectService _declarationEffectService;
     private readonly ComplexMechanicService _complexMechanicService;
     private readonly PhaseRunner _phaseRunner;
     private readonly RuleProcessor _ruleProcessor;
@@ -153,6 +185,7 @@ public sealed class ActionExecutor
         PlayCardService? playCardService = null,
         DigivolveService? digivolveService = null,
         AttackService? attackService = null,
+        DeclarationEffectService? declarationEffectService = null,
         ComplexMechanicService? complexMechanicService = null,
         PhaseRunner? phaseRunner = null,
         RuleProcessor? ruleProcessor = null)
@@ -163,6 +196,7 @@ public sealed class ActionExecutor
             playCardService,
             digivolveService,
             attackService,
+            declarationEffectService,
             complexMechanicService,
             phaseRunner,
             ruleProcessor))
@@ -176,6 +210,7 @@ public sealed class ActionExecutor
         _playCardService = playCardService!;
         _digivolveService = digivolveService!;
         _attackService = attackService!;
+        _declarationEffectService = declarationEffectService!;
         _complexMechanicService = complexMechanicService!;
         _phaseRunner = phaseRunner!;
         _ruleProcessor = ruleProcessor!;
@@ -186,6 +221,8 @@ public sealed class ActionExecutor
     internal DigivolveService RuntimeDigivolveService => _digivolveService;
 
     internal AttackService RuntimeAttackService => _attackService;
+
+    internal DeclarationEffectService RuntimeDeclarationEffectService => _declarationEffectService;
 
     internal PhaseRunner RuntimePhaseRunner => _phaseRunner;
 
@@ -253,6 +290,13 @@ public sealed class ActionExecutor
                 _complexMechanicService.ExecuteDelayOptionPlay(state, delay);
                 break;
 
+            case DeclareEffectAction declare:
+                result = ActionExecutionResult.FromDeclaration(
+                    state,
+                    declare,
+                    _declarationEffectService.ExecuteWithResult(state, declare, trace));
+                break;
+
             case AttackAction attack:
                 result = ActionExecutionResult.FromAttack(
                     state,
@@ -297,6 +341,7 @@ public sealed class ActionExecutor
         PlayCardService? playCardService,
         DigivolveService? digivolveService,
         AttackService? attackService,
+        DeclarationEffectService? declarationEffectService,
         ComplexMechanicService? complexMechanicService,
         PhaseRunner? phaseRunner,
         RuleProcessor? ruleProcessor) =>
@@ -305,6 +350,7 @@ public sealed class ActionExecutor
         || playCardService is null
         || digivolveService is null
         || attackService is null
+        || declarationEffectService is null
         || complexMechanicService is null
         || phaseRunner is null
         || ruleProcessor is null;

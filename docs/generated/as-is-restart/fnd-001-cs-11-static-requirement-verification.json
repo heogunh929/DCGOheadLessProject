@@ -1,0 +1,1808 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001cs11-static-requirement-verification.v1",
+  "generatedAt": "2026-06-23T21:36:28.141714+00:00",
+  "goal": "FND-001-A static evolution/link requirement effective gate evidence",
+  "inputs": {
+    "asIsSourceRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+    "fnd001PartialClosure": "docs/generated/as-is-restart/fnd-001-continuous-static-partial-closure.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "programTests": "src/DCGO.RL.Engine.Tests/Program.cs"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "srcTestModifiedOnlyForEvidence": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "trust001Performed": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-11",
+    "classification": "CloseableFoundationTask",
+    "title": "static evolution/link requirement effective gates",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-07",
+    "parityBoundaryTask": "PARITY-001",
+    "trustBoundaryTask": "TRUST-001-RERUN",
+    "linkFactoryWrapperParityClosed": false
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-11",
+    "requiredSourceRequirementGroupCount": 3,
+    "coveredSourceRequirementGroupCount": 3,
+    "requiredHeadlessRequirementGroupCount": 3,
+    "coveredHeadlessRequirementGroupCount": 3,
+    "sourceSampleCandidateCount": 1196,
+    "factoryReferenceCount": 1257,
+    "sourceRequiredLinkedSampleCount": 1196,
+    "parityNotRunSampleCount": 1196,
+    "evolutionFactoryReferenceCount": 1187,
+    "linkFactoryReferenceCount": 70,
+    "directIgnorePermissionSourceSampleCount": 0,
+    "requiredTestCount": 15,
+    "coveredTestCount": 15,
+    "staticRequirementServiceCovered": true,
+    "evolutionFactoryWrapperCovered": true,
+    "linkSourceFacingFactoryWrapperPresent": false,
+    "linkFactoryWrapperParityClosed": false,
+    "ignorePermissionBoundaryRetained": true,
+    "fullCardParityReduced": false,
+    "parityNotRunSourceEffectCount": 3918,
+    "parityPassedSourceEffectCount": 0
+  },
+  "conditions": {
+    "sourceRequirementGroupsCovered": true,
+    "headlessDescriptorGroupsCovered": true,
+    "staticRequirementServiceCovered": true,
+    "evolutionFactoryWrapperCovered": true,
+    "evolutionRuntimeWiringCovered": true,
+    "linkRuntimeWiringCovered": true,
+    "sourceSamplesLinked": true,
+    "ignorePermissionBoundaryRetained": true,
+    "linkFactoryWrapperBoundaryRetained": true,
+    "testCandidatesPresent": true,
+    "fullCardParityBoundaryRetained": true,
+    "openCodeStillFalse": true,
+    "continuousStillPartial": true
+  },
+  "sourceRequirementGroups": [
+    {
+      "id": "EvolutionRequirement",
+      "title": "static digivolution/evolution requirement",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\AddDigivolutionRequirement.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\AddEvolutionConditionClass.cs",
+      "sourceInterfaceFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectInterfaces.cs",
+      "sourceConsumerFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardSource.cs",
+      "sourceClass": "AddDigivolutionRequirementClass",
+      "sourceInterface": "IAddDigivolutionRequirementEffect",
+      "sourceMethods": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "AddDigivolutionRequirementStaticEffect"
+      ],
+      "sampleFactoryApi": [
+        "AddSelfDigivolutionRequirementStaticEffect",
+        "AddDigivolutionRequirementStaticEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "AddSelfDigivolutionRequirementStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "AddDigivolutionRequirementStaticEffect",
+          "present": true,
+          "lines": [
+            17,
+            35
+          ]
+        },
+        {
+          "pattern": "cardCondition ?? ((cardSource) => cardSource == card)",
+          "present": true,
+          "lines": [
+            19
+          ]
+        },
+        {
+          "pattern": "effectName: effectName ?? \"Can digivolve to this card\"",
+          "present": true,
+          "lines": [
+            25
+          ]
+        },
+        {
+          "pattern": "SetUpAddDigivolutionRequirementClass(getEvoCost: GetEvoCost)",
+          "present": true,
+          "lines": [
+            39
+          ]
+        },
+        {
+          "pattern": "cardSource.Owner.CanIgnoreDigivolutionRequirement(permanent, cardSource)",
+          "present": true,
+          "lines": [
+            54,
+            61,
+            66
+          ]
+        },
+        {
+          "pattern": "permanent.TopCard.CardColors.Contains(cardColor)",
+          "present": true,
+          "lines": [
+            62
+          ]
+        },
+        {
+          "pattern": "permanent.TopCard.Level == level",
+          "present": true,
+          "lines": [
+            71
+          ]
+        },
+        {
+          "pattern": "return costEquation != null ? costEquation() : digivolutionCost;",
+          "present": true,
+          "lines": [
+            76
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class AddDigivolutionRequirementClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "IAddDigivolutionRequirementEffect",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "SetUpAddDigivolutionRequirementClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "public int GetEvoCost",
+          "present": true,
+          "lines": [
+            13
+          ]
+        },
+        {
+          "pattern": "return _getEvoCost(permanent, cardSource, ignore, isCheckAvailability);",
+          "present": true,
+          "lines": [
+            21
+          ]
+        },
+        {
+          "pattern": "return -1;",
+          "present": true,
+          "lines": [
+            26
+          ]
+        }
+      ],
+      "interfacePatterns": [
+        {
+          "pattern": "public interface IAddDigivolutionRequirementEffect",
+          "present": true,
+          "lines": [
+            331
+          ]
+        },
+        {
+          "pattern": "int GetEvoCost(Permanent permanent, CardSource cardSource, CardEffectCommons.IgnoreRequirement ignore, bool checkAvailability);",
+          "present": true,
+          "lines": [
+            333
+          ]
+        }
+      ],
+      "consumerPatterns": [
+        {
+          "pattern": "cardEffect is IAddDigivolutionRequirementEffect && cardEffect.CanUse(null)",
+          "present": true,
+          "lines": [
+            547,
+            563,
+            577
+          ]
+        },
+        {
+          "pattern": "((IAddDigivolutionRequirementEffect)cardEffect).GetEvoCost(targetPermanent, this, ignore, checkAvailability)",
+          "present": true,
+          "lines": [
+            549,
+            565,
+            579
+          ]
+        },
+        {
+          "pattern": "BaseEvoCostsFromEntity",
+          "present": true,
+          "lines": [
+            528,
+            589
+          ]
+        },
+        {
+          "pattern": "Owner.CanIgnoreDigivolutionRequirement(targetPermanent, this)",
+          "present": true,
+          "lines": [
+            593,
+            596,
+            599
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "id": "LinkRequirement",
+      "title": "static link requirement",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\AddLinkRequirement.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\AddLinkConditionClass.cs",
+      "sourceInterfaceFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectInterfaces.cs",
+      "sourceConsumerFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardSource.cs",
+      "sourceClass": "AddLinkConditionClass",
+      "sourceInterface": "IAddLinkConditionEffect",
+      "sourceMethods": [
+        "AddSelfLinkConditionStaticEffect",
+        "AddLinkConditionStaticEffect"
+      ],
+      "sampleFactoryApi": [
+        "AddSelfLinkConditionStaticEffect",
+        "AddLinkConditionStaticEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "AddSelfLinkConditionStaticEffect",
+          "present": true,
+          "lines": [
+            11
+          ]
+        },
+        {
+          "pattern": "AddLinkConditionStaticEffect",
+          "present": true,
+          "lines": [
+            18,
+            30
+          ]
+        },
+        {
+          "pattern": "cardCondition: cardCondition ?? ((cardSource) => cardSource == card)",
+          "present": true,
+          "lines": [
+            20
+          ]
+        },
+        {
+          "pattern": "effectName: effectName ?? \"Link\"",
+          "present": true,
+          "lines": [
+            25
+          ]
+        },
+        {
+          "pattern": "SetUpAddLinkConditionClass(getLinkCondition: GetLink)",
+          "present": true,
+          "lines": [
+            34
+          ]
+        },
+        {
+          "pattern": "LinkCondition GetLink(CardSource cardSource)",
+          "present": true,
+          "lines": [
+            73
+          ]
+        },
+        {
+          "pattern": "new LinkCondition(",
+          "present": true,
+          "lines": [
+            78
+          ]
+        },
+        {
+          "pattern": "digimonCondition: PermanentCondition",
+          "present": true,
+          "lines": [
+            79
+          ]
+        },
+        {
+          "pattern": "cost: linkCost",
+          "present": true,
+          "lines": [
+            80
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class AddLinkConditionClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "IAddLinkConditionEffect",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "SetUpAddLinkConditionClass",
+          "present": true,
+          "lines": [
+            8
+          ]
+        },
+        {
+          "pattern": "public LinkCondition GetLinkCondition",
+          "present": true,
+          "lines": [
+            12
+          ]
+        },
+        {
+          "pattern": "return _getLinkCondition(cardSource);",
+          "present": true,
+          "lines": [
+            20
+          ]
+        },
+        {
+          "pattern": "return null;",
+          "present": true,
+          "lines": [
+            25
+          ]
+        }
+      ],
+      "interfacePatterns": [
+        {
+          "pattern": "public interface IAddLinkConditionEffect",
+          "present": true,
+          "lines": [
+            423
+          ]
+        },
+        {
+          "pattern": "LinkCondition GetLinkCondition(CardSource cardSource);",
+          "present": true,
+          "lines": [
+            425
+          ]
+        }
+      ],
+      "consumerPatterns": [
+        {
+          "pattern": "cardEffect is IAddLinkConditionEffect",
+          "present": true,
+          "lines": [
+            2733
+          ]
+        },
+        {
+          "pattern": "((IAddLinkConditionEffect)cardEffect).GetLinkCondition(this) != null",
+          "present": true,
+          "lines": [
+            2735
+          ]
+        },
+        {
+          "pattern": "return ((IAddLinkConditionEffect)addLinkConditonEffect).GetLinkCondition(this);",
+          "present": true,
+          "lines": [
+            2737
+          ]
+        },
+        {
+          "pattern": "return null;",
+          "present": true,
+          "lines": [
+            2739,
+            2979,
+            3007,
+            3035,
+            3063
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "id": "IgnorePermission",
+      "title": "ignore digivolution requirement permission and cannot-ignore restriction",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectCommons\\GiveEffect\\GiveEffectToPlayer\\IgnoreDigivolutionRequirement.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\CannotIgnoreDigivolutionConditionClass.cs",
+      "sourceInterfaceFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectInterfaces.cs",
+      "sourceConsumerFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\Player.cs",
+      "sourceClass": "CannotIgnoreDigivolutionConditionClass",
+      "sourceInterface": "ICannotIgnoreDigivolutionConditionEffect",
+      "sourceMethods": [
+        "GainIgnoreDigivolutionRequirementPlayerEffect"
+      ],
+      "sampleFactoryApi": [
+        "GainIgnoreDigivolutionRequirementPlayerEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "GainIgnoreDigivolutionRequirementPlayerEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "GainIgnoreDigivolutionRequirementPlayerEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "if (activateClass == null) return null;",
+          "present": true,
+          "lines": [
+            12
+          ]
+        },
+        {
+          "pattern": "if (activateClass.EffectSourceCard == null) return null;",
+          "present": true,
+          "lines": [
+            13
+          ]
+        },
+        {
+          "pattern": "CardEffectFactory.AddDigivolutionRequirementStaticEffect",
+          "present": true,
+          "lines": [
+            27
+          ]
+        },
+        {
+          "pattern": "effectName: \"Ignore Digivolution requirements and change digivolution cost\"",
+          "present": true,
+          "lines": [
+            35
+          ]
+        },
+        {
+          "pattern": "return GetCardEffectByEffectTiming(timing: EffectTiming.None, cardEffect: addDigivolutionRequirementClass);",
+          "present": true,
+          "lines": [
+            37
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class CannotIgnoreDigivolutionConditionClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "ICannotIgnoreDigivolutionConditionEffect",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "SetUpCannotIgnoreDigivolutionConditionClass",
+          "present": true,
+          "lines": [
+            7
+          ]
+        },
+        {
+          "pattern": "public bool cannotIgnoreDigivolutionCondition",
+          "present": true,
+          "lines": [
+            14
+          ]
+        },
+        {
+          "pattern": "IgnoreDigivolutionCondition(player, targetPermanent, cardSource)",
+          "present": true,
+          "lines": [
+            22
+          ]
+        },
+        {
+          "pattern": "return false;",
+          "present": true,
+          "lines": [
+            30
+          ]
+        }
+      ],
+      "interfacePatterns": [
+        {
+          "pattern": "public interface ICannotIgnoreDigivolutionConditionEffect",
+          "present": true,
+          "lines": [
+            352
+          ]
+        },
+        {
+          "pattern": "bool cannotIgnoreDigivolutionCondition(Player player, Permanent targetPermanent, CardSource cardSource);",
+          "present": true,
+          "lines": [
+            354
+          ]
+        }
+      ],
+      "consumerPatterns": [
+        {
+          "pattern": "public bool CanIgnoreDigivolutionRequirement(Permanent targetPermanent, CardSource cardSource)",
+          "present": true,
+          "lines": [
+            1422
+          ]
+        },
+        {
+          "pattern": "cardEffect1 is ICannotIgnoreDigivolutionConditionEffect",
+          "present": true,
+          "lines": [
+            1432,
+            1449
+          ]
+        },
+        {
+          "pattern": "cardEffect1.CanUse(null)",
+          "present": true,
+          "lines": [
+            1047,
+            1064,
+            1200,
+            1220,
+            1270,
+            1295,
+            1392,
+            1406,
+            1434,
+            1451
+          ]
+        },
+        {
+          "pattern": "cannotIgnoreDigivolutionCondition(this, targetPermanent, cardSource)",
+          "present": true,
+          "lines": [
+            1436,
+            1453
+          ]
+        },
+        {
+          "pattern": "return false;",
+          "present": true,
+          "lines": [
+            1034,
+            1051,
+            1068,
+            1245,
+            1281,
+            1306,
+            1325,
+            1346,
+            1363,
+            1438
+          ]
+        },
+        {
+          "pattern": "return true;",
+          "present": true,
+          "lines": [
+            1077,
+            1206,
+            1226,
+            1238,
+            1276,
+            1301,
+            1318,
+            1372,
+            1464,
+            1516
+          ]
+        }
+      ],
+      "covered": true
+    }
+  ],
+  "headlessSurfaces": {
+    "files": [
+      "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+      "src/DCGO.RL.Engine/Effects/StaticRequirementService.cs",
+      "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+      "src/DCGO.RL.Engine/Battle/LegalActionGenerator.cs",
+      "src/DCGO.RL.Engine/Battle/DigivolveService.cs",
+      "src/DCGO.RL.Engine/Mechanics/ComplexMechanicService.cs"
+    ],
+    "requirementGroups": [
+      {
+        "id": "EvolutionRequirement",
+        "title": "static digivolution/evolution requirement",
+        "headlessDescriptor": "StaticEvolutionRequirementDescriptor",
+        "patterns": [
+          {
+            "pattern": "public sealed record StaticEvolutionRequirementDescriptor",
+            "present": true,
+            "lines": [
+              858
+            ]
+          },
+          {
+            "pattern": "CardColor RequiredColor = CardColor.None",
+            "present": true,
+            "lines": [
+              864
+            ]
+          },
+          {
+            "pattern": "int RequiredLevel = -1",
+            "present": true,
+            "lines": [
+              865
+            ]
+          },
+          {
+            "pattern": "bool IgnoreDigivolutionRequirement = false",
+            "present": true,
+            "lines": [
+              868
+            ]
+          },
+          {
+            "pattern": "Func<StaticEvolutionRequirementEvaluationContext, bool>? SourceCardCondition",
+            "present": true,
+            "lines": [
+              869
+            ]
+          },
+          {
+            "pattern": "Func<StaticEvolutionRequirementEvaluationContext, bool>? TargetPermanentCondition",
+            "present": true,
+            "lines": [
+              870
+            ]
+          },
+          {
+            "pattern": "Func<StaticEvolutionRequirementEvaluationContext, int>? CostEquation",
+            "present": true,
+            "lines": [
+              871
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<StaticEvolutionRequirementDescriptor> CollectStaticEvolutionRequirements",
+            "present": true,
+            "lines": [
+              1102
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<StaticEvolutionRequirementEvaluation> EvaluateEvolutionRequirements",
+            "present": true,
+            "lines": [
+              1921
+            ]
+          },
+          {
+            "pattern": "staticRequirements?.FirstEvolutionRequirement(state, card, targetPermanent, staticEffects)",
+            "present": true,
+            "lines": [
+              2504
+            ]
+          },
+          {
+            "pattern": "BattleRules.CanDigivolve(state, card, permanent, out _, _staticRequirements, _staticEffects)",
+            "present": true,
+            "lines": [
+              2687
+            ]
+          },
+          {
+            "pattern": "DigivolveWithResult",
+            "present": true,
+            "lines": [
+              2824,
+              2835,
+              18522,
+              19673,
+              20099
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "LinkRequirement",
+        "title": "static link requirement",
+        "headlessDescriptor": "StaticLinkRequirementDescriptor",
+        "patterns": [
+          {
+            "pattern": "public sealed record StaticLinkRequirementDescriptor",
+            "present": true,
+            "lines": [
+              915
+            ]
+          },
+          {
+            "pattern": "int LinkCost",
+            "present": true,
+            "lines": [
+              920
+            ]
+          },
+          {
+            "pattern": "Func<StaticLinkRequirementEvaluationContext, bool>? SourceCardCondition",
+            "present": true,
+            "lines": [
+              921
+            ]
+          },
+          {
+            "pattern": "Func<StaticLinkRequirementEvaluationContext, bool>? TargetPermanentCondition",
+            "present": true,
+            "lines": [
+              922
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<StaticLinkRequirementDescriptor> CollectStaticLinkRequirements",
+            "present": true,
+            "lines": [
+              1169
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<StaticLinkRequirementEvaluation> EvaluateLinkRequirements",
+            "present": true,
+            "lines": [
+              1996
+            ]
+          },
+          {
+            "pattern": "_staticRequirements?.FirstLinkRequirement(state, action.LinkCard, target, _staticEffects)",
+            "present": true,
+            "lines": [
+              3282
+            ]
+          },
+          {
+            "pattern": "GenerateStaticLinkActions",
+            "present": true,
+            "lines": [
+              3474,
+              3521,
+              3528
+            ]
+          },
+          {
+            "pattern": "_costResolver.ResolveLink",
+            "present": true,
+            "lines": [
+              3298
+            ]
+          },
+          {
+            "pattern": "[\"staticRequirement\"] = \"link\"",
+            "present": true,
+            "lines": [
+              3561
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "IgnorePermission",
+        "title": "ignore digivolution requirement permission and cannot-ignore restriction",
+        "headlessDescriptor": "CannotIgnoreDigivolutionRequirementDescriptor",
+        "patterns": [
+          {
+            "pattern": "public sealed record CannotIgnoreDigivolutionRequirementDescriptor",
+            "present": true,
+            "lines": [
+              890
+            ]
+          },
+          {
+            "pattern": "StaticEffectPlayerTargetKind AppliesTo",
+            "present": true,
+            "lines": [
+              895
+            ]
+          },
+          {
+            "pattern": "CardMetadataCriteria? EvolvingCardMetadataCriteria",
+            "present": true,
+            "lines": [
+              900
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<CannotIgnoreDigivolutionRequirementDescriptor> CollectCannotIgnoreDigivolutionRequirements",
+            "present": true,
+            "lines": [
+              1135
+            ]
+          },
+          {
+            "pattern": "public IReadOnlyList<CannotIgnoreDigivolutionRequirementEvaluation> EvaluateCannotIgnoreDigivolutionRequirements",
+            "present": true,
+            "lines": [
+              1958
+            ]
+          },
+          {
+            "pattern": "CanIgnoreDigivolutionRequirement(state, descriptor.ControllerPlayerId, evolvingCard, targetPermanent)",
+            "present": true,
+            "lines": [
+              2063
+            ]
+          },
+          {
+            "pattern": "descriptor.IgnoreDigivolutionRequirement && !HasExplicitTargetGate(descriptor)",
+            "present": true,
+            "lines": [
+              2056
+            ]
+          },
+          {
+            "pattern": "Static evolution requirement cannot-ignore restriction blocks permission",
+            "present": true,
+            "lines": [
+              4097
+            ]
+          },
+          {
+            "pattern": "Static evolution requirement cannot-ignore restriction condition gates",
+            "present": true,
+            "lines": [
+              4098
+            ]
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "servicePatterns": [
+      {
+        "pattern": "public sealed class StaticRequirementService",
+        "present": true,
+        "lines": [
+          7
+        ]
+      },
+      {
+        "pattern": "EvaluateEvolutionRequirements",
+        "present": true,
+        "lines": [
+          27,
+          62
+        ]
+      },
+      {
+        "pattern": "FirstEvolutionRequirement",
+        "present": true,
+        "lines": [
+          57
+        ]
+      },
+      {
+        "pattern": "EvaluateCannotIgnoreDigivolutionRequirements",
+        "present": true,
+        "lines": [
+          64,
+          225
+        ]
+      },
+      {
+        "pattern": "EvaluateLinkRequirements",
+        "present": true,
+        "lines": [
+          102,
+          137
+        ]
+      },
+      {
+        "pattern": "FirstLinkRequirement",
+        "present": true,
+        "lines": [
+          132
+        ]
+      },
+      {
+        "pattern": "staticEffects?.EffectiveCardColors",
+        "present": true,
+        "lines": [
+          175
+        ]
+      },
+      {
+        "pattern": "staticEffects?.EffectivePermanentLevel",
+        "present": true,
+        "lines": [
+          177
+        ]
+      },
+      {
+        "pattern": "staticEffects.MatchesCardMetadata",
+        "present": true,
+        "lines": [
+          305
+        ]
+      },
+      {
+        "pattern": "DistinctBy(evaluation => evaluation.Descriptor.StableId)",
+        "present": true,
+        "lines": [
+          52,
+          97,
+          127
+        ]
+      },
+      {
+        "pattern": "OrderBy(evaluation => evaluation.Descriptor.StableId, StringComparer.Ordinal)",
+        "present": true,
+        "lines": [
+          53,
+          98,
+          128
+        ]
+      }
+    ],
+    "evolutionFactoryPatterns": [
+      {
+        "pattern": "AddSelfDigivolutionRequirementStaticEffect",
+        "present": true,
+        "lines": [
+          293
+        ]
+      },
+      {
+        "pattern": "AddDigivolutionRequirementStaticEffect",
+        "present": true,
+        "lines": [
+          306,
+          320
+        ]
+      },
+      {
+        "pattern": "Digivolution cost must not be negative without a cost equation.",
+        "present": true,
+        "lines": [
+          338
+        ]
+      },
+      {
+        "pattern": "StableEvolutionRequirementId",
+        "present": true,
+        "lines": [
+          348,
+          385
+        ]
+      },
+      {
+        "pattern": "CombineSourceConditions",
+        "present": true,
+        "lines": [
+          365,
+          371
+        ]
+      }
+    ],
+    "evolutionRuntimePatterns": [
+      {
+        "pattern": "staticRequirements?.FirstEvolutionRequirement(state, card, targetPermanent, staticEffects)",
+        "present": true,
+        "lines": [
+          2504
+        ]
+      },
+      {
+        "pattern": "BattleRules.CanDigivolve(state, card, permanent, out _, _staticRequirements, _staticEffects)",
+        "present": true,
+        "lines": [
+          2687
+        ]
+      },
+      {
+        "pattern": "BattleRules.CanDigivolve(state, action.Card, permanent, out var cost, _staticRequirements, _staticEffects)",
+        "present": true,
+        "lines": [
+          2854
+        ]
+      },
+      {
+        "pattern": "BattleRules.CanDigivolve(state, action.Card, permanent, out cost, _staticRequirements, _staticEffects)",
+        "present": true,
+        "lines": [
+          2876
+        ]
+      }
+    ],
+    "linkRuntimePatterns": [
+      {
+        "pattern": "_staticRequirements?.FirstLinkRequirement(state, action.LinkCard, target, _staticEffects)",
+        "present": true,
+        "lines": [
+          3282
+        ]
+      },
+      {
+        "pattern": "GenerateStaticLinkActions",
+        "present": true,
+        "lines": [
+          3474,
+          3521,
+          3528
+        ]
+      },
+      {
+        "pattern": "_staticRequirements.EvaluateLinkRequirements(state, card, target, _staticEffects)",
+        "present": true,
+        "lines": [
+          3544
+        ]
+      },
+      {
+        "pattern": "_costResolver.ResolveLink",
+        "present": true,
+        "lines": [
+          3298
+        ]
+      },
+      {
+        "pattern": "[\"staticRequirement\"] = \"link\"",
+        "present": true,
+        "lines": [
+          3561
+        ]
+      }
+    ],
+    "staticRequirementServiceCovered": true,
+    "evolutionFactoryWrapperCovered": true,
+    "evolutionRuntimeWiringCovered": true,
+    "linkRuntimeWiringCovered": true,
+    "linkSourceFacingFactoryWrapperPresent": false,
+    "linkSourceFacingFactoryWrapperBoundary": true
+  },
+  "sourceSamples": {
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceSampleCandidateCount": 1196,
+    "factoryReferenceCount": 1257,
+    "sourceRequiredLinkedSampleCount": 1196,
+    "parityNotRunSampleCount": 1196,
+    "methodReferenceCounts": {
+      "AddSelfDigivolutionRequirementStaticEffect": 1186,
+      "AddSelfLinkConditionStaticEffect": 70,
+      "AddDigivolutionRequirementStaticEffect": 1
+    },
+    "groupSourceSampleCounts": {
+      "EvolutionRequirement": 1186,
+      "LinkRequirement": 70
+    },
+    "groupFactoryReferenceCounts": {
+      "EvolutionRequirement": 1187,
+      "LinkRequirement": 70
+    },
+    "byGroup": [
+      {
+        "id": "EvolutionRequirement",
+        "title": "static digivolution/evolution requirement",
+        "sourceSampleCount": 1186,
+        "factoryReferenceCount": 1187,
+        "methodReferenceCounts": {
+          "AddSelfDigivolutionRequirementStaticEffect": 1186,
+          "AddDigivolutionRequirementStaticEffect": 1
+        },
+        "sourceRequiredLinkedCount": 1186,
+        "parityNotRunCount": 1186,
+        "requiresDirectSourceScaffold": true,
+        "directScaffoldBoundaryRetained": false,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_001@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+            "sourceEffectClassName": "AD1_001",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceEffectClassName": "AD1_002",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_003@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+            "sourceEffectClassName": "AD1_003",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceEffectClassName": "AD1_004",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceEffectClassName": "AD1_005",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "LinkRequirement",
+        "title": "static link requirement",
+        "sourceSampleCount": 70,
+        "factoryReferenceCount": 70,
+        "methodReferenceCounts": {
+          "AddSelfLinkConditionStaticEffect": 70
+        },
+        "sourceRequiredLinkedCount": 70,
+        "parityNotRunCount": 70,
+        "requiresDirectSourceScaffold": true,
+        "directScaffoldBoundaryRetained": false,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "BT21_009@DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_009.cs",
+            "sourceEffectClassName": "BT21_009",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_009.cs",
+            "sourceSetId": "BT21",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect",
+              "AddSelfLinkConditionStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement",
+              "LinkRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT21_009_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_009.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT21_009_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_009.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT21_009_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_009.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT21_018@DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_018.cs",
+            "sourceEffectClassName": "BT21_018",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_018.cs",
+            "sourceSetId": "BT21",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect",
+              "AddSelfLinkConditionStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement",
+              "LinkRequirement"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT21_018_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_018.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT21_018_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_018.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT21_018_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_018.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT21_023@DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_023.cs",
+            "sourceEffectClassName": "BT21_023",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_023.cs",
+            "sourceSetId": "BT21",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect",
+              "AddSelfLinkConditionStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement",
+              "LinkRequirement"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT21_023_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_023.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT21_023_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_023.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT21_023_DCGO_Assets_Scripts_CardEffect_BT21_Red_BT21_023.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT21_041@DCGO/Assets/Scripts/CardEffect/BT21/Yellow/BT21_041.cs",
+            "sourceEffectClassName": "BT21_041",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Yellow/BT21_041.cs",
+            "sourceSetId": "BT21",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect",
+              "AddSelfLinkConditionStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement",
+              "LinkRequirement"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT21_041_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_041.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT21_041_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_041.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT21_041_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_041.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT21_043@DCGO/Assets/Scripts/CardEffect/BT21/Yellow/BT21_043.cs",
+            "sourceEffectClassName": "BT21_043",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT21/Yellow/BT21_043.cs",
+            "sourceSetId": "BT21",
+            "factoryApi": [
+              "AddSelfDigivolutionRequirementStaticEffect",
+              "AddSelfLinkConditionStaticEffect"
+            ],
+            "requirementGroups": [
+              "EvolutionRequirement",
+              "LinkRequirement"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT21_043_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_043.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT21_043_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_043.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT21_043_DCGO_Assets_Scripts_CardEffect_BT21_Yellow_BT21_043.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "IgnorePermission",
+        "title": "ignore digivolution requirement permission and cannot-ignore restriction",
+        "sourceSampleCount": 0,
+        "factoryReferenceCount": 0,
+        "methodReferenceCounts": {},
+        "sourceRequiredLinkedCount": 0,
+        "parityNotRunCount": 0,
+        "requiresDirectSourceScaffold": false,
+        "directScaffoldBoundaryRetained": true,
+        "sampleRecords": [],
+        "covered": true
+      }
+    ],
+    "sampleRecords": [
+      {
+        "sourceScaffoldId": "AD1_001@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+        "sourceEffectClassName": "AD1_001",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_001.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_001_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_001.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceEffectClassName": "AD1_002",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_003@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+        "sourceEffectClassName": "AD1_003",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_003.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_003_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_003.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "sourceEffectClassName": "AD1_004",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceEffectClassName": "AD1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_006@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "sourceEffectClassName": "AD1_006",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_006.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_006_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_006.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceEffectClassName": "AD1_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceEffectClassName": "AD1_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_009@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceEffectClassName": "AD1_009",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_010@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+        "sourceEffectClassName": "AD1_010",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_010.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_010_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_010.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_011@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+        "sourceEffectClassName": "AD1_011",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_011.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_011_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_011.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_011_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_011.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_011_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_011.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_012@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+        "sourceEffectClassName": "AD1_012",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_012.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_012_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_012.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_012_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_012.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_012_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_012.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceEffectClassName": "AD1_013",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_014@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "sourceEffectClassName": "AD1_014",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_014_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_014.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_015@DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+        "sourceEffectClassName": "AD1_015",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_015.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_015_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_015.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_016@DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "sourceEffectClassName": "AD1_016",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_016_DCGO_Assets_Scripts_CardEffect_AD1_Yellow_AD1_016.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_024@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceEffectClassName": "AD1_024",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 3,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_007@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_007.cs",
+        "sourceEffectClassName": "BT10_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_007.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_007_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_007_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_007_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_007.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_008@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+        "sourceEffectClassName": "BT10_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_008.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 5,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_008_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT10_011@DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_011.cs",
+        "sourceEffectClassName": "BT10_011",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_011.cs",
+        "sourceSetId": "BT10",
+        "factoryApi": [
+          "AddSelfDigivolutionRequirementStaticEffect"
+        ],
+        "requirementGroups": [
+          "EvolutionRequirement"
+        ],
+        "affectedCardCount": 6,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_011_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_011.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_011_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_011.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_011_DCGO_Assets_Scripts_CardEffect_BT10_Red_BT10_011.cs.comparison.json"
+      }
+    ],
+    "covered": true
+  },
+  "testEvidence": {
+    "program": "src/DCGO.RL.Engine.Tests/Program.cs",
+    "requiredTests": [
+      "CardEffectFactory self evolution requirement maps to static descriptor",
+      "Static card color modifier affects digivolution color requirement",
+      "Static card level modifier feeds permanent level requirement",
+      "Static evolution requirement cannot-ignore restriction blocks permission",
+      "Static evolution requirement cannot-ignore restriction condition gates",
+      "Static evolution requirement condition gates target",
+      "Static evolution requirement hand source generates and executes",
+      "Static evolution requirement ignore permission generates and executes",
+      "Static evolution requirement ignore permission requires target gate",
+      "Static evolution requirement stops after source move",
+      "Static link cost modifier adjusts link cost",
+      "Static link requirement hand source generates and executes",
+      "Static link requirement uses effective metadata and level",
+      "Static requirement metadata criteria gates source and target",
+      "Static requirement replay deterministic"
+    ],
+    "presence": {
+      "CardEffectFactory self evolution requirement maps to static descriptor": true,
+      "Static card color modifier affects digivolution color requirement": true,
+      "Static card level modifier feeds permanent level requirement": true,
+      "Static evolution requirement cannot-ignore restriction blocks permission": true,
+      "Static evolution requirement cannot-ignore restriction condition gates": true,
+      "Static evolution requirement condition gates target": true,
+      "Static evolution requirement hand source generates and executes": true,
+      "Static evolution requirement ignore permission generates and executes": true,
+      "Static evolution requirement ignore permission requires target gate": true,
+      "Static evolution requirement stops after source move": true,
+      "Static link cost modifier adjusts link cost": true,
+      "Static link requirement hand source generates and executes": true,
+      "Static link requirement uses effective metadata and level": true,
+      "Static requirement metadata criteria gates source and target": true,
+      "Static requirement replay deterministic": true
+    },
+    "coveredTestCount": 15,
+    "requiredTestCount": 15,
+    "allRequiredTestsPresent": true
+  },
+  "retainedBoundaries": [
+    {
+      "id": "LinkFactoryWrapperParity",
+      "owner": "FND001-CS-07/PARITY-001",
+      "reason": "Original AddLinkRequirement factory evidence and headless static link descriptor/runtime evidence are present, but a source-facing headless CardEffectFactory AddSelfLinkConditionStaticEffect wrapper is not present. CS-11 closes descriptor/runtime effective gates only."
+    },
+    {
+      "id": "IgnorePermissionDirectScaffold",
+      "owner": "TRUST-001-RERUN/PARITY-001",
+      "reason": "Ignore digivolution permission is represented by a common helper and cannot-ignore restriction path, not direct full-card source scaffold samples. It remains a boundary for full-card parity and trust rerun."
+    },
+    {
+      "id": "FullCardParityNotRun",
+      "owner": "PARITY-001",
+      "reason": "Full-card source effects remain NotRun and were not converted into parity pass evidence."
+    }
+  ],
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "parityBoundary": {
+    "notRunSourceEffectCount": 3918,
+    "passedSourceEffectCount": 0,
+    "failedSourceEffectCount": 0,
+    "allGeneratedSourceEffectsHaveUnityParity": false,
+    "parityBoundaryOwner": "PARITY-001"
+  },
+  "trust001Handoff": {
+    "handoffRequired": true,
+    "items": [
+      "Map StaticEvolutionRequirementDescriptor reuse to AddDigivolutionRequirementClass/GetEvoCost source evidence before trusting production card scripts.",
+      "Map StaticLinkRequirementDescriptor reuse to AddLinkConditionClass/GetLinkCondition source evidence; keep missing source-facing factory wrapper as a review boundary.",
+      "Map CannotIgnoreDigivolutionRequirementDescriptor reuse to CannotIgnoreDigivolutionConditionClass and Player.CanIgnoreDigivolutionRequirement before trusting ignore-permission behavior.",
+      "Do not use CS-11 evidence to promote generated full-card source records while full-card parity remains NotRun."
+    ]
+  }
+}

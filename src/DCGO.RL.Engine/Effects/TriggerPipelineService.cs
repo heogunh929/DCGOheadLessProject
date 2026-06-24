@@ -26,8 +26,10 @@ public sealed record TriggerPipelineOptions(
         | TriggerSourceZone.Executing
         | TriggerSourceZone.FaceUpSecurity,
     bool ExecuteBackgroundEffects = false,
+    bool ExecuteBackgroundEffectsFirst = false,
     bool ResolveAfterEffectsActivate = false,
-    bool UseMultipleSkillsOrdering = true);
+    bool UseMultipleSkillsOrdering = true,
+    bool UseFirstActiveOnly = false);
 
 public sealed record TriggerPipelineResult(
     EffectContext Context,
@@ -279,7 +281,7 @@ public sealed class TriggerPipelineService
         var skippedOptionalEffects = new List<EffectResolution>();
         var selectionApplications = new List<SelectionResultApplicationResult>();
 
-        var rootFrame = CreateFrame(prepared, parentFrame: null, TriggerStackFrameKind.Batch, depth: 0);
+        var rootFrame = CreateEntryFrame(prepared, parentFrame: null, TriggerStackFrameKind.Batch, depth: 0);
         var outcome = DrainFrame(
             rootFrame,
             state,
@@ -502,6 +504,11 @@ public sealed class TriggerPipelineService
             }
 
             RemoveFirst(remaining, resolution);
+            if (current.Options.UseFirstActiveOnly)
+            {
+                remaining.Clear();
+            }
+
             current = current with
             {
                 RemainingEffects = remaining.ToArray(),
@@ -647,6 +654,11 @@ public sealed class TriggerPipelineService
         }
 
         RemoveFirst(remaining, selected);
+        if (continuation.Options.UseFirstActiveOnly)
+        {
+            remaining.Clear();
+        }
+
         var frame = continuation.Frame with
         {
             RemainingEffects = remaining.ToArray(),
@@ -1137,6 +1149,11 @@ public sealed class TriggerPipelineService
             yield break;
         }
 
+        foreach (var source in EnumerateRuleEventPayloadSources(state, context))
+        {
+            yield return source;
+        }
+
         foreach (var player in state.Players.OrderBy(player => player.Id.Value))
         {
             foreach (var permanent in player.FieldPermanents.OrderBy(permanent => permanent.FrameIndex).ThenBy(permanent => permanent.Id.Value))
@@ -1193,6 +1210,57 @@ public sealed class TriggerPipelineService
                 {
                     yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.FaceUpSecurity);
                 }
+            }
+        }
+    }
+
+    private static IEnumerable<TriggerSource> EnumerateRuleEventPayloadSources(
+        GameState state,
+        EffectContext context)
+    {
+        if (context.Timing != EffectTiming.OnDigivolutionCardDiscarded)
+        {
+            yield break;
+        }
+
+        var seen = new HashSet<CardInstanceId>();
+        foreach (var card in CardsFromPayload(context.Payload, "TriggeredSourceCards")
+            .Concat(CardsFromPayload(context.Payload, "DiscardedCards")))
+        {
+            if (!seen.Add(card))
+            {
+                continue;
+            }
+
+            if (!state.Cards.TryGetValue(card, out var instance) || instance.CurrentZone != Zone.Trash)
+            {
+                continue;
+            }
+
+            yield return CreatePlayerZoneSource(state, card, TriggerSourceRole.Trash);
+        }
+    }
+
+    private static IEnumerable<CardInstanceId> CardsFromPayload(
+        IReadOnlyDictionary<string, object?> payload,
+        string key)
+    {
+        if (!payload.TryGetValue(key, out var value) || value is null)
+        {
+            yield break;
+        }
+
+        if (value is CardInstanceId card)
+        {
+            yield return card;
+            yield break;
+        }
+
+        if (value is IEnumerable<CardInstanceId> cards)
+        {
+            foreach (var item in cards)
+            {
+                yield return item;
             }
         }
     }
@@ -1484,6 +1552,42 @@ public sealed class TriggerPipelineService
             afterEffectsCandidateSignatures: afterEffectsCandidateSignatures
                 ?? parentFrame?.AfterEffectsCandidateSignatures);
 
+    private static TriggerStackFrame CreateEntryFrame(
+        PreparedTriggerGroup prepared,
+        TriggerStackFrame? parentFrame,
+        TriggerStackFrameKind kind,
+        int depth,
+        IReadOnlyList<string>? afterEffectsCandidateSignatures = null)
+    {
+        var frame = CreateFrame(prepared, parentFrame, kind, depth, afterEffectsCandidateSignatures);
+        if (kind != TriggerStackFrameKind.Batch
+            || !prepared.Options.ExecuteBackgroundEffects
+            || !prepared.Options.ExecuteBackgroundEffectsFirst
+            || prepared.BackgroundEffects.Count == 0)
+        {
+            return frame;
+        }
+
+        var foregroundFrame = frame with
+        {
+            BackgroundEffects = Array.Empty<EffectResolution>(),
+            HadCandidate = prepared.QueuedEffects.Count > 0,
+        };
+
+        return new TriggerStackFrame(
+            prepared.Context,
+            prepared.BackgroundEffects,
+            Array.Empty<EffectResolution>(),
+            prepared.Options,
+            foregroundFrame,
+            TriggerStackFrameKind.Background,
+            depth: depth,
+            hadCandidate: true,
+            hadResolutionAttempt: false,
+            afterEffectsCandidateSignatures: afterEffectsCandidateSignatures
+                ?? parentFrame?.AfterEffectsCandidateSignatures);
+    }
+
     private static TriggerStackFrame? CreateFrameChain(
         IReadOnlyList<PreparedTriggerGroup> preparedGroups,
         TriggerStackFrame? parentFrame,
@@ -1492,7 +1596,7 @@ public sealed class TriggerPipelineService
         TriggerStackFrame? next = parentFrame;
         for (var index = preparedGroups.Count - 1; index >= 0; index--)
         {
-            next = CreateFrame(
+            next = CreateEntryFrame(
                 preparedGroups[index],
                 next,
                 TriggerStackFrameKind.Batch,

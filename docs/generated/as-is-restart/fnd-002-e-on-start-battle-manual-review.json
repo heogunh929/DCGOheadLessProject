@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002e-on-start-battle-manual-review.v1",
+  "generatedAt": "2026-06-23T23:29:50.926889+00:00",
+  "goal": "FND-002-E",
+  "sourceRoot": "E:/headlessDCGO/DCGO/Assets",
+  "inputs": {
+    "fullMechanicInventory": "docs/generated/full-mechanic-inventory.json",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "capabilityRegistry": "docs/generated/capability-truth-audit/capability-registry.json",
+    "fnd002Rerun": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+    "originalFnd002Mapping": "docs/generated/as-is-restart/fnd-002-unknown-common-api-mapping.json"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "commitOrPushPerformed": false,
+    "rawJsonOver100MiBAdded": false
+  },
+  "summary": {
+    "targetCount": 1,
+    "currentStatusCounts": {
+      "NotReferenced": 1
+    },
+    "classificationCounts": {
+      "SourceKnownZeroCardTiming": 1
+    },
+    "movedFromNeedsSourceReviewToNotReferencedCount": 1,
+    "currentCardEffectReferenceCount": 0,
+    "currentAffectedCardCount": 0,
+    "foundationGateOpenCodeReady": false,
+    "foundationGateUnknownCommonApiCount": 0,
+    "foundationGateUnsupportedCapabilityCount": 15,
+    "foundationGatePartiallyImplementedCapabilityCount": 48,
+    "inventorySha256": "b475e1f4106fb508ecaba86b8df3c03b660d3243eda0078cc57d99b7dfce13ae",
+    "capabilityRegistrySha256": "158a283b9b71bae2f45e8bd5958601598ee8cc10323dfd011098fa789712f109",
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "generatedStatusPromoted": false,
+    "foundationGateDirectlyManipulated": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false
+  },
+  "entries": [
+    {
+      "apiName": "OnStartBattle",
+      "originalFnd002MappingStatus": "NeedsSourceReview",
+      "previousRerunMappingStatus": "NotReferenced",
+      "previousRerunClassification": "SourceKnownZeroCardTiming",
+      "currentMappingStatus": "NotReferenced",
+      "currentCapabilityStatus": "Unsupported",
+      "fnd002EClassification": "SourceKnownZeroCardTiming",
+      "sourceClassification": "BattleStartRuntimeDispatch",
+      "affectedCardCount": 0,
+      "affectedCards": [],
+      "cardEffectSourceFileCount": 0,
+      "cardEffectOccurrenceCount": 0,
+      "sourceFileCount": 1,
+      "sourceOccurrenceCount": 1,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 4,
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "sourceFiles": [
+        "DCGO/Assets/Scripts/Script/ICardEffect.cs:1011",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4527",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4542",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4549",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4553",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4554",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4555",
+        "DCGO/Assets/Scripts/Script/CardController.cs:4557"
+      ],
+      "payloadKeys": [
+        "AttackingPermanent",
+        "DefendingPermanent",
+        "DefendingCard"
+      ],
+      "sourceMeaning": "The source dispatch occurs in CardController.Battle() after attacker/defender existence checks and before the battle auto-process/body comparison flow. The source stores snapshot Permanent copies for attacking and defending permanents, plus the defending security/card target when present.",
+      "policyDecision": "Treat OnStartBattle as source-known NotReferenced for the current AS-IS card pool. The runtime dispatch and payload are real, but the current CardEffect corpus has zero EffectTiming.OnStartBattle references and zero affected card records. It should not keep the common API mapping gate open for the current source snapshot.",
+      "reopenCondition": "If a future source snapshot contains any CardEffect file referencing EffectTiming.OnStartBattle, the conditional inventory override no longer applies and the timing must return as a battle-start payload foundation task with Unity/RL fixture coverage.",
+      "nextFoundationTask": "FND-002-E1",
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-E battle-start zero-card timing manual review found a source runtime dispatch and payload shape, but the current AS-IS CardEffect corpus has zero EffectTiming.OnStartBattle card references and zero affected card records. This inventory treats the timing as source-known NotReferenced for current full-card-pool completion instead of leaving it as NeedsSourceReview; if a future source card references it, the conditional override stops applying."
+      ],
+      "implementationPerformed": false,
+      "generatedStatusPromoted": false
+    }
+  ]
+}

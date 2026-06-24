@@ -1,0 +1,1772 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd001cs08-static-modifier-verification.v1",
+  "generatedAt": "2026-06-23T21:14:24.053570+00:00",
+  "goal": "FND-001-A static DP/SecurityAttack/SecurityDigimonDP descriptor parity evidence",
+  "inputs": {
+    "asIsSourceRoot": "E:\\headlessDCGO\\DCGO\\Assets",
+    "fnd001PartialClosure": "docs/generated/as-is-restart/fnd-001-continuous-static-partial-closure.json",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "foundationGate": "docs/generated/foundation-completion-gate.json",
+    "programTests": "src/DCGO.RL.Engine.Tests/Program.cs"
+  },
+  "policy": {
+    "implementationPerformed": false,
+    "srcImplementationModified": false,
+    "srcTestModifiedOnlyForEvidence": true,
+    "dcgoOriginalModified": false,
+    "cardEffectBodyImplemented": false,
+    "c0039OrLaterCardPortingRun": false,
+    "rlComponentsImplemented": false,
+    "foundationGateManipulated": false,
+    "generatedStatusPromoted": false,
+    "trust001Performed": false,
+    "commitOrPushPerformed": false
+  },
+  "task": {
+    "id": "FND001-CS-08",
+    "classification": "CloseableFoundationTask",
+    "title": "static DP/SecurityAttack/SecurityDigimonDP descriptor parity",
+    "status": "ClosedByEvidence",
+    "nextTaskCandidate": "FND001-CS-11",
+    "baseDpExactSetSemanticsBoundary": "PARITY-001/TRUST-001-RERUN",
+    "parityBoundaryTask": "PARITY-001"
+  },
+  "summary": {
+    "passed": true,
+    "taskId": "FND001-CS-08",
+    "requiredSourceModifierGroupCount": 4,
+    "coveredSourceModifierGroupCount": 4,
+    "requiredHeadlessRuntimeModifierKindCount": 3,
+    "coveredHeadlessRuntimeModifierKindCount": 3,
+    "sourceSampleCandidateCount": 532,
+    "factoryReferenceCount": 554,
+    "sourceRequiredLinkedSampleCount": 532,
+    "parityNotRunSampleCount": 532,
+    "requiredTestCount": 12,
+    "coveredTestCount": 12,
+    "dynamicAmountDelegateCovered": true,
+    "baseDefinitionMutationBoundaryCovered": true,
+    "baseDpExactSetSemanticsClosed": false,
+    "fullCardParityReduced": false,
+    "parityNotRunSourceEffectCount": 3918,
+    "parityPassedSourceEffectCount": 0
+  },
+  "conditions": {
+    "sourceModifierGroupsCovered": true,
+    "runtimeModifierKindsCovered": true,
+    "continuousDescriptorCovered": true,
+    "continuousServiceCovered": true,
+    "dynamicAmountDelegateCovered": true,
+    "baseDefinitionMutationBoundaryCovered": true,
+    "sourceSamplesLinked": true,
+    "testCandidatesPresent": true,
+    "baseDpExactSetSemanticsRetainedAsBoundary": true,
+    "fullCardParityBoundaryRetained": true,
+    "openCodeStillFalse": true,
+    "continuousStillPartial": true
+  },
+  "sourceModifierGroups": [
+    {
+      "id": "DP",
+      "title": "permanent DP continuous modifier",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\ChangeDP.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\ChangeDPClass.cs",
+      "sourceClass": "ChangeDPClass",
+      "sourceInterface": "IChangeDPEffect",
+      "sourceMethods": [
+        "ChangeSelfDPStaticEffect",
+        "ChangeTargetDPStaticEffect",
+        "ChangeDPStaticEffect"
+      ],
+      "sampleFactoryApi": [
+        "ChangeSelfDPStaticEffect",
+        "ChangeTargetDPStaticEffect",
+        "ChangeDPStaticEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "public static ChangeDPClass ChangeSelfDPStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "public static ChangeDPClass ChangeTargetDPStaticEffect",
+          "present": true,
+          "lines": [
+            41
+          ]
+        },
+        {
+          "pattern": "public static ChangeDPClass ChangeDPStaticEffect",
+          "present": true,
+          "lines": [
+            65
+          ]
+        },
+        {
+          "pattern": "typeof(Func<int>)",
+          "present": true,
+          "lines": [
+            75
+          ]
+        },
+        {
+          "pattern": "if (isInt && (int)(object)changeValue == 0) return null;",
+          "present": true,
+          "lines": [
+            79
+          ]
+        },
+        {
+          "pattern": "DP += _changeValue();",
+          "present": true,
+          "lines": [
+            116
+          ]
+        },
+        {
+          "pattern": "permanent.TopCard.CanNotBeAffected(changeDPClass)",
+          "present": true,
+          "lines": [
+            126
+          ]
+        },
+        {
+          "pattern": "SetIsInheritedEffect(isInheritedEffect)",
+          "present": true,
+          "lines": [
+            97
+          ]
+        },
+        {
+          "pattern": "SetIsLinkedEffect(isLinkedEffect)",
+          "present": true,
+          "lines": [
+            98
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class ChangeDPClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "IChangeDPEffect",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "SetUpChangeDPClass",
+          "present": true,
+          "lines": [
+            11
+          ]
+        },
+        {
+          "pattern": "public int GetDP",
+          "present": true,
+          "lines": [
+            18
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            26,
+            37
+          ]
+        },
+        {
+          "pattern": "IsMinusDP",
+          "present": true,
+          "lines": [
+            57
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "id": "SecurityAttack",
+      "title": "permanent/player SecurityAttack continuous modifier",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\ChangeSAttack.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\ChangeSAttackClass.cs",
+      "sourceClass": "ChangeSAttackClass",
+      "sourceInterface": "IChangeSAttackEffect",
+      "sourceMethods": [
+        "ChangeSelfSAttackStaticEffect",
+        "ChangeTargetSAttackStaticEffect",
+        "ChangeSAttackStaticEffect"
+      ],
+      "sampleFactoryApi": [
+        "ChangeSelfSAttackStaticEffect",
+        "ChangeTargetSAttackStaticEffect",
+        "ChangeSAttackStaticEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "public static ChangeSAttackClass ChangeSelfSAttackStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "public static ChangeSAttackClass ChangeTargetSAttackStaticEffect",
+          "present": true,
+          "lines": [
+            41
+          ]
+        },
+        {
+          "pattern": "public static ChangeSAttackClass ChangeSAttackStaticEffect",
+          "present": true,
+          "lines": [
+            66
+          ]
+        },
+        {
+          "pattern": "typeof(Func<int>)",
+          "present": true,
+          "lines": [
+            76,
+            213
+          ]
+        },
+        {
+          "pattern": "if (isInt && (int)(object)changeValue == 0) return null;",
+          "present": true,
+          "lines": [
+            80,
+            217
+          ]
+        },
+        {
+          "pattern": "SAttack += _changeValue();",
+          "present": true,
+          "lines": [
+            122
+          ]
+        },
+        {
+          "pattern": "permanent.TopCard.CanNotBeAffected(changeSAttackClass)",
+          "present": true,
+          "lines": [
+            132
+          ]
+        },
+        {
+          "pattern": "CalculateOrder.UpDownValue",
+          "present": true,
+          "lines": [
+            146
+          ]
+        },
+        {
+          "pattern": "SetHashString(hashstring)",
+          "present": true,
+          "lines": [
+            93
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class ChangeSAttackClass",
+          "present": true,
+          "lines": [
+            7
+          ]
+        },
+        {
+          "pattern": "IChangeSAttackEffect",
+          "present": true,
+          "lines": [
+            7
+          ]
+        },
+        {
+          "pattern": "SetUpChangeSAttackClass",
+          "present": true,
+          "lines": [
+            9
+          ]
+        },
+        {
+          "pattern": "public int GetSAttack",
+          "present": true,
+          "lines": [
+            20
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            24,
+            54
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "id": "SecurityDigimonDP",
+      "title": "security Digimon card DP continuous modifier",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\ChangeCardDP.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\ChangeCardDPClass.cs",
+      "sourceClass": "ChangeCardDPClass",
+      "sourceInterface": "IChangeCardDPEffect",
+      "sourceMethods": [
+        "ChangeSecurityDigimonCardDPStaticEffect"
+      ],
+      "sampleFactoryApi": [
+        "ChangeSecurityDigimonCardDPStaticEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "public static ChangeCardDPClass ChangeSecurityDigimonCardDPStaticEffect",
+          "present": true,
+          "lines": [
+            11
+          ]
+        },
+        {
+          "pattern": "typeof(Func<int>)",
+          "present": true,
+          "lines": [
+            14
+          ]
+        },
+        {
+          "pattern": "if (isInt && (int)(object)changeValue == 0) return null;",
+          "present": true,
+          "lines": [
+            18
+          ]
+        },
+        {
+          "pattern": "GManager.instance.attackProcess.SecurityDigimon == cardSource",
+          "present": true,
+          "lines": [
+            56
+          ]
+        },
+        {
+          "pattern": "DP += _changeValue();",
+          "present": true,
+          "lines": [
+            46
+          ]
+        },
+        {
+          "pattern": "SetIsInheritedEffect(isInheritedEffect)",
+          "present": true,
+          "lines": [
+            27
+          ]
+        },
+        {
+          "pattern": "SetIsLinkedEffect(islinkedEffect)",
+          "present": true,
+          "lines": [
+            28
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class ChangeCardDPClass",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "IChangeCardDPEffect",
+          "present": true,
+          "lines": [
+            5
+          ]
+        },
+        {
+          "pattern": "SetUpChangeCardDPClass",
+          "present": true,
+          "lines": [
+            11
+          ]
+        },
+        {
+          "pattern": "public int GetDP",
+          "present": true,
+          "lines": [
+            18
+          ]
+        },
+        {
+          "pattern": "CardCondition",
+          "present": true,
+          "lines": [
+            24,
+            34
+          ]
+        },
+        {
+          "pattern": "IsMinusDP",
+          "present": true,
+          "lines": [
+            54
+          ]
+        }
+      ],
+      "covered": true
+    },
+    {
+      "id": "BaseDPBoundary",
+      "title": "origin/base DP set-semantics boundary",
+      "sourceFactoryFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffectFactory\\ChangeOriginDP.cs",
+      "sourceClassFile": "E:\\headlessDCGO\\DCGO\\Assets\\Scripts\\Script\\CardEffects\\ChangeBaseDPClass.cs",
+      "sourceClass": "ChangeBaseDPClass",
+      "sourceInterface": "IChangeBaseDPEffect",
+      "sourceMethods": [
+        "ChangeBaseDPStaticEffect",
+        "ChangeBaseDPGlobalEffect"
+      ],
+      "sampleFactoryApi": [
+        "ChangeBaseDPStaticEffect",
+        "ChangeBaseDPGlobalEffect"
+      ],
+      "factoryPatterns": [
+        {
+          "pattern": "public static ChangeBaseDPClass ChangeBaseDPStaticEffect",
+          "present": true,
+          "lines": [
+            10
+          ]
+        },
+        {
+          "pattern": "public static ChangeBaseDPClass ChangeBaseDPGlobalEffect",
+          "present": true,
+          "lines": [
+            36
+          ]
+        },
+        {
+          "pattern": "typeof(Func<int>)",
+          "present": true,
+          "lines": [
+            39
+          ]
+        },
+        {
+          "pattern": "if (isInt && (int)(object)changeValue == 0) return null;",
+          "present": true,
+          "lines": [
+            43
+          ]
+        },
+        {
+          "pattern": "DP = _changeValue();",
+          "present": true,
+          "lines": [
+            70
+          ]
+        },
+        {
+          "pattern": "Origin DP is",
+          "present": true,
+          "lines": [
+            47
+          ]
+        },
+        {
+          "pattern": "permanent.TopCard.CanNotBeAffected(changeBaseDPClass)",
+          "present": true,
+          "lines": [
+            80
+          ]
+        },
+        {
+          "pattern": "SetUpChangeBaseDPClass",
+          "present": true,
+          "lines": [
+            51
+          ]
+        }
+      ],
+      "classPatterns": [
+        {
+          "pattern": "public class ChangeBaseDPClass",
+          "present": true,
+          "lines": [
+            6
+          ]
+        },
+        {
+          "pattern": "IChangeBaseDPEffect",
+          "present": true,
+          "lines": [
+            6
+          ]
+        },
+        {
+          "pattern": "SetUpChangeBaseDPClass",
+          "present": true,
+          "lines": [
+            12
+          ]
+        },
+        {
+          "pattern": "public int GetDP",
+          "present": true,
+          "lines": [
+            19
+          ]
+        },
+        {
+          "pattern": "PermanentCondition",
+          "present": true,
+          "lines": [
+            27,
+            38
+          ]
+        },
+        {
+          "pattern": "IsMinusDP",
+          "present": true,
+          "lines": [
+            58
+          ]
+        }
+      ],
+      "covered": true
+    }
+  ],
+  "headlessSurfaces": {
+    "files": [
+      "src/DCGO.RL.Engine/CardEffects/CardEffectFactory.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectDescriptor.cs",
+      "src/DCGO.RL.Engine/Effects/ContinuousEffectService.cs",
+      "src/DCGO.RL.Engine/Battle/BattleRules.cs",
+      "src/DCGO.RL.Engine/Battle/BattleKeywordService.cs",
+      "src/DCGO.RL.Engine/Battle/SecurityCheckService.cs",
+      "src/DCGO.RL.Engine/Domain/GameState.cs"
+    ],
+    "modifierGroups": [
+      {
+        "id": "DP",
+        "title": "permanent DP continuous modifier",
+        "headlessModifierKind": "DP",
+        "patterns": [
+          {
+            "pattern": "ContinuousModifierKind.DP",
+            "present": true,
+            "lines": [
+              61,
+              88,
+              1847,
+              15456
+            ]
+          },
+          {
+            "pattern": "public int Dp(GameState state, PermanentState permanent)",
+            "present": true,
+            "lines": [
+              1844
+            ]
+          },
+          {
+            "pattern": "ContinuousPermanentModifierAmount(state, permanent, ContinuousModifierKind.DP)",
+            "present": true,
+            "lines": [
+              1847
+            ]
+          },
+          {
+            "pattern": "ChangeSelfDPStaticEffect",
+            "present": true,
+            "lines": [
+              8,
+              24,
+              11524,
+              13995,
+              14111,
+              15484
+            ]
+          },
+          {
+            "pattern": "ChangeDPStaticEffect",
+            "present": true,
+            "lines": [
+              15,
+              31,
+              40,
+              70,
+              11619
+            ]
+          },
+          {
+            "pattern": "DP change amount must not be zero.",
+            "present": true,
+            "lines": [
+              51
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "SecurityAttack",
+        "title": "permanent/player SecurityAttack continuous modifier",
+        "headlessModifierKind": "SecurityAttack",
+        "patterns": [
+          {
+            "pattern": "ContinuousModifierKind.SecurityAttack",
+            "present": true,
+            "lines": [
+              1868,
+              1869
+            ]
+          },
+          {
+            "pattern": "SecurityAttackModifierAmount(GameState state, PermanentState permanent)",
+            "present": true,
+            "lines": [
+              1867
+            ]
+          },
+          {
+            "pattern": "ContinuousPermanentModifierAmount(state, permanent, ContinuousModifierKind.SecurityAttack)",
+            "present": true,
+            "lines": [
+              1868
+            ]
+          },
+          {
+            "pattern": "ContinuousPlayerModifierAmount(state, permanent.ControllerPlayerId, ContinuousModifierKind.SecurityAttack)",
+            "present": true,
+            "lines": [
+              1869
+            ]
+          },
+          {
+            "pattern": "SecurityAttackCount(GameState state, PermanentState permanent)",
+            "present": true,
+            "lines": [
+              2245
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "SecurityDigimonDP",
+        "title": "security Digimon card DP continuous modifier",
+        "headlessModifierKind": "SecurityDigimonDP",
+        "patterns": [
+          {
+            "pattern": "ContinuousModifierKind.SecurityDigimonDP",
+            "present": true,
+            "lines": [
+              1861,
+              15265
+            ]
+          },
+          {
+            "pattern": "public int SecurityDp(GameState state, CardInstanceId card)",
+            "present": true,
+            "lines": [
+              1851
+            ]
+          },
+          {
+            "pattern": "ContinuousPlayerModifierAmount(",
+            "present": true,
+            "lines": [
+              1858,
+              1869,
+              1877
+            ]
+          },
+          {
+            "pattern": "ContinuousModifierKind.SecurityDigimonDP",
+            "present": true,
+            "lines": [
+              1861,
+              15265
+            ]
+          },
+          {
+            "pattern": "_effectiveStats.SecurityDp(state, securityCard)",
+            "present": true,
+            "lines": [
+              3213
+            ]
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "BaseDPBoundary",
+        "title": "origin/base DP set-semantics boundary",
+        "headlessModifierKind": "BoundaryOnly",
+        "patterns": [
+          {
+            "pattern": "definition.Value.DP",
+            "present": true,
+            "lines": [
+              299
+            ]
+          },
+          {
+            "pattern": "var dp = definition.DP;",
+            "present": true,
+            "lines": [
+              556,
+              569
+            ]
+          },
+          {
+            "pattern": "Continuous DP modifier preserves base definition DP",
+            "present": true,
+            "lines": [
+              1024
+            ]
+          },
+          {
+            "pattern": "Continuous effects are derived for state hash",
+            "present": true,
+            "lines": [
+              1073
+            ]
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "descriptorPatterns": [
+      {
+        "pattern": "public enum ContinuousModifierKind",
+        "present": true,
+        "lines": [
+          24
+        ]
+      },
+      {
+        "pattern": "DP,",
+        "present": true,
+        "lines": [
+          26,
+          28
+        ]
+      },
+      {
+        "pattern": "SecurityAttack,",
+        "present": true,
+        "lines": [
+          27
+        ]
+      },
+      {
+        "pattern": "SecurityDigimonDP,",
+        "present": true,
+        "lines": [
+          28
+        ]
+      },
+      {
+        "pattern": "Func<ContinuousEffectEvaluationContext, int> Amount",
+        "present": true,
+        "lines": [
+          127
+        ]
+      },
+      {
+        "pattern": "Func<ContinuousEffectEvaluationContext, bool>? Condition",
+        "present": true,
+        "lines": [
+          128
+        ]
+      },
+      {
+        "pattern": "CardMetadataCriteria? SourceMetadataCriteria",
+        "present": true,
+        "lines": [
+          130,
+          148,
+          173,
+          197,
+          225,
+          246,
+          269,
+          293,
+          316,
+          339
+        ]
+      },
+      {
+        "pattern": "CardMetadataCriteria? TargetMetadataCriteria",
+        "present": true,
+        "lines": [
+          131,
+          149,
+          198,
+          247,
+          363,
+          412,
+          437,
+          463
+        ]
+      }
+    ],
+    "servicePatterns": [
+      {
+        "pattern": "PermanentModifierAmount(GameState state, PermanentState target, ContinuousModifierKind modifierKind)",
+        "present": true,
+        "lines": [
+          709
+        ]
+      },
+      {
+        "pattern": "PlayerModifierAmount(GameState state, PlayerId targetPlayer, ContinuousModifierKind modifierKind)",
+        "present": true,
+        "lines": [
+          712
+        ]
+      },
+      {
+        "pattern": "EvaluateForPermanent",
+        "present": true,
+        "lines": [
+          710,
+          715
+        ]
+      },
+      {
+        "pattern": "EvaluateForPlayer",
+        "present": true,
+        "lines": [
+          713,
+          733
+        ]
+      },
+      {
+        "pattern": "DistinctBy(evaluation => evaluation.Descriptor.StableId)",
+        "present": true,
+        "lines": [
+          728,
+          746,
+          765,
+          782
+        ]
+      },
+      {
+        "pattern": "OrderBy(evaluation => evaluation.Descriptor.StableId, StringComparer.Ordinal)",
+        "present": true,
+        "lines": [
+          729,
+          747,
+          766,
+          783
+        ]
+      }
+    ],
+    "dynamicAmountPatterns": [
+      {
+        "pattern": "Func<ContinuousEffectEvaluationContext, int> changeValue",
+        "present": true,
+        "lines": [
+          26,
+          73
+        ]
+      },
+      {
+        "pattern": "ArgumentNullException.ThrowIfNull(changeValue)",
+        "present": true,
+        "lines": [
+          79
+        ]
+      },
+      {
+        "pattern": "AmountStableToken(changeValue)",
+        "present": true,
+        "lines": [
+          65
+        ]
+      },
+      {
+        "pattern": "amountStableToken",
+        "present": true,
+        "lines": [
+          409,
+          422,
+          440,
+          441
+        ]
+      },
+      {
+        "pattern": "dynamic",
+        "present": true,
+        "lines": [
+          82,
+          92
+        ]
+      }
+    ],
+    "baseDefinitionBoundaryPatterns": [
+      {
+        "pattern": "definition.Value.DP",
+        "present": true,
+        "lines": [
+          299
+        ]
+      },
+      {
+        "pattern": "var dp = definition.DP;",
+        "present": true,
+        "lines": [
+          556,
+          569
+        ]
+      },
+      {
+        "pattern": "Continuous DP modifier preserves base definition DP",
+        "present": true,
+        "lines": [
+          1024
+        ]
+      },
+      {
+        "pattern": "Continuous effects are derived for state hash",
+        "present": true,
+        "lines": [
+          1073
+        ]
+      }
+    ],
+    "runtimeModifierKindsCovered": true,
+    "descriptorCovered": true,
+    "serviceCovered": true,
+    "dynamicAmountCovered": true,
+    "baseDefinitionBoundaryCovered": true
+  },
+  "sourceSamples": {
+    "sourceScaffoldDir": "docs/generated/full-card-source-scaffold/sources",
+    "sourceRequiredCapabilities": "docs/generated/capability-truth-audit/source-required-capabilities.json",
+    "fullCardParityEvidence": "docs/generated/full-card-parity-evidence.json",
+    "sourceSampleCandidateCount": 532,
+    "factoryReferenceCount": 554,
+    "sourceRequiredLinkedSampleCount": 532,
+    "parityNotRunSampleCount": 532,
+    "methodReferenceCounts": {
+      "ChangeSelfDPStaticEffect": 329,
+      "ChangeSelfSAttackStaticEffect": 148,
+      "ChangeSAttackStaticEffect": 10,
+      "ChangeSecurityDigimonCardDPStaticEffect": 24,
+      "ChangeDPStaticEffect": 42,
+      "ChangeBaseDPGlobalEffect": 1
+    },
+    "groupSourceSampleCounts": {
+      "DP": 365,
+      "SecurityAttack": 157,
+      "SecurityDigimonDP": 24,
+      "BaseDPBoundary": 1
+    },
+    "groupFactoryReferenceCounts": {
+      "DP": 371,
+      "SecurityAttack": 158,
+      "SecurityDigimonDP": 24,
+      "BaseDPBoundary": 1
+    },
+    "byGroup": [
+      {
+        "id": "DP",
+        "title": "permanent DP continuous modifier",
+        "sourceSampleCount": 365,
+        "factoryReferenceCount": 371,
+        "methodReferenceCounts": {
+          "ChangeSelfDPStaticEffect": 329,
+          "ChangeDPStaticEffect": 42
+        },
+        "sourceRequiredLinkedCount": 365,
+        "parityNotRunCount": 365,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceEffectClassName": "AD1_002",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceEffectClassName": "AD1_004",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect",
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP",
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "sourceEffectClassName": "AD1_008",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceEffectClassName": "AD1_013",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT1_002@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_002.cs",
+            "sourceEffectClassName": "BT1_002",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_002.cs",
+            "sourceSetId": "BT1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "SecurityAttack",
+        "title": "permanent/player SecurityAttack continuous modifier",
+        "sourceSampleCount": 157,
+        "factoryReferenceCount": 158,
+        "methodReferenceCounts": {
+          "ChangeSelfSAttackStaticEffect": 148,
+          "ChangeSAttackStaticEffect": 10
+        },
+        "sourceRequiredLinkedCount": 157,
+        "parityNotRunCount": 157,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceEffectClassName": "AD1_004",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfDPStaticEffect",
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "DP",
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceEffectClassName": "AD1_005",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "sourceEffectClassName": "AD1_007",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_009@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+            "sourceEffectClassName": "AD1_009",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 2,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "AD1_024@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+            "sourceEffectClassName": "AD1_024",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+            "sourceSetId": "AD1",
+            "factoryApi": [
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 3,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "SecurityDigimonDP",
+        "title": "security Digimon card DP continuous modifier",
+        "sourceSampleCount": 24,
+        "factoryReferenceCount": 24,
+        "methodReferenceCounts": {
+          "ChangeSecurityDigimonCardDPStaticEffect": 24
+        },
+        "sourceRequiredLinkedCount": 24,
+        "parityNotRunCount": 24,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "BT10_034@DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_034.cs",
+            "sourceEffectClassName": "BT10_034",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_034.cs",
+            "sourceSetId": "BT10",
+            "factoryApi": [
+              "ChangeSecurityDigimonCardDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityDigimonDP"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT10_034_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_034.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT10_034_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_034.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT10_034_DCGO_Assets_Scripts_CardEffect_BT10_Yellow_BT10_034.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_029@DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_029.cs",
+            "sourceEffectClassName": "BT16_029",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_029.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "ChangeSecurityDigimonCardDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityDigimonDP"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_029_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_029.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_029_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_029.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_029_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_029.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_030@DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_030.cs",
+            "sourceEffectClassName": "BT16_030",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_030.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "ChangeSecurityDigimonCardDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityDigimonDP"
+            ],
+            "affectedCardCount": 3,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_030_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_030.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_030_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_030.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_030_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_030.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT16_031@DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_031.cs",
+            "sourceEffectClassName": "BT16_031",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT16/Yellow/BT16_031.cs",
+            "sourceSetId": "BT16",
+            "factoryApi": [
+              "ChangeSecurityDigimonCardDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityDigimonDP"
+            ],
+            "affectedCardCount": 3,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT16_031_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_031.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT16_031_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_031.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT16_031_DCGO_Assets_Scripts_CardEffect_BT16_Yellow_BT16_031.cs.comparison.json"
+          },
+          {
+            "sourceScaffoldId": "BT17_029@DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_029.cs",
+            "sourceEffectClassName": "BT17_029",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_029.cs",
+            "sourceSetId": "BT17",
+            "factoryApi": [
+              "ChangeSecurityDigimonCardDPStaticEffect"
+            ],
+            "modifierGroups": [
+              "SecurityDigimonDP"
+            ],
+            "affectedCardCount": 1,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT17_029_DCGO_Assets_Scripts_CardEffect_BT17_Yellow_BT17_029.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT17_029_DCGO_Assets_Scripts_CardEffect_BT17_Yellow_BT17_029.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT17_029_DCGO_Assets_Scripts_CardEffect_BT17_Yellow_BT17_029.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      },
+      {
+        "id": "BaseDPBoundary",
+        "title": "origin/base DP set-semantics boundary",
+        "sourceSampleCount": 1,
+        "factoryReferenceCount": 1,
+        "methodReferenceCounts": {
+          "ChangeBaseDPGlobalEffect": 1
+        },
+        "sourceRequiredLinkedCount": 1,
+        "parityNotRunCount": 1,
+        "sampleRecords": [
+          {
+            "sourceScaffoldId": "BT25_104@DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+            "sourceEffectClassName": "BT25_104",
+            "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+            "sourceSetId": "BT25",
+            "factoryApi": [
+              "ChangeBaseDPGlobalEffect",
+              "ChangeSelfSAttackStaticEffect"
+            ],
+            "modifierGroups": [
+              "BaseDPBoundary",
+              "SecurityAttack"
+            ],
+            "affectedCardCount": 3,
+            "sourceRequiredPresent": true,
+            "parityCoverageStatus": "NotRun",
+            "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT25_104_DCGO_Assets_Scripts_CardEffect_BT25_Red_BT25_104.cs.parity.json",
+            "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT25_104_DCGO_Assets_Scripts_CardEffect_BT25_Red_BT25_104.cs.parity.json",
+            "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT25_104_DCGO_Assets_Scripts_CardEffect_BT25_Red_BT25_104.cs.comparison.json"
+          }
+        ],
+        "covered": true
+      }
+    ],
+    "sampleRecords": [
+      {
+        "sourceScaffoldId": "AD1_002@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceEffectClassName": "AD1_002",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_002.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_002_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_002.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_004@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "sourceEffectClassName": "AD1_004",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect",
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP",
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_004_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_004.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_005@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceEffectClassName": "AD1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_005.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_005_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_005.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_007@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceEffectClassName": "AD1_007",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_007.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_007_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_007.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_008@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceEffectClassName": "AD1_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_008_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_009@DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceEffectClassName": "AD1_009",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_009_DCGO_Assets_Scripts_CardEffect_AD1_Red_AD1_009.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_013@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceEffectClassName": "AD1_013",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_013.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_013_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_013.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "AD1_024@DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceEffectClassName": "AD1_024",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_024.cs",
+        "sourceSetId": "AD1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 3,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_AD1_024_DCGO_Assets_Scripts_CardEffect_AD1_Blue_AD1_024.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_002@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_002.cs",
+        "sourceEffectClassName": "BT1_002",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_002.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_002_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_002.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_004@DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_004.cs",
+        "sourceEffectClassName": "BT1_004",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_004.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_004_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_004.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_004_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_004.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_004_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_004.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_005@DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_005.cs",
+        "sourceEffectClassName": "BT1_005",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_005.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_005_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_005.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_005_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_005.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_005_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_005.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_008@DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_008.cs",
+        "sourceEffectClassName": "BT1_008",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_008.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_008_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_008.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_008_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_008.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_008_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_008.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_015@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_015.cs",
+        "sourceEffectClassName": "BT1_015",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_015.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_015_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_015.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_015_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_015.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_015_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_015.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_018@DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_018.cs",
+        "sourceEffectClassName": "BT1_018",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_018.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_018_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_018.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_018_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_018.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_018_DCGO_Assets_Scripts_CardEffect_BT1_Red_BT1_018.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_033@DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_033.cs",
+        "sourceEffectClassName": "BT1_033",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Blue/BT1_033.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_033_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_033.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_033_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_033.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_033_DCGO_Assets_Scripts_CardEffect_BT1_Blue_BT1_033.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_060@DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_060.cs",
+        "sourceEffectClassName": "BT1_060",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_060.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 5,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_060_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_060.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_060_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_060.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_060_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_060.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_063@DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_063.cs",
+        "sourceEffectClassName": "BT1_063",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Yellow/BT1_063.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_063_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_063.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_063_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_063.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_063_DCGO_Assets_Scripts_CardEffect_BT1_Yellow_BT1_063.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_068@DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_068.cs",
+        "sourceEffectClassName": "BT1_068",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_068.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfSAttackStaticEffect"
+        ],
+        "modifierGroups": [
+          "SecurityAttack"
+        ],
+        "affectedCardCount": 1,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_068_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_068.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_068_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_068.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_068_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_068.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_073@DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_073.cs",
+        "sourceEffectClassName": "BT1_073",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_073.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 5,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_073_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_073.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_073_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_073.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_073_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_073.cs.comparison.json"
+      },
+      {
+        "sourceScaffoldId": "BT1_083@DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_083.cs",
+        "sourceEffectClassName": "BT1_083",
+        "sourcePath": "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_083.cs",
+        "sourceSetId": "BT1",
+        "factoryApi": [
+          "ChangeSelfDPStaticEffect"
+        ],
+        "modifierGroups": [
+          "DP"
+        ],
+        "affectedCardCount": 2,
+        "sourceRequiredPresent": true,
+        "parityCoverageStatus": "NotRun",
+        "unityFixturePath": "docs/generated/parity-fixtures/unity/full-card-source/full-card-source_BT1_083_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_083.cs.parity.json",
+        "rlFixturePath": "docs/generated/parity-fixtures/rl/full-card-source/full-card-source_BT1_083_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_083.cs.parity.json",
+        "comparisonReportPath": "docs/generated/parity-fixtures/reports/full-card-source/full-card-source_BT1_083_DCGO_Assets_Scripts_CardEffect_BT1_Green_BT1_083.cs.comparison.json"
+      }
+    ],
+    "covered": true
+  },
+  "testEvidence": {
+    "program": "src/DCGO.RL.Engine.Tests/Program.cs",
+    "requiredTests": [
+      "BattleKeywords Security Attack extra checks",
+      "CardEffectFactory DP static effect maps to continuous descriptor",
+      "CardEffectFactory DP static effect rejects zero amount",
+      "Continuous DP modifier affects effective DP",
+      "Continuous DP modifier preserves base definition DP",
+      "Continuous and duration modifiers stack deterministically",
+      "Continuous dynamic SecurityAttack from source count",
+      "Continuous effects are derived for state hash",
+      "Continuous trash source applies from trash",
+      "Duration security Digimon DP affects security battle",
+      "Runtime composition primitive SecurityCheck uses continuous SecurityAttack",
+      "Runtime composition primitive SecurityCheck uses continuous SecurityDigimonDP"
+    ],
+    "presence": {
+      "BattleKeywords Security Attack extra checks": true,
+      "CardEffectFactory DP static effect maps to continuous descriptor": true,
+      "CardEffectFactory DP static effect rejects zero amount": true,
+      "Continuous DP modifier affects effective DP": true,
+      "Continuous DP modifier preserves base definition DP": true,
+      "Continuous and duration modifiers stack deterministically": true,
+      "Continuous dynamic SecurityAttack from source count": true,
+      "Continuous effects are derived for state hash": true,
+      "Continuous trash source applies from trash": true,
+      "Duration security Digimon DP affects security battle": true,
+      "Runtime composition primitive SecurityCheck uses continuous SecurityAttack": true,
+      "Runtime composition primitive SecurityCheck uses continuous SecurityDigimonDP": true
+    },
+    "coveredTestCount": 12,
+    "requiredTestCount": 12,
+    "allRequiredTestsPresent": true
+  },
+  "baseDpBoundary": {
+    "baseDpExactSetSemanticsClosed": false,
+    "reason": "Original ChangeBaseDPStaticEffect/ChangeBaseDPGlobalEffect set origin DP. CS-08 records the source method and sample evidence and verifies the headless derived-stat policy does not mutate CardDefinition.DP. Exact per-card set-semantics must be locked by PARITY-001/TRUST-001-RERUN before status promotion."
+  },
+  "gateSummary": {
+    "openCodeReady": false,
+    "selectedNextFoundationCapability": "ContinuousOrStaticEffect",
+    "selectedNextFoundationStatus": "PartiallyImplemented",
+    "unsupportedCapabilityCount": 26,
+    "partiallyImplementedCapabilityCount": 37
+  },
+  "parityBoundary": {
+    "notRunSourceEffectCount": 3918,
+    "passedSourceEffectCount": 0,
+    "failedSourceEffectCount": 0,
+    "allGeneratedSourceEffectsHaveUnityParity": false,
+    "parityBoundaryOwner": "PARITY-001"
+  },
+  "trust001Handoff": {
+    "handoffRequired": true,
+    "items": [
+      "Treat ContinuousEffectDescriptor DP/SecurityAttack/SecurityDigimonDP runtime reuse as candidate only after TRUST-001 maps it back to ChangeDP/ChangeSAttack/ChangeCardDP/ChangeOriginDP evidence.",
+      "Keep ChangeBaseDP exact origin-DP set semantics as a boundary until source fixture parity proves the derived-stat policy is equivalent for affected cards.",
+      "Do not use CS-08 evidence to promote generated full-card source records while full-card parity remains NotRun."
+    ]
+  }
+}

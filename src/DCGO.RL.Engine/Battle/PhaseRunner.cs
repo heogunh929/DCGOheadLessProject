@@ -1,6 +1,7 @@
 using DCGO.RL.Engine.Decisions;
 using DCGO.RL.Engine.Domain;
 using DCGO.RL.Engine.Effects;
+using DCGO.RL.Engine.Primitives;
 using DCGO.RL.Engine.Setup;
 using DCGO.RL.Engine.Validation;
 
@@ -35,17 +36,20 @@ public sealed class PhaseRunner
     private readonly BattleKeywordService _keywordService;
     private readonly DurationCleanupService _durationCleanupService;
     private readonly TriggerPipelineService? _triggerPipelineService;
+    private readonly Tier1PrimitiveService _primitives;
 
     public PhaseRunner(
         DrawService? drawService = null,
         BattleKeywordService? keywordService = null,
         DurationCleanupService? durationCleanupService = null,
-        TriggerPipelineService? triggerPipelineService = null)
+        TriggerPipelineService? triggerPipelineService = null,
+        Tier1PrimitiveService? primitiveService = null)
     {
         _drawService = drawService ?? new DrawService();
         _keywordService = keywordService ?? BattleKeywordService.Default;
         _durationCleanupService = durationCleanupService ?? new DurationCleanupService();
         _triggerPipelineService = triggerPipelineService;
+        _primitives = primitiveService ?? new Tier1PrimitiveService();
     }
 
     internal TriggerPipelineService? RuntimeTriggerPipelineService => _triggerPipelineService;
@@ -63,14 +67,14 @@ public sealed class PhaseRunner
 
         foreach (var permanent in state.GetPlayer(state.TurnPlayerId).FieldPermanents)
         {
-            permanent.IsSuspended = false;
+            _primitives.Unsuspend(state, permanent.Id);
         }
 
         foreach (var permanent in state.GetPlayer(state.NonTurnPlayerId).FieldPermanents)
         {
             if (_keywordService.HasKeyword(state, permanent, BattleKeyword.Reboot))
             {
-                permanent.IsSuspended = false;
+                _primitives.Unsuspend(state, permanent.Id);
             }
         }
 

@@ -1,0 +1,633 @@
+{
+  "schemaVersion": "dcgo.as-is-restart.fnd002-rerun-next-action-queue.v1",
+  "generatedAt": "2026-06-23T23:29:44.744113+00:00",
+  "goal": "FND-002-RERUN",
+  "sourceMapping": "docs/generated/as-is-restart/fnd-002-rerun-unknown-common-api-mapping.json",
+  "summary": {
+    "sourceMappedPartialFoundationCount": 15,
+    "sourceMappedDataPolicyPartialCount": 1,
+    "sourceKnownZeroCardTimingCount": 1,
+    "remainingNeedsSourceReviewCount": 0,
+    "recommendedNextQueueGroups": [
+      "FND-002-A replacement/cut-in timing source mapping (closed)",
+      "FND-002-B link lifecycle timing source mapping (closed)",
+      "FND-002-C digisorption/digiburst timing policy (closed)",
+      "FND-002-D face-up security data policy (closed when generated)",
+      "FND-002-E OnStartBattle zero-card timing review (closed when generated)"
+    ]
+  },
+  "sourceMappedPartialFoundationItems": [
+    {
+      "apiName": "OnDeclaration",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-P",
+      "affectedCardCount": 578,
+      "sourceFileCount": 302,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 28,
+      "sourceRuntimeCallEvidence": "CardSource.cs:1051, Permanent.cs:1623/2927, TurnStateMachine.cs:1472/3061/3063",
+      "sourceClassOrMethodArea": "CardSource/Permanent/TurnStateMachine declaration skill discovery",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_089.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_025.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_100.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_061.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_015.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Red/BT12_089.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/White/BT12_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Blue/BT13_028.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-P declaration legal action/runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnTappedAnyone",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-O",
+      "affectedCardCount": 306,
+      "sourceFileCount": 140,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 41,
+      "sourceRuntimeCallEvidence": "CardController.cs:5648",
+      "sourceClassOrMethodArea": "CardController suspend event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Blue/AD1_014.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_016.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Yellow/AD1_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_048.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_051.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_011.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_103.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_056.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-O actual suspend primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "BeforePayCost",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-N",
+      "affectedCardCount": 284,
+      "sourceFileCount": 143,
+      "engineSourceReferenceCount": 2,
+      "engineTestOrDocReferenceCount": 95,
+      "sourceRuntimeCallEvidence": "CardController.cs:604-621/709-711, CardSource.cs:2641",
+      "sourceClassOrMethodArea": "CardController/CardSource pre-cost collection and cut-in",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_091.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/White/BT11_095.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Black/BT12_094.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_022.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_102.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Purple/BT12_096.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-N pre-cost runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnDetermineDoSecurityCheck",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-M",
+      "affectedCardCount": 228,
+      "sourceFileCount": 122,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 26,
+      "sourceRuntimeCallEvidence": "CardController.cs:4731, Permanent.cs:2591, Pierce.cs:78",
+      "sourceClassOrMethodArea": "CardController/Permanent security-check modifier collection",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_008.cs",
+        "DCGO/Assets/Scripts/CardEffect/AD1/Red/AD1_009.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_081.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_022.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Red/BT1_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_049.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_050.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_016.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Red/BT10_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_057.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-M security-check decision runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnEndBattle",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-L",
+      "affectedCardCount": 160,
+      "sourceFileCount": 86,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 31,
+      "sourceRuntimeCallEvidence": "CardController.cs:4718, CardEffectFactory.cs:452",
+      "sourceClassOrMethodArea": "CardController battle end stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Blue/BT10_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_045.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Green/BT10_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Green/BT11_059.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_053.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Green/BT12_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Green/BT13_055.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_043.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_047.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-L battle-result runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnDigivolutionCardDiscarded",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-K",
+      "affectedCardCount": 121,
+      "sourceFileCount": 54,
+      "engineSourceReferenceCount": 2,
+      "engineTestOrDocReferenceCount": 27,
+      "sourceRuntimeCallEvidence": "CardController.cs:5181/5215",
+      "sourceClassOrMethodArea": "CardController source trash actual event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_072.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_073.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_075.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_076.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_081.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_082.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_026.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Blue/BT14_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Blue/BT14_083.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-K source-trash primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnAddDigivolutionCards",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-J",
+      "affectedCardCount": 102,
+      "sourceFileCount": 51,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 32,
+      "sourceRuntimeCallEvidence": "Permanent.cs:1119/1223",
+      "sourceClassOrMethodArea": "Permanent source-add event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_093.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Black/BT17_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Purple/BT17_090.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Purple/BT20_080.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Yellow/BT20_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT20/Yellow/BT20_035.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_080.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT21/Red/BT21_090.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-J source-add primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnMove",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-I",
+      "affectedCardCount": 79,
+      "sourceFileCount": 32,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 21,
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:1111, CardEffectFactory.cs:854, CanUseEffects/OnMove.cs:10",
+      "sourceClassOrMethodArea": "CardObjectController/CardEffectFactory movement event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Purple/BT11_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Green/BT15_054.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/White/BT16_082.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Black/BT24_052.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Purple/BT24_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT24/Yellow/BT24_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Red/BT25_104.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/Yellow/BT5_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT6/Blue/BT6_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT6/Red/BT6_087.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Black/BT8_092.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/White/BT8_094.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-I permanent-move primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnUnTappedAnyone",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-H",
+      "affectedCardCount": 70,
+      "sourceFileCount": 30,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 26,
+      "sourceRuntimeCallEvidence": "CardController.cs:5694/5754",
+      "sourceClassOrMethodArea": "CardController unsuspend actual event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_069.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Black/BT11_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT11/Blue/BT11_112.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Blue/BT12_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Black/BT15_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_002.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_021.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_028.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Blue/BT2_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT2/Green/BT2_004.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Black/BT22_101.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-H actual unsuspend primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnUseOption",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-G",
+      "affectedCardCount": 65,
+      "sourceFileCount": 31,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 28,
+      "sourceRuntimeCallEvidence": "CardController.cs:1765/1767",
+      "sourceClassOrMethodArea": "CardController option execution boundary",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Yellow/BT10_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT12/Yellow/BT12_044.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_031.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_032.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_040.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Yellow/BT19_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Black/BT25_091.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_088.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Purple/BT3_091.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-G hand-option runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnDiscardLibrary",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-F",
+      "affectedCardCount": 51,
+      "sourceFileCount": 21,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 19,
+      "sourceRuntimeCallEvidence": "CardController.cs:5816",
+      "sourceClassOrMethodArea": "CardController deck trash event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT10/Purple/BT10_108.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Purple/BT14_077.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT19/Purple/BT19_097.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_006.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_074.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Purple/BT8_079.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_005.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Purple/EX10_041.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX2/Purple/EX2_039.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX2/Purple/EX2_044.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-F deck-trash primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnAddSecurity",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-E",
+      "affectedCardCount": 38,
+      "sourceFileCount": 15,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 32,
+      "sourceRuntimeCallEvidence": "CardController.cs:5489",
+      "sourceClassOrMethodArea": "CardController security-add event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_041.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT14/Yellow/BT14_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT16/Black/BT16_056.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT23/Green/BT23_083.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_038.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT8/Yellow/BT8_090.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT9/Yellow/BT9_003.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Yellow/EX1_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Yellow/EX1_030.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX11/Green/EX11_003.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-E security-add/recovery primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnDiscardSecurity",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-D",
+      "affectedCardCount": 23,
+      "sourceFileCount": 15,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 16,
+      "sourceRuntimeCallEvidence": "CardController.cs:4377",
+      "sourceClassOrMethodArea": "CardController security discard event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT13/Yellow/BT13_106.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_084.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT15/Yellow/BT15_092.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT17/Yellow/BT17_036.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT18/Yellow/BT18_098.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Yellow/BT22_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT22/Yellow/BT22_037.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_034.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT25/Yellow/BT25_040.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-D security-discard primitive scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "AfterPayCost",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-C",
+      "affectedCardCount": 15,
+      "sourceFileCount": 8,
+      "engineSourceReferenceCount": 2,
+      "engineTestOrDocReferenceCount": 39,
+      "sourceRuntimeCallEvidence": "CardController.cs:985",
+      "sourceClassOrMethodArea": "CardController post-cost cut-in stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT1/Green/BT1_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT3/Green/BT3_103.cs",
+        "DCGO/Assets/Scripts/CardEffect/BT5/White/BT5_109.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/Green/EX1_033.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX1/White/EX1_071.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX5/Yellow/EX5_029.cs",
+        "DCGO/Assets/Scripts/CardEffect/ST12/Red/ST12_15.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-C post-cost runtime scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    },
+    {
+      "apiName": "OnRemovedField",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedPartialFoundation",
+      "fnd003Task": "FND-003-B",
+      "affectedCardCount": 4,
+      "sourceFileCount": 3,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 13,
+      "sourceRuntimeCallEvidence": "CardObjectController.cs:524",
+      "sourceClassOrMethodArea": "CardObjectController post-removal event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/BT22/White/BT22_007.cs",
+        "DCGO/Assets/Scripts/CardEffect/EX10/Red/EX10_010.cs",
+        "DCGO/Assets/Scripts/Script/CardObjectController.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-003-B primitive field-removal event scope has source-aligned foundation evidence, but executable full-card parity is still NotRun; this inventory keeps the timing PartiallyImplemented instead of promoting it to Verified."
+      ],
+      "nextAction": "full-card parity fixture가 없으므로 Verified 승격 없이 partial/blocker queue에서 추적",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    }
+  ],
+  "sourceMappedDataPolicyPartialItems": [
+    {
+      "apiName": "OnFaceUpSecurityIncreased",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "PartiallyImplemented",
+      "rerunClassification": "SourceMappedDataPolicyPartial",
+      "fnd003Task": null,
+      "affectedCardCount": 2,
+      "sourceFileCount": 2,
+      "engineSourceReferenceCount": 1,
+      "engineTestOrDocReferenceCount": 6,
+      "sourceRuntimeCallEvidence": "CardController.cs:5506/5548",
+      "sourceClassOrMethodArea": "CardController face-up security state event stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/CardEffect/EX11/Black/EX11_004.cs",
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-D face-up security data policy has source call/payload evidence and headless AddSecurity face-up event coverage, but IFlipSecurity face-up conversion and EX11-004 full-card parity remain incomplete; this inventory treats the timing as source-known PartiallyImplemented data-policy foundation instead of leaving it as NeedsSourceReview."
+      ],
+      "nextAction": "face-up security data/state policy와 affected-card fixture 범위 확정",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    }
+  ],
+  "sourceKnownZeroCardTimingItems": [
+    {
+      "apiName": "OnStartBattle",
+      "category": "timing",
+      "previousMappingStatus": "NeedsSourceReview",
+      "currentMappingStatus": "NotReferenced",
+      "rerunClassification": "SourceKnownZeroCardTiming",
+      "fnd003Task": null,
+      "affectedCardCount": 0,
+      "sourceFileCount": 1,
+      "engineSourceReferenceCount": 0,
+      "engineTestOrDocReferenceCount": 4,
+      "sourceRuntimeCallEvidence": "CardController.cs:4557",
+      "sourceClassOrMethodArea": "CardController battle start stack",
+      "sampleSourcePaths": [
+        "DCGO/Assets/Scripts/Script/CardController.cs"
+      ],
+      "evidenceNotes": [
+        "Implemented/Verified mapping uses source usage, engine enum/service references, and test/doc evidence conservatively.",
+        "FND-002-E battle-start zero-card timing manual review found a source runtime dispatch and payload shape, but the current AS-IS CardEffect corpus has zero EffectTiming.OnStartBattle card references and zero affected card records. This inventory treats the timing as source-known NotReferenced for current full-card-pool completion instead of leaving it as NeedsSourceReview; if a future source card references it, the conditional override stops applying."
+      ],
+      "nextAction": "Current AS-IS CardEffect references are zero; exclude this source-known battle-start timing from current full-card-pool blockers and reopen payload fixture work only if a future source card references it.",
+      "generatedStatusPromoted": false,
+      "implementationPerformed": false
+    }
+  ],
+  "remainingNeedsSourceReviewItems": [],
+  "recommendedNextQueueGroups": [
+    {
+      "queueId": "FND-002-A",
+      "title": "replacement/cut-in timing source mapping",
+      "items": [
+        "WhenPermanentWouldBeDeleted",
+        "WhenRemoveField",
+        "WhenReturntoLibraryAnyone",
+        "WhenUntapAnyone",
+        "WhenWouldDigivolutionCardDiscarded"
+      ]
+    },
+    {
+      "queueId": "FND-002-B",
+      "title": "link lifecycle timing source mapping",
+      "items": [
+        "WhenLinked",
+        "WhenWouldLink",
+        "OnLinkCardDiscarded"
+      ]
+    },
+    {
+      "queueId": "FND-002-C",
+      "title": "digisorption/digiburst timing policy",
+      "items": [
+        "WhenDigisorption",
+        "OnUseDigiburst"
+      ]
+    },
+    {
+      "queueId": "FND-002-D",
+      "title": "face-up security data policy",
+      "status": "closed-by-source-mapped-partial-data-policy",
+      "items": [
+        "OnFaceUpSecurityIncreased"
+      ]
+    },
+    {
+      "queueId": "FND-002-E",
+      "title": "OnStartBattle zero-card timing review",
+      "status": "closed-by-source-known-zero-card-timing",
+      "items": [
+        "OnStartBattle"
+      ]
+    }
+  ]
+}

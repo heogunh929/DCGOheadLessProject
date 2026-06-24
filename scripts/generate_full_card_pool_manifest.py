@@ -62,6 +62,22 @@ def write_json(path: Path, value: Any) -> None:
     )
 
 
+def source_checkout_candidates(workspace: Path) -> list[Path]:
+    candidates = [workspace]
+    external_source_parent = Path("E:/headlessDCGO")
+    if external_source_parent.exists():
+        candidates.append(external_source_parent)
+    return candidates
+
+
+def resolve_locked_source_path(workspace: Path, relative_path: str) -> tuple[Path, Path]:
+    for root in source_checkout_candidates(workspace):
+        candidate = root / relative_path
+        if candidate.exists():
+            return candidate, root
+    return workspace / relative_path, workspace
+
+
 def assert_source_lock(workspace: Path) -> dict[str, Any]:
     lock_path = workspace / "docs/source/dcgo-source-lock.json"
     if not lock_path.exists():
@@ -93,7 +109,7 @@ def assert_current_source_fingerprint(workspace: Path, lock: dict[str, Any]) -> 
     expected_paths: dict[str, dict[str, Any]] = {entry["path"]: entry for entry in manifest["files"]}
 
     for relative_path, entry in expected_paths.items():
-        full_path = workspace / relative_path
+        full_path, _ = resolve_locked_source_path(workspace, relative_path)
         if not full_path.exists():
             raise RuntimeError(f"source fingerprint mismatch: missing file {relative_path}")
         if full_path.stat().st_size != int(entry["size"]):
@@ -103,11 +119,11 @@ def assert_current_source_fingerprint(workspace: Path, lock: dict[str, Any]) -> 
             raise RuntimeError(f"source fingerprint mismatch: hash changed {relative_path}")
 
     for root in manifest["roots"]:
-        root_path = workspace / root
+        root_path, checkout_root = resolve_locked_source_path(workspace, root)
         if not root_path.exists():
             raise RuntimeError(f"source fingerprint mismatch: missing root {root}")
         for current_file in sorted(path for path in root_path.rglob("*") if path.is_file()):
-            relative_path = unix_path(current_file, workspace)
+            relative_path = unix_path(current_file, checkout_root)
             if relative_path not in expected_paths:
                 raise RuntimeError(f"source fingerprint mismatch: unexpected file {relative_path}")
 
